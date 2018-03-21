@@ -12,6 +12,8 @@ isEqual(QT_MAJOR_VERSION, 5) {
   CONFIG += designer uitools
 }
 
+CONFIG -= staticlib
+
 TEMPLATE = app
 
 INCLUDEPATH += ../scriptapi \
@@ -23,6 +25,8 @@ INCLUDEPATH += ../scriptapi \
                ../../xtuple-build-desktop/widgets/tmp/lib \
                ../../xtuple-build-desktop/guiclient . \
                $(CSVIMP_HEADERS)/csvimpcommon $(CSVIMP_HEADERS)/plugin
+			   C:\QtNew\qt-everywhere-opensource-src-5.5.1\qtbase\src\3rdparty\zlib
+			   $$[QT_INSTALL_HEADERS]/QtZlib
 
 DEPENDPATH  += $${INCLUDEPATH}
 
@@ -64,7 +68,7 @@ OBJECTS_DIR = tmp/obj
 win32 {
   win32-msvc*:LIBS += -lshell32
   RC_FILE = rcguiclient.rc
-  LIBS += -lz
+  #LIBS += -lz
 }
 win32-g++-4.6 {
   LIBS += -lz

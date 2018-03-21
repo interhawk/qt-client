@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <zlib.h>
 #define SIGTRACK false
 #define FUNTRACK false
 

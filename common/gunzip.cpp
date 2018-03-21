@@ -10,7 +10,7 @@
 
 #include "gunzip.h"
 
-#include <zlib.h>
+#include <QtZlib/zlib.h>
 #include <qbuffer.h>
 
 QByteArray gunzipFile(const QString & file)
