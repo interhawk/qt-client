@@ -14,6 +14,7 @@
 #include <QtZlib/zlib.h>
 #else
 #include <zlib.h>
+#endif
 
 #include <qbuffer.h>
 
