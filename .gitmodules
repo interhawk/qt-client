@@ -1,5 +1,5 @@
 [submodule "openrpt"]	
-	path = openrpt	
+	path = openrpt
 	url = https://github.com/xtuple/openrpt.git
 [submodule "csvimp"]
 	path = csvimp
