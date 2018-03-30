@@ -25,8 +25,6 @@ INCLUDEPATH += ../scriptapi \
                ../../xtuple-build-desktop/widgets/tmp/lib \
                ../../xtuple-build-desktop/guiclient . \
                $(CSVIMP_HEADERS)/csvimpcommon $(CSVIMP_HEADERS)/plugin
-			   C:\QtNew\qt-everywhere-opensource-src-5.5.1\qtbase\src\3rdparty\zlib
-			   $$[QT_INSTALL_HEADERS]/QtZlib
 
 DEPENDPATH  += $${INCLUDEPATH}
 
