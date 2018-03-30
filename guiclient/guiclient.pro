@@ -64,12 +64,15 @@ mac:!static:contains(QT_CONFIG, qt_framework) {
 
 OBJECTS_DIR = tmp/obj
 win32 {
-  win32-msvc*:LIBS += -lshell32
   RC_FILE = rcguiclient.rc
-  #LIBS += -lz
+  LIBS += -lz
 }
 win32-g++-4.6 {
   LIBS += -lz
+}
+win32-msvc*{
+  LIBS += -lshell32
+  LIBS -= -lz
 }
 
 unix: !macx {
