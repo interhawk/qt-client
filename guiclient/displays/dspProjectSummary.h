@@ -8,35 +8,26 @@
  * to be bound by its terms.
  */
 
-#ifndef PROJECTS_H
-#define PROJECTS_H
+#ifndef DSPPROJECTSUMMARY_H
+#define DSPPROJECTSUMMARY_H
 
 #include "display.h"
-#include "xtreewidget.h"
-#include "ui_projects.h"
 
-class projects : public display, public Ui::projects
+class dspProjectSummary : public display
 {
     Q_OBJECT
 
 public:
-    projects(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::Window);
+    dspProjectSummary(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::Window);
+
+    virtual bool setParams(ParameterList &);
 
 public slots:
     virtual void sNew();
     virtual void sEdit();
     virtual void sView();
-    virtual void sDelete();
-    virtual void sCopy();
-    virtual void sOpen();
-    virtual void sPopulateMenu(QMenu *, QTreeWidgetItem*, int);
-    virtual bool setParams(ParameterList &);
-
-private:
-  QStringList _statuses;
-  virtual void open(XTreeWidgetItem*, QString);
-  virtual bool getPriv(int, XTreeWidgetItem*);
-  
+    virtual void sOpenProject(QString);
+    virtual void sPopulateMenu(QMenu * pMenu, QTreeWidgetItem * pSelected, int);
 };
 
-#endif // PROJECTS_H
+#endif // DSPPROJECTSUMMARY_H

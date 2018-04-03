@@ -1,12 +1,14 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
  * to be bound by its terms.
  */
+
+#include "menuCRM.h"
 
 #include <QAction>
 #include <QMenuBar>
@@ -15,36 +17,32 @@
 
 #include "guiclient.h"
 
-#include "project.h"
-#include "projects.h"
-#include "dspOrderActivityByProject.h"
-
 #include "contact.h"
 #include "contacts.h"
 #include "contactMerge.h"
 #include "crmaccountMerge.h"
+#include "dspOrderActivityByProject.h"
+#include "dspProjectSummary.h"
 #include "addressMerge.h"
 #include "address.h"
 #include "addresses.h"
+#include "createRecurringItems.h"
 #include "crmaccount.h"
 #include "crmaccounts.h"
+#include "project.h"
+#include "projects.h"
 #include "prospect.h"
 #include "prospects.h"
 #include "incidentWorkbench.h"
 #include "incident.h"
-#include "opportunityList.h"
-#include "todoList.h"
-#include "todoListCalendar.h"
-#include "todoItem.h"
-
 #include "opportunity.h"
+#include "opportunityList.h"
+#include "task.h"
+#include "taskList.h"
+#include "taskListCalendar.h"
 
 #include "editOwners.h"
-#include "createRecurringItems.h"
-
 #include "setup.h"
-
-#include "menuCRM.h"
 
 menuCRM::menuCRM(GUIClient *Pparent) :
   QObject(Pparent)
@@ -61,7 +59,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
   crmMenu           = new QMenu(parent);
   projectsMenu      = new QMenu(parent);
   incidentMenu      = new QMenu(parent);
-  todoMenu          = new QMenu(parent);
+  taskMenu          = new QMenu(parent);
   reportsMenu       = new QMenu(parent);
   accountsMenu      = new QMenu(parent);
   contactsMenu      = new QMenu(parent);
@@ -73,7 +71,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
   crmMenu->setObjectName("menu.crm");
   projectsMenu->setObjectName("menu.crm.projects");
   incidentMenu->setObjectName("menu.crm.incident");
-  todoMenu->setObjectName("menu.crm.todo");
+  taskMenu->setObjectName("menu.crm.tasks");
   reportsMenu->setObjectName("menu.crm.reports");
   accountsMenu->setObjectName("menu.crm.accounts");
   contactsMenu->setObjectName("menu.crm.contacts");
@@ -88,11 +86,11 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     { "crm.incident",		tr("&New..."),		SLOT(sIncident()),		incidentMenu,	"MaintainPersonalIncidents MaintainAllIncidents", NULL, NULL, true , NULL },
     { "crm.incidentList",	tr("&List..."),	SLOT(sIncidentWorkbench()),	incidentMenu,	"ViewPersonalIncidents MaintainPersonalIncidents ViewAllIncidents MaintainAllIncidents", new QPixmap(":/images/incidents.png"), toolBar, true , tr("Incident List") },
 
-    // CRM / To Do
-    { "menu",			tr("&To-Do"),	(char*)todoMenu,	crmMenu,	"true", NULL, NULL, true	, NULL },
-    { "crm.todoItem",		tr("&New..."),	SLOT(sTodoItem()),	todoMenu,	"MaintainPersonalToDoItems MaintainAllToDoItems", NULL, NULL, true	, NULL },
-    { "crm.todoList",		tr("&List..."),		SLOT(sTodoList()),	todoMenu,	"MaintainPersonalToDoItems ViewPersonalToDoItems MaintainAllToDoItems ViewAllToDoItems", new QPixmap(":/images/toDoList.png"), toolBar, true	, tr("To-Do List") },
-    { "crm.todoListCalendar",		tr("&Calendar List..."),		SLOT(sTodoListCalendar()),	todoMenu,	"MaintainPersonalToDoItems ViewPersonalToDoItems MaintainAllToDoItems ViewAllToDoItems", NULL, NULL, true, NULL},
+    // CRM / Tasks
+    { "menu",			tr("&Tasks"),            (char*)taskMenu,        crmMenu,	"true", NULL, NULL, true	, NULL },
+    { "crm.task",		tr("&New..."),	         SLOT(sTask()),	        taskMenu,	"MaintainPersonalToDoItems MaintainAllToDoItems", NULL, NULL, true	, NULL },
+    { "crm.taskList",		tr("&List..."),		 SLOT(sTaskList()),	taskMenu,	"MaintainPersonalToDoItems ViewPersonalToDoItems MaintainAllToDoItems ViewAllToDoItems", new QPixmap(":/images/toDoList.png"), toolBar, true	, tr("To-Do List") },
+    { "crm.taskListCalendar",	tr("&Calendar List..."), SLOT(sTaskListCalendar()),	taskMenu,	"MaintainPersonalToDoItems ViewPersonalToDoItems MaintainAllToDoItems ViewAllToDoItems", NULL, NULL, true, NULL},
 
     //  Project
     { "menu", tr("Pro&ject"), (char*)projectsMenu, crmMenu, "true", NULL, NULL, true	, NULL },
@@ -108,8 +106,8 @@ menuCRM::menuCRM(GUIClient *Pparent) :
 
     // Reports
     { "menu",				tr("&Reports"),		(char*)reportsMenu,			crmMenu,	"true", NULL, NULL, true	, NULL },
-
     { "pm.dspOrderActivityByProject", tr("Order &Activity by Project..."), SLOT(sDspOrderActivityByProject()), reportsMenu, "ViewAllProjects ViewPersonalProjects", NULL, NULL, true , NULL },
+    { "pm.dspProjectSummary", tr("Project Summary..."), SLOT(sDspProjectSummary()), reportsMenu, "ViewAllProjects ViewPersonalProjects", NULL, NULL, true , NULL },
     { "separator",		NULL,				NULL,			crmMenu,	"true", NULL, NULL, true	, NULL },
     
     // CRM | Account
@@ -229,6 +227,11 @@ void menuCRM::sDspOrderActivityByProject()
   omfgThis->handleNewWindow(new dspOrderActivityByProject());
 }
 
+void menuCRM::sDspProjectSummary()
+{
+  omfgThis->handleNewWindow(new dspProjectSummary());
+}
+
 void menuCRM::sCRMAccount()
 {
   ParameterList params;
@@ -310,25 +313,26 @@ void menuCRM::sIncident()
   newdlg->exec();
 }
 
-void menuCRM::sTodoList()
+void menuCRM::sTaskList()
 {
   ParameterList params;
   params.append("run");
-  todoList* win = new todoList();
+  taskList* win = new taskList();
   win->set(params);
   omfgThis->handleNewWindow(win);
 }
 
-void menuCRM::sTodoListCalendar()
+void menuCRM::sTaskListCalendar()
 {
-  omfgThis->handleNewWindow(new todoListCalendar());
+  omfgThis->handleNewWindow(new taskListCalendar());
 }
 
-void menuCRM::sTodoItem()
+void menuCRM::sTask()
 {
   ParameterList params;
   params.append("mode", "new");
-  todoItem* newdlg = new todoItem();
+  params.append("parent", "TASK");
+  task* newdlg = new task();
   newdlg->set(params);
   omfgThis->handleNewWindow(newdlg);
 }

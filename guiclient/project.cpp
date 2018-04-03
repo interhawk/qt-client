@@ -1,7 +1,7 @@
   /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -22,16 +22,16 @@
 #include "mqlutil.h"
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
-#include "task.h"
-#include "salesOrder.h"
-#include "salesOrderItem.h"
+#include "incident.h"
 #include "invoice.h"
 #include "invoiceItem.h"
+#include "salesOrder.h"
+#include "salesOrderItem.h"
+#include "task.h"
 #include "workOrder.h"
 #include "purchaseRequest.h"
 #include "purchaseOrder.h"
 #include "purchaseOrderItem.h"
-#include "incident.h"
 
 const char *_projectStatuses[] = { "P", "O", "C" };
 
@@ -70,15 +70,7 @@ project::project(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
 {
   setupUi(this);
 
-  XSqlQuery projectType;
-  projectType.prepare("SELECT prjtype_id, prjtype_descr FROM prjtype WHERE prjtype_active;");
-  projectType.exec();
-  _projectType->populate(projectType);
-  if (projectType.lastError().type() != QSqlError::NoError)
-  {
-    systemError(this, projectType.lastError().databaseText(), __FILE__, __LINE__);
-    return;
-  }
+  _projectType->populate("SELECT prjtype_id, prjtype_descr FROM prjtype WHERE prjtype_active;");
 
   if(!_privileges->check("EditOwner")) _owner->setEnabled(false);
 
@@ -215,14 +207,6 @@ enum SetResponse project::set(const ParameterList &pParams)
     {
       _mode = cNew;
 
-      connect(_assignedTo, SIGNAL(newId(int)), this, SLOT(sAssignedToChanged(int)));
-      connect(_status,  SIGNAL(currentIndexChanged(int)), this, SLOT(sStatusChanged(int)));
-      connect(_completed,  SIGNAL(newDate(QDate)), this, SLOT(sCompletedChanged()));
-      connect(_pctCompl,  SIGNAL(valueChanged(int)), this, SLOT(sCompletedChanged()));
-      connect(_prjtask, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
-      connect(_prjtask, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
-      connect(_prjtask, SIGNAL(itemSelected(int)), _editTask, SLOT(animateClick()));
-
       projectet.exec("SELECT NEXTVAL('prj_prj_id_seq') AS prj_id;");
       if (projectet.first())
         _prjid = projectet.value("prj_id").toInt();
@@ -242,14 +226,6 @@ enum SetResponse project::set(const ParameterList &pParams)
       _mode = cEdit;
 
       _number->setEnabled(false);
-
-      connect(_assignedTo, SIGNAL(newId(int)), this, SLOT(sAssignedToChanged(int)));
-      connect(_status,  SIGNAL(currentIndexChanged(int)), this, SLOT(sStatusChanged(int)));
-      connect(_completed,  SIGNAL(newDate(QDate)), this, SLOT(sCompletedChanged()));
-      connect(_pctCompl,  SIGNAL(valueChanged(int)), this, SLOT(sCompletedChanged()));
-      connect(_prjtask, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
-      connect(_prjtask, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
-      connect(_prjtask, SIGNAL(itemSelected(int)), _editTask, SLOT(animateClick()));
 
       QMenu * newMenu = new QMenu;
       QAction *menuItem;
@@ -275,6 +251,18 @@ enum SetResponse project::set(const ParameterList &pParams)
     }
     else if (param.toString() == "view")
       setViewMode();
+
+    if (_mode == cNew || _mode == cEdit)
+    {
+      connect(_assignedTo, SIGNAL(newId(int)), this, SLOT(sAssignedToChanged(int)));
+      connect(_status,  SIGNAL(currentIndexChanged(int)), this, SLOT(sStatusChanged(int)));
+      connect(_completed,  SIGNAL(newDate(QDate)), this, SLOT(sCompletedChanged()));
+      connect(_pctCompl,  SIGNAL(valueChanged(int)), this, SLOT(sCompletedChanged()));
+      connect(_prjtask, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
+      connect(_prjtask, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
+      connect(_prjtask, SIGNAL(itemSelected(int)), _editTask, SLOT(animateClick()));
+      connect(_projectType, SIGNAL(newID(int)), this, SLOT(sProjectTypeChanged(int)));
+    }
   }
     
   return NoError;
@@ -553,6 +541,55 @@ void project::sAssignedToChanged(const int newid)
     _assigned->setDate(omfgThis->dbDate());
 }
 
+void project::sProjectTypeChanged(const int newType)
+{
+  if (!_saved)
+  {
+    if (!sSave(true))
+      return;
+  }
+
+  XSqlQuery taskq;
+  taskq.prepare("SELECT applyDefaultTasks('J', :category, :project, :override) AS ret;" );
+  taskq.bindValue(":category", newType);
+  taskq.bindValue(":project", _prjid);
+  taskq.bindValue(":override", false);
+  taskq.exec();
+
+  /*
+   The following checks whether tasks already exist and should be overridden.
+   return code 0 means no templates exist
+   return code < 0 means tasks already exist and user is questions whether to override
+   return code > 0 means no existing tasks so they have been copied automatically
+  */
+  if (taskq.first()) 
+  {
+    if (taskq.value("ret").toInt() < 0)
+    {
+      if (QMessageBox::question(this, tr("Existing Tasks"),
+                         tr("<p>Tasks already exist for this Project.\n"
+                            "Do you want to replace tasks with the new template?"),
+                   QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+      {
+          return;
+      }
+      else
+      {
+         taskq.bindValue(":override", true);
+         taskq.exec();
+         if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
+                                  taskq, __FILE__, __LINE__))
+              return;
+      }
+    }
+  }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
+                                taskq, __FILE__, __LINE__))
+            return;
+
+  sFillTaskList();
+}
+
 void project::sStatusChanged(const int pStatus)
 {
   switch(pStatus)
@@ -793,13 +830,14 @@ void project::sNewTask()
     
   ParameterList params;
   params.append("mode", "new");
-  params.append("prj_id", _prjid);
-  params.append("prj_owner_username", _owner->username());
-  params.append("prj_username", _assignedTo->username());
-  params.append("prj_start_date", _started->date());
-  params.append("prj_due_date",	_due->date());
-  params.append("prj_assigned_date", _assigned->date());
-  params.append("prj_completed_date", _completed->date());
+  params.append("parent", "J");
+  params.append("parent_id", _prjid);
+  params.append("parent_owner_username", _owner->username());
+  params.append("parent_assigned_username", _assignedTo->username());
+  params.append("parent_start_date", _started->date());
+  params.append("parent_due_date",	_due->date());
+  params.append("parent_assigned_date", _assigned->date());
+  params.append("parent_completed_date", _completed->date());
 
   task newdlg(this, "", true);
   newdlg.set(params);
@@ -814,7 +852,7 @@ void project::sEditTask()
 
   ParameterList params;
   params.append("mode", "edit");
-  params.append("prjtask_id", _prjtask->id());
+  params.append("task_id", _prjtask->id());
 
   task newdlg(this, "", true);
   newdlg.set(params);
@@ -829,7 +867,7 @@ void project::sViewTask()
 
   ParameterList params;
   params.append("mode", "view");
-  params.append("prjtask_id", _prjtask->id());
+  params.append("task_id", _prjtask->id());
 
   task newdlg(this, "", true);
   newdlg.set(params);
@@ -840,36 +878,17 @@ void project::sDeleteTask()
 {
   if(_prjtask->altId() != 5)
     return;
-  
+
   XSqlQuery projectDeleteTask;
-  projectDeleteTask.prepare("SELECT deleteProjectTask(:prjtask_id) AS result; ");
+  projectDeleteTask.prepare("SELECT deleteTask(:prjtask_id) AS result; ");
   projectDeleteTask.bindValue(":prjtask_id", _prjtask->id());
   projectDeleteTask.exec();
-  if(projectDeleteTask.first())
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Project Task"),
+                                projectDeleteTask, __FILE__, __LINE__))
   {
-    int result = projectDeleteTask.value("result").toInt();
-    if(result < 0)
-    {
-      QString errmsg;
-      switch(result)
-      {
-        case -1:
-          errmsg = tr("Project task not found.");
-          break;
-        case -2:
-          errmsg = tr("Actual hours have been posted to this project task.");
-          break;
-        case -3:
-          errmsg = tr("Actual expenses have been posted to this project task.");
-          break;
-        default:
-          errmsg = tr("Error #%1 encountered while trying to delete project task.").arg(result);
-      }
-      QMessageBox::critical( this, tr("Cannot Delete Project Task"),
-        tr("Could not delete the project task for one or more reasons.\n") + errmsg);
-      return;
-    }
+    return;
   }
+
   emit deletedTask();
   sFillTaskList();
 }
@@ -896,16 +915,6 @@ void project::sFillTaskList()
   {
     return;
   }
-/* Not sure why the totals are zeroed out 
-   else
-  {
-    _totalHrBud->setDouble(0.0);
-    _totalHrAct->setDouble(0.0);
-    _totalHrBal->setDouble(0.0);
-    _totalExpBud->setDouble(0.0);
-    _totalExpAct->setDouble(0.0);
-    _totalExpBal->setDouble(0.0);
-  }  */
 
 // Populate Task List
   MetaSQLQuery mqltask = mqlLoad("orderActivityByProject", "detail");

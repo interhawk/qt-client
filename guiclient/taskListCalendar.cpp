@@ -1,14 +1,14 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
  * to be bound by its terms.
  */
 
-#include "todoListCalendar.h"
+#include "taskListCalendar.h"
 
 #include "xdialog.h"
 
@@ -21,20 +21,19 @@
 #include <metasql.h>
 #include <openreports.h>
 
-#include "todoCalendarControl.h"
+#include "taskCalendarControl.h"
 #include "storedProcErrorLookup.h"
-#include "todoItem.h"
 #include "task.h"
 #include "customer.h"
 #include "errorReporter.h"
 
-todoListCalendar::todoListCalendar(QWidget* parent, const char * name, Qt::WindowFlags f)
+taskListCalendar::taskListCalendar(QWidget* parent, const char * name, Qt::WindowFlags f)
   : XWidget(parent, name, f)
 {
-  XSqlQuery todotodoListCalendar;
+  XSqlQuery taskListq;
   setupUi(this);
 
-  todoCalendarControl * cc = new todoCalendarControl(this);
+  taskCalendarControl * cc = new taskCalendarControl(this);
   QGraphicsScene * scene = new QGraphicsScene(this);
   calendar = new CalendarGraphicsItem(cc);
   calendar->setSelectedDay(QDate::currentDate());
@@ -43,17 +42,18 @@ todoListCalendar::todoListCalendar(QWidget* parent, const char * name, Qt::Windo
   _gview->setScene(scene);
   _gview->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 
-  _usr->setEnabled(_privileges->check("MaintainAllToDoItems") || _privileges->check("MaintainPersonalToDoItems"));
+  _usr->setEnabled(_privileges->check("MaintainAllToDoItems") || _privileges->check("MaintainPersonalToDoItems")
+                   || _privileges->check("MaintainAllProjects") || _privileges->check("MaintainPersonalProjects"));
   _usr->setType(ParameterGroup::User);
-  todotodoListCalendar.prepare("SELECT getUsrId(NULL) AS usr_id;");
-  todotodoListCalendar.exec();
-  if (todotodoListCalendar.first())
+  taskListq.prepare("SELECT getUsrId(NULL) AS usr_id;");
+  taskListq.exec();
+  if (taskListq.first())
   {
-    _myUsrId = todotodoListCalendar.value("usr_id").toInt();
+    _myUsrId = taskListq.value("usr_id").toInt();
     _usr->setId(_myUsrId);
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving User Information"),
-                                todotodoListCalendar, __FILE__, __LINE__))
+                                taskListq, __FILE__, __LINE__))
   {
     close();
   }
@@ -82,21 +82,18 @@ todoListCalendar::todoListCalendar(QWidget* parent, const char * name, Qt::Windo
   if (_preferences->boolean("XCheckBox/forgetful"))
     _active->setChecked(true);
 
-  _usr->setEnabled(_privileges->check("MaintainAllToDoItems") ||
-                   _privileges->check("ViewAllToDoItems"));
-
   sFillList(QDate::currentDate());
 
   connect(_list, SIGNAL(itemSelected(int)), this, SLOT(sOpen()));
   connect(cc, SIGNAL(selectedDayChanged(QDate)), this, SLOT(sFillList(QDate)));
 }
 
-void todoListCalendar::languageChange()
+void taskListCalendar::languageChange()
 {
   retranslateUi(this);
 }
 
-enum SetResponse todoListCalendar::set(const ParameterList& pParams)
+enum SetResponse taskListCalendar::set(const ParameterList& pParams)
 {
   XWidget::set(pParams);
   QVariant param;
@@ -111,35 +108,35 @@ enum SetResponse todoListCalendar::set(const ParameterList& pParams)
   return NoError;
 }
 
-void todoListCalendar::sOpen()
+void taskListCalendar::sOpen()
 {
   if (_list->rawValue("type") == "T")
   {
     bool editPriv =
         (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("MaintainPersonalToDoItems")) ||
-        (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("MaintainPersonalToDoItems")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("MaintainPersonalToDoItems")) ||
         (_privileges->check("MaintainAllToDoItems"));
 
     bool viewPriv =
         (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("ViewPersonalToDoItems")) ||
-        (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("ViewPersonalToDoItems")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalToDoItems")) ||
         (_privileges->check("ViewAllToDoItems"));
 
     if (editPriv)
-      sEdit();
+      sEditTask();
     else if (viewPriv)
-      sView();
+      sViewTask();
   }
    else if (_list->rawValue("type") == "PR")
   {
     bool editPriv =
         (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("MaintainPersonalProjects")) ||
-        (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("MaintainPersonalProjects")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("MaintainPersonalProjects")) ||
         (_privileges->check("MaintainAllProjects"));
 
     bool viewPriv =
         (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("ViewPersonalProjects")) ||
-        (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("ViewPersonalProjects")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalProjects")) ||
         (_privileges->check("ViewAllProjects"));
 
     if (editPriv)
@@ -149,7 +146,7 @@ void todoListCalendar::sOpen()
   }
 }
 
-void todoListCalendar::sPopulateMenu(QMenu *pMenu)
+void taskListCalendar::sPopulateMenu(QMenu *pMenu)
 {
   QAction *menuItem;
 
@@ -157,21 +154,21 @@ void todoListCalendar::sPopulateMenu(QMenu *pMenu)
   {
     bool editPriv =
         (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("MaintainPersonalToDoItems")) ||
-        (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("MaintainPersonalToDoItems")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("MaintainPersonalToDoItems")) ||
         (_privileges->check("MaintainAllToDoItems"));
 
     bool viewPriv =
         (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("ViewPersonalToDoItems")) ||
-        (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("ViewPersonalToDoItems")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalToDoItems")) ||
         (_privileges->check("ViewAllToDoItems"));
 
-    menuItem = pMenu->addAction(tr("New..."), this, SLOT(sNew()));
+    menuItem = pMenu->addAction(tr("New..."), this, SLOT(sNewTask()));
     menuItem->setEnabled(editPriv);
 
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEditTask()));
     menuItem->setEnabled(editPriv);
 
-   menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+   menuItem = pMenu->addAction(tr("View..."), this, SLOT(sViewTask()));
     menuItem->setEnabled(viewPriv);
 
     menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
@@ -182,16 +179,13 @@ void todoListCalendar::sPopulateMenu(QMenu *pMenu)
   {
     bool editPriv =
         (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("MaintainPersonalProjects")) ||
-        (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("MaintainPersonalProjects")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("MaintainPersonalProjects")) ||
         (_privileges->check("MaintainAllProjects"));
 
     bool viewPriv =
         (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("ViewPersonalProjects")) ||
-        (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("ViewPersonalProjects")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalProjects")) ||
         (_privileges->check("ViewAllProjects"));
-
-    menuItem = pMenu->addAction(tr("New..."), this, SLOT(sNewTask()));
-    menuItem->setEnabled(editPriv);
 
     menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEditTask()));
     menuItem->setEnabled(editPriv);
@@ -209,51 +203,16 @@ void todoListCalendar::sPopulateMenu(QMenu *pMenu)
   }
 }
 
-void todoListCalendar::sNew()
+void taskListCalendar::sNewTask()
 {
   ParameterList params;
   params.append("mode", "new");
+  params.append("parent", "TASK");
+  
   if (_usr->isSelected())
     _usr->appendValue(params);
-
-  todoItem newdlg(this, "", true);
-  newdlg.set(params);
-
-  if (newdlg.exec() != XDialog::Rejected)
-    sFillList();
-}
-
-void todoListCalendar::sEdit()
-{
-  ParameterList params;
-  params.append("mode", "edit");
-  params.append("todoitem_id", _list->id());
-
-  todoItem newdlg(this, "", true);
-  newdlg.set(params);
-
-  if (newdlg.exec() != XDialog::Rejected)
-    sFillList();
-}
-
-void todoListCalendar::sView()
-{
-  ParameterList params;
-  params.append("mode", "view");
-  params.append("todoitem_id", _list->id());
-
-  todoItem newdlg(this, "", true);
-  newdlg.set(params);
-
-  newdlg.exec();
-}
-
-void todoListCalendar::sNewTask()
-{
-  ParameterList params;
-  params.append("mode", "new");
-  if (_usr->isSelected())
-    _usr->appendValue(params);
+  else
+    params.append("parent_assigned_username", omfgThis->username());
 
   task newdlg(this, "", true);
   newdlg.set(params);
@@ -262,11 +221,11 @@ void todoListCalendar::sNewTask()
     sFillList();
 }
 
-void todoListCalendar::sEditTask()
+void taskListCalendar::sEditTask()
 {
   ParameterList params;
   params.append("mode", "edit");
-  params.append("prjtask_id", _list->id());
+  params.append("task_id", _list->id());
 
   task newdlg(this, "", true);
   newdlg.set(params);
@@ -275,11 +234,11 @@ void todoListCalendar::sEditTask()
     sFillList();
 }
 
-void todoListCalendar::sViewTask()
+void taskListCalendar::sViewTask()
 {
   ParameterList params;
   params.append("mode", "view");
-  params.append("prjtask_id", _list->id());
+  params.append("task_id", _list->id());
 
   task newdlg(this, "", true);
   newdlg.set(params);
@@ -287,33 +246,20 @@ void todoListCalendar::sViewTask()
   newdlg.exec();
 }
 
-void todoListCalendar::sDelete()
+void taskListCalendar::sDelete()
 {
-  XSqlQuery todoDelete;
-  todoDelete.prepare("SELECT deleteTodoItem(:todoitem_id) AS result;");
-  todoDelete.bindValue(":todoitem_id", _list->id());
-  todoDelete.exec();
-  if (todoDelete.first())
-  {
-    int result = todoDelete.value("result").toInt();
-    if (result < 0)
-    {
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting To Do Item Information"),
-                             storedProcErrorLookup("deleteTodoItem", result),
-                             __FILE__, __LINE__);
-      return;
-    }
-    else
-      sFillList();
-    }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting To Do Item Information"),
-                                todoDelete, __FILE__, __LINE__))
-  {
-    return;
-  }
+  XSqlQuery taskDelete;
+  taskDelete.prepare("SELECT deleteTask(:task_id) AS result;");
+  taskDelete.bindValue(":task_id", _list->id());
+  taskDelete.exec();
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
+                              taskDelete, __FILE__, __LINE__))
+     return;
+  else
+     sFillList();
 }
 
-void todoListCalendar::sEditCustomer()
+void taskListCalendar::sEditCustomer()
 {
   XSqlQuery cust;
   cust.prepare("SELECT cust_id FROM custinfo WHERE (cust_number=:number);");
@@ -334,7 +280,7 @@ void todoListCalendar::sEditCustomer()
 
 }
 
-void todoListCalendar::sViewCustomer()
+void taskListCalendar::sViewCustomer()
 {
   XSqlQuery cust;
   cust.prepare("SELECT cust_id FROM custinfo WHERE (cust_number=:number);");
@@ -355,7 +301,7 @@ void todoListCalendar::sViewCustomer()
 
 }
 
-void todoListCalendar::setParams(ParameterList &params)
+void taskListCalendar::setParams(ParameterList &params)
 {
   if (_active->isChecked())
     params.append("active");
@@ -364,12 +310,12 @@ void todoListCalendar::setParams(ParameterList &params)
   _usr->appendValue(params);
 }
 
-void todoListCalendar::sFillList()
+void taskListCalendar::sFillList()
 {
   sFillList(_lastDate);
 }
 
-void todoListCalendar::sFillList(const QDate & date)
+void taskListCalendar::sFillList(const QDate & date)
 {
   static bool dontBotherMe = false;
   if(dontBotherMe)
@@ -377,59 +323,40 @@ void todoListCalendar::sFillList(const QDate & date)
   dontBotherMe = true;
   _lastDate = date;
   calendar->setSelectedDay(_lastDate);
-  QString sql = "SELECT todoitem_id AS id, todoitem_owner_username AS owner, "
-                "       'T' AS type, incdtpriority_order AS seq, incdtpriority_name AS priority, "
-                "       todoitem_name AS name, "
-                "       firstLine(todoitem_description) AS descrip, "
-                "       todoitem_status AS status, todoitem_due_date AS due, "
-                "       todoitem_username AS assigned, todoitem_owner_username AS owner, "
+  QString sql = "SELECT task_id AS id, task_owner_username AS owner, "
+                "       CASE task_parent_type WHEN 'J' THEN 'PR' ELSE 'T' END AS type, "
+                "       incdtpriority_order AS seq, incdtpriority_name AS priority, "
+                "       task_name AS name, "
+                "       firstLine(task_descrip) AS descrip, "
+                "       task_status AS status, task_due_date AS due, "
+                "       (SELECT array_to_string(array_agg(taskass_username),',') FROM taskass "
+                "                                 WHERE taskass_task_id=task_id) AS assigned, "
+                "       task_owner_username AS owner, "
                 "       incdt_number AS incdt, cust_number AS cust, "
-                "       CASE WHEN (todoitem_status != 'C'AND "
-                "                  todoitem_due_date < CURRENT_DATE) THEN 'expired'"
-                "            WHEN (todoitem_status != 'C'AND "
-                "                  todoitem_due_date > CURRENT_DATE) THEN 'future'"
+                "       CASE WHEN (task_status != 'C'AND "
+                "                  task_due_date < CURRENT_DATE) THEN 'expired'"
+                "            WHEN (task_status != 'C'AND "
+                "                  task_due_date > CURRENT_DATE) THEN 'future'"
                 "       END AS due_qtforegroundrole "
-                "  FROM todoitem() LEFT OUTER JOIN incdt ON (incdt_id=todoitem_incdt_id) "
-                "                  LEFT OUTER JOIN crmacct ON (crmacct_id=todoitem_crmacct_id) "
-                "                  LEFT OUTER JOIN custinfo ON (cust_crmacct_id=crmacct_id) "
-                "                  LEFT OUTER JOIN incdtpriority ON (incdtpriority_id=todoitem_priority_id) "
-                " WHERE( (todoitem_due_date = <? value(\"date\") ?>)"
-                "  <? if not exists(\"completed\") ?>"
-                "  AND   (todoitem_status != 'C')"
+                "  FROM task() LEFT OUTER JOIN incdt ON (incdt_id=task_parent_id AND task_parent_type='INCDT') "
+                "              LEFT OUTER JOIN crmacct ON (crmacct_id=task_parent_id AND task_parent_type='CRMA') "
+                "              LEFT OUTER JOIN custinfo ON (cust_crmacct_id=crmacct_id) "
+                "              LEFT OUTER JOIN incdtpriority ON (incdtpriority_id=task_priority_id) "
+                " WHERE task_due_date = <? value('date') ?> "
+                "   AND NOT task_istemplate "
+                "  <? if not exists('completed') ?>"
+                "  AND   task_status != 'C'"
                 "  <? endif ?>"
-                "  <? if exists(\"username\") ?> "
-                "  AND (todoitem_username=<? value(\"username\") ?>) "
-                "  <? elseif exists(\"usr_pattern\") ?>"
-                "  AND (todoitem_username ~ <? value(\"usr_pattern\") ?>) "
+                "  <? if exists('username') ?> "
+                "  AND task_id IN (SELECT taskass_task_id "
+                "                  FROM taskass "
+                "                  WHERE taskass_username = <? value('username') ?>) "
+                "  <? elseif exists('usr_pattern') ?>"
+                "  AND task_id IN (SELECT taskass_task_id "
+                "                  FROM taskass "
+                "                  WHERE taskass_username ~ <? value('username') ?>) "
                 "  <? endif ?>"
-                "  <? if exists(\"active\") ?>AND (todoitem_active) <? endif ?>"
-                "       ) "
-                "UNION ALL "
-                "SELECT prjtask_id AS id, prjtask_owner_username AS owner, "
-                "       'PR' AS type, prjtask_id AS seq, 'N/A' AS priority, "
-                "       prjtask_name AS name, "
-                "       firstLine(prjtask_descrip) AS descrip, "
-                "       prjtask_status AS status, prjtask_due_date AS due, "
-                "       prjtask_username AS assigned, prjtask_owner_username AS owner, "
-                "       NULL::INTEGER AS incdt, cust_number AS cust, "
-                "       CASE WHEN (prjtask_status != 'C'AND "
-                "                  prjtask_due_date < CURRENT_DATE) THEN 'expired'"
-                "            WHEN (prjtask_status != 'C'AND "
-                "                  prjtask_due_date > CURRENT_DATE) THEN 'future'"
-                "       END AS due_qtforegroundrole "
-                "  FROM prjtask() JOIN prj() ON (prj_id=prjtask_prj_id) "
-                "       LEFT OUTER JOIN crmacct ON (crmacct_id=prj_crmacct_id) "
-                "       LEFT OUTER JOIN custinfo ON (cust_crmacct_id=crmacct_id) "
-                " WHERE( (prjtask_due_date = <? value(\"date\") ?>)"
-                "  <? if not exists(\"completed\") ?>"
-                "  AND   (prjtask_status != 'C')"
-                "  <? endif ?>"
-                "  <? if exists(\"username\") ?> "
-                "  AND (prjtask_username=<? value(\"username\") ?>) "
-                "  <? elseif exists(\"usr_pattern\") ?>"
-                "  AND (prjtask_username ~ <? value(\"usr_pattern\") ?>) "
-                "  <? endif ?>"
-                "       ) "
+                "  <? if exists('active') ?>AND task_active <? endif ?>"
                 "ORDER BY due, seq, assigned;";
 
   ParameterList params;
@@ -450,7 +377,7 @@ void todoListCalendar::sFillList(const QDate & date)
   dontBotherMe = false;
 }
 
-void todoListCalendar::resizeEvent(QResizeEvent* event)
+void taskListCalendar::resizeEvent(QResizeEvent* event)
 {
   XWidget::resizeEvent(event);
 
@@ -458,7 +385,7 @@ void todoListCalendar::resizeEvent(QResizeEvent* event)
   _gview->fitInView(_gview->scene()->sceneRect(), Qt::KeepAspectRatio);
 }
 
-void todoListCalendar::showEvent(QShowEvent * event)
+void taskListCalendar::showEvent(QShowEvent * event)
 {
   XWidget::showEvent(event);
 

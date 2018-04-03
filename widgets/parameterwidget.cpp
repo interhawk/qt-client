@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -37,9 +37,11 @@
 #include "warehouseCluster.h"
 #include "vendorcluster.h"
 #include "itemcluster.h"
+#include "incidentcluster.h"
 #include "empcluster.h"
 #include "shiptocluster.h"
 #include "ordercluster.h"
+#include "opportunitycluster.h"
 #include "wocluster.h"
 
 #define DEBUG false
@@ -579,6 +581,13 @@ void ParameterWidget::applySaved(int pId, int filter_id)
             projectCluster->setId(tempFilterList[1].toInt());
           }
           break;
+        case Incident:
+          {
+          IncidentCluster *incidentCluster = qobject_cast<IncidentCluster*>(found);
+          if (incidentCluster != 0)
+            incidentCluster->setId(tempFilterList[1].toInt());
+          }
+          break;
         case Item:
           {
           ItemCluster *itemCluster = qobject_cast<ItemCluster*>(found);
@@ -598,6 +607,13 @@ void ParameterWidget::applySaved(int pId, int filter_id)
           OrderCluster *soCluster = qobject_cast<OrderCluster*>(found);
           if (soCluster != 0)
             soCluster->setId(tempFilterList[1].toInt());
+          }
+          break;
+        case Opportunity:
+          {
+          OpportunityCluster *opportunityCluster = qobject_cast<OpportunityCluster*>(found);
+          if (opportunityCluster != 0)
+            opportunityCluster->setId(tempFilterList[1].toInt());
           }
           break;
         case PurchaseOrder:
@@ -792,6 +808,13 @@ void ParameterWidget::applySaved(int pId, int filter_id)
           itemCluster->setId(pp->defaultValue.toInt());
         }
         break;
+      case Incident:
+        {
+        IncidentCluster *incidentCluster = qobject_cast<IncidentCluster*>(found);
+        if (incidentCluster != 0)
+          incidentCluster->setId(pp->defaultValue.toInt());
+        }
+        break;
       case Employee:
         {
         EmpCluster *employeeCluster = qobject_cast<EmpCluster*>(found);
@@ -811,6 +834,13 @@ void ParameterWidget::applySaved(int pId, int filter_id)
         OrderCluster *toCluster = qobject_cast<OrderCluster*>(found);
         if (toCluster != 0)
           toCluster->setId(pp->defaultValue.toInt());
+        }
+        break;
+      case Opportunity:
+        {
+        OpportunityCluster *opportunityCluster = qobject_cast<OpportunityCluster*>(found);
+        if (opportunityCluster != 0)
+          opportunityCluster->setId(pp->defaultValue.toInt());
         }
         break;
       case PurchaseOrder:
@@ -1075,6 +1105,17 @@ void ParameterWidget::changeFilterObject(int index)
       connect(itemCluster, SIGNAL(newId(int)), this, SLOT( storeFilterValue(int) ) );
     }
     break;
+  case Incident:
+    {
+      IncidentCluster *incidentCluster = new IncidentCluster(_filterGroup);
+      newWidget = incidentCluster;
+      incidentCluster->setOrientation(Qt::Horizontal);
+      incidentCluster->setLabel("");
+      incidentCluster->setNameVisible(false);
+
+      connect(incidentCluster, SIGNAL(newId(int)), this, SLOT( storeFilterValue(int) ) );
+    }
+    break;
   case Employee:
     {
       EmpCluster *employeeCluster = new EmpCluster(_filterGroup);
@@ -1109,6 +1150,17 @@ void ParameterWidget::changeFilterObject(int index)
       toCluster->setLabel("");
 
       connect(toCluster, SIGNAL(newId(int,QString)), this, SLOT( storeFilterValue(int) ) );
+    }
+    break;
+  case Opportunity:
+    {
+      OpportunityCluster *opportunityCluster = new OpportunityCluster(_filterGroup);
+      newWidget = opportunityCluster;
+      opportunityCluster->setOrientation(Qt::Horizontal);
+      opportunityCluster->setLabel("");
+      opportunityCluster->setNameVisible(false);
+
+      connect(opportunityCluster, SIGNAL(newId(int)), this, SLOT( storeFilterValue(int) ) );
     }
     break;
   case PurchaseOrder:

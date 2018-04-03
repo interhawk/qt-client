@@ -230,6 +230,9 @@ setup::setup(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
   modeVal = mode("MaintainSiteTypes", "ViewSiteTypes");
   insert(tr("Site Types"), "siteTypes", MasterInformation, Xt::InventoryModule, modeVal, modeVal);
 
+  modeVal = mode("MaintainTaskTemplates");
+  insert(tr("Task Templates"), "taskTemplates", MasterInformation, Xt::CRMModule, modeVal, modeVal);
+
   modeVal = mode("MaintainTaxCodes", "ViewTaxCodes");
   insert(tr("Tax Codes"), "taxCodes", MasterInformation, Xt::SalesModule, modeVal, modeVal);
 

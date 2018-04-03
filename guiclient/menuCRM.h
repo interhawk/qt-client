@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -42,6 +42,7 @@ class menuCRM : public QObject
     void sNewProject();
     void sProjects();
     void sDspOrderActivityByProject();
+    void sDspProjectSummary();
     void sAddress();
     void sAddresses();
     void sCRMAccount();
@@ -55,9 +56,9 @@ class menuCRM : public QObject
     void sCreateRecurringItems();
     void sIncident();
     void sIncidentWorkbench();
-    void sTodoItem();
-    void sTodoList();
-    void sTodoListCalendar();
+    void sTask();
+    void sTaskList();
+    void sTaskListCalendar();
     void sNewOpportunity();
     void sOpportunities();
     void sNewProspect();
@@ -72,7 +73,7 @@ class menuCRM : public QObject
     QMenu *crmMenu;
     QMenu *projectsMenu;
     QMenu *incidentMenu;
-    QMenu *todoMenu;
+    QMenu *taskMenu;
     QMenu *reportsMenu;
     QMenu *accountsMenu;
     QMenu *contactsMenu;

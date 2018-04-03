@@ -2,13 +2,13 @@
 <ui version="4.0">
  <comment>This file is part of the xTuple ERP: PostBooks Edition, a free and
 open source Enterprise Resource Planning software suite,
-Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
 It is licensed to you under the Common Public Attribution License
 version 1.0, the full text of which (including xTuple-specific Exhibits)
 is available at www.xtuple.com/CPAL.  By using this software, you agree
 to be bound by its terms.</comment>
- <class>todoList</class>
- <widget class="QWidget" name="todoList">
+ <class>taskList</class>
+ <widget class="QWidget" name="taskList">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,7 +18,7 @@ to be bound by its terms.</comment>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>To-Do List</string>
+   <string>Task List</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -33,9 +33,9 @@ to be bound by its terms.</comment>
          <number>12</number>
         </property>
         <item>
-         <widget class="XCheckBox" name="_todolist">
+         <widget class="XCheckBox" name="_tasks">
           <property name="text">
-           <string>To-Do List</string>
+           <string>Tasks</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -79,6 +79,16 @@ to be bound by its terms.</comment>
        </layout>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="XCheckBox" name="_showCompleted">
+     <property name="text">
+      <string>Show Completed</string>
+     </property>
+     <property name="visible">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
   </layout>

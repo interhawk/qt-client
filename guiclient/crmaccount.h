@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -15,7 +15,7 @@
 #include "addresses.h"
 #include "contacts.h"
 #include "guiclient.h"
-#include "todoList.h"
+#include "taskList.h"
 #include "xwidget.h"
 
 #include <QSqlError>
@@ -29,6 +29,7 @@ public:
     crmaccount(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::Window);
     ~crmaccount();
     static      void doDialog(QWidget *, const ParameterList &);
+    static bool userHasPriv(const int = cView, const int = 0);
     Q_INVOKABLE int  id();
 
 public slots:
@@ -72,7 +73,7 @@ protected slots:
 protected:
     virtual void closeEvent(QCloseEvent*);
     
-    todoList *_todoList;
+    taskList *_taskList;
     contacts *_contacts;
     addresses *_addresses;
 
