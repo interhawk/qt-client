@@ -69,9 +69,11 @@ taskList::taskList(QWidget* parent, const char*, Qt::WindowFlags fl)
   connect(omfgThis,       SIGNAL(emitSignal(QString, int)), this, SLOT(sUpdate(QString, int)));
 
   list()->addColumn(tr("Type"),               75,  Qt::AlignCenter, true, "type");
-  list()->addColumn(tr("Priority"),  _userColumn,  Qt::AlignLeft,   true, "priority");
-  list()->addColumn(tr("Owner"),     _userColumn,  Qt::AlignLeft,   false,"owner");
-  list()->addColumn(tr("Assigned To"),_userColumn, Qt::AlignLeft,   true, "assigned");
+  list()->addColumn(tr("Project"),           100,  Qt::AlignLeft,   false,  "prj_number");
+  list()->addColumn(tr("Priority"),    _userColumn,  Qt::AlignLeft,   true, "priority");
+  list()->addColumn(tr("Owner"),       _userColumn,  Qt::AlignLeft,   false,"owner");
+  list()->addColumn(tr("Assigned To"), _userColumn,  Qt::AlignLeft,   true, "assigned");
+  list()->addColumn(tr("Number"),            100,  Qt::AlignLeft,   true, "number");
   list()->addColumn(tr("Name"),              100,  Qt::AlignLeft,   true, "name");
   list()->addColumn(tr("Notes"),              -1,  Qt::AlignLeft,   true, "notes");
   list()->addColumn(tr("Stage"),   _statusColumn,  Qt::AlignLeft,   true, "stage");

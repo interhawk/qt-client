@@ -166,10 +166,13 @@ enum SetResponse opportunity::set(const ParameterList &pParams)
 
       _startDate->setDate(omfgThis->dbDate());
 
-      opportunityet.exec("SELECT NEXTVAL('ophead_ophead_id_seq') AS result;");
+      opportunityet.exec("SELECT NEXTVAL('ophead_ophead_id_seq') AS result, "
+                         "COALESCE((SELECT incdtpriority_id FROM incdtpriority "
+                         "WHERE incdtpriority_default), -1) AS prioritydefault;");
       if (opportunityet.first())
       {
         _opheadid = opportunityet.value("result").toInt();
+        _priority->setId(opportunityet.value("prioritydefault").toInt());
         _charass->setId(_opheadid);
         _documents->setId(_opheadid);
         _comments->setId(_opheadid);
@@ -1098,7 +1101,6 @@ void opportunity::sHandleCrmacct(int pCrmacctid)
   else
     _salesTab->setEnabled(true);
 
-  _project->setAccount(pCrmacctid);
   sHandleSalesPrivs();
 }
 
@@ -1115,6 +1117,17 @@ int opportunity::id()
 
 void opportunity::sProjectUpdated()
 {
+  XSqlQuery updp;
+  updp.prepare("UPDATE task SET task_prj_id=:prjid "
+                 "WHERE task_parent_type='OPP' "
+                 "  AND task_parent_id=:oppid;" );
+  updp.bindValue(":prjid", _project->id());
+  updp.bindValue(":oppid", _opheadid);
+  updp.exec();
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Opportunity Project"),
+                                updp, __FILE__, __LINE__))
+       return;
+
   _taskList->parameterWidget()->setDefault(tr("Project"), _project->id(), true);
   _taskList->sFillList();
 }

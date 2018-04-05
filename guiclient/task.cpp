@@ -122,6 +122,7 @@ enum SetResponse task::set(const ParameterList &pParams)
   XDialog::set(pParams);
   QVariant param;
   bool     valid;
+  bool     prioritySet = false;
 
   param = pParams.value("parent", &valid);
   if (valid)
@@ -169,7 +170,10 @@ enum SetResponse task::set(const ParameterList &pParams)
 
   param = pParams.value("priority_id", &valid);
   if (valid)
+  {
     _priority->setId(param.toInt());
+    prioritySet = true;
+  }
 
   param = pParams.value("task_id", &valid);
   if (valid)
@@ -200,6 +204,19 @@ enum SetResponse task::set(const ParameterList &pParams)
       {
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Task Information"),
                              tasket, __FILE__, __LINE__);
+      }
+
+      if(!prioritySet)
+      {
+        tasket.exec("SELECT COALESCE((SELECT incdtpriority_id FROM incdtpriority "
+                    "       WHERE incdtpriority_default), -1) AS prioritydefault;");
+        if (tasket.first())
+          _priority->setId(tasket.value("prioritydefault").toInt());
+        else
+        {
+          ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Task Information"),
+                               tasket, __FILE__, __LINE__);
+        }
       }
 
       connect(_status,  SIGNAL(currentIndexChanged(int)), this, SLOT(sStatusChanged(int)));

@@ -168,7 +168,9 @@ enum SetResponse incident::set(const ParameterList &pParams)
     if (param.toString() == "new")
     {
       incidentet.exec("SELECT nextval('incdt_incdt_id_seq') AS incdt_id, "
-             "fetchIncidentNumber() AS number;");
+           "fetchIncidentNumber() AS number,"
+           "COALESCE((SELECT incdtpriority_id FROM incdtpriority "
+           "          WHERE incdtpriority_default), -1) AS prioritydefault;");
       if(incidentet.first())
       {
         _incdtid=incidentet.value("incdt_id").toInt();
@@ -178,6 +180,7 @@ enum SetResponse incident::set(const ParameterList &pParams)
         _charass->setId(_incdtid);
         _alarms->setId(_incdtid);
         _recurring->setParent(_incdtid, "INCDT");
+        _priority->setId(incidentet.value("prioritydefault").toInt());
         _print->hide();
         _project->setAllowedStatuses(ProjectLineEdit::Concept |  ProjectLineEdit::InProcess);
       }
@@ -690,7 +693,6 @@ void incident::sIncdtCategoryChanged(int newCat)
 
 void incident::sCRMAcctChanged(const int newid)
 {
-  _project->setAccount(newid);
   _cntct->setSearchAcct(newid);
 }
 
@@ -703,6 +705,17 @@ void incident::sNewCharacteristic()
 
 void incident::sProjectUpdated()
 {
+  XSqlQuery updp;
+  updp.prepare("UPDATE task SET task_prj_id=:prjid "
+                 "WHERE task_parent_type='INCDT' "
+                 "  AND task_parent_id=:incdtid;" );
+  updp.bindValue(":prjid", _project->id());
+  updp.bindValue(":incdtid", _incdtid);
+  updp.exec();
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Incident Project"),
+                                updp, __FILE__, __LINE__))
+       return;
+
   _taskList->parameterWidget()->setDefault(tr("Project"), _project->id(), true);
   _taskList->sFillList();
 }

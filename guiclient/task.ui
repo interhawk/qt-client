@@ -236,9 +236,6 @@ to be bound by its terms.</comment>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
-              <property name="maximum">
-               <number>100</number>
-              </property>
              </widget>
             </item>
             <item>
@@ -364,6 +361,16 @@ to be bound by its terms.</comment>
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="_assignmentsLit">
+            <property name="text">
+             <string>Task Assignments:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">

@@ -38,7 +38,6 @@ prospects::prospects(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("Assigned"), "assigned", ParameterWidget::User);
   parameterWidget()->appendComboBox(tr("Source"), "source", XComboBox::OpportunitySources);
   parameterWidget()->appendComboBox(tr("Stage"), "stage", XComboBox::OpportunityStages);
-  parameterWidget()->appendComboBox(tr("Priority"), "priority", XComboBox::IncidentPriority);
   parameterWidget()->append(tr("Contact Name Pattern"), "cntct_name_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Phone Pattern"), "cntct_phone_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Email Pattern"), "cntct_email_pattern", ParameterWidget::Text);
