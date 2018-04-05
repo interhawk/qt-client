@@ -22,6 +22,7 @@
 #include <QFont>
 #endif
 
+#include "format.h"
 #include "parameterwidget.h"
 #include "widgets.h"
 #include "xcombobox.h"
@@ -43,6 +44,7 @@
 #include "ordercluster.h"
 #include "opportunitycluster.h"
 #include "wocluster.h"
+#include "xdoublevalidator.h"
 
 #define DEBUG false
 
@@ -113,7 +115,7 @@ ParameterWidget::ParameterWidget(QWidget *pParent, const char *pName)  :
   connect(_filterButton,          SIGNAL(toggled(bool)), this, SLOT(setFiltersVisible(bool)));
   connect(_filterList, SIGNAL(currentIndexChanged(int)), this, SLOT(applySaved(int)));
   connect(_filterList, SIGNAL(currentIndexChanged(int)), this, SLOT(setFiltersDefault()));
-  connect(_filterSignalMapper,      SIGNAL(mapped(int)), this, SLOT(removeParam(int)));
+  connect(_filterSignalMapper,      SIGNAL(mapped(int)), this, SLOT(removeFilter(int)));
   connect(_manageButton,              SIGNAL(clicked()), this, SLOT(sManageFilters()));
   connect(_saveButton,                SIGNAL(clicked()), this, SLOT(save()));
   connect(this,                       SIGNAL(updated()), this, SLOT(toggleSave()));
@@ -228,7 +230,7 @@ void ParameterWidget::addParam()
 {
   XComboBox   *xcomboBox     = new XComboBox(_filterGroup);
   QToolButton *toolButton    = new QToolButton(_filterGroup);
-  QLineEdit   *lineEdit      = new QLineEdit(_filterGroup);
+  QLineEdit   *lineEdit      = new XLineEdit(_filterGroup);
   QGridLayout *gridLayout    = new QGridLayout();
   QVBoxLayout *xcomboLayout  = new QVBoxLayout();
   QHBoxLayout *widgetLayout1 = new QHBoxLayout();
@@ -416,12 +418,24 @@ void ParameterWidget::appendComboBox(QString pName, QString pParam, QString pQue
   }
 }
 
+/** @brief Remove a filter from the set of available filters.
+  @param pName      The user-visible name for this filter to distinguish
+                    it from other filters in the same set
+*/
+void ParameterWidget::removeParam(QString pName)
+{
+  int pidx = paramIndex(pName);
+  _params.remove(pidx);
+  repopulateComboboxes();
+}
+
 void ParameterWidget::applySaved(int pId, int filter_id)
 {
   QWidget *found = 0;
   XSqlQuery qry;
   QString query;
   QString filterValue;
+  QString filterColumns;
   QDate today = QDate::currentDate();
   int xid;
 
@@ -443,7 +457,7 @@ void ParameterWidget::applySaved(int pId, int filter_id)
   if (classname.isEmpty())
     classname = parent()->metaObject()->className();
 
-  query = " SELECT filter_value, "
+  query = " SELECT filter_value, filter_columns, "
           "  CASE WHEN (filter_username IS NULL) THEN true "
           "  ELSE false END AS shared "
           " FROM filter "
@@ -457,6 +471,7 @@ void ParameterWidget::applySaved(int pId, int filter_id)
   if (qry.first())
   {
     filterValue = qry.value("filter_value").toString();
+    filterColumns = qry.value("filter_columns").toString();
     _shared = qry.value("shared").toBool();
   }
 
@@ -910,12 +925,12 @@ void ParameterWidget::applySaved(int pId, int filter_id)
           break;
       default:
         {
-        QLineEdit *lineEdit = qobject_cast<QLineEdit*>(found);
-        if (lineEdit != 0)
-        {
-          lineEdit->setText(pp->defaultValue.toString());
-          storeFilterValue(-1, lineEdit);
-        }
+          QLineEdit *lineEdit = qobject_cast<QLineEdit*>(found);
+          if (lineEdit != 0)
+          {
+            lineEdit->setText(pp->defaultValue.toString());
+            storeFilterValue(-1, lineEdit);
+          }
         }
         break;
       }
@@ -924,6 +939,7 @@ void ParameterWidget::applySaved(int pId, int filter_id)
     }//end of while _defaultTypes
   }
 
+  emit filterApplySaved(filter_id, filterColumns);
   emit updated();
 }
 
@@ -1271,6 +1287,15 @@ void ParameterWidget::changeFilterObject(int index)
       connect(checkBox, SIGNAL(stateChanged(int)), this, SLOT( storeFilterValue(int) ) );
     }
     break;
+  case Numeric:
+    {
+      QLineEdit *lineEdit = new QLineEdit(_filterGroup);
+      newWidget = lineEdit;
+      lineEdit->setValidator(new XDoubleValidator(0, 99999999,  decimalPlaces("salesprice"), this));
+
+      connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT( storeFilterValue() ) );
+    }
+    break;
   default:
     {
       QLineEdit *lineEdit = new QLineEdit(_filterGroup);
@@ -1400,7 +1425,7 @@ void ParameterWidget::addUsedType()
   _usedTypes[row] = mybox->currentText();
 }
 
-void ParameterWidget::removeParam(int pRow)
+void ParameterWidget::removeFilter(int pRow)
 {
   QLayoutItem *test;
   QLayoutItem *test2;
@@ -1431,6 +1456,7 @@ void ParameterWidget::removeParam(int pRow)
 void ParameterWidget::save()
 {
   QString filter = "";
+  QString columns = "";
   QString variantString;
   QVariant tempVar;
   QDate today = QDate::currentDate();
@@ -1468,6 +1494,11 @@ void ParameterWidget::save()
       + ":" + split[1] + "`";
   }
 
+  // If the parent of the parameter is a display we may also want to save the column visibility
+  if (parent()->inherits("display"))
+    QMetaObject::invokeMethod(parent(), "listColumnVisibility", Qt::DirectConnection,
+                              Q_RETURN_ARG(QString, columns));
+
   QString classname(parent()->objectName());
   if (classname.isEmpty())
     classname = parent()->metaObject()->className();
@@ -1481,6 +1512,8 @@ void ParameterWidget::save()
     params.append("shared", true);
   if (!_x_privileges->check("AllowSharedFilterEdit"))
     params.append("disableshare", true);
+  if (columns.size())
+    params.append("columns", columns);
   filterSave newdlg(this);
   newdlg.set(params);
   filter_id = newdlg.exec();

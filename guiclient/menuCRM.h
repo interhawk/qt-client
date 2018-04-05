@@ -44,14 +44,18 @@ class menuCRM : public QObject
     void sDspOrderActivityByProject();
     void sDspProjectSummary();
     void sAddress();
+    void sAddressGroups();
     void sAddresses();
     void sCRMAccount();
     void sCRMAccounts();
+    void sCRMAccountGroups();
     void sContact();
     void sContacts();
+    void sContactGroups();
     void sContactMerge();
     void sCrmaccountMerge();
     void sAddressMerge();
+    void sBuildCRMGroups();
 
     void sCreateRecurringItems();
     void sIncident();
@@ -63,6 +67,7 @@ class menuCRM : public QObject
     void sOpportunities();
     void sNewProspect();
     void sProspects();
+    void sProspectGroups();
     void sEditOwners();
     void sSetup();
 

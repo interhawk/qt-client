@@ -135,12 +135,13 @@ void ContactWidget::init()
                          "MaintainPersonalContacts MaintainAllContacts");
     _emailopt           = new QCheckBox(tr("Opt In"), this);
     _emailopt->setObjectName("_emailopt");
+
     if (_x_metrics)
       _emailopt->setChecked(_x_metrics->boolean("DefaultEmailOptIn"));
 
     _emailBox->addWidget(_email, 2);
     _emailBox->addWidget(_emailopt, 0);
-
+  
     _webaddrLit		= new QLabel(tr("Web:"), this);
     _webaddrLit->setObjectName("_webaddrLit");
     _webaddr		= new XLineEdit(this, "_webaddr");
@@ -483,8 +484,10 @@ void ContactWidget::clear()
   _initials->clear();
   _title->clear();
   _email->clear();
+  
   if (_x_metrics)
     _emailopt->setChecked(_x_metrics->boolean("DefaultEmailOptIn"));
+
   _webaddr->clear();
   _address->clear();
   _active->setChecked(true);

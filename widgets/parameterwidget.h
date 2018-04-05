@@ -36,7 +36,7 @@ class XTUPLEWIDGETS_EXPORT ParameterWidget : public QWidget, public Ui::Paramete
       Multiselect, GLAccount, Exists, CheckBox, Project,
       Customer, Site, Vendor, Item, Employee, Shipto,
       SalesOrder, WorkOrder, PurchaseOrder, TransferOrder,
-      Incident, Opportunity
+      Incident, Opportunity, Numeric
     };
     Q_ENUM(ParameterWidgetTypes)
 
@@ -56,7 +56,8 @@ class XTUPLEWIDGETS_EXPORT ParameterWidget : public QWidget, public Ui::Paramete
     void applySaved(int pId = 0, int filter_id = 0);
     void changeFilterObject(int index);
     void clearFilters();
-    void removeParam(int);
+    void removeParam(QString pName);
+    void removeFilter(int);
     void save();
     void setDefault(QString pName, QVariant pDefault = QVariant(), bool pAutoApply = false);
     void setEnabled(QString pName, bool pEnabled);
@@ -74,6 +75,7 @@ class XTUPLEWIDGETS_EXPORT ParameterWidget : public QWidget, public Ui::Paramete
 
   signals:
     void cleared();
+    void filterApplySaved(int, QString);
     void filterChanged();
     void filterSetSaved();
     void updated();

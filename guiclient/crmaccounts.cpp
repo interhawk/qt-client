@@ -39,13 +39,12 @@ crmaccounts::crmaccounts(QWidget* parent, const char*, Qt::WindowFlags fl)
                                "SELECT  5, '%5' UNION "
                                "SELECT  6, '%6' UNION "
                                "SELECT  7, '%7' UNION "
-                               "SELECT  8, '%8' UNION "
-                               "SELECT  9, '%9' ")
+                               "SELECT  100+crmrole_id, crmrole_name "
+                               " FROM crmrole WHERE crmrole_crmacct "
+                               "ORDER BY 2" )
   .arg(tr("Customer"))
   .arg(tr("Prospect"))
   .arg(tr("Vendor"))
-  .arg(tr("Competitor"))
-  .arg(tr("Partner"))
   .arg(tr("Tax Auth."))
   .arg(tr("User"))
   .arg(tr("Employee"))
@@ -56,6 +55,7 @@ crmaccounts::crmaccounts(QWidget* parent, const char*, Qt::WindowFlags fl)
     parameterWidget()->append(tr("Owner"), "owner_username", ParameterWidget::User);
     parameterWidget()->append(tr("Owner Pattern"), "owner_usr_pattern", ParameterWidget::Text);
   }
+  parameterWidget()->appendComboBox(tr("Account Groups"), "crmacctgrp", XComboBox::AccountGroups);
   parameterWidget()->append(tr("Show Inactive"), "showInactive", ParameterWidget::Exists);
   parameterWidget()->append(tr("Account Number Pattern"), "crmacct_number_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Account Name Pattern"), "crmacct_name_pattern", ParameterWidget::Text);
@@ -96,8 +96,6 @@ crmaccounts::crmaccounts(QWidget* parent, const char*, Qt::WindowFlags fl)
   list()->addColumn(tr("Customer"),       70, Qt::AlignCenter,  true, "cust");
   list()->addColumn(tr("Prospect"),       70, Qt::AlignCenter,  true, "prospect");
   list()->addColumn(tr("Vendor"),         70, Qt::AlignCenter,  true, "vend");
-  list()->addColumn(tr("Competitor"),     70, Qt::AlignCenter, false, "competitor");
-  list()->addColumn(tr("Partner"),        70, Qt::AlignCenter, false, "partner");
   list()->addColumn(tr("Tax Auth."),      70, Qt::AlignCenter, false, "taxauth");
   list()->addColumn(tr("User"),           70, Qt::AlignCenter, false, "usr");
   list()->addColumn(tr("Employee"),       70, Qt::AlignCenter, false, "emp");
