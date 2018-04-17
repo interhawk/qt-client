@@ -264,6 +264,25 @@ void contacts::sDelete()
                                  QMessageBox::Yes | QMessageBox::No,
                                  QMessageBox::No) == QMessageBox::Yes)
           cascade = true;
+        else
+        {
+          XSqlQuery incdt;
+          incdt.prepare("SELECT EXISTS(SELECT 1 "
+                        "                FROM incdt "
+                        "               WHERE incdt_cntct_id=:cntct_id) AS used;");
+          incdt.bindValue(":cntct_id", selected->id());
+          incdt.exec();
+
+          if (incdt.first() && incdt.value("used").toBool())
+          {
+            QMessageBox::critical(this, tr("Contact in Use"), tr("Contact is used on an incident "
+                                                                 "and cannot be deleted."));
+            return;
+          }
+          else if (ErrorReporter::error(QtCriticalMsg, this, tr("Checking Usage"),
+                                        incdt, __FILE__, __LINE__))
+            return;
+        }
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Checking Usage"),
                                     chk, __FILE__, __LINE__))
