@@ -153,17 +153,31 @@ enum SetResponse opportunity::set(const ParameterList &pParams)
     populate();
   }
 
+  param = pParams.value("crmacct_id", &valid);
+  if (valid)
+  {
+    _crmacct->setId(param.toInt());
+    _crmacct->setEnabled(false);
+  }
+
+  param = pParams.value("parent_owner_username", &valid);
+  if (valid)
+    _owner->setUsername(param.toString());
+
+  param = pParams.value("parent_assigned_username", &valid);
+  if (valid)
+    _assignedTo->setUsername(param.toString());
+
+  param = pParams.value("cntct_id", &valid);
+  if (valid)
+    _cntct->setId(param.toInt());
+
   param = pParams.value("mode", &valid);
   if (valid)
   {
     if (param.toString() == "new")
     {
-      _mode = cNew;
-      
-      param = pParams.value("crmacct_id", &valid);
-      if (valid)
-        _crmacct->setId(param.toInt());
-
+      _mode = cNew;    
       _startDate->setDate(omfgThis->dbDate());
 
       opportunityet.exec("SELECT NEXTVAL('ophead_ophead_id_seq') AS result, "
@@ -205,17 +219,10 @@ enum SetResponse opportunity::set(const ParameterList &pParams)
       setViewMode();
   }
 
-  param = pParams.value("crmacct_id", &valid);
-  if (valid)
-  {
-    _crmacct->setId(param.toInt());
-    _crmacct->setEnabled(false);
-  }
-
-  connect(_opptype,     SIGNAL(newID(int)), this, SLOT(sOppTypeChanged(int)));
-
   _taskList->parameterWidget()->setDefault(tr("Opportunity"), _opheadid, true);
   _taskList->sFillList();
+
+  connect(_opptype,     SIGNAL(newID(int)), this, SLOT(sOppTypeChanged(int)));
 
   sHandleSalesPrivs();
   return NoError;
@@ -227,6 +234,8 @@ void opportunity::setViewMode()
 
   _crmacct->setEnabled(false);
   _owner->setEnabled(false);
+  _assignedTo->setEnabled(false);
+  _project->setEnabled(false);
   _oppstage->setEnabled(false);
   _oppsource->setEnabled(false);
   _opptype->setEnabled(false);

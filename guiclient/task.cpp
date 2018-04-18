@@ -205,6 +205,20 @@ enum SetResponse task::set(const ParameterList &pParams)
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Task Information"),
                              tasket, __FILE__, __LINE__);
       }
+      if(((_metrics->value("TaskNumberGeneration") == "A") ||
+          (_metrics->value("TaskNumberGeneration") == "O"))
+       && _number->text().isEmpty()
+       && _parenttype != "J")
+      {
+        XSqlQuery numq;
+        numq.exec("SELECT fetchTaskNumber() AS number;");
+        if (numq.first())
+        {
+          _number->setText(numq.value("number"));
+          _number->setEnabled(false);
+          _name->setFocus();
+        }
+      }
 
       if(!prioritySet)
       {
