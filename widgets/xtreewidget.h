@@ -285,6 +285,7 @@ class XTUPLEWIDGETS_EXPORT XTreeWidget : public QTreeWidget
     void  populateMenu(QMenu *, QTreeWidgetItem *, int);
     void  populateMenu(QMenu *, XTreeWidgetItem *);
     void  populateMenu(QMenu *, XTreeWidgetItem *, int);
+    void  populateHeaderMenu(QMenu *, QTreeWidgetItem *, int);
     void  resorted();
     void  populated();
 

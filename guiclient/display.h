@@ -93,6 +93,7 @@ public slots:
     virtual void sFillList();
     virtual void sFillList(ParameterList, bool = false);
     virtual void sPopulateMenu(QMenu *, QTreeWidgetItem *, int);
+    virtual void sPopulateHeaderMenu(QMenu *, QTreeWidgetItem *, int);
 
 protected:
     Q_INVOKABLE ParameterList getParams();

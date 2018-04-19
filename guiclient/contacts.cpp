@@ -16,12 +16,16 @@
 #include <QToolButton>
 #include <QVariant>
 #include <QMessageBox>
+#include <QInputDialog>
 
+#include "characteristic.h"
 #include "contact.h"
 #include "errorReporter.h"
 #include "parameterwidget.h"
 #include "prospect.h"
 #include "storedProcErrorLookup.h"
+#include "xclusterinputdialog.h"
+#include "xdateinputdialog.h"
 
 contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   : display(parent, "contacts", fl)
@@ -188,6 +192,227 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
     pMenu->addSeparator();
     menuItem = pMenu->addAction(tr("Create Prospect..."), this, SLOT(sNewProspect()));
     menuItem->setEnabled(editProspectPriv);
+  }
+}
+
+void contacts::sPopulateHeaderMenu(QMenu *pMenu, QTreeWidgetItem *, int index)
+{
+  _replace = list()->column(index);
+
+  if (list()->selectedItems().size() > 0)
+  {
+    QAction *menuItem = pMenu->addAction(tr("Replace..."), this, SLOT(sReplace()));
+    menuItem->setEnabled(_privileges->check("MaintainAllContacts"));
+    pMenu->addSeparator();
+  }
+}
+
+void contacts::sReplace()
+{
+  QString label;
+  characteristic::Type chartype = characteristic::Text;
+  int charid = -1;
+  QVariant replace;
+
+  if (_replace == "cntct_first_name")
+    label = tr("New First Name:");
+  else if(_replace == "cntct_last_name")
+    label = tr("New Last Name:");
+  else if(_replace == "cntct_owner_username")
+    label = tr("New Owner:");
+  else if(_replace == "cntct_title")
+    label = tr("New Title:");
+  else if(_replace == "cntct_phone")
+    label = tr("New Phone:");
+  else if(_replace == "cntct_phone2")
+    label = tr("New Alternate:");
+  else if(_replace == "cntct_fax")
+    label = tr("New Fax:");
+  else if(_replace == "cntct_email")
+    label = tr("New Email:");
+  else if(_replace == "cntct_webaddr")
+    label = tr("New Web Address:");
+  else if (_replace.contains("crmacct"))
+    label = tr("New CRM Account:");
+  else if (_replace.contains("addr"))
+    label = tr("New Address:");
+  else if (_replace.contains("char"))
+  {
+    charid = _replace.mid(4).toInt();
+    if (charid > 0)
+    {
+      XSqlQuery qry;
+      qry.prepare("SELECT char_name, char_type "
+                  "  FROM char "
+                  " WHERE char_id=:char_id;");
+      qry.bindValue(":char_id", charid);
+      qry.exec();
+      if (qry.first())
+      {
+        label = "New " + qry.value("char_name").toString() + ":";
+        chartype = (characteristic::Type)(qry.value("char_type").toInt());
+      }
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Characteristic lookup failed"),
+                                    qry, __FILE__, __LINE__))
+        return;
+    }
+  }
+
+  bool ok;
+
+  if (_replace.contains("cntct"))
+    replace = QInputDialog::getText(this, tr("Replace"), label, QLineEdit::Normal, "", &ok);
+  else if (_replace.contains("crmacct") || _replace.contains("addr"))
+  {
+    ParameterList params;
+    params.append("label", label);
+    if (_replace.contains("crmacct"))
+      params.append("type", "crmacct");
+    else if (_replace.contains("addr"))
+      params.append("type", "addr");
+
+    XClusterInputDialog newdlg(this, "", true);
+    newdlg.set(params);
+    if (newdlg.exec() == XDialog::Accepted)
+    {
+      replace = newdlg.getId() > 0 ? newdlg.getId() : QVariant();
+      ok = true;
+    }
+  }
+  else if (_replace.contains("char"))
+  {
+    if (chartype == characteristic::Text)
+      replace = QInputDialog::getText(this, tr("Replace"), label, QLineEdit::Normal, "", &ok);
+    else if (chartype == characteristic::Number)
+      replace = QInputDialog::getDouble(this, tr("Replace"), label, 0, 0.0, 9999999.0,
+                                        decimalPlaces("purchprice"), &ok);
+    else if (chartype == characteristic::List)
+    {
+      QStringList options;
+
+      XSqlQuery qry;
+      qry.prepare("SELECT charopt_value "
+                  "   FROM charopt "
+                  " WHERE charopt_char_id=:char_id "
+                  " ORDER BY charopt_order;");
+      qry.bindValue(":char_id", charid);
+      qry.exec();
+      while (qry.next())
+        options.append(qry.value("charopt_value").toString());
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Characteristic option lookup failed"),
+                                    qry, __FILE__, __LINE__))
+        return;
+
+      replace = QInputDialog::getItem(this, tr("Replace"), label, options, 0, false, &ok);
+    }
+    else if (chartype == characteristic::Date)
+    {
+      ParameterList params;
+      params.append("label", label);
+
+      XDateInputDialog newdlg(this, "", true);
+      newdlg.set(params);
+      if (newdlg.exec() == XDialog::Accepted)
+      {
+        replace = newdlg.getDate();
+        ok = true;
+      }
+    }
+  }
+
+  if (ok && QMessageBox::warning(this, tr("Bulk Replace?"),
+                                 tr("<p>The selected value will be replaced for all selected "
+                                    "items. Are you sure you want to do this?"),
+                                 QMessageBox::Yes | QMessageBox::No,
+                                 QMessageBox::No) == QMessageBox::Yes)
+  {
+    QString insertStr;
+    QString updateStr;
+    if (!_replace.contains("char"))
+    {
+      updateStr = "UPDATE cntct SET ";
+      if (_replace.contains("cntct"))
+        updateStr += _replace;
+      else if(_replace.contains("crmacct"))
+        updateStr += "cntct_crmacct_id";
+      else if(_replace.contains("addr"))
+        updateStr += "cntct_addr_id";
+    
+      updateStr += "=:replace WHERE cntct_id IN (";
+    }
+    else
+    {
+      insertStr = "INSERT INTO charass "
+                  "(charass_target_type, charass_target_id, charass_char_id, charass_value) "
+                  "SELECT 'CNTCT', cntct_id, :char_id, :replace "
+                  "  FROM cntct "
+                  " WHERE NOT EXISTS(SELECT 1 "
+                  "                    FROM charass "
+                  "                   WHERE charass_target_type = 'CNTCT' "
+                  "                     AND charass_target_id = cntct_id "
+                  "                     AND charass_char_id = :char_id) "
+                  "  AND cntct_id IN (";
+      updateStr = "UPDATE charass "
+                  "   SET charass_value=:replace "
+                  " WHERE charass_target_type='CNTCT' "
+                  "   AND charass_char_id = :char_id "
+                  "   AND charass_target_id IN (";
+    }
+
+    for (int i = 0; i < list()->selectedItems().size(); i++)
+    {
+      insertStr += QString(":id%1").arg(i);
+      updateStr += QString(":id%1").arg(i);
+      if (i != list()->selectedItems().size() -1)
+      {
+        insertStr += ",";
+        updateStr += ",";
+      }
+    }
+
+    insertStr += ");";
+    updateStr += ");";
+
+    XSqlQuery begin("BEGIN;");
+    XSqlQuery rollback;
+    rollback.prepare("ROLLBACK;");
+
+    XSqlQuery qry;
+    if (_replace.contains("char"))
+    {
+      qry.prepare(insertStr);
+      qry.bindValue(":char_id", charid);
+      for (int i = 0; i < list()->selectedItems().size(); i++)
+        qry.bindValue(QString(":id%1").arg(i), (list()->selectedItems())[i]->id());
+      qry.bindValue(":replace", replace);
+      qry.exec();
+
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Replace failed"),
+                               qry, __FILE__, __LINE__))
+      {
+        rollback.exec();
+        return;
+      }
+    }
+
+    qry.prepare(updateStr);
+    if (_replace.contains("char"))
+      qry.bindValue(":char_id", charid);
+    for (int i = 0; i < list()->selectedItems().size(); i++)
+      qry.bindValue(QString(":id%1").arg(i), (list()->selectedItems())[i]->id());
+    qry.bindValue(":replace", replace);
+    qry.exec();
+
+    if (ErrorReporter::error(QtCriticalMsg, this, tr("Replace failed"),
+                             qry, __FILE__, __LINE__))
+    {
+      rollback.exec();
+      return;
+    }
+
+    XSqlQuery commit("COMMIT;");
+
+    sFillList();
   }
 }
 

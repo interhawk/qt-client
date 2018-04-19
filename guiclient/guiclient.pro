@@ -648,6 +648,7 @@ FORMS =   absoluteCalendarItem.ui               \
           woMaterialItem.ui                     \
           workOrder.ui                          \
           workOrderMaterials.ui                 \
+          xclusterinputdialog.ui                \
           xdateinputdialog.ui                   \
           xdocumentwindow.ui                    \
           xsltMap.ui                            \
@@ -1265,6 +1266,7 @@ HEADERS = ../common/format.h                    \
           xTupleDesigner.h              \
           xTupleDesignerActions.h       \
           xabstractconfigure.h          \
+          xclusterinputdialog.h         \
           xdateinputdialog.h            \
           xdialog.h                     \
           xdocumentwindow.h             \
@@ -1884,6 +1886,7 @@ SOURCES = absoluteCalendarItem.cpp              \
           xTupleDesigner.cpp                    \
           xTupleDesignerActions.cpp             \
           xabstractconfigure.cpp                \
+          xclusterinputdialog.cpp               \
           xdateinputdialog.cpp                  \
           xdialog.cpp                           \
           xdocumentwindow.cpp                   \
