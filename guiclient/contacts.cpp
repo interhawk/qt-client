@@ -53,6 +53,7 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("State Pattern"), "addr_state_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Postal Code Pattern"), "addr_postalcode_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Country Pattern"), "addr_country_pattern", ParameterWidget::Text);
+  parameterWidget()->append(tr("Marked"), "marked", ParameterWidget::CheckBox);
 
   list()->addColumn(tr("First Name"),          80, Qt::AlignLeft,  true, "cntct_first_name");
   list()->addColumn(tr("Last Name"),          100, Qt::AlignLeft,  true, "cntct_last_name");
@@ -72,6 +73,7 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   list()->addColumn(tr("Postal Code"),         75, Qt::AlignLeft, false, "addr_postalcode");
   list()->addColumn(tr("Customer"),     _ynColumn,  Qt::AlignLeft, false, "cust");
   list()->addColumn(tr("Prospect"),    _ynColumn,  Qt::AlignLeft, false, "prospect");
+  list()->addColumn(tr("Marked"),      _ynColumn,  Qt::AlignLeft, false, "marked");
 
   list()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
@@ -148,6 +150,29 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(editPriv);
+
+  bool foundMarked = false;
+  bool foundUnmarked = false;
+
+  foreach (XTreeWidgetItem *item, list()->selectedItems())
+  {
+    if (item->rawValue("marked").toBool())
+      foundMarked = true;
+    else
+      foundUnmarked = true;
+  }
+
+  if (foundUnmarked)
+  {
+    menuItem = pMenu->addAction(tr("Mark"), this, SLOT(sMark()));
+    menuItem->setEnabled(editPriv);
+  }
+
+  if (foundMarked)
+  {
+    menuItem = pMenu->addAction(tr("Unmark"), this, SLOT(sUnmark()));
+    menuItem->setEnabled(editPriv);
+  }
 
   // Create, Edit, View Prospect
 
@@ -279,6 +304,68 @@ void contacts::sDelete()
 
     sFillList();
   }
+}
+
+void contacts::sMark()
+{
+  QString qryStr = "INSERT INTO mrkd "
+                   "(mrkd_target_type, mrkd_target_id) "
+                   "SELECT 'T', cntct_id "
+                   "  FROM cntct "
+                   " WHERE NOT EXISTS(SELECT 1 "
+                   "                    FROM mrkd "
+                   "                   WHERE mrkd_target_type = 'T' "
+                   "                     AND mrkd_target_id = cntct_id) "
+                   "   AND cntct_id IN (";
+
+  for (int i = 0; i < list()->selectedItems().size(); i++)
+  {
+    qryStr += QString(":id%1").arg(i);
+    if (i != list()->selectedItems().size() -1)
+      qryStr += ",";
+  }
+
+  qryStr += ");";
+
+  XSqlQuery qry;
+  qry.prepare(qryStr);
+  for (int i = 0; i < list()->selectedItems().size(); i++)
+    qry.bindValue(QString(":id%1").arg(i), (list()->selectedItems())[i]->id());
+  qry.exec();
+
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Marking failed"),
+                           qry, __FILE__, __LINE__))
+    return;
+
+  sFillList();
+}
+
+void contacts::sUnmark()
+{
+  QString qryStr = "DELETE FROM mrkd "
+                   " WHERE mrkd_target_type = 'T' "
+                   "   AND mrkd_target_id IN (";
+
+  for (int i = 0; i < list()->selectedItems().size(); i++)
+  {
+    qryStr += QString(":id%1").arg(i);
+    if (i != list()->selectedItems().size() -1)
+      qryStr += ",";
+  }
+
+  qryStr += ");";
+
+  XSqlQuery qry;
+  qry.prepare(qryStr);
+  for (int i = 0; i < list()->selectedItems().size(); i++)
+    qry.bindValue(QString(":id%1").arg(i), (list()->selectedItems())[i]->id());
+  qry.exec();
+
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Unmarking failed"),
+                           qry, __FILE__, __LINE__))
+    return;
+
+  sFillList();
 }
 
 void contacts::sAttach()
