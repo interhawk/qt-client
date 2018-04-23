@@ -177,10 +177,7 @@ enum SetResponse task::set(const ParameterList &pParams)
 
   param = pParams.value("task_id", &valid);
   if (valid)
-  {
     _taskid = param.toInt();
-    populate();
-  }
 
   param = pParams.value("mode", &valid);
   if (valid)
@@ -268,6 +265,28 @@ enum SetResponse task::set(const ParameterList &pParams)
     }
   }
 
+  if (_parenttype == "J")
+  {
+    XSqlQuery parentq;
+    parentq.prepare("SELECT task_id, task_number FROM task "
+                    "WHERE task_prj_id = :project "
+                    "  AND task_id <> :task "
+                    "ORDER BY task_number;" );
+    parentq.bindValue(":project", _parentid);
+    parentq.bindValue(":task", _taskid);
+    parentq.exec();
+    if (parentq.first())
+      _parentTask->populate(parentq);
+  }
+  else
+  {
+    _parentTaskLit->setVisible(false);
+    _parentTask->setVisible(false);
+  }
+
+  if (_mode != cNew)
+    populate();
+
   _alarms->setId(_taskid);
   _comments->setId(_taskid);
   _documents->setId(_taskid);
@@ -287,6 +306,8 @@ void task::setViewMode()
   _number->setEnabled(false);
   _name->setEnabled(false);
   _descrip->setEnabled(false);
+  _parentTask->setEnabled(false);
+  _priority->setEnabled(false);
   _status->setEnabled(false);
   _notes->setEnabled(false);
   _budgetHours->setEnabled(false);
@@ -345,6 +366,7 @@ void task::populate()
     _name->setText(taskpopulate.value("task_name"));
     _descrip->setText(taskpopulate.value("task_descrip").toString());
     _priority->setId(taskpopulate.value("task_priority_id").toInt());
+    _parentTask->setId(taskpopulate.value("task_parent_task_id").toInt());
     _owner->setUsername(taskpopulate.value("task_owner_username").toString());
     _started->setDate(taskpopulate.value("task_start_date").toDate());
     _due->setDate(taskpopulate.value("task_due_date").toDate());
@@ -409,7 +431,7 @@ void task::sSave()
   taskSave.prepare( "UPDATE task "
                "SET task_number=:task_number, task_name=:task_name,"
                "    task_descrip=:task_descrip, task_status=:task_status,"
-               "    task_prj_id=:task_prj_id,"
+               "    task_parent_task_id=:task_parent_task_id, task_prj_id=:task_prj_id,"
                "    task_hours_budget=:task_hours_budget,"
                "    task_hours_actual=:task_hours_actual,"
                "    task_exp_budget=:task_exp_budget,"
@@ -443,9 +465,11 @@ void task::sSave()
   taskSave.bindValue(":task_exp_budget", _budgetExp->text().toDouble());
   taskSave.bindValue(":task_exp_actual", _actualExp->text().toDouble());
   taskSave.bindValue(":task_notes", _notes->toPlainText());
-  if (_parenttype == "J")
+  if (_parentTask->id() > 0)
+    taskSave.bindValue(":task_parent_task_id", _parentTask->id());
+  if (_parenttype == "J" && _parentid > 0)
     taskSave.bindValue(":task_prj_id", _parentid);
-  else
+  else if (_project->isValid())
     taskSave.bindValue(":task_prj_id", _project->id());
   if (_recurring->isRecurring())
     taskSave.bindValue(":parent_id", _recurring->parentId());
@@ -499,16 +523,22 @@ void task::sStatusChanged(const int pStatus)
 {
   switch(pStatus)
   {
-    case 0: // Concept
-    default:
+    case 0: // New
+      default:
       _started->clear();
       _completed->clear();
       break;
-    case 1: // In Process
+    case 1: // Pending
+      _started->clear();
+      _completed->clear();
+      break;
+    case 2: // In Process
       _started->setDate(omfgThis->dbDate());
       _completed->clear();
       break;
-    case 2: // Completed
+    case 3: // Deferred
+      break;
+    case 4: // Completed
       _completed->setDate(omfgThis->dbDate());
       break;
   }

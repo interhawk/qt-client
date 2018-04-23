@@ -68,6 +68,28 @@ to be bound by its terms.</comment>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
+        <widget class="XLabel" name="_parentTaskLit">
+         <property name="text">
+          <string>Parent Task:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="XComboBox" name="_parentTask">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+          </size>
+         </property>
+         <property name="allowNull">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="XLabel" name="_priorityLit">
          <property name="text">
           <string>Priority:</string>

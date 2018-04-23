@@ -98,27 +98,27 @@ project::project(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
 
   _charass->setType("PROJ");
 
-  _prjtask->addColumn(tr("Name"),        _itemColumn,  Qt::AlignLeft,   true,  "name"   );
+  _prjtask->addColumn(tr("Name"),         _itemColumn, Qt::AlignLeft,   true,  "name"   );
   _prjtask->addColumn(tr("Status"),      _orderColumn, Qt::AlignLeft,   true,  "status"   );
-  _prjtask->addColumn(tr("Item #"),      _itemColumn,  Qt::AlignLeft,   true,  "item"   );
-  _prjtask->addColumn(tr("Description"), -1          , Qt::AlignLeft,   true,  "descrip" );
-  _prjtask->addColumn(tr("Account/Customer"), -1          , Qt::AlignLeft,   false,  "customer" );
-  _prjtask->addColumn(tr("Contact"), -1          , Qt::AlignLeft,   false,  "contact" );
-  _prjtask->addColumn(tr("City"), -1          , Qt::AlignLeft,   false,  "city" );
-  _prjtask->addColumn(tr("State"), -1          , Qt::AlignLeft,   false,  "state" );
-  _prjtask->addColumn(tr("Qty"),         _qtyColumn,   Qt::AlignRight,  true,  "qty"  );
-  _prjtask->addColumn(tr("UOM"),         _uomColumn,   Qt::AlignLeft,   true,  "uom"  );
-  _prjtask->addColumn(tr("Value"),      _qtyColumn,   Qt::AlignRight,  true,  "value"  );
-  _prjtask->addColumn(tr("Due Date"),      _dateColumn,   Qt::AlignRight,  true,  "due"  );
-  _prjtask->addColumn(tr("Assigned"),      _dateColumn,   Qt::AlignRight,  true,  "assigned"  );
-  _prjtask->addColumn(tr("Started"),      _dateColumn,   Qt::AlignRight,  true,  "started"  );
-  _prjtask->addColumn(tr("Completed"),      _dateColumn,   Qt::AlignRight,  true,  "completed"  );
-  _prjtask->addColumn(tr("Hrs. Budget"),      _qtyColumn,   Qt::AlignRight,  true,  "hrs_budget"  );
-  _prjtask->addColumn(tr("Hrs. Actual"),      _qtyColumn,   Qt::AlignRight,  true,  "hrs_actual"  );
-  _prjtask->addColumn(tr("Hrs. Balance"),      _qtyColumn,   Qt::AlignRight,  true,  "hrs_balance"  );
-  _prjtask->addColumn(tr("Exp. Budget"),      _priceColumn,   Qt::AlignRight,  true,  "exp_budget"  );
-  _prjtask->addColumn(tr("Exp. Actual"),      _priceColumn,   Qt::AlignRight,  true,  "exp_actual"  );
-  _prjtask->addColumn(tr("Exp. Balance"),      _priceColumn,   Qt::AlignRight,  true,  "exp_balance"  );
+  _prjtask->addColumn(tr("Item #"),       _itemColumn, Qt::AlignLeft,   true,  "item"   );
+  _prjtask->addColumn(tr("Description"),           -1, Qt::AlignLeft,   true,  "descrip" );
+  _prjtask->addColumn(tr("Account/Customer"),      -1, Qt::AlignLeft,   false,  "customer" );
+  _prjtask->addColumn(tr("Contact"),               -1, Qt::AlignLeft,   false,  "contact" );
+  _prjtask->addColumn(tr("City"),                  -1, Qt::AlignLeft,   false,  "city" );
+  _prjtask->addColumn(tr("State"),                 -1, Qt::AlignLeft,   false,  "state" );
+  _prjtask->addColumn(tr("Qty"),           _qtyColumn, Qt::AlignRight,  true,  "qty"  );
+  _prjtask->addColumn(tr("UOM"),           _uomColumn, Qt::AlignLeft,   true,  "uom"  );
+  _prjtask->addColumn(tr("Value"),         _qtyColumn, Qt::AlignRight,  true,  "value"  );
+  _prjtask->addColumn(tr("Due Date"),     _dateColumn, Qt::AlignRight,  true,  "due"  );
+  _prjtask->addColumn(tr("Assigned"),     _dateColumn, Qt::AlignRight,  true,  "assigned"  );
+  _prjtask->addColumn(tr("Started"),      _dateColumn, Qt::AlignRight,  true,  "started"  );
+  _prjtask->addColumn(tr("Completed"),    _dateColumn, Qt::AlignRight,  true,  "completed"  );
+  _prjtask->addColumn(tr("Hrs. Budget"),   _qtyColumn, Qt::AlignRight,  true,  "hrs_budget"  );
+  _prjtask->addColumn(tr("Hrs. Actual"),   _qtyColumn, Qt::AlignRight,  true,  "hrs_actual"  );
+  _prjtask->addColumn(tr("Hrs. Balance"),  _qtyColumn, Qt::AlignRight,  true,  "hrs_balance"  );
+  _prjtask->addColumn(tr("Exp. Budget"),  _priceColumn, Qt::AlignRight,  true,  "exp_budget"  );
+  _prjtask->addColumn(tr("Exp. Actual"),  _priceColumn, Qt::AlignRight,  true,  "exp_actual"  );
+  _prjtask->addColumn(tr("Exp. Balance"), _priceColumn, Qt::AlignRight,  true,  "exp_balance"  );
   _prjtask->setSortingEnabled(false);
 
   _owner->setUsername(omfgThis->username());
@@ -265,7 +265,6 @@ enum SetResponse project::set(const ParameterList &pParams)
       connect(_completed,  SIGNAL(newDate(QDate)), this, SLOT(sCompletedChanged()));
       connect(_pctCompl,  SIGNAL(valueChanged(int)), this, SLOT(sCompletedChanged()));
       connect(_prjtask, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
-      connect(_prjtask, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
       connect(_prjtask, SIGNAL(itemSelected(int)), _editTask, SLOT(animateClick()));
       connect(_projectType, SIGNAL(newID(int)), this, SLOT(sProjectTypeChanged(int)));
     }
@@ -288,7 +287,6 @@ void project::setViewMode()
   _po->setEnabled(false);
   _cntct->setEnabled(false);
   _newTask->setEnabled(false);
-  connect(_prjtask, SIGNAL(itemSelected(int)), _viewTask, SLOT(animateClick()));
   _comments->setReadOnly(true);
   _charass->setReadOnly(true);
   _documents->setReadOnly(true);
@@ -298,6 +296,8 @@ void project::setViewMode()
   _buttonBox->removeButton(_buttonBox->button(QDialogButtonBox::Save));
   _buttonBox->removeButton(_buttonBox->button(QDialogButtonBox::Cancel));
   _buttonBox->addButton(QDialogButtonBox::Close);
+
+  connect(_prjtask, SIGNAL(itemSelected(int)), _viewTask, SLOT(animateClick()));
 
   QMenu * printMenu = new QMenu;
   printMenu->addAction(tr("Print Tasks"), this, SLOT(sPrintTasks()));
@@ -855,9 +855,10 @@ void project::sEditTask()
 {
   if(_prjtask->altId() != 5)
     return;
-
   ParameterList params;
   params.append("mode", "edit");
+  params.append("parent", "J");
+  params.append("parent_id", _prjid);
   params.append("task_id", _prjtask->id());
 
   task newdlg(this, "", true);
@@ -873,6 +874,8 @@ void project::sViewTask()
 
   ParameterList params;
   params.append("mode", "view");
+  params.append("parent", "J");
+  params.append("parent_id", _prjid);
   params.append("task_id", _prjtask->id());
 
   task newdlg(this, "", true);
@@ -939,6 +942,7 @@ void project::sFillTaskList()
   params.append("invoices",   tr("Invoices"));
   params.append("new",        tr("New"));
   params.append("open",       tr("Open"));
+  params.append("deferred",   tr("Deferred"));
   params.append("planning",   tr("Concept"));
   params.append("po",         tr("Purchase Order"));
   params.append("pos",        tr("Purchase Orders"));
@@ -1167,16 +1171,7 @@ void project::sViewOrder()
 {
   ParameterList params;
 
-  if(_prjtask->altId() == 5)
-  {
-    params.append("mode", "view");
-    params.append("prjtask_id", _prjtask->id());
-
-    task newdlg(this, "", true);
-    newdlg.set(params);
-    newdlg.exec();
-  }
-  else if(_prjtask->altId() == 15)
+  if(_prjtask->altId() == 15)
   {
     params.append("mode", "viewQuote");
     params.append("quhead_id", _prjtask->id());
