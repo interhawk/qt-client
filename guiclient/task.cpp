@@ -268,8 +268,8 @@ enum SetResponse task::set(const ParameterList &pParams)
   if (_parenttype == "J")
   {
     XSqlQuery parentq;
-    parentq.prepare("SELECT task_id, task_number FROM task "
-                    "WHERE task_prj_id = :project "
+    parentq.prepare("SELECT task_id, task_number||' - '||task_name FROM task "
+                    "WHERE task_parent_type = 'J' AND task_parent_id = :project "
                     "  AND task_id <> :task "
                     "ORDER BY task_number;" );
     parentq.bindValue(":project", _parentid);

@@ -497,17 +497,41 @@ void taskList::sDelete()
     }
 
     if (item->altId() == TODO || item->altId() == TASK)
-      taskDelete.prepare("SELECT deleteTask(:task_id) AS result;");
-    else if (item->altId() == PROJECT)
-      taskDelete.prepare("SELECT deleteProject(:task_id) AS result");
-    else
-      return;
-    taskDelete.bindValue(":task_id", item->id());
-    taskDelete.exec();
-    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
-                                taskDelete, __FILE__, __LINE__))
     {
-      return;
+      taskDelete.prepare("SELECT deleteTask(:task_id) AS result;");
+      taskDelete.bindValue(":task_id", item->id());
+      taskDelete.exec();
+      if (taskDelete.first() && taskDelete.value("result").toInt() == -1)
+      {
+        if (QMessageBox::question(this, tr("Sub-Tasks"),
+                       tr("<p>Sub-tasks exist for this Task.\n"
+                          "Do you also want to delete sub-tasks?"),
+                 QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+        {
+          return;
+        }
+        else
+        {
+          taskDelete.prepare("SELECT deleteTask(:task_id, true) AS result;");
+          taskDelete.bindValue(":task_id", item->id());
+          taskDelete.exec();
+          if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
+                                taskDelete, __FILE__, __LINE__))
+            return;
+        }
+      }
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
+                                taskDelete, __FILE__, __LINE__))
+        return;
+    }
+    else if (item->altId() == PROJECT)
+    {
+      taskDelete.prepare("SELECT deleteProject(:project_id) AS result");
+      taskDelete.bindValue(":project_id", item->id());
+      taskDelete.exec();
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Project"),
+                                taskDelete, __FILE__, __LINE__))
+         return;
     }
   }
   sFillList();

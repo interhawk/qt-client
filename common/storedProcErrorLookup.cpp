@@ -747,8 +747,8 @@ const struct {
                            "these Accounts before you may delete the selected "
                            "Subaccount."),                              0, "" },
   { "deleteTask",	-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The Task was not found."), 0, "" },
-  { "deleteTask",	-2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Actual hours have been posted to this task."), 0, "" },
-  { "deleteTask",	-3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Actual expenses have been posted to this task."), 0, "" },
+  { "deleteTask",	-2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Actual hours have been posted to this task (or sub-task)."), 0, "" },
+  { "deleteTask",	-3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Actual expenses have been posted to this task (or sub-task)."), 0, "" },
 
   { "deleteTO",		-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "This Transfer Order cannot be deleted as some of "
 			       "its line items have already been shipped."),

@@ -168,6 +168,10 @@ enum SetResponse opportunity::set(const ParameterList &pParams)
   if (valid)
     _assignedTo->setUsername(param.toString());
 
+  param = pParams.value("prj_id", &valid);
+  if (valid)
+    _project->setId(param.toInt());
+
   param = pParams.value("cntct_id", &valid);
   if (valid)
     _cntct->setId(param.toInt());

@@ -14,6 +14,7 @@
 
 #include <QAction>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>
 
@@ -192,6 +193,9 @@ void taskListCalendar::sPopulateMenu(QMenu *pMenu)
 
     menuItem = pMenu->addAction(tr("View..."), this, SLOT(sViewTask()));
     menuItem->setEnabled(viewPriv);
+
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
+    menuItem->setEnabled(editPriv);
   }
 
   if (! (_list->rawValue("cust") == ""))
@@ -252,11 +256,30 @@ void taskListCalendar::sDelete()
   taskDelete.prepare("SELECT deleteTask(:task_id) AS result;");
   taskDelete.bindValue(":task_id", _list->id());
   taskDelete.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
-                              taskDelete, __FILE__, __LINE__))
-     return;
-  else
-     sFillList();
+  if (taskDelete.first() && taskDelete.value("result").toInt() == -1)
+  {
+    if (QMessageBox::question(this, tr("Sub-Tasks"),
+                   tr("<p>Sub-tasks exist for this Task.\n"
+                      "Do you also want to delete sub-tasks?"),
+             QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+    {
+      return;
+    }
+    else
+    {
+      taskDelete.prepare("SELECT deleteTask(:task_id, true) AS result;");
+      taskDelete.bindValue(":task_id", _list->id());
+      taskDelete.exec();
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
+                               taskDelete, __FILE__, __LINE__))
+         return;
+    }
+  }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
+                            taskDelete, __FILE__, __LINE__))
+    return;
+  
+  sFillList();
 }
 
 void taskListCalendar::sEditCustomer()
