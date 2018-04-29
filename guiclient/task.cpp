@@ -26,16 +26,16 @@ bool task::userHasPriv(const int pMode, const QString pType, const int pId)
 {
   if (pType == "J" && _privileges->check("MaintainAllProjects"))
     return true;
-  else if (_privileges->check("MaintainAllToDoItems"))
+  else if (_privileges->check("MaintainAllTaskItems"))
     return true;
-  bool personalPriv = (pType == "J") ? _privileges->check("MaintainPersonalProjects") : _privileges->check("MaintainPersonalToDoItems");
+  bool personalPriv = (pType == "J") ? _privileges->check("MaintainPersonalProjects") : _privileges->check("MaintainPersonalTaskItems");
   if(pMode==cView)
   {
     if(pType == "J" && _privileges->check("ViewAllProjects"))
       return true;
-    else if (_privileges->check("ViewAllToDoItems"))
+    else if (_privileges->check("ViewAllTaskItems"))
       return true;
-    bool viewPriv = (pType == "J") ? _privileges->check("ViewPersonalProjects") : _privileges->check("ViewPersonalToDoItems");
+    bool viewPriv = (pType == "J") ? _privileges->check("ViewPersonalProjects") : _privileges->check("ViewPersonalTaskItems");
     personalPriv = personalPriv || viewPriv;
   }
 

@@ -455,8 +455,8 @@ void customer::setValid(bool valid)
     _taskListButton->setChecked(true);
     sHandleButtons();
   }
-  if (!_privileges->check("MaintainAllToDoItems") && !_privileges->check("ViewAllToDoItems") &&
-      !_privileges->check("MaintainPersonalToDoItems") && !_privileges->check("ViewPersonalToDoItems"))
+  if (!_privileges->check("MaintainAllTaskItems") && !_privileges->check("ViewAllTaskItems") &&
+      !_privileges->check("MaintainPersonalTaskItems") && !_privileges->check("ViewPersonalTaskItems"))
   {
     _taskListButton->setEnabled(false);
     if (_taskListButton->isChecked())

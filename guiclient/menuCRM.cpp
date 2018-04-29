@@ -90,9 +90,9 @@ menuCRM::menuCRM(GUIClient *Pparent) :
 
     // CRM / Tasks
     { "menu",			tr("&Tasks"),            (char*)taskMenu,        crmMenu,	"true", NULL, NULL, true	, NULL },
-    { "crm.task",		tr("&New..."),	         SLOT(sTask()),	        taskMenu,	"MaintainPersonalToDoItems MaintainAllToDoItems", NULL, NULL, true	, NULL },
-    { "crm.taskList",		tr("&List..."),		 SLOT(sTaskList()),	taskMenu,	"MaintainPersonalToDoItems ViewPersonalToDoItems MaintainAllToDoItems ViewAllToDoItems", new QPixmap(":/images/toDoList.png"), toolBar, true	, tr("To-Do List") },
-    { "crm.taskListCalendar",	tr("&Calendar List..."), SLOT(sTaskListCalendar()),	taskMenu,	"MaintainPersonalToDoItems ViewPersonalToDoItems MaintainAllToDoItems ViewAllToDoItems", NULL, NULL, true, NULL},
+    { "crm.task",		tr("&New..."),	         SLOT(sTask()),	        taskMenu,	"MaintainPersonalTaskItems MaintainAllTaskItems", NULL, NULL, true	, NULL },
+    { "crm.taskList",		tr("&List..."),		 SLOT(sTaskList()),	taskMenu,	"MaintainPersonalTaskItems ViewPersonalTaskItems MaintainAllTaskItems ViewAllTaskItems", new QPixmap(":/images/toDoList.png"), toolBar, true	, tr("To-Do List") },
+    { "crm.taskListCalendar",	tr("&Calendar List..."), SLOT(sTaskListCalendar()),	taskMenu,	"MaintainPersonalTaskItems ViewPersonalTaskItems MaintainAllTaskItems ViewAllTaskItems", NULL, NULL, true, NULL},
 
     //  Project
     { "menu", tr("Pro&ject"), (char*)projectsMenu, crmMenu, "true", NULL, NULL, true	, NULL },
@@ -145,7 +145,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     //Utilities
     { "menu",			tr("&Utilities"),		(char*)utilitiesMenu,		crmMenu,	"true", NULL, NULL, true	, NULL },
     { "crm.replaceOwner",	tr("Edit O&wners"),		SLOT(sEditOwners()),	utilitiesMenu,	"EditOwner", NULL, NULL, true, NULL },
-    { "crm.createRecurringItems",tr("Create &Recurring Items..."), SLOT(sCreateRecurringItems()),utilitiesMenu, "MaintainPersonalIncidents MaintainPersonalIncidents MaintainAllIncidents MaintainAllProjects MaintainPersonalToDoItems MaintainAllToDoItems", NULL, NULL, true, NULL },
+    { "crm.createRecurringItems",tr("Create &Recurring Items..."), SLOT(sCreateRecurringItems()),utilitiesMenu, "MaintainPersonalIncidents MaintainPersonalIncidents MaintainAllIncidents MaintainAllProjects MaintainPersonalTaskItems MaintainAllTaskItems", NULL, NULL, true, NULL },
     { "separator",		NULL,				NULL,			utilitiesMenu,	"true", NULL, NULL, true	, NULL },
     { "crm.crmaccountMerge",     tr("Merge &Accounts"), SLOT(sCrmaccountMerge()),    utilitiesMenu, "MaintainAllCRMAccounts", NULL, NULL, true, NULL },
     { "crm.addressMerge",        tr("Merge Addresses"), SLOT(sAddressMerge()),       utilitiesMenu, "MaintainAddresses",      NULL, NULL, true, NULL },
