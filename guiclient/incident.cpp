@@ -669,18 +669,16 @@ void incident::sIncdtCategoryChanged(int newCat)
       if (QMessageBox::question(this, tr("Existing Tasks"),
                          tr("<p>Tasks already exist for this Incident.\n"
                             "Do you want to replace tasks with the new template?"),
-                   QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+                   QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
       {
           return;
       }
-      else
-      {
-         taskq.bindValue(":override", true);
-         taskq.exec();
-         if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
-                                  taskq, __FILE__, __LINE__))
-              return;
-      }
+
+      taskq.bindValue(":override", true);
+      taskq.exec();
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
+                               taskq, __FILE__, __LINE__))
+         return;
     }
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),

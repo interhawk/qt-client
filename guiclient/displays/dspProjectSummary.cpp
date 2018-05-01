@@ -44,18 +44,18 @@ dspProjectSummary::dspProjectSummary(QWidget* parent, const char*, Qt::WindowFla
 
   list()->addColumn(tr("Customer"),       _orderColumn, Qt::AlignLeft,  true, "crmacct_name");
   list()->addColumn(tr("Number"),         _orderColumn, Qt::AlignLeft,  true, "prj_number");
-  list()->addColumn(tr("Project"),        _orderColumn, Qt::AlignLeft,  true, "prj_name");
+  list()->addColumn(tr("Project"),        -1,           Qt::AlignLeft,  true, "prj_name");
   list()->addColumn(tr("Type"),           _orderColumn, Qt::AlignLeft,  true, "prjtype_code");
   list()->addColumn(tr("Status"),         _orderColumn, Qt::AlignLeft,  true, "prj_stat");
-  list()->addColumn(tr("Budget Hours"),   _moneyColumn, Qt::AlignRight, true, "budhrs");
-  list()->addColumn(tr("Pending Budget Hrs"),   _moneyColumn, Qt::AlignRight, true, "pendbudhrs");
-  list()->addColumn(tr("Actual Hours"),   _moneyColumn, Qt::AlignRight, true, "acthrs");
-  list()->addColumn(tr("Hours Balance"),  _moneyColumn, Qt::AlignRight, true, "balhrs");
-  list()->addColumn(tr("Budget Exp."),    _moneyColumn, Qt::AlignRight, true, "budexp");
-  list()->addColumn(tr("Pending Budget Exp"),   _moneyColumn, Qt::AlignRight, true, "pendbudexp");
-  list()->addColumn(tr("Actual Exp."),    _moneyColumn, Qt::AlignRight, true, "actexp");
-  list()->addColumn(tr("Exp. Balance"),   _moneyColumn, Qt::AlignRight, true, "balexp");
-  list()->addColumn(tr("Count"),          _moneyColumn, Qt::AlignRight, true, "prjcnt");
+  list()->addColumn(tr("Budget Hours"),   -1,           Qt::AlignRight, true, "budhrs");
+  list()->addColumn(tr("Pending Budget Hrs"),   -1,     Qt::AlignRight, true, "pendbudhrs");
+  list()->addColumn(tr("Actual Hours"),   -1,           Qt::AlignRight, true, "acthrs");
+  list()->addColumn(tr("Hours Balance"),  -1,           Qt::AlignRight, true, "balhrs");
+  list()->addColumn(tr("Budget Exp."),    -1,           Qt::AlignRight, true, "budexp");
+  list()->addColumn(tr("Pending Budget Exp"),   -1,     Qt::AlignRight, true, "pendbudexp");
+  list()->addColumn(tr("Actual Exp."),    -1,           Qt::AlignRight, true, "actexp");
+  list()->addColumn(tr("Exp. Balance"),   -1,           Qt::AlignRight, true, "balexp");
+  list()->addColumn(tr("Count"),          -1,           Qt::AlignRight, true, "prjcnt");
 
   if (_privileges->check("MaintainAllProjects"))
     connect(list(), SIGNAL(itemSelected(int)), this, SLOT(sEdit()));
