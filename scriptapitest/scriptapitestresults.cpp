@@ -12,18 +12,12 @@
 #include "format.h"
 #include "qtexteditproto.h"
 
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <streambuf>
 #include <QDebug>
 #include <QDir>
 #include <QDirIterator>
 #include <QException>
 
-#include <sys/types.h>
-#include <dirent.h>
-#include <errno.h>
+
 
 class ScriptApiTestResultsPrivate : public QWidget {
 public:
