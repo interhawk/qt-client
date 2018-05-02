@@ -7490,7 +7490,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Contact...</source>
-        <translation>&amp;amp;Contacto...</translation>
+        <translation>&amp;Contacto...</translation>
     </message>
     <message>
         <source>Event</source>
@@ -17234,7 +17234,7 @@ Contract Number you have specified.</source>
     </message>
     <message>
         <source>&amp;Return Items not on Pick List</source>
-        <translation>&amp;amp;Devolver Productos no Surtidos</translation>
+        <translation>&amp;Devolver Productos no Surtidos</translation>
     </message>
     <message>
         <source>Correct Production Posting</source>
@@ -28777,7 +28777,7 @@ Total</source>
     </message>
     <message>
         <source>&amp;Invoice #:</source>
-        <translation># &amp;amp;Factura.:</translation>
+        <translation># &amp;Factura.:</translation>
     </message>
     <message>
         <source>Invoice Information</source>
@@ -29113,7 +29113,7 @@ Total</source>
     <name>dspItemCostSummary</name>
     <message>
         <source>Costing &amp;Elements</source>
-        <translation type="unfinished">&amp;amp;Elementos de Costeo</translation>
+        <translation type="unfinished">&amp;Elementos de Costeo</translation>
     </message>
     <message>
         <source>Posted</source>
@@ -50705,7 +50705,7 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Cerrar
+        <translation>&amp;Cerrar
 </translation>
     </message>
     <message>
@@ -50766,7 +50766,7 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Ver</translation>
+        <translation>&amp;Ver</translation>
     </message>
     <message>
         <source>Invoice #</source>
@@ -52794,7 +52794,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Scrap...</source>
-        <translation>&amp;amp;Desecho...</translation>
+        <translation>&amp;Desecho...</translation>
     </message>
     <message>
         <source>&amp;ABC Class...</source>
@@ -57932,7 +57932,7 @@ transfer the production to the intended Site.</source>
     </message>
     <message>
         <source>&amp;Issue Items not on Pick List</source>
-        <translation>&amp;amp;Ingresar Productos no Surtidos</translation>
+        <translation>&amp;Ingresar Productos no Surtidos</translation>
     </message>
     <message>
         <source>&amp;Post</source>
