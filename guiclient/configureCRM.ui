@@ -147,20 +147,20 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="_taskGenerationLit">
+              <widget class="QLabel" name="_projectGenerationLit">
                <property name="text">
-                <string>Task # Generation:</string>
+                <string>Project # Generation:</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
                <property name="buddy">
-                <cstring>_taskGeneration</cstring>
+                <cstring>_projectGeneration</cstring>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QComboBox" name="_taskGeneration">
+              <widget class="QComboBox" name="_projectGeneration">
                <item>
                 <property name="text">
                  <string>Manual</string>
@@ -179,6 +179,67 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="2" column="2">
+              <widget class="QLabel" name="_nextProjectNumberLit">
+               <property name="text">
+                <string>Next #:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>_nextProjectNumber</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="XLineEdit" name="_nextProjectNumber">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="_taskGenerationLit">
+               <property name="text">
+                <string>Task # Generation:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>_taskGeneration</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QComboBox" name="_taskGeneration">
+               <item>
+                <property name="text">
+                 <string>Manual</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Automatic</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Automatic, Allow Override</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="3" column="2">
               <widget class="QLabel" name="_nextTaskNumberLit">
                <property name="text">
                 <string>Next #:</string>
@@ -191,7 +252,7 @@ to be bound by its terms.</comment>
                </property>
               </widget>
              </item>
-             <item row="2" column="3">
+             <item row="3" column="3">
               <widget class="XLineEdit" name="_nextTaskNumber">
                <property name="minimumSize">
                 <size>

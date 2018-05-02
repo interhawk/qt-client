@@ -229,8 +229,19 @@ enum SetResponse project::set(const ParameterList &pParams)
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Project Information"),
                                     projectet, __FILE__, __LINE__))
+          return UndefinedError;
+
+      if(_metrics->value("ProjectNumberGeneration") != "M"
+          && _number->text().isEmpty())
       {
-        return UndefinedError;
+        XSqlQuery numq;
+        numq.exec("SELECT fetchProjectNumber() AS number;");
+        if (numq.first())
+        {
+          _number->setText(numq.value("number"));
+          _number->setEnabled(_metrics->value("ProjectNumberGeneration") == "O");
+          _name->setFocus();
+        }
       }
 
       _comments->setId(_prjid);

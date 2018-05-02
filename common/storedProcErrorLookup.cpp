@@ -608,8 +608,8 @@ const struct {
                                         "without a valid parent item."),0, "" },
 
   { "deleteOpportunity", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Opportunity cannot be deleted because "
-                            "there are ToDo Items assigned to it.  You must "
-                            "delete or reassign these ToDo Items "
+                            "there are Task Items assigned to it.  You must first "
+                            "delete or reassign these Tasks "
                             "before you may delete it."),                      0, "" },
   { "deleteOpportunity", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Opportunity cannot be deleted because "
                             "there are Quotes assigned to it.  You must "

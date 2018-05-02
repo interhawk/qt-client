@@ -31,6 +31,7 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
 
   _nextInNumber->setValidator(omfgThis->orderVal());
   _nextAcctNumber->setValidator(omfgThis->orderVal());
+  _nextProjectNumber->setValidator(omfgThis->orderVal());
   _nextTaskNumber->setValidator(omfgThis->orderVal());
 
   configureconfigureCRM.exec( "SELECT orderseq_number AS innumber "
@@ -45,6 +46,12 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
   if (configureconfigureCRM.first())
     _nextAcctNumber->setText(configureconfigureCRM.value("acnumber"));
 
+  configureconfigureCRM.exec( "SELECT orderseq_number AS prjnumber "
+          "  FROM orderseq"
+          " WHERE (orderseq_name='ProjectNumber');" );
+  if (configureconfigureCRM.first())
+    _nextProjectNumber->setText(configureconfigureCRM.value("prjnumber"));
+
   configureconfigureCRM.exec( "SELECT orderseq_number AS tsknumber "
           "  FROM orderseq"
           " WHERE (orderseq_name='TaskNumber');" );
@@ -58,6 +65,14 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
     _acctGeneration->setCurrentIndex(1);
   else if (metric == "O")
     _acctGeneration->setCurrentIndex(2);
+
+  metric = _metrics->value("ProjectNumberGeneration");
+  if (metric == "M")
+    _projectGeneration->setCurrentIndex(0);
+  else if (metric == "A")
+    _projectGeneration->setCurrentIndex(1);
+  else if (metric == "O")
+    _projectGeneration->setCurrentIndex(2);
 
   metric = _metrics->value("TaskNumberGeneration");
   if (metric == "M")
@@ -151,6 +166,8 @@ bool configureCRM::sSave()
   
   if (QString(numberGenerationTypes[_acctGeneration->currentIndex()]) != "M" && _nextAcctNumber->text().toInt() < 1)
     _nextAcctNumber->setText("1");
+  if (QString(numberGenerationTypes[_projectGeneration->currentIndex()]) != "M" && _nextProjectNumber->text().toInt() < 1)
+    _nextProjectNumber->setText("1");
   if (QString(numberGenerationTypes[_taskGeneration->currentIndex()]) != "M" && _nextTaskNumber->text().toInt() < 1)
     _nextTaskNumber->setText("1");
 
@@ -158,11 +175,16 @@ bool configureCRM::sSave()
   configq.bindValue(":acnumber", _nextAcctNumber->text().toInt());
   configq.exec();
 
+  configq.prepare( "SELECT setNextProjectNumber(:prjnumber);" );
+  configq.bindValue(":prjnumber", _nextProjectNumber->text().toInt());
+  configq.exec();
+
   configq.prepare( "SELECT setNextTaskNumber(:tsknumber);" );
   configq.bindValue(":tsknumber", _nextTaskNumber->text().toInt());
   configq.exec();
 
   _metrics->set("CRMAccountNumberGeneration", QString(numberGenerationTypes[_acctGeneration->currentIndex()]));
+  _metrics->set("ProjectNumberGeneration", QString(numberGenerationTypes[_projectGeneration->currentIndex()]));
   _metrics->set("TaskNumberGeneration", QString(numberGenerationTypes[_taskGeneration->currentIndex()]));
   
   _metrics->set("UseProjects", _useProjects->isChecked());

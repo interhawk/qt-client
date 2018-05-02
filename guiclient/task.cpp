@@ -205,14 +205,15 @@ enum SetResponse task::set(const ParameterList &pParams)
       if(((_metrics->value("TaskNumberGeneration") == "A") ||
           (_metrics->value("TaskNumberGeneration") == "O"))
        && _number->text().isEmpty()
-       && _parenttype != "J")
+       && _parenttype != "J"
+       && !_isTemplate)
       {
         XSqlQuery numq;
         numq.exec("SELECT fetchTaskNumber() AS number;");
         if (numq.first())
         {
           _number->setText(numq.value("number"));
-          _number->setEnabled(false);
+          _number->setEnabled(_metrics->value("TaskNumberGeneration") == "O");
           _name->setFocus();
         }
       }
@@ -253,13 +254,16 @@ enum SetResponse task::set(const ParameterList &pParams)
     if (param.toString() == "edit")
     {
       _mode = cEdit;
-
+      _number->setEnabled((_metrics->value("TaskNumberGeneration") != "A"
+                          && _parenttype != "J")  || _isTemplate);
       connect(_status,  SIGNAL(currentIndexChanged(int)), this, SLOT(sStatusChanged(int)));
       connect(_completed,  SIGNAL(newDate(QDate)), this, SLOT(sCompletedChanged()));
       connect(_pctCompl,  SIGNAL(valueChanged(int)), this, SLOT(sCompletedChanged()));
     }
     if (param.toString() == "view")
     {
+      _number->setEnabled((_metrics->value("TaskNumberGeneration") != "A"
+                          && _parenttype != "J")  || _isTemplate);
       _mode = cView;
       setViewMode();
     }
@@ -293,8 +297,21 @@ enum SetResponse task::set(const ParameterList &pParams)
   _charass->setId(_taskid);
 
   _due->setVisible(!_isTemplate);
+  _project->setVisible(!_isTemplate);
+  _started->setVisible(!_isTemplate);
+  _startedLit->setVisible(!_isTemplate);
+  _completed->setVisible(!_isTemplate);
+  _completedLit->setVisible(!_isTemplate);
+  _pctCompl->setVisible(!_isTemplate);
+  _pctComplLit->setVisible(!_isTemplate);
   _dueDays->setVisible(_isTemplate);
   _dueDaysLit->setVisible(_isTemplate);
+  if (_isTemplate)
+  {
+    setWindowTitle(tr("Template Task"));
+    _tab->removeTab(_tab->indexOf(_teTab));
+    _tab->removeTab(_tab->indexOf(_commentsTab));
+  }
 
   sFillUserList();
 
@@ -407,7 +424,7 @@ void task::sSave()
 {
   XSqlQuery taskSave;
   QList<GuiErrorCheck> errors;
-  errors<< GuiErrorCheck(_number->text().length() == 0, _number,
+  errors<< GuiErrorCheck(_number->text().trimmed().length() == 0, _number,
                          tr("You must enter a valid Number."))
         << GuiErrorCheck(_name->text().length() == 0, _name,
                          tr("You must enter a valid Name."))
@@ -447,8 +464,8 @@ void task::sSave()
                "WHERE (task_id=:task_id);" );
 
   taskSave.bindValue(":task_id", _taskid);
-  taskSave.bindValue(":task_number", _number->text());
-  taskSave.bindValue(":task_name", _name->text());
+  taskSave.bindValue(":task_number", _number->text().trimmed());
+  taskSave.bindValue(":task_name", _name->text().trimmed());
   taskSave.bindValue(":task_descrip", _descrip->toPlainText());
   taskSave.bindValue(":task_status", _taskStatuses[_status->currentIndex()]);
   taskSave.bindValue(":task_priority_id", _priority->id());

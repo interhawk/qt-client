@@ -220,7 +220,7 @@ void taskTemplate::sAssignTask()
     templateTasks[tlist.value("task_number").toString()] = tlist.value("task_id").toInt();
     items << tlist.value("task_number").toString();
   }
-  QString item = QInputDialog::getItem(this, tr("Template Tasks)"),
+  QString item = QInputDialog::getItem(this, tr("Template Tasks"),
                                          tr("Task:"), items, 0, false, &ok);
   if (ok && !item.isEmpty())
   {

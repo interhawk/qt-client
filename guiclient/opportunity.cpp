@@ -279,25 +279,11 @@ void opportunity::sCancel()
 
   if (_saved && cNew == _mode)
   {
-    cancelOppo.prepare("SELECT deleteOpportunity(:ophead_id) AS result;");
+    cancelOppo.prepare("SELECT deleteOpportunity(:ophead_id, true) AS result;");
     cancelOppo.bindValue(":ophead_id", _opheadid);
     cancelOppo.exec();
-    if (cancelOppo.first())
-    {
-      int result = cancelOppo.value("result").toInt();
-      if (result < 0)
-      {
-        ErrorReporter::error(QtCriticalMsg, this, tr("Error Cancelling Opportunity"),
-                               storedProcErrorLookup("deleteOpportunity", result),
-                               __FILE__, __LINE__);
-        return;
-      }
-    }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Cancelling Opportunity"),
-                                  cancelOppo, __FILE__, __LINE__))
-    {
-      return;
-    }
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Cancelling Opportunity"),
+                                  cancelOppo, __FILE__, __LINE__);
   }
   reject();
 }
