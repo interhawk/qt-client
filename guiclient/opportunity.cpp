@@ -562,7 +562,7 @@ void opportunity::sOppTypeChanged(int newCat)
       if (QMessageBox::question(this, tr("Existing Tasks"),
                          tr("<p>Tasks already exist for this Opportunity.\n"
                             "Do you want to replace tasks with the new template?"),
-                   QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+                   QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
       {
           return;
       }
@@ -1118,8 +1118,8 @@ void opportunity::sProjectUpdated()
 {
   XSqlQuery updp;
   updp.prepare("UPDATE task SET task_prj_id=:prjid "
-                 "WHERE task_parent_type='OPP' "
-                 "  AND task_parent_id=:oppid;" );
+               " WHERE task_parent_type='OPP' "
+               "   AND task_parent_id=:oppid;" );
   updp.bindValue(":prjid", _project->id());
   updp.bindValue(":oppid", _opheadid);
   updp.exec();

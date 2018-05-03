@@ -705,8 +705,8 @@ void incident::sProjectUpdated()
 {
   XSqlQuery updp;
   updp.prepare("UPDATE task SET task_prj_id=:prjid "
-                 "WHERE task_parent_type='INCDT' "
-                 "  AND task_parent_id=:incdtid;" );
+               " WHERE task_parent_type='INCDT' "
+               "   AND task_parent_id=:incdtid;" );
   updp.bindValue(":prjid", _project->id());
   updp.bindValue(":incdtid", _incdtid);
   updp.exec();

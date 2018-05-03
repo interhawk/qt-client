@@ -576,18 +576,17 @@ void project::sProjectTypeChanged(const int newType)
       if (QMessageBox::question(this, tr("Existing Tasks"),
                          tr("<p>Tasks already exist for this Project.\n"
                             "Do you want to replace tasks with the new template?"),
-                   QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+                   QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
       {
           return;
       }
-      else
-      {
-         taskq.bindValue(":override", true);
-         taskq.exec();
-         if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
-                                  taskq, __FILE__, __LINE__))
-              return;
-      }
+
+      taskq.bindValue(":override", true);
+      taskq.exec();
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
+                               taskq, __FILE__, __LINE__))
+           return;
+
     }
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
@@ -903,7 +902,7 @@ void project::sDeleteTask()
     if (QMessageBox::question(this, tr("Sub-Tasks"),
                        tr("<p>Sub-tasks exist for this Task.\n"
                           "Do you also want to delete sub-tasks?"),
-                 QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
       {
           return;
       }

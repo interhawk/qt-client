@@ -379,7 +379,7 @@ void taskListCalendar::sFillList(const QDate & date)
                 "                  FROM taskass "
                 "                  WHERE taskass_username ~ <? value('username') ?>) "
                 "  <? endif ?>"
-                "  <? if exists('active') ?>AND task_active <? endif ?>"
+                "  <? if exists('active') ?>AND task_status <> 'C' <? endif ?>"
                 "ORDER BY due, seq, assigned;";
 
   ParameterList params;

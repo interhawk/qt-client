@@ -22,10 +22,7 @@ taskAssignment::taskAssignment(QWidget* parent, const char* name, bool modal, Qt
 
   connect(_save, SIGNAL(clicked()), this, SLOT(sSave()));
 
-  _role->populate("SELECT crmrole_id, crmrole_name "
-                  "FROM crmrole "
-                  "WHERE crmrole_cntct "
-                  "ORDER BY crmrole_sort;" );
+  _role->setType(XComboBox::XComboBox::CRMRoleContact);
 }
 
 taskAssignment::~taskAssignment()
@@ -66,7 +63,7 @@ void taskAssignment::sSave()
 
   taskSave.prepare("INSERT INTO taskass (taskass_task_id, taskass_username, taskass_crmrole_id, "
                    "                     taskass_assigned_date) "
-                   "VALUES (:task, :user, :role, COALESCE(:date, CURRENT_DATE) ) "
+                   "VALUES (:task, :user, :role, COALESCE(:date, CURRENT_TIMESTAMP) ) "
                    " ON CONFLICT (taskass_task_id, taskass_username) DO NOTHING; " );
   taskSave.bindValue(":task", _taskid);
   taskSave.bindValue(":user", _user->username());

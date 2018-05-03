@@ -638,7 +638,7 @@ to be bound by its terms.</comment>
           <enum>Qt::StrongFocus</enum>
          </property>
          <property name="type">
-          <number>0</number>
+          <number>Comments::Opportunity</number>
          </property>
         </widget>
        </item>
@@ -652,7 +652,7 @@ to be bound by its terms.</comment>
        <item row="0" column="0">
         <widget class="Documents" name="_documents">
          <property name="type">
-          <number>0</number>
+          <number>Documents::Opportunity</number>
          </property>
         </widget>
        </item>

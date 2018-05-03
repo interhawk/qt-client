@@ -20,8 +20,6 @@
 #include "userList.h"
 #include "taskAssignment.h"
 
-const char *_taskStatuses[] = { "N", "P", "O", "D", "C" };
-
 bool task::userHasPriv(const int pMode, const QString pType, const int pId)
 {
   if (pType == "J" && _privileges->check("MaintainAllProjects"))
@@ -87,6 +85,7 @@ task::task(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
   _taskid = -1;
   
   _owner->setType(UsernameLineEdit::UsersActive);
+  _comments->setType(Comments::Task);
   _charass->setType("TASK");
   _documents->setType(Documents::ProjectTask);
 
@@ -391,17 +390,10 @@ void task::populate()
     _completed->setDate(taskpopulate.value("task_completed_date").toDate());
     _pctCompl->setValue(taskpopulate.value("task_pct_complete").toInt());
     _notes->setText(taskpopulate.value("task_notes").toString());
-
     _parenttype=taskpopulate.value("task_parent_type").toString();
     _parentid=taskpopulate.value("task_parent_id").toInt();
     _project->setId(taskpopulate.value("task_prj_id").toInt());
-
-    for (int counter = 0; counter < _status->count(); counter++)
-    {
-      if (QString(taskpopulate.value("task_status").toString()[0]) == _taskStatuses[counter])
-        _status->setCurrentIndex(counter);
-    }
-
+    _status->setCode(taskpopulate.value("task_status").toString());
     _budgetHours->setText(formatQty(taskpopulate.value("task_hours_budget").toDouble()));
     _actualHours->setText(formatQty(taskpopulate.value("task_hours_actual").toDouble()));
     _budgetExp->setText(formatCost(taskpopulate.value("task_exp_budget").toDouble()));
@@ -467,7 +459,7 @@ void task::sSave()
   taskSave.bindValue(":task_number", _number->text().trimmed());
   taskSave.bindValue(":task_name", _name->text().trimmed());
   taskSave.bindValue(":task_descrip", _descrip->toPlainText());
-  taskSave.bindValue(":task_status", _taskStatuses[_status->currentIndex()]);
+  taskSave.bindValue(":task_status", _status->code());
   taskSave.bindValue(":task_priority_id", _priority->id());
   taskSave.bindValue(":task_pct_complete", _pctCompl->value());
   taskSave.bindValue(":task_owner_username", _owner->username());

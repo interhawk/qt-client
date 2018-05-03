@@ -668,11 +668,7 @@ to be bound by its terms.</comment>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
-        <widget class="Comments" name="_comments">
-         <property name="type">
-          <number>0</number>
-         </property>
-        </widget>
+        <widget class="Comments" name="_comments" />
        </item>
       </layout>
      </widget>
@@ -712,11 +708,7 @@ to be bound by its terms.</comment>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="Documents" name="_documents">
-         <property name="type">
-          <number>0</number>
-         </property>
-        </widget>
+        <widget class="Documents" name="_documents" />
        </item>
       </layout>
      </widget>
