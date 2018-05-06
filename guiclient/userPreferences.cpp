@@ -382,11 +382,14 @@ void userPreferences::sSave(bool close)
   // the id in this case is just a row number. The time zone pref is
   // saved and consumed as a string. Allow null on the xcombobox so the user
   // can go back to an unset state, defaulting to the servers defined time zone
-  if (_tz->id() < 1)
+  XSqlQuery settz;
+  if (_tz->id() < 1) {
     _pref->remove("TimeZone");
+    settz.prepare("SET TIME ZONE DEFAULT;");
+    settz.exec();
+  }
   else {
     _pref->set("TimeZone", _tz->currentText());
-    XSqlQuery settz;
     settz.prepare("SET TIME ZONE :tz;");
     settz.bindValue(":tz", _tz->currentText());
     settz.exec();
