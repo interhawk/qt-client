@@ -1004,6 +1004,10 @@ void salesOrderItem::clear()
   _originalQtyOrd  = 0.0;
   _qtyOrderedCache   = 0.0;
   _priceUOMCache   = -1;
+  _itemsiteLastItemid = -1;
+  _itemsiteLastWarehousid = -1;
+  _itemsubsLastItemid = -1;
+  _itemsubsLastWarehousid = -1;
   _modified        = false;
   _partialsaved    = false;
   _updateItemsite  = false;
