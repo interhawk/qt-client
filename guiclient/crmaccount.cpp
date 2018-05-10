@@ -78,9 +78,6 @@ crmaccount::crmaccount(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _taskList->parameterWidget()->append("hasContext", "hasContext", ParameterWidget::Exists, true);
   _taskList->setParameterWidgetVisible(false);
   _taskList->setQueryOnStartEnabled(false);
-  _taskList->_projects->setForgetful(true);
-  _taskList->_projects->setVisible(false);
-  _taskList->_projects->setChecked(false);
   _taskList->setParent("CRMA");
 
   ParameterList params;

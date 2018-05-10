@@ -552,7 +552,7 @@ void opportunity::sOppTypeChanged(int newCat)
   /*
    The following checks whether tasks already exist and should be overridden.
    return code 0 means no templates exist
-   return code < 0 means tasks already exist and user is questions whether to override
+   return code < 0 means tasks already exist and user is asked whether to override
    return code > 0 means no existing tasks so they have been copied automatically
   */
   if (taskq.first()) 

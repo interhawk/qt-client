@@ -86,9 +86,9 @@ to be bound by its terms.</comment>
      <property name="text">
       <string>Show Completed</string>
      </property>
-     <property name="visible">
-      <bool>false</bool>
-     </property>
+<!--     <property name="visible">
+      <bool>true</bool>
+     </property>  -->
     </widget>
    </item>
   </layout>

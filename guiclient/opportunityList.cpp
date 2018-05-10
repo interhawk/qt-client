@@ -139,14 +139,17 @@ void opportunityList::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
                               prjq, __FILE__, __LINE__))
     return;
 
-  if (_privileges->check("MaintainPersonalProjects") && !hasProj)
+  if (_privileges->check("MaintainAllProjects MaintainPersonalProjects") && !hasProj)
   {
     menuItem = pMenu->addAction(tr("Create Project"), this, SLOT(sCreateProject()));
     menuItem->setEnabled(true);
   }
 
-  menuItem = pMenu->addAction(tr("Create Task"), this, SLOT(sCreateTask()));
-  menuItem->setEnabled(true);
+  if (_privileges->check("MaintainAllTaskItems MaintainPersonalTaskItems"))
+  {
+    menuItem = pMenu->addAction(tr("Create Task"), this, SLOT(sCreateTask()));
+    menuItem->setEnabled(true);
+  }
 
   if (_privileges->check("MaintainQuotes"))
   {

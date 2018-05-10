@@ -24,9 +24,9 @@
 #include <QToolBar>
 #include "errorReporter.h"
 
-static const int TODO        = 1;
+static const int TASK        = 1;
 static const int INCIDENT    = 2;
-static const int TASK        = 3;
+static const int PTASK       = 3;
 static const int PROJECT     = 4;
 static const int OPPORTUNITY = 5;
 static const int ACCOUNT     = 6;
@@ -50,6 +50,7 @@ taskList::taskList(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("Owner"), "owner_username", ParameterWidget::User);
   parameterWidget()->append(tr("Assigned To"), "assigned_username", ParameterWidget::User);
   parameterWidget()->append(tr("Account"), "crmacct_id", ParameterWidget::Crmacct);
+  parameterWidget()->appendComboBox(tr("Account Group"), "crmacctgrp", XComboBox::AccountGroups);
   parameterWidget()->append(tr("Incident"), "incdt_id", ParameterWidget::Incident);
   parameterWidget()->append(tr("Opportunity"), "ophead_id", ParameterWidget::Opportunity);
   parameterWidget()->append(tr("Project"), "prj_id", ParameterWidget::Project);
@@ -57,7 +58,6 @@ taskList::taskList(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("Start Date on or After"), "startEndDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Due Date on or Before"), "dueStartDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Due Date on or After"), "dueEndDate", ParameterWidget::Date);
-  parameterWidget()->append(tr("Show Completed"), "completed", ParameterWidget::Exists);
   parameterWidget()->append(tr("Show Completed Only"), "completedonly", ParameterWidget::Exists);
 
   connect(_opportunities, SIGNAL(toggled(bool)), this,            SLOT(sFillList()));
@@ -131,7 +131,7 @@ void taskList::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
     edit = edit || getPriv(cEdit, item->altId(), item);
     view = view || getPriv(cView, item->altId(), item);
 
-    if (item->altId() == TODO || item->altId() == TASK || item->altId() == PROJECT)
+    if (item->altId() == TASK || item->altId() == PTASK || item->altId() == PROJECT)
     {
       foundDeletable = true;
       del = del || getPriv(cEdit, item->altId(), item);
@@ -280,7 +280,7 @@ void taskList::sEdit()
     if (!edit && !view)
       continue;
 
-    if (item->altId() == TODO || item->altId() == TASK)
+    if (item->altId() == TASK || item->altId() == PTASK)
     {
       if (edit)
         sEditTask(item->id());
@@ -318,7 +318,7 @@ void taskList::sView()
     if(!getPriv(cView, item->altId(), item))
       continue;
 
-    if (item->altId() == TODO || item->altId() == TASK)
+    if (item->altId() == TASK || item->altId() == PTASK)
       sViewTask(item->id());
     else if (item->altId() == INCIDENT)
       sViewIncident(item->id());
@@ -398,7 +398,7 @@ void taskList::sDelete()
     XSqlQuery taskDelete;
     QString recurstr;
     QString recurtype;
-    if (item->altId() == TODO)
+    if (item->altId() == TASK || item->altId() == PTASK)
     {
       recurstr = "SELECT MAX(task_due_date) AS max"
                  "  FROM task"
@@ -496,7 +496,7 @@ void taskList::sDelete()
       }
     }
 
-    if (item->altId() == TODO || item->altId() == TASK)
+    if (item->altId() == TASK || item->altId() == PTASK)
     {
       taskDelete.prepare("SELECT deleteTask(:task_id) AS result;");
       taskDelete.bindValue(":task_id", item->id());
@@ -558,6 +558,8 @@ bool taskList::setParams(ParameterList &params)
     params.append("projects");
   if (_showCompleted->isChecked())
     params.append("completed");
+  if (_parent.length() > 0)
+    params.append("parent", _parent);
 
   params.append("incident", tr("Incident"));
   params.append("account", tr("Account"));
@@ -588,17 +590,13 @@ bool taskList::getPriv(const int pMode, const int pType, XTreeWidgetItem* item)
   if (!item)
     item = list()->currentItem();
 
-  int id;
-  if (item->altId() == pType)
-    id = item->id();
-  else
-    id = item->id("parent");
+  int id = (item->altId() == pType) ? item->id() : item->id("parent");
 
-  if (pType == TODO)
+  if (pType == TASK)
     return task::userHasPriv(pMode, "TD", id);
   else if (pType == INCIDENT)
     return incident::userHasPriv(pMode, id);
-  else if (pType == TASK)
+  else if (pType == PTASK)
     return task::userHasPriv(pMode, "J", id);
   else if (pType == PROJECT)
     return project::userHasPriv(pMode, id);
@@ -612,13 +610,13 @@ bool taskList::getPriv(const int pMode, const int pType, XTreeWidgetItem* item)
 
 int taskList::getParentType(XTreeWidgetItem* item)
 {
-  if (item->altId() == TODO && item->rawValue("parent") == "INCDT")
+  if (item->altId() == TASK && item->rawValue("parent") == "INCDT")
     return INCIDENT;
-  if (item->altId() == TODO && item->rawValue("parent") == "OPP")
+  if (item->altId() == TASK && item->rawValue("parent") == "OPP")
     return OPPORTUNITY;
-  if (item->altId() == TODO && item->rawValue("parent") == "CRMA")
+  if (item->altId() == TASK && item->rawValue("parent") == "CRMA")
     return ACCOUNT;
-  if (item->altId() == TASK)
+  if (item->altId() == PTASK)
     return PROJECT;
 
   return 0;
