@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2015 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -37,6 +37,7 @@ printStatementsByCustomerGroup::printStatementsByCustomerGroup(QWidget* parent, 
   connect(_custgrp,        SIGNAL(newID(int)), this, SLOT(setId(int)));
   connect(this, SIGNAL(populated(XSqlQuery*)), this, SLOT(sPopulate(XSqlQuery*)));
 
+  setId(_custgrp->id());
   setPrintEnabled(true); // or_custgrp->allowNull(true) and connect isValid to setPrintEnabled
 }
 
@@ -48,13 +49,6 @@ printStatementsByCustomerGroup::~printStatementsByCustomerGroup()
 void printStatementsByCustomerGroup::languageChange()
 {
   retranslateUi(this);
-}
-
-void printStatementsByCustomerGroup::clear()
-{
-  setId(-1);
-  _custgrp->setId(-1);
-  _custgrp->setFocus();
 }
 
 ParameterList printStatementsByCustomerGroup::getParams(XSqlQuery *docq)
