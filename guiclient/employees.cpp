@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -41,7 +41,8 @@ employees::employees(QWidget* parent, const char*, Qt::WindowFlags fl)
 
   connect(omfgThis, SIGNAL(employeeUpdated(int)),     this, SLOT(sFillList()));
 
-  list()->addColumn(tr("Site"),   _whsColumn,  Qt::AlignLeft, true, "warehous_code");
+  if (_metrics->boolean("MultiWhs"))
+    list()->addColumn(tr("Site"),   _whsColumn,  Qt::AlignLeft, true, "warehous_code");
   list()->addColumn(tr("Active"), _ynColumn,   Qt::AlignLeft, true, "emp_active");
   list()->addColumn(tr("Code"),   _itemColumn, Qt::AlignLeft, true, "emp_code");
   list()->addColumn(tr("Number"), -1,          Qt::AlignLeft, true, "emp_number");
