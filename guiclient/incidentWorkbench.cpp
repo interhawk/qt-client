@@ -262,7 +262,7 @@ void incidentWorkbench::sCreateProject()
   
   int answer = QMessageBox::question(this,  tr("Open Projects"),
             tr("Do you want to open the Project(s) after creation?"),
-            QMessageBox::Yes, QMessageBox::No | QMessageBox::Default, QMessageBox::Cancel);
+            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
   if (answer == QMessageBox::Yes) 
     openw = true;
   else if (answer == QMessageBox::Cancel)
@@ -304,7 +304,7 @@ void incidentWorkbench::sCreateTask()
   
   int answer = QMessageBox::question(this,  tr("Open Tasks"),
             tr("Do you want to open the Task(s) after creation?"),
-            QMessageBox::Yes, QMessageBox::No | QMessageBox::Default, QMessageBox::Cancel);
+            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
   if (answer == QMessageBox::Yes) 
     openw = true;
   else if (answer == QMessageBox::Cancel)

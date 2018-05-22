@@ -243,7 +243,7 @@ void prospects::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
   menuItem = pMenu->addAction(tr("Create Task"), this, SLOT(sCreateTask()));
   menuItem->setEnabled(true);
 
-  if (_privileges->check("MaintainPersonalOpportunities"))
+  if (_privileges->check("MaintainAllOpportunities MaintainPersonalOpportunities"))
   {
     menuItem = pMenu->addAction(tr("Create Opportunity"), this, SLOT(sCreateOpportunity()));
     menuItem->setEnabled(true);

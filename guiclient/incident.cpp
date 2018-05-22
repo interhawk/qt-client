@@ -667,7 +667,7 @@ void incident::sIncdtCategoryChanged(int newCat)
     if (taskq.value("ret").toInt() < 0)
     {
       if (QMessageBox::question(this, tr("Existing Tasks"),
-                         tr("<p>Tasks already exist for this Incident.\n"
+                         tr("<p>Tasks already exist for this Incident.<br>"
                             "Do you want to replace tasks with the new template?"),
                    QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
       {

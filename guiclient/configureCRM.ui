@@ -45,23 +45,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QComboBox" name="_acctGeneration">
-               <item>
-                <property name="text">
-                 <string>Manual</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Automatic</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Automatic, Allow Override</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="XComboBox" name="_acctGeneration" />
              </item>
              <item row="0" column="2">
               <widget class="QLabel" name="_nextAcctNumberLit">
@@ -106,15 +90,10 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QComboBox" name="_incidentGeneration">
+              <widget class="XComboBox" name="_incidentGeneration">
                <property name="enabled">
                 <bool>false</bool>
                </property>
-               <item>
-                <property name="text">
-                 <string>Automatic</string>
-                </property>
-               </item>
               </widget>
              </item>
              <item row="1" column="2">
@@ -160,23 +139,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QComboBox" name="_projectGeneration">
-               <item>
-                <property name="text">
-                 <string>Manual</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Automatic</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Automatic, Allow Override</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="XComboBox" name="_projectGeneration" />
              </item>
              <item row="2" column="2">
               <widget class="QLabel" name="_nextProjectNumberLit">
@@ -221,23 +184,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QComboBox" name="_taskGeneration">
-               <item>
-                <property name="text">
-                 <string>Manual</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Automatic</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Automatic, Allow Override</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="XComboBox" name="_taskGeneration" />
              </item>
              <item row="3" column="2">
               <widget class="QLabel" name="_nextTaskNumberLit">
