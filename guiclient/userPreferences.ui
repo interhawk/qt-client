@@ -127,7 +127,7 @@ to be bound by its terms.</comment>
           <item row="0" column="0">
            <widget class="QRadioButton" name="_noBackgroundImage">
             <property name="text">
-             <string>None</string>
+             <string>&amp;None</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -249,7 +249,7 @@ to be bound by its terms.</comment>
           <item row="0" column="0">
            <widget class="QRadioButton" name="_richText">
             <property name="text">
-             <string>Rich Text</string>
+             <string>Rich Te&amp;xt</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -396,14 +396,14 @@ to be bound by its terms.</comment>
             </property>
            </widget>
           </item>
-          <item row="3" column="0" rowspan="2" colspan="3">
+          <item row="4" column="0" rowspan="2" colspan="3">
            <widget class="Line" name="line">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QCheckBox" name="_ignoreTranslation">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -416,14 +416,14 @@ to be bound by its terms.</comment>
             </property>
            </widget>
           </item>
-          <item row="4" column="2" rowspan="2">
+          <item row="5" column="2" rowspan="2">
            <widget class="QPushButton" name="_translations">
             <property name="text">
              <string>Get Translations...</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0" colspan="2">
+          <item row="7" column="0" colspan="2">
            <widget class="QCheckBox" name="_enableSpell">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -436,21 +436,21 @@ to be bound by its terms.</comment>
             </property>
            </widget>
           </item>
-          <item row="6" column="2">
+          <item row="7" column="2">
            <widget class="QPushButton" name="_dictionaries">
             <property name="text">
              <string>Get Dictionaries...</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="0" colspan="3">
+          <item row="8" column="0" colspan="3">
            <widget class="Line" name="line_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
-          <item row="8" column="0" colspan="3">
+          <item row="9" column="0" colspan="3">
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
              <widget class="QLabel" name="_idleTimeoutLit">
@@ -467,6 +467,40 @@ to be bound by its terms.</comment>
             </item>
             <item>
              <spacer>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0" colspan="3">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="XLabel" name="_tzLit">
+              <property name="text">
+               <string>Time Zone:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="XComboBox" name="_tz">
+              <property name="allowNull">
+               <bool>true</bool>
+              </property>
+              <property name="nullStr">
+               <string>Server Default</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -1282,6 +1316,11 @@ to be bound by its terms.</comment>
    <class>XComboBox</class>
    <extends>QComboBox</extends>
    <header>xcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XLabel</class>
+   <extends>QLabel</extends>
+   <header>xlabel.h</header>
   </customwidget>
   <customwidget>
    <class>XLineEdit</class>

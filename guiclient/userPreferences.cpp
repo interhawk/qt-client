@@ -127,6 +127,12 @@ userPreferences::userPreferences(QWidget* parent, const char* name, bool modal, 
   _deprecationLevel->append(4, tr("Critical"), "critical");
   _deprecationLevel->append(5, tr("Fatal"),    "fatal");
 
+  // intentionally leaving out posix/ dupes.. this list is long enough
+  QString tzQry = "SELECT row_number() OVER(), name "
+                  "  FROM pg_timezone_names "
+                  " WHERE name !~* 'posix/' ORDER BY name;";
+  _tz->populate(tzQry);
+
   sPopulate();
   adjustSize();
 }
@@ -296,6 +302,11 @@ void userPreferences::sPopulate()
   _debug->setChecked(_pref->boolean("EnableScriptDebug"));
   _deprecationLevel->setCode(_pref->value("DeprecationLevel"));
 
+  if (_pref->value("TimeZone").isEmpty())
+    _tz->setNull();
+  else
+    _tz->setText(_pref->value("TimeZone"));
+
   sFillList();
   sFillWarehouseList();
 }
@@ -367,6 +378,22 @@ void userPreferences::sSave(bool close)
 
   _pref->set("EnableScriptDebug", _debug->isChecked());
   _pref->set("DeprecationLevel",  _deprecationLevel->code());
+
+  // the id in this case is just a row number. The time zone pref is
+  // saved and consumed as a string. Allow null on the xcombobox so the user
+  // can go back to an unset state, defaulting to the servers defined time zone
+  XSqlQuery settz;
+  if (_tz->id() < 1) {
+    _pref->remove("TimeZone");
+    settz.prepare("SET TIME ZONE DEFAULT;");
+    settz.exec();
+  }
+  else {
+    _pref->set("TimeZone", _tz->currentText());
+    settz.prepare("SET TIME ZONE :tz;");
+    settz.bindValue(":tz", _tz->currentText());
+    settz.exec();
+  }
 
   if (_currentUser->isChecked())
   {
