@@ -490,7 +490,8 @@ bool incident::save(bool partial)
 void incident::sFillHistoryList()
 {
   XSqlQuery incidentFillHistoryList;
-  incidentFillHistoryList.prepare("SELECT * "
+  incidentFillHistoryList.prepare("SELECT incdthist_id, incdthist_username, incdthist_timestamp, "
+                                  "       incdthist_descrip "
             "  FROM incdthist"
             " WHERE (incdthist_incdt_id=:incdt_id)"
             " ORDER BY incdthist_timestamp; ");

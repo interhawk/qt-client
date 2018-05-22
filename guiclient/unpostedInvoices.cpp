@@ -169,23 +169,6 @@ void unpostedInvoices::sPost()
   XSqlQuery unpostedPost;
 
   int journal = -1;
-  unpostedPost.exec("SELECT fetchJournalNumber('AR-IN') AS result;");
-  if (unpostedPost.first())
-  {
-    journal = unpostedPost.value("result").toInt();
-    if (journal < 0)
-    {
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Journal Number"),
-                             storedProcErrorLookup("fetchJournalNumber", journal),
-                             __FILE__, __LINE__);
-      return;
-    }
-  }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Journal Number"),
-                                unpostedPost, __FILE__, __LINE__))
-  {
-    return;
-  }
 
   XSqlQuery xrate;
   xrate.prepare("SELECT curr_rate "
@@ -247,7 +230,6 @@ void unpostedInvoices::sPost()
 
     XSqlQuery unpostedPost;
 
-    int journal = -1;
     unpostedPost.prepare("SELECT fetchJournalNumber('AR-IN', :seriesDate) AS result;");
     unpostedPost.bindValue(":seriesDate", seriesDate);
     unpostedPost.exec();
