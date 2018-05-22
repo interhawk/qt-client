@@ -8,27 +8,30 @@
  * to be bound by its terms.
  */
 
-#ifndef INCIDENTWORKBENCH_H
-#define INCIDENTWORKBENCH_H
+#ifndef TASKTEMPLATES_H
+#define TASKTEMPLATES_H
 
-#include "display.h"
+#include "xwidget.h"
+#include "ui_taskTemplates.h"
 
-class incidentWorkbench : public display
+class taskTemplates : public XWidget, public Ui::taskTemplates
 {
     Q_OBJECT
 
 public:
-    incidentWorkbench(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::Window);
+    taskTemplates(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::Window);
+    ~taskTemplates();
 
 public slots:
-    virtual enum SetResponse set( const ParameterList & pParams );
-    virtual bool setParams(ParameterList&);
+    virtual void sDelete();
     virtual void sNew();
     virtual void sEdit();
-    virtual void sView();
-    virtual void sOpen();
-    virtual void sCreateProject();
-    virtual void sPopulateMenu(QMenu *, QTreeWidgetItem *, int);
+    virtual void sUpdate(QString, int);
+    virtual void sFillList();
+
+protected slots:
+    virtual void languageChange();
+
 };
 
-#endif // INCIDENTWORKBENCH_H
+#endif // TASKTEMPLATE_H

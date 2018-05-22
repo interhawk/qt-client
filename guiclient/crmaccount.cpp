@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -34,23 +34,54 @@
 
 #define DEBUG false
 
+bool crmaccount::userHasPriv(const int pMode, const int pId)
+{
+  if (_privileges->check("MaintainAllCRMAccounts"))
+    return true;
+  bool personalPriv = _privileges->check("MaintainPersonalCRMAccounts");
+  if(pMode==cView)
+  {
+    if(_privileges->check("ViewAllCRMAccounts"))
+      return true;
+    personalPriv = personalPriv || _privileges->check("ViewPersonalCRMAccounts");
+  }
+
+  if(pMode==cNew)
+    return personalPriv;
+  else
+  {
+    XSqlQuery usernameCheck;
+    usernameCheck.prepare( "SELECT getEffectiveXtUser() IN (crmacct_owner_username, crmacct_usr_username) AS canModify "
+                           "FROM crmacct "
+                            "WHERE (crmacct_id=:crmacct_id);" );
+    usernameCheck.bindValue(":crmacct_id", pId);
+    usernameCheck.exec();
+
+    if (usernameCheck.first())
+      return usernameCheck.value("canModify").toBool()&&personalPriv;
+    return false;
+  }
+}
+
 crmaccount::crmaccount(QWidget* parent, const char* name, Qt::WindowFlags fl)
     : XWidget(parent, name, fl)
 {
   setupUi(this);
 
-  _todoList = new todoList(this, "todoList", Qt::Widget);
-  _todoListTab->layout()->addWidget(_todoList);
-  _todoList->setCloseVisible(false);
-  _todoList->list()->hideColumn("crmacct_number");
-  _todoList->list()->hideColumn("crmacct_name");
-  _todoList->parameterWidget()->setDefault(tr("User"), QVariant(), true);
-  _todoList->parameterWidget()->append("hasContext", "hasContext", ParameterWidget::Exists, true);
-  _todoList->setParameterWidgetVisible(false);
-  _todoList->setQueryOnStartEnabled(false);
-  _todoList->_projects->setForgetful(true);
-  _todoList->_projects->setVisible(false);
-  _todoList->_projects->setChecked(false);
+  _taskList = new taskList(this, "taskList", Qt::Widget);
+  _taskListTab->layout()->addWidget(_taskList);
+  _taskList->setCloseVisible(false);
+  _taskList->list()->hideColumn("crmacct_number");
+  _taskList->list()->hideColumn("crmacct_name");
+  _taskList->list()->hideColumn("parent");
+  _taskList->parameterWidget()->setDefault(tr("User"), QVariant(), true);
+  _taskList->parameterWidget()->append("hasContext", "hasContext", ParameterWidget::Exists, true);
+  _taskList->setParameterWidgetVisible(false);
+  _taskList->setQueryOnStartEnabled(false);
+  _taskList->_projects->setForgetful(true);
+  _taskList->_projects->setVisible(false);
+  _taskList->_projects->setChecked(false);
+  _taskList->setParent("CRMA");
 
   ParameterList params;
   params.append("showRole", true);
@@ -237,7 +268,7 @@ enum SetResponse crmaccount::set(const ParameterList &pParams)
            why don't scripts just call setCurrentIndex if they care?
    */
   if(pParams.inList("scripted"))
-    _tab->setCurrentIndex(_tab->indexOf(_todoListTab));
+    _tab->setCurrentIndex(_tab->indexOf(_taskListTab));
 
   if (_mode == cEdit && !_lock.acquire("crmacct", _crmacctId, AppLock::Interactive))
   {
@@ -667,7 +698,7 @@ int crmaccount::id()
 void crmaccount::setId(int id)
 {
   _crmacctId = id;
-  _todoList->parameterWidget()->setDefault(tr("Account"), _crmacctId, true);
+  _taskList->parameterWidget()->setDefault(tr("Account"), _crmacctId, true);
   _contacts->setCrmacctid(_crmacctId);
   _addresses->setCrmacctid(_crmacctId);
   _charass->setId(_crmacctId);
@@ -767,7 +798,7 @@ void crmaccount::sPopulate()
   sPopulateRegistrations();
   _contacts->sFillList();
   _addresses->sFillList();
-  _todoList->sFillList();
+  _taskList->sFillList();
 }
 
 void crmaccount::sCustomer()

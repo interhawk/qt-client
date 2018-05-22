@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1284,6 +1284,7 @@ void XComboBox::setId(int pTarget)
             updateMapperData();
             emit newID(pTarget);
             emit valid(true);
+            _lastid = pTarget;
 
             if (allowNull())
               emit notNull(true);
@@ -1306,6 +1307,7 @@ void XComboBox::setId(int pTarget)
           updateMapperData();
           emit newID(pTarget);
           emit valid(true);
+          _lastid = pTarget;
 
           if (allowNull())
             emit notNull(true);
@@ -1523,10 +1525,18 @@ void XComboBox::sHandleNewIndex(int pIndex)
   if (DEBUG)
     qDebug("%s::sHandleNewIndex(%d) entered", qPrintable(objectName()), pIndex);
 
+  if (id() == _lastid)
+  {
+    if (DEBUG)
+      qDebug("%s::sHandleNewIndex(%d) no id changed", qPrintable(objectName()), pIndex);
+    return;
+  }
+
   if (pIndex >= 0 && pIndex < _data->_ids.count())
   {
     updateMapperData();
     emit newID(_data->_ids.at(pIndex));
+    _lastid = _data->_ids.at(pIndex);
 
     if (DEBUG)
       qDebug("%s::shandleNewIndex() emitted newID(%d)",

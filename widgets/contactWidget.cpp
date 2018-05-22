@@ -1350,6 +1350,8 @@ void ContactWidget::fillEmail()
               "ORDER BY email, id;");
   qry.bindValue(":cntct_id", _id);
   qry.exec();
+  ErrorReporter::error(QtCriticalMsg, this, tr("Getting Email Details"),
+                         qry, __FILE__, __LINE__);
 
   QString curremail = _email->currentText();
 

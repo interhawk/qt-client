@@ -36,7 +36,7 @@ class XTUPLEWIDGETS_EXPORT ParameterWidget : public QWidget, public Ui::Paramete
       Multiselect, GLAccount, Exists, CheckBox, Project,
       Customer, Site, Vendor, Item, Employee, Shipto,
       SalesOrder, WorkOrder, PurchaseOrder, TransferOrder,
-      Numeric
+      Incident, Opportunity, Numeric
     };
     Q_ENUM(ParameterWidgetTypes)
 

@@ -11,9 +11,12 @@
 #include "incidentWorkbench.h"
 
 #include <QSqlError>
+#include <QMessageBox>
 
+#include "errorReporter.h"
 #include "guiclient.h"
 #include "incident.h"
+#include "project.h"
 #include "parameterwidget.h"
 
 incidentWorkbench::incidentWorkbench(QWidget* parent, const char*, Qt::WindowFlags fl)
@@ -187,6 +190,8 @@ bool incidentWorkbench::setParams(ParameterList & params)
 void incidentWorkbench::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
+  XSqlQuery prjq;
+  bool hasProj = false;
 
   bool editPriv =
       (omfgThis->username() == list()->currentItem()->rawValue("incdt_owner_username") && _privileges->check("MaintainPersonalIncidents")) ||
@@ -202,6 +207,23 @@ void incidentWorkbench::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
   menuItem->setEnabled(editPriv);
   menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
   menuItem->setEnabled(viewPriv);
+
+  pMenu->addSeparator();
+
+  prjq.prepare("SELECT 1 FROM incdt WHERE incdt_id=:incdt AND incdt_prj_id IS NOT NULL;");
+  prjq.bindValue(":incdt", list()->id());
+  prjq.exec();
+  if (prjq.first())
+    hasProj = true;
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Determining Incident Project"),
+                              prjq, __FILE__, __LINE__))
+    return;
+
+  if (_privileges->check("MaintainPersonalProjects") && !hasProj)
+  {
+    menuItem = pMenu->addAction(tr("Create Project"), this, SLOT(sCreateProject()));
+    menuItem->setEnabled(true);
+  }
 }
 
 void incidentWorkbench::sOpen()
@@ -222,4 +244,42 @@ void incidentWorkbench::sOpen()
     sView();
 }
 
+void incidentWorkbench::sCreateProject()
+{
+  XSqlQuery prjq;
+  ParameterList params;
+  int prjid;
+  bool openw = false;
+  
+  int answer = QMessageBox::question(this,  tr("Open Projects"),
+            tr("Do you want to open the Project(s) after creation?"),
+            QMessageBox::Yes, QMessageBox::No | QMessageBox::Default, QMessageBox::Cancel);
+  if (answer == QMessageBox::Yes) 
+    openw = true;
+  else if (answer == QMessageBox::Cancel)
+    return;
 
+  prjq.prepare("SELECT createProjectFromIncident(:incdt_id) AS projectid;" );
+
+  foreach (XTreeWidgetItem *item, list()->selectedItems())
+  {
+    prjq.bindValue(":incdt_id", item->id());
+    prjq.exec();
+    if (prjq.first())
+      prjid = prjq.value("projectid").toInt();
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Creating Project"),
+                           prjq, __FILE__, __LINE__))
+      return;
+
+    if (openw)
+    {
+      params.append("prj_id", prjid);
+      params.append("mode", cEdit);
+   
+      project* newdlg = new project(0, "", false);
+      newdlg->set(params);
+      newdlg->setAttribute(Qt::WA_DeleteOnClose);
+      newdlg->show();
+    }
+  }
+}

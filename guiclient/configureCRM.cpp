@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -31,6 +31,7 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
 
   _nextInNumber->setValidator(omfgThis->orderVal());
   _nextAcctNumber->setValidator(omfgThis->orderVal());
+  _nextTaskNumber->setValidator(omfgThis->orderVal());
 
   configureconfigureCRM.exec( "SELECT orderseq_number AS innumber "
           "  FROM orderseq"
@@ -44,6 +45,12 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
   if (configureconfigureCRM.first())
     _nextAcctNumber->setText(configureconfigureCRM.value("acnumber"));
 
+  configureconfigureCRM.exec( "SELECT orderseq_number AS tsknumber "
+          "  FROM orderseq"
+          " WHERE (orderseq_name='TaskNumber');" );
+  if (configureconfigureCRM.first())
+    _nextTaskNumber->setText(configureconfigureCRM.value("tsknumber"));
+
   QString metric = _metrics->value("CRMAccountNumberGeneration");
   if (metric == "M")
     _acctGeneration->setCurrentIndex(0);
@@ -52,6 +59,13 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
   else if (metric == "O")
     _acctGeneration->setCurrentIndex(2);
 
+  metric = _metrics->value("TaskNumberGeneration");
+  if (metric == "M")
+    _taskGeneration->setCurrentIndex(0);
+  else if (metric == "A")
+    _taskGeneration->setCurrentIndex(1);
+  else if (metric == "O")
+    _taskGeneration->setCurrentIndex(2);
     
   _useProjects->setChecked(_metrics->boolean("UseProjects"));
   _autoCreate->setChecked(_metrics->boolean("AutoCreateProjectsForOrders"));
@@ -137,12 +151,19 @@ bool configureCRM::sSave()
   
   if (QString(numberGenerationTypes[_acctGeneration->currentIndex()]) != "M" && _nextAcctNumber->text().toInt() < 1)
     _nextAcctNumber->setText("1");
+  if (QString(numberGenerationTypes[_taskGeneration->currentIndex()]) != "M" && _nextTaskNumber->text().toInt() < 1)
+    _nextTaskNumber->setText("1");
 
   configq.prepare( "SELECT setNextCRMAccountNumber(:acnumber);" );
   configq.bindValue(":acnumber", _nextAcctNumber->text().toInt());
   configq.exec();
 
+  configq.prepare( "SELECT setNextTaskNumber(:tsknumber);" );
+  configq.bindValue(":tsknumber", _nextTaskNumber->text().toInt());
+  configq.exec();
+
   _metrics->set("CRMAccountNumberGeneration", QString(numberGenerationTypes[_acctGeneration->currentIndex()]));
+  _metrics->set("TaskNumberGeneration", QString(numberGenerationTypes[_taskGeneration->currentIndex()]));
   
   _metrics->set("UseProjects", _useProjects->isChecked());
   _metrics->set("AutoCreateProjectsForOrders", (_autoCreate->isChecked() && _useProjects->isChecked()));

@@ -19,6 +19,10 @@
 #include "errorReporter.h"
 #include "parameterwidget.h"
 #include "prospect.h"
+#include "salesOrder.h"
+#include "opportunity.h"
+#include "task.h"
+#include "project.h"
 #include "storedProcErrorLookup.h"
 
 prospects::prospects(QWidget* parent, const char*, Qt::WindowFlags fl)
@@ -30,6 +34,7 @@ prospects::prospects(QWidget* parent, const char*, Qt::WindowFlags fl)
   setNewVisible(true);
   setSearchVisible(true);
   setQueryOnStartEnabled(true);
+  setUseAltId(true);
 
   parameterWidget()->append(tr("Show Inactive"), "showInactive", ParameterWidget::Exists);
   parameterWidget()->append(tr("Prospect Number Pattern"), "prospect_number_pattern", ParameterWidget::Text);
@@ -141,6 +146,80 @@ void prospects::sDelete()
   omfgThis->sProspectsUpdated();
 }
 
+void prospects::sCreateQuote()
+{
+  ParameterList params;
+  params.append("mode", "newQuote");
+  params.append("cust_id", list()->id());
+
+  salesOrder *newdlg = new salesOrder();
+  newdlg->set(params);
+  omfgThis->handleNewWindow(newdlg);
+}
+
+void prospects::sCreateProject()
+{
+  XSqlQuery cntctq;
+  ParameterList params;
+
+  params.append("mode", cNew);
+  params.append("crmacct_id", list()->altId());
+  params.append("username", list()->rawValue("prospect_assigned_username").toString());
+
+  cntctq.prepare("SELECT getcrmaccountcontact(:crmacct) AS ret;");
+  cntctq.bindValue(":crmacct", list()->altId());
+  cntctq.exec();
+  if (cntctq.first())
+    params.append("cntct_id", cntctq.value("ret"));
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Determining Contact"),
+                             cntctq, __FILE__, __LINE__))
+      return;
+   
+  project* newdlg = new project(0, "", false);
+  newdlg->set(params);
+  newdlg->setAttribute(Qt::WA_DeleteOnClose);
+  newdlg->show();
+}
+
+void prospects::sCreateTask()
+{
+  ParameterList params;
+
+  params.append("mode", "new");
+  params.append("parent", "CRMA");
+  params.append("parent_id", list()->altId());
+  params.append("parent_owner_username", list()->rawValue("prospect_owner_username").toString());
+  params.append("parent_assigned_username", list()->rawValue("prospect_assigned_username").toString());
+
+  task* newdlg = new task(0, "", false);
+  newdlg->set(params);
+  newdlg->setAttribute(Qt::WA_DeleteOnClose);
+  newdlg->show();
+}
+
+void prospects::sCreateOpportunity()
+{
+  XSqlQuery cntctq;
+  ParameterList params;
+  params.append("mode", "new");
+  params.append("crmacct_id",list()->altId());
+  params.append("parent_owner_username", list()->rawValue("prospect_owner_username").toString());
+  params.append("parent_assigned_username", list()->rawValue("prospect_assigned_username").toString());
+
+  cntctq.prepare("SELECT getcrmaccountcontact(:crmacct) AS ret;");
+  cntctq.bindValue(":crmacct", list()->altId());
+  cntctq.exec();
+  if (cntctq.first())
+    params.append("cntct_id", cntctq.value("ret"));
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Determining Contact"),
+                             cntctq, __FILE__, __LINE__))
+      return;
+
+  opportunity newdlg(0, "", true);
+  newdlg.set(params);
+  newdlg.exec();
+}
+
 void prospects::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
@@ -152,4 +231,27 @@ void prospects::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 
   menuItem = pMenu->addAction("Delete", this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainProspectMasters"));
+
+  pMenu->addSeparator();
+
+  if (_privileges->check("MaintainPersonalProjects"))
+  {
+    menuItem = pMenu->addAction(tr("Create Project"), this, SLOT(sCreateProject()));
+    menuItem->setEnabled(true);
+  }
+
+  menuItem = pMenu->addAction(tr("Create Task"), this, SLOT(sCreateTask()));
+  menuItem->setEnabled(true);
+
+  if (_privileges->check("MaintainPersonalOpportunities"))
+  {
+    menuItem = pMenu->addAction(tr("Create Opportunity"), this, SLOT(sCreateOpportunity()));
+    menuItem->setEnabled(true);
+  }
+
+  if (_privileges->check("MaintainQuotes"))
+  {
+    menuItem = pMenu->addAction(tr("Create Quote"), this, SLOT(sCreateQuote()));
+    menuItem->setEnabled(true);
+  }
 }

@@ -31,7 +31,7 @@
 #include "salesOrder.h"
 #include "shipTo.h"
 #include "storedProcErrorLookup.h"
-#include "todoItem.h"
+#include "task.h"
 #include "transferOrder.h"
 #include "vendor.h"
 #include "vendorAddress.h"
@@ -840,10 +840,12 @@ void contact::sDetachUse()
       break;
 
     case 21:
+/*  TODO - need to decide how to handle this situation
       question = tr("Are you sure you want to remove this Contact as "
                     "the Contact for this To-Do Item?");
       detachq.prepare("UPDATE todoitem SET todoitem_cntct_id = NULL"
                       " WHERE todoitem_id=:id;");
+*/
       break;
 
     case 22:
@@ -1199,8 +1201,8 @@ void contact::sEditTodoItem()
 {
   ParameterList params;
   params.append("mode",        "edit");
-  params.append("todoitem_id", _uses->id());
-  todoItem newdlg(this);
+  params.append("task_id", _uses->id());
+  task newdlg(this);
   newdlg.set(params);
   if (newdlg.exec() == XDialog::Accepted)
     sFillList();
@@ -1210,8 +1212,8 @@ void contact::sViewTodoItem()
 {
   ParameterList params;
   params.append("mode",        "view");
-  params.append("todoitem_id", _uses->id());
-  todoItem newdlg(this);
+  params.append("task_id", _uses->id());
+  task newdlg(this);
   newdlg.set(params);
   newdlg.exec();
 }

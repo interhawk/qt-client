@@ -578,6 +578,9 @@ FORMS =   absoluteCalendarItem.ui               \
           sysLocale.ui                          \
           systemMessage.ui                      \
           task.ui                               \
+          taskAssignment.ui                     \
+          taskTemplate.ui                       \
+          taskTemplates.ui                      \
           taxAdjustment.ui                      \
           taxAssignment.ui                      \
           taxAssignments.ui                     \
@@ -598,9 +601,8 @@ FORMS =   absoluteCalendarItem.ui               \
           terms.ui                              \
           termses.ui                            \
           thawItemSitesByClassCode.ui           \
-          todoItem.ui                           \
-          todoList.ui                           \
-          todoListCalendar.ui                   \
+          taskList.ui                           \
+          taskListCalendar.ui                   \
           toggleBankrecCleared.ui               \
           transactionInformation.ui             \
           transferOrder.ui                      \
@@ -1186,6 +1188,9 @@ HEADERS = ../common/format.h                    \
           sysLocale.h                   \
           systemMessage.h               \
           task.h                        \
+          taskAssignment.h              \
+          taskTemplate.h                \
+          taskTemplates.h               \
           taxAdjustment.h               \
           taxAssignment.h               \
           taxAssignments.h              \
@@ -1209,10 +1214,9 @@ HEADERS = ../common/format.h                    \
           termses.h                     \
           thawItemSitesByClassCode.h    \
           timeoutHandler.h              \
-          todoCalendarControl.h         \
-          todoItem.h                    \
-          todoList.h                    \
-          todoListCalendar.h            \
+          taskCalendarControl.h         \
+          taskList.h                    \
+          taskListCalendar.h            \
           toggleBankrecCleared.h        \
           toitemTableModel.h            \
           toitemTableView.h             \
@@ -1808,6 +1812,9 @@ SOURCES = absoluteCalendarItem.cpp              \
           sysLocale.cpp                         \
           systemMessage.cpp                     \
           task.cpp                              \
+          taskAssignment.cpp                    \
+          taskTemplate.cpp                      \
+          taskTemplates.cpp                     \
           taxAdjustment.cpp                     \
           taxAssignment.cpp                     \
           taxAssignments.cpp                    \
@@ -1831,10 +1838,9 @@ SOURCES = absoluteCalendarItem.cpp              \
           termses.cpp                           \
           thawItemSitesByClassCode.cpp          \
           timeoutHandler.cpp                    \
-          todoCalendarControl.cpp               \
-          todoItem.cpp                          \
-          todoList.cpp                          \
-          todoListCalendar.cpp                  \
+          taskCalendarControl.cpp               \
+          taskList.cpp                          \
+          taskListCalendar.cpp                  \
           toggleBankrecCleared.cpp              \
           toitemTableModel.cpp                  \
           toitemTableView.cpp                   \

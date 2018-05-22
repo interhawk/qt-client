@@ -42,6 +42,7 @@ class menuCRM : public QObject
     void sNewProject();
     void sProjects();
     void sDspOrderActivityByProject();
+    void sDspProjectSummary();
     void sAddress();
     void sAddressGroups();
     void sAddresses();
@@ -59,9 +60,9 @@ class menuCRM : public QObject
     void sCreateRecurringItems();
     void sIncident();
     void sIncidentWorkbench();
-    void sTodoItem();
-    void sTodoList();
-    void sTodoListCalendar();
+    void sTask();
+    void sTaskList();
+    void sTaskListCalendar();
     void sNewOpportunity();
     void sOpportunities();
     void sNewProspect();
@@ -77,7 +78,7 @@ class menuCRM : public QObject
     QMenu *crmMenu;
     QMenu *projectsMenu;
     QMenu *incidentMenu;
-    QMenu *todoMenu;
+    QMenu *taskMenu;
     QMenu *reportsMenu;
     QMenu *accountsMenu;
     QMenu *contactsMenu;

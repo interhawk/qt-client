@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -63,14 +63,14 @@ void editOwners::sFillList()
 
   if(_todo->isChecked())
   {
-    _queryString += "SELECT todoitem_id AS id, "
-                    "       todoitem_owner_username AS owner_username, "
-                    "       todoitem_name AS name, "
-                    "       todoitem_description AS description, "
-                    "       'To Do' AS type_name, "
-                    "       'todoitem' AS table "
-                    "FROM todoitem "
-                    "WHERE todoitem_owner_username = :owner ";
+    _queryString += "SELECT task_id AS id, "
+                    "       task_owner_username AS owner_username, "
+                    "       task_name AS name, "
+                    "       task_description AS description, "
+                    "       'Task' AS type_name, "
+                    "       'task' AS table "
+                    "FROM task "
+                    "WHERE task_owner_username = :owner ";
     _first = false;
   }
   if(_project->isChecked())
@@ -222,7 +222,7 @@ bool editOwners::modifyOne(XTreeWidgetItem * currentItem)
   XSqlQuery editmodifyOne;
   QString table;
 
-  if(currentItem->rawValue("type_name").toString() == "To Do") table = "todoitem";
+  if(currentItem->rawValue("type_name").toString() == "Task") table = "task";
   if(currentItem->rawValue("type_name").toString() == "Project") table = "prj";
   if(currentItem->rawValue("type_name").toString() == "Contact") table = "cntct";
   if(currentItem->rawValue("type_name").toString() == "Incident") table = "incdt";

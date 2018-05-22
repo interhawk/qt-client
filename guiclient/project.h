@@ -42,6 +42,7 @@ public slots:
     virtual bool sSave(bool partial = false);
     virtual void sPrintTasks();
     virtual void sPrintOrders();
+    virtual void sProjectTypeChanged(const int);
     virtual void sNewTask();
     virtual void sEditTask();
     virtual void sViewTask();
