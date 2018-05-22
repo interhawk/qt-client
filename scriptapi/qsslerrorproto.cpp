@@ -113,7 +113,7 @@ QScriptValue constructQSslError(QScriptContext *context, QScriptEngine  *engine)
   }
   else if (context->argumentCount() == 1) {
     QScriptValue arg = context->argument(0);
-    if (arg.isString() or arg.isNumber()) {
+    if (arg.isString() || arg.isNumber()) {
       sslError = static_cast<QSslError::SslError>(context->argument(0).toInt32());
       obj = new QSslError(sslError);
     } else {

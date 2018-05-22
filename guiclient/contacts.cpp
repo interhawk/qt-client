@@ -53,6 +53,10 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("State Pattern"), "addr_state_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Postal Code Pattern"), "addr_postalcode_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Country Pattern"), "addr_country_pattern", ParameterWidget::Text);
+  parameterWidget()->append(tr("Created Before"), "createEndDate", ParameterWidget::Date);
+  parameterWidget()->append(tr("Created After"), "createStartDate", ParameterWidget::Date);
+  parameterWidget()->append(tr("Updated Before"), "updateEndDate", ParameterWidget::Date);
+  parameterWidget()->append(tr("Updated After"), "updateStartDate", ParameterWidget::Date);
 
   list()->addColumn(tr("First Name"),          80, Qt::AlignLeft,  true, "cntct_first_name");
   list()->addColumn(tr("Last Name"),          100, Qt::AlignLeft,  true, "cntct_last_name");
@@ -70,6 +74,8 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   list()->addColumn(tr("State"),               50, Qt::AlignLeft, false, "addr_state");
   list()->addColumn(tr("Country"),            100, Qt::AlignLeft, false, "addr_country");
   list()->addColumn(tr("Postal Code"),         75, Qt::AlignLeft, false, "addr_postalcode");
+  list()->addColumn(tr("Created"),             -1, Qt::AlignLeft, false, "cntct_created");
+  list()->addColumn(tr("Updated"),             -1, Qt::AlignLeft, false, "cntct_lastupdated");
   list()->addColumn(tr("Customer"),     _ynColumn,  Qt::AlignLeft, false, "cust");
   list()->addColumn(tr("Prospect"),    _ynColumn,  Qt::AlignLeft, false, "prospect");
 
@@ -264,6 +270,25 @@ void contacts::sDelete()
                                  QMessageBox::Yes | QMessageBox::No,
                                  QMessageBox::No) == QMessageBox::Yes)
           cascade = true;
+        else
+        {
+          XSqlQuery incdt;
+          incdt.prepare("SELECT EXISTS(SELECT 1 "
+                        "                FROM incdt "
+                        "               WHERE incdt_cntct_id=:cntct_id) AS used;");
+          incdt.bindValue(":cntct_id", selected->id());
+          incdt.exec();
+
+          if (incdt.first() && incdt.value("used").toBool())
+          {
+            QMessageBox::critical(this, tr("Contact in Use"), tr("Contact is used on an incident "
+                                                                 "and cannot be deleted."));
+            return;
+          }
+          else if (ErrorReporter::error(QtCriticalMsg, this, tr("Checking Usage"),
+                                        incdt, __FILE__, __LINE__))
+            return;
+        }
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Checking Usage"),
                                     chk, __FILE__, __LINE__))

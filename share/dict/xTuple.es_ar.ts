@@ -39529,7 +39529,7 @@ Rate</source>
     </message>
     <message>
         <source>Count &amp;Qty.:</source>
-        <translation>&amp;amp;Cant. Contada:</translation>
+        <translation>&amp;Cant. Contada:</translation>
     </message>
     <message>
         <source>Co&amp;mments:</source>
@@ -39899,7 +39899,7 @@ Would you like to automatically create a credit memo against this return?</sourc
     </message>
     <message>
         <source>&amp;Enter Return</source>
-        <translation>&amp;amp;Ingresar Devolución</translation>
+        <translation>&amp;Ingresar Devolución</translation>
     </message>
     <message>
         <source>Purchase Order Items:</source>
@@ -43167,7 +43167,7 @@ but you may deactivate it.</source>
     <name>firmPlannedOrdersByPlannerCode</name>
     <message>
         <source>&amp;Firm</source>
-        <translation type="unfinished">&amp;amp;Firme</translation>
+        <translation type="unfinished">&amp;Firme</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -43580,7 +43580,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>Freight &amp;Class:</source>
-        <translation>&amp;amp;Clase de Fletes:</translation>
+        <translation>&amp;Clase de Fletes:</translation>
     </message>
     <message>
         <source>Error Saving Freight Information</source>
@@ -51076,7 +51076,7 @@ Debajo encontrará más detalles del problema con la conección:
     </message>
     <message>
         <source>Clear &amp;Menu</source>
-        <translation>Borrar &amp;amp;Menu</translation>
+        <translation>Borrar &amp;Menu</translation>
     </message>
     <message>
         <source>&lt;p&gt;A connection could not be established with the specified Database as the Proper Database Drivers have not been installed. Contact your Systems Administator.</source>
@@ -57222,7 +57222,7 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>&amp;Roll Up Standard Costs</source>
-        <translation>&amp;amp;Actualizar Costos Estándar</translation>
+        <translation>&amp;Actualizar Costos Estándar</translation>
     </message>
     <message>
         <source>Post Lower Level Material Costs</source>

@@ -43,7 +43,7 @@ openSalesOrders::openSalesOrders(QWidget* parent, const char*, Qt::WindowFlags f
   optionsWidget()->hide();
 
   _dates->setStartNull(tr("Earliest"), omfgThis->startOfTime(), true);
-  int confDays = _metrics->value("DefaultOrderStartDays").toInt() ? : -90;
+  int confDays = _metrics->value("DefaultOrderStartDays").toInt() ? NULL : -90;
   _dates->setStartDate(QDate().currentDate().addDays(confDays));
   _dates->setEndNull(tr("Latest"), omfgThis->endOfTime(), true);
 

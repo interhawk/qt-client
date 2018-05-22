@@ -97,13 +97,17 @@ isEmpty( OPENRPT_IMAGE_DIR ) {
 
 OPENRPTLIBEXT = $${QMAKE_EXTENSION_SHLIB}
 XTLIBEXT      = $${QMAKE_EXTENSION_SHLIB}
-win32:OPENRPTLIBEXT = a
-win32:XTLIBEXT      = a
+
+win32-g++:OPENRPTLIBEXT = a
+win32-g++:XTLIBEXT      = a
+win32-msvc*:OPENRPTLIBEXT = lib
+win32-msvc*:XTLIBEXT      = lib
 macx:OPENRPTLIBEXT  = a
 macx:XTLIBEXT       = a
 macx:CONFIG += c++11
 
 isEmpty( OPENRPTLIBEXT ) {
+  win32: OPENRPTLIBEXT = a 
   unix:OPENRPTLIBEXT  = so
 }
 isEmpty( XTLIBEXT ) {

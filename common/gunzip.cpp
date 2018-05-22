@@ -10,7 +10,12 @@
 
 #include "gunzip.h"
 
+#ifdef _MSC_VER
+#include <QtZlib/zlib.h>
+#else
 #include <zlib.h>
+#endif
+
 #include <qbuffer.h>
 
 QByteArray gunzipFile(const QString & file)

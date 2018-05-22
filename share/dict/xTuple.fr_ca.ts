@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="fr_CA">
 <context>
     <name>AddressCluster</name>
     <message>
@@ -456,7 +456,7 @@ Adresse:</translation>
     </message>
     <message>
         <source>&amp; (ampersand) is not a valid Delimiting Character.</source>
-        <translation>&amp;amp; (perluète) n&apos;est pas un Caractère Délimiteur valide.</translation>
+        <translation>&amp; (perluète) n&apos;est pas un Caractère Délimiteur valide.</translation>
     </message>
     <message>
         <source>The Delimiting Character and the Encapsulating Character cannot be the same. Please change one or the other.</source>
@@ -583,11 +583,11 @@ Adresse:</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>E&amp;xpire</source>
@@ -595,7 +595,7 @@ Adresse:</translation>
     </message>
     <message>
         <source>Move &amp;Up</source>
-        <translation>Déplacer Ha&amp;amp;ut</translation>
+        <translation>Déplacer Ha&amp;ut</translation>
     </message>
     <message>
         <source>Assortment</source>
@@ -603,7 +603,7 @@ Adresse:</translation>
     </message>
     <message>
         <source>Move Do&amp;wn</source>
-        <translation>Déplacer &amp;amp;Bas </translation>
+        <translation>Déplacer &amp;Bas </translation>
     </message>
     <message>
         <source>Totals:</source>
@@ -747,15 +747,15 @@ Adresse:</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Details</source>
@@ -5643,7 +5643,7 @@ returned %2
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Error Getting Record</source>
@@ -5884,7 +5884,7 @@ returned %2
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Enter a Date</source>
@@ -6361,7 +6361,7 @@ returned %2
     </message>
     <message>
         <source>E&amp;xt. Reference:</source>
-        <translation>Référence E&amp;amp;xt.:</translation>
+        <translation>Référence E&amp;xt.:</translation>
     </message>
     <message>
         <source>-</source>
@@ -6476,23 +6476,23 @@ returned %2
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Asset</source>
@@ -6777,19 +6777,19 @@ returned %2
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Close Period</source>
@@ -6801,7 +6801,7 @@ returned %2
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Qtr</source>
@@ -6931,23 +6931,23 @@ returned %2
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Close Year</source>
@@ -7289,7 +7289,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Cannot Post Transaction</source>
@@ -7340,11 +7340,11 @@ as an Address. Please select a Prospect to edit:</source>
     <name>adjustmentTrans</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Site:</source>
-        <translation>&amp;amp;Site:</translation>
+        <translation>&amp;Site:</translation>
     </message>
     <message>
         <source>Adjustment Transaction</source>
@@ -7356,11 +7356,11 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Document #:</source>
@@ -7368,11 +7368,11 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Relative</source>
-        <translation>&amp;amp;Relative</translation>
+        <translation>&amp;Relative</translation>
     </message>
     <message>
         <source>&amp;Absolute</source>
-        <translation>&amp;amp;Absolue</translation>
+        <translation>&amp;Absolue</translation>
     </message>
     <message>
         <source>&amp;Adjustment Qty.:</source>
@@ -7487,7 +7487,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Contact...</source>
-        <translation>Personne-ressour&amp;amp;ce...</translation>
+        <translation>Personne-ressour&amp;ce...</translation>
     </message>
     <message>
         <source>Due:</source>
@@ -7538,19 +7538,19 @@ as an Address. Please select a Prospect to edit:</source>
     <name>alarms</name>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;amp;Supprimer</translation>
+        <translation type="unfinished">&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Form</source>
@@ -7593,7 +7593,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Allocate</source>
@@ -7766,27 +7766,27 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;ampVisualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
 </context>
 <context>
@@ -8103,7 +8103,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermé</translation>
+        <translation>&amp;Fermé</translation>
     </message>
     <message>
         <source>Payables Workbench</source>
@@ -8202,11 +8202,11 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>Apply to &amp;Balance</source>
-        <translation>Imputer au &amp;amp;Solde</translation>
+        <translation>Imputer au &amp;Solde</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation>&amp;amp;Imputer</translation>
+        <translation>&amp;Imputer</translation>
     </message>
     <message>
         <source>Clear Application</source>
@@ -8317,11 +8317,11 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>Apply to &amp;Balance</source>
-        <translation>Imputer au &amp;amp;Solde</translation>
+        <translation>Imputer au &amp;Solde</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation>&amp;amp;Imputer</translation>
+        <translation>&amp;Imputer</translation>
     </message>
     <message>
         <source>Clear Application</source>
@@ -8577,27 +8577,27 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Deferred Rev. Account</source>
@@ -9028,7 +9028,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Discover Card</source>
@@ -9363,11 +9363,11 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&lt;p&gt;You must indicate the Lot/Serial # to assign and select the &apos;Assign&apos; button. You may not cancel this action.</source>
@@ -9768,7 +9768,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     <name>bankAccounts</name>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished">Modifi&amp;amp;er</translation>
+        <translation type="unfinished">Modifi&amp;er</translation>
     </message>
     <message>
         <source>Credit Card</source>
@@ -9776,15 +9776,15 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Bank Accounts:</source>
@@ -9832,11 +9832,11 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&lt;p&gt;The selected Bank Account cannot be deleted as Cash Receipts have been posted against it.</source>
@@ -9883,11 +9883,11 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp:strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Date:</source>
@@ -9974,27 +9974,27 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Getting Adjustments</source>
@@ -10064,27 +10064,27 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Adjustment Types</source>
@@ -10143,7 +10143,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>Costing &amp;Elements:</source>
-        <translation>Élém&amp;amp;ents de Prix de Revient:</translation>
+        <translation>Élém&amp;ents de Prix de Revient:</translation>
     </message>
     <message>
         <source>Posted</source>
@@ -10394,7 +10394,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source> BOMs with &amp;Component Items</source>
-        <translation>Nomenclatures avec Articles &amp;amp;Composants</translation>
+        <translation>Nomenclatures avec Articles &amp;Composants</translation>
     </message>
     <message>
         <source>Description</source>
@@ -10410,11 +10410,11 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Bills of Materials</source>
@@ -10430,7 +10430,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Bills of Materials:</source>
@@ -10438,38 +10438,38 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
 </context>
 <context>
     <name>budgets</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;amp;Nouveau</translation>
+        <translation type="unfinished">&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation type="unfinished">&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Budgets</source>
@@ -10477,11 +10477,11 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation type="unfinished">Modifi&amp;er</translation>
     </message>
     <message>
         <source>Cop&amp;y</source>
-        <translation>Cop&amp;amp;ier</translation>
+        <translation type="unfinished">Cop&amp;ier</translation>
     </message>
     <message>
         <source>Budgets:</source>
@@ -10489,7 +10489,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>Code</source>
@@ -10497,7 +10497,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation type="unfinished">Im&amp;primer</translation>
     </message>
     <message>
         <source>End Date</source>
@@ -10513,7 +10513,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation type="unfinished">&amp;Visualiser</translation>
     </message>
     <message>
         <source>Error Deleting Budget</source>
@@ -10552,7 +10552,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Vendor Part Number:</source>
@@ -10639,7 +10639,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>A&amp;bsolute</source>
-        <translation>A&amp;amp;bsolu</translation>
+        <translation>A&amp;bsolu</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -10723,7 +10723,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Calendar Items:</source>
@@ -10735,11 +10735,11 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Error Creating New Calendar</source>
@@ -10774,7 +10774,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Absolute</source>
@@ -10810,15 +10810,15 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
 </context>
 <context>
@@ -10833,7 +10833,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>Apply &amp;Line Bal.</source>
-        <translation>Imputer Solde de &amp;amp;Ligne</translation>
+        <translation>Imputer Solde de &amp;Ligne</translation>
     </message>
     <message>
         <source>Include Credits</source>
@@ -10861,7 +10861,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Credit Card</source>
@@ -10873,7 +10873,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Find Document #:</source>
@@ -10989,7 +10989,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Select a Credit Card</source>
@@ -11045,7 +11045,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Anuller</translation>
+        <translation>&amp;Anuller</translation>
     </message>
     <message>
         <source>Cash Receipt Transaction Not In Bank Currency</source>
@@ -11085,7 +11085,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Amount Received:</source>
@@ -11121,11 +11121,11 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>Apply to &amp;Balance</source>
-        <translation>Imputer au &amp;amp;Solde </translation>
+        <translation>Imputer au &amp;Solde </translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation>&amp;amp;Imputer</translation>
+        <translation>&amp;Imputer</translation>
     </message>
     <message>
         <source>&lt;p&gt;This transaction is specified in %1 while the Bank Account is specified in %2. Do you wish to convert at the current Exchange Rate?&lt;p&gt;If not, click NO and change the Bank Account in the POST TO field.</source>
@@ -11402,7 +11402,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>View...</source>
@@ -11430,7 +11430,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Cash Receipts</source>
@@ -11454,7 +11454,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Check</source>
@@ -11462,15 +11462,15 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Distribution Date</source>
@@ -11584,7 +11584,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>Comment Type:</source>
@@ -11592,7 +11592,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Change W/O Quantity Ordered</source>
@@ -11863,7 +11863,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Characteristic:</source>
@@ -11875,7 +11875,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Value:</source>
@@ -11887,7 +11887,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Characteristic Price</source>
@@ -11925,7 +11925,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Cannot Delete Characteristic</source>
@@ -11933,7 +11933,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Characteristics:</source>
@@ -11941,15 +11941,15 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>List Characteristics</source>
@@ -11957,7 +11957,7 @@ Etes-vous certain de vouloir enregistrer ce changement?  </translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Error Retrieving Characteristic Information</source>
@@ -12262,19 +12262,19 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>List Check Formats</source>
@@ -12387,11 +12387,11 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Class Code</source>
@@ -12415,19 +12415,19 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Class Codes</source>
@@ -12446,7 +12446,7 @@ You may not create duplicate Forms.</source>
     <name>closePurchaseOrder</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>Close &amp;P/O</source>
@@ -12458,7 +12458,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Vendor</source>
@@ -12541,7 +12541,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure you want to close this Work Order?</source>
@@ -12580,7 +12580,7 @@ You may not create duplicate Forms.</source>
     <name>comment</name>
     <message>
         <source>&amp;More</source>
-        <translation type="unfinished">&amp;amp;Plus</translation>
+        <translation type="unfinished">&amp;Plus</translation>
     </message>
     <message>
         <source>&amp;Previous</source>
@@ -12588,7 +12588,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Next</source>
-        <translation>Suiva&amp;amp;nt</translation>
+        <translation>Suiva&amp;nt</translation>
     </message>
     <message>
         <source>&lt;p&gt;A Stored Procedure failed to run properly.&lt;br&gt;(%1, %2)&lt;br&gt;</source>
@@ -12604,7 +12604,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Public</source>
@@ -12627,11 +12627,11 @@ You may not create duplicate Forms.</source>
     <name>commentType</name>
     <message>
         <source>&amp;Name:</source>
-        <translation type="unfinished">&amp;amp;Nom:</translation>
+        <translation type="unfinished">&amp;Nom:</translation>
     </message>
     <message>
         <source>&amp;Order:</source>
-        <translation>&amp;amp;Ordre</translation>
+        <translation>&amp;Ordre</translation>
     </message>
     <message>
         <source>Cannot Save Comment Type</source>
@@ -12710,7 +12710,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Description</source>
@@ -12718,7 +12718,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>The selected Comment Type cannot be deleted because there are Comments that are assigned to it.
@@ -12739,11 +12739,11 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Error Retrieving Comment Type Information</source>
@@ -12762,7 +12762,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Edit...</source>
@@ -12770,7 +12770,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>View...</source>
@@ -12778,7 +12778,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Description</source>
@@ -12794,11 +12794,11 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Error Deleting Company</source>
@@ -14523,7 +14523,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Set Sold Items as E&amp;xclusive</source>
-        <translation>Établir Articles Vendus comme E&amp;amp;xclusifs</translation>
+        <translation>Établir Articles Vendus comme E&amp;xclusifs</translation>
     </message>
     <message>
         <source>Defaults</source>
@@ -15783,7 +15783,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -15819,7 +15819,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Inactive</source>
-        <translation>&amp;amp;Inactive</translation>
+        <translation>&amp;Inactive</translation>
     </message>
     <message>
         <source>Email</source>
@@ -16612,7 +16612,7 @@ Contract Number you have specified.</source>
     <name>copyBOM</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>One or more of the components for this Bill of Materials make reference to a
@@ -16638,7 +16638,7 @@ Gamme d&apos;Opérations. Ces références ne peuvent pas être copiées et doiv
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>Error Copying BOM</source>
@@ -16681,11 +16681,11 @@ de la plage de périodes.</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>New Budget Name:</source>
@@ -16777,7 +16777,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Item Number Exists</source>
@@ -16793,7 +16793,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Target Item Number:</source>
@@ -16805,7 +16805,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>Target Item Description:</source>
@@ -17196,7 +17196,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Qty. Ordered:</source>
@@ -17228,7 +17228,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Qty. to Disassemble:</source>
@@ -17240,7 +17240,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Qty. Disassembled:</source>
@@ -17307,7 +17307,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Delete Cost Category</source>
@@ -17335,27 +17335,27 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>List Cost Categories</source>
@@ -17525,7 +17525,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>User Costing Elements:</source>
@@ -17541,15 +17541,15 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
 </context>
 <context>
@@ -17566,7 +17566,7 @@ S.V.P. vérifiez le # du Bordereau de Dénombrement que vous inscrivez. </transl
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>An Count Slip for this Site has already been entered with this #.
@@ -17580,7 +17580,7 @@ S.V.P. vérifiez le # du Bordereau de Dénombrement que vous inscrivez. </transl
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>An unposted Count Slip for this Site has already been entered
@@ -17636,7 +17636,7 @@ Please verify the Serial # of the Count Slip you are entering.</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>...</source>
@@ -17644,7 +17644,7 @@ Please verify the Serial # of the Count Slip you are entering.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Counted Qty. TD:</source>
@@ -17692,7 +17692,7 @@ Please verify the Serial # of the Count Slip you are entering.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Post Count</source>
@@ -17745,7 +17745,7 @@ S.V.P. Communiquer avec votre Administrateur de Systèmes Informatiques et signa
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>...</source>
@@ -17761,7 +17761,7 @@ S.V.P. Communiquer avec votre Administrateur de Systèmes Informatiques et signa
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Only for Specific Location:</source>
@@ -17826,7 +17826,7 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Count Tags:</source>
@@ -17849,23 +17849,23 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Confirm Delete</source>
@@ -17999,7 +17999,7 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>Create &amp;Tag</source>
-        <translation>Créer É&amp;amp;tiquette</translation>
+        <translation>Créer É&amp;tiquette</translation>
     </message>
     <message>
         <source>Mark Created Count Tag as Priority</source>
@@ -18007,7 +18007,7 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Comments:</source>
@@ -18030,7 +18030,7 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>Create &amp;Tags</source>
-        <translation>Créer É&amp;amp;tiquettes</translation>
+        <translation>Créer É&amp;tiquettes</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -18062,7 +18062,7 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Mark Created Count Tag as Priority</source>
@@ -18117,11 +18117,11 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Create &amp;Tags</source>
-        <translation>Créer É&amp;amp;tiquette</translation>
+        <translation>Créer É&amp;tiquette</translation>
     </message>
     <message>
         <source>Class Code</source>
@@ -18235,11 +18235,11 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Create Invoices</source>
-        <translation>&amp;amp;Créer Factures </translation>
+        <translation>&amp;Créer Factures </translation>
     </message>
     <message>
         <source>Error Creating Invoice</source>
@@ -18430,7 +18430,7 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Create Item Sites by Class Code</source>
@@ -18565,7 +18565,7 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&lt;p&gt;You must enter a Lot/Serial number.</source>
@@ -18573,7 +18573,7 @@ S.V.P. vérifier la Qté de l&apos;Étiquette de Dénombrement et essayer de rep
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Create Lot/Serial #</source>
@@ -18650,7 +18650,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>C&amp;reate</source>
@@ -18662,11 +18662,11 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Delete Existing Firmed MRP Orders</source>
-        <translation>Supprimer Comman&amp;amp;des PBM Planifiées Fermes Existantes</translation>
+        <translation>Supprimer Comman&amp;des PBM Planifiées Fermes Existantes</translation>
     </message>
     <message>
         <source>&amp;Site:</source>
@@ -18708,7 +18708,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Delete Existing Firmed MRP Orders</source>
-        <translation>Supprimer Comman&amp;amp;des PBM Planifiées Fermes Existantes</translation>
+        <translation>Supprimer Comman&amp;des PBM Planifiées Fermes Existantes</translation>
     </message>
     <message>
         <source>Error Creating Planned Orders By Planner Code</source>
@@ -18731,7 +18731,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Error Creating Recurring Invoices</source>
@@ -18752,6 +18752,7 @@ de créer les Commandes Planifiées.</translation>
         <source>&lt;p&gt;%n record(s) were created.</source>
         <translation type="unfinished">
             <numerusform>&lt;p&gt;%n enregistrement(s) ont été créés. </numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -18788,7 +18789,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Processing Errors</source>
@@ -18798,6 +18799,7 @@ de créer les Commandes Planifiées.</translation>
         <source>&lt;p&gt;%n error(s) occurred during processing:&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished">
             <numerusform>&lt;p&gt;%n erreur(s) se sont produites durant le traitement:&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>
@@ -18821,7 +18823,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>The zip code must be entered</source>
@@ -18857,11 +18859,11 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Expiration Year:</source>
@@ -18960,7 +18962,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Tax Zone:</source>
@@ -19060,11 +19062,11 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Unposted</source>
@@ -19104,7 +19106,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Place on Hold</source>
-        <translation>&amp;amp;Mettre en Retenue</translation>
+        <translation>&amp;Mettre en Retenue</translation>
     </message>
     <message>
         <source>Misc. Charge Description:</source>
@@ -19279,11 +19281,11 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Error Retrieving Credit Memo Information</source>
@@ -19310,7 +19312,7 @@ de créer les Commandes Planifiées.</translation>
     <name>creditMemoItem</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>Update Inventory</source>
@@ -19350,7 +19352,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Line #:</source>
@@ -19358,7 +19360,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Extended Price:</source>
@@ -19529,7 +19531,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Owner:</source>
@@ -19777,11 +19779,11 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>User Account...</source>
@@ -20233,7 +20235,7 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>You cannot delete the base currency.</source>
@@ -20249,19 +20251,19 @@ de créer les Commandes Planifiées.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Currencies</source>
@@ -20442,11 +20444,11 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&lt;p&gt;There is only a base currency defined. You must add more currencies before you can create an exchange rate. Click the NEW CURRENCY button to add another currency.</source>
@@ -20474,15 +20476,15 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>New Currency</source>
@@ -20577,7 +20579,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Error Retrieving Currency Information</source>
@@ -20592,7 +20594,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>S/O</source>
@@ -20680,7 +20682,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Module:</source>
@@ -20692,7 +20694,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>New</source>
@@ -20747,7 +20749,7 @@ Please check the values of these dates.</source>
     <name>customCommandArgument</name>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;amp;Annuler</translation>
+        <translation type="unfinished">&amp;Annuler</translation>
     </message>
     <message>
         <source>No Argument Specified</source>
@@ -20767,7 +20769,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>You must specify an argument in order to save.</source>
@@ -20790,7 +20792,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Module</source>
@@ -20806,15 +20808,15 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>List Custom Commands</source>
@@ -20869,7 +20871,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Edit...</source>
@@ -20921,7 +20923,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Active</source>
-        <translation>&amp;amp;Actif</translation>
+        <translation>&amp;Actif</translation>
     </message>
     <message>
         <source>Remarks</source>
@@ -20933,7 +20935,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>CRM</source>
@@ -21013,7 +21015,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Late Balance:</source>
@@ -21029,7 +21031,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Quotes</source>
@@ -21037,7 +21039,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Orders</source>
@@ -21045,7 +21047,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -21515,7 +21517,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Default</source>
@@ -21527,19 +21529,19 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Error Deleting Form Assignment</source>
@@ -21578,11 +21580,11 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -21598,7 +21600,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Member Customers:</source>
@@ -21606,7 +21608,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Error Retrieving Customer Group Information</source>
@@ -21649,23 +21651,23 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Delete?</source>
@@ -21735,11 +21737,11 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Clea&amp;r</source>
-        <translation>Efface&amp;amp;r</translation>
+        <translation>Efface&amp;r</translation>
     </message>
     <message>
         <source>&amp;Select</source>
@@ -21762,23 +21764,23 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Customer Types</source>
@@ -22084,7 +22086,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Auto Update Signal &amp;Interval:</source>
-        <translation>Mise à Jour Automatique du Signal d&apos;&amp;amp;Intervalle:</translation>
+        <translation>Mise à Jour Automatique du Signal d&apos;&amp;Intervalle:</translation>
     </message>
     <message>
         <source>Disallow mismatched client versions</source>
@@ -22123,7 +22125,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -22131,7 +22133,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Delete &amp;Child Orders</source>
@@ -22152,11 +22154,11 @@ to be deleted.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Delete Firmed Orders</source>
@@ -22546,7 +22548,7 @@ to be deleted.</source>
     </message>
     <message>
         <source>Distri&amp;bute</source>
-        <translation>&amp;amp;Répartir</translation>
+        <translation>&amp;Répartir</translation>
     </message>
     <message>
         <source>No</source>
@@ -22554,7 +22556,7 @@ to be deleted.</source>
     </message>
     <message>
         <source>F&amp;ind</source>
-        <translation>Tro&amp;amp;uver</translation>
+        <translation>Tro&amp;uver</translation>
     </message>
     <message>
         <source>N/A</source>
@@ -22578,7 +22580,7 @@ to be deleted.</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>De&amp;fault and Post</source>
@@ -22614,7 +22616,7 @@ to be deleted.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Site Zone:</source>
@@ -22701,7 +22703,7 @@ to be deleted.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>You may not distribute a positive value when the balance to distribute is negative.</source>
@@ -22931,11 +22933,11 @@ to be deleted.</source>
     <name>documents</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;amp;Nouveau</translation>
+        <translation type="unfinished">&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Attach</source>
-        <translation>&amp;amp;Joindre</translation>
+        <translation>&amp;Joindre</translation>
     </message>
     <message>
         <source>&amp;Detach</source>
@@ -22947,11 +22949,11 @@ to be deleted.</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
 </context>
 <context>
@@ -24045,11 +24047,11 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>Show &amp;Future Components</source>
-        <translation>Montrer Composantes &amp;amp;Futures</translation>
+        <translation>Montrer Composantes &amp;Futures</translation>
     </message>
     <message>
         <source>Show &amp;Expired Components</source>
-        <translation>Montr&amp;amp;er Composantes Périmées</translation>
+        <translation>Montr&amp;er Composantes Périmées</translation>
     </message>
     <message>
         <source>Bill of Materials</source>
@@ -24299,7 +24301,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Show unreconciled as of posting</source>
@@ -24323,7 +24325,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Date Posted:</source>
@@ -24350,7 +24352,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Order #</source>
@@ -24362,7 +24364,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>Create &amp;Invoice</source>
-        <translation>Créer &amp;amp;Facture</translation>
+        <translation>Créer &amp;Facture</translation>
     </message>
     <message>
         <source>Are you sure that you want to cancel billing for the selected order?</source>
@@ -24386,27 +24388,27 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Create &amp;All</source>
-        <translation>Créer &amp;amp;Toutes </translation>
+        <translation>Créer &amp;Toutes </translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Misc.</source>
@@ -24414,7 +24416,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Subtotal</source>
@@ -25158,11 +25160,11 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Chk./Vchr.</source>
@@ -25422,7 +25424,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>Show &amp;Expired Components</source>
-        <translation>Montr&amp;amp;er Composantes Périmées</translation>
+        <translation>Montr&amp;er Composantes Périmées</translation>
     </message>
     <message>
         <source>Use Actual Costs</source>
@@ -25430,7 +25432,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>Show &amp;Future Components</source>
-        <translation>Montr&amp;amp;er Composantes </translation>
+        <translation>Montr&amp;er Composantes </translation>
     </message>
     <message>
         <source>Use Standard Costs</source>
@@ -25449,23 +25451,23 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>...</source>
@@ -25513,7 +25515,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>Post &amp;All</source>
-        <translation>Reporter &amp;amp;Tous </translation>
+        <translation>Reporter &amp;Tous </translation>
     </message>
     <message>
         <source>Count Slips:</source>
@@ -25521,7 +25523,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>P&amp;ost</source>
-        <translation>Rep&amp;amp;orter</translation>
+        <translation>Rep&amp;orter</translation>
     </message>
     <message>
         <source>Site:</source>
@@ -25723,7 +25725,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Count Tag Edit List</source>
@@ -25755,15 +25757,15 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Automatically Update</source>
@@ -25775,11 +25777,11 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>P&amp;ost</source>
-        <translation>Rep&amp;amp;orter</translation>
+        <translation>Rep&amp;orter</translation>
     </message>
     <message>
         <source>Enter S&amp;lip</source>
-        <translation>Inscrire &amp;amp;Bordereau</translation>
+        <translation>Inscrire &amp;Bordereau</translation>
     </message>
     <message>
         <source>Cannot Delete Count tag</source>
@@ -27182,7 +27184,7 @@ Total</translation>
     </message>
     <message>
         <source>Show &amp;Future Prices</source>
-        <translation>Montrer Prix &amp;amp;Futurs</translation>
+        <translation>Montrer Prix &amp;Futurs</translation>
     </message>
     <message>
         <source>Currency</source>
@@ -27305,7 +27307,7 @@ Total</translation>
     </message>
     <message>
         <source>Show &amp;Future Prices</source>
-        <translation>Montrer Prix &amp;amp;Futurs</translation>
+        <translation>Montrer Prix &amp;Futurs</translation>
     </message>
     <message>
         <source>From</source>
@@ -27836,11 +27838,11 @@ Total</translation>
     </message>
     <message>
         <source>Show &amp;Expired Components</source>
-        <translation>Montr&amp;amp;er Composantes Périmées</translation>
+        <translation>Montr&amp;er Composantes Périmées</translation>
     </message>
     <message>
         <source>Show &amp;Future Components</source>
-        <translation>Montr&amp;amp;er Composantes &amp;amp;Futures </translation>
+        <translation>Montrer Composantes &amp;Futures </translation>
     </message>
     <message>
         <source>Seq. #</source>
@@ -28808,7 +28810,7 @@ Total</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;View Details</source>
@@ -28860,7 +28862,7 @@ Total</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Applications:</source>
@@ -29140,7 +29142,7 @@ Total</translation>
     <name>dspItemCostSummary</name>
     <message>
         <source>Costing &amp;Elements</source>
-        <translation type="unfinished">Élément de Prix de R&amp;amp;evient</translation>
+        <translation type="unfinished">Élément de Prix de R&amp;evient</translation>
     </message>
     <message>
         <source>Never</source>
@@ -29965,7 +29967,7 @@ Total</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -29981,7 +29983,7 @@ Total</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Calendar:</source>
@@ -31212,7 +31214,7 @@ Total</translation>
     </message>
     <message>
         <source>&amp;Build Date</source>
-        <translation>Date de Fa&amp;amp;brication</translation>
+        <translation>Date de Fa&amp;brication</translation>
     </message>
     <message>
         <source>&amp;Effective:</source>
@@ -32997,7 +32999,7 @@ Total</translation>
     </message>
     <message>
         <source>Show &amp;Future Prices</source>
-        <translation>Montrer Prix &amp;amp;Futurs</translation>
+        <translation>Montrer Prix &amp;Futurs</translation>
     </message>
     <message>
         <source>Show Costs and Margins</source>
@@ -33056,7 +33058,7 @@ Total</translation>
     </message>
     <message>
         <source>Show &amp;Future Prices</source>
-        <translation>Montrer Prix &amp;amp;Futurs </translation>
+        <translation>Montrer Prix &amp;Futurs </translation>
     </message>
     <message>
         <source>Show E&amp;xpired Prices</source>
@@ -33219,7 +33221,7 @@ Total</translation>
     </message>
     <message>
         <source>Show &amp;Future Prices</source>
-        <translation>Montrer Prix &amp;amp;Futurs</translation>
+        <translation>Montrer Prix &amp;Futurs</translation>
     </message>
     <message>
         <source>Prices by Item</source>
@@ -37602,7 +37604,7 @@ Rate</source>
     <name>dspUndefinedManufacturedItems</name>
     <message>
         <source>Show &amp;Inactive Items</source>
-        <translation type="unfinished">Montrer Articles &amp;amp;Inactifs</translation>
+        <translation type="unfinished">Montrer Articles &amp;Inactifs</translation>
     </message>
     <message>
         <source>Show Manufactured Items without valid Bills of Materials</source>
@@ -38356,7 +38358,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Work Order Pattern:</source>
-        <translation>Filtre de Bon de Tra&amp;amp;vail:</translation>
+        <translation>Filtre de Bon de Tra&amp;vail:</translation>
     </message>
     <message>
         <source>Show W/O Cost</source>
@@ -38936,7 +38938,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -39063,7 +39065,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Incident</source>
@@ -39118,11 +39120,11 @@ Rate</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Employee Group</source>
@@ -39138,11 +39140,11 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Privilege Error</source>
@@ -39189,23 +39191,23 @@ Rate</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Error Deleting Employee Group</source>
@@ -39396,7 +39398,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Financial</source>
@@ -39420,7 +39422,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Contact</source>
-        <translation>Personne-ressour&amp;amp;ce</translation>
+        <translation>Personne-ressour&amp;ce</translation>
     </message>
     <message>
         <source>Comments</source>
@@ -39550,7 +39552,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Count &amp;Qty.:</source>
@@ -39621,11 +39623,11 @@ Rate</source>
     </message>
     <message>
         <source>P&amp;ost</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Receive &amp;All</source>
-        <translation>&amp;amp;Tout Réceptionner</translation>
+        <translation>&amp;Tout Réceptionner</translation>
     </message>
     <message>
         <source>Receive Items using bar code:</source>
@@ -39669,7 +39671,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>N/A</source>
@@ -39689,7 +39691,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Print Label...</source>
@@ -39737,7 +39739,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Print </source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -39839,7 +39841,7 @@ Rate</source>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>UOM</source>
@@ -39861,7 +39863,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Site</source>
@@ -39873,7 +39875,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Vend. Item #</source>
@@ -39889,7 +39891,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Ordered</source>
@@ -39925,11 +39927,11 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Enter Return</source>
-        <translation>Inscrire R&amp;amp;etour</translation>
+        <translation>Inscrire R&amp;etour</translation>
     </message>
     <message>
         <source>Purchase Order Items:</source>
@@ -40258,7 +40260,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Vend. Item Number:</source>
@@ -40266,7 +40268,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Return</source>
-        <translation>&amp;amp;Retourner</translation>
+        <translation>&amp;Retourner</translation>
     </message>
     <message>
         <source>Vendor Item Description:</source>
@@ -41382,11 +41384,11 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Events:</source>
@@ -41394,7 +41396,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>View Purchase Order Item...</source>
@@ -41497,19 +41499,19 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&lt;p&gt;The selected Expense Category cannot be deleted as there are unposted P/O Lines assigned to it. You must reassign these P/O Lines before you may delete the selected Expense Category.&lt;/p&gt;</source>
@@ -41517,23 +41519,23 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>&lt;p&gt;The selected Expense Category cannot be deleted as there are open P/O Lines assigned to it. You must close these P/O Lines before you may delete the selected Expense Category.&lt;/p&gt;</source>
@@ -41552,7 +41554,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Active</source>
-        <translation>&amp;amp;Active</translation>
+        <translation>&amp;Active</translation>
     </message>
     <message>
         <source>&lt;p&gt;The name you have specified is already in use.</source>
@@ -41627,7 +41629,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Getting QOH</source>
@@ -41647,7 +41649,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -41667,7 +41669,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Document #:</source>
@@ -41718,7 +41720,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Multiple Level Explosion</source>
@@ -41734,11 +41736,11 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>E&amp;xplode</source>
-        <translation>E&amp;amp;xploser</translation>
+        <translation>E&amp;xploser</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Error Exploding Work Order</source>
@@ -41888,11 +41890,11 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Pre-Authorization</source>
@@ -42058,7 +42060,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Shipment Number</source>
@@ -42086,7 +42088,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Package Tracking Number</source>
@@ -42098,7 +42100,7 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Tracking Number</source>
@@ -42134,11 +42136,11 @@ Aimeriez-vous créer une note de crédit automatiquement pour ce retour? </trans
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Privileges Error</source>
@@ -42254,7 +42256,7 @@ Please, change the name of the filter if you want to save its current settings.<
     <name>financialLayout</name>
     <message>
         <source>&amp;Move Up</source>
-        <translation type="unfinished">Déplacer vers le Ha&amp;amp;ut</translation>
+        <translation type="unfinished">Déplacer vers le Ha&amp;ut</translation>
     </message>
     <message>
         <source>Error Creating Temporary Record</source>
@@ -42304,11 +42306,11 @@ Dt/Ct</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Move Down</source>
-        <translation>Déplacer vers le &amp;amp;Bas </translation>
+        <translation>Déplacer vers le &amp;Bas </translation>
     </message>
     <message>
         <source>All column layouts must be deleted before changing the type.</source>
@@ -42375,7 +42377,7 @@ Personnalisé</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Column Layouts</source>
@@ -42383,7 +42385,7 @@ Personnalisé</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation>&amp;amp;Ajouter</translation>
+        <translation>&amp;Ajouter</translation>
     </message>
     <message>
         <source>Options</source>
@@ -42391,7 +42393,7 @@ Personnalisé</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Sub./Summ.</source>
@@ -42507,7 +42509,7 @@ Fin</translation>
     </message>
     <message>
         <source>&amp;Balance Sheet</source>
-        <translation>&amp;amp;Bilan</translation>
+        <translation>&amp;Bilan</translation>
     </message>
     <message>
         <source>&amp;Cash Flow</source>
@@ -43019,11 +43021,11 @@ Budget</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>System Report</source>
@@ -43035,7 +43037,7 @@ Budget</translation>
     </message>
     <message>
         <source>Show &amp;Inactive</source>
-        <translation>Montrer &amp;amp;Inactif </translation>
+        <translation>Montrer &amp;Inactif </translation>
     </message>
     <message>
         <source>You must specify a name.</source>
@@ -43081,7 +43083,7 @@ Etes-vous certain que vous voulez continuer?</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Error Encountered</source>
@@ -43093,7 +43095,7 @@ Etes-vous certain que vous voulez continuer?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -43161,7 +43163,7 @@ mais vous pouvez le désactiver.</translation>
     </message>
     <message>
         <source>&amp;Firm</source>
-        <translation>&amp;amp;Fixer</translation>
+        <translation>&amp;Fixer</translation>
     </message>
     <message>
         <source>&amp;Quantity:</source>
@@ -43173,7 +43175,7 @@ mais vous pouvez le désactiver.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Order Type:</source>
@@ -43208,11 +43210,11 @@ mais vous pouvez le désactiver.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Firm</source>
-        <translation>&amp;amp;Fixer</translation>
+        <translation>&amp;Fixer</translation>
     </message>
     <message>
         <source>Enter Cut Off Date</source>
@@ -43268,7 +43270,7 @@ Cliquez le bouton &quot;Réparer&quot; pour corriger les problèmes de permissio
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Query not run yet</source>
@@ -43415,15 +43417,15 @@ You may not create duplicate Forms.</source>
     <name>forms</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;amp;Nouveau</translation>
+        <translation type="unfinished">&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Name</source>
@@ -43439,7 +43441,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>List Forms</source>
@@ -43589,7 +43591,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Error Retrieving Freight Information</source>
@@ -43635,7 +43637,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure that you wish to delete all unused Freight Classes?</source>
@@ -43647,7 +43649,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Freight Classes:</source>
@@ -43659,11 +43661,11 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Delete &amp;Unused</source>
@@ -43671,11 +43673,11 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Error Removing Selected Freight Class</source>
@@ -43741,7 +43743,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Assign</source>
-        <translation>&amp;amp;Affecter</translation>
+        <translation>&amp;Affecter</translation>
     </message>
     <message>
         <source>Enter A Lot Number</source>
@@ -43761,7 +43763,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Expiration Date:</source>
@@ -43828,7 +43830,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Dist. Date:</source>
@@ -43836,7 +43838,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Debits</source>
@@ -43852,11 +43854,11 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&lt;p&gt;The G/L Series information is unbalanced and cannot be posted. Please correct this before continuing.</source>
@@ -44085,7 +44087,7 @@ Désirez-vous convertir %1 %2 au taux en vigueur le %3?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Created:</source>
@@ -44108,7 +44110,7 @@ Désirez-vous convertir %1 %2 au taux en vigueur le %3?</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Save?</source>
@@ -44116,7 +44118,7 @@ Désirez-vous convertir %1 %2 au taux en vigueur le %3?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you wish to save your changes?</source>
@@ -44124,7 +44126,7 @@ Désirez-vous convertir %1 %2 au taux en vigueur le %3?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Module:</source>
@@ -44311,7 +44313,7 @@ Désirez-vous convertir %1 %2 au taux en vigueur le %3?</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Cannot Delete Group</source>
@@ -44327,11 +44329,11 @@ Désirez-vous convertir %1 %2 au taux en vigueur le %3?</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Name</source>
@@ -44339,15 +44341,15 @@ Désirez-vous convertir %1 %2 au taux en vigueur le %3?</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>The selected Group cannot be deleted as there are one or more Users currently assigned to it.
@@ -44411,23 +44413,23 @@ Vous devez réaffecter ces Utilisateurs avant que vous puissiez supprimer le Gro
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>View...</source>
@@ -44435,7 +44437,7 @@ Vous devez réaffecter ces Utilisateurs avant que vous puissiez supprimer le Gro
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Edit...</source>
@@ -44466,7 +44468,7 @@ Vous devez réaffecter ces Utilisateurs avant que vous puissiez supprimer le Gro
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Hot Key</source>
@@ -44474,7 +44476,7 @@ Vous devez réaffecter ces Utilisateurs avant que vous puissiez supprimer le Gro
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Keystroke:</source>
@@ -44501,15 +44503,15 @@ Vous devez réaffecter ces Utilisateurs avant que vous puissiez supprimer le Gro
     <name>hotkeys</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;amp;Nouvelle</translation>
+        <translation type="unfinished">&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Action</source>
@@ -44521,7 +44523,7 @@ Vous devez réaffecter ces Utilisateurs avant que vous puissiez supprimer le Gro
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Keystroke</source>
@@ -44640,11 +44642,11 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Inventory Description</source>
@@ -44668,7 +44670,7 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Engineering Reference</source>
@@ -44680,7 +44682,7 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
 </context>
 <context>
@@ -44699,7 +44701,7 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Name</source>
@@ -44714,7 +44716,7 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Images:</source>
@@ -44726,15 +44728,15 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Images</source>
@@ -44742,7 +44744,7 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Package</source>
@@ -44826,7 +44828,7 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     <name>implodeWo</name>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;amp;Oui</translation>
+        <translation type="unfinished">&amp;Oui</translation>
     </message>
     <message>
         <source>Adhoc Work Order</source>
@@ -44834,7 +44836,7 @@ Le fichier n&apos;est pas une image, un format d&apos;image inconnu ou est corro
     </message>
     <message>
         <source>&amp;Implode</source>
-        <translation>&amp;amp;Imploser</translation>
+        <translation>&amp;Imploser</translation>
     </message>
     <message>
         <source>Implode Work Order</source>
@@ -44854,7 +44856,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Work Order Not Imploded</source>
@@ -44866,7 +44868,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Error Imploding Work Order</source>
@@ -45328,7 +45330,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Incident Categories:</source>
@@ -45340,15 +45342,15 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>View...</source>
@@ -45356,11 +45358,11 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Error Retrieving Incident Category Information</source>
@@ -45441,7 +45443,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>List Priorities</source>
@@ -45449,7 +45451,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Priority</source>
@@ -45465,11 +45467,11 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Order</source>
@@ -45477,11 +45479,11 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>View...</source>
@@ -45590,7 +45592,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <name>incidentResolutions</name>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished">&amp;amp;Visualiser</translation>
+        <translation type="unfinished">&amp;Visualiser</translation>
     </message>
     <message>
         <source>Incident Resolutions:</source>
@@ -45598,19 +45600,19 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Order</source>
@@ -45618,7 +45620,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Resolution</source>
@@ -45657,7 +45659,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <name>incidentSeverities</name>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished">&amp;amp;Visualiser</translation>
+        <translation type="unfinished">&amp;Visualiser</translation>
     </message>
     <message>
         <source>Incident Severities:</source>
@@ -45665,7 +45667,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Severity</source>
@@ -45673,15 +45675,15 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Order</source>
@@ -45689,7 +45691,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>View...</source>
@@ -46054,7 +46056,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Order #:</source>
@@ -46102,7 +46104,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Invoice #:</source>
@@ -46118,7 +46120,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>None</source>
@@ -46126,7 +46128,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Description</source>
@@ -46138,7 +46140,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Subtotal:</source>
@@ -46146,7 +46148,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Cannot Save Invoice</source>
@@ -46323,7 +46325,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation type="unfinished">Co&amp;amp;mmentaires</translation>
+        <translation type="unfinished">Co&amp;mmentaires</translation>
     </message>
 </context>
 <context>
@@ -46378,7 +46380,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -46482,7 +46484,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Getting Invoice UOMs</source>
@@ -46554,7 +46556,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation type="unfinished">Co&amp;amp;mmentaires</translation>
+        <translation type="unfinished">Co&amp;mmentaires</translation>
     </message>
     <message>
         <source>Invoice Line Characteristics</source>
@@ -46573,7 +46575,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Cust. P/O #</source>
@@ -46652,7 +46654,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Issue</source>
-        <translation>É&amp;amp;mettre</translation>
+        <translation>É&amp;mettre</translation>
     </message>
     <message>
         <source>Invalid Quantity to Issue to Shipping</source>
@@ -46668,7 +46670,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Sales Order #:</source>
@@ -46755,7 +46757,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Ship</source>
-        <translation>&amp;amp;Expédier</translation>
+        <translation>&amp;Expédier</translation>
     </message>
     <message>
         <source>Issue Canceled</source>
@@ -46763,7 +46765,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>Issue &amp;Line</source>
-        <translation>Émettre &amp;amp;Ligne</translation>
+        <translation>Émettre &amp;Ligne</translation>
     </message>
     <message>
         <source>No Bar Code scanned</source>
@@ -46871,7 +46873,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Line Items:</source>
@@ -46879,7 +46881,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Issue Stock</source>
-        <translation>Émettre &amp;amp;Stock </translation>
+        <translation>Émettre &amp;Stock </translation>
     </message>
     <message>
         <source>1</source>
@@ -47031,7 +47033,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Transaction &amp;Date:</source>
@@ -47083,7 +47085,7 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Material Issue</source>
@@ -47159,7 +47161,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Material Issue</source>
@@ -47183,7 +47185,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Invalid date</source>
@@ -47260,7 +47262,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Vendor</source>
@@ -47280,7 +47282,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have changed the Item Type of this Item. To ensure Item Sites do not have invalid settings, all Item Sites for it will be inactivated before this change may occur.  You may afterward edit the Item Sites, enter valid information, and reactivate them.  Do you wish to continue saving and inactivate the Item Sites?</source>
@@ -47304,7 +47306,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Default</source>
@@ -47336,7 +47338,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -47344,7 +47346,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>Rank</source>
@@ -47396,7 +47398,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Exclusive</source>
@@ -47432,7 +47434,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Item &amp;Number:</source>
@@ -47460,7 +47462,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Product C&amp;ategory:</source>
@@ -47532,7 +47534,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Tax Types</source>
@@ -47620,7 +47622,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Transformations</source>
@@ -47644,7 +47646,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Item Sites Exist</source>
@@ -47676,7 +47678,7 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>Materials...</source>
@@ -47871,15 +47873,15 @@ qu&apos;il y ait un Stock en Main suffisant avant de procéder.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -47936,7 +47938,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>Show &amp;Inactive Items</source>
-        <translation>Montrer Articles &amp;amp;Inactifs</translation>
+        <translation>Montrer Articles &amp;Inactifs</translation>
     </message>
     <message>
         <source>&amp;Alias:</source>
@@ -47948,7 +47950,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
 </context>
 <context>
@@ -47963,7 +47965,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>History</source>
@@ -48066,11 +48068,11 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Lower Level:</source>
@@ -48121,7 +48123,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>The selected Item is already a member of this Item Group</source>
@@ -48133,7 +48135,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Item Group</source>
@@ -48196,7 +48198,7 @@ You may not create duplicate Item Aliases.</source>
     <name>itemGroups</name>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;amp;Supprimer</translation>
+        <translation type="unfinished">&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Item Groups</source>
@@ -48204,15 +48206,15 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Name</source>
@@ -48224,7 +48226,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -48263,7 +48265,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Miscellaneous</source>
@@ -48333,7 +48335,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Item List Price</source>
@@ -48341,11 +48343,11 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>List Price:</source>
@@ -48498,7 +48500,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Flat Rate</source>
@@ -48562,23 +48564,23 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Qty. UOM</source>
@@ -48645,7 +48647,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Base</source>
@@ -48657,7 +48659,7 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>All Ship Vias</source>
@@ -48713,7 +48715,7 @@ Vous ne pouvez pas créer d&apos;Éléments de Liste de Prix doublons.</translat
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Cannot Create Pricing Schedule Item</source>
@@ -48902,7 +48904,7 @@ Vous ne pouvez pas créer d&apos;Éléments de Liste de Prix doublons.</translat
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>The selected Pricing Schedule cannot be deleted as it has been assign to one or more Sales.
@@ -48924,7 +48926,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Search &amp;for:</source>
@@ -48936,7 +48938,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>Show &amp;Future Pricing Schedules</source>
-        <translation>Montrer Listes de Prix &amp;amp;Futures</translation>
+        <translation>Montrer Listes de Prix &amp;Futures</translation>
     </message>
     <message>
         <source>Show E&amp;xpired Pricing Schedules</source>
@@ -48948,15 +48950,15 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -49025,7 +49027,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>Show &amp;Inactive Items</source>
-        <translation>Montrer Articles &amp;amp;Inactifs </translation>
+        <translation>Montrer Articles &amp;Inactifs </translation>
     </message>
     <message>
         <source>Items</source>
@@ -49172,7 +49174,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Item Site for this Item at %1 is inactive. Would you like to make it active?</source>
@@ -49212,7 +49214,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Inventory</source>
-        <translation>&amp;amp;Stocks</translation>
+        <translation>&amp;Stocks</translation>
     </message>
     <message>
         <source>Allowed</source>
@@ -49228,7 +49230,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation>Co&amp;amp;mmentaires</translation>
+        <translation>Co&amp;mmentaires</translation>
     </message>
     <message>
         <source>To Date</source>
@@ -49248,7 +49250,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Over-ride Work Order Item Cost Recognition Default</source>
@@ -49276,19 +49278,19 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Planning</source>
-        <translation>&amp;amp;Planification</translation>
+        <translation>&amp;Planification</translation>
     </message>
     <message>
         <source>E&amp;xpiration</source>
-        <translation>Pé&amp;amp;remption</translation>
+        <translation>Pé&amp;remption</translation>
     </message>
     <message>
         <source>&amp;Location</source>
-        <translation>Emp&amp;amp;lacement</translation>
+        <translation>Emp&amp;lacement</translation>
     </message>
     <message>
         <source>&amp;Notes</source>
-        <translation>&amp;amp;Notes</translation>
+        <translation>&amp;Notes</translation>
     </message>
     <message>
         <source>Assign Lot Numbers</source>
@@ -49296,7 +49298,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>No Item Source found</source>
@@ -49376,7 +49378,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>Event &amp;Fence:</source>
-        <translation>&amp;amp;Borne d&apos;Événement:</translation>
+        <translation>&amp;Borne d&apos;Événement:</translation>
     </message>
     <message>
         <source>B</source>
@@ -49568,7 +49570,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>Show &amp;Inactive Item Sites</source>
-        <translation>Montrer Articles par Site &amp;amp;Inactifs</translation>
+        <translation>Montrer Articles par Site &amp;Inactifs</translation>
     </message>
     <message>
         <source>View...</source>
@@ -49592,7 +49594,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Edit...</source>
@@ -49632,7 +49634,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>View Inventory Availability...</source>
@@ -49656,7 +49658,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Site</source>
@@ -49668,7 +49670,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Planner Code</source>
@@ -49676,7 +49678,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>QOH</source>
@@ -49755,7 +49757,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Prices</source>
-        <translation>&amp;amp;Prix</translation>
+        <translation>&amp;Prix</translation>
     </message>
     <message>
         <source>Vendor &amp;UOM:</source>
@@ -49763,7 +49765,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Manufacturer</source>
-        <translation>&amp;amp;Fabricant</translation>
+        <translation>&amp;Fabricant</translation>
     </message>
     <message>
         <source>Base</source>
@@ -49771,7 +49773,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>Vendor &amp;Description</source>
-        <translation>&amp;amp;Description Fournisseur</translation>
+        <translation>&amp;Description Fournisseur</translation>
     </message>
     <message>
         <source>Active</source>
@@ -49791,7 +49793,7 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Notes</source>
-        <translation>&amp;amp;Notes</translation>
+        <translation>&amp;Notes</translation>
     </message>
     <message>
         <source>Vendor Ranking:</source>
@@ -49799,11 +49801,11 @@ Vous devez supprimer ces affectations avant que vous puissiez supprimer la Liste
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Delete Item Source Price</source>
@@ -49853,7 +49855,7 @@ avant que vous puissiez enregistrer cette Source d&apos;Approvisionnement d&apos
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Fixed</source>
@@ -49975,7 +49977,7 @@ avant que vous puissiez enregistrer cette Source d&apos;Approvisionnement d&apos
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Vendor Item Number:</source>
@@ -49987,11 +49989,11 @@ avant que vous puissiez enregistrer cette Source d&apos;Approvisionnement d&apos
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation>&amp;amp;Ajouter</translation>
+        <translation>&amp;Ajouter</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>You must select this Vendor that this Item Source is sold by
@@ -50073,7 +50075,7 @@ Vendor Item, Manfacturer Name and Manufacturer Item Number you have specified.</
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Manuf. Item#</source>
@@ -50120,7 +50122,7 @@ Vendor Item, Manfacturer Name and Manufacturer Item Number you have specified.</
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Site Restriction</source>
@@ -50132,7 +50134,7 @@ Vendor Item, Manfacturer Name and Manufacturer Item Number you have specified.</
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Pricing Type</source>
@@ -50161,7 +50163,7 @@ already exists for this Item Source.</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Discount Percent (Wholesale Price):</source>
@@ -50256,7 +50258,7 @@ already exists for this Item Source.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Manufacturer Item Numbers</source>
@@ -50283,7 +50285,7 @@ already exists for this Item Source.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Cannot Create Substitute</source>
@@ -50323,7 +50325,7 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Subsitute/Parent UOM Ratio:</source>
@@ -50346,11 +50348,11 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>No Types Selected</source>
@@ -50366,7 +50368,7 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Available Types</source>
@@ -50413,7 +50415,7 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Are you sure that you want to delete the Item?</source>
@@ -50421,7 +50423,7 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Delete Item</source>
@@ -50639,7 +50641,7 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;Form Name:</source>
-        <translation>Nom du &amp;amp;Formulaire:</translation>
+        <translation>Nom du &amp;Formulaire:</translation>
     </message>
     <message>
         <source>Report Name is Invalid</source>
@@ -50682,23 +50684,23 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Label Forms</source>
@@ -50740,11 +50742,11 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Interval</source>
@@ -50808,7 +50810,7 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Recurring Invoices:</source>
@@ -50847,7 +50849,7 @@ Vous pouvez modifier la Substitution existante mais vous ne pouvez pas créer un
     <name>locales</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>Locales</source>
@@ -50873,11 +50875,11 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Locales</source>
@@ -50885,11 +50887,11 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>Cop&amp;y</source>
-        <translation>Cop&amp;amp;ier</translation>
+        <translation>Cop&amp;ier</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Error Retrieving Locale Information</source>
@@ -50904,15 +50906,15 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Select a Site</source>
@@ -50940,7 +50942,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Location</source>
@@ -50948,7 +50950,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>Ne&amp;table</source>
-        <translation>U&amp;amp;tilisable</translation>
+        <translation>U&amp;tilisable</translation>
     </message>
     <message>
         <source>&amp;Zone:</source>
@@ -50972,7 +50974,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Rack</source>
@@ -50988,7 +50990,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;Restricted</source>
-        <translation>&amp;amp;Restreint</translation>
+        <translation>&amp;Restreint</translation>
     </message>
     <message>
         <source>Allowable Items:</source>
@@ -51039,7 +51041,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Restricted</source>
@@ -51047,7 +51049,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Site</source>
@@ -51055,7 +51057,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Netable</source>
@@ -51063,11 +51065,11 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Locations:</source>
@@ -51075,7 +51077,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>List Site Locations</source>
@@ -51267,15 +51269,15 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Print Label</source>
@@ -51496,7 +51498,7 @@ Vous devez réaffecter les Paramètres de Lieu pour ces Utilisateurs avant que v
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -51576,7 +51578,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Cannot Save Budget</source>
@@ -51596,7 +51598,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Incomplete criteria</source>
@@ -51719,7 +51721,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&lt;p&gt;Before a Costing Element is deleted, the system will set the Actual Cost value to 0. This helps ensure Inventory is valued correctly. Once the 0 value Actual Cost is posted to Standard, the Costing Element will be removed.</source>
@@ -51802,7 +51804,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Stock at Shipping:</source>
@@ -51869,7 +51871,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Mass Expire Component Item</source>
@@ -51889,7 +51891,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>EC&amp;N #:</source>
@@ -51920,7 +51922,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Replacement Item:</source>
@@ -51932,7 +51934,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Mass Replace Component Item</source>
@@ -51956,7 +51958,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Replace</source>
-        <translation>&amp;amp;Remplacer</translation>
+        <translation>&amp;Remplacer</translation>
     </message>
     <message>
         <source>Checking Revisions</source>
@@ -52031,7 +52033,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Before</source>
@@ -52043,7 +52045,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Transaction Date:</source>
@@ -52055,7 +52057,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Receipt Qty.:</source>
@@ -52110,7 +52112,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <name>menuAccounting</name>
     <message>
         <source>&amp;Post Journals to Ledger...</source>
-        <translation type="unfinished">Re&amp;amp;porter Journaux à l&apos;Auxiliaire...</translation>
+        <translation type="unfinished">Re&amp;porter Journaux à l&apos;Auxiliaire...</translation>
     </message>
     <message>
         <source>&amp;List Open...</source>
@@ -52126,11 +52128,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Setup...</source>
-        <translation>&amp;amp;Monter...</translation>
+        <translation>&amp;Monter...</translation>
     </message>
     <message>
         <source>Open &amp;Payables...</source>
-        <translation>Comptes Fournisseurs Im&amp;amp;payés...</translation>
+        <translation>Comptes Fournisseurs Im&amp;payés...</translation>
     </message>
     <message>
         <source>Accounting Tools</source>
@@ -52146,7 +52148,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;List Recurring Invoices...</source>
-        <translation>&amp;amp;Lister Factures Récurrentes</translation>
+        <translation>&amp;Lister Factures Récurrentes</translation>
     </message>
     <message>
         <source>List Unposted Vouchers</source>
@@ -52178,7 +52180,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Memos</source>
-        <translation>&amp;amp;Memos</translation>
+        <translation>&amp;Memos</translation>
     </message>
     <message>
         <source>&amp;Voucher Register...</source>
@@ -52218,7 +52220,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Bank Reconciliation</source>
-        <translation>Rapprochement &amp;amp;Bancaire</translation>
+        <translation>Rapprochement &amp;Bancaire</translation>
     </message>
     <message>
         <source>Tax &amp;Classes...</source>
@@ -52258,7 +52260,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Fiscal Calendar</source>
-        <translation>Calendrier &amp;amp;Fiscal</translation>
+        <translation>Calendrier &amp;Fiscal</translation>
     </message>
     <message>
         <source>List Unposted Journal Entries</source>
@@ -52318,7 +52320,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Bu&amp;dget</source>
-        <translation>Bu&amp;amp;dget</translation>
+        <translation>Bu&amp;dget</translation>
     </message>
     <message>
         <source>&amp;New Budget...</source>
@@ -52330,7 +52332,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Tax</source>
-        <translation>&amp;amp;Taxe</translation>
+        <translation>&amp;Taxe</translation>
     </message>
     <message>
         <source>Tax Assi&amp;gnments...</source>
@@ -52354,7 +52356,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Tax &amp;Registrations...</source>
-        <translation>En&amp;amp;registrements de Taxes...</translation>
+        <translation>En&amp;registrements de Taxes...</translation>
     </message>
     <message>
         <source>&amp;Duplicate Account Numbers...</source>
@@ -52390,7 +52392,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Purchase &amp;Order</source>
-        <translation>Bon de C&amp;amp;ommande</translation>
+        <translation>Bon de C&amp;ommande</translation>
     </message>
     <message>
         <source>&amp;Voucher</source>
@@ -52410,7 +52412,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Payments</source>
-        <translation>&amp;amp;Paiements</translation>
+        <translation>&amp;Paiements</translation>
     </message>
     <message>
         <source>Print Purchase &amp;Order...</source>
@@ -52422,7 +52424,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Reports</source>
-        <translation>&amp;amp;Rapports</translation>
+        <translation>&amp;Rapports</translation>
     </message>
     <message>
         <source>&amp;Uninvoiced Receipts and Returns...</source>
@@ -52434,11 +52436,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Invoice</source>
-        <translation>&amp;amp;Facture</translation>
+        <translation>&amp;Facture</translation>
     </message>
     <message>
         <source>C&amp;ash Receipt</source>
-        <translation>Enc&amp;amp;aissements</translation>
+        <translation>Enc&amp;aissements</translation>
     </message>
     <message>
         <source>&amp;Re-Print Invoices...</source>
@@ -52478,7 +52480,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>General &amp;Ledger</source>
-        <translation>Grand &amp;amp;Livre</translation>
+        <translation>Grand &amp;Livre</translation>
     </message>
     <message>
         <source>S&amp;imple...</source>
@@ -52490,11 +52492,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Journal Entry</source>
-        <translation>Entrée de &amp;amp;Journal</translation>
+        <translation>Entrée de &amp;Journal</translation>
     </message>
     <message>
         <source>&amp;Standard Journals</source>
-        <translation>Journaux &amp;amp;Standards</translation>
+        <translation>Journaux &amp;Standards</translation>
     </message>
     <message>
         <source>&amp;List...</source>
@@ -52605,11 +52607,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Create &amp;Recurring Items...</source>
-        <translation>Créer Items &amp;amp;Récurrents...</translation>
+        <translation>Créer Items &amp;Récurrents...</translation>
     </message>
     <message>
         <source>&amp;Incident</source>
-        <translation>&amp;amp;Incident</translation>
+        <translation>&amp;Incident</translation>
     </message>
     <message>
         <source>List Contacts</source>
@@ -52653,7 +52655,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Pro&amp;ject</source>
-        <translation>Pro&amp;amp;jet</translation>
+        <translation>Pro&amp;jet</translation>
     </message>
     <message>
         <source>List Projects</source>
@@ -52665,7 +52667,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Reports</source>
-        <translation>&amp;amp;Rapports</translation>
+        <translation>&amp;Rapports</translation>
     </message>
     <message>
         <source>Order &amp;Activity by Project...</source>
@@ -52673,19 +52675,19 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Account</source>
-        <translation>&amp;amp;Compte</translation>
+        <translation>&amp;Compte</translation>
     </message>
     <message>
         <source>&amp;Contact</source>
-        <translation>Personne-ressour&amp;amp;ce</translation>
+        <translation>Personne-ressour&amp;ce</translation>
     </message>
     <message>
         <source>A&amp;ddress</source>
-        <translation>A&amp;amp;dresse</translation>
+        <translation>A&amp;dresse</translation>
     </message>
     <message>
         <source>&amp;Merge Contacts...</source>
-        <translation>&amp;amp;Fusionner Personne-ressources...</translation>
+        <translation>&amp;Fusionner Personne-ressources...</translation>
     </message>
     <message>
         <source>&amp;Setup...</source>
@@ -52704,7 +52706,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <name>menuInventory</name>
     <message>
         <source>by &amp;Sales Order...</source>
-        <translation type="unfinished">Par &amp;amp;Commande Client...</translation>
+        <translation type="unfinished">Par &amp;Commande Client...</translation>
     </message>
     <message>
         <source>P&amp;urge Posted Count Tags...</source>
@@ -52712,7 +52714,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>by &amp;Transfer Order...</source>
-        <translation>par Ordre de &amp;amp;Transfert...</translation>
+        <translation>par Ordre de &amp;Transfert...</translation>
     </message>
     <message>
         <source>Enter Count &amp;Slip...</source>
@@ -52724,7 +52726,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Count Ta&amp;g Edit List...</source>
-        <translation>Liste de Révision des Étiquettes de &amp;amp;Dénombrement...</translation>
+        <translation>Liste de Révision des Étiquettes de &amp;Dénombrement...</translation>
     </message>
     <message>
         <source>&amp;Setup...</source>
@@ -52736,7 +52738,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Reports</source>
-        <translation>&amp;amp;Rapports</translation>
+        <translation>&amp;Rapports</translation>
     </message>
     <message>
         <source>Post Count S&amp;lips...</source>
@@ -52744,7 +52746,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Count S&amp;lip Edit List...</source>
-        <translation>&amp;amp;Liste de Révision des Bordereaux de Dénombrement...</translation>
+        <translation>&amp;Liste de Révision des Bordereaux de Dénombrement...</translation>
     </message>
     <message>
         <source>&amp;Zero Uncounted Count Tags...</source>
@@ -52796,7 +52798,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>R&amp;eceiving</source>
-        <translation>Réc&amp;amp;eption</translation>
+        <translation>Réc&amp;eption</translation>
     </message>
     <message>
         <source>Inventory Tools</source>
@@ -52812,11 +52814,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Maintain...</source>
-        <translation>&amp;amp;Maintenir...</translation>
+        <translation>&amp;Maintenir...</translation>
     </message>
     <message>
         <source>by Sit&amp;e...</source>
-        <translation>par Sit&amp;amp;e...</translation>
+        <translation>par Sit&amp;e...</translation>
     </message>
     <message>
         <source>Transfer &amp;Order</source>
@@ -52832,15 +52834,15 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>History by &amp;Lot/Serial #...</source>
-        <translation>Historique par # &amp;amp;Lot/Série...</translation>
+        <translation>Historique par # &amp;Lot/Série...</translation>
     </message>
     <message>
         <source>&amp;Usage Statistics...</source>
-        <translation>Statistiques d&apos;&amp;amp;Utilisation...</translation>
+        <translation>Statistiques d&apos;&amp;Utilisation...</translation>
     </message>
     <message>
         <source>&amp;Backlog...</source>
-        <translation>Carnet &amp;amp;de Commandes...</translation>
+        <translation>Carnet &amp;de Commandes...</translation>
     </message>
     <message>
         <source>Packing List &amp;Batch...</source>
@@ -52848,11 +52850,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;New...</source>
-        <translation>&amp;amp;Nouvel...</translation>
+        <translation>&amp;Nouvel...</translation>
     </message>
     <message>
         <source>Quantities On Hand By &amp;Location...</source>
-        <translation>Stock en Main par Emp&amp;amp;lacement...</translation>
+        <translation>Stock en Main par Emp&amp;lacement...</translation>
     </message>
     <message>
         <source>&amp;History...</source>
@@ -52860,11 +52862,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>History by Lo&amp;cation...</source>
-        <translation>Historique par Empla&amp;amp;cement...</translation>
+        <translation>Historique par Empla&amp;cement...</translation>
     </message>
     <message>
         <source>&amp;Physical Inventory</source>
-        <translation>Inventaire &amp;amp;Physique </translation>
+        <translation>Inventaire &amp;Physique </translation>
     </message>
     <message>
         <source>&amp;New Receipt...</source>
@@ -52880,7 +52882,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>by &amp;Planner Code...</source>
-        <translation>par Code de &amp;amp;Planificateur...</translation>
+        <translation>par Code de &amp;Planificateur...</translation>
     </message>
     <message>
         <source>Adjust Avg. Cost Value...</source>
@@ -52904,7 +52906,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Site</source>
-        <translation>&amp;amp;Site</translation>
+        <translation>&amp;Site</translation>
     </message>
     <message>
         <source>&amp;List Unposted Receipts...</source>
@@ -52944,7 +52946,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Transactions</source>
-        <translation>Mouvemen&amp;amp;t</translation>
+        <translation>Mouvemen&amp;t</translation>
     </message>
     <message>
         <source>&amp;Lot/Serial Control</source>
@@ -52992,7 +52994,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Graphs</source>
-        <translation>&amp;amp;Graphiques</translation>
+        <translation>&amp;Graphiques</translation>
     </message>
     <message>
         <source>&amp;Reorder Levels</source>
@@ -53012,7 +53014,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Inventory</source>
-        <translation>&amp;amp;Stocks</translation>
+        <translation>&amp;Stocks</translation>
     </message>
     <message>
         <source>&amp;Site Transfer...</source>
@@ -53084,7 +53086,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Time &amp;Phased Usage Statistics...</source>
-        <translation>&amp;amp;Statistiques d&apos;Utilisation Échéancées...</translation>
+        <translation>&amp;Statistiques d&apos;Utilisation Échéancées...</translation>
     </message>
     <message>
         <source>Slow &amp;Moving Inventory...</source>
@@ -53108,11 +53110,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Purge Posted Count Slips...</source>
-        <translation>Éliminer Bordereaux de Dénombrement Re&amp;amp;portés...</translation>
+        <translation>Éliminer Bordereaux de Dénombrement Re&amp;portés...</translation>
     </message>
     <message>
         <source>Purchase Order &amp;Return...</source>
-        <translation>&amp;amp;Retour de Bon de Commande...</translation>
+        <translation>&amp;Retour de Bon de Commande...</translation>
     </message>
     <message>
         <source>Maintain E&amp;xternal Shipping Records...</source>
@@ -53191,11 +53193,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Work Order &amp;Costing...</source>
-        <translation>Prix de Revient &amp;amp;Bon de Travail...</translation>
+        <translation>Prix de Revient &amp;Bon de Travail...</translation>
     </message>
     <message>
         <source>&amp;Transactions</source>
-        <translation>Mouvemen&amp;amp;t</translation>
+        <translation>Mouvemen&amp;t</translation>
     </message>
     <message>
         <source>&amp;Issue Material</source>
@@ -53207,11 +53209,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Reports</source>
-        <translation>&amp;amp;Rapports</translation>
+        <translation>&amp;Rapports</translation>
     </message>
     <message>
         <source>Work Order &amp;Schedule</source>
-        <translation>Ordonnancement des Bon&amp;amp;s de Travail</translation>
+        <translation>Ordonnancement des Bon&amp;s de Travail</translation>
     </message>
     <message>
         <source>by &amp;Component Item...</source>
@@ -53231,11 +53233,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;History</source>
-        <translation>&amp;amp;Historique</translation>
+        <translation>&amp;Historique</translation>
     </message>
     <message>
         <source>Material &amp;Usage Variance</source>
-        <translation>Écart &amp;amp;Utilisation Matières</translation>
+        <translation>Écart &amp;Utilisation Matières</translation>
     </message>
     <message>
         <source>&amp;Maintain...</source>
@@ -53390,11 +53392,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Post &amp;Standard Costs</source>
-        <translation>Reporter Coûts &amp;amp;Standards</translation>
+        <translation>Reporter Coûts &amp;Standards</translation>
     </message>
     <message>
         <source>&amp;Item</source>
-        <translation>Art&amp;amp;icle</translation>
+        <translation>Art&amp;icle</translation>
     </message>
     <message>
         <source>&amp;Pending BOM Changes...</source>
@@ -53438,7 +53440,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Bill Of Ma&amp;terials</source>
-        <translation>Nomencla&amp;amp;ture</translation>
+        <translation>Nomencla&amp;ture</translation>
     </message>
     <message>
         <source>Mass &amp;Replace...</source>
@@ -53446,7 +53448,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Costing</source>
-        <translation>Prix de Re&amp;amp;vient</translation>
+        <translation>Prix de Re&amp;vient</translation>
     </message>
     <message>
         <source>&amp;Maintain Item Costs...</source>
@@ -53466,7 +53468,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Item Costs</source>
-        <translation>Coûts Art&amp;amp;icle</translation>
+        <translation>Coûts Art&amp;icle</translation>
     </message>
     <message>
         <source>&amp;History...</source>
@@ -53490,7 +53492,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Reports</source>
-        <translation>&amp;amp;Rapports</translation>
+        <translation>&amp;Rapports</translation>
     </message>
     <message>
         <source>by &amp;Class Code...</source>
@@ -53525,7 +53527,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Price &amp;Variances</source>
-        <translation>Écarts Pri&amp;amp;x</translation>
+        <translation>Écarts Pri&amp;x</translation>
     </message>
     <message>
         <source>&amp;Receipts and Returns</source>
@@ -53537,7 +53539,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Release by A&amp;gent...</source>
-        <translation>Lancer par A&amp;amp;gent...</translation>
+        <translation>Lancer par A&amp;gent...</translation>
     </message>
     <message>
         <source>&amp;List Open...</source>
@@ -53549,7 +53551,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Item Source</source>
-        <translation>Source d&apos;Approvisionnement d&apos;Art&amp;amp;icle</translation>
+        <translation>Source d&apos;Approvisionnement d&apos;Art&amp;icle</translation>
     </message>
     <message>
         <source>List Open Purchase Orders</source>
@@ -53569,7 +53571,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>V&amp;endor</source>
-        <translation>Fourniss&amp;amp;eur</translation>
+        <translation>Fourniss&amp;eur</translation>
     </message>
     <message>
         <source>Print Purchase &amp;Order...</source>
@@ -53601,7 +53603,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Purchase Order &amp;History...</source>
-        <translation>&amp;amp;Historique de Bon de Commande...</translation>
+        <translation>&amp;Historique de Bon de Commande...</translation>
     </message>
     <message>
         <source>by &amp;Planner Code...</source>
@@ -53637,11 +53639,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>New &amp;Miscellaneous...</source>
-        <translation>Nouveau &amp;amp;Divers...</translation>
+        <translation>Nouveau &amp;Divers...</translation>
     </message>
     <message>
         <source>&amp;Voucher</source>
-        <translation>Pièce Justificati&amp;amp;ve</translation>
+        <translation>Pièce Justificati&amp;ve</translation>
     </message>
     <message>
         <source>&amp;Reschedule...</source>
@@ -53681,7 +53683,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Reports</source>
-        <translation>&amp;amp;Rapports</translation>
+        <translation>&amp;Rapports</translation>
     </message>
     <message>
         <source>&amp;Purchase Orders</source>
@@ -53689,7 +53691,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>P&amp;urchase</source>
-        <translation>&amp;amp;Achat</translation>
+        <translation>&amp;Achat</translation>
     </message>
     <message>
         <source>&amp;Buy Card...</source>
@@ -53697,7 +53699,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Lookup</source>
-        <translation type="unfinished">Consu&amp;amp;lter</translation>
+        <translation type="unfinished">Consu&amp;lter</translation>
     </message>
     <message>
         <source>&amp;Item Source Prices...</source>
@@ -53816,7 +53818,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Lookup</source>
-        <translation>Consu&amp;amp;lter</translation>
+        <translation>Consu&amp;lter</translation>
     </message>
     <message>
         <source>Su&amp;mmarized Backlog...</source>
@@ -53836,7 +53838,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Summari&amp;zed Sales History...</source>
-        <translation>Sommaire de l&apos;Historique des &amp;amp;Ventes...</translation>
+        <translation>Sommaire de l&apos;Historique des &amp;Ventes...</translation>
     </message>
     <message>
         <source>&amp;Backlog...</source>
@@ -53844,7 +53846,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>T&amp;ime Phased Bookings...</source>
-        <translation>Commandes Ant&amp;amp;icipées Échéancées...</translation>
+        <translation>Commandes Ant&amp;icipées Échéancées...</translation>
     </message>
     <message>
         <source>Time &amp;Phased Sales History...</source>
@@ -53852,7 +53854,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Brie&amp;f Sales History...</source>
-        <translation>Récapitulati&amp;amp;f d&apos;Historique des Ventes...</translation>
+        <translation>Récapitulati&amp;f d&apos;Historique des Ventes...</translation>
     </message>
     <message>
         <source>Inventory &amp;Availability...</source>
@@ -53864,7 +53866,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Availability by &amp;Sales Order...</source>
-        <translation>Di&amp;amp;sponibilité par Commande Client...</translation>
+        <translation>Di&amp;sponibilité par Commande Client...</translation>
     </message>
     <message>
         <source>&amp;Reassign Customer Type by Customer Type...</source>
@@ -53872,11 +53874,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Bookings...</source>
-        <translation>Commandes &amp;amp;Anticipées...</translation>
+        <translation>Commandes &amp;Anticipées...</translation>
     </message>
     <message>
         <source>Availability by &amp;Customer Type...</source>
-        <translation>Disponibilité par Type de &amp;amp;Client...</translation>
+        <translation>Disponibilité par Type de &amp;Client...</translation>
     </message>
     <message>
         <source>by &amp;Item...</source>
@@ -53888,7 +53890,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Sales Order S&amp;tatus...</source>
-        <translation>État de Commande Clien&amp;amp;t...</translation>
+        <translation>État de Commande Clien&amp;t...</translation>
     </message>
     <message>
         <source>Print Sales &amp;Order Form...</source>
@@ -53900,7 +53902,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Reports</source>
-        <translation>&amp;amp;Rapports</translation>
+        <translation>&amp;Rapports</translation>
     </message>
     <message>
         <source>&amp;Print Packing List...</source>
@@ -53908,7 +53910,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>B&amp;rief Earned Commissions...</source>
-        <translation>&amp;amp;Récapitulatif des Commissions Acquises...</translation>
+        <translation>&amp;Récapitulatif des Commissions Acquises...</translation>
     </message>
     <message>
         <source>&amp;Partially Shipped Orders...</source>
@@ -53920,11 +53922,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Analysis</source>
-        <translation>&amp;amp;Analyse</translation>
+        <translation>&amp;Analyse</translation>
     </message>
     <message>
         <source>&amp;Prospect</source>
-        <translation>&amp;amp;Prospect</translation>
+        <translation>&amp;Prospect</translation>
     </message>
     <message>
         <source>&amp;Groups...</source>
@@ -53932,7 +53934,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Customer</source>
-        <translation>&amp;amp;Client</translation>
+        <translation>&amp;Client</translation>
     </message>
     <message>
         <source>&amp;Update List Prices...</source>
@@ -53968,7 +53970,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Quote</source>
-        <translation>S&amp;amp;oumission</translation>
+        <translation>S&amp;oumission</translation>
     </message>
     <message>
         <source>&amp;New...</source>
@@ -53992,7 +53994,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Invoice</source>
-        <translation>F&amp;amp;acture</translation>
+        <translation>F&amp;acture</translation>
     </message>
     <message>
         <source>&amp;Billing</source>
@@ -54075,7 +54077,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Planned &amp;Orders...</source>
-        <translation>C&amp;amp;ommandes Planifiées...</translation>
+        <translation>C&amp;ommandes Planifiées...</translation>
     </message>
     <message>
         <source>&amp;Running Availability...</source>
@@ -54091,11 +54093,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Reports</source>
-        <translation>&amp;amp;Rapports</translation>
+        <translation>&amp;Rapports</translation>
     </message>
     <message>
         <source>&amp;Firm Planned Orders...</source>
-        <translation>Commandes Planifiées &amp;amp;Fixées...</translation>
+        <translation>Commandes Planifiées &amp;Fixées...</translation>
     </message>
     <message>
         <source>&amp;Release Planned Orders...</source>
@@ -54115,7 +54117,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Run &amp;MRP</source>
-        <translation>Traiter PB&amp;amp;M</translation>
+        <translation>Traiter PB&amp;M</translation>
     </message>
     <message>
         <source>Schedule Tools</source>
@@ -54127,7 +54129,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;MRP Detail...</source>
-        <translation>Détail PB&amp;amp;M...</translation>
+        <translation>Détail PB&amp;M...</translation>
     </message>
     <message>
         <source>&amp;New Planned Order...</source>
@@ -54166,7 +54168,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Bl&amp;ogs</source>
-        <translation>Bl&amp;amp;ogs</translation>
+        <translation>Bl&amp;ogs</translation>
     </message>
     <message>
         <source>&amp;About...</source>
@@ -54178,7 +54180,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Bugs and Feature Requests</source>
-        <translation>Demandes Fonctionnelles et &amp;amp;Anomalies</translation>
+        <translation>Demandes Fonctionnelles et &amp;Anomalies</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Maintain CSV Atlases utility is only available when user preferences are set to show windows as free-floating.</source>
@@ -54194,7 +54196,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Export Data</source>
-        <translation>&amp;amp;Exporter Données</translation>
+        <translation>&amp;Exporter Données</translation>
     </message>
     <message>
         <source>Rescan &amp;Privileges</source>
@@ -54210,23 +54212,23 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Scr&amp;ipts...</source>
-        <translation>Scr&amp;amp;ipts...</translation>
+        <translation>Scr&amp;ipts...</translation>
     </message>
     <message>
         <source>&amp;MetaSQL Statements...</source>
-        <translation>Instructions &amp;amp;MetaSQL...</translation>
+        <translation>Instructions &amp;MetaSQL...</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;amp;Aide</translation>
+        <translation>&amp;Aide</translation>
     </message>
     <message>
         <source>Maintain &amp;Roles...</source>
-        <translation>Maintenir &amp;amp;Rôles...</translation>
+        <translation>Maintenir &amp;Rôles...</translation>
     </message>
     <message>
         <source>S&amp;creens...</source>
-        <translation>É&amp;amp;crans...</translation>
+        <translation>É&amp;crans...</translation>
     </message>
     <message>
         <source>&amp;Hot Keys...</source>
@@ -54242,15 +54244,15 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Import Data</source>
-        <translation>&amp;amp;Importer Données</translation>
+        <translation>&amp;Importer Données</translation>
     </message>
     <message>
         <source>Maintain CS&amp;V Atlases...</source>
-        <translation>Maintenir Atlas CS&amp;amp;V...</translation>
+        <translation>Maintenir Atlas CS&amp;V...</translation>
     </message>
     <message>
         <source>&amp;Design</source>
-        <translation>&amp;amp;Design</translation>
+        <translation>&amp;Design</translation>
     </message>
     <message>
         <source>&amp;Serial Columns</source>
@@ -54590,7 +54592,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Enter Voucher Number</source>
@@ -54698,11 +54700,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Invoice Date:</source>
@@ -54710,7 +54712,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Flag for &amp;1099</source>
-        <translation>Indicateur pour &amp;amp;1099</translation>
+        <translation>Indicateur pour &amp;1099</translation>
     </message>
     <message>
         <source>&lt;p&gt;You must enter a Due Date before you may save this Voucher.</source>
@@ -54762,7 +54764,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Reference:</source>
@@ -54770,11 +54772,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Post on Save</source>
@@ -54806,7 +54808,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation type="unfinished">Co&amp;amp;mmentaires</translation>
+        <translation type="unfinished">Co&amp;mmentaires</translation>
     </message>
 </context>
 <context>
@@ -54860,7 +54862,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>Show</source>
@@ -54876,7 +54878,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Edit...</source>
@@ -54908,11 +54910,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Return Authorizations:</source>
@@ -54920,7 +54922,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Access Denied</source>
@@ -54936,7 +54938,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Delete...</source>
@@ -54980,11 +54982,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Close</source>
@@ -55262,7 +55264,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Journal Series</source>
@@ -55294,7 +55296,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Vend. Type</source>
@@ -55314,19 +55316,19 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>G/L Post Date</source>
@@ -55334,7 +55336,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;New Misc.</source>
-        <translation>&amp;amp;Nouvelle Div.</translation>
+        <translation>&amp;Nouvelle Div.</translation>
     </message>
     <message>
         <source>Post</source>
@@ -55457,7 +55459,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Priority</source>
@@ -55907,23 +55909,23 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Opportunity Sources</source>
@@ -55931,7 +55933,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
 </context>
 <context>
@@ -55978,27 +55980,27 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Opportunity Stages</source>
@@ -56048,7 +56050,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <name>opportunityTypes</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;amp;Nouveau</translation>
+        <translation type="unfinished">&amp;Nouveau</translation>
     </message>
     <message>
         <source>The selected Opportunity Type cannot be deleted as there are one or more Opportunities currently assigned to it.
@@ -56061,23 +56063,23 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Cannot Delete Opportunity Type</source>
@@ -56200,7 +56202,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Version</source>
@@ -56236,7 +56238,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -56319,11 +56321,11 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&lt;p&gt;xTuple ERP could not find the Updater application. Would you like to look for it?</source>
@@ -56351,7 +56353,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Print</source>
@@ -56359,7 +56361,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -56506,7 +56508,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete Printed</source>
@@ -56514,7 +56516,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>Print &amp;Batch</source>
-        <translation>Imprimer &amp;amp;Lot</translation>
+        <translation>Imprimer &amp;Lot</translation>
     </message>
     <message>
         <source>Form</source>
@@ -56693,7 +56695,7 @@ Vous devez créer les Articles par Site pour ces Articles Composants avant que v
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>The Supplied From Site must be different from the Transfer To Site.</source>
@@ -56805,11 +56807,11 @@ Vous devez créer une Nomenclature valide avant de pouvoir exploser cette Comman
     <name>plannerCodes</name>
     <message>
         <source>&amp;Print</source>
-        <translation type="unfinished">Im&amp;amp;primer</translation>
+        <translation type="unfinished">Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -56835,19 +56837,19 @@ Vous devez réaffecter ces Articles par Site avant que vous puissiez supprimer l
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Planner Codes</source>
@@ -56878,11 +56880,11 @@ Vous devez réaffecter ces Articles par Site avant que vous puissiez supprimer l
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Distribution Date:</source>
@@ -57065,7 +57067,7 @@ montant reçu. Vous devez corriger ceci avant que vous puissiez reporter cet Enc
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>No Unposted Cash Receipts</source>
@@ -57081,7 +57083,7 @@ montant reçu. Vous devez corriger ceci avant que vous puissiez reporter cet Enc
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Error Posting Cash Receipts Information</source>
@@ -57112,7 +57114,7 @@ Contact you Systems Administrator.</source>
     <name>postCheck</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>Bank Account:</source>
@@ -57120,11 +57122,11 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Post Payment</source>
@@ -57159,11 +57161,11 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Post Payments</source>
@@ -57194,7 +57196,7 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>&amp;Roll Up Standard Costs</source>
-        <translation>Cumuler Coûts Standa&amp;amp;rds</translation>
+        <translation>Cumuler Coûts Standa&amp;rds</translation>
     </message>
     <message>
         <source>Post Actual Costs by Class Code</source>
@@ -57238,11 +57240,11 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Select all Costs</source>
@@ -57257,11 +57259,11 @@ Contact you Systems Administrator.</source>
     <name>postCostsByItem</name>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Post Lower Level User Costs</source>
@@ -57289,11 +57291,11 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Roll Up Standard Costs</source>
-        <translation>Cumuler Coûts Standa&amp;amp;rds</translation>
+        <translation>Cumuler Coûts Standa&amp;rds</translation>
     </message>
     <message>
         <source>Post Lower Level Material Costs</source>
@@ -57332,7 +57334,7 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>No Count Slips Posted</source>
@@ -57340,7 +57342,7 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>No count slips were posted! Either there were no count slips available to
@@ -57385,11 +57387,11 @@ be posted or an error occurred trying to post the count slips.</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
 </context>
 <context>
@@ -57404,7 +57406,7 @@ be posted or an error occurred trying to post the count slips.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>General Ledger Series</source>
@@ -57412,7 +57414,7 @@ be posted or an error occurred trying to post the count slips.</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Error Retrieving Journal Number</source>
@@ -57523,7 +57525,7 @@ Aimeriez-vous les reporter?</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Post Unprinted Invoices</source>
@@ -57535,7 +57537,7 @@ Aimeriez-vous les reporter?</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>No Invoices to Post</source>
@@ -57744,7 +57746,7 @@ may be posted.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Backflush &amp;Materials</source>
@@ -57780,11 +57782,11 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Post Misc. Production</source>
@@ -57895,7 +57897,7 @@ manuellement la production au Site voulu.</translation>
     <name>postPoReturnCreditMemo</name>
     <message>
         <source>&amp;Post</source>
-        <translation type="unfinished">Re&amp;amp;porter</translation>
+        <translation type="unfinished">Re&amp;porter</translation>
     </message>
     <message>
         <source>Post PO Return Credit Memo</source>
@@ -57915,7 +57917,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Reject Qty.:</source>
@@ -57962,7 +57964,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Qty. Disassembled:</source>
@@ -57978,7 +57980,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Qty. Ordered:</source>
@@ -57994,11 +57996,11 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Close &amp;Work Order after Posting</source>
-        <translation>Fermer &amp;amp;Bon de Travail après Report</translation>
+        <translation>Fermer &amp;Bon de Travail après Report</translation>
     </message>
     <message>
         <source>Scrap on Post</source>
@@ -58097,7 +58099,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Release Purchase Order</source>
@@ -58105,7 +58107,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
 </context>
 <context>
@@ -58128,7 +58130,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>All Purchasing Agents</source>
@@ -58155,7 +58157,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Post Standard Journal</source>
@@ -58163,7 +58165,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Distribution Date:</source>
@@ -58179,7 +58181,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Error Posting Standard Journal</source>
@@ -58206,7 +58208,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Standard Journal Group:</source>
@@ -58218,7 +58220,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Distribution Date:</source>
@@ -58226,7 +58228,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Error Posting Standard Journal Group</source>
@@ -58249,7 +58251,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Journal Series</source>
@@ -58265,7 +58267,7 @@ manuellement la production au Site voulu.</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>No Vouchers to Post</source>
@@ -58309,7 +58311,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Prepare Payment Run</source>
@@ -58434,7 +58436,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Price List</source>
@@ -58576,15 +58578,15 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Cust. Name</source>
@@ -58592,15 +58594,15 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Customer #</source>
@@ -58805,7 +58807,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to mark the selected Check as Void and create a replacement check?</source>
@@ -58817,11 +58819,11 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Print Payment</source>
@@ -58909,11 +58911,11 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Print Payments</source>
@@ -59017,7 +59019,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Unmark</source>
-        <translation>Démarq&amp;amp;uer</translation>
+        <translation>Démarq&amp;uer</translation>
     </message>
     <message>
         <source>Replace</source>
@@ -59029,15 +59031,15 @@ post Vouchers.</source>
     </message>
     <message>
         <source>Mark as &amp;Printed</source>
-        <translation>Marquer comme Im&amp;amp;primé</translation>
+        <translation>Marquer comme Im&amp;primé</translation>
     </message>
     <message>
         <source>&amp;Void</source>
-        <translation>A&amp;amp;nnuler</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <source>Void &amp;&amp; &amp;Replace</source>
-        <translation>Annuler &amp;amp; &amp;amp;Remplacer </translation>
+        <translation>Annuler et &amp;Remplacer </translation>
     </message>
     <message>
         <source>Select All</source>
@@ -59207,7 +59209,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -59254,7 +59256,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
 </context>
 <context>
@@ -59265,7 +59267,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>from</source>
@@ -59599,7 +59601,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Latest</source>
@@ -59639,7 +59641,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Print Packing List Batch</source>
@@ -59724,7 +59726,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Internal</source>
-        <translation>&amp;amp;Interne</translation>
+        <translation>&amp;Interne</translation>
     </message>
     <message>
         <source>&amp;Vendor</source>
@@ -59732,11 +59734,11 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source># of C&amp;opies:</source>
@@ -59790,7 +59792,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -60181,7 +60183,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Print Vendor Form</source>
@@ -60212,7 +60214,7 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
 </context>
 <context>
@@ -60227,11 +60229,11 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Error Occurred</source>
@@ -60258,11 +60260,11 @@ post Vouchers.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Print Packing List</source>
@@ -60319,11 +60321,11 @@ Vous devez premièrement réaffecter ces articles avant de supprimer la Catégor
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Are you sure that you wish to delete all unused Product Categories?</source>
@@ -60331,7 +60333,7 @@ Vous devez premièrement réaffecter ces articles avant de supprimer la Catégor
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Product Categories:</source>
@@ -60339,23 +60341,23 @@ Vous devez premièrement réaffecter ces articles avant de supprimer la Catégor
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Delete &amp;Unused</source>
@@ -60414,11 +60416,11 @@ You may not create a Product Category with this code.</source>
     <name>profitCenter</name>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;amp;Annuler</translation>
+        <translation type="unfinished">&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -60438,7 +60440,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>You must enter a valid Number.</source>
@@ -60469,11 +60471,11 @@ You may not create a Product Category with this code.</source>
     <name>profitCenters</name>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;amp;Supprimer</translation>
+        <translation type="unfinished">&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>List Profit Centers</source>
@@ -60481,7 +60483,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Number</source>
@@ -60489,7 +60491,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Description</source>
@@ -60501,7 +60503,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Error Deleting Profit Center</source>
@@ -60528,7 +60530,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Work Orders</source>
@@ -60584,7 +60586,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Print</source>
@@ -60592,7 +60594,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -60604,7 +60606,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Started:</source>
@@ -61097,7 +61099,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished">Co&amp;amp;pier</translation>
+        <translation type="unfinished">Co&amp;pier</translation>
     </message>
     <message>
         <source>The Project Number already exists.  Please choose another number.</source>
@@ -61637,7 +61639,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Quote Date</source>
@@ -61957,11 +61959,11 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Purchasing Agent:</source>
@@ -62005,7 +62007,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Subtotal:</source>
@@ -62105,7 +62107,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Vendor Address</source>
@@ -62157,7 +62159,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Manuf. Item#</source>
@@ -62221,7 +62223,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Cannot Create P/O</source>
@@ -62233,7 +62235,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>C&amp;lose</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Main</source>
@@ -62416,7 +62418,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Vend. Item Number:</source>
@@ -62528,7 +62530,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Value</source>
@@ -62536,7 +62538,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -62743,7 +62745,7 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Purchase Request #:</source>
@@ -62818,7 +62820,7 @@ différent avant de créer cette Demande d&apos;Achat.</translation>
     </message>
     <message>
         <source>&amp;Purge</source>
-        <translation>Élimi&amp;amp;ner</translation>
+        <translation>Élimi&amp;ner</translation>
     </message>
     <message>
         <source>Cutoff Date:</source>
@@ -62826,7 +62828,7 @@ différent avant de créer cette Demande d&apos;Achat.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Error Deleting Work Order Information</source>
@@ -62841,11 +62843,11 @@ différent avant de créer cette Demande d&apos;Achat.</translation>
     </message>
     <message>
         <source>&amp;Purge</source>
-        <translation>Élimi&amp;amp;ner</translation>
+        <translation>Élimi&amp;ner</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>No</source>
@@ -62915,7 +62917,7 @@ Etes-vous certain que vous voulez supprimer les Enregistrements de Facture séle
     </message>
     <message>
         <source>&amp;Purge</source>
-        <translation>Élimi&amp;amp;ner</translation>
+        <translation>Élimi&amp;ner</translation>
     </message>
     <message>
         <source>Delete Invoice Records</source>
@@ -62935,22 +62937,22 @@ Etes-vous certain que vous voulez supprimer les Enregistrements de Facture séle
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
 </context>
 <context>
     <name>purgePostedCountSlips</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Purge</source>
-        <translation>Élimi&amp;amp;ner</translation>
+        <translation>Élimi&amp;ner</translation>
     </message>
     <message>
         <source>Purge Posted Count Slips</source>
@@ -62965,11 +62967,11 @@ Etes-vous certain que vous voulez supprimer les Enregistrements de Facture séle
     <name>purgePostedCounts</name>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;amp;Annuler</translation>
+        <translation type="unfinished">&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Purge</source>
-        <translation>Élimi&amp;amp;ner</translation>
+        <translation>Élimi&amp;ner</translation>
     </message>
     <message>
         <source>Purge Posted Count Tags</source>
@@ -63388,19 +63390,19 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Reason Codes:</source>
@@ -63408,11 +63410,11 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Reason Codes</source>
@@ -63443,7 +63445,7 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Reassign</source>
@@ -63474,7 +63476,7 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Customer Type Pattern:</source>
@@ -63529,7 +63531,7 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Reassign Lot/Serial #</source>
@@ -63565,7 +63567,7 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Reassign</source>
@@ -63612,7 +63614,7 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>New Product Category:</source>
@@ -63651,7 +63653,7 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Customer</source>
@@ -63679,7 +63681,7 @@ Vous devez éliminer ces enregistrements avant que vous puissiez supprimer le Co
     </message>
     <message>
         <source>&amp;Recall</source>
-        <translation>&amp;amp;Rappeler</translation>
+        <translation>&amp;Rappeler</translation>
     </message>
     <message>
         <source>Show Invoiced</source>
@@ -63850,7 +63852,7 @@ S.V.P. corrigez ceci avant de continuer.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Difference:</source>
@@ -64072,27 +64074,27 @@ Vous devez éliminer ces enregistrements avant de que vous puissiez supprimer le
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Reject Codes</source>
@@ -64127,7 +64129,7 @@ Vous devez éliminer ces enregistrements avant de que vous puissiez supprimer le
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Days</source>
@@ -64139,7 +64141,7 @@ Vous devez éliminer ces enregistrements avant de que vous puissiez supprimer le
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Years</source>
@@ -64175,7 +64177,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Cutoff Date:</source>
@@ -64183,7 +64185,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Release</source>
-        <translation>Lance&amp;amp;r</translation>
+        <translation>Lance&amp;r</translation>
     </message>
     <message>
         <source>Only Release Firmed</source>
@@ -64265,7 +64267,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Release</source>
-        <translation>Lance&amp;amp;r</translation>
+        <translation>Lance&amp;r</translation>
     </message>
     <message>
         <source>Cutoff Date:</source>
@@ -64281,7 +64283,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Error Retrieving Work Order Information</source>
@@ -64308,7 +64310,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Lot/Serial #</source>
@@ -64316,7 +64318,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Relocate Inventory</source>
@@ -64407,7 +64409,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Name</source>
@@ -64415,7 +64417,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Error Loading Report</source>
@@ -64439,11 +64441,11 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Report Definitions:</source>
@@ -64455,7 +64457,7 @@ You may not create duplicate Calendar Items.</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
 </context>
 <context>
@@ -64640,7 +64642,7 @@ Invoice Number:</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Current Priority:</source>
@@ -64648,7 +64650,7 @@ Invoice Number:</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Reprioritize</source>
@@ -64685,11 +64687,11 @@ n&apos;appartient pas à un BC Ouvert.</translation>
     </message>
     <message>
         <source>&amp;Reschedule</source>
-        <translation>&amp;amp;Réordonnancer</translation>
+        <translation>&amp;Réordonnancer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Due Date:</source>
@@ -64728,7 +64730,7 @@ n&apos;appartient pas à un BC Ouvert.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>You must specify a valid Start/Due date.</source>
@@ -64742,7 +64744,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Reschedule</source>
-        <translation>&amp;amp;Réordonnancer</translation>
+        <translation>&amp;Réordonnancer</translation>
     </message>
     <message>
         <source>Cannot Reschedule Released W/O</source>
@@ -64754,7 +64756,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Current</source>
@@ -64813,7 +64815,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Qty. Reserved:</source>
@@ -64881,7 +64883,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>F&amp;ind</source>
-        <translation type="unfinished">Tro&amp;amp;uver</translation>
+        <translation type="unfinished">Tro&amp;uver</translation>
     </message>
     <message>
         <source>Location</source>
@@ -64964,7 +64966,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     <name>resetQOHBalances</name>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;amp;Annuler</translation>
+        <translation type="unfinished">&amp;Annuler</translation>
     </message>
     <message>
         <source>Reset Selected QOH Balances?</source>
@@ -65019,7 +65021,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Bank Uses Different Currency</source>
@@ -65039,7 +65041,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Date:</source>
@@ -65086,7 +65088,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>You must select a Lot/Serial Number.</source>
@@ -65106,7 +65108,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source> Lot/Serial #:</source>
@@ -65114,7 +65116,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Qty. &amp;Auth.:</source>
@@ -65161,7 +65163,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Commission:</source>
@@ -65189,7 +65191,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Close</source>
@@ -65197,7 +65199,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Sale Price</source>
@@ -65205,7 +65207,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Authorize All</source>
-        <translation>&amp;amp;Autoriser Tout</translation>
+        <translation>&amp;Autoriser Tout</translation>
     </message>
     <message>
         <source>Ship Site:</source>
@@ -65443,7 +65445,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>Clear Authori&amp;zation</source>
-        <translation>Effacer Autori&amp;amp;sation</translation>
+        <translation>Effacer Autori&amp;sation</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -65451,15 +65453,15 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>Authorize &amp;Line</source>
-        <translation>Autoriser &amp;amp;Ligne</translation>
+        <translation>Autoriser &amp;Ligne</translation>
     </message>
     <message>
         <source>N&amp;otes</source>
-        <translation>N&amp;amp;otes</translation>
+        <translation>N&amp;otes</translation>
     </message>
     <message>
         <source>Rece&amp;ive All</source>
-        <translation>Tout Récept&amp;amp;ionner</translation>
+        <translation>Tout Récept&amp;ionner</translation>
     </message>
     <message>
         <source>Original Order #:</source>
@@ -65467,15 +65469,15 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>Re&amp;fund</source>
-        <translation>Rem&amp;amp;bourser</translation>
+        <translation>Rem&amp;bourser</translation>
     </message>
     <message>
         <source>&amp;Post Receipts</source>
-        <translation>Re&amp;amp;porter Réceptions</translation>
+        <translation>Re&amp;porter Réceptions</translation>
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation>Co&amp;amp;mmentaires</translation>
+        <translation>Co&amp;mmentaires</translation>
     </message>
     <message>
         <source>Print on Save</source>
@@ -65495,7 +65497,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Credited</source>
@@ -65543,7 +65545,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Header Information</source>
@@ -65802,7 +65804,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>A&amp;ccounting</source>
-        <translation>Finan&amp;amp;cier</translation>
+        <translation>Finan&amp;cier</translation>
     </message>
     <message>
         <source>Create Work Order</source>
@@ -65826,11 +65828,11 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation>Co&amp;amp;mmentaires</translation>
+        <translation>Co&amp;mmentaires</translation>
     </message>
     <message>
         <source>Sale</source>
@@ -65930,11 +65932,11 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>New Order #:</source>
@@ -66042,7 +66044,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Costs</source>
@@ -66078,7 +66080,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Alternate Cost of Sales Account:</source>
@@ -66118,7 +66120,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Supply</source>
-        <translation>Approvi&amp;amp;sionner</translation>
+        <translation>Approvi&amp;sionner</translation>
     </message>
     <message>
         <source>Authorize &amp;only these Lot/Serial Numbers</source>
@@ -66325,7 +66327,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Never</source>
@@ -66357,7 +66359,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Returns Awaiting</source>
@@ -66436,7 +66438,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     <name>returnWoMaterialBatch</name>
     <message>
         <source>&amp;Post</source>
-        <translation type="unfinished">Re&amp;amp;porter</translation>
+        <translation type="unfinished">Re&amp;porter</translation>
     </message>
     <message>
         <source>Invalid date</source>
@@ -66448,7 +66450,7 @@ Vous devez Rappeler ce Bon de Travail avant de le Réordonnancer.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Transaction &amp;Date:</source>
@@ -66505,11 +66507,11 @@ You must instead return each Work Order Material item individually.
     <name>returnWoMaterialItem</name>
     <message>
         <source>&amp;Post</source>
-        <translation type="unfinished">Re&amp;amp;porter</translation>
+        <translation type="unfinished">Re&amp;porter</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Return Work Order Material Item</source>
@@ -66525,7 +66527,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>You must enter a valid transaction date.</source>
@@ -66592,7 +66594,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>You must enter some Notes to describe this transaction.</source>
@@ -66624,7 +66626,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Distribution Date:</source>
@@ -66671,7 +66673,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>The start date cannot be earlier than the end date.</source>
@@ -66695,7 +66697,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>You cannot enter a duplicate name for this Sale before saving it.</source>
@@ -66820,7 +66822,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure that you want to delete the selected Sale?</source>
@@ -66832,7 +66834,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>End</source>
@@ -66844,7 +66846,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Name</source>
@@ -66856,7 +66858,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Schedule</source>
@@ -66923,7 +66925,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>C&amp;ost of Sales Account:</source>
-        <translation>Compte de C&amp;amp;oût des Marchandises Vendues:</translation>
+        <translation>Compte de C&amp;oût des Marchandises Vendues:</translation>
     </message>
     <message>
         <source>Cannot Save Sales Account Assignment</source>
@@ -66931,7 +66933,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>Inventory Sa&amp;les Account:</source>
-        <translation>&amp;amp;Compte de Ventes d&apos;Inventaire:</translation>
+        <translation>&amp;Compte de Ventes d&apos;Inventaire:</translation>
     </message>
     <message>
         <source>Error Retrieving Customer Type Information</source>
@@ -66970,7 +66972,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Shipping Zone</source>
@@ -66978,7 +66980,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>List Sales Account Assignments</source>
@@ -66994,7 +66996,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Returns Accnt. #</source>
@@ -67006,11 +67008,11 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Site</source>
@@ -67022,7 +67024,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Sales Account Assignments:</source>
@@ -67065,11 +67067,11 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>The selected Sales Category cannot be deleted as there are unposted Invoice Lines assigned to it.
@@ -67082,7 +67084,7 @@ You must reassign these Invoice Lines before you may delete the selected Sales C
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -67095,7 +67097,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Sales Categories:</source>
@@ -67103,7 +67105,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>The selected Sales Category cannot be deleted as there are A/R Open Items assigned to it.
@@ -67112,7 +67114,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>List Sales Categories</source>
@@ -67120,15 +67122,15 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>Error Deleting Sales Category</source>
@@ -67163,7 +67165,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;Active</source>
-        <translation>&amp;amp;Active</translation>
+        <translation>&amp;Active</translation>
     </message>
     <message>
         <source>Cannot Save Sales Category</source>
@@ -67206,7 +67208,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Order Number:</source>
@@ -67230,11 +67232,11 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Bill-To</source>
@@ -67461,7 +67463,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Quote Order Number you have entered already exists. Please enter a new one.</source>
@@ -67537,7 +67539,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Doc&amp;uments</source>
-        <translation>Doc&amp;amp;uments</translation>
+        <translation>Doc&amp;uments</translation>
     </message>
     <message>
         <source>Shipping</source>
@@ -67577,7 +67579,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Clea&amp;r</source>
-        <translation>Efface&amp;amp;r</translation>
+        <translation>Efface&amp;r</translation>
     </message>
     <message>
         <source>Edit Purchase Order...</source>
@@ -67605,7 +67607,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Pa&amp;yment</source>
-        <translation>Pa&amp;amp;iement</translation>
+        <translation>Pa&amp;iement</translation>
     </message>
     <message>
         <source>Copy to Ship-to -&gt;</source>
@@ -67640,7 +67642,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation>Co&amp;amp;mmentaires</translation>
+        <translation>Co&amp;mmentaires</translation>
     </message>
     <message>
         <source>Hold Type:</source>
@@ -67664,7 +67666,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Order &amp;Date:</source>
-        <translation>&amp;amp;Date de Commande:</translation>
+        <translation>&amp;Date de Commande:</translation>
     </message>
     <message>
         <source>Issue Stock...</source>
@@ -67672,7 +67674,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Cust. &amp;PO #:</source>
-        <translation># &amp;amp;BC Client:</translation>
+        <translation># &amp;BC Client:</translation>
     </message>
     <message>
         <source>Name</source>
@@ -67684,7 +67686,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Save and Add to Packing List &amp;Batch</source>
-        <translation>Enregistrer et Ajouter au Lot de &amp;amp;Bordereaux d&apos;Emballage</translation>
+        <translation>Enregistrer et Ajouter au Lot de &amp;Bordereaux d&apos;Emballage</translation>
     </message>
     <message>
         <source>Release P/R...</source>
@@ -67692,7 +67694,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Scheduled Da&amp;te:</source>
-        <translation>Da&amp;amp;te Ordonnancée:</translation>
+        <translation>Da&amp;te Ordonnancée:</translation>
     </message>
     <message>
         <source>Ship-To</source>
@@ -67716,7 +67718,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Relat&amp;ionships</source>
-        <translation>Relat&amp;amp;ions</translation>
+        <translation>Relat&amp;ions</translation>
     </message>
     <message>
         <source>Schedule Date Required</source>
@@ -67752,7 +67754,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Line Items</source>
@@ -67908,7 +67910,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Cancel Quote?</source>
@@ -68052,7 +68054,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Order #:</source>
@@ -68564,7 +68566,7 @@ Do you wish to continue saving the order?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Return</source>
@@ -68651,7 +68653,7 @@ Do you wish to continue saving the order?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Extended Price:</source>
@@ -68733,7 +68735,7 @@ Aimeriez-vous les enregistrer maintenant? </translation>
     </message>
     <message>
         <source>Suppl&amp;y</source>
-        <translation>Réappro&amp;amp;visionnement</translation>
+        <translation>Réappro&amp;visionnement</translation>
     </message>
     <message>
         <source>Cannot Create P/O</source>
@@ -68741,11 +68743,11 @@ Aimeriez-vous les enregistrer maintenant? </translation>
     </message>
     <message>
         <source>Pric&amp;e UOM:</source>
-        <translation>UM Pri&amp;amp;x:</translation>
+        <translation>UM Pri&amp;x:</translation>
     </message>
     <message>
         <source>Ch&amp;aracteristics</source>
-        <translation>Car&amp;amp;actéristiques</translation>
+        <translation>Car&amp;actéristiques</translation>
     </message>
     <message>
         <source>None</source>
@@ -68793,7 +68795,7 @@ Aimeriez-vous les enregistrer maintenant? </translation>
     </message>
     <message>
         <source>Su&amp;bstitute for:</source>
-        <translation>Su&amp;amp;bstitut pour:</translation>
+        <translation>Su&amp;bstitut pour:</translation>
     </message>
     <message>
         <source>Tax</source>
@@ -68809,19 +68811,19 @@ Aimeriez-vous les enregistrer maintenant? </translation>
     </message>
     <message>
         <source>S&amp;ite:</source>
-        <translation>S&amp;amp;ite:</translation>
+        <translation>S&amp;ite:</translation>
     </message>
     <message>
         <source>Cance&amp;l Item</source>
-        <translation>Annu&amp;amp;ler Article</translation>
+        <translation>Annu&amp;ler Article</translation>
     </message>
     <message>
         <source>&amp;Net Unit Price:</source>
-        <translation>Prix Unitaire &amp;amp;Net:</translation>
+        <translation>Prix Unitaire &amp;Net:</translation>
     </message>
     <message>
         <source>De&amp;tail</source>
-        <translation>Dé&amp;amp;tail</translation>
+        <translation>Dé&amp;tail</translation>
     </message>
     <message>
         <source>Lead Time:</source>
@@ -68841,7 +68843,7 @@ Aimeriez-vous les enregistrer maintenant? </translation>
     </message>
     <message>
         <source>Accountin&amp;g</source>
-        <translation>Com&amp;amp;ptabilité</translation>
+        <translation>Com&amp;ptabilité</translation>
     </message>
     <message>
         <source>On Order:</source>
@@ -68849,11 +68851,11 @@ Aimeriez-vous les enregistrer maintenant? </translation>
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation>Co&amp;amp;mmentaires</translation>
+        <translation>Co&amp;mmentaires</translation>
     </message>
     <message>
         <source>N&amp;otes</source>
-        <translation>N&amp;amp;otes</translation>
+        <translation>N&amp;otes</translation>
     </message>
     <message>
         <source>Qty.:</source>
@@ -69734,7 +69736,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Sales Orders:</source>
@@ -69817,7 +69819,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Pa&amp;yment</source>
-        <translation type="unfinished">Pa&amp;amp;iement</translation>
+        <translation type="unfinished">Pa&amp;iement</translation>
     </message>
     <message>
         <source>Credit Card</source>
@@ -70484,7 +70486,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Error Deleting</source>
@@ -70512,11 +70514,11 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>List Sales Representatives</source>
@@ -70524,15 +70526,15 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Delete Sales Rep...</source>
@@ -70595,15 +70597,15 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Scrap Qty.:</source>
@@ -70741,7 +70743,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Getting Script</source>
@@ -70821,7 +70823,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Package:</source>
@@ -70920,7 +70922,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Package</source>
@@ -70928,15 +70930,15 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation type="unfinished">&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Delete Script?</source>
@@ -70979,7 +70981,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Employee Numbers</source>
@@ -71015,7 +71017,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Dept.</source>
@@ -71063,7 +71065,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Print</source>
@@ -71075,7 +71077,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Error Occurred</source>
@@ -71094,7 +71096,7 @@ Are you sure you want to do this?</source>
     <name>selectBankAccount</name>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;amp;Annuler</translation>
+        <translation type="unfinished">&amp;Annuler</translation>
     </message>
     <message>
         <source>Select Bank Account</source>
@@ -71129,7 +71131,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Uninvoiced:</source>
@@ -71161,7 +71163,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Approve Billing Quantity</source>
@@ -71196,7 +71198,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Uninvoiced</source>
@@ -71284,11 +71286,11 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Total:</source>
@@ -71320,11 +71322,11 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Ca&amp;ncel</source>
-        <translation>An&amp;amp;nuler</translation>
+        <translation>An&amp;nuler</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>None</source>
@@ -71471,7 +71473,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Edit Discount</source>
@@ -71479,7 +71481,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Discount:</source>
@@ -71562,7 +71564,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>On Hold</source>
@@ -71570,7 +71572,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Open</source>
@@ -71793,7 +71795,7 @@ Are you sure you want to do this?</source>
     <name>selectShippedOrders</name>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Approve Shipped Orders for Billing</source>
@@ -71812,7 +71814,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Voucher</source>
@@ -71864,11 +71866,11 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>List Approved Payments</source>
@@ -72234,7 +72236,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Ship Order</source>
@@ -72266,7 +72268,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Ship</source>
@@ -72389,7 +72391,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Customer #:</source>
@@ -72409,7 +72411,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>You must enter a valid Name.</source>
@@ -72417,7 +72419,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Ship-&amp;To #:</source>
@@ -72563,11 +72565,11 @@ before you may save it.</source>
     <name>shipVias</name>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;amp;Supprimer</translation>
+        <translation type="unfinished">&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Description</source>
@@ -72579,7 +72581,7 @@ before you may save it.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Ship Vias:</source>
@@ -72591,7 +72593,7 @@ before you may save it.</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
 </context>
 <context>
@@ -72665,7 +72667,7 @@ You must reassigned these ShipTo&apos;s before you may delete the selected Shipp
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Cannot Delete Shipping Charge Type</source>
@@ -72678,7 +72680,7 @@ You must reassigned these Customers before you may delete the selected Shipping 
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Shipping Charge Types:</source>
@@ -72686,7 +72688,7 @@ You must reassigned these Customers before you may delete the selected Shipping 
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>List Shipping Charge Types</source>
@@ -72694,7 +72696,7 @@ You must reassigned these Customers before you may delete the selected Shipping 
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
 </context>
 <context>
@@ -72740,23 +72742,23 @@ You must reassigned these Customers before you may delete the selected Shipping 
     <name>shippingForms</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;amp;Nouveau</translation>
+        <translation type="unfinished">&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Shipping Forms</source>
@@ -72971,19 +72973,19 @@ Vous devez réaffecter ces Destinataires à une Zone d&apos;Expédition différe
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Shipping Zones:</source>
@@ -72991,11 +72993,11 @@ Vous devez réaffecter ces Destinataires à une Zone d&apos;Expédition différe
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Shipping Zones</source>
@@ -73039,7 +73041,7 @@ avant que vous puissiez l&apos;enregistrer.</translation>
     <name>siteTypes</name>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;amp;Supprimer</translation>
+        <translation type="unfinished">&amp;Supprimer</translation>
     </message>
     <message>
         <source>Code</source>
@@ -73067,11 +73069,11 @@ avant que vous puissiez l&apos;enregistrer.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>The selected Site Type cannot be deleted as it still contains Sites.
@@ -73097,19 +73099,19 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
 </context>
 <context>
@@ -73128,7 +73130,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Line #:</source>
@@ -73183,7 +73185,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Credit</source>
@@ -73207,7 +73209,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Transactions:</source>
@@ -73215,7 +73217,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Debits</source>
@@ -73223,15 +73225,15 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Credits</source>
@@ -73247,7 +73249,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Error Retrieving Journal Information</source>
@@ -73258,7 +73260,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     <name>standardJournalGroup</name>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Expires</source>
@@ -73314,19 +73316,19 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Show &amp;Future Standard Journal Members</source>
-        <translation>Montrer Membres de Journaux Standards &amp;amp;Futurs</translation>
+        <translation>Montrer Membres de Journaux Standards &amp;Futurs</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Member Items:</source>
@@ -73334,11 +73336,11 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>The Name you have entered for this Standard Journal Group is already in use.</source>
@@ -73361,7 +73363,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Times</source>
@@ -73373,7 +73375,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Always</source>
@@ -73401,7 +73403,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Standard Journal Group Item</source>
@@ -73424,15 +73426,15 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Standard Journal Groups:</source>
@@ -73440,11 +73442,11 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>List Standard Journal Groups</source>
@@ -73452,7 +73454,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Post</source>
@@ -73475,7 +73477,7 @@ Vous devez réaffecter ces Sites avant de supprimer ce Type de Site.</translatio
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>You must enter an amount value.</source>
@@ -73509,7 +73511,7 @@ Désirez-vous convertir %1 %2 au taux en vigueur?</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Account #:</source>
@@ -73521,7 +73523,7 @@ Désirez-vous convertir %1 %2 au taux en vigueur?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Error Retrieving Journal Information</source>
@@ -73536,7 +73538,7 @@ Désirez-vous convertir %1 %2 au taux en vigueur?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Standard Journals:</source>
@@ -73548,23 +73550,23 @@ Désirez-vous convertir %1 %2 au taux en vigueur?</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Post</source>
@@ -75697,7 +75699,7 @@ You must first delete the Bill of Materials for the selected target item before 
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -75709,7 +75711,7 @@ You must first delete the Bill of Materials for the selected target item before 
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Subaccount Type</source>
@@ -75725,7 +75727,7 @@ You must first delete the Bill of Materials for the selected target item before 
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Error Retrieving Sub Account Information</source>
@@ -75744,11 +75746,11 @@ You must first delete the Bill of Materials for the selected target item before 
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Liability</source>
@@ -75760,11 +75762,11 @@ You must first delete the Bill of Materials for the selected target item before 
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>ERROR</source>
@@ -75776,7 +75778,7 @@ You must first delete the Bill of Materials for the selected target item before 
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Equity</source>
@@ -75836,11 +75838,11 @@ You must reassign these Ledger Accounts before you may delete the selected G/L S
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Cannot Save Sub Account</source>
@@ -75848,7 +75850,7 @@ You must reassign these Ledger Accounts before you may delete the selected G/L S
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&lt;p&gt;The old Subaccount Number %1 might be used by existing Accounts. Would you like to change all accounts that use it to Subaccount Number %2?&lt;p&gt;If you answer &apos;No&apos; then change the Number back to %3 and Save again.</source>
@@ -75879,7 +75881,7 @@ You must reassign these Ledger Accounts before you may delete the selected G/L S
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -75887,19 +75889,19 @@ You must reassign these Ledger Accounts before you may delete the selected G/L S
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>List Subaccounts</source>
@@ -75942,7 +75944,7 @@ You must reassign these Ledger Accounts before you may delete the selected G/L S
     </message>
     <message>
         <source>&amp;Schedule</source>
-        <translation>&amp;amp;Ordonnancer</translation>
+        <translation>&amp;Ordonnancer</translation>
     </message>
     <message>
         <source>Action:</source>
@@ -75962,7 +75964,7 @@ You must reassign these Ledger Accounts before you may delete the selected G/L S
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Error Saving Scheduled Action Information</source>
@@ -75985,7 +75987,7 @@ You must reassign these Ledger Accounts before you may delete the selected G/L S
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Scheduled</source>
@@ -75993,7 +75995,7 @@ You must reassign these Ledger Accounts before you may delete the selected G/L S
     </message>
     <message>
         <source>&amp;Schedule</source>
-        <translation>&amp;amp;Ordonnancer</translation>
+        <translation>&amp;Ordonnancer</translation>
     </message>
     <message>
         <source>Cannot Submit Report</source>
@@ -76042,7 +76044,7 @@ child Work Order before substituting.</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Site:</source>
@@ -76109,7 +76111,7 @@ child Work Order before substituting.</source>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>The selected Inventory Transactions have been summarized.</source>
@@ -76121,15 +76123,15 @@ child Work Order before substituting.</source>
     </message>
     <message>
         <source>Summari&amp;ze</source>
-        <translation>Établir Sommai&amp;amp;re</translation>
+        <translation>Établir Sommai&amp;re</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>Summarize Inventory Transactions?</source>
@@ -76324,7 +76326,7 @@ Updating Chart of Accounts...</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Periods:</source>
@@ -76675,7 +76677,7 @@ Updating Chart of Accounts...</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Posted by:</source>
@@ -76683,7 +76685,7 @@ Updating Chart of Accounts...</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Never</source>
@@ -77155,7 +77157,7 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>County:</source>
@@ -77167,7 +77169,7 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Cannot Create Tax Authority</source>
@@ -77187,7 +77189,7 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>You must enter a valid Code.</source>
@@ -77745,23 +77747,23 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -77808,7 +77810,7 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -77934,11 +77936,11 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>End Date</source>
@@ -77950,11 +77952,11 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>List Tax Registrations</source>
@@ -77962,7 +77964,7 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Error Deleting Tax Registration Information</source>
@@ -77977,7 +77979,7 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     <name>taxType</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>Cannot Create Tax Type</source>
@@ -77997,7 +77999,7 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -78005,7 +78007,7 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -78028,11 +78030,11 @@ Vous devez premièrement Retirer ces Codes de Taxe.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Description</source>
@@ -78054,19 +78056,19 @@ Vous devez premièrement réaffecter ces articles avant de supprimer le Type de 
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Tax Types</source>
@@ -78215,7 +78217,7 @@ Vous devez premièrement réaffecter ces articles avant de supprimer le Type de 
     </message>
     <message>
         <source>&amp;Proximo</source>
-        <translation>&amp;amp;Prochain</translation>
+        <translation>&amp;Prochain</translation>
     </message>
     <message>
         <source>D&amp;ue Days:</source>
@@ -78310,23 +78312,23 @@ Vous devez premièrement réaffecter ces articles avant de supprimer le Type de 
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Description</source>
@@ -78334,7 +78336,7 @@ Vous devez premièrement réaffecter ces articles avant de supprimer le Type de 
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>List Terms</source>
@@ -78377,7 +78379,7 @@ Vous devez premièrement réaffecter ces articles avant de supprimer le Type de 
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Thaw Item Sites by Class Code/Site</source>
@@ -78904,11 +78906,11 @@ Vous devez premièrement réaffecter ces articles avant de supprimer le Type de 
     <name>transactionInformation</name>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">Enregi&amp;amp;strer</translation>
+        <translation type="unfinished">Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Transaction Information</source>
@@ -79037,11 +79039,11 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Ship To</source>
@@ -79137,7 +79139,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Error Calculating Tax</source>
@@ -79157,11 +79159,11 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Error Creating Header</source>
@@ -79532,11 +79534,11 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Previous</source>
@@ -79723,7 +79725,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Transfer Orders:</source>
@@ -79802,7 +79804,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation>Co&amp;amp;pier</translation>
+        <translation>Co&amp;pier</translation>
     </message>
     <message>
         <source>Selected:</source>
@@ -79866,7 +79868,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Transfer Orders:</source>
@@ -79874,19 +79876,19 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Dest. Site</source>
@@ -79898,7 +79900,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Destination Site:</source>
@@ -79977,7 +79979,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>&lt;p&gt;You must enter a positive Quantity before posting this Transaction.</source>
@@ -79993,11 +79995,11 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Error Posting Inter Warehouse Transfer</source>
@@ -80076,11 +80078,11 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Qty. to Transform:</source>
@@ -80254,7 +80256,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure that you want to completely delete the selected script?</source>
@@ -80286,7 +80288,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Grade:</source>
-        <translation>Ni&amp;amp;veau</translation>
+        <translation>Ni&amp;veau</translation>
     </message>
     <message>
         <source>&amp;Package:</source>
@@ -80294,7 +80296,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>Na&amp;me:</source>
-        <translation>No&amp;amp;m:</translation>
+        <translation>No&amp;m:</translation>
     </message>
     <message>
         <source>The screen appears to have changed. Do you want to save your changes?</source>
@@ -80362,23 +80364,23 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation>&amp;amp;Exporter</translation>
+        <translation>&amp;Exporter</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation>&amp;amp;Importer</translation>
+        <translation>&amp;Importer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Delete Command?</source>
@@ -80394,11 +80396,11 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Delete Script?</source>
@@ -80476,11 +80478,11 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Screens:</source>
@@ -80500,15 +80502,15 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Test</source>
-        <translation>&amp;amp;Tester</translation>
+        <translation>&amp;Tester</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Enabled</source>
@@ -80599,23 +80601,23 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation>&amp;amp;Imputer</translation>
+        <translation>&amp;Imputer</translation>
     </message>
     <message>
         <source>List Unapplied A/P Credit Memos</source>
@@ -80630,11 +80632,11 @@ ou alors un nouvel va être créé.</translation>
     <name>unappliedARCreditMemos</name>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Cust. #</source>
@@ -80674,15 +80676,15 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation>&amp;amp;Imputer</translation>
+        <translation>&amp;Imputer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Error Retrieving Unapplied AR Credit Memo Information</source>
@@ -80709,7 +80711,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Uninvoiced Shipments</source>
@@ -80721,7 +80723,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>UOM</source>
@@ -80776,31 +80778,31 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Access Denied</source>
@@ -80927,7 +80929,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Doc. Type</source>
@@ -80963,7 +80965,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>The following G/L Transactions will be posted to the Trial Balance if you open this period:</source>
@@ -81050,15 +81052,15 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>View</source>
@@ -81066,7 +81068,7 @@ ou alors un nouvel va être créé.</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Posting Error</source>
@@ -81358,7 +81360,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Order #</source>
@@ -81366,11 +81368,11 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>N/A</source>
@@ -81398,11 +81400,11 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Type</source>
@@ -81683,11 +81685,11 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>To Value</source>
@@ -81739,11 +81741,11 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Error Saving UOM Information</source>
@@ -81762,7 +81764,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>You must select a To UOM.</source>
@@ -81770,7 +81772,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>You must select a From UOM.</source>
@@ -81778,7 +81780,7 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>You must enter a valid Ratio before saving this UOM Conversion.</source>
@@ -81813,11 +81815,11 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Units of Measure:</source>
@@ -81829,19 +81831,19 @@ Voulez-vous la reporter de toutes façons?</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Units of Measure</source>
@@ -81914,7 +81916,7 @@ Codes de Classe d&apos;Articles par Site ou sélectionner un Code de Classe de l
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Class &amp;B Cutoff:</source>
@@ -81934,7 +81936,7 @@ Codes de Classe d&apos;Articles par Site ou sélectionner un Code de Classe de l
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>ABC Class Code Updated</source>
@@ -81969,7 +81971,7 @@ Codes de Classe d&apos;Articles par Site ou sélectionner un Code de Classe de l
     </message>
     <message>
         <source>&amp;Roll Up Standard Costs</source>
-        <translation>Cumuler Coûts Standa&amp;amp;rds</translation>
+        <translation>Cumuler Coûts Standa&amp;rds</translation>
     </message>
     <message>
         <source>Update Direct Labor Cost</source>
@@ -82009,7 +82011,7 @@ Codes de Classe d&apos;Articles par Site ou sélectionner un Code de Classe de l
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Update</source>
@@ -82049,7 +82051,7 @@ Illegal parameter value &apos;%2&apos; for &apos;costtype&apos;</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Update Actual Costs by Item</source>
@@ -82093,7 +82095,7 @@ Illegal parameter value &apos;%2&apos; for &apos;costtype&apos;</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Select all Costs</source>
@@ -82132,11 +82134,11 @@ Illegal parameter value &apos;%2&apos; for &apos;costtype&apos;</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Update</source>
-        <translation>Mettre à Jo&amp;amp;ur</translation>
+        <translation>Mettre à Jo&amp;ur</translation>
     </message>
 </context>
 <context>
@@ -82147,19 +82149,19 @@ Illegal parameter value &apos;%2&apos; for &apos;costtype&apos;</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Class &amp;A Frequency:</source>
-        <translation>Fréquence Classe &amp;amp;A</translation>
+        <translation>Fréquence Classe &amp;A</translation>
     </message>
     <message>
         <source>Class &amp;C Frequency:</source>
-        <translation>Fréquence Classe &amp;amp;C</translation>
+        <translation>Fréquence Classe &amp;C</translation>
     </message>
     <message>
         <source>Class &amp;B Frequency:</source>
-        <translation>Fréquence Classe &amp;amp;B</translation>
+        <translation>Fréquence Classe &amp;B</translation>
     </message>
     <message>
         <source>Days</source>
@@ -82167,14 +82169,14 @@ Illegal parameter value &apos;%2&apos; for &apos;costtype&apos;</source>
     </message>
     <message>
         <source>&amp;Update</source>
-        <translation>Mettre à Jo&amp;amp;ur</translation>
+        <translation>Mettre à Jo&amp;ur</translation>
     </message>
 </context>
 <context>
     <name>updateItemSiteLeadTimes</name>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;amp;Annuler</translation>
+        <translation type="unfinished">&amp;Annuler</translation>
     </message>
     <message>
         <source>Days</source>
@@ -82186,7 +82188,7 @@ Illegal parameter value &apos;%2&apos; for &apos;costtype&apos;</source>
     </message>
     <message>
         <source>&amp;Update</source>
-        <translation>Mettre à Jo&amp;amp;ur</translation>
+        <translation>Mettre à Jo&amp;ur</translation>
     </message>
     <message>
         <source>Update Item Site Lead Time Days</source>
@@ -82214,7 +82216,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Update</source>
-        <translation>Mettre à Jo&amp;amp;ur</translation>
+        <translation>Mettre à Jo&amp;ur</translation>
     </message>
     <message>
         <source>Check and Update Customers Credit Status if they have Late Open Items</source>
@@ -82222,7 +82224,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
 </context>
 <context>
@@ -82245,7 +82247,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Enter a Update Percentage</source>
@@ -82257,7 +82259,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Update</source>
-        <translation>Mettre à Jo&amp;amp;ur</translation>
+        <translation>Mettre à Jo&amp;ur</translation>
     </message>
     <message>
         <source>Error Updating List Price Information</source>
@@ -82292,7 +82294,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Periods to Include in Analysis</source>
@@ -82300,7 +82302,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Update</source>
-        <translation>Mettre à Jo&amp;amp;ur</translation>
+        <translation>Mettre à Jo&amp;ur</translation>
     </message>
     <message>
         <source>Calendar:</source>
@@ -82339,7 +82341,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Update</source>
-        <translation>Mettre à Jo&amp;amp;ur</translation>
+        <translation>Mettre à Jo&amp;ur</translation>
     </message>
     <message>
         <source>Fixed Days:</source>
@@ -82347,7 +82349,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Periods to Include in Analysis</source>
@@ -82370,7 +82372,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Incomplete Data</source>
@@ -82390,7 +82392,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Update</source>
-        <translation>Mettre à Jo&amp;amp;ur</translation>
+        <translation>Mettre à Jo&amp;ur</translation>
     </message>
     <message>
         <source>Item Site Lead Time + </source>
@@ -82580,7 +82582,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Periods to Include in Analysis</source>
@@ -82680,7 +82682,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Post</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Error Updating Reorder Level Information</source>
@@ -82720,7 +82722,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Getting User Sites</source>
@@ -82760,7 +82762,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>Proper &amp;Name:</source>
-        <translation>&amp;amp;Nom Correct:</translation>
+        <translation>&amp;Nom Correct:</translation>
     </message>
     <message>
         <source>No Spaces Allowed</source>
@@ -82768,7 +82770,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Active</source>
-        <translation>&amp;amp;Actif</translation>
+        <translation>&amp;Actif</translation>
     </message>
     <message>
         <source>&amp;Initials:</source>
@@ -82800,11 +82802,11 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Module:</source>
@@ -83039,7 +83041,7 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>This Costing Element already exists.  You have been placed in edit mode.</source>
@@ -83055,11 +83057,11 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Active</source>
-        <translation>&amp;amp;Actif</translation>
+        <translation>&amp;Actif</translation>
     </message>
     <message>
         <source>Accept P/&amp;O Distributions</source>
-        <translation>Accepter Répartiti&amp;amp;ons BC</translation>
+        <translation>Accepter Répartiti&amp;ons BC</translation>
     </message>
     <message>
         <source>You must enter a Name for this Costing Element.</source>
@@ -83071,11 +83073,11 @@ Item: %2 - %3</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>A Costing Elements with the entered code already exists.
@@ -83163,7 +83165,7 @@ Vous ne pouvez pas créer un Élément de Prix de Revient avec ce code.</transla
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Keystroke</source>
@@ -83171,7 +83173,7 @@ Vous ne pouvez pas créer un Élément de Prix de Revient avec ce code.</transla
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Hot Keys</source>
@@ -83396,7 +83398,7 @@ Please enter both again carefully.</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Get Translations...</source>
@@ -83507,11 +83509,11 @@ Please enter both again carefully.</source>
     <name>users</name>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Status</source>
@@ -83519,7 +83521,7 @@ Please enter both again carefully.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Active</source>
@@ -83539,7 +83541,7 @@ Please enter both again carefully.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>List User Accounts</source>
@@ -83614,7 +83616,7 @@ Please enter both again carefully.</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Account</source>
@@ -83646,11 +83648,11 @@ Please enter both again carefully.</source>
     </message>
     <message>
         <source>&amp;Active</source>
-        <translation>&amp;amp;Actif</translation>
+        <translation>&amp;Actif</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Print</source>
@@ -83658,11 +83660,11 @@ Please enter both again carefully.</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -83760,7 +83762,7 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Transmission</source>
@@ -83832,7 +83834,7 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>Receives a &amp;1099</source>
-        <translation>Reçoit un &amp;amp;1099</translation>
+        <translation>Reçoit un &amp;1099</translation>
     </message>
     <message>
         <source>&amp;Qualified</source>
@@ -83848,7 +83850,7 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Account Number:</source>
@@ -83860,7 +83862,7 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Account Type:</source>
@@ -84091,11 +84093,11 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -84103,7 +84105,7 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Number:</source>
@@ -84130,7 +84132,7 @@ and Purchase Order amounts</source>
     <name>vendorAddressList</name>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;amp;Annuler</translation>
+        <translation type="unfinished">&amp;Annuler</translation>
     </message>
     <message>
         <source>Name</source>
@@ -84309,11 +84311,11 @@ and Purchase Order amounts</source>
     <name>vendorTypes</name>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;amp;Fermer</translation>
+        <translation type="unfinished">&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>Vendor Types:</source>
@@ -84325,7 +84327,7 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>The selected Vendor Type cannot be deleted as there are one or more Vendors assigned to it.
@@ -84343,11 +84345,11 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouveau</translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>List Vendor Types</source>
@@ -84517,7 +84519,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>New</source>
@@ -84537,7 +84539,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Void</source>
-        <translation>A&amp;amp;nnuler</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -84553,7 +84555,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>Po&amp;st</source>
-        <translation>Re&amp;amp;porter</translation>
+        <translation>Re&amp;porter</translation>
     </message>
     <message>
         <source>Bank Account:</source>
@@ -84652,7 +84654,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     <name>voidChecks</name>
     <message>
         <source>&amp;Void</source>
-        <translation>A&amp;amp;nnuler</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <source>Bank Account:</source>
@@ -84664,7 +84666,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Void Payments</source>
@@ -84703,11 +84705,11 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Closed</source>
@@ -84799,7 +84801,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Balance:</source>
@@ -84823,7 +84825,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>Save Voucher?</source>
@@ -84835,7 +84837,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>PO Unit Price</source>
@@ -84887,7 +84889,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Distributing Line</source>
@@ -84943,7 +84945,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>Flag for &amp;1099</source>
-        <translation>Indicateur pour &amp;amp;1099</translation>
+        <translation>Indicateur pour &amp;1099</translation>
     </message>
     <message>
         <source>Error Distributing</source>
@@ -84983,7 +84985,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>Distribute &amp;All</source>
-        <translation>Répartir &amp;amp;Tout</translation>
+        <translation>Répartir &amp;Tout</translation>
     </message>
     <message>
         <source>Distribute &amp;Line</source>
@@ -84991,7 +84993,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Clear</source>
-        <translation>Effa&amp;amp;cer</translation>
+        <translation>Effa&amp;cer</translation>
     </message>
     <message>
         <source>Vend. Item #</source>
@@ -85103,7 +85105,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>Co&amp;mments</source>
-        <translation type="unfinished">Co&amp;amp;mmentaires</translation>
+        <translation type="unfinished">Co&amp;mmentaires</translation>
     </message>
 </context>
 <context>
@@ -85198,7 +85200,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Receiving</source>
@@ -85206,7 +85208,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Line #:</source>
@@ -85274,11 +85276,11 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Due Date:</source>
@@ -85294,7 +85296,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Invoice Value Mismatch</source>
@@ -85357,7 +85359,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Voucher Item Distribution</source>
@@ -85369,7 +85371,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Costing Element:</source>
@@ -85384,11 +85386,11 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Discountable</source>
@@ -85531,7 +85533,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvel</translation>
+        <translation>&amp;Nouvel</translation>
     </message>
     <message>
         <source>Tax Zone:</source>
@@ -85583,7 +85585,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Force the use of Count Slips</source>
@@ -85591,7 +85593,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Aisle Size:</source>
@@ -85599,7 +85601,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&lt;p&gt;You must select a Cost Category for this Transit Site before saving it.</source>
@@ -85619,7 +85621,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Comments</source>
@@ -85675,7 +85677,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Description:</source>
-        <translation>&amp;amp;Description:</translation>
+        <translation>&amp;Description:</translation>
     </message>
     <message>
         <source>&lt;p&gt;The new Site information cannot be saved as the new Site Code that you entered conflicts with an existing Site. You must uniquely name this Site before you may save it.</source>
@@ -85695,11 +85697,11 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Active</source>
-        <translation>&amp;amp;Actif</translation>
+        <translation>&amp;Actif</translation>
     </message>
     <message>
         <source>Transfer Order Pick List:</source>
@@ -85738,15 +85740,15 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Site Zone information cannot be saved as the Site Zone Name that you entered conflicts with an existing Site Zone. You must uniquely name this Site Zone before you may save it.</source>
@@ -85801,11 +85803,11 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Print</source>
-        <translation>Im&amp;amp;primer</translation>
+        <translation>Im&amp;primer</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>View...</source>
@@ -85817,11 +85819,11 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>List Item Sites...</source>
@@ -85829,7 +85831,7 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Type</source>
@@ -85891,11 +85893,11 @@ Vous devez réaffecter ces Fournisseurs avant que vous puissiez supprimer le Typ
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>A W/O Material Requirement cannot be created for the selected
@@ -85907,7 +85909,7 @@ où le Bon de Travail sélectionné est.</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Cannot Create W/O Material Requirement</source>
@@ -86051,7 +86053,7 @@ and Work Order Component Items may not be Job Costed.</source>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;amp;Non</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Change Date</source>
@@ -86132,7 +86134,7 @@ sélectionné alors la demande de la Commande Client restera mais le Bon de Trav
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Cost Recognition</source>
@@ -86190,7 +86192,7 @@ Voulez-vous mettre à jour la quantité commandée et créer la commande?</trans
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;amp;Oui</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>Work Order not Exploded</source>
@@ -86290,7 +86292,7 @@ S.V.P. corriger avant de créer ce Bon de Travail</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;amp;Annuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>The Work Order was created but not Exploded as the Work Order status is not Open
@@ -86713,7 +86715,7 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>Maintain Work Order Materials</source>
@@ -86721,7 +86723,7 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;amp;Supprimer</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Material Requirements:</source>
@@ -86729,7 +86731,7 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>Scrap %</source>
@@ -86737,11 +86739,11 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;amp;Nouvelle</translation>
+        <translation>&amp;Nouvelle</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;amp;Visualiser</translation>
+        <translation>&amp;Visualiser</translation>
     </message>
     <message>
         <source>Current Std. Material Cost:</source>
@@ -86836,7 +86838,7 @@ Please correct before creating this Work Order</source>
     <name>xTupleDesigner</name>
     <message>
         <source>&amp;Tool</source>
-        <translation type="unfinished">Ou&amp;amp;tils</translation>
+        <translation type="unfinished">Ou&amp;tils</translation>
     </message>
     <message>
         <source>Object Inspector</source>
@@ -86844,11 +86846,11 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>Modifi&amp;amp;er</translation>
+        <translation>Modifi&amp;er</translation>
     </message>
     <message>
         <source>&amp;Form</source>
-        <translation>&amp;amp;Formulaire</translation>
+        <translation>&amp;Formulaire</translation>
     </message>
     <message>
         <source>Widget Box</source>
@@ -86864,7 +86866,7 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;amp;Fichier</translation>
+        <translation>&amp;Fichier</translation>
     </message>
 </context>
 <context>
@@ -86931,11 +86933,11 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Save...</source>
-        <translation>Enregi&amp;amp;strer</translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>&amp;Revert</source>
@@ -87061,7 +87063,7 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;amp;Fermer</translation>
+        <translation>&amp;Fermer</translation>
     </message>
     <message>
         <source>&amp;Zero</source>

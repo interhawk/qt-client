@@ -12,6 +12,8 @@ isEqual(QT_MAJOR_VERSION, 5) {
   CONFIG += designer uitools
 }
 
+CONFIG -= staticlib
+
 TEMPLATE = app
 
 INCLUDEPATH += ../scriptapi \
@@ -62,12 +64,15 @@ mac:!static:contains(QT_CONFIG, qt_framework) {
 
 OBJECTS_DIR = tmp/obj
 win32 {
-  win32-msvc*:LIBS += -lshell32
   RC_FILE = rcguiclient.rc
   LIBS += -lz
 }
 win32-g++-4.6 {
   LIBS += -lz
+}
+win32-msvc*{
+  LIBS += -lshell32
+  LIBS -= -lz
 }
 
 unix: !macx {
