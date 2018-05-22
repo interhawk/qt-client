@@ -1026,6 +1026,7 @@ const struct {
   { "stdjrnlgrp_stdjrnlgrp_name_key",           Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "A Standard Journal Group already exists with this name.") },
   { "subaccnt_subaccnt_number_check",           Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "The Subaccount number is required.") },
   { "subaccnt_subaccnt_number_key",             Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "A Subaccount already exists with this number.") },
+  { "task_task_name_check",                     Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "You must enter both a Task Number and Task Name.") },
   { "tasktmpl_name_unq",                        Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "A Task Template already exists with this number.") },
 //{ "tax_tax_basis_tax_id_fkey",                Delete,  0, QT_TRANSLATE_NOOP("errorReporter", "") },
 //{ "tax_tax_basis_tax_id_fkey",                Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "") },
