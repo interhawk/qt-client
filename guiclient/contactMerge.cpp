@@ -263,7 +263,8 @@ void contactMerge::sFillList()
   }
   else
   {
-    QString qryStr = "SELECT cntct_id, "
+    ParameterList params;
+    MetaSQLQuery mql("SELECT cntct_id, "
                      "       CASE WHEN cntctsel_cntct_id IS NOT NULL "
                      "             AND cntctsel_target THEN 1 "
                      "            WHEN cntctsel_cntct_id IS NOT NULL "
@@ -292,26 +293,21 @@ void contactMerge::sFillList()
                      "  LEFT OUTER JOIN addr ON cntct_addr_id=addr_id "
                      "  LEFT OUTER JOIN crmacct ON cntct_crmacct_id=crmacct_id "
                      "  LEFT OUTER JOIN cntctsel ON cntct_id=cntctsel_cntct_id "
-                     "  LEFT OUTER JOIN cntctmrgd ON cntct_id=cntctmrgd_cntct_id"
-                     " WHERE cntct_id IN (";
+                     "  LEFT OUTER JOIN cntctmrgd ON cntct_id=cntctmrgd_cntct_id "
+                     " WHERE cntct_id IN (-1 "
+                     "       <? foreach('contacts') ?> "
+                     "       , <? value('contacts') ?> "
+                     "       <? endforeach ?> "
+                     "       ) "
+                     "<? if not exists('merge') ?> "
+                     "   AND cntctmrgd_cntct_id IS NOT NULL "
+                     "<? endif ?>;");
 
-    for (int i = 0; i < _contacts.size(); i++)
-    {
-      qryStr += QString(":id%1").arg(i);
-      if (i != _contacts.size() -1)
-        qryStr += ",";
-    }
-
+    params.append("contacts", _contacts);
     if ((_mode->currentIndex() == 0) || (_mode->currentIndex() == 2)) // cMerge or cMergePurge
-      qryStr += ");";
-    else
-      qryStr += ") AND cntctmrgd_cntct_id IS NOT NULL;";
+      params.append("merge");
 
-    XSqlQuery qry;
-    qry.prepare(qryStr);
-    for (int i=0; i < _contacts.size(); i++)
-      qry.bindValue(QString(":id%1").arg(i), _contacts[i]);
-    qry.exec();
+    XSqlQuery qry = mql.toQuery(params);
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Contact Information"),
                                   qry, __FILE__, __LINE__))
     {
