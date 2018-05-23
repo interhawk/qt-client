@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -47,15 +47,16 @@ itemPricingSchedules::itemPricingSchedules(QWidget* parent, const char* name, Qt
     connect(_ipshead, SIGNAL(valid(bool)), _edit, SLOT(setEnabled(bool)));
     connect(_ipshead, SIGNAL(valid(bool)), _copy, SLOT(setEnabled(bool)));
     connect(_ipshead, SIGNAL(valid(bool)), _delete, SLOT(setEnabled(bool)));
+    connect(_ipshead, SIGNAL(valid(bool)), _view, SLOT(setEnabled(bool)));
+    connect(_ipshead, SIGNAL(itemSelected(int)), _edit, SLOT(animateClick()));
   }
-  else
-    _new->setEnabled(false);
-
-  if (_privileges->check("MaintainPricingSchedules ViewPricingSchedules"))
+  else if (_privileges->check("ViewPricingSchedules"))
   {
     connect(_ipshead, SIGNAL(valid(bool)), _view, SLOT(setEnabled(bool)));
     connect(_ipshead, SIGNAL(itemSelected(int)), _view, SLOT(animateClick()));
   }
+
+  _new->setEnabled(_privileges->check("MaintainPricingSchedules"));
 
   _listpricesched = false;
 }
