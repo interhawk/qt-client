@@ -19,6 +19,7 @@
 
 #include "contact.h"
 #include "errorReporter.h"
+#include "metasql.h"
 #include "parameterwidget.h"
 #include "prospect.h"
 #include "storedProcErrorLookup.h"
@@ -333,7 +334,8 @@ void contacts::sDelete()
 
 void contacts::sMark()
 {
-  QString qryStr = "INSERT INTO mrkd "
+  ParameterList params;
+  MetaSQLQuery mql("INSERT INTO mrkd "
                    "(mrkd_target_type, mrkd_target_id) "
                    "SELECT 'T', cntct_id "
                    "  FROM cntct "
@@ -341,22 +343,18 @@ void contacts::sMark()
                    "                    FROM mrkd "
                    "                   WHERE mrkd_target_type = 'T' "
                    "                     AND mrkd_target_id = cntct_id) "
-                   "   AND cntct_id IN (";
+                   "   AND cntct_id IN (-1 "
+                   "       <? foreach('contacts') ?> "
+                   "       , <? value('contacts') ?> "
+                   "       <? endforeach ?> "
+                   "       );");
 
-  for (int i = 0; i < list()->selectedItems().size(); i++)
-  {
-    qryStr += QString(":id%1").arg(i);
-    if (i != list()->selectedItems().size() -1)
-      qryStr += ",";
-  }
+  QList<QVariant> contacts;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    contacts.append(item->id());
 
-  qryStr += ");";
-
-  XSqlQuery qry;
-  qry.prepare(qryStr);
-  for (int i = 0; i < list()->selectedItems().size(); i++)
-    qry.bindValue(QString(":id%1").arg(i), (list()->selectedItems())[i]->id());
-  qry.exec();
+  params.append("contacts", contacts);
+  XSqlQuery qry = mql.toQuery(params);
 
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Marking failed"),
                            qry, __FILE__, __LINE__))
@@ -367,24 +365,21 @@ void contacts::sMark()
 
 void contacts::sUnmark()
 {
-  QString qryStr = "DELETE FROM mrkd "
+  ParameterList params;
+  MetaSQLQuery mql("DELETE FROM mrkd "
                    " WHERE mrkd_target_type = 'T' "
-                   "   AND mrkd_target_id IN (";
+                   "   AND mrkd_target_id IN (-1 "
+                   "       <? foreach('contacts') ?> "
+                   "       , <? value('contacts') ?> "
+                   "       <? endforeach ?> "
+                   "       );");
 
-  for (int i = 0; i < list()->selectedItems().size(); i++)
-  {
-    qryStr += QString(":id%1").arg(i);
-    if (i != list()->selectedItems().size() -1)
-      qryStr += ",";
-  }
+  QList<QVariant> contacts;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    contacts.append(item->id());
 
-  qryStr += ");";
-
-  XSqlQuery qry;
-  qry.prepare(qryStr);
-  for (int i = 0; i < list()->selectedItems().size(); i++)
-    qry.bindValue(QString(":id%1").arg(i), (list()->selectedItems())[i]->id());
-  qry.exec();
+  params.append("contacts", contacts);
+  XSqlQuery qry = mql.toQuery(params);
 
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Unmarking failed"),
                            qry, __FILE__, __LINE__))
