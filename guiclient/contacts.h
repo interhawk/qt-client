@@ -53,7 +53,7 @@ signals:
 
 private:
     int _crmacctid;
-    QString _replace;
+    int _replace;
 
     QAction * _attachAct;
     QAction * _detachAct;

@@ -21,6 +21,7 @@
 #include "characteristic.h"
 #include "contact.h"
 #include "errorReporter.h"
+#include "metasql.h"
 #include "parameterwidget.h"
 #include "prospect.h"
 #include "storedProcErrorLookup.h"
@@ -197,7 +198,7 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 
 void contacts::sPopulateHeaderMenu(QMenu *pMenu, QTreeWidgetItem *, int index)
 {
-  _replace = list()->column(index);
+  _replace = index;
 
   if (list()->selectedItems().size() > 0)
   {
@@ -209,47 +210,25 @@ void contacts::sPopulateHeaderMenu(QMenu *pMenu, QTreeWidgetItem *, int index)
 
 void contacts::sReplace()
 {
-  QString label;
+  QString label = tr("New %1").arg(list()->headerItem()->text(_replace).mid(3));
+  QString col = list()->column(_replace);
   characteristic::Type chartype = characteristic::Text;
   int charid = -1;
   QVariant replace;
 
-  if (_replace == "cntct_first_name")
-    label = tr("New First Name:");
-  else if(_replace == "cntct_last_name")
-    label = tr("New Last Name:");
-  else if(_replace == "cntct_owner_username")
-    label = tr("New Owner:");
-  else if(_replace == "cntct_title")
-    label = tr("New Title:");
-  else if(_replace == "cntct_phone")
-    label = tr("New Phone:");
-  else if(_replace == "cntct_phone2")
-    label = tr("New Alternate:");
-  else if(_replace == "cntct_fax")
-    label = tr("New Fax:");
-  else if(_replace == "cntct_email")
-    label = tr("New Email:");
-  else if(_replace == "cntct_webaddr")
-    label = tr("New Web Address:");
-  else if (_replace.contains("crmacct"))
-    label = tr("New CRM Account:");
-  else if (_replace.contains("addr"))
-    label = tr("New Address:");
-  else if (_replace.contains("char"))
+  if (col.contains("char"))
   {
-    charid = _replace.mid(4).toInt();
+    charid = col.mid(4).toInt();
     if (charid > 0)
     {
       XSqlQuery qry;
-      qry.prepare("SELECT char_name, char_type "
+      qry.prepare("SELECT char_type "
                   "  FROM char "
                   " WHERE char_id=:char_id;");
       qry.bindValue(":char_id", charid);
       qry.exec();
       if (qry.first())
       {
-        label = "New " + qry.value("char_name").toString() + ":";
         chartype = (characteristic::Type)(qry.value("char_type").toInt());
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Characteristic lookup failed"),
@@ -260,15 +239,15 @@ void contacts::sReplace()
 
   bool ok;
 
-  if (_replace.contains("cntct"))
+  if (col.contains("cntct"))
     replace = QInputDialog::getText(this, tr("Replace"), label, QLineEdit::Normal, "", &ok);
-  else if (_replace.contains("crmacct") || _replace.contains("addr"))
+  else if (col.contains("crmacct") || col.contains("addr"))
   {
     ParameterList params;
     params.append("label", label);
-    if (_replace.contains("crmacct"))
+    if (col.contains("crmacct"))
       params.append("type", "crmacct");
-    else if (_replace.contains("addr"))
+    else if (col.contains("addr"))
       params.append("type", "addr");
 
     XClusterInputDialog newdlg(this, "", true);
@@ -279,7 +258,7 @@ void contacts::sReplace()
       ok = true;
     }
   }
-  else if (_replace.contains("char"))
+  else if (col.contains("char"))
   {
     if (chartype == characteristic::Text)
       replace = QInputDialog::getText(this, tr("Replace"), label, QLineEdit::Normal, "", &ok);
@@ -321,71 +300,76 @@ void contacts::sReplace()
   }
 
   if (ok && QMessageBox::warning(this, tr("Bulk Replace?"),
-                                 tr("<p>The selected value will be replaced for all selected "
-                                    "items. Are you sure you want to do this?"),
+                                 tr("<p>The selected value will be replaced for all %1 selected "
+                                    "items. Are you sure you want to do this?")
+                                 .arg(list()->selectedItems().size()),
                                  QMessageBox::Yes | QMessageBox::No,
                                  QMessageBox::No) == QMessageBox::Yes)
   {
-    QString insertStr;
-    QString updateStr;
-    if (!_replace.contains("char"))
+    ParameterList params;
+    MetaSQLQuery insert;
+    MetaSQLQuery update;
+    if (!col.contains("char"))
     {
-      updateStr = "UPDATE cntct SET ";
-      if (_replace.contains("cntct"))
-        updateStr += _replace;
-      else if(_replace.contains("crmacct"))
-        updateStr += "cntct_crmacct_id";
-      else if(_replace.contains("addr"))
-        updateStr += "cntct_addr_id";
-    
-      updateStr += "=:replace WHERE cntct_id IN (";
+      QString column;
+      if (col.contains("cntct"))
+        column = col;
+      else if(col.contains("crmacct"))
+        column = "cntct_crmacct_id";
+      else if(col.contains("addr"))
+        column = "cntct_addr_id";
+
+      update.setQuery(QString("UPDATE cntct "
+                              "   SET %1 = <? value('replace') ?> "
+                              " WHERE cntct_id IN (-1 "
+                              "       <? foreach('contacts') ?> "
+                              "       , <? value('contacts') ?> "
+                              "       <? endforeach ?> "
+                              "       );").arg(column));
     }
     else
     {
-      insertStr = "INSERT INTO charass "
-                  "(charass_target_type, charass_target_id, charass_char_id, charass_value) "
-                  "SELECT 'CNTCT', cntct_id, :char_id, :replace "
-                  "  FROM cntct "
-                  " WHERE NOT EXISTS(SELECT 1 "
-                  "                    FROM charass "
-                  "                   WHERE charass_target_type = 'CNTCT' "
-                  "                     AND charass_target_id = cntct_id "
-                  "                     AND charass_char_id = :char_id) "
-                  "  AND cntct_id IN (";
-      updateStr = "UPDATE charass "
-                  "   SET charass_value=:replace "
-                  " WHERE charass_target_type='CNTCT' "
-                  "   AND charass_char_id = :char_id "
-                  "   AND charass_target_id IN (";
+      insert.setQuery("INSERT INTO charass "
+                      "(charass_target_type, charass_target_id, charass_char_id, charass_value) "
+                      "SELECT 'CNTCT', cntct_id, <? value('char_id') ?>, <? value('replace') ?> "
+                      "  FROM cntct "
+                      " WHERE NOT EXISTS(SELECT 1 "
+                      "                    FROM charass "
+                      "                   WHERE charass_target_type = 'CNTCT' "
+                      "                     AND charass_target_id = cntct_id "
+                      "                     AND charass_char_id = <? value('char_id') ?>) "
+                      "   AND cntct_id IN (-1 "
+                      "       <? foreach('contacts') ?> "
+                      "       , <? value('contacts') ?> "
+                      "       <? endforeach ?> "
+                      "       );");
+      update.setQuery("UPDATE charass "
+                      "   SET charass_value=<? value('replace') ?> "
+                      " WHERE charass_target_type='CNTCT' "
+                      "   AND charass_char_id = <? value('char_id') ?> "
+                      "   AND charass_target_id IN (-1 "
+                      "       <? foreach('contacts') ?> "
+                      "       , <? value('contacts') ?> "
+                      "       <? endforeach ?> "
+                      "       );");
+
+      params.append("char_id", charid);
     }
 
-    for (int i = 0; i < list()->selectedItems().size(); i++)
-    {
-      insertStr += QString(":id%1").arg(i);
-      updateStr += QString(":id%1").arg(i);
-      if (i != list()->selectedItems().size() -1)
-      {
-        insertStr += ",";
-        updateStr += ",";
-      }
-    }
+    QList<QVariant> contacts;
+    foreach (XTreeWidgetItem* item, list()->selectedItems())
+      contacts.append(item->id());
 
-    insertStr += ");";
-    updateStr += ");";
+    params.append("replace", replace);
+    params.append("contacts", contacts);
 
     XSqlQuery begin("BEGIN;");
     XSqlQuery rollback;
     rollback.prepare("ROLLBACK;");
 
-    XSqlQuery qry;
-    if (_replace.contains("char"))
+    if (col.contains("char"))
     {
-      qry.prepare(insertStr);
-      qry.bindValue(":char_id", charid);
-      for (int i = 0; i < list()->selectedItems().size(); i++)
-        qry.bindValue(QString(":id%1").arg(i), (list()->selectedItems())[i]->id());
-      qry.bindValue(":replace", replace);
-      qry.exec();
+      XSqlQuery qry = insert.toQuery(params);
 
       if (ErrorReporter::error(QtCriticalMsg, this, tr("Replace failed"),
                                qry, __FILE__, __LINE__))
@@ -395,13 +379,7 @@ void contacts::sReplace()
       }
     }
 
-    qry.prepare(updateStr);
-    if (_replace.contains("char"))
-      qry.bindValue(":char_id", charid);
-    for (int i = 0; i < list()->selectedItems().size(); i++)
-      qry.bindValue(QString(":id%1").arg(i), (list()->selectedItems())[i]->id());
-    qry.bindValue(":replace", replace);
-    qry.exec();
+    XSqlQuery qry = update.toQuery(params);
 
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Replace failed"),
                              qry, __FILE__, __LINE__))
