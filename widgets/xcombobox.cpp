@@ -1514,10 +1514,7 @@ QString XComboBox::code() const
 
 bool XComboBox::isValid() const
 {
-  if ((allowNull()) && (id() == -1))
-    return false;
-  else
-    return true;
+  return id() != -1;
 }
 
 void XComboBox::sHandleNewIndex(int pIndex)
