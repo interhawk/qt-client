@@ -1599,6 +1599,7 @@ void XTreeWidget::sShowHeaderMenu(const QPoint &pntThis)
   _menu->addSeparator();
 
   QTreeWidgetItem *hitem = headerItem();
+  emit populateHeaderMenu(_menu, hitem, logicalIndex);
   for (int i = 0; i < header()->count(); i++)
   {
     QAction *act = _menu->addAction(hitem->text(i));

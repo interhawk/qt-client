@@ -400,6 +400,7 @@ display::display(QWidget* parent, const char* name, Qt::WindowFlags flags)
   connect(_data->_searchAct, SIGNAL(triggered()), this, SLOT(sFillList()));
   connect(this, SIGNAL(fillList()), this, SLOT(sFillList()));
   connect(_data->_list, SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateMenu(QMenu*,QTreeWidgetItem*,int)));
+  connect(_data->_list, SIGNAL(populateHeaderMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateHeaderMenu(QMenu*,QTreeWidgetItem*,int)));
   connect(_data->_autoupdate, SIGNAL(toggled(bool)), this, SLOT(sAutoUpdateToggled()));
   connect(filterButton, SIGNAL(toggled(bool)), _data->_moreBtn, SLOT(setChecked(bool)));
 }
@@ -814,6 +815,10 @@ void display::sFillList(ParameterList pParams, bool forceSetParams)
 }
 
 void display::sPopulateMenu(QMenu *, QTreeWidgetItem *, int)
+{
+}
+
+void display::sPopulateHeaderMenu(QMenu *, QTreeWidgetItem *, int)
 {
 }
 
