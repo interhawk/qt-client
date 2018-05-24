@@ -18,6 +18,7 @@
 #include <QMessageBox>
 
 #include "contact.h"
+#include "contactMerge.h"
 #include "errorReporter.h"
 #include "parameterwidget.h"
 #include "prospect.h"
@@ -154,6 +155,13 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(editPriv);
+
+  if (list()->selectedItems().count() > 1)
+  {
+    pMenu->addSeparator();
+    menuItem = pMenu->addAction(tr("Merge Contacts..."), this, SLOT(sMerge()));
+    menuItem->setEnabled(_privileges->check("MergeContacts"));
+  }
 
   // Create, Edit, View Prospect
 
@@ -304,6 +312,20 @@ void contacts::sDelete()
 
     sFillList();
   }
+}
+
+void contacts::sMerge()
+{
+  QList<QVariant> ids;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    ids.append(item->id());
+
+  ParameterList params;
+  params.append("contacts", ids);
+
+  contactMerge *newdlg = new contactMerge();
+  newdlg->set(params);
+  omfgThis->handleNewWindow(newdlg);
 }
 
 void contacts::sAttach()

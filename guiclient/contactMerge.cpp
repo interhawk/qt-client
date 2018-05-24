@@ -105,6 +105,28 @@ void contactMerge::languageChange()
     retranslateUi(this);
 }
 
+enum SetResponse contactMerge::set(const ParameterList &pParams)
+{
+  XWidget::set(pParams);
+  QVariant param;
+  bool valid;
+
+  param = pParams.value("contacts", &valid);
+  if (valid)
+  {
+    _contacts = param.toList();
+
+    _searchLit->setVisible(false);
+    _search->setVisible(false);
+    _showGroup->setVisible(false);
+    _searchGroup->setVisible(false);
+
+    sFillList();
+  }
+
+  return NoError;
+}
+
 void contactMerge::sAdd()
 {
   sSelect(false);
@@ -196,39 +218,95 @@ void contactMerge::sDeselectSource()
 
 void contactMerge::sFillList()
 {
-
-  if ((_mode->currentIndex() == 0) || (_mode->currentIndex() == 2)) // cMerge or cMergePurge
+  if (_contacts.isEmpty())
   {
-    ParameterList params;
-    params.append("searchText", _search->text());
-    params.append("searchContactName", QVariant(_searchContact->isChecked()));
-    params.append("searchPhone", QVariant(_searchPhone->isChecked()));
-    params.append("searchEmail", QVariant(_searchEmail->isChecked()));
-    params.append("searchNumber", QVariant(_searchNumber->isChecked()));
-    params.append("searchName", QVariant(_searchName->isChecked()));
-    params.append("showInactive", QVariant(_showInactive->isChecked()));
-    params.append("ignoreBlanks", QVariant(!_blanks->isChecked()));
-    params.append("IndentedDups", QVariant(_showGroup->isChecked()));
-    params.append("CheckHnfc", QVariant(_showGroup->isChecked() && _checkHonorific->isChecked()));
-    params.append("CheckFirst", QVariant(_showGroup->isChecked() && _checkFirst->isChecked()));
-    params.append("CheckMiddle", QVariant(_showGroup->isChecked() && _checkMiddle->isChecked()));
-    params.append("CheckLast", QVariant(_showGroup->isChecked() && _checkLast->isChecked()));
-    params.append("CheckSuffix", QVariant(_showGroup->isChecked() && _checkSuffix->isChecked()));
-    params.append("CheckPhone", QVariant(_showGroup->isChecked() && _checkPhone->isChecked()));
-    params.append("CheckEmail", QVariant(_showGroup->isChecked() && _checkEmail->isChecked()));
-    MetaSQLQuery mql = mqlLoad("contactmerge", "search");
-    XSqlQuery qry = mql.toQuery(params);
-    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Contact Information"),
-                                qry, __FILE__, __LINE__))
+    if ((_mode->currentIndex() == 0) || (_mode->currentIndex() == 2)) // cMerge or cMergePurge
     {
-      return;
+      ParameterList params;
+      params.append("searchText", _search->text());
+      params.append("searchContactName", QVariant(_searchContact->isChecked()));
+      params.append("searchPhone", QVariant(_searchPhone->isChecked()));
+      params.append("searchEmail", QVariant(_searchEmail->isChecked()));
+      params.append("searchNumber", QVariant(_searchNumber->isChecked()));
+      params.append("searchName", QVariant(_searchName->isChecked()));
+      params.append("showInactive", QVariant(_showInactive->isChecked()));
+      params.append("ignoreBlanks", QVariant(!_blanks->isChecked()));
+      params.append("IndentedDups", QVariant(_showGroup->isChecked()));
+      params.append("CheckHnfc", QVariant(_showGroup->isChecked() && _checkHonorific->isChecked()));
+      params.append("CheckFirst", QVariant(_showGroup->isChecked() && _checkFirst->isChecked()));
+      params.append("CheckMiddle", QVariant(_showGroup->isChecked() && _checkMiddle->isChecked()));
+      params.append("CheckLast", QVariant(_showGroup->isChecked() && _checkLast->isChecked()));
+      params.append("CheckSuffix", QVariant(_showGroup->isChecked() && _checkSuffix->isChecked()));
+      params.append("CheckPhone", QVariant(_showGroup->isChecked() && _checkPhone->isChecked()));
+      params.append("CheckEmail", QVariant(_showGroup->isChecked() && _checkEmail->isChecked()));
+      MetaSQLQuery mql = mqlLoad("contactmerge", "search");
+      XSqlQuery qry = mql.toQuery(params);
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Contact Information"),
+                                  qry, __FILE__, __LINE__))
+      {
+        return;
+      }
+      _cntct->populate(qry, true);
     }
-    _cntct->populate(qry, true);
+    else
+    {
+      ParameterList params;
+      MetaSQLQuery mql = mqlLoad("contactmerge", "merged");
+      XSqlQuery qry = mql.toQuery(params);
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Contact Information"),
+                                    qry, __FILE__, __LINE__))
+      {
+        return;
+      }
+      _cntct->populate(qry, true);
+    }
   }
   else
   {
     ParameterList params;
-    MetaSQLQuery mql = mqlLoad("contactmerge", "merged");
+    MetaSQLQuery mql("SELECT cntct_id, "
+                     "       CASE WHEN cntctsel_cntct_id IS NOT NULL "
+                     "             AND cntctsel_target THEN 1 "
+                     "            WHEN cntctsel_cntct_id IS NOT NULL "
+                     "             AND NOT cntctsel_target THEN 2 "
+                     "            WHEN cntctmrgd_cntct_id IS NOT NULL "
+                     "             AND NOT cntctUsed(cntctmrgd_cntct_id) THEN 3 "
+                     "            WHEN cntctmrgd_cntct_id IS NOT NULL THEN 4 "
+                     "            ELSE 0 "
+                     "        END AS status, "
+                     "       cntct_crmacct_id, cntct_first_name, cntct_last_name, cntct_honorific, "
+                     "       cntct_initials, cntct_active, cntct_phone, cntct_phone2, cntct_fax, "
+                     "       cntct_email, cntct_webaddr, cntct_notes, cntct_title, cntct_number, "
+                     "       cntct_middle, cntct_suffix, cntct_owner_username, "
+                     "       crmacct_number,crmacct_name, "
+                     "       addr_id, addr_line1, addr_line2, addr_line3, addr_city, addr_state, "
+                     "       addr_postalcode, addr_country, addr_active, addr_notes, addr_number, "
+                     "       CASE WHEN cntctsel_cntct_id IS NOT NULL "
+                     "             AND cntctsel_target THEN 'altemphasis' "
+                     "            WHEN cntctsel_cntct_id IS NOT NULL "
+                     "             AND NOT cntctsel_target THEN 'emphasis' "
+                     "            WHEN cntctmrgd_cntct_id IS NOT NULL "
+                     "             AND NOT cntctUsed(cntctmrgd_cntct_id) THEN 'warning' "
+                     "            WHEN cntctmrgd_cntct_id IS NOT NULL THEN 'error' "
+                     "        END AS qtforegroundrole "
+                     "  FROM cntct "
+                     "  LEFT OUTER JOIN addr ON cntct_addr_id=addr_id "
+                     "  LEFT OUTER JOIN crmacct ON cntct_crmacct_id=crmacct_id "
+                     "  LEFT OUTER JOIN cntctsel ON cntct_id=cntctsel_cntct_id "
+                     "  LEFT OUTER JOIN cntctmrgd ON cntct_id=cntctmrgd_cntct_id "
+                     " WHERE cntct_id IN (-1 "
+                     "       <? foreach('contacts') ?> "
+                     "       , <? value('contacts') ?> "
+                     "       <? endforeach ?> "
+                     "       ) "
+                     "<? if not exists('merge') ?> "
+                     "   AND cntctmrgd_cntct_id IS NOT NULL "
+                     "<? endif ?>;");
+
+    params.append("contacts", _contacts);
+    if ((_mode->currentIndex() == 0) || (_mode->currentIndex() == 2)) // cMerge or cMergePurge
+      params.append("merge");
+
     XSqlQuery qry = mql.toQuery(params);
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Contact Information"),
                                   qry, __FILE__, __LINE__))
@@ -246,17 +324,20 @@ void contactMerge::sFillList()
 void contactMerge::sHandleMode()
 {
   bool canSearch = ((_mode->currentIndex() == 0) || (_mode->currentIndex() == 2)); // cMerge or cMergePurge
-  _searchLit->setVisible(canSearch);
-  _search->setVisible(canSearch);
-  _showGroup->setVisible(canSearch);
-  _searchGroup->setVisible(canSearch);
+  _searchLit->setVisible(canSearch && _contacts.isEmpty());
+  _search->setVisible(canSearch && _contacts.isEmpty());
+  _showGroup->setVisible(canSearch && _contacts.isEmpty());
+  _searchGroup->setVisible(canSearch && _contacts.isEmpty());
   sHandleProcess();
   _process->setText(_mode->currentText());
   _tab->setTabEnabled(_tab->indexOf(_selTab), canSearch);
-  if (canSearch)
-    _cntct->clear();
-  else
-    sFillList();
+  if (_contacts.isEmpty())
+  {
+    if (canSearch)
+      _cntct->clear();
+    else
+      sFillList();
+  }
 }
 
 void contactMerge::sHandleProcess()
