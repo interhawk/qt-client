@@ -336,16 +336,16 @@ int main(int argc, char *argv[])
   {
     foreach (QString l, lang)
     {
-      if (f.first == "xTuple" && l.split("_")[0] == "en")
-      {
-        app.removeTranslator(translatorSys);
-        break;
-      }
-      else if (translator->load(translationFile(l, f.first, f.second)))
+      if (translator->load(translationFile(l, f.first, f.second)))
       {
         app.installTranslator(translator);
         qDebug() << "installed" << l << f.first;
         translator = new QTranslator(&app);
+        break;
+      }
+      else if (f.first == "xTuple" && l == "en_us")
+      {
+        app.removeTranslator(translatorSys);
         break;
       }
     }
