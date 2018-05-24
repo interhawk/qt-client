@@ -121,7 +121,7 @@ enum SetResponse createLotSerial::set(const ParameterList &pParams)
         // First check for "pre-assigned/associated" lots. A couple example use cases:
         // 1) Receiving TO - get lot(s) from issue to shipping trans. 2) Receiving RA - get lot(s) from original SO (if exists).
         XSqlQuery origTransLots;
-        origTransLots.prepare("SELECT ls_number, ls_number FROM ls WHERE ls_id = ANY(getAssocLotSerialIds(pItemlocdistId := :itemlocdist_id));");
+        origTransLots.prepare("SELECT ls_number, ls_number FROM ls WHERE ls_id IN (SELECT UNNEST(getAssocLotSerialIds(:itemlocdist_id)));");
         origTransLots.bindValue(":itemlocdist_id", _itemlocdistid);
         origTransLots.exec();
         if (origTransLots.first())

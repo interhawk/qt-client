@@ -36,7 +36,6 @@
 #include "qcoreapplicationproto.h"
 #include "qcryptographichashproto.h"
 #include "qdatawidgetmapperproto.h"
-#include "qdateproto.h"
 #include "qdialogbuttonboxproto.h"
 #include "qdialogsetup.h"
 #include "qdirproto.h"
@@ -192,7 +191,6 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQCoreApplicationProto(engine);
   setupQCryptographicHashProto(engine);
   setupQDataWidgetMapperProto(engine);
-  setupQDateProto(engine);
   setupQDialog(engine);
   setupQDialogButtonBoxProto(engine);
   setupQDirProto(engine);

@@ -1379,7 +1379,8 @@ const struct {
              "Transaction series must be provided."), 0, "" },
   { "postInvTrans", -8, QT_TRANSLATE_NOOP("storedProcErrorLookup",
              "Could not find the itemlocSeries for the pInvhistId provided."), 0, "" },
-
+  { "postInvTrans", -9, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Could not post this inventory transaction because"
+             " the transaction will cause inventory to be reduced below current Sales Reservation requirements."), 0, "" },
   { "postPoReceipt",	-1, "",	 -1, "postReceipt" },
   { "postPoReceipt",	-2, "",	 -2, "postReceipt" },
   { "postPoReceipt",	-3, "",	 -3, "postReceipt" },
