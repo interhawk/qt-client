@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
 
   _evaluation = false;
 
-  QTranslator *translator = new QTranslator(&app);
+  QTranslator *translatorSys = new QTranslator(&app);
 
   QStringList lang;
   QLocale sysl = QLocale::system();
@@ -229,8 +229,8 @@ int main(int argc, char *argv[])
   {
     lang.append(sysl.name().toLower());
 
-    if (translator->load(translationFile(lang.first(), "xTuple")))
-      app.installTranslator(translator);
+    if (translatorSys->load(translationFile(lang.first(), "xTuple")))
+      app.installTranslator(translatorSys);
   }
 
   if (!loggedIn)
@@ -330,7 +330,7 @@ int main(int argc, char *argv[])
   ErrorReporter::error(QtCriticalMsg, 0, QObject::tr("Error Getting Extension Names"),
                        pkglist, __FILE__, __LINE__);
 
-  translator = new QTranslator(&app);
+  QTranslator *translator = new QTranslator(&app);
   QPair<QString, QString> f;
   foreach (f, transfile)
   {
@@ -341,6 +341,11 @@ int main(int argc, char *argv[])
         app.installTranslator(translator);
         qDebug() << "installed" << l << f.first;
         translator = new QTranslator(&app);
+        break;
+      }
+      else if (f.first == "xTuple" && l == "en_us")
+      {
+        app.removeTranslator(translatorSys);
         break;
       }
     }
