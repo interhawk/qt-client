@@ -40,6 +40,8 @@ public slots:
     virtual void sView();
     virtual void sDelete();
     virtual void sMerge();
+    virtual void sMark();
+    virtual void sUnmark();
     virtual void sAttach();
     virtual void sDetach();
     virtual void sOpen();

@@ -59,6 +59,7 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("State Pattern"), "addr_state_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Postal Code Pattern"), "addr_postalcode_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Country Pattern"), "addr_country_pattern", ParameterWidget::Text);
+  parameterWidget()->append(tr("Marked"), "marked", ParameterWidget::CheckBox);
   parameterWidget()->append(tr("Created Before"), "createEndDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Created After"), "createStartDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Updated Before"), "updateEndDate", ParameterWidget::Date);
@@ -84,6 +85,7 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   list()->addColumn(tr("Updated"),             -1, Qt::AlignLeft, false, "cntct_lastupdated");
   list()->addColumn(tr("Customer"),     _ynColumn,  Qt::AlignLeft, false, "cust");
   list()->addColumn(tr("Prospect"),    _ynColumn,  Qt::AlignLeft, false, "prospect");
+  list()->addColumn(tr("Marked"),      _ynColumn,  Qt::AlignLeft, false, "marked");
 
   list()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
@@ -166,6 +168,29 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
     pMenu->addSeparator();
     menuItem = pMenu->addAction(tr("Merge Contacts..."), this, SLOT(sMerge()));
     menuItem->setEnabled(_privileges->check("MergeContacts"));
+  }
+
+  bool foundMarked = false;
+  bool foundUnmarked = false;
+
+  foreach (XTreeWidgetItem *item, list()->selectedItems())
+  {
+    if (item->rawValue("marked").toBool())
+      foundMarked = true;
+    else
+      foundUnmarked = true;
+  }
+
+  if (foundUnmarked)
+  {
+    menuItem = pMenu->addAction(tr("Mark"), this, SLOT(sMark()));
+    menuItem->setEnabled(editPriv);
+  }
+
+  if (foundMarked)
+  {
+    menuItem = pMenu->addAction(tr("Unmark"), this, SLOT(sUnmark()));
+    menuItem->setEnabled(editPriv);
   }
 
   // Create, Edit, View Prospect
@@ -529,6 +554,62 @@ void contacts::sMerge()
   contactMerge *newdlg = new contactMerge();
   newdlg->set(params);
   omfgThis->handleNewWindow(newdlg);
+}
+
+void contacts::sMark()
+{
+  ParameterList params;
+  MetaSQLQuery mql("INSERT INTO mrkd "
+                   "(mrkd_target_type, mrkd_target_id) "
+                   "SELECT 'T', cntct_id "
+                   "  FROM cntct "
+                   " WHERE NOT EXISTS(SELECT 1 "
+                   "                    FROM mrkd "
+                   "                   WHERE mrkd_target_type = 'T' "
+                   "                     AND mrkd_target_id = cntct_id) "
+                   "   AND cntct_id IN (-1 "
+                   "       <? foreach('contacts') ?> "
+                   "       , <? value('contacts') ?> "
+                   "       <? endforeach ?> "
+                   "       );");
+
+  QList<QVariant> contacts;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    contacts.append(item->id());
+
+  params.append("contacts", contacts);
+  XSqlQuery qry = mql.toQuery(params);
+
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Marking failed"),
+                           qry, __FILE__, __LINE__))
+    return;
+
+  sFillList();
+}
+
+void contacts::sUnmark()
+{
+  ParameterList params;
+  MetaSQLQuery mql("DELETE FROM mrkd "
+                   " WHERE mrkd_target_type = 'T' "
+                   "   AND mrkd_target_id IN (-1 "
+                   "       <? foreach('contacts') ?> "
+                   "       , <? value('contacts') ?> "
+                   "       <? endforeach ?> "
+                   "       );");
+
+  QList<QVariant> contacts;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    contacts.append(item->id());
+
+  params.append("contacts", contacts);
+  XSqlQuery qry = mql.toQuery(params);
+
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Unmarking failed"),
+                           qry, __FILE__, __LINE__))
+    return;
+
+  sFillList();
 }
 
 void contacts::sAttach()
