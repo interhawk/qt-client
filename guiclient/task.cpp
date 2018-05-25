@@ -20,22 +20,20 @@
 #include "userList.h"
 #include "taskAssignment.h"
 
-const char *_taskStatuses[] = { "N", "P", "O", "D", "C" };
-
 bool task::userHasPriv(const int pMode, const QString pType, const int pId)
 {
   if (pType == "J" && _privileges->check("MaintainAllProjects"))
     return true;
-  else if (_privileges->check("MaintainAllToDoItems"))
+  else if (_privileges->check("MaintainAllTaskItems"))
     return true;
-  bool personalPriv = (pType == "J") ? _privileges->check("MaintainPersonalProjects") : _privileges->check("MaintainPersonalToDoItems");
+  bool personalPriv = (pType == "J") ? _privileges->check("MaintainPersonalProjects") : _privileges->check("MaintainPersonalTaskItems");
   if(pMode==cView)
   {
     if(pType == "J" && _privileges->check("ViewAllProjects"))
       return true;
-    else if (_privileges->check("ViewAllToDoItems"))
+    else if (_privileges->check("ViewAllTaskItems"))
       return true;
-    bool viewPriv = (pType == "J") ? _privileges->check("ViewPersonalProjects") : _privileges->check("ViewPersonalToDoItems");
+    bool viewPriv = (pType == "J") ? _privileges->check("ViewPersonalProjects") : _privileges->check("ViewPersonalTaskItems");
     personalPriv = personalPriv || viewPriv;
   }
 
@@ -87,6 +85,7 @@ task::task(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
   _taskid = -1;
   
   _owner->setType(UsernameLineEdit::UsersActive);
+  _comments->setType(Comments::Task);
   _charass->setType("TASK");
   _documents->setType(Documents::ProjectTask);
 
@@ -205,14 +204,15 @@ enum SetResponse task::set(const ParameterList &pParams)
       if(((_metrics->value("TaskNumberGeneration") == "A") ||
           (_metrics->value("TaskNumberGeneration") == "O"))
        && _number->text().isEmpty()
-       && _parenttype != "J")
+       && _parenttype != "J"
+       && !_isTemplate)
       {
         XSqlQuery numq;
         numq.exec("SELECT fetchTaskNumber() AS number;");
         if (numq.first())
         {
           _number->setText(numq.value("number"));
-          _number->setEnabled(false);
+          _number->setEnabled(_metrics->value("TaskNumberGeneration") == "O");
           _name->setFocus();
         }
       }
@@ -253,13 +253,16 @@ enum SetResponse task::set(const ParameterList &pParams)
     if (param.toString() == "edit")
     {
       _mode = cEdit;
-
+      _number->setEnabled((_metrics->value("TaskNumberGeneration") != "A"
+                          && _parenttype != "J")  || _isTemplate);
       connect(_status,  SIGNAL(currentIndexChanged(int)), this, SLOT(sStatusChanged(int)));
       connect(_completed,  SIGNAL(newDate(QDate)), this, SLOT(sCompletedChanged()));
       connect(_pctCompl,  SIGNAL(valueChanged(int)), this, SLOT(sCompletedChanged()));
     }
     if (param.toString() == "view")
     {
+      _number->setEnabled((_metrics->value("TaskNumberGeneration") != "A"
+                          && _parenttype != "J")  || _isTemplate);
       _mode = cView;
       setViewMode();
     }
@@ -268,8 +271,8 @@ enum SetResponse task::set(const ParameterList &pParams)
   if (_parenttype == "J")
   {
     XSqlQuery parentq;
-    parentq.prepare("SELECT task_id, task_number FROM task "
-                    "WHERE task_prj_id = :project "
+    parentq.prepare("SELECT task_id, task_number||' - '||task_name FROM task "
+                    "WHERE task_parent_type = 'J' AND task_parent_id = :project "
                     "  AND task_id <> :task "
                     "ORDER BY task_number;" );
     parentq.bindValue(":project", _parentid);
@@ -293,8 +296,21 @@ enum SetResponse task::set(const ParameterList &pParams)
   _charass->setId(_taskid);
 
   _due->setVisible(!_isTemplate);
+  _project->setVisible(!_isTemplate);
+  _started->setVisible(!_isTemplate);
+  _startedLit->setVisible(!_isTemplate);
+  _completed->setVisible(!_isTemplate);
+  _completedLit->setVisible(!_isTemplate);
+  _pctCompl->setVisible(!_isTemplate);
+  _pctComplLit->setVisible(!_isTemplate);
   _dueDays->setVisible(_isTemplate);
   _dueDaysLit->setVisible(_isTemplate);
+  if (_isTemplate)
+  {
+    setWindowTitle(tr("Template Task"));
+    _tab->removeTab(_tab->indexOf(_teTab));
+    _tab->removeTab(_tab->indexOf(_commentsTab));
+  }
 
   sFillUserList();
 
@@ -374,17 +390,10 @@ void task::populate()
     _completed->setDate(taskpopulate.value("task_completed_date").toDate());
     _pctCompl->setValue(taskpopulate.value("task_pct_complete").toInt());
     _notes->setText(taskpopulate.value("task_notes").toString());
-
     _parenttype=taskpopulate.value("task_parent_type").toString();
     _parentid=taskpopulate.value("task_parent_id").toInt();
     _project->setId(taskpopulate.value("task_prj_id").toInt());
-
-    for (int counter = 0; counter < _status->count(); counter++)
-    {
-      if (QString(taskpopulate.value("task_status").toString()[0]) == _taskStatuses[counter])
-        _status->setCurrentIndex(counter);
-    }
-
+    _status->setCode(taskpopulate.value("task_status").toString());
     _budgetHours->setText(formatQty(taskpopulate.value("task_hours_budget").toDouble()));
     _actualHours->setText(formatQty(taskpopulate.value("task_hours_actual").toDouble()));
     _budgetExp->setText(formatCost(taskpopulate.value("task_exp_budget").toDouble()));
@@ -407,7 +416,7 @@ void task::sSave()
 {
   XSqlQuery taskSave;
   QList<GuiErrorCheck> errors;
-  errors<< GuiErrorCheck(_number->text().length() == 0, _number,
+  errors<< GuiErrorCheck(_number->text().trimmed().length() == 0, _number,
                          tr("You must enter a valid Number."))
         << GuiErrorCheck(_name->text().length() == 0, _name,
                          tr("You must enter a valid Name."))
@@ -447,10 +456,10 @@ void task::sSave()
                "WHERE (task_id=:task_id);" );
 
   taskSave.bindValue(":task_id", _taskid);
-  taskSave.bindValue(":task_number", _number->text());
-  taskSave.bindValue(":task_name", _name->text());
+  taskSave.bindValue(":task_number", _number->text().trimmed());
+  taskSave.bindValue(":task_name", _name->text().trimmed());
   taskSave.bindValue(":task_descrip", _descrip->toPlainText());
-  taskSave.bindValue(":task_status", _taskStatuses[_status->currentIndex()]);
+  taskSave.bindValue(":task_status", _status->code());
   taskSave.bindValue(":task_priority_id", _priority->id());
   taskSave.bindValue(":task_pct_complete", _pctCompl->value());
   taskSave.bindValue(":task_owner_username", _owner->username());

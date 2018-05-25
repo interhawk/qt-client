@@ -168,6 +168,10 @@ enum SetResponse opportunity::set(const ParameterList &pParams)
   if (valid)
     _assignedTo->setUsername(param.toString());
 
+  param = pParams.value("prj_id", &valid);
+  if (valid)
+    _project->setId(param.toInt());
+
   param = pParams.value("cntct_id", &valid);
   if (valid)
     _cntct->setId(param.toInt());
@@ -275,25 +279,11 @@ void opportunity::sCancel()
 
   if (_saved && cNew == _mode)
   {
-    cancelOppo.prepare("SELECT deleteOpportunity(:ophead_id) AS result;");
+    cancelOppo.prepare("SELECT deleteOpportunity(:ophead_id, true) AS result;");
     cancelOppo.bindValue(":ophead_id", _opheadid);
     cancelOppo.exec();
-    if (cancelOppo.first())
-    {
-      int result = cancelOppo.value("result").toInt();
-      if (result < 0)
-      {
-        ErrorReporter::error(QtCriticalMsg, this, tr("Error Cancelling Opportunity"),
-                               storedProcErrorLookup("deleteOpportunity", result),
-                               __FILE__, __LINE__);
-        return;
-      }
-    }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Cancelling Opportunity"),
-                                  cancelOppo, __FILE__, __LINE__))
-    {
-      return;
-    }
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Cancelling Opportunity"),
+                                  cancelOppo, __FILE__, __LINE__);
   }
   reject();
 }
@@ -562,7 +552,7 @@ void opportunity::sOppTypeChanged(int newCat)
   /*
    The following checks whether tasks already exist and should be overridden.
    return code 0 means no templates exist
-   return code < 0 means tasks already exist and user is questions whether to override
+   return code < 0 means tasks already exist and user is asked whether to override
    return code > 0 means no existing tasks so they have been copied automatically
   */
   if (taskq.first()) 
@@ -572,7 +562,7 @@ void opportunity::sOppTypeChanged(int newCat)
       if (QMessageBox::question(this, tr("Existing Tasks"),
                          tr("<p>Tasks already exist for this Opportunity.\n"
                             "Do you want to replace tasks with the new template?"),
-                   QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+                   QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
       {
           return;
       }
@@ -1128,8 +1118,8 @@ void opportunity::sProjectUpdated()
 {
   XSqlQuery updp;
   updp.prepare("UPDATE task SET task_prj_id=:prjid "
-                 "WHERE task_parent_type='OPP' "
-                 "  AND task_parent_id=:oppid;" );
+               " WHERE task_parent_type='OPP' "
+               "   AND task_parent_id=:oppid;" );
   updp.bindValue(":prjid", _project->id());
   updp.bindValue(":oppid", _opheadid);
   updp.exec();

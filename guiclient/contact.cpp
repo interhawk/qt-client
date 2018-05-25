@@ -180,12 +180,12 @@ class contactPrivate
           break;
 
         case 21:
-          privs.canEdit = _privileges->check("MaintainAllToDoItems") ||
+          privs.canEdit = _privileges->check("MaintainAllTaskItems") ||
                      (omfgThis->username() == owner &&
-                      _privileges->check("MaintainPersonalToDoItems"));
-          privs.canView = _privileges->check("ViewAllToDoItems") ||
+                      _privileges->check("MaintainPersonalTaskItems"));
+          privs.canView = _privileges->check("ViewAllTaskItems") ||
                      (omfgThis->username() == owner &&
-                      _privileges->check("ViewPersonalToDoItems"));
+                      _privileges->check("ViewPersonalTaskItems"));
           privs.canDetach = privs.canEdit;
           break;
 

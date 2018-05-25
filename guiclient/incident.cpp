@@ -667,20 +667,18 @@ void incident::sIncdtCategoryChanged(int newCat)
     if (taskq.value("ret").toInt() < 0)
     {
       if (QMessageBox::question(this, tr("Existing Tasks"),
-                         tr("<p>Tasks already exist for this Incident.\n"
+                         tr("<p>Tasks already exist for this Incident.<br>"
                             "Do you want to replace tasks with the new template?"),
-                   QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+                   QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
       {
           return;
       }
-      else
-      {
-         taskq.bindValue(":override", true);
-         taskq.exec();
-         if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
-                                  taskq, __FILE__, __LINE__))
-              return;
-      }
+
+      taskq.bindValue(":override", true);
+      taskq.exec();
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
+                               taskq, __FILE__, __LINE__))
+         return;
     }
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
@@ -707,8 +705,8 @@ void incident::sProjectUpdated()
 {
   XSqlQuery updp;
   updp.prepare("UPDATE task SET task_prj_id=:prjid "
-                 "WHERE task_parent_type='INCDT' "
-                 "  AND task_parent_id=:incdtid;" );
+               " WHERE task_parent_type='INCDT' "
+               "   AND task_parent_id=:incdtid;" );
   updp.bindValue(":prjid", _project->id());
   updp.bindValue(":incdtid", _incdtid);
   updp.exec();

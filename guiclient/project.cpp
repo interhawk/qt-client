@@ -25,6 +25,7 @@
 #include "incident.h"
 #include "invoice.h"
 #include "invoiceItem.h"
+#include "opportunity.h"
 #include "salesOrder.h"
 #include "salesOrderItem.h"
 #include "task.h"
@@ -76,19 +77,23 @@ project::project(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
 
   connect(_buttonBox,     SIGNAL(rejected()),        this, SLOT(sClose()));
   connect(_buttonBox,     SIGNAL(accepted()),        this, SLOT(sSave()));
-  connect(_queryTasks,    SIGNAL(clicked()),         this, SLOT(sFillTaskList()));
   connect(_newTask,       SIGNAL(clicked()),         this, SLOT(sNewTask()));
-  connect(_print,         SIGNAL(clicked()),         this, SLOT(sPrintTasks()));
+  connect(_printTasks,    SIGNAL(clicked()),         this, SLOT(sPrintTasks()));
+  connect(_printOrders,   SIGNAL(clicked()),         this, SLOT(sPrintOrders()));
   connect(_editTask,      SIGNAL(clicked()),         this, SLOT(sEditTask()));
+  connect(_editOrder,     SIGNAL(clicked()),         this, SLOT(sEditOrder()));
   connect(_viewTask,      SIGNAL(clicked()),         this, SLOT(sViewTask()));
+  connect(_viewOrder,     SIGNAL(clicked()),         this, SLOT(sViewOrder()));
   connect(_deleteTask,    SIGNAL(clicked()),         this, SLOT(sDeleteTask()));
   connect(_number,        SIGNAL(editingFinished()), this, SLOT(sNumberChanged()));
   connect(_crmacct,       SIGNAL(newId(int)),        this, SLOT(sCRMAcctChanged(int)));
-  connect(_prjtask, SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateMenu(QMenu*, QTreeWidgetItem*)));
-  connect(_showSo, SIGNAL(toggled(bool)), this, SLOT(sFillTaskList()));
-  connect(_showPo, SIGNAL(toggled(bool)), this, SLOT(sFillTaskList()));
-  connect(_showWo, SIGNAL(toggled(bool)), this, SLOT(sFillTaskList()));
+  connect(_prjtask,   SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateTaskMenu(QMenu*, QTreeWidgetItem*)));
+  connect(_prjorders, SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateOrdersMenu(QMenu*, QTreeWidgetItem*)));
+  connect(_showSo, SIGNAL(toggled(bool)), this, SLOT(sFillOrdersList()));
+  connect(_showPo, SIGNAL(toggled(bool)), this, SLOT(sFillOrdersList()));
+  connect(_showWo, SIGNAL(toggled(bool)), this, SLOT(sFillOrdersList()));
   connect(_showIn, SIGNAL(toggled(bool)), this, SLOT(sFillTaskList()));
+  connect(_showOpp, SIGNAL(toggled(bool)), this, SLOT(sFillTaskList()));
   connect(_showCompleted, SIGNAL(toggled(bool)), this, SLOT(sFillTaskList()));
 
   connect(omfgThis, SIGNAL(salesOrdersUpdated(int, bool)), this, SLOT(sFillTaskList()));
@@ -98,28 +103,33 @@ project::project(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
 
   _charass->setType("PROJ");
 
+  _prjtask->addColumn(tr("Number"),       _itemColumn, Qt::AlignLeft,   true,  "number" );
+  _prjtask->addColumn(tr("Status"),      _orderColumn, Qt::AlignLeft,   true,  "status" );
   _prjtask->addColumn(tr("Name"),         _itemColumn, Qt::AlignLeft,   true,  "name"   );
-  _prjtask->addColumn(tr("Status"),      _orderColumn, Qt::AlignLeft,   true,  "status"   );
-  _prjtask->addColumn(tr("Item #"),       _itemColumn, Qt::AlignLeft,   true,  "item"   );
-  _prjtask->addColumn(tr("Description"),           -1, Qt::AlignLeft,   true,  "descrip" );
-  _prjtask->addColumn(tr("Account/Customer"),      -1, Qt::AlignLeft,   false,  "customer" );
-  _prjtask->addColumn(tr("Contact"),               -1, Qt::AlignLeft,   false,  "contact" );
-  _prjtask->addColumn(tr("City"),                  -1, Qt::AlignLeft,   false,  "city" );
-  _prjtask->addColumn(tr("State"),                 -1, Qt::AlignLeft,   false,  "state" );
-  _prjtask->addColumn(tr("Qty"),           _qtyColumn, Qt::AlignRight,  true,  "qty"  );
-  _prjtask->addColumn(tr("UOM"),           _uomColumn, Qt::AlignLeft,   true,  "uom"  );
-  _prjtask->addColumn(tr("Value"),         _qtyColumn, Qt::AlignRight,  true,  "value"  );
+  _prjtask->addColumn(tr("Description"),           -1, Qt::AlignLeft,   true,  "descrip");
   _prjtask->addColumn(tr("Due Date"),     _dateColumn, Qt::AlignRight,  true,  "due"  );
-  _prjtask->addColumn(tr("Assigned"),     _dateColumn, Qt::AlignRight,  true,  "assigned"  );
+  _prjtask->addColumn(tr("Assigned"),     _dateColumn, Qt::AlignRight,  true,  "assigned" );
   _prjtask->addColumn(tr("Started"),      _dateColumn, Qt::AlignRight,  true,  "started"  );
   _prjtask->addColumn(tr("Completed"),    _dateColumn, Qt::AlignRight,  true,  "completed"  );
-  _prjtask->addColumn(tr("Hrs. Budget"),   _qtyColumn, Qt::AlignRight,  true,  "hrs_budget"  );
-  _prjtask->addColumn(tr("Hrs. Actual"),   _qtyColumn, Qt::AlignRight,  true,  "hrs_actual"  );
-  _prjtask->addColumn(tr("Hrs. Balance"),  _qtyColumn, Qt::AlignRight,  true,  "hrs_balance"  );
-  _prjtask->addColumn(tr("Exp. Budget"),  _priceColumn, Qt::AlignRight,  true,  "exp_budget"  );
-  _prjtask->addColumn(tr("Exp. Actual"),  _priceColumn, Qt::AlignRight,  true,  "exp_actual"  );
-  _prjtask->addColumn(tr("Exp. Balance"), _priceColumn, Qt::AlignRight,  true,  "exp_balance"  );
+  _prjtask->addColumn(tr("Hrs. Budget"),   _qtyColumn, Qt::AlignRight,  true,  "hrs_budget" );
+  _prjtask->addColumn(tr("Hrs. Actual"),   _qtyColumn, Qt::AlignRight,  true,  "hrs_actual" );
+  _prjtask->addColumn(tr("Hrs. Balance"),  _qtyColumn, Qt::AlignRight,  true,  "hrs_balance" );
+  _prjtask->addColumn(tr("Exp. Budget"),  _priceColumn, Qt::AlignRight,  true,  "exp_budget" );
+  _prjtask->addColumn(tr("Exp. Actual"),  _priceColumn, Qt::AlignRight,  true,  "exp_actual" );
+  _prjtask->addColumn(tr("Exp. Balance"), _priceColumn, Qt::AlignRight,  true,  "exp_balance" );
   _prjtask->setSortingEnabled(false);
+
+  _prjorders->addColumn(tr("Number"),       _itemColumn, Qt::AlignLeft,   true,  "name"   );
+  _prjorders->addColumn(tr("Status"),      _orderColumn, Qt::AlignLeft,   true,  "status"   );
+  _prjorders->addColumn(tr("Item #"),       _itemColumn, Qt::AlignLeft,   true,  "item"   );
+  _prjorders->addColumn(tr("Description"),           -1, Qt::AlignLeft,   true,  "descrip" );
+  _prjorders->addColumn(tr("Account/Customer"),      -1, Qt::AlignLeft,   false,  "customer" );
+  _prjorders->addColumn(tr("Contact"),               -1, Qt::AlignLeft,   false,  "contact" );
+  _prjorders->addColumn(tr("City"),                  -1, Qt::AlignLeft,   false,  "city" );
+  _prjorders->addColumn(tr("State"),                 -1, Qt::AlignLeft,   false,  "state" );
+  _prjorders->addColumn(tr("Qty"),           _qtyColumn, Qt::AlignRight,  true,  "qty"  );
+  _prjorders->addColumn(tr("UOM"),           _uomColumn, Qt::AlignLeft,   true,  "uom"  );
+  _prjorders->addColumn(tr("Value"),         _qtyColumn, Qt::AlignRight,  true,  "value"  );
 
   _owner->setUsername(omfgThis->username());
   _assignedTo->setUsername(omfgThis->username());
@@ -141,22 +151,23 @@ project::project(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   newMenu->addAction(tr("Task..."), this, SLOT(sNewTask()));
   newMenu->addSeparator();
   menuItem = newMenu->addAction(tr("Incident"), this, SLOT(sNewIncident()));
-  menuItem->setEnabled(_privileges->check("MaintainPersonalIncidents") ||
-                       _privileges->check("MaintainAllIncidents"));
-  menuItem = newMenu->addAction(tr("Quote"), this, SLOT(sNewQuotation()));
-  menuItem->setEnabled(_privileges->check("MaintainQuotes"));
-  menuItem = newMenu->addAction(tr("Sales Order"), this, SLOT(sNewSalesOrder()));
-  menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
-  menuItem = newMenu->addAction(tr("Purchase Order"),   this, SLOT(sNewPurchaseOrder()));
-  menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
-  menuItem = newMenu->addAction(tr("Work Order"),   this, SLOT(sNewWorkOrder()));
-  menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
-  _newTask->setMenu(newMenu); 
+  menuItem->setEnabled(_privileges->check("MaintainPersonalIncidents MaintainAllIncidents"));
+  menuItem = newMenu->addAction(tr("Opportunity"), this, SLOT(sNewOpportunity()));
+  menuItem->setEnabled(_privileges->check("MaintainPersonalOpportunities MaintainAllOpportunities"));
+  _newTask->setMenu(newMenu);
 
-  QMenu * printMenu = new QMenu;
-  printMenu->addAction(tr("Print Tasks"), this, SLOT(sPrintTasks()));
-  printMenu->addAction(tr("Print Orders"), this, SLOT(sPrintOrders()));
-  _print->setMenu(printMenu);
+  QMenu * newOrdMenu = new QMenu;
+  QAction *menuOrdItem;
+  menuOrdItem = newOrdMenu->addAction(tr("Quote"), this, SLOT(sNewQuotation()));
+  menuOrdItem->setEnabled(_privileges->check("MaintainQuotes"));
+  menuOrdItem = newOrdMenu->addAction(tr("Sales Order"), this, SLOT(sNewSalesOrder()));
+  menuOrdItem->setEnabled(_privileges->check("MaintainSalesOrders"));
+  menuOrdItem = newOrdMenu->addAction(tr("Purchase Order"),   this, SLOT(sNewPurchaseOrder()));
+  menuOrdItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
+  menuOrdItem = newOrdMenu->addAction(tr("Work Order"),   this, SLOT(sNewWorkOrder()));
+  menuOrdItem->setEnabled(_privileges->check("MaintainWorkOrders"));
+  _newOrder->setMenu(newOrdMenu);
+
 }
 
 project::~project()
@@ -218,8 +229,19 @@ enum SetResponse project::set(const ParameterList &pParams)
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Project Information"),
                                     projectet, __FILE__, __LINE__))
+          return UndefinedError;
+
+      if(_metrics->value("ProjectNumberGeneration") != "M"
+          && _number->text().isEmpty())
       {
-        return UndefinedError;
+        XSqlQuery numq;
+        numq.exec("SELECT fetchProjectNumber() AS number;");
+        if (numq.first())
+        {
+          _number->setText(numq.value("number"));
+          _number->setEnabled(_metrics->value("ProjectNumberGeneration") == "O");
+          _name->setFocus();
+        }
       }
 
       _comments->setId(_prjid);
@@ -230,30 +252,7 @@ enum SetResponse project::set(const ParameterList &pParams)
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
-
       _number->setEnabled(false);
-
-      QMenu * newMenu = new QMenu;
-      QAction *menuItem;
-      newMenu->addAction(tr("Task..."), this, SLOT(sNewTask()));
-      newMenu->addSeparator();
-      menuItem = newMenu->addAction(tr("Incident"), this, SLOT(sNewIncident()));
-      menuItem->setEnabled(_privileges->check("MaintainPersonalIncidents") ||
-                       _privileges->check("MaintainAllIncidents"));
-      menuItem = newMenu->addAction(tr("Quote"), this, SLOT(sNewQuotation()));
-      menuItem->setEnabled(_privileges->check("MaintainQuotes"));
-      menuItem = newMenu->addAction(tr("Sales Order"), this, SLOT(sNewSalesOrder()));
-      menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
-      menuItem = newMenu->addAction(tr("Purchase Order"),   this, SLOT(sNewPurchaseOrder()));
-      menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
-      menuItem = newMenu->addAction(tr("Work Order"),   this, SLOT(sNewWorkOrder()));
-      menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
-      _newTask->setMenu(newMenu);
-
-      QMenu * printMenu = new QMenu;
-      printMenu->addAction(tr("Print Tasks"), this, SLOT(sPrintTasks()));
-      printMenu->addAction(tr("Print Orders"), this, SLOT(sPrintOrders()));
-      _print->setMenu(printMenu);
     }
     else if (param.toString() == "view")
       setViewMode();
@@ -298,11 +297,6 @@ void project::setViewMode()
   _buttonBox->addButton(QDialogButtonBox::Close);
 
   connect(_prjtask, SIGNAL(itemSelected(int)), _viewTask, SLOT(animateClick()));
-
-  QMenu * printMenu = new QMenu;
-  printMenu->addAction(tr("Print Tasks"), this, SLOT(sPrintTasks()));
-  printMenu->addAction(tr("Print Orders"), this, SLOT(sPrintOrders()));
-  _print->setMenu(printMenu);
 }
 
 void project::sHandleButtons(bool valid)
@@ -319,7 +313,7 @@ void project::sHandleButtons(bool valid)
   }
 }
 
-void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
+void project::sPopulateTaskMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
 {
   Q_UNUSED(selected);
   QAction *menuItem;
@@ -327,16 +321,35 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
   if(_prjtask->altId() == 5)
   {
     menuItem = pMenu->addAction(tr("Edit Task..."), this, SLOT(sEditTask()));
-    menuItem->setEnabled(_privileges->check("MaintainAllProjects") || _privileges->check("MaintainPersonalProjects"));
+    menuItem->setEnabled(_privileges->check("MaintainAllProjects MaintainPersonalProjects"));
 
     menuItem = pMenu->addAction(tr("View Task..."), this, SLOT(sViewTask()));
-    menuItem->setEnabled(_privileges->check("MaintainAllProjects") ||
-			 _privileges->check("MaintainPersonalProjects") ||
-                         _privileges->check("ViewAllProjects")  ||
-			 _privileges->check("ViewPersonalProjects"));
+    menuItem->setEnabled(_privileges->check("MaintainAllProjects MaintainPersonalProjects ViewAllProjects ViewPersonalProjects"));
   }
+  if(_prjtask->altId() == 105)
+  {
+    menuItem = pMenu->addAction(tr("Edit Incident..."), this, SLOT(sEditOrder()));
+    menuItem->setEnabled(_privileges->check("MaintainPersonalIncidents MaintainAllIncidents"));
 
-  if(_prjtask->altId() == 15)
+    menuItem = pMenu->addAction(tr("View Incident..."), this, SLOT(sViewOrder()));
+    menuItem->setEnabled(_privileges->check("ViewPersonalIncidents ViewAllIncidents MaintainPersonalIncidents MaintainAllIncidents"));
+  }
+  if(_prjtask->altId() == 110)
+  {
+    menuItem = pMenu->addAction(tr("Edit Opportunity..."), this, SLOT(sEditOrder()));
+    menuItem->setEnabled(_privileges->check("MaintainPersonalOpportunities MaintainAllOpportunities"));
+
+    menuItem = pMenu->addAction(tr("View Opportunity..."), this, SLOT(sViewOrder()));
+    menuItem->setEnabled(_privileges->check("ViewPersonalOpportunities ViewAllOpportunities MaintainPersonalOpportunities MaintainAllOpportunities"));
+  }
+}
+
+void project::sPopulateOrdersMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
+{
+  Q_UNUSED(selected);
+  QAction *menuItem;
+
+  if(_prjorders->altId() == 15)
   {
     menuItem = pMenu->addAction(tr("Edit Quote..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainQuotes"));
@@ -346,7 +359,7 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
                          _privileges->check("ViewQuotes") );
   }
 
-  if(_prjtask->altId() == 17)
+  if(_prjorders->altId() == 17)
   {
     menuItem = pMenu->addAction(tr("Edit Quote Item..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainQuotes"));
@@ -356,7 +369,7 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
                          _privileges->check("ViewQuotes"));
   }
 
-  if(_prjtask->altId() == 25)
+  if(_prjorders->altId() == 25)
   {
     menuItem = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
@@ -366,7 +379,7 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
                          _privileges->check("ViewSalesOrders"));
   }
 
-  if(_prjtask->altId() == 27)
+  if(_prjorders->altId() == 27)
   {
     menuItem = pMenu->addAction(tr("Edit Sales Order Item..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
@@ -376,7 +389,7 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
                          _privileges->check("ViewSalesOrders"));
   }
 
-  if(_prjtask->altId() == 35)
+  if(_prjorders->altId() == 35)
   {
     menuItem = pMenu->addAction(tr("Edit Invoice..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
@@ -386,7 +399,7 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
                          _privileges->check("ViewMiscInvoices"));
   }
 
-  if(_prjtask->altId() == 37)
+  if(_prjorders->altId() == 37)
   {
     menuItem = pMenu->addAction(tr("Edit Invoice Item..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
@@ -396,7 +409,7 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
                          _privileges->check("ViewMiscInvoices"));
   }
 
-  if(_prjtask->altId() == 45)
+  if(_prjorders->altId() == 45)
   {
     menuItem = pMenu->addAction(tr("Edit Work Order..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
@@ -406,14 +419,14 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
                          _privileges->check("ViewWorkOrders"));
   }
 
-  if(_prjtask->altId() == 55)
+  if(_prjorders->altId() == 55)
   {
     menuItem = pMenu->addAction(tr("View Purchase Request..."), this, SLOT(sViewOrder()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseRequests") ||
                          _privileges->check("ViewPurchaseRequests"));
   }
 
-  if(_prjtask->altId() == 65)
+  if(_prjorders->altId() == 65)
   {
     menuItem = pMenu->addAction(tr("Edit Purchase Order..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
@@ -423,7 +436,7 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
                          _privileges->check("ViewPurchaseOrders"));
   }
 
-  if(_prjtask->altId() == 67)
+  if(_prjorders->altId() == 67)
   {
     menuItem = pMenu->addAction(tr("Edit Purchase Order Item..."), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
@@ -431,19 +444,6 @@ void project::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
     menuItem = pMenu->addAction(tr("View Purchase Order Item..."), this, SLOT(sViewOrder()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                          _privileges->check("ViewPurchaseOrders"));
-  }
-
-  if(_prjtask->altId() == 105)
-  {
-    menuItem = pMenu->addAction(tr("Edit Incident..."), this, SLOT(sEditOrder()));
-    menuItem->setEnabled(_privileges->check("MaintainPersonalIncidents") ||
-			_privileges->check("MaintainAllIncidents"));
-
-    menuItem = pMenu->addAction(tr("View Incident..."), this, SLOT(sViewOrder()));
-    menuItem->setEnabled(_privileges->check("ViewPersonalIncidents") ||
-			_privileges->check("ViewAllIncidents") ||
-			_privileges->check("MaintainPersonalIncidents") ||
-			_privileges->check("MaintainAllIncidents"));
   }
 }
 
@@ -534,6 +534,7 @@ void project::populate()
   }
 
   sFillTaskList();
+  sFillOrdersList();
   _comments->setId(_prjid);
   _documents->setId(_prjid);
   emit populated(_prjid);
@@ -575,18 +576,17 @@ void project::sProjectTypeChanged(const int newType)
       if (QMessageBox::question(this, tr("Existing Tasks"),
                          tr("<p>Tasks already exist for this Project.\n"
                             "Do you want to replace tasks with the new template?"),
-                   QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+                   QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
       {
           return;
       }
-      else
-      {
-         taskq.bindValue(":override", true);
-         taskq.exec();
-         if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
-                                  taskq, __FILE__, __LINE__))
-              return;
-      }
+
+      taskq.bindValue(":override", true);
+      taskq.exec();
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
+                               taskq, __FILE__, __LINE__))
+           return;
+
     }
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Applying Template Tasks"),
@@ -758,6 +758,11 @@ void project::sPrintTasks()
   ParameterList params;
 
   params.append("prj_id", _prjid);
+  params.append("assigned",   tr("Assigned"));
+  params.append("complete",   tr("Completed"));
+  params.append("deferred",   tr("Deferred"));
+  params.append("new",        tr("New"));
+  params.append("inprocess",  tr("In Process"));
 
   orReport report("ProjectTaskList", params);
   if(report.isValid())
@@ -889,14 +894,31 @@ void project::sDeleteTask()
     return;
 
   XSqlQuery projectDeleteTask;
-  projectDeleteTask.prepare("SELECT deleteTask(:prjtask_id) AS result; ");
+  projectDeleteTask.prepare("SELECT deleteTask(:prjtask_id) AS result;");
   projectDeleteTask.bindValue(":prjtask_id", _prjtask->id());
   projectDeleteTask.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Project Task"),
-                                projectDeleteTask, __FILE__, __LINE__))
+  if (projectDeleteTask.first() && projectDeleteTask.value("result").toInt() == -1)
   {
-    return;
+    if (QMessageBox::question(this, tr("Sub-Tasks"),
+                       tr("<p>Sub-tasks exist for this Task.\n"
+                          "Do you also want to delete sub-tasks?"),
+                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
+      {
+          return;
+      }
+      else
+      {
+        projectDeleteTask.prepare("SELECT deleteTask(:prjtask_id, true) AS result;");
+        projectDeleteTask.bindValue(":prjtask_id", _prjtask->id());
+        projectDeleteTask.exec();
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Project Task"),
+                                projectDeleteTask, __FILE__, __LINE__))
+            return;
+      }
   }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Project Task"),
+                                projectDeleteTask, __FILE__, __LINE__))
+    return;
 
   emit deletedTask();
   sFillTaskList();
@@ -926,17 +948,52 @@ void project::sFillTaskList()
   }
 
 // Populate Task List
-  MetaSQLQuery mqltask = mqlLoad("orderActivityByProject", "detail");
+  MetaSQLQuery mqltask = mqlLoad("orderActivityByProject", "tasks");
 
   params.append("assigned",   tr("Assigned"));
+  params.append("complete",   tr("Completed"));
+  params.append("confirmed",  tr("Confirmed"));
+  params.append("deferred",   tr("Deferred"));
+  params.append("feedback",   tr("Feedback"));
+  params.append("inprocess",  tr("In Process"));
+  params.append("new",        tr("New"));
+  params.append("open",       tr("Open"));
+  params.append("planning",   tr("Concept"));
+  params.append("posted",     tr("Posted"));
+  params.append("resolved",   tr("Resolved"));
+  params.append("total", tr("Total"));
+
+  if(_showIn->isChecked())
+    params.append("showIn");
+  if(_showOpp->isChecked())
+    params.append("showOpp");
+
+  if (_showCompleted->isChecked())
+    params.append("showCompleted");
+
+  if (! _privileges->check("ViewAllProjects") && ! _privileges->check("MaintainAllProjects"))
+    params.append("owner_username", omfgThis->username());
+
+  XSqlQuery qrytask = mqltask.toQuery(params);
+  _prjtask->populate(qrytask, true);
+  (void)ErrorReporter::error(QtCriticalMsg, this, tr("Could not get Task Information"),
+                           qrytask, __FILE__, __LINE__);
+  _prjtask->expandAll();
+}
+
+void project::sFillOrdersList()
+{
+  ParameterList params;
+  params.append("prj_id", _prjid);
+// Populate Project Orders List
+  MetaSQLQuery mqltask = mqlLoad("orderActivityByProject", "orders");
+
   params.append("canceled",   tr("Canceled"));
   params.append("closed",     tr("Closed"));
   params.append("complete",   tr("Complete"));
-  params.append("confirmed",  tr("Confirmed"));
   params.append("converted",  tr("Converted"));
   params.append("expired",    tr("Expired"));
   params.append("exploded",   tr("Exploded"));
-  params.append("feedback",   tr("Feedback"));
   params.append("inprocess",  tr("In Process"));
   params.append("invoice",    tr("Invoice"));
   params.append("invoices",   tr("Invoices"));
@@ -952,7 +1009,6 @@ void project::sFillTaskList()
   params.append("quote",      tr("Quote"));
   params.append("quotes",     tr("Quotes"));
   params.append("released",   tr("Released"));
-  params.append("resolved",   tr("Resolved"));
   params.append("so",         tr("Sales Order"));
   params.append("sos",        tr("Sales Orders"));
   params.append("total",      tr("Total"));
@@ -972,9 +1028,6 @@ void project::sFillTaskList()
   if(_showPo->isChecked())
     params.append("showPo");
 
-  if(_showIn->isChecked())
-    params.append("showIn");
-
   if (_showCompleted->isChecked())
     params.append("showCompleted");
 
@@ -983,10 +1036,10 @@ void project::sFillTaskList()
 
   XSqlQuery qrytask = mqltask.toQuery(params);
 
-  _prjtask->populate(qrytask, true);
-  (void)ErrorReporter::error(QtCriticalMsg, this, tr("Could not get Task Information"),
+  _prjorders->populate(qrytask, true);
+  (void)ErrorReporter::error(QtCriticalMsg, this, tr("Could not get Project Order Information"),
                            qrytask, __FILE__, __LINE__);
-  _prjtask->expandAll();
+  _prjorders->expandAll();
 }
 
 void project::sNumberChanged()
@@ -1025,6 +1078,20 @@ void project::sNewIncident()
   params.append("cntct_id",  _cntct->id());
   
   incident *newdlg = new incident(this);
+  newdlg->set(params);
+  omfgThis->handleNewWindow(newdlg);
+  sFillTaskList();
+}
+
+void project::sNewOpportunity()
+{
+  ParameterList params;
+  params.append("mode", "new");
+  params.append("prj_id",  _prjid);
+  params.append("crmacct_id",  _crmacct->id());
+  params.append("cntct_id",  _cntct->id());
+  
+  opportunity *newdlg = new opportunity(this);
   newdlg->set(params);
   omfgThis->handleNewWindow(newdlg);
   sFillTaskList();
@@ -1079,77 +1146,77 @@ void project::sEditOrder()
 {
   ParameterList params;
 
-  if(_prjtask->altId() == 15)
+  if(_prjorders->altId() == 15)
   {
     params.append("mode", "editQuote");
-    params.append("quhead_id", _prjtask->id());
+    params.append("quhead_id", _prjorders->id());
 
     salesOrder *newdlg = new salesOrder(this);
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg);
   }
-  else if(_prjtask->altId() == 17)
+  else if(_prjorders->altId() == 17)
   {
     params.append("mode", "editQuote");
-    params.append("soitem_id", _prjtask->id());
+    params.append("soitem_id", _prjorders->id());
 
     salesOrderItem newdlg(this);
     newdlg.set(params);
     newdlg.exec();
   }
-  else if(_prjtask->altId() == 25)
+  else if(_prjorders->altId() == 25)
   {
     params.append("mode",      "edit");
-    params.append("sohead_id", _prjtask->id());
+    params.append("sohead_id", _prjorders->id());
     salesOrder *newdlg = new salesOrder(this);
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg, Qt::WindowModal);
   }
-  else if(_prjtask->altId() == 27)
+  else if(_prjorders->altId() == 27)
   {
     params.append("mode", "edit");
-    params.append("soitem_id", _prjtask->id());
+    params.append("soitem_id", _prjorders->id());
 
     salesOrderItem newdlg(this);
     newdlg.set(params);
     newdlg.exec();
   }
-  else if(_prjtask->altId() == 35)
+  else if(_prjorders->altId() == 35)
   {
-    invoice::editInvoice(_prjtask->id(), this);
+    invoice::editInvoice(_prjorders->id(), this);
   }
-  else if(_prjtask->altId() == 37)
+  else if(_prjorders->altId() == 37)
   {
     params.append("mode", "edit");
-    params.append("invcitem_id", _prjtask->id());
+    params.append("invcitem_id", _prjorders->id());
 
     invoiceItem newdlg(this);
     newdlg.set(params);
     newdlg.exec();
   }
-  else if(_prjtask->altId() == 45)
+  else if(_prjorders->altId() == 45)
   {
     params.append("mode", "edit");
-    params.append("wo_id", _prjtask->id());
+    params.append("wo_id", _prjorders->id());
 
     workOrder *newdlg = new workOrder(this);
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg);
   }
-  else if(_prjtask->altId() == 65)
+  else if(_prjorders->altId() == 65)
   {
     params.append("mode", "edit");
-    params.append("pohead_id", _prjtask->id());
+    params.append("pohead_id", _prjorders->id());
 
     purchaseOrder *newdlg = new purchaseOrder(this);
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg);
   }
-  else if(_prjtask->altId() == 67)
+  else if(_prjorders->altId() == 67)
   {
     ParameterList params;
     params.append("mode", "edit");
-    params.append("poitem_id", _prjtask->id());
+    params.append("poitem_id", _prjorders->id());
 
     purchaseOrderItem newdlg(this, "", true);
     newdlg.set(params);
@@ -1162,6 +1229,16 @@ void project::sEditOrder()
     params.append("incdt_id", _prjtask->id());
 
     incident newdlg(this, "", true);
+    newdlg.set(params);
+    newdlg.exec();
+  }
+  else if(_prjtask->altId() == 110)
+  {
+    ParameterList params;
+    params.append("mode", "edit");
+    params.append("ophead_id", _prjtask->id());
+
+    opportunity newdlg(this, "", true);
     newdlg.set(params);
     newdlg.exec();
   }
@@ -1171,86 +1248,86 @@ void project::sViewOrder()
 {
   ParameterList params;
 
-  if(_prjtask->altId() == 15)
+  if(_prjorders->altId() == 15)
   {
     params.append("mode", "viewQuote");
-    params.append("quhead_id", _prjtask->id());
+    params.append("quhead_id", _prjorders->id());
 
     salesOrder *newdlg = new salesOrder(this);
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg);
   }
-  else if(_prjtask->altId() == 17)
+  else if(_prjorders->altId() == 17)
   {
     params.append("mode", "viewQuote");
-    params.append("soitem_id", _prjtask->id());
+    params.append("soitem_id", _prjorders->id());
 
     salesOrderItem newdlg(this);
     newdlg.set(params);
     newdlg.exec();
   }
-  else if(_prjtask->altId() == 25)
+  else if(_prjorders->altId() == 25)
   {
     params.append("mode",      "view");
-    params.append("sohead_id", _prjtask->id());
+    params.append("sohead_id", _prjorders->id());
     salesOrder *newdlg = new salesOrder(this);
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg, Qt::WindowModal);
   }
-  else if(_prjtask->altId() == 27)
+  else if(_prjorders->altId() == 27)
   {
     params.append("mode", "view");
-    params.append("soitem_id", _prjtask->id());
+    params.append("soitem_id", _prjorders->id());
 
     salesOrderItem newdlg(this);
     newdlg.set(params);
     newdlg.exec();
   }
-  else if(_prjtask->altId() == 35)
+  else if(_prjorders->altId() == 35)
   {
-    invoice::viewInvoice(_prjtask->id(), this);
+    invoice::viewInvoice(_prjorders->id(), this);
   }
-  else if(_prjtask->altId() == 37)
+  else if(_prjorders->altId() == 37)
   {
     params.append("mode", "view");
-    params.append("invcitem_id", _prjtask->id());
+    params.append("invcitem_id", _prjorders->id());
 
     invoiceItem newdlg(this);
     newdlg.set(params);
     newdlg.exec();
   }
-  else if(_prjtask->altId() == 45)
+  else if(_prjorders->altId() == 45)
   {
     params.append("mode", "view");
-    params.append("wo_id", _prjtask->id());
+    params.append("wo_id", _prjorders->id());
 
     workOrder *newdlg = new workOrder(this);
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg);
   }
-  else if(_prjtask->altId() == 55)
+  else if(_prjorders->altId() == 55)
   {
     params.append("mode", "view");
-    params.append("pr_id", _prjtask->id());
+    params.append("pr_id", _prjorders->id());
 
     purchaseRequest newdlg(this, "", true);
     newdlg.set(params);
     newdlg.exec();
   }
-  else if(_prjtask->altId() == 65)
+  else if(_prjorders->altId() == 65)
   {
     params.append("mode", "view");
-    params.append("pohead_id", _prjtask->id());
+    params.append("pohead_id", _prjorders->id());
 
     purchaseOrder *newdlg = new purchaseOrder(this);
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg);
   }
-  else if(_prjtask->altId() == 67)
+  else if(_prjorders->altId() == 67)
   {
     ParameterList params;
     params.append("mode", "view");
-    params.append("poitem_id", _prjtask->id());
+    params.append("poitem_id", _prjorders->id());
 
     purchaseOrderItem newdlg(this, "", true);
     newdlg.set(params);
@@ -1263,6 +1340,16 @@ void project::sViewOrder()
     params.append("incdt_id", _prjtask->id());
 
     incident newdlg(this, "", true);
+    newdlg.set(params);
+    newdlg.exec();
+  }
+  else if(_prjtask->altId() == 110)
+  {
+    ParameterList params;
+    params.append("mode", "view");
+    params.append("ophead_id", _prjtask->id());
+
+    opportunity newdlg(this, "", true);
     newdlg.set(params);
     newdlg.exec();
   }

@@ -15,6 +15,10 @@
 #include <QValidator>
 #include <QVariant>
 
+#include <parameter.h>
+#include <metasql.h>
+#include "mqlutil.h"
+
 #include "storedProcErrorLookup.h"
 #include "errorReporter.h"
 
@@ -60,99 +64,108 @@ editOwners::editOwners(QWidget* parent, const char* name, bool modal, Qt::Window
 void editOwners::sFillList()
 {
   XSqlQuery editFillList;
-
-  if(_todo->isChecked())
-  {
-    _queryString += "SELECT task_id AS id, "
-                    "       task_owner_username AS owner_username, "
-                    "       task_name AS name, "
-                    "       task_description AS description, "
-                    "       'Task' AS type_name, "
-                    "       'task' AS table "
-                    "FROM task "
-                    "WHERE task_owner_username = :owner ";
-    _first = false;
-  }
+  ParameterList params;
+  QString qry = "<? if exists('task') ?>"
+                "SELECT task_id AS id, "
+                "       task_owner_username AS owner_username, "
+                "       task_name AS name, "
+                "       task_descrip AS description, "
+                "       <? value('task') ?> AS type_name, "
+                "       'task' AS table "
+                "FROM task "
+                "WHERE task_owner_username = <? value('owner') ?> "
+                "<? endif ?>"
+                "<? if exists('project') ?>" 
+                "  <? if exists('task') ?>"
+                "  UNION ALL"
+                "  <? endif ?>"  
+                "SELECT prj_id AS id, "
+                "       prj_owner_username AS owner_username, "
+                "       prj_name AS name, "
+                "       prj_descrip AS description, "
+                "       <? value('project') ?> AS type_name, "
+                "       'prj' AS table "
+                "FROM prj "
+                "WHERE prj_owner_username = <? value('owner') ?> "
+                "<? endif ?>"
+                "<? if exists('contact') ?>"
+                "  <? if reExists('(task|project)') ?>"
+                "  UNION ALL"
+                "  <? endif ?>"  
+                "SELECT cntct_id AS id, "
+                "       cntct_owner_username AS owner_username, "
+                "       cntct_first_name || ' ' || cntct_last_name AS name, "
+                "       '' AS description, "
+                "       <? value('contact') ?> AS type_name, "
+                "       'cntct' AS table "
+                "FROM cntct "
+                "WHERE cntct_owner_username = <? value('owner') ?> "
+                "<? endif ?>"
+                "<? if exists('incident') ?>"
+                "  <? if reExists('(task|project|contact)') ?>"
+                "  UNION ALL"
+                "  <? endif ?>"  
+                "SELECT incdt_id AS id, "
+                "       incdt_owner_username AS owner_username, "
+                "       incdt_summary AS name, "
+                "       incdt_descrip AS description, "
+                "       <? value('incident') ?> AS type_name, "
+                "       'incdt' AS table "
+                "FROM incdt "
+                "WHERE incdt_owner_username = <? value('owner') ?> "
+                "<? endif ?>"
+                "<? if exists('account') ?>"
+                "  <? if reExists('(task|project|contact|incident)') ?>"
+                "  UNION ALL"
+                "  <? endif ?>"  
+                "SELECT crmacct_id AS id, "
+                "       crmacct_owner_username AS owner_username, "
+                "       crmacct_name AS name, "
+                "       crmacct_notes AS description, "
+                "       <? value('account') ?> AS type_name, "
+                "       'crmacct' AS table "
+                "FROM crmacct "
+                "WHERE crmacct_owner_username = <? value('owner') ?> "
+                "<? endif ?>"
+                "<? if exists('opportunity') ?>"
+                "  <? if reExists('(task|project|contact|incident|account)') ?>"
+                "  UNION ALL"
+                "  <? endif ?>"  
+                "SELECT ophead_id AS id, "
+                "       ophead_owner_username AS owner_username, "
+                "       ophead_name AS name, "
+                "       ophead_notes AS description, "
+                "       <? value('opportunity') ?> AS type_name, "
+                "       'ophead' AS table "
+                "FROM ophead "
+                "WHERE ophead_owner_username = <? value('owner') ?>"
+                "<? endif ?>;" ;
+  if(_task->isChecked())
+    params.append("task", tr("Task"));
   if(_project->isChecked())
-  {
-    if(!_first) _queryString += "UNION ALL ";
-    _queryString += "SELECT prj_id AS id, "
-                    "       prj_owner_username AS owner_username, "
-                    "       prj_name AS name, "
-                    "       prj_descrip AS description, "
-                    "       'Project' AS type_name, "
-                    "       'prj' AS table "
-                    "FROM prj "
-                    "WHERE prj_owner_username = :owner ";
-    _first = false;
-  }
+    params.append("project", tr("Project"));
   if(_contact->isChecked())
-  {
-    if(!_first) _queryString += "UNION ALL ";
-    _queryString += "SELECT cntct_id AS id, "
-                    "       cntct_owner_username AS owner_username, "
-                    "       cntct_first_name || ' ' || cntct_last_name AS name, "
-                    "       '' AS description, "
-                    "       'Contact' AS type_name, "
-                    "       'cntct' AS table "
-                    "FROM cntct "
-                    "WHERE cntct_owner_username = :owner ";
-    _first = false;
-  }
+    params.append("contact", tr("Contact"));
   if(_incident->isChecked())
-  {
-    if(!_first) _queryString += "UNION ALL ";
-    _queryString += "SELECT incdt_id AS id, "
-                    "       incdt_owner_username AS owner_username, "
-                    "       incdt_summary AS name, "
-                    "       incdt_descrip AS description, "
-                    "       'Incident' AS type_name, "
-                    "       'incdt' AS table "
-                    "FROM incdt "
-                    "WHERE incdt_owner_username = :owner ";
-    _first = false;
-  }
+    params.append("incident", tr("Incident"));
   if(_account->isChecked())
-  {
-    if(!_first) _queryString += "UNION ALL ";
-    _queryString += "SELECT crmacct_id AS id, "
-                    "       crmacct_owner_username AS owner_username, "
-                    "       crmacct_name AS name, "
-                    "       crmacct_notes AS description, "
-                    "       'Account' AS type_name, "
-                    "       'crmacct' AS table "
-                    "FROM crmacct "
-                    "WHERE crmacct_owner_username = :owner ";
-    _first = false;
-  }
-  if(_oppourtunity->isChecked())
-  {
-    if(!_first) _queryString += "UNION ALL ";
-    _queryString += "SELECT ophead_id AS id, "
-                    "       ophead_owner_username AS owner_username, "
-                    "       ophead_name AS name, "
-                    "       ophead_notes AS description, "
-                    "       'Opportunity' AS type_name, "
-                    "       'ophead' AS table "
-                    "FROM ophead "
-                    "WHERE ophead_owner_username = :owner ";
-    _first = false;
-  }
+    params.append("account", tr("Account"));
+  if(_opportunity->isChecked())
+    params.append("opportunity", tr("Opportunity"));
 
-  if(_queryString == "")
+  if(!_task->isChecked() && !_project->isChecked() && !_contact->isChecked() 
+     && !_incident->isChecked() && !_account->isChecked() && !_opportunity->isChecked())
     _list->clear();
   else
   {
-    editFillList.prepare(_queryString);
-    editFillList.bindValue(":owner", _owner->username());
-    editFillList.exec();
+    MetaSQLQuery mql(qry);
+    params.append("owner", _owner->username());
+    editFillList = mql.toQuery(params);
     _list->populate(editFillList);
   }
 
   _modifyAll->setEnabled(_list->topLevelItemCount() > 0);
   _modify->setEnabled(false);
-  _first = true;
-  _queryString = "";
 }
 
 void editOwners::sClose()

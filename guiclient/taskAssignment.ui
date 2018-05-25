@@ -69,7 +69,7 @@ to be bound by its terms.</comment>
      <item row="2" column="0">
       <widget class="XLabel" name="_dateLit">
        <property name="text">
-        <string>Assigned Date:</string>
+        <string>Assigned:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

@@ -42,7 +42,7 @@ QString taskCalendarControl::contents(const QDate & date)
                 "                  FROM taskass "
                 "                  WHERE taskass_username ~ <? value('username') ?>) "
                 "  <? endif ?>"
-                "  <? if exists('active') ?>AND task_active <? endif ?>"
+                "  <? if exists('active') ?>AND task_status <> 'C' <? endif ?>"
                 " ) data;";     
 
   ParameterList params;

@@ -139,14 +139,17 @@ void opportunityList::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
                               prjq, __FILE__, __LINE__))
     return;
 
-  if (_privileges->check("MaintainPersonalProjects") && !hasProj)
+  if (_privileges->check("MaintainAllProjects MaintainPersonalProjects") && !hasProj)
   {
     menuItem = pMenu->addAction(tr("Create Project"), this, SLOT(sCreateProject()));
     menuItem->setEnabled(true);
   }
 
-  menuItem = pMenu->addAction(tr("Create Task"), this, SLOT(sCreateTask()));
-  menuItem->setEnabled(true);
+  if (_privileges->check("MaintainAllTaskItems MaintainPersonalTaskItems"))
+  {
+    menuItem = pMenu->addAction(tr("Create Task"), this, SLOT(sCreateTask()));
+    menuItem->setEnabled(true);
+  }
 
   if (_privileges->check("MaintainQuotes"))
   {
@@ -216,30 +219,15 @@ void opportunityList::sView()
 void opportunityList::sDelete()
 {
   XSqlQuery opportunityDelete;
-  opportunityDelete.prepare("SELECT deleteOpportunity(:ophead_id) AS result;");
+  opportunityDelete.prepare("SELECT deleteOpportunity(:ophead_id, false) AS result;");
 
   foreach (XTreeWidgetItem *item, list()->selectedItems())
   {
     opportunityDelete.bindValue(":ophead_id", item->id());
     opportunityDelete.exec();
-    if (opportunityDelete.first())
-    {
-      int result = opportunityDelete.value("result").toInt();
-      if (result < 0)
-      {
-        ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Opportunity"),
-                             storedProcErrorLookup("deleteOpportunity", result),
-                             __FILE__, __LINE__);
-        return;
-      }
-    }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Opportunity"),
-                                opportunityDelete, __FILE__, __LINE__))
-    {
-      return;
-    }
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Opportunity"),
+                                opportunityDelete, __FILE__, __LINE__);
   }
-
   sFillList();
 }
 

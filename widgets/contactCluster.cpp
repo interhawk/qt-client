@@ -44,7 +44,7 @@ void ContactClusterLineEdit::setSearchAcct(int crmAcctId)
 {
   _searchAcctId = crmAcctId;
   if (crmAcctId != -1)
-    _extraClause = QString(" (cntct_id IN (SELECT crmacctcntctass_cntct_id FROM crmacctcntctass "
+    _extraClause = QString(" cntct_id IN (SELECT crmacctcntctass_cntct_id FROM crmacctcntctass "
                            "                          WHERE crmacctcntctass_crmacct_id = %1) ").arg(crmAcctId);
   else
     _extraClause = "";

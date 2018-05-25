@@ -117,7 +117,7 @@ QMap<QString, struct CommentMap *> &Comments::commentMap() {
 //  addToMap(ShipTo,            "SHP",   tr("Ship To"),                  "shipto_id",   "shipTo"             );
     addToMap(TimeAttendance,    "TATC",  tr("Time Attendance")                                               );
 //  addToMap(TimeExpense,       "TE",    tr("Time Expense")                                                  );
-    addToMap(TodoItem,          "TD",    tr("To-Do"),                    "task_id",     "task",          "MaintainPersonalToDoItems MaintainAllTodoItems");
+    addToMap(TodoItem,          "TD",    tr("To-Do"),                    "task_id",     "task",          "MaintainPersonalTaskItems MaintainAllTodoItems");
     addToMap(TransferOrder,     "TO",    tr("Transfer Order"),           "tohead_id",   "transferOrder"      );
     addToMap(TransferOrderItem, "TI",    tr("Transfer Order Item")                                           );
     addToMap(Vendor,            "V",     tr("Vendor"),                   "vend_id",     "vendor"             );

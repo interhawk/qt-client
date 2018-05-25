@@ -14,6 +14,7 @@
 
 #include <QAction>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>
 
@@ -42,7 +43,7 @@ taskListCalendar::taskListCalendar(QWidget* parent, const char * name, Qt::Windo
   _gview->setScene(scene);
   _gview->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
 
-  _usr->setEnabled(_privileges->check("MaintainAllToDoItems") || _privileges->check("MaintainPersonalToDoItems")
+  _usr->setEnabled(_privileges->check("MaintainAllTaskItems") || _privileges->check("MaintainPersonalTaskItems")
                    || _privileges->check("MaintainAllProjects") || _privileges->check("MaintainPersonalProjects"));
   _usr->setType(ParameterGroup::User);
   taskListq.prepare("SELECT getUsrId(NULL) AS usr_id;");
@@ -113,14 +114,14 @@ void taskListCalendar::sOpen()
   if (_list->rawValue("type") == "T")
   {
     bool editPriv =
-        (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("MaintainPersonalToDoItems")) ||
-        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("MaintainPersonalToDoItems")) ||
-        (_privileges->check("MaintainAllToDoItems"));
+        (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("MaintainPersonalTaskItems")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("MaintainPersonalTaskItems")) ||
+        (_privileges->check("MaintainAllTaskItems"));
 
     bool viewPriv =
-        (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("ViewPersonalToDoItems")) ||
-        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalToDoItems")) ||
-        (_privileges->check("ViewAllToDoItems"));
+        (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("ViewPersonalTaskItems")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalTaskItems")) ||
+        (_privileges->check("ViewAllTaskItems"));
 
     if (editPriv)
       sEditTask();
@@ -153,14 +154,14 @@ void taskListCalendar::sPopulateMenu(QMenu *pMenu)
   if (_list->rawValue("type") == "T")
   {
     bool editPriv =
-        (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("MaintainPersonalToDoItems")) ||
-        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("MaintainPersonalToDoItems")) ||
-        (_privileges->check("MaintainAllToDoItems"));
+        (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("MaintainPersonalTaskItems")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("MaintainPersonalTaskItems")) ||
+        (_privileges->check("MaintainAllTaskItems"));
 
     bool viewPriv =
-        (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("ViewPersonalToDoItems")) ||
-        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalToDoItems")) ||
-        (_privileges->check("ViewAllToDoItems"));
+        (omfgThis->username() == _list->currentItem()->rawValue("owner") && _privileges->check("ViewPersonalTaskItems")) ||
+        (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalTaskItems")) ||
+        (_privileges->check("ViewAllTaskItems"));
 
     menuItem = pMenu->addAction(tr("New..."), this, SLOT(sNewTask()));
     menuItem->setEnabled(editPriv);
@@ -192,6 +193,9 @@ void taskListCalendar::sPopulateMenu(QMenu *pMenu)
 
     menuItem = pMenu->addAction(tr("View..."), this, SLOT(sViewTask()));
     menuItem->setEnabled(viewPriv);
+
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
+    menuItem->setEnabled(editPriv);
   }
 
   if (! (_list->rawValue("cust") == ""))
@@ -252,11 +256,30 @@ void taskListCalendar::sDelete()
   taskDelete.prepare("SELECT deleteTask(:task_id) AS result;");
   taskDelete.bindValue(":task_id", _list->id());
   taskDelete.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
-                              taskDelete, __FILE__, __LINE__))
-     return;
-  else
-     sFillList();
+  if (taskDelete.first() && taskDelete.value("result").toInt() == -1)
+  {
+    if (QMessageBox::question(this, tr("Sub-Tasks"),
+                   tr("<p>Sub-tasks exist for this Task.\n"
+                      "Do you also want to delete sub-tasks?"),
+             QMessageBox::Yes, QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
+    {
+      return;
+    }
+    else
+    {
+      taskDelete.prepare("SELECT deleteTask(:task_id, true) AS result;");
+      taskDelete.bindValue(":task_id", _list->id());
+      taskDelete.exec();
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
+                               taskDelete, __FILE__, __LINE__))
+         return;
+    }
+  }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Task"),
+                            taskDelete, __FILE__, __LINE__))
+    return;
+  
+  sFillList();
 }
 
 void taskListCalendar::sEditCustomer()
@@ -356,7 +379,7 @@ void taskListCalendar::sFillList(const QDate & date)
                 "                  FROM taskass "
                 "                  WHERE taskass_username ~ <? value('username') ?>) "
                 "  <? endif ?>"
-                "  <? if exists('active') ?>AND task_active <? endif ?>"
+                "  <? if exists('active') ?>AND task_status <> 'C' <? endif ?>"
                 "ORDER BY due, seq, assigned;";
 
   ParameterList params;
