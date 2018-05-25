@@ -597,9 +597,6 @@ to be bound by its terms.</comment>
            <property name="type">
             <enum>XComboBox::ShipVias</enum>
            </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
           </widget>
          </item>
          <item row="3" column="4">
