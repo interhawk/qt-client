@@ -1246,7 +1246,8 @@ const struct {
   { "postCCcredit",  -4, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot post this Credit Card refund because the "
                             "credit card payment records is not for a refund."),
                                                                         0, "" },
-
+  { "postCheck",   -9, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Bank settings require this payment to be printed before posting."),
+                                                                        0, "" },
   { "postCheck",  -10, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot post this Payment because it has already "
 			 "been posted."),				0, "" },
   { "postCheck",  -11, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot post this Payment because the recipient "
