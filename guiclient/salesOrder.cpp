@@ -3138,7 +3138,7 @@ bool salesOrder::deleteForCancel()
       return false;
   }
 
-  if ((_mode == cNew && !_captive) || (ISORDER(_mode) && _soitem->topLevelItemCount() == 0))
+  if ((_mode == cNew && !_captive) || (!_metrics->boolean("EnableRentals") && ISORDER(_mode) && _soitem->topLevelItemCount() == 0))
   {
     query.prepare("SELECT deleteSO(:sohead_id, :sohead_number) AS result;");
     query.bindValue(":sohead_id", _soheadid);
