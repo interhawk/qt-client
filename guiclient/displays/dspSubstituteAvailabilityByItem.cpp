@@ -11,12 +11,10 @@
 #include "dspSubstituteAvailabilityByItem.h"
 
 #include <QAction>
-#include <QAction>
-#include <QAction>
-#include <QAction>
+#include <QButtonGroup>
 #include <QMenu>
-#include <QVariant>
 #include <QMessageBox>
+#include <QVariant>
 
 #include "dspAllocations.h"
 #include "dspOrders.h"

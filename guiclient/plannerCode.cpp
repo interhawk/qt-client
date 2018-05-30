@@ -10,6 +10,7 @@
 
 #include "plannerCode.h"
 
+#include <QButtonGroup>
 #include <QVariant>
 #include <QMessageBox>
 #include "errorReporter.h"

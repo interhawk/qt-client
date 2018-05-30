@@ -10,6 +10,7 @@
 
 #include "explodeWo.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>

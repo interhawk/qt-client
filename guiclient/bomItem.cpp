@@ -10,6 +10,7 @@
 
 #include "bomItem.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QValidator>

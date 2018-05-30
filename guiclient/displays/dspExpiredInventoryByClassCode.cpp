@@ -10,6 +10,7 @@
 
 #include "dspExpiredInventoryByClassCode.h"
 
+#include <QButtonGroup>
 #include <QMenu>
 #include <QMessageBox>
 
