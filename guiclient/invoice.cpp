@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -85,6 +85,7 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _freightCache = 0;
   _posted = false;
   _NumberGen = -1;
+  _saved = false;
 
   _cust->setType(CLineEdit::ActiveCustomers);
 
@@ -146,6 +147,18 @@ enum SetResponse invoice::set(const ParameterList &pParams)
   QVariant param;
   bool     valid;
 
+  param = pParams.value("invchead_id", &valid);
+  if (valid)
+  {
+    _invcheadid = param.toInt();
+    _documents->setId(_invcheadid);
+    _charass->setId(_invcheadid);
+    _comments->setId(_invcheadid);
+    populate();
+    populateCMInfo();
+    populateCCInfo();
+  }
+
   param = pParams.value("mode", &valid);
   if (valid)
   {
@@ -195,7 +208,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
 
       invoiceet.prepare("INSERT INTO invchead ("
 				"    invchead_id, invchead_invcnumber, invchead_orderdate,"
-                "    invchead_invcdate, invchead_cust_id, invchead_posted,"
+                                "    invchead_invcdate, invchead_cust_id, invchead_posted,"
 				"    invchead_printed, invchead_commission, invchead_freight,"
 				"    invchead_misc_amount, invchead_shipchrg_id "
 				") VALUES ("
@@ -223,15 +236,6 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     }
     else if (param.toString() == "edit")
     {
-
-      param = pParams.value("invchead_id", &valid);
-      if(valid)
-      {
-        _invcheadid = param.toInt();
-        _charass->setId(_invcheadid);
-        _comments->setId(_invcheadid);
-      }
-
       setObjectName(QString("invoice edit %1").arg(_invcheadid));
       _mode = cEdit;
 
@@ -293,18 +297,6 @@ enum SetResponse invoice::set(const ParameterList &pParams)
   if(cNew == _mode && valid)
     _cust->setId(param.toInt());
 
-  param = pParams.value("invchead_id", &valid);
-  if (valid)
-  {
-    _invcheadid = param.toInt();
-    _documents->setId(_invcheadid);
-    _charass->setId(_invcheadid);
-    _comments->setId(_invcheadid);
-    populate();
-    populateCMInfo();
-    populateCCInfo();
-  }
-
   return NoError;
 }
 
@@ -323,12 +315,11 @@ void invoice::sClose()
   XSqlQuery invoiceClose;
   if (_mode == cNew)
   {
-    int answer = QMessageBox::question(this,
+    if ( QMessageBox::question(this,
                    tr("Delete Invoice?"),
                    tr("<p>This Invoice has not been saved.  "
                       "Do you wish to delete this Invoice?"),
-                 QMessageBox::No | QMessageBox::Default, QMessageBox::Yes);
-    if (QMessageBox::No == answer)
+                 QMessageBox::No | QMessageBox::Yes, QMessageBox::Yes) == QMessageBox::No)
       return;
     else
     {
@@ -368,13 +359,12 @@ void invoice::sClose()
   {
     if (_invcitem->topLevelItemCount() <= 0 )
     {
-      int answer = QMessageBox::question(this,
+      if ( QMessageBox::question(this,
                      tr("Delete Invoice with no Line Items?"),
                      tr("<p>This Invoice does not contain any Line Items "
                         "associated with it. Do you wish to delete "
                         "this Invoice?"),
-                   QMessageBox::No | QMessageBox::Default, QMessageBox::Yes);
-      if (QMessageBox::No == answer)
+                   QMessageBox::No | QMessageBox::Yes, QMessageBox::Yes) == QMessageBox::No)
         return;
       else
       {
@@ -398,6 +388,7 @@ void invoice::sClose()
     }
   }
 
+  omfgThis->sInvoicesUpdated(_invcheadid, true);
   close();
 }
 
@@ -585,10 +576,9 @@ void invoice::sSave()
   if (_recurring->isRecurring() && _mode == cEdit && _recurring->parentId() != _invcheadid)
   {
     if (QMessageBox::question(this, tr("Recurring Invoice"),
-                                    tr("You have edited a recurring Invoice.\n"
-                                    "Do you wish to change all future invoice recurrences?"),
-                              QMessageBox::Yes, QMessageBox::No | QMessageBox::Default)
-             == QMessageBox::Yes)
+                          tr("You have edited a recurring Invoice.\n"
+                          "Do you wish to change all future invoice recurrences?"),
+                          QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
     {
     // Update Recurring Invoice with latest saved detail
       XSqlQuery recurUpd;
@@ -624,7 +614,7 @@ void invoice::sSave()
 
   omfgThis->sInvoicesUpdated(_invcheadid, true);
 
-  _invcheadid = -1;
+  _saved = true;
   close();
 }
 
@@ -793,7 +783,7 @@ void invoice::postInvoice()
   {
     if (QMessageBox::question(this, tr("Invoice Has Value 0"),
       tr("Invoice #%1 has a total value of 0.\n""Would you like to post it anyway?")
-      .arg(_invoiceNumber->text()), QMessageBox::Yes, QMessageBox::No | QMessageBox::Default)
+      .arg(_invoiceNumber->text()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No)
       == QMessageBox::No)
       return;
   }
@@ -1168,7 +1158,7 @@ void invoice::sCalculateTotal()
 void invoice::closeEvent(QCloseEvent *pEvent)
 {
   XSqlQuery invoicecloseEvent;
-  if ( (_mode == cNew) && (_invcheadid != -1) )
+  if ( _mode == cNew && !_saved )
   {
     // make sure invoice not posted
     invoicecloseEvent.prepare( "SELECT invchead_posted FROM invchead WHERE (invchead_id=:invchead_id);" );
@@ -1184,7 +1174,7 @@ void invoice::closeEvent(QCloseEvent *pEvent)
       return;
     }
 
-    invoicecloseEvent.prepare( "DELETE FROM invcitem WHERE (invcitem_invchead_id=:invchead_id);" );
+    invoicecloseEvent.prepare( "SELECT deleteInvoice(:invchead_id) AS result;" );
     invoicecloseEvent.bindValue(":invchead_id", _invcheadid);
     invoicecloseEvent.bindValue(":invoiceNumber", _invoiceNumber->text().toInt());
     invoicecloseEvent.exec();
@@ -1194,6 +1184,7 @@ void invoice::closeEvent(QCloseEvent *pEvent)
     sReleaseNumber();
   }
 
+  omfgThis->sInvoicesUpdated(_invcheadid, true);
   XWidget::closeEvent(pEvent);
 }
 
