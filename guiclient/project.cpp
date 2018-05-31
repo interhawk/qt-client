@@ -950,6 +950,9 @@ void project::sFillTaskList()
 // Populate Task List
   MetaSQLQuery mqltask = mqlLoad("orderActivityByProject", "tasks");
 
+  params.append("tasks",         tr("Tasks"));
+  params.append("incidents",     tr("Incidents"));
+  params.append("opportunities", tr("Opportunities"));
   params.append("assigned",   tr("Assigned"));
   params.append("complete",   tr("Completed"));
   params.append("confirmed",  tr("Confirmed"));
