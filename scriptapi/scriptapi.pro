@@ -14,12 +14,6 @@ lessThan (QT_MINOR_VERSION, 6) : isEqual(QT_MAJOR_VERSION, 5) {
 QT += core network printsupport script sql widgets xml serialport
 QT += websockets webchannel
 
-equals(QT_MAJOR_VERSION, 5) {
-  lessThan (QT_MINOR_VERSION, 9) {
-    QT += webkit webkitwidgets
-  }
-}
-
 DBFILE = scriptapi.db
 LANGUAGE = C++
 INCLUDEPATH += $${XTUPLE_DIR}/common          $${XTUPLE_BLD}/common \
