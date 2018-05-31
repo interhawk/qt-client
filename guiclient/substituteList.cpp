@@ -10,6 +10,7 @@
 
 #include "substituteList.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <QVariant>
 

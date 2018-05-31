@@ -11,6 +11,7 @@
 #include "dspSlowMovingInventoryByClassCode.h"
 
 #include <QAction>
+#include <QButtonGroup>
 #include <QMenu>
 #include <QMessageBox>
 #include <QSqlError>

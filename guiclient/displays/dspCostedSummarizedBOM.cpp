@@ -10,8 +10,9 @@
 
 #include "dspCostedSummarizedBOM.h"
 
-#include <QVariant>
+#include <QButtonGroup>
 #include <QMessageBox>
+#include <QVariant>
 
 #include "xtreewidget.h"
 

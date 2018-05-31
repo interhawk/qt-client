@@ -10,6 +10,7 @@
 
 #include "cashReceipt.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>

@@ -10,6 +10,7 @@
 
 #include "postCountTags.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>
