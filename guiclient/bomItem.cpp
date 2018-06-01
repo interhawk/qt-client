@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -60,6 +60,7 @@ bomItem::bomItem(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   _qtyFxd->setValidator(omfgThis->qtyVal());
   _qtyPer->setValidator(omfgThis->qtyPerVal());
   _scrap->setValidator(omfgThis->scrapVal());
+  _seqnumber->setValidator(new QIntValidator(1,999999999));
 
   _bomitemsub->addColumn(tr("Rank"),        _whsColumn,  Qt::AlignCenter, true, "bomitemsub_rank");
   _bomitemsub->addColumn(tr("Item Number"), _itemColumn, Qt::AlignLeft,  true, "item_number");
@@ -125,6 +126,8 @@ enum SetResponse bomItem::set(const ParameterList &pParams)
     if (param.toString() == "new")
     {
       _mode = cNew;
+      _seqnumberLit->setVisible(false);
+      _seqnumber->setVisible(false);
 
       if (!_metrics->boolean("AllowInactiveBomItems"))
         _item->setType(ItemLineEdit::cGeneralComponents | ItemLineEdit::cActive);
@@ -238,6 +241,7 @@ enum SetResponse bomItem::set(const ParameterList &pParams)
       _substituteGroup->setEnabled(false);
       _notes->setEnabled(false);
       _ref->setEnabled(false);
+      _seqnumber->setEnabled(false);
       _buttonBox->setStandardButtons(QDialogButtonBox::Close);
 
       _newCost->setEnabled(false);
@@ -300,7 +304,7 @@ void bomItem::sSave()
   XSqlQuery bomitem;
   if ( (_mode == cNew && !_saved) || (_mode == cCopy) || (_mode == cReplace) )
     bomitem.prepare( "INSERT INTO bomitem"
-                     " ( bomitem_id, bomitem_parent_item_id, bomitem_seqnumber,"
+                     " ( bomitem_id, bomitem_parent_item_id,"
                      "   bomitem_item_id, bomitem_qtyper, bomitem_scrap,"
                      "   bomitem_status, bomitem_effective, bomitem_expires,"
                      "   bomitem_createwo, bomitem_issuemethod, bomitem_schedatwooper,"
@@ -309,7 +313,7 @@ void bomItem::sSave()
                      "   bomitem_char_id, bomitem_value, bomitem_notes,"
                      "   bomitem_ref, bomitem_qtyfxd, bomitem_issuewo )"
                      " VALUES"
-                     " ( :bomitem_id, :bomitem_parent_item_id, :bomitem_seqnumber,"
+                     " ( :bomitem_id, :bomitem_parent_item_id,"
                      "   :bomitem_item_id, :bomitem_qtyper, :bomitem_scrap,"
                      "   :bomitem_status, :bomitem_effective, :bomitem_expires,"
                      "   :bomitem_createwo, :bomitem_issuemethod, :bomitem_schedatwooper,"
@@ -327,7 +331,8 @@ void bomItem::sSave()
                      "    bomitem_uom_id=:bomitem_uom_id, bomitem_ecn=:bomitem_ecn,"
                      "    bomitem_moddate=CURRENT_DATE, bomitem_subtype=:bomitem_subtype,"
                      "    bomitem_char_id=:bomitem_char_id, bomitem_value=:bomitem_value,"
-                     "    bomitem_notes=:bomitem_notes, bomitem_ref=:bomitem_ref "
+                     "    bomitem_notes=:bomitem_notes, bomitem_ref=:bomitem_ref, "
+                     "    bomitem_seqnumber=:bomitem_seqnumber "
                      "WHERE (bomitem_id=:bomitem_id);" );
   else
 //  ToDo
@@ -352,6 +357,9 @@ void bomItem::sSave()
   bomitem.bindValue(":bomitem_issuemethod", _issueMethods[_issueMethod->currentIndex()]);
   bomitem.bindValue(":bomitem_schedatwooper", false);
 
+  if (_mode == cEdit)
+    bomitem.bindValue(":bomitem_seqnumber", _seqnumber->toDouble());
+
   if (_noSubstitutes->isChecked())
     bomitem.bindValue(":bomitem_subtype", "N");
   else if (_itemDefinedSubstitutes->isChecked())
@@ -364,11 +372,6 @@ void bomItem::sSave()
     bomitem.bindValue(":bomitem_char_id", _char->id());
     bomitem.bindValue(":bomitem_value", _value->currentText());
   }
-
-//  Not used?
-//  bomitem.bindValue(":configType", "N");
-//  bomitem.bindValue(":configId", -1);
-//  bomitem.bindValue(":configFlag", QVariant(false));
 
   bomitem.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving BOM Information"),
@@ -561,6 +564,7 @@ void bomItem::populate()
     _uom->setId(qbomitem.value("bomitem_uom_id").toInt());
     _notes->setText(qbomitem.value("bomitem_notes").toString());
     _ref->setText(qbomitem.value("bomitem_ref").toString());
+    _seqnumber->setText(qbomitem.value("bomitem_seqnumber").toInt());
 
     for (int counter = 0; counter < _issueMethod->count(); counter++)
     {
