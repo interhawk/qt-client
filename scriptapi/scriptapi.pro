@@ -44,8 +44,7 @@ HEADERS += setupscriptapi.h \
     qbytearrayproto.h \
     qcoreapplicationproto.h \
     qcryptographichashproto.h \
-    qdatawidgetmapperproto.h \
-    qdateproto.h \
+    qdatawidgetmapperproto.h    \
     qdialogbuttonboxproto.h \
     qdialogsetup.h \
     qdirproto.h \
@@ -74,7 +73,7 @@ HEADERS += setupscriptapi.h \
     qdomprocessinginstructionproto.h \
     qdomtextproto.h \
     qdoublevalidatorproto.h \
-    qeventloopproto.h \
+    qeventloopproto.h       \
     qeventproto.h \
     qfileinfoproto.h \
     qfileproto.h \
@@ -156,34 +155,6 @@ HEADERS += setupscriptapi.h \
     xwebsync.h \
     xwebsync_p.h \
 
-lessThan (QT_MINOR_VERSION, 6) : equals(QT_MAJOR_VERSION, 5) {
-  # headers that won't compile under 5.10
-  HEADERS += qwebelementcollectionproto.h \
-              qwebelementproto.h \
-              qwebframeproto.h \
-              qwebpageproto.h \
-              qwebsecurityoriginproto.h \
-              qwebsettingsproto.h \
-              qwebviewproto.h \
-
-
-  # source files that won't compile under 5.10
-  SOURCES += qwebelementcollectionproto.cpp \
-              qwebelementproto.cpp \
-              qwebframeproto.cpp \
-              qwebpageproto.cpp \
-              qwebsecurityoriginproto.cpp \
-              qwebsettingsproto.cpp \
-              qwebviewproto.cpp \
-} else {
-  HEADERS += qwebenginepageproto.h \
-              qwebengineviewproto.h
-
-  SOURCES += qwebenginepageproto.cpp \
-              qwebengineviewproto.cpp
-}
-
-
 SOURCES += setupscriptapi.cpp \
     include.cpp \
     char.cpp \
@@ -202,8 +173,7 @@ SOURCES += setupscriptapi.cpp \
     qbytearrayproto.cpp \
     qcoreapplicationproto.cpp \
     qcryptographichashproto.cpp \
-    qdatawidgetmapperproto.cpp \
-    qdateproto.cpp \
+    qdatawidgetmapperproto.cpp  \
     qdialogbuttonboxproto.cpp \
     qdialogsetup.cpp \
     qdirproto.cpp \
@@ -232,7 +202,7 @@ SOURCES += setupscriptapi.cpp \
     qdomprocessinginstructionproto.cpp \
     qdomtextproto.cpp \
     qdoublevalidatorproto.cpp \
-    qeventloopproto.cpp \
+    qeventloopproto.cpp       \
     qeventproto.cpp \
     qfileinfoproto.cpp \
     qfileproto.cpp \
@@ -328,4 +298,10 @@ lessThan (QT_MINOR_VERSION, 9) : equals(QT_MAJOR_VERSION, 5) {
               qwebsecurityoriginproto.cpp \
               qwebsettingsproto.cpp \
               qwebviewproto.cpp
+} else {
+  HEADERS += qwebenginepageproto.h \
+              qwebengineviewproto.h
+
+  SOURCES += qwebenginepageproto.cpp \
+              qwebengineviewproto.cpp
 }

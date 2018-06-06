@@ -21,6 +21,7 @@
 #include <QSqlError>
 #include <QStringList>
 #include <QDesktopServices>
+#include <QTimeZone>
 #include <QUrl>
 #include <QVariant>
 
@@ -491,6 +492,22 @@ void login2::sLogin()
         _handler->message(QtCriticalMsg, storedProcErrorLookup("login", result));
         return;
       }
+
+      XSqlQuery time;
+      time.prepare("SET TIME ZONE :timezone;");
+      time.bindValue(":timezone", QString(QTimeZone::systemTimeZoneId()));
+      time.exec();
+
+      if (time.lastError().type() != QSqlError::NoError)
+      {
+        if (_splash)
+          _splash->hide();
+        _handler->message(QtCriticalMsg, tr("A System Error occurred at %1::%2:\n%3")
+                            .arg(__FILE__).arg(__LINE__)
+                            .arg(time.lastError().databaseText()));
+        return;
+      }
+
       _user = login.value("user").toString();
       _databaseURL = databaseURL;
       updateRecentOptions();

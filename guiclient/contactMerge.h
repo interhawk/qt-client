@@ -25,6 +25,9 @@ public:
     contactMerge(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::Window);
     ~contactMerge();
 
+public slots:
+    virtual SetResponse set(const ParameterList &pParams);
+
 protected slots:
     virtual void languageChange();
 
@@ -57,6 +60,7 @@ protected slots:
 private:
     int         _selectCol;
     QStringList _colMap;
+    QList<QVariant> _contacts;
 
 };
 

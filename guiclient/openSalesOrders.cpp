@@ -43,7 +43,7 @@ openSalesOrders::openSalesOrders(QWidget* parent, const char*, Qt::WindowFlags f
   optionsWidget()->hide();
 
   _dates->setStartNull(tr("Earliest"), omfgThis->startOfTime(), true);
-  int confDays = _metrics->value("DefaultOrderStartDays").toInt() ? : -90;
+  int confDays = _metrics->value("DefaultOrderStartDays").toInt() ? NULL : -90;
   _dates->setStartDate(QDate().currentDate().addDays(confDays));
   _dates->setEndNull(tr("Latest"), omfgThis->endOfTime(), true);
 
@@ -52,12 +52,14 @@ openSalesOrders::openSalesOrders(QWidget* parent, const char*, Qt::WindowFlags f
                             " UNION SELECT 2, '%3' " 
                             " UNION SELECT 3, '%4' " 
                             " UNION SELECT 4, '%5' "
+                            " UNION SELECT 5, '%6' "
                             " ORDER BY code; ")
           .arg(tr("None"))
           .arg(tr("Credit"))
           .arg(tr("Shipping"))
           .arg(tr("Packing"))
-          .arg(tr("Return"));
+          .arg(tr("Return"))
+          .arg(tr("Tax"));
 
   if (_metrics->boolean("MultiWhs"))
     parameterWidget()->append(tr("Site"), "warehous_id", ParameterWidget::Site);
@@ -149,6 +151,7 @@ bool openSalesOrders::setParams(ParameterList &params)
   params.append("credit", tr("Credit"));
   params.append("ship",   tr("Shipping"));
   params.append("pack",   tr("Packing"));
+  params.append("tax",    tr("Tax"));
   params.append("return", tr("Return"));
    
   return true;

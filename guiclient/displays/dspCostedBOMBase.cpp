@@ -11,9 +11,7 @@
 #include "dspCostedBOMBase.h"
 
 #include <QAction>
-#include <QAction>
-#include <QAction>
-#include <QAction>
+#include <QButtonGroup>
 #include <QMenu>
 #include <QMessageBox>
 #include <QVariant>

@@ -251,7 +251,7 @@ void projects::open(XTreeWidgetItem* item, QString mode)
     params.append("mode", mode + "Quote");
     params.append("soitem_id", item->id());
 
-    salesOrderItem* newdlg = new salesOrderItem(0, "", Qt::Dialog);
+    salesOrderItem* newdlg = new salesOrderItem();
     newdlg->set(params);
     newdlg->setAttribute(Qt::WA_DeleteOnClose);
     newdlg->show();
@@ -270,7 +270,7 @@ void projects::open(XTreeWidgetItem* item, QString mode)
     params.append("mode", mode);
     params.append("soitem_id", item->id());
 
-    salesOrderItem* newdlg = new salesOrderItem(0, "", Qt::Dialog);
+    salesOrderItem* newdlg = new salesOrderItem();
     newdlg->set(params);
     newdlg->setAttribute(Qt::WA_DeleteOnClose);
     newdlg->show();

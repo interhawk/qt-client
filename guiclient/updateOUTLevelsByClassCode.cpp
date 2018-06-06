@@ -10,6 +10,7 @@
 
 #include "updateOUTLevelsByClassCode.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <parameter.h>
 

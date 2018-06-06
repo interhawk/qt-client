@@ -123,6 +123,7 @@ configureSO::configureSO(QWidget* parent, const char* name, bool /*modal*/, Qt::
   _partial->setChecked(_metrics->boolean("DefaultPartialShipments"));
   _backorders->setChecked(_metrics->boolean("DefaultBackOrders"));
   _freeFormShiptos->setChecked(_metrics->boolean("DefaultFreeFormShiptos"));
+  _freeFormBilltos->setChecked(_metrics->boolean("DefaultFreeFormBilltos"));
 
   _creditLimit->setText(_metrics->value("SOCreditLimit"));
   _creditRating->setText(_metrics->value("SOCreditRate"));
@@ -323,6 +324,7 @@ bool configureSO::sSave()
   _metrics->set("DefaultPartialShipments", _partial->isChecked());
   _metrics->set("DefaultBackOrders", _backorders->isChecked());
   _metrics->set("DefaultFreeFormShiptos", _freeFormShiptos->isChecked());
+  _metrics->set("DefaultFreeFormBilltos", _freeFormBilltos->isChecked());
   _metrics->set("DefaultPrintSOOnSave", _printSO->isChecked());
   _metrics->set("CreditCheckSOOnSave", _creditCheckSO->isChecked());
   _metrics->set("DefaultSOLineItemsTab", _lineItemsSO->isChecked());

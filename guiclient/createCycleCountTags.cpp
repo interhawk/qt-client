@@ -10,6 +10,7 @@
 
 #include "createCycleCountTags.h"
 
+#include <QButtonGroup>
 #include <QSqlError>
 #include <QVariant>
 

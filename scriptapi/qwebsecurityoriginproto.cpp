@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -85,6 +85,7 @@ void QListQWebSecurityOriginFromScriptValue(const QScriptValue &obj, QList<QWebS
 
 QScriptValue addLocalSchemeForJS(QScriptContext* context, QScriptEngine* engine)
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   if (context->argumentCount() == 1) {
     QWebSecurityOrigin::addLocalScheme(context->argument(0).toString());
   }
@@ -99,11 +100,13 @@ QScriptValue addLocalSchemeForJS(QScriptContext* context, QScriptEngine* engine)
 
 QScriptValue localSchemesForJS(QScriptContext* /*context*/, QScriptEngine* engine)
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   return engine->toScriptValue(QWebSecurityOrigin::localSchemes());
 }
 
 QScriptValue removeLocalSchemeForJS(QScriptContext* context, QScriptEngine* engine)
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   if (context->argumentCount() == 1) {
     QWebSecurityOrigin::removeLocalScheme(context->argument(0).toString());
   }
@@ -144,6 +147,7 @@ void setupQWebSecurityOriginProto(QScriptEngine *engine)
 
 QScriptValue constructQWebSecurityOrigin(QScriptContext *context, QScriptEngine  *engine)
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *obj = 0;
   if (context->argumentCount() == 1) {
     QUrl url = qscriptvalue_cast<QUrl>(context->argument(0));
@@ -172,6 +176,7 @@ QWebSecurityOriginProto::~QWebSecurityOriginProto()
 
 void QWebSecurityOriginProto::addAccessWhitelistEntry(const QString & scheme, const QString & host, QWebSecurityOrigin::SubdomainSetting subdomainSetting)
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     item->addAccessWhitelistEntry(scheme, host, subdomainSetting);
@@ -179,6 +184,7 @@ void QWebSecurityOriginProto::addAccessWhitelistEntry(const QString & scheme, co
 
 qint64 QWebSecurityOriginProto::databaseQuota() const
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     return item->databaseQuota();
@@ -187,6 +193,7 @@ qint64 QWebSecurityOriginProto::databaseQuota() const
 
 qint64 QWebSecurityOriginProto::databaseUsage() const
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     return item->databaseUsage();
@@ -197,6 +204,7 @@ qint64 QWebSecurityOriginProto::databaseUsage() const
 /*
 QList<QWebDatabase> QWebSecurityOriginProto::databases() const
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     return item->databases();
@@ -206,6 +214,7 @@ QList<QWebDatabase> QWebSecurityOriginProto::databases() const
 
 QString QWebSecurityOriginProto::host() const
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     return item->host();
@@ -214,6 +223,7 @@ QString QWebSecurityOriginProto::host() const
 
 int QWebSecurityOriginProto::port() const
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     return item->port();
@@ -222,6 +232,7 @@ int QWebSecurityOriginProto::port() const
 
 void QWebSecurityOriginProto::removeAccessWhitelistEntry(const QString & scheme, const QString & host, QWebSecurityOrigin::SubdomainSetting subdomainSetting)
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     item->removeAccessWhitelistEntry(scheme, host, subdomainSetting);
@@ -229,6 +240,7 @@ void QWebSecurityOriginProto::removeAccessWhitelistEntry(const QString & scheme,
 
 QString QWebSecurityOriginProto::scheme() const
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     return item->scheme();
@@ -237,6 +249,7 @@ QString QWebSecurityOriginProto::scheme() const
 
 void QWebSecurityOriginProto::setApplicationCacheQuota(qint64 quota)
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     item->setApplicationCacheQuota(quota);
@@ -244,6 +257,7 @@ void QWebSecurityOriginProto::setApplicationCacheQuota(qint64 quota)
 
 void QWebSecurityOriginProto::setDatabaseQuota(qint64 quota)
 {
+  scriptDeprecated("QWebSecurityOrigin will not be available in a future version");
   QWebSecurityOrigin *item = qscriptvalue_cast<QWebSecurityOrigin*>(thisObject());
   if (item)
     item->setDatabaseQuota(quota);

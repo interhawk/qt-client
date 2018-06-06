@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -20,7 +20,7 @@
 #include <QToolButton>
 
 #include <metasql.h>
-#include <mqlutil.h>
+#include <metasql.h>
 #include <orprerender.h>
 #include <orprintrender.h>
 #include <renderobjects.h>
@@ -337,7 +337,10 @@ bool displayPrivate::setParams(ParameterList &params)
       for (int j = 0; j < param.toStringList().count(); j++)
         list << QString(":char%1_%2").arg(columnid.toString()).arg(j);
 
-      clauses.append(QString("charass_alias%1.charass_value IN (%2) ").arg(columnid.toString()).arg(list.join(",")));
+      if (list.size())
+        clauses.append(QString("charass_alias%1.charass_value IN (%2) ").arg(columnid.toString()).arg(list.join(",")));
+      else
+        clauses.append("FALSE");
     }
   }
   // Handle date based sections of clause
@@ -425,6 +428,7 @@ display::display(QWidget* parent, const char* name, Qt::WindowFlags flags)
   connect(_data->_searchAct, SIGNAL(triggered()), this, SLOT(sFillList()));
   connect(this, SIGNAL(fillList()), this, SLOT(sFillList()));
   connect(_data->_list, SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateMenu(QMenu*,QTreeWidgetItem*,int)));
+  connect(_data->_list, SIGNAL(populateHeaderMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateHeaderMenu(QMenu*,QTreeWidgetItem*,int)));
   connect(_data->_autoupdate, SIGNAL(toggled(bool)), this, SLOT(sAutoUpdateToggled()));
   connect(filterButton, SIGNAL(toggled(bool)), _data->_moreBtn, SLOT(setChecked(bool)));
 }
@@ -794,15 +798,7 @@ void display::sFillList(ParameterList pParams, bool forceSetParams)
       return;
   }
   int itemid = _data->_list->id();
-  bool ok = true;
-  QString errorString;
-  MetaSQLQuery mql = MQLUtil::mqlLoad(_data->metasqlGroup, _data->metasqlName, errorString, &ok);
-  if(!ok)
-  {
-    ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Information"),
-                         errorString, __FILE__, __LINE__);
-    return;
-  }
+  MetaSQLQuery mql(omfgThis->_mqlhash->value(_data->metasqlGroup, _data->metasqlName));
   XSqlQuery xq = mql.toQuery(pParams, QSqlDatabase(), false);
 
   QString column;
@@ -857,6 +853,10 @@ void display::sFillList(ParameterList pParams, bool forceSetParams)
 }
 
 void display::sPopulateMenu(QMenu *, QTreeWidgetItem *, int)
+{
+}
+
+void display::sPopulateHeaderMenu(QMenu *, QTreeWidgetItem *, int)
 {
 }
 

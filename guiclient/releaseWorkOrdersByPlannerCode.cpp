@@ -10,6 +10,7 @@
 
 #include "releaseWorkOrdersByPlannerCode.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include "guiErrorCheck.h"
 #include <QSqlError>

@@ -11,6 +11,7 @@
 #include "dspQOH.h"
 
 #include <QAction>
+#include <QButtonGroup>
 #include <QMenu>
 #include <QVariant>
 

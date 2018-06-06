@@ -10,6 +10,7 @@
 
 #include "adjustmentTrans.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QValidator>

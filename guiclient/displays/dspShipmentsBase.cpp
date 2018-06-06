@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -62,7 +62,7 @@ void dspShipmentsBase::languageChange()
 }
 
 enum SetResponse dspShipmentsBase::set(const ParameterList &pParams)
-{ 
+{
   XWidget::set(pParams);
   QVariant param;
   bool     valid;
@@ -105,10 +105,10 @@ bool dspShipmentsBase::setParams(ParameterList& params)
     params.append("sohead_id", _salesOrder->id());
 
   if(_shipment->isVisibleTo(this))
-  {
     params.append("shiphead_id", _shipment->id());
+
+  if (_metrics->boolean("MultiWhs"))
     params.append("MultiWhs", true);
-  }
 
   return true;
 }
@@ -160,17 +160,22 @@ void dspShipmentsBase::sPopulateSalesOrder(int pSoheadid)
 
 void dspShipmentsBase::sPopulateShipment(int pShipheadid)
 {
+  XSqlQuery shq;
+  ParameterList params;
+
   if (pShipheadid != -1)
   {
     XSqlQuery shq;
-    shq.prepare("SELECT cust_name, getcontactphone(cntct_id, 'Office') AS contact_phone,"
+    QString sql("SELECT cust_name, getcontactphone(cntct_id, 'Office') AS contact_phone,"
                 "       cohead_orderdate AS orderdate,"
                 "       cohead_custponumber AS custponumber"
                 "  FROM shiphead"
                 "  JOIN cohead ON (shiphead_order_id=cohead_id)"
                 "  JOIN custinfo ON (cohead_cust_id=cust_id)"
                 "  JOIN cntct ON (cust_cntct_id=cntct_id)"
-                " WHERE (shiphead_id=:shiphead_id) AND (shiphead_order_type='SO')"
+                " WHERE shiphead_id=<? value('shiphead_id') ?>"
+                "   AND shiphead_order_type='SO'"
+                " <? if exists('MultiWhs') ?>"
                 " UNION "
                 "SELECT warehous_code, getcontactphone(cntct_id, 'Office') AS contact_phone,"
                 "       tohead_orderdate AS orderdate,"
@@ -179,9 +184,15 @@ void dspShipmentsBase::sPopulateShipment(int pShipheadid)
                 "  JOIN tohead ON (shiphead_order_id=tohead_id)"
                 "  JOIN whsinfo ON (tohead_dest_warehous_id=warehous_id)"
                 "  LEFT OUTER JOIN cntct ON (warehous_cntct_id=cntct_id)"
-                " WHERE (shiphead_id=:shiphead_id) AND (shiphead_order_type='TO');");
-    shq.bindValue(":shiphead_id", pShipheadid);
-    shq.exec();
+                " WHERE shiphead_id=<? value('shiphead_id') ?>"
+                "   AND shiphead_order_type='TO'"
+                " <? endif ?> ;");
+    params.append("shiphead_id", pShipheadid);
+    if (_metrics->boolean("MultiWhs"))
+      params.append("MultiWhs", true);
+
+    MetaSQLQuery mql(sql);
+    shq = mql.toQuery(params);
     if (shq.first())
     {
       _orderDate->setDate(shq.value("orderdate").toDate());
@@ -209,7 +220,7 @@ void dspShipmentsBase::sFillURL()
                "  FROM shiphead, cohead "
                " WHERE ((shiphead_id=:shiphead_id) "
                "    AND (shiphead_order_id=cohead_id));");
-   
+
   shq.bindValue(":shiphead_id", list()->id());
   shq.exec();
   if (shq.first())
@@ -218,14 +229,14 @@ void dspShipmentsBase::sFillURL()
    bool    canOpenTrackingPage = true;
    QString tracknum = shq.value("shiphead_tracknum").toString();
    QString shipvia  = shq.value("shiphead_shipvia").toString();
-   
+
    if (shipvia.startsWith("UPS"))
    {
      url = "http://wwwapps.ups.com/WebTracking/processInputRequest?HTMLVersion=5.0&loc=en_US&Requester=UPSHome&tracknum=";
      url +=  tracknum;
      url +=  "&AgreeToTermsAndConditions=yes&track.x=40&track.y=9";
     }
-   
+
    if (shipvia.startsWith("SAIA"))
    {
      url = "http://www.SaiaSecure.com/tracing/manifest.asp?UID=&PWD=&PRONum1=";
@@ -313,7 +324,7 @@ void dspShipmentsBase::sFillURL()
      /* TODO: http://my.yrc.com/dynamic/national/servlet?
                    CONTROLLER=com.rdwy.ec.rextracking
                    .http.controller.ProcessPublicTrackingController
-                   &type=1&pro0=nnnnnnnnnn&ozip0=nnnnn&dzip0=nnnnnn 
+                   &type=1&pro0=nnnnnnnnnn&ozip0=nnnnn&dzip0=nnnnnn
         type = 1 to track by bill of lading #, 2 by p/o #, 3 by booking #
         ozip0 = origin zip code, dzip = destination zip code
       */
