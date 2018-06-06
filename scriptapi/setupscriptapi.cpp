@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -12,6 +12,7 @@
 
 #include <QtGlobal>
 #include <QDebug>
+#include <QMessageBox>
 
 #include "applock.h"
 #include "metrics.h"
@@ -36,7 +37,6 @@
 #include "qcoreapplicationproto.h"
 #include "qcryptographichashproto.h"
 #include "qdatawidgetmapperproto.h"
-#include "qdateproto.h"
 #include "qdialogbuttonboxproto.h"
 #include "qdialogsetup.h"
 #include "qdirproto.h"
@@ -136,25 +136,26 @@
 #include "quuidproto.h"
 #include "qvalidatorproto.h"
 #include "qwebchannelproto.h"
+#if QT_VERSION < 0x050900
+#include "qwebelementcollectionproto.h"
+#include "qwebelementproto.h"
+#include "qwebframeproto.h"
+#include "qwebpageproto.h"
+#include "qwebsecurityoriginproto.h"
+#include "qwebsettingsproto.h"
+#endif
 #include "qwebsocketcorsauthenticatorproto.h"
 #include "qwebsocketproto.h"
 #include "qwebsocketprotocolproto.h"
 #include "qwebsocketserverproto.h"
+#if QT_VERSION < 0x050900
+#include "qwebviewproto.h"
+#endif
 #include "qwidgetproto.h"
 #include "webchanneltransport.h"
 #include "xsqlqueryproto.h"
 #include "xvariantsetup.h"
 #include "xwebsync.h"
-
-#if QT_VERSION < 0x050900
-  #include "qwebelementcollectionproto.h"
-  #include "qwebelementproto.h"
-  #include "qwebframeproto.h"
-  #include "qwebpageproto.h"
-  #include "qwebsecurityoriginproto.h"
-  #include "qwebsettingsproto.h"
-  #include "qwebviewproto.h"
-#endif
 
 #if QT_VERSION >= 0x050900
   #include "qwebenginepageproto.h"
@@ -162,7 +163,6 @@
 #endif
 
 static Preferences *prefs = 0;
-
 /*! \defgroup scriptapi The xTuple ERP Scripting API
 
   The xTuple ERP Scripting API defines the interface between extension %scripts
@@ -197,7 +197,6 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQCoreApplicationProto(engine);
   setupQCryptographicHashProto(engine);
   setupQDataWidgetMapperProto(engine);
-  setupQDateProto(engine);
   setupQDialog(engine);
   setupQDialogButtonBoxProto(engine);
   setupQDirProto(engine);
@@ -296,10 +295,21 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQUuidProto(engine);
   setupQValidatorProto(engine);
   setupQWebChannelProto(engine);
+#if QT_VERSION < 0x050900
+  setupQWebElementCollectionProto(engine);
+  setupQWebElementProto(engine);
+  setupQWebFrameProto(engine);
+  setupQWebPageProto(engine);
+  setupQWebSecurityOriginProto(engine);
+  setupQWebSettingsProto(engine);
+#endif
   setupQWebSocketCorsAuthenticatorProto(engine);
   setupQWebSocketProto(engine);
   setupQWebSocketProtocolProto(engine);
   setupQWebSocketServerProto(engine);
+#if QT_VERSION < 0x050900
+  setupQWebViewProto(engine);
+#endif
   setupQWidgetProto(engine);
   setupQt(engine);
   setupWebChannelTransport(engine);
@@ -347,7 +357,12 @@ void scriptDeprecated(QString msg)
   else if (prefs->value("DeprecationLevel") == "warning")
     qWarning() << msg;
   else if (prefs->value("DeprecationLevel") == "critical")
-    qCritical() << msg;
+    QMessageBox::critical(0, QObject::tr("Deprecated Script Call"), msg);
   else if (prefs->value("DeprecationLevel") == "fatal")
-    qFatal("%s\n", msg.toUtf8().data());
+  {
+    QMessageBox::critical(0, QObject::tr("Deprecated Script Call"),
+                          QObject::tr("Fatal error:<p>%1").arg(msg));
+    QApplication::exit(5);
+    exit(5);
+  }
 }

@@ -10,6 +10,7 @@
 
 #include "updateOUTLevels.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 
 updateOUTLevels::updateOUTLevels(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)

@@ -91,60 +91,30 @@ void issueWoMaterialBatch::sIssue()
     return;
   }
   
-  QString sqlissue =
-        ( "SELECT itemsite_id, "
-          "       item_number, "
-          "       warehous_code, "
-          "       (COALESCE((SELECT SUM(itemloc_qty) "
-          "                    FROM itemloc "
-          "                   WHERE (itemloc_itemsite_id=itemsite_id)), 0.0) "
-          "        >= roundQty(item_fractional, noNeg(itemuomtouom(itemsite_item_id, womatl_uom_id, NULL, womatl_qtyreq - womatl_qtyiss)))) AS isqtyavail "
-          "  FROM womatl, itemsite, item, whsinfo "
-          " WHERE ( (womatl_itemsite_id=itemsite_id) "
-          "   AND (itemsite_item_id=item_id) "
-          "   AND (itemsite_warehous_id=warehous_id) "
-          "   AND (NOT ((item_type = 'R') OR (itemsite_controlmethod = 'N'))) "
-          "   AND ((itemsite_controlmethod IN ('L', 'S')) OR (itemsite_loccntrl)) "
-          "   AND (womatl_issuemethod IN ('S', 'M')) "
-          "  <? if exists(\"pickItemsOnly\") ?>"
-          "   AND (womatl_picklist) "
-          "  <? endif ?>"
-          "   AND (womatl_wo_id=<? value(\"wo_id\") ?>)); ");
+  QStringList itemlist;
+
+  QString sqlissue = ("SELECT DISTINCT item_number "
+              "FROM womatl "
+              "JOIN itemsite ON (womatl_itemsite_id = itemsite_id) "
+              "JOIN item ON (itemsite_item_id = item_id) "
+              "WHERE (fetchMetricBool('DisallowNegativeInventory') OR itemsite_costmethod='A' OR itemsite_controlmethod IN ('L', 'S') OR itemsite_loccntrl) "
+              "  AND itemsite_qtyonhand < roundQty(item_fractional, itemuomtouom(item_id, womatl_uom_id, NULL, roundQty(itemuomfractionalbyuom(item_id, womatl_uom_id), noNeg(CASE WHEN (womatl_qtyreq >= 0) THEN womatl_qtyreq - womatl_qtyiss ELSE womatl_qtyiss * -1 END)))) "
+              " AND (womatl_issuemethod IN ('S', 'M')) "
+              " <? if exists('pickItemsOnly') ?> "
+              " AND (womatl_picklist) "
+              " <? endif ?> "
+              " AND (womatl_wo_id=<? value('wo_id') ?>);");
   MetaSQLQuery mqlissue(sqlissue);
   ParameterList params;
   params.append("wo_id", _wo->id());
   if (!_nonPickItems->isChecked())
     params.append("pickItemsOnly", true);
   XSqlQuery issue = mqlissue.toQuery(params);
-  while(issue.next())
-  {
-    if(!(issue.value("isqtyavail").toBool()))
-    {
-      QMessageBox::critical(this, tr("Insufficient Inventory"),
-        tr("Item Number %1 in Site %2 is a Multiple Location or\n"
-           "Lot/Serial controlled Item which is short on Inventory.\n"
-           "This transaction cannot be completed as is. Please make\n"
-           "sure there is sufficient Quantity on Hand before proceeding.")
-          .arg(issue.value("item_number").toString())
-          .arg(issue.value("warehous_code").toString()));
-      return;
-    }
-  }
+  while (issue.next())
+    itemlist.append(issue.value("item_number").toString());
 
-  sqlissue = ("SELECT COALESCE(bool_and(itemsite_qtyonhand >= roundQty(item_fractional, itemuomtouom(item_id, womatl_uom_id, NULL, roundQty(itemuomfractionalbyuom(item_id, womatl_uom_id), noNeg(CASE WHEN (womatl_qtyreq >= 0) THEN womatl_qtyreq - womatl_qtyiss ELSE womatl_qtyiss * -1 END))))), TRUE) AS isqtyavail "
-              "FROM womatl "
-              "JOIN itemsite ON (womatl_itemsite_id = itemsite_id) "
-              "JOIN item ON (itemsite_item_id = item_id) "
-              "WHERE (fetchMetricBool('DisallowNegativeInventory') OR itemsite_costmethod='A') "
-              " AND (womatl_issuemethod IN ('S', 'M')) "
-              " <? if exists('pickItemsOnly') ?> "
-              " AND (womatl_picklist) "
-              " <? endif ?> "
-              " AND (womatl_wo_id=<? value('wo_id') ?>);");
-  mqlissue.setQuery(sqlissue);
-  issue = mqlissue.toQuery(params);
-  if (issue.first() && ! issue.value("isqtyavail").toBool() &&
-      QMessageBox::question(this, tr("Continue?"), tr("One or more items cannot be issued due to insufficient inventory. Issue all other items?"),
+  if (itemlist.size() &&
+      QMessageBox::question(this, tr("Continue?"), tr("The following items cannot be issued due to insufficient inventory:<ul><li>%1</li></ul>. Issue all other items?").arg(itemlist.join("</li><li>")),
                                QMessageBox::No | QMessageBox::Default, QMessageBox::Yes) == QMessageBox::No)
         return;
 
@@ -167,6 +137,11 @@ void issueWoMaterialBatch::sIssue()
                 "FROM womatl, itemsite, item "
                 "WHERE((womatl_itemsite_id=itemsite_id) "
                 " AND (itemsite_item_id=item_id) "
+                " AND item_number NOT IN ('' "
+                "     <? foreach('items') ?> "
+                "     , <? value('items') ?> "
+                "     <? endforeach ?> "
+                "     ) "
                 " AND (womatl_issuemethod IN ('S', 'M')) "
                 " <? if exists(\"pickItemsOnly\") ?> "
                 " AND (womatl_picklist) "
@@ -174,6 +149,7 @@ void issueWoMaterialBatch::sIssue()
                 " AND (womatl_wo_id=<? value(\"wo_id\") ?>)) "
                 "ORDER BY womatl_id; ");
   MetaSQLQuery mqlitems(sqlitems);
+  params.append("items", itemlist);
   XSqlQuery items = mqlitems.toQuery(params);
 
   int succeeded = 0;

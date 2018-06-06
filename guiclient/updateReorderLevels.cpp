@@ -8,6 +8,7 @@
  * to be bound by its terms.
  */
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>

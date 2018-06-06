@@ -10,6 +10,7 @@
 
 #include "updateOUTLevelByItem.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <parameter.h>
 

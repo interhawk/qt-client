@@ -54,6 +54,7 @@ public slots:
     virtual void sAssigned();
     virtual void sNewCharacteristic();
     virtual void sProjectUpdated();
+    virtual void done(int);
 
     virtual void setVisible(bool);
 

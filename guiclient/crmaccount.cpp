@@ -282,17 +282,27 @@ enum SetResponse crmaccount::set(const ParameterList &pParams)
 
     crmaccount *w = qobject_cast<crmaccount*>(widget);
 
-    if (w && w->id()==_crmacctId)
+    if (w && w != this && w->id()==_crmacctId)
     {
-      w->setFocus();
-
-      if (omfgThis->showTopLevel())
+      // detect "i'm my own grandpa"
+      QObject *p;
+      for (p = parent(); p && p != w ; p = p->parent())
+        ; // do nothing
+      if (p == w)
       {
-        w->raise();
-        w->activateWindow();
+        QMessageBox::warning(this, tr("Cannot Open Recursively"),
+                             tr("This account is already open and cannot be "
+                                "raised. Please close windows to get to it."));
+        _closed = true;
+      } else if (p) {
+        w->setFocus();
+        if (omfgThis->showTopLevel())
+        {
+          w->raise();
+          w->activateWindow();
+        }
+        _closed = true;
       }
-
-      _closed = true;
       break;
     }
   }
@@ -400,6 +410,21 @@ void crmaccount::sClose()
                            tr("Error detaching Contact from Account"),
                            detachq, __FILE__, __LINE__);
       return;
+    }
+
+    if (_metrics->boolean("LotSerialControl"))
+    {
+      XSqlQuery deleteReg;
+      deleteReg.prepare("DELETE FROM lsreg "
+                        "      WHERE lsreg_crmacct_id=:crmacct_id;");
+      deleteReg.bindValue(":crmacct_id", _crmacctId);
+      deleteReg.exec();
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error deleting Registrations from Account"),
+                               deleteReg, __FILE__, __LINE__))
+      {
+        rollback.exec();
+        return;
+      }
     }
 
     // TODO: handle _username

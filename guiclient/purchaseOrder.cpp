@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1502,10 +1502,10 @@ void purchaseOrder::closeEvent(QCloseEvent *pEvent)
       return;
     }
 
-    purchasecloseEvent.prepare( "DELETE FROM pohead "
-               "WHERE (pohead_id=:pohead_id);"
-               "DELETE FROM poitem "
-               "WHERE (poitem_pohead_id=:pohead_id);" );
+    purchasecloseEvent.prepare( "DELETE FROM poitem "
+               "WHERE (poitem_pohead_id=:pohead_id);"
+               "DELETE FROM pohead "
+               "WHERE (pohead_id=:pohead_id);" );
     purchasecloseEvent.bindValue(":pohead_id", _poheadid);
     purchasecloseEvent.exec();
     if (purchasecloseEvent.lastError().type() != QSqlError::NoError)
@@ -1552,6 +1552,8 @@ void purchaseOrder::closeEvent(QCloseEvent *pEvent)
   if (! _lock.release())
     ErrorReporter::error(QtCriticalMsg, this, tr("Locking Error"),
                          _lock.lastError(), __FILE__, __LINE__);
+
+  omfgThis->sPurchaseOrdersUpdated(_poheadid, true);
   
   XWidget::closeEvent(pEvent);
 }

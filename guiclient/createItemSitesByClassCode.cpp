@@ -10,6 +10,7 @@
 
 #include "createItemSitesByClassCode.h"
 
+#include <QButtonGroup>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QValidator>

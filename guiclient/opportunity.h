@@ -62,6 +62,7 @@ public slots:
     virtual void sPrintSalesOrder();
     virtual void sViewSalesOrder();
     virtual void sHandleCrmacct(int);
+    virtual void done(int);
 
     virtual void setVisible(bool);
 
