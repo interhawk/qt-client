@@ -39,6 +39,7 @@ class opportunityList : public display, public Ui::opportunityList
     virtual void	sCreateProject();
     virtual void	sCreateQuote();
     virtual void	sCreateTask();
+    virtual void	sUpdate(QString, int);
 
 };
 

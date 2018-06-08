@@ -191,6 +191,14 @@ enum SetResponse project::set(const ParameterList &pParams)
   if (valid)
     _assignedTo->setUsername(param.toString());
 
+  param = pParams.value("prj_id", &valid);
+  if (valid)
+  {
+    _prjid = param.toInt();
+    populate();
+    _charass->setId(_prjid);
+  }
+
   param = pParams.value("mode", &valid);
   if (valid)
   {
@@ -246,14 +254,6 @@ enum SetResponse project::set(const ParameterList &pParams)
       connect(_prjtask, SIGNAL(itemSelected(int)), _editTask, SLOT(animateClick()));
       connect(_projectType, SIGNAL(newID(int)), this, SLOT(sProjectTypeChanged(int)));
     }
-  }
-
-  param = pParams.value("prj_id", &valid);
-  if (valid)
-  {
-    _prjid = param.toInt();
-    populate();
-    _charass->setId(_prjid);
   }
 
   param = pParams.value("crmacct_id", &valid);

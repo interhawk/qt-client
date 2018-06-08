@@ -209,9 +209,6 @@ enum SetResponse opportunity::set(const ParameterList &pParams)
       setViewMode();
   }
 
-  _taskList->parameterWidget()->setDefault(tr("Opportunity"), _opheadid, true);
-  _taskList->sFillList();
-
   param = pParams.value("ophead_id", &valid);
   if (valid)
   {
@@ -225,6 +222,9 @@ enum SetResponse opportunity::set(const ParameterList &pParams)
     _crmacct->setId(param.toInt());
     _crmacct->setEnabled(false);
   }
+
+  _taskList->parameterWidget()->setDefault(tr("Opportunity"), _opheadid, true);
+  _taskList->sFillList();
 
   connect(_opptype,     SIGNAL(newID(int)), this, SLOT(sOppTypeChanged(int)));
 
@@ -292,6 +292,8 @@ void opportunity::sSave()
 {
   if (! save(false)) // if error
     return;
+
+  omfgThis->sEmitSignal(QString("Opportunity"), _opheadid);
 
   done(_opheadid);
 }
@@ -1133,10 +1135,11 @@ void opportunity::sProjectUpdated()
   updp.prepare("UPDATE task SET task_prj_id=:prjid "
                " WHERE task_parent_type='OPP' "
                "   AND task_parent_id=:oppid;" );
-  updp.bindValue(":prjid", _project->id());
+  if (_project->isValid())
+    updp.bindValue(":prjid", _project->id());
   updp.bindValue(":oppid", _opheadid);
   updp.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Opportunity Project"),
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error updating Opportunity Project"),
                                 updp, __FILE__, __LINE__))
        return;
 

@@ -64,6 +64,7 @@ opportunityList::opportunityList(QWidget* parent, const char*, Qt::WindowFlags f
   list()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   connect(list(), SIGNAL(itemSelected(int)), this, SLOT(sOpen()));
+  connect(omfgThis, SIGNAL(emitSignal(QString, int)), this, SLOT(sUpdate(QString, int)));
 
   if (!_privileges->check("MaintainAllOpportunities") && !_privileges->check("MaintainPersonalOpportunities"))
     newAction()->setEnabled(false);
@@ -453,3 +454,8 @@ void opportunityList::sCreateQuote()
   }
 }
 
+void opportunityList::sUpdate(QString source, int id)
+{
+  if (source == "Opportunity")
+    sFillList();
+}

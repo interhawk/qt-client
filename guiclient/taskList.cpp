@@ -266,7 +266,7 @@ void taskList::sNewIncdt()
   newdlg.set(params);
   newdlg.setWindowModality(Qt::WindowModal);
 
-  if (newdlg.exec() != XDialog::Rejected)
+  if (newdlg.exec() > 0)
     sFillList();
 }
 
