@@ -978,6 +978,8 @@ const struct {
 			       "Transfer Order Item then either the Transfer "
 			       "Order does not exist or there is no Item Site "
 			       "for this line item."),		0, "" },
+  { "enterReceipt",  -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An Item Site is marked inactive and cannot be receipted against. "
+                          "Please correct this before proceeding."),		0, "" },
 
   { "explodeWo",  -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Work Order %1 cannot be Exploded as there is no "
 			 "valid Bill of Materials on file for the Work Order "
