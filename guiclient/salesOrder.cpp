@@ -3273,6 +3273,7 @@ void salesOrder::clear()
   _CCAmount->clear();
   _CCCVV->clear();
   _project->setId(-1);
+  _docNumber->clear();
   _fromQuoteLit->setText(tr("From Quote:"));
 
   _fromQuote->setText(tr("No"));
