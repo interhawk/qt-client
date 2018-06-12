@@ -30,6 +30,7 @@ public slots:
     virtual void sCreateProject();
     virtual void sCreateTask();
     virtual void sPopulateMenu(QMenu *, QTreeWidgetItem *, int);
+    virtual void sUpdate(QString, int);
 };
 
 #endif // INCIDENTWORKBENCH_H

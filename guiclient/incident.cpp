@@ -205,9 +205,10 @@ enum SetResponse incident::set(const ParameterList &pParams)
     populate();
     _lotserial->setItemId(_item->id());
     _charass->setId(_incdtid);
-    _taskList->parameterWidget()->setDefault(tr("Incident"), _incdtid, true);
-    _taskList->sFillList();
   }
+
+  _taskList->parameterWidget()->setDefault(tr("Incident"), _incdtid, true);
+  _taskList->sFillList();
 
   param = pParams.value("crmacct_id", &valid);
   if (valid)
@@ -359,9 +360,8 @@ void incident::sSave()
 {
   if (! save(false)) // if error
     return;
-  {
-   done(_incdtid);
-  }
+
+  done(_incdtid);
 }
 
 bool incident::save(bool partial)
@@ -717,7 +717,8 @@ void incident::sProjectUpdated()
   updp.prepare("UPDATE task SET task_prj_id=:prjid "
                " WHERE task_parent_type='INCDT' "
                "   AND task_parent_id=:incdtid;" );
-  updp.bindValue(":prjid", _project->id());
+  if (_project->isValid())
+    updp.bindValue(":prjid", _project->id());
   updp.bindValue(":incdtid", _incdtid);
   updp.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Incident Project"),
@@ -814,6 +815,8 @@ void incident::done(int result)
   if (!_lock.release())
     ErrorReporter::error(QtCriticalMsg, this, tr("Locking Error"),
                          _lock.lastError(), __FILE__, __LINE__);
+
+  omfgThis->sEmitSignal(QString("Incident"), _incdtid);
 
   XDialog::done(result);
 }
