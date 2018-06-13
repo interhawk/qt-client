@@ -132,7 +132,6 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
     double  _supplyOverridePriceCache;
     bool    _supplyConnectionsCache;
     double  _cachedPct;
-    double  _cachedRate;
     int     _taxzoneid;
     QStandardItemModel *_itemchar;
     int     _invuomid;

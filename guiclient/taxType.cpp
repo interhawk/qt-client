@@ -127,10 +127,12 @@ void taxType::sSave()
     taxSave.prepare( "UPDATE taxtype "
                "SET taxtype_name=:taxtype_name,"
                "    taxtype_descrip=:taxtype_descrip "
+               "    taxtype_external_code=:taxtype_external_code "
                "WHERE (taxtype_id=:taxtype_id);" );
     taxSave.bindValue(":taxtype_id", _taxtypeid);
     taxSave.bindValue(":taxtype_name", _name->text().trimmed());
     taxSave.bindValue(":taxtype_descrip", _description->text());
+    taxSave.bindValue(":taxtype_external_code", _externalCode->code());
     taxSave.exec();
   }
   else if (_mode == cNew)
@@ -160,12 +162,13 @@ void taxType::sSave()
     }
 
     taxSave.prepare( "INSERT INTO taxtype "
-               "( taxtype_id, taxtype_name, taxtype_descrip ) "
+               "( taxtype_id, taxtype_name, taxtype_descrip, taxtype_external_code ) "
                "VALUES "
-               "( :taxtype_id, :taxtype_name, :taxtype_descrip );" );
+               "( :taxtype_id, :taxtype_name, :taxtype_descrip, :taxtype_external_code );" );
     taxSave.bindValue(":taxtype_id", _taxtypeid);
     taxSave.bindValue(":taxtype_name", _name->text().trimmed());
     taxSave.bindValue(":taxtype_descrip", _description->text());
+    taxSave.bindValue(":taxtype_external_code", _externalCode->code());
     taxSave.exec();
   }
 
@@ -175,7 +178,7 @@ void taxType::sSave()
 void taxType::populate()
 {
   XSqlQuery taxpopulate;
-  taxpopulate.prepare( "SELECT taxtype_name, taxtype_descrip, taxtype_sys "
+  taxpopulate.prepare( "SELECT taxtype_name, taxtype_descrip, taxtype_sys, taxtype_external_code "
              "FROM taxtype "
              "WHERE (taxtype_id=:taxtype_id);" );
   taxpopulate.bindValue(":taxtype_id", _taxtypeid);
@@ -186,6 +189,7 @@ void taxType::populate()
     if(taxpopulate.value("taxtype_sys").toBool())
       _name->setEnabled(false);
     _description->setText(taxpopulate.value("taxtype_descrip").toString());
+    _externalCode->setCode(taxpopulate.value("taxtype_external_code").toString());
   }
 }
 

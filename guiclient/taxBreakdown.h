@@ -14,7 +14,6 @@
 #include "guiclient.h"
 #include "xdialog.h"
 #include <parameter.h>
-#include "taxCache.h"
 #include "ui_taxBreakdown.h"
 
 class taxBreakdown : public XDialog, public Ui::taxBreakdown
@@ -29,16 +28,16 @@ class taxBreakdown : public XDialog, public Ui::taxBreakdown
     void	     languageChange();
 
     virtual SetResponse set(const ParameterList&);
-    virtual void	sAdjTaxDetail();
-    virtual void	sFreightTaxDetail();
-    virtual void	sLineTaxDetail();
-    virtual void	sTotalTaxDetail();
     virtual void	sPopulate();
+    virtual void        sHandleButtons(bool);
+    virtual void        sNew();
+    virtual void        sDelete();
 
   private:
     int         _mode;
     int		_orderid;
     int         _sense;
     QString	_ordertype;
+    QDate       _date;
 };
 #endif // TAXBREAKDOWN_H

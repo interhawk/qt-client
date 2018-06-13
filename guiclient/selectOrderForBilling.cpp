@@ -22,6 +22,7 @@
 #include "selectBillingQty.h"
 #include "storedProcErrorLookup.h"
 #include "taxBreakdown.h"
+#include "taxIntegration.h"
 #include "errorReporter.h"
 
 selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -423,22 +424,9 @@ void selectOrderForBilling::sSelectBalance()
 
 void selectOrderForBilling::sCalculateTax()   
 {
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(tax) AS tax "
-                "FROM ("
-                "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-                "FROM tax "
-                " JOIN calculateTaxDetailSummary('B', :cobmisc_id, 'T') ON (taxdetail_tax_id=tax_id)"
-	        "GROUP BY tax_id) AS data;" );
-  taxq.bindValue(":cobmisc_id", _cobmiscid);
-  taxq.exec();
-  if (taxq.first())
-    _salesTax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
+  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+  _salesTax->setLocalValue(tax->calculateTax("COB", _cobmiscid));
+
   // changing _tax fires sCalculateTotal()
 }
 
@@ -578,7 +566,7 @@ void selectOrderForBilling::sTaxDetail()
 
   ParameterList params;
   params.append("order_id",	_cobmiscid);
-  params.append("order_type",	"B");
+  params.append("order_type",	"COB");
   params.append("mode",		"edit");
 
   taxBreakdown newdlg(this, "", true);
