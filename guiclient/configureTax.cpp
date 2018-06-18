@@ -9,6 +9,7 @@
  */
 
 #include "configureTax.h"
+#include "avalaraIntegration.h"
 
 #include <QMessageBox>
 
@@ -84,7 +85,8 @@ bool configureTax::sCheck()
 
 bool configureTax::sTest()
 {
-  QMessageBox::critical(this, "Connection Failed", "Service not configured.");
+  AvalaraIntegration ai;
+  ai.test();
 
   return false;
 }
