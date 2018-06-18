@@ -52,9 +52,11 @@ enum SetResponse taxAdjustment::set(const ParameterList &pParams)
   param = pParams.value("order_type", &valid);
   if (valid)
   {
+    _ordertype = param.toString();
+
     if (param.toString() == "I")
       _table = "invcheadtax";
-    else if (param.toString() == "B")
+    else if (param.toString() == "COB")
       _table = "cobmisctax";
     else if (param.toString() == "CM")
       _table = "cmheadtax";
@@ -103,8 +105,8 @@ void taxAdjustment::sSave()
 
   QString sql;
   if (_mode == cNew)
-    sql = QString( "INSERT into %1 (taxhist_basis,taxhist_percent,taxhist_amount,taxhist_docdate, taxhist_tax_id, taxhist_tax, taxhist_taxtype_id, taxhist_parent_id  ) "
-                   "VALUES (0, 0, 0, :date, :taxcode_id, :amount, getadjustmenttaxtypeid(), :order_id) ").arg(_table);
+    sql = QString( "INSERT into %1 (taxhist_basis,taxhist_percent,taxhist_amount,taxhist_docdate, taxhist_tax_id, taxhist_tax, taxhist_taxtype_id, taxhist_parent_id, taxhist_doctype  ) "
+                   "VALUES (0, 0, 0, :date, :taxcode_id, :amount, getadjustmenttaxtypeid(), :order_id, :ordertype) ").arg(_table);
 
   else if (_mode == cEdit)
     sql = QString( "UPDATE taxhist "
@@ -115,6 +117,7 @@ void taxAdjustment::sSave()
   taxSave.bindValue(":taxcode_id", _taxcode->id());
   taxSave.bindValue(":amount", _amount->localValue() * _sense);
   taxSave.bindValue(":order_id", _orderid);
+  taxSave.bindValue(":ordertype", _ordertype);
   taxSave.bindValue(":date", _amount->effective());
   taxSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Tax Adjustment Information"),
@@ -122,7 +125,7 @@ void taxAdjustment::sSave()
   {
     return;
   }
-  done(_orderid);
+  accept();
 }
 
 void taxAdjustment::sCheck()

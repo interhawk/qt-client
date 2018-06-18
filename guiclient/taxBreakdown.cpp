@@ -10,15 +10,12 @@
 
 #include "taxBreakdown.h"
 
-#include <QSqlError>
-#include <QVariant>
+#include <QMessageBox>
 
-#include <metasql.h>
-#include "mqlutil.h"
-
-#include "taxCache.h"
-#include "taxDetail.h"
 #include "errorReporter.h"
+#include "metasql.h"
+#include "mqlutil.h"
+#include "taxAdjustment.h"
 
 taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
   : XDialog(parent, name, modal, fl)
@@ -26,16 +23,26 @@ taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::Wi
   setupUi(this);
 
   _currency->setLabel(_currencyLit);
-  _taxcurrency->setLabel(_taxcurrencyLit);
-
-  connect(_adjTaxLit,    SIGNAL(leftClickedURL(QString)),this, SLOT(sAdjTaxDetail()));
-  connect(_freightTaxLit,SIGNAL(leftClickedURL(QString)),this, SLOT(sFreightTaxDetail()));
-  connect(_lineTaxLit,   SIGNAL(leftClickedURL(QString)),this, SLOT(sLineTaxDetail()));
-  connect(_totalTaxLit,  SIGNAL(leftClickedURL(QString)),this, SLOT(sTotalTaxDetail()));
 
   _orderid	= -1;
   _ordertype	= "";
   _sense        = 1;
+
+  _tax->addColumn(tr("Line"), -1, Qt::AlignLeft, true, "line");
+  _tax->addColumn(tr("Item"), -1, Qt::AlignLeft, true, "item_number");
+  _tax->addColumn(tr("Qty"), -1, Qt::AlignLeft, true, "qty");
+  _tax->addColumn(tr("Amount"), -1, Qt::AlignLeft, true, "amount");
+  _tax->addColumn(tr("Extended"), -1, Qt::AlignLeft, true, "extended");
+  _tax->addColumn(tr("Taxable Amount"), -1, Qt::AlignLeft, true, "taxhist_basis");
+  _tax->addColumn(tr("Code"), -1, Qt::AlignLeft, true, "tax_code");
+  _tax->addColumn(tr("Description"), -1, Qt::AlignLeft, true, "tax_descrip");
+  _tax->addColumn(tr("Sequence"), -1, Qt::AlignLeft, true, "taxhist_sequence");
+  _tax->addColumn(tr("Tax"), -1, Qt::AlignLeft, true, "taxhist_tax");
+  _tax->addColumn(tr("Total"), -1, Qt::AlignLeft, true, "total");
+
+  connect(_tax, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
+  connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
+  connect(_delete, SIGNAL(clicked()), this, SLOT(sDelete()));
 }
 
 taxBreakdown::~taxBreakdown()
@@ -71,121 +78,13 @@ SetResponse taxBreakdown::set(const ParameterList& pParams)
       _mode = cEdit;
   }
   
-   param = pParams.value("sense", &valid);
-   if (valid)
-    _sense = param.toInt();
+ param = pParams.value("sense", &valid);
+ if (valid)
+  _sense = param.toInt();
 
   sPopulate();
 
   return NoError;
-}
-
-void taxBreakdown::sAdjTaxDetail()
-{
-  XSqlQuery taxAdjTaxDetail;
-  taxDetail newdlg(this, "", true);
-  ParameterList params;
-
-  params.append("curr_id", _taxcurrency->id());
-  params.append("date",    _adjTax->effective());
-  if (cView == _mode)
-    params.append("readOnly");
-
-  taxAdjTaxDetail.exec("SELECT getadjustmenttaxtypeid() as taxtype;");
-	if(taxAdjTaxDetail.first())
-	 params.append("taxtype_id", taxAdjTaxDetail.value("taxtype").toInt());  
-   
-  params.append("order_type", _ordertype);
-  params.append("order_id", _orderid);
-  params.append("display_type", "A");
-  params.append("adjustment");
-  params.append("sense", _sense);
-  if (newdlg.set(params) == NoError)  
-  {
-	  newdlg.exec();
-	  sPopulate();
-  }
-}
-
-void taxBreakdown::sFreightTaxDetail()
-{
-  XSqlQuery taxFreightTaxDetail;
-  taxDetail newdlg(this, "", true);
-  ParameterList params;
-
-   params.append("curr_id", _taxcurrency->id());
-   params.append("date",    _freight->effective());
-   params.append("subtotal",CurrDisplay::convert(_freight->id(),
-						_taxcurrency->id(),
-						_freight->localValue(),
-						_freight->effective()));
-   params.append("sense", _sense);
-
-   taxFreightTaxDetail.exec("SELECT getfreighttaxtypeid() as taxtype;");
-   if(taxFreightTaxDetail.first())
-     params.append("taxtype_id", taxFreightTaxDetail.value("taxtype").toInt()); 
-
-  if (_ordertype == "S" || _ordertype == "Q" || _ordertype == "RA" 
-      || _ordertype == "PO" || _ordertype == "PI")
-  {
-    params.append("taxzone_id",  _taxzone->id()); 
-    params.append("date",    _freight->effective());
-  
-    params.append("readOnly");
-    if (newdlg.set(params) == NoError) 
-      newdlg.exec();
-  }
-  else if (_ordertype == "I" || _ordertype == "B" || _ordertype == "CM" 
-          || _ordertype == "TO" || _ordertype == "VO" || _ordertype == "VI" )
-  {
-    params.append("order_type", _ordertype);
-    params.append("order_id", _orderid);
-    params.append("display_type", "F");
-    params.append("readOnly");
-    if (newdlg.set(params) == NoError) 
-      newdlg.exec();  
-  }
-}
-
-void taxBreakdown::sLineTaxDetail()
-{
-  taxDetail newdlg(this, "", true);
-  ParameterList params;
-
-  params.append("order_type", _ordertype);
-  params.append("order_id", _orderid);
-  params.append("display_type", "L");
-  params.append("curr_id", _taxcurrency->id());
-  params.append("date",    _line->effective());
-  params.append("subtotal",CurrDisplay::convert(_line->id(),
-						_taxcurrency->id(),
-						_line->localValue(),
-						_line->effective()));
-  params.append("readOnly");
-  params.append("sense", _sense);
-
-  if (newdlg.set(params) == NoError)
-    newdlg.exec();
-}
-
-void taxBreakdown::sTotalTaxDetail()
-{
-  taxDetail newdlg(this, "", true);
-  ParameterList params;
-  params.append("order_type", _ordertype);
-  params.append("order_id", _orderid);
-  params.append("display_type", "T");
-  params.append("curr_id", _taxcurrency->id());
-  params.append("date",    _total->effective());
-  params.append("subtotal",CurrDisplay::convert(_pretax->id(),
-						_taxcurrency->id(),
-						_pretax->localValue(),
-						_pretax->effective()));
-  params.append("readOnly");
-  params.append("sense", _sense);
-
-  if (newdlg.set(params) == NoError)
-    newdlg.exec();
 }
 
 void taxBreakdown::sPopulate()
@@ -196,7 +95,11 @@ void taxBreakdown::sPopulate()
   {
     _currencyLit->setText(tr("Invoice Currency:"));
     _header->setText(tr("Tax Breakdown for Invoice:"));
-    _totalLit->setText(tr("Invoice Total:"));
+
+    taxPopulate.prepare("SELECT invchead_invcnumber AS number, invchead_taxzone_id AS taxzone_id, "
+                        "       invchead_curr_id AS curr_id, invchead_invcdate AS date "
+                        "  FROM invchead "
+                        " WHERE invchead_id = :orderid ");
 
     params.append("invchead_id", _orderid);
   }
@@ -204,40 +107,89 @@ void taxBreakdown::sPopulate()
   {
     _currencyLit->setText(tr("Sales Order Currency:"));
     _header->setText(tr("Tax Breakdown for Sales Order:"));
-    _totalLit->setText(tr("Sales Order Total:"));
 
-    _adjTaxLit->setVisible(false);
-    _adjTax->setVisible(false);
+    _new->hide();
+    _delete->hide();
+
+    taxPopulate.prepare("SELECT cohead_number AS number, cohead_taxzone_id AS taxzone_id, "
+                        "       cohead_curr_id AS curr_id, cohead_orderdate AS date "
+                        "  FROM cohead "
+                        " WHERE cohead_id = :orderid ");
 
     params.append("cohead_id", _orderid);
+  }
+  else if (_ordertype == "SI")
+  {
+    _currencyLit->setText(tr("Sales Order Currency:"));
+    _header->setText(tr("Tax Breakdown for Sales Order:"));
+ 
+    _new->hide();
+    _delete->hide();
+
+    taxPopulate.prepare("SELECT cohead_number AS number, cohead_taxzone_id AS taxzone_id, "
+                        "       cohead_curr_id AS curr_id, cohead_orderdate AS date "
+                        "  FROM coitem "
+                        "  JOIN cohead ON coitem_cohead_id = cohead_id "
+                        " WHERE coitem_id = :orderid ");
+
+    params.append("coitem_id", _orderid);
   }
   else if (_ordertype == "Q")
   {
     _currencyLit->setText(tr("Quote Currency:"));
     _header->setText(tr("Tax Breakdown for Quote:"));
-    _totalLit->setText(tr("Quote Total:"));
+ 
+    _new->hide();
+    _delete->hide();
 
-    _adjTaxLit->setVisible(false);
-    _adjTax->setVisible(false);
+    taxPopulate.prepare("SELECT quhead_number AS number, quhead_taxzone_id AS taxzone_id, "
+                        "       quhead_curr_id AS curr_id, quhead_quotedate AS date "
+                        "  FROM quhead "
+                        " WHERE quhead_id = :orderid ");
 
     params.append("quhead_id", _orderid);
+  }
+  else if (_ordertype == "QI")
+  {
+    _currencyLit->setText(tr("Quote Currency:"));
+    _header->setText(tr("Tax Breakdown for Quote:"));
+ 
+    _new->hide();
+    _delete->hide();
+
+    taxPopulate.prepare("SELECT quhead_number AS number, quhead_taxzone_id AS taxzone_id, "
+                        "       quhead_curr_id AS curr_id, quhead_quotedate AS date "
+                        "  FROM quitem "
+                        "  JOIN quhead ON quitem_quhead_id = quhead_id "
+                        " WHERE quitem_id = :orderid ");
+
+    params.append("quitem_id", _orderid);
   }
   else if (_ordertype == "RA")
   {
     _currencyLit->setText(tr("Return Authorization Currency:"));
     _header->setText(tr("Tax Breakdown for Return:"));
-    _totalLit->setText(tr("Return Total:"));
+ 
+    _new->hide();
+    _delete->hide();
 
-    _adjTaxLit->setVisible(false);
-    _adjTax->setVisible(false);
+    taxPopulate.prepare("SELECT rahead_number AS number, rahead_taxzone_id AS taxzone_id, "
+                        "       rahead_curr_id AS curr_id, rahead_authdate AS date "
+                        "  FROM rahead "
+                        " WHERE rahead_id = :orderid ");
 
     params.append("rahead_id", _orderid);
   }
-  else if (_ordertype == "B")
+  else if (_ordertype == "COB")
   {
     _currencyLit->setText(tr("Billing Currency:"));
     _header->setText(tr("Tax Breakdown for Billing Order:"));
-    _totalLit->setText(tr("Billing Total:"));
+
+    taxPopulate.prepare("SELECT cohead_number AS number, cobmisc_taxzone_id AS taxzone_id, "
+                        "       cobmisc_curr_id AS curr_id, cobmisc_invcdate AS date "
+                        "  FROM cobmisc "
+                        "  JOIN cohead ON cobmisc_cohead_id = cohead_id "
+                        " WHERE cobmisc_id = :orderid ");
 
     params.append("cobmisc_id", _orderid);
   }
@@ -245,7 +197,11 @@ void taxBreakdown::sPopulate()
   {
     _currencyLit->setText(tr("Sales Credit Currency:"));
     _header->setText(tr("Tax Breakdown for Sales Credit:"));
-    _totalLit->setText(tr("Sales Credit Total:"));
+
+    taxPopulate.prepare("SELECT cmhead_number AS number, cmhead_taxzone_id AS taxzone_id, "
+                        "       cmhead_curr_id AS curr_id, cmhead_docdate AS date "
+                        "  FROM cmhead "
+                        " WHERE cmhead_id = :orderid ");
 
     params.append("cmhead_id", _orderid);
   }
@@ -253,11 +209,11 @@ void taxBreakdown::sPopulate()
   {
     _currencyLit->setText(tr("Transfer Order Currency:"));
     _header->setText(tr("Tax Breakdown for Transfer Order:"));
-    _totalLit->setText(tr("Transfer Order Total:"));
-    _adjTaxLit->setVisible(false);
-    _adjTax->setVisible(false);
-    _freightTaxLit->setVisible(false);
-    _freightTax->setVisible(false);
+
+    taxPopulate.prepare("SELECT tohead_number AS number, tohead_taxzone_id AS taxzone_id, "
+                        "       tohead_freight_curr_id AS curr_id, tohead_orderdate AS date "
+                        "  FROM tohead "
+                        " WHERE tohead_id = :orderid ");
 
     params.append("tohead_id", _orderid);
   }
@@ -265,65 +221,121 @@ void taxBreakdown::sPopulate()
   {
     _currencyLit->setText(tr("Purchase Order Currency:"));
     _header->setText(tr("Tax Breakdown for Purchase Order:"));
-    _totalLit->setText(tr("Purchase Order Total:"));
-    _freightLit->setText(tr("Total P/O Freight Value:"));
 
-    _adjTaxLit->setVisible(false);
-    _adjTax->setVisible(false);
+    taxPopulate.prepare("SELECT pohead_number AS number, pohead_taxzone_id AS taxzone_id, "
+                        "       pohead_curr_id AS curr_id, pohead_orderdate AS date "
+                        "  FROM pohead "
+                        " WHERE pohead_id = :orderid ");
+
     params.append("pohead_id", _orderid);
   }
   else if (_ordertype == "PI")
   {
     _currencyLit->setText(tr("Purchase Order Currency:"));
     _header->setText(tr("Tax Breakdown for Purchase Order Item:"));
-    _totalLit->setText(tr("Purchase Item Total:"));
 
-    _adjTaxLit->setVisible(false);
-    _adjTax->setVisible(false);
+    taxPopulate.prepare("SELECT pohead_number AS number, pohead_taxzone_id AS taxzone_id, "
+                        "       pohead_curr_id AS curr_id, pohead_orderdate AS date "
+                        "  FROM poitem "
+                        "  JOIN pohead ON poitem_pohead_id = pohead_id "
+                        " WHERE poitem_id = :orderid ");
+
     params.append("poitem_id", _orderid);
   }
    else if (_ordertype == "VO")
   {
     _currencyLit->setText(tr("Voucher Currency:"));
     _header->setText(tr("Tax Breakdown for Voucher:"));
-    _totalLit->setText(tr("Voucher Total:"));
-    _freightLit->setText(tr("Total Voucher Freight:"));
-    _adjTaxLit->setVisible(false);
-    _adjTax->setVisible(false);
+
+    taxPopulate.prepare("SELECT vohead_number AS number, vohead_taxzone_id AS taxzone_id, "
+                        "       vohead_curr_id AS curr_id, vohead_docdate AS date "
+                        "  FROM vohead "
+                        " WHERE vohead_id = :orderid ");
+
     params.append("vohead_id", _orderid);
   }
   else if (_ordertype == "VI")
   {
     _currencyLit->setText(tr("Voucher Currency:"));
     _header->setText(tr("Tax Breakdown for Voucher:"));
-    _totalLit->setText(tr("Voucher Total:"));
+
+    taxPopulate.prepare("SELECT vohead_number AS number, vohead_taxzone_id AS taxzone_id, "
+                        "       vohead_curr_id AS curr_id, vohead_docdate AS date "
+                        "  FROM voitem "
+                        "  JOIN vohead ON voitem_vohead_id = vohead_id "
+                        " WHERE voitem_id = :orderid ");
+
     params.append("voitem_id", _orderid);
-    _adjTaxLit->setVisible(false);
-    _adjTax->setVisible(false);
   }
 
-  MetaSQLQuery mql = mqlLoad("taxBreakdown", "detail");
-  taxPopulate = mql.toQuery(params);
+  taxPopulate.bindValue(":orderid", _orderid);
+  taxPopulate.exec();
   if (taxPopulate.first())
   {
-    // do dates and currencies first because of signal/slot cascades
-    _total->setEffective(taxPopulate.value("date").toDate());
-    _currency->setId(taxPopulate.value("curr_id").toInt());
-    _taxcurrency->setId(taxPopulate.value("tax_curr_id").toInt());
-
-    // now the rest
     _document->setText(taxPopulate.value("number").toString());
     _taxzone->setId(taxPopulate.value("taxzone_id").toInt());
-    _line->setLocalValue(taxPopulate.value("line").toDouble());
-    _lineTax->setLocalValue(taxPopulate.value("total_tax").toDouble());
-    _freight->setLocalValue(taxPopulate.value("freight").toDouble());
-    _freightTax->setLocalValue(taxPopulate.value("freighttaxamt").toDouble());
-    _adjTax->setLocalValue(taxPopulate.value("adjtaxamt").toDouble());
-    _pretax->setLocalValue(_line->localValue() + _freight->localValue());
-    _totalTax->setLocalValue(_lineTax->localValue() + _freightTax->localValue() + _adjTax->localValue());
-    _total->setLocalValue(_pretax->localValue() + _totalTax->localValue());
+    _currency->setId(taxPopulate.value("curr_id").toInt());
+    _date = taxPopulate.value("date").toDate();
+
+    if (_date.isNull())
+      _date = QDate::currentDate();
   }
-  else if (taxPopulate.lastError().type() != QSqlError::NoError)
-    ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
-                       taxPopulate, __FILE__, __LINE__);
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
+                                taxPopulate, __FILE__, __LINE__))
+    return;
+
+  MetaSQLQuery mql = mqlLoad("taxBreakdown", "detail");
+  params.append("freight", tr("Freight"));
+  params.append("misc", tr("Misc"));
+  params.append("adjustment", tr("Adjustment"));
+
+  XSqlQuery qry = mql.toQuery(params);
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
+                           qry, __FILE__, __LINE__))
+    return;
+
+  _tax->populate(qry, true);
+}
+
+void taxBreakdown::sHandleButtons(bool valid)
+{
+  _delete->setEnabled(valid && _tax->altId() == 3 &&
+                      _tax->id() > 0);
+}
+
+void taxBreakdown::sNew()
+{
+  taxAdjustment newdlg(this, "", true);
+  ParameterList params;
+  params.append("order_id", _orderid);
+  params.append("order_type", _ordertype);
+  params.append("date", _date);
+  params.append("curr_id", _currency->id());
+  params.append("sense", _sense);
+  params.append("mode", "new");
+  newdlg.set(params);
+
+  if (newdlg.exec() == XDialog::Accepted)
+    sPopulate(); 
+}
+
+void taxBreakdown::sDelete()
+{
+  if (QMessageBox::question(this, tr("Delete Tax Adjustment?"),
+                            tr("<p>Are you sure that you want to delete this tax adjustment?"),
+                            QMessageBox::Yes | QMessageBox::No,
+                            QMessageBox::No) == QMessageBox::Yes)
+  {
+    XSqlQuery taxDelete;
+    taxDelete.prepare("DELETE FROM taxhist "
+                      " WHERE taxhist_id = :taxhist_id;");
+    taxDelete.bindValue(":taxhist_id", _tax->id());
+    taxDelete.exec();
+
+    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Tax Adjustment Information"),
+                             taxDelete, __FILE__, __LINE__))
+      return;
+
+    sPopulate();
+  }
 }

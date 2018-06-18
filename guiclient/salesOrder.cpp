@@ -35,6 +35,7 @@
 #include "salesOrderItem.h"
 #include "storedProcErrorLookup.h"
 #include "taxBreakdown.h"
+#include "taxIntegration.h"
 #include "freightBreakdown.h"
 #include "printPackingList.h"
 #include "printSoForm.h"
@@ -4718,27 +4719,9 @@ void salesOrder::sFreightChanged()
 
 void salesOrder::sCalculateTax()
 {
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(tax) AS tax "
-                "FROM ("
-                "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-                "FROM tax "
-                " JOIN calculateTaxDetailSummary(:type, :cohead_id, 'T') ON (taxdetail_tax_id=tax_id)"
-                "GROUP BY tax_id) AS data;" );
+  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+  _tax->setLocalValue(tax->calculateTax(ISORDER(_mode) ? "S" : "Q", _soheadid));
 
-  taxq.bindValue(":cohead_id", _soheadid);
-  if (ISQUOTE(_mode))
-    taxq.bindValue(":type","Q");
-  else
-    taxq.bindValue(":type","S");
-  taxq.exec();
-  if (taxq.first())
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
   sCalculateTotal();
 }
 

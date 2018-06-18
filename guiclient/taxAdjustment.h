@@ -37,6 +37,7 @@ private:
   int _taxhistid;
   int _mode;
   int _orderid;
+  QString _ordertype;
   QString _table;
 	
 };

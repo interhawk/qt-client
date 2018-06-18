@@ -28,7 +28,7 @@
 #include "priceList.h"
 #include "reserveSalesOrderItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 #include "woMaterialItem.h"
 #include "xdoublevalidator.h"
 
@@ -82,9 +82,7 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
   connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sChanged()));
   connect(_qtyUOM,            SIGNAL(newID(int)),                   this, SLOT(sChanged()));
   connect(_cancel,            SIGNAL(clicked()),                    this, SLOT(sCancel()));
-  connect(_extendedPrice,     SIGNAL(valueChanged()),               this, SLOT(sLookupTax()));
   connect(_taxLit,            SIGNAL(leftClickedURL(QString)),      this, SLOT(sTaxDetail()));
-  connect(_taxtype,           SIGNAL(newID(int)),                   this, SLOT(sLookupTax()));
   connect(_qtyUOM,            SIGNAL(newID(int)),                   this, SLOT(sQtyUOMChanged()));
   connect(_priceUOM,          SIGNAL(newID(int)),                   this, SLOT(sPriceUOMChanged()));
   connect(_inventoryButton,   SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()));
@@ -4635,45 +4633,30 @@ void salesOrderItem::sCancel()
 void salesOrderItem::sLookupTax()
 {
   XSqlQuery calcq;
-  calcq.prepare("SELECT calculateTax(:taxzone_id, :taxtype_id, :date, :curr_id, :ext ) AS val");
-
-  calcq.bindValue(":taxzone_id",  _taxzoneid);
-  calcq.bindValue(":taxtype_id",  _taxtype->id());
-  calcq.bindValue(":date",  _netUnitPrice->effective());
-  calcq.bindValue(":curr_id",  _netUnitPrice->id());
-  calcq.bindValue(":ext",     _extendedPrice->localValue());
-
+  calcq.prepare("SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
+                "  FROM taxhist "
+                " WHERE taxhist_doctype = :doctype "
+                "   AND taxhist_parent_id = :soitemid");
+  calcq.bindValue(":doctype", ISORDER(_mode) ? "SI" : "QI");
+  calcq.bindValue(":soitemid", _soitemid);
   calcq.exec();
   if (calcq.first())
-  {
-    _cachedRate= calcq.value("val").toDouble();
-    _tax->setLocalValue(_cachedRate );
-  }
+    _tax->setLocalValue(calcq.value("tax").toDouble());
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
                                 calcq, __FILE__, __LINE__))
-  {
     return;
-  }
 }
 
 void salesOrderItem::sTaxDetail()
 {
-  taxDetail     newdlg(this, "", true);
+  taxBreakdown newdlg(this, "", true);
   ParameterList params;
-  params.append("taxzone_id",   _taxzoneid);
-  params.append("taxtype_id",  _taxtype->id());
-  params.append("date", _netUnitPrice->effective());
-  params.append("curr_id",   _netUnitPrice->id());
-  params.append("subtotal",    _extendedPrice->localValue());
+  params.append("order_id", _soitemid);
+  params.append("order_type", ISORDER(_mode) ? "SI" : "QI");
+  params.append("mode", "view");
 
-  if (_mode == cView)
-    params.append("readOnly");
-
-  if (newdlg.set(params) == NoError && newdlg.exec())
-  {
-    if (_taxtype->id() != newdlg.taxtype())
-      _taxtype->setId(newdlg.taxtype());
-  }
+  newdlg.set(params);
+  newdlg.exec();
 }
 
 void salesOrderItem::sPopulateUOM()

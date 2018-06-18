@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <comment>This file is part of the xTuple ERP: PostBooks Edition, a free and
+open source Enterprise Resource Planning software suite,
+Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+It is licensed to you under the Common Public Attribution License
+version 1.0, the full text of which (including xTuple-specific Exhibits)
+is available at www.xtuple.com/CPAL.  By using this software, you agree
+to be bound by its terms.</comment>
+ <class>configureTax</class>
+ <widget class="QWidget" name="configureTax">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>245</width>
+    <height>224</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Tax Service Configuration</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <widget class="XLabel" name="_serviceLit">
+     <property name="text">
+      <string>Tax Service:</string>
+     </property>
+     <property name="buddy">
+      <cstring>_service</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="XComboBox" name="_service"/>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QStackedWidget" name="_configStack">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="_nonePage"/>
+     <widget class="QWidget" name="_avalaraPage">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="1">
+        <widget class="XLabel" name="_accountLit">
+         <property name="text">
+          <string>Account #:</string>
+         </property>
+         <property name="buddy">
+          <cstring>_account</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="XLineEdit" name="_account"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="XLabel" name="_keyLit">
+         <property name="text">
+          <string>License Key:</string>
+         </property>
+         <property name="buddy">
+          <cstring>_key</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="XLineEdit" name="_key"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="XLabel" name="_urlLit">
+         <property name="text">
+          <string>Service URL:</string>
+         </property>
+         <property name="buddy">
+          <cstring>_url</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="XLineEdit" name="_url"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="XLabel" name="_companyLit">
+         <property name="text">
+          <string>Company Code:</string>
+         </property>
+         <property name="buddy">
+          <cstring>_company</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="XLineEdit" name="_company"/>
+       </item>
+       <item row="4" column="1" colspan="2">
+        <widget class="XCheckBox" name="_disableRecording">
+         <property name="text">
+          <string>Disable Document Recording</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" colspan="2">
+        <widget class="QPushButton" name="_test">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Test Connection</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="5" margin="5"/>
+ <customwidgets>
+  <customwidget>
+   <class>XCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>xcheckbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XComboBox</class>
+   <extends>QComboBox</extends>
+   <header>xcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XLabel</class>
+   <extends>QLabel</extends>
+   <header>xlabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>xlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>_service</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>_configStack</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>151</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>122</x>
+     <y>92</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

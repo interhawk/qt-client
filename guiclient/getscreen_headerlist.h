@@ -81,6 +81,7 @@
 #include "configurePO.h"
 #include "configureSO.h"
 #include "configureSearchPath.h"
+#include "configureTax.h"
 #include "configureWO.h"
 #include "confirmAchOK.h"
 #include "contact.h"
