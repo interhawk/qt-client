@@ -306,6 +306,8 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
                      "       cobmisc_payment AS payment,"
                      "       cobmisc_closeorder,"
                      "       cobmisc_curr_id,"
+                     "       cobmisc_freight_taxtype_id, cobmisc_misc_taxtype_id,"
+                     "       cobmisc_misc_discount,"
                      "       cohead_number, cohead_shipto_id,"
                      "       cohead_custponumber,"
                      "       cohead_billtoname, cohead_shiptoname,"
