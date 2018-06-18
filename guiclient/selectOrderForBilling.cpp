@@ -93,6 +93,9 @@ selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, 
   _payment->hide(); // Issue 10254:  if no objections over time, we should ultimately remove this.
 
   _miscChargeAccount->setType(GLCluster::cRevenue | GLCluster::cExpense);
+
+  _freightTaxtype->setCode("Freight");
+  _miscChargeTaxtype->setCode("Misc");
 }
 
 selectOrderForBilling::~selectOrderForBilling()
@@ -208,7 +211,10 @@ void selectOrderForBilling::sSave()
                "    cobmisc_shipvia=:cobmisc_shipvia, cobmisc_closeorder=:cobmisc_closeorder,"
                "    cobmisc_misc=:cobmisc_misc, cobmisc_misc_accnt_id=:cobmisc_misc_accnt_id,"
                "    cobmisc_misc_descrip=:cobmisc_misc_descrip, "
-	       "    cobmisc_curr_id=:cobmisc_curr_id "
+	       "    cobmisc_curr_id=:cobmisc_curr_id, "
+               "    cobmisc_freight_taxtype_id=:cobmisc_freight_taxtype_id, "
+               "    cobmisc_misc_taxtype_id=:cobmisc_misc_taxtype_id, "
+               "    cobmisc_misc_discount=:cobmisc_misc_discount "
                "WHERE (cobmisc_id=:cobmisc_id);" );
     selectSave.bindValue(":cobmisc_id", _cobmiscid);
     selectSave.bindValue(":cobmisc_freight", _freight->localValue());
@@ -226,6 +232,9 @@ void selectOrderForBilling::sSave()
     selectSave.bindValue(":cobmisc_misc_accnt_id", _miscChargeAccount->id());
     selectSave.bindValue(":cobmisc_misc_descrip", _miscChargeDescription->text().trimmed());
     selectSave.bindValue(":cobmisc_curr_id",	_custCurrency->id());
+    selectSave.bindValue(":cobmisc_freight_taxtype_id", _freightTaxtype->id());
+    selectSave.bindValue(":cobmisc_misc_taxtype_id", _miscChargeTaxtype->id());
+    selectSave.bindValue(":cobmisc_misc_discount", _miscChargeDiscount->isChecked());
     selectSave.exec();
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Selected Orders For Billing"),
                                   selectSave, __FILE__, __LINE__))
@@ -329,6 +338,9 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
       _miscCharge->setLocalValue(cobmisc.value("cobmisc_misc").toDouble());
       _miscChargeAccount->setId(cobmisc.value("cobmisc_misc_accnt_id").toInt());
       _miscChargeDescription->setText(cobmisc.value("cobmisc_misc_descrip"));
+      _miscChargeTaxtype->setId(cobmisc.value("cobmisc_misc_taxtype_id").toInt());
+      _miscChargeDiscount->setChecked(cobmisc.value("cobmisc_misc_discount").toBool());
+      _freightTaxtype->setId(cobmisc.value("cobmisc_freight_taxtype_id").toInt());
       _payment->set(cobmisc.value("payment").toDouble(),
 		    cobmisc.value("cobmisc_curr_id").toInt(),
 		    cobmisc.value("cohead_orderdate").toDate(), false);

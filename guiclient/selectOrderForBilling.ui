@@ -751,6 +751,47 @@ to be bound by its terms.</comment>
                </property>
               </widget>
              </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="_miscChargeTaxtypeLit">
+               <property name="text">
+                <string>Misc. Charge Tax Type:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="XComboBox" name="_miscChargeTaxtype">
+               <property name="type">
+                <enum>XComboBox::TaxTypes</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="XCheckBox" name="_miscChargeDiscount">
+               <property name="text">
+                <string>Misc. Charge is Discount</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="_freightTaxtypeLit">
+               <property name="text">
+                <string>Freight Tax Type:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="XComboBox" name="_freightTaxtype">
+               <property name="type">
+                <enum>XComboBox::TaxTypes</enum>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="_custCurrencyLit">
                <property name="text">
