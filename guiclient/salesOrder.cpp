@@ -2901,9 +2901,9 @@ void salesOrder::populate()
       _miscCharge->setLocalValue(qu.value("quhead_misc").toDouble());
       _miscChargeDescription->setText(qu.value("quhead_misc_descrip"));
       _miscChargeAccount->setId(qu.value("quhead_misc_accnt_id").toInt());
-      _miscChargeTaxtype->setId(qu.value("cohead_misc_taxtype_id").toInt());
-      _miscChargeDiscount->setChecked(qu.value("cohead_misc_discount").toBool());
-      _freightTaxtype->setId(qu.value("cohead_freight_taxtype_id").toInt());
+      _miscChargeTaxtype->setId(qu.value("quhead_misc_taxtype_id").toInt());
+      _miscChargeDiscount->setChecked(qu.value("quhead_misc_discount").toBool());
+      _freightTaxtype->setId(qu.value("quhead_freight_taxtype_id").toInt());
 
       _orderComments->setText(qu.value("quhead_ordercomments").toString());
       _shippingComments->setText(qu.value("quhead_shipcomments").toString());
