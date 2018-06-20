@@ -35,8 +35,8 @@ QUrl AvalaraIntegration::buildUrl(QString api, QString transcode = "")
 
   url.replace("{companyCode}", _metrics->value("AvalaraCompany"), Qt::CaseSensitive);
   url.replace("{transactionCode}", transcode, Qt::CaseSensitive);
-  
-  return QUrl(url); 
+
+  return QUrl(url);
 }
 
 void AvalaraIntegration::buildHeaders(QNetworkRequest &netrequest)
@@ -102,7 +102,7 @@ bool AvalaraIntegration::testService()
 
         delete reply;
         return false;
-     } 
+     }
   }
   else
   {
@@ -123,7 +123,7 @@ QJsonObject AvalaraIntegration::sendRequest(QJsonObject payload)
   QNetworkRequest netrequest;
   QJsonObject response;
   QJsonDocument doc(payload);
-  
+
   netrequest.setUrl(buildUrl("createtransaction"));
   buildHeaders(netrequest);
 
@@ -132,20 +132,26 @@ QJsonObject AvalaraIntegration::sendRequest(QJsonObject payload)
   QNetworkReply *reply = restclient->post(netrequest, doc.toJson(QJsonDocument::Compact));
   eventLoop.exec();
 
-  if (reply->error() == QNetworkReply::NoError)
+  QString strReply = (QString)reply->readAll();
+  QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
+  response = jsonResponse.object();
+  if (reply->error() != QNetworkReply::NoError)
   {
-     QString strReply = (QString)reply->readAll();
-     QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
-     response = jsonResponse.object();
-  }
-  else
-  {
+    QJsonObject err = response["error"].toObject();
+    QString errcode = err["code"].toString();
+    QString errmsg  = err["message"].toString();
+    QJsonArray details = err["details"].toArray();
+    QJsonObject ary = details.at(0).toObject();
+    QString errhelp = ary["description"].toString();
+    qDebug() << response;
     QMessageBox::information(0, tr("Avalara Create Transaction"),
-                  tr("<p>Avalara Create Transaction Failed<br>"
-                     "%1").arg(reply->errorString()));
+                  QString("<p>Avalara Create Transaction Failed<br><br>"
+                     "%1: %2<br><br>"
+                     "Caused by:<br> %3.").arg(errcode).arg(errmsg).arg(errhelp));
   }
 
   delete reply;
+
   return response;
 }
 

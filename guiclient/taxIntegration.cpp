@@ -52,7 +52,9 @@ double TaxIntegration::calculateTax(QString orderType, int orderId)
   qry.bindValue(":response", QString::fromUtf8(QJsonDocument(response).toJson()));
   qry.exec();
   if (qry.first())
+  {
     return qry.value("tax").toDouble();
+  }
   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error calculating tax"),
                                 qry, __FILE__, __LINE__))
     return 0.0;
