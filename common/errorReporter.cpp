@@ -778,8 +778,6 @@ const struct {
   { "prodcat_prodcat_code_check",               Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "The Product Category code is required.") },
   { "prodcat_prodcat_code_key",                 Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "A Product Category already exists with this code.") },
   { "prospect_crmacct_id_fkey",                 Delete,  0,  QT_TRANSLATE_NOOP("errorReporter", "Cannot delete CRM Account because it is a Prospect.") },
-//{ "prospect_prospect_cntct_id_fkey",          Delete,  0, QT_TRANSLATE_NOOP("errorReporter", "") },
-//{ "prospect_prospect_cntct_id_fkey",          Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "") },
   { "prospect_prospect_number_check",           Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "The Prospect number is required.") },
   { "prospect_prospect_number_key",             Upsert,  0, QT_TRANSLATE_NOOP("errorReporter", "A Prospect already exists with this number.") },
   { "prospect_prospect_salesrep_id_fkey",       Delete,  0, QT_TRANSLATE_NOOP("errorReporter", "The Sales Rep cannot be deleted as s/he is still assigned to one or more Prospects.") },
