@@ -20,9 +20,11 @@ class TaxIntegration : public QObject
   public:
     Q_INVOKABLE static TaxIntegration* getTaxIntegration();
     Q_INVOKABLE virtual double calculateTax(QString, int);
+                virtual QJsonObject getTaxCodes();
 
   protected:
     virtual QJsonObject sendRequest(QJsonObject) = 0;
+    virtual QJsonObject getTaxCodeList() = 0;
 };
 
 #endif
