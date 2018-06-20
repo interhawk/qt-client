@@ -25,7 +25,7 @@ AvalaraIntegration::AvalaraIntegration() : TaxIntegration()
 
   urlmap.insert("test",              "utilities/ping");
   urlmap.insert("taxcodes",          "definitions/taxcodes");
-  urlmap.insert("createtransaction", "transactions/create");
+  urlmap.insert("createtransaction", "transactions/createoradjust?$include=Details");
   urlmap.insert("committransaction", "companies/{companyCode}/transactions/{transactionCode}/commit");
 }
 
