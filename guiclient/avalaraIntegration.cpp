@@ -22,24 +22,21 @@
 AvalaraIntegration::AvalaraIntegration() : TaxIntegration()
 {
   restclient = new QNetworkAccessManager;
+
+  urlmap.insert("test",              "utilities/ping");
+  urlmap.insert("taxcodes",          "definitions/taxcodes");
+  urlmap.insert("createtransaction", "transactions/create");
+  urlmap.insert("committransaction", "companies/{companyCode}/transactions/{transactionCode}/commit");
 }
 
-QJsonObject AvalaraIntegration::sendRequest(QJsonObject request)
+QUrl AvalaraIntegration::buildUrl(QString api, QString transcode = "")
 {
+  QString url = _metrics->value("AvalaraUrl") + "api/v2/" + urlmap.value(api);
 
-  QJsonObject response;
-
-  //Send request, return response
-
-  return response;
-}
-
-QUrl AvalaraIntegration::buildUrl(QString api)
-{
-  QString base = _metrics->value("AvalaraUrl") + "api/v2/";
-
-  if (api == "test")
-    return QUrl( base + "utilities/ping");
+  url.replace("{companyCode}", _metrics->value("AvalaraCompany"), Qt::CaseSensitive);
+  url.replace("{transactionCode}", transcode, Qt::CaseSensitive);
+  
+  return QUrl(url); 
 }
 
 void AvalaraIntegration::buildHeaders(QNetworkRequest &netrequest)
@@ -52,6 +49,7 @@ void AvalaraIntegration::buildHeaders(QNetworkRequest &netrequest)
   client.append(QString("xTuple; %1; REST; V2; %2").arg(_metrics->value("ServerVersion"))
                                                   .arg(localhost));
 
+  netrequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
   netrequest.setRawHeader("Authorization", authkey);
   netrequest.setRawHeader("X-Avalara-UID", "a0o0b000003PfVt");
   netrequest.setRawHeader("X-Avalara-Client", client);
@@ -68,16 +66,13 @@ QString AvalaraIntegration::buildAuthKey()
   return "Basic " + enc;
 }
 
-void AvalaraIntegration::test()
+bool AvalaraIntegration::testService()
 {
   QEventLoop eventLoop;
   QNetworkRequest netrequest;
-  QByteArray authkey;
-  QByteArray client;
-  QString localhost = QHostInfo::localHostName();
 
-  buildHeaders(netrequest);
   netrequest.setUrl(buildUrl("test"));
+  buildHeaders(netrequest);
 
   connect(restclient, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
 
@@ -100,11 +95,14 @@ void AvalaraIntegration::test()
                     .arg(authd)
                     .arg(authAccnt));
      else
+     {
        QMessageBox::information(0, tr("Avalara Integration Test"),
                     tr("<p>Avalara Integration Test Failed<br>"
                        "Invalid authentication details."));
 
-     delete reply;
+        delete reply;
+        return false;
+     } 
   }
   else
   {
@@ -112,6 +110,100 @@ void AvalaraIntegration::test()
                   tr("<p>Avalara Integration Test Failed<br>"
                      "%1").arg(reply->errorString()));
      delete reply;
+     return false;
   }
+
+  delete reply;
+  return true;
+}
+
+QJsonObject AvalaraIntegration::sendRequest(QJsonObject payload)
+{
+  QEventLoop eventLoop;
+  QNetworkRequest netrequest;
+  QJsonObject response;
+  QJsonDocument doc(payload);
+  
+  netrequest.setUrl(buildUrl("createtransaction"));
+  buildHeaders(netrequest);
+
+  connect(restclient, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+
+  QNetworkReply *reply = restclient->post(netrequest, doc.toJson(QJsonDocument::Compact));
+  eventLoop.exec();
+
+  if (reply->error() == QNetworkReply::NoError)
+  {
+     QString strReply = (QString)reply->readAll();
+     QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
+     response = jsonResponse.object();
+  }
+  else
+  {
+    QMessageBox::information(0, tr("Avalara Create Transaction"),
+                  tr("<p>Avalara Create Transaction Failed<br>"
+                     "%1").arg(reply->errorString()));
+  }
+
+  delete reply;
+  return response;
+}
+
+QJsonObject AvalaraIntegration::getTaxCodeList()
+{
+  QEventLoop eventLoop;
+  QNetworkRequest netrequest;
+  QJsonObject response;
+  QJsonObject jsonObject;
+
+  netrequest.setUrl(buildUrl("taxcodes"));
+  buildHeaders(netrequest);
+
+  connect(restclient, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+
+  QNetworkReply *reply = restclient->get(netrequest);
+  eventLoop.exec();
+
+  //Convert Avalara reply to xTuple requirements
+  if (reply->error() == QNetworkReply::NoError)
+  {
+     QString strReply = (QString)reply->readAll();
+     QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
+     jsonObject = jsonResponse.object();
+  }
+  else
+  {
+    QMessageBox::information(0, tr("Avalara Tax Codes"),
+                  tr("<p>Error retrieving Avalara Tax Codes<br>"
+                     "%1").arg(reply->errorString()));
+  }
+
+  delete reply;
+  return jsonObject;
+}
+
+void AvalaraIntegration::commitTransaction(QString transcode)
+{
+  QEventLoop eventLoop;
+  QNetworkRequest netrequest;
+
+  netrequest.setUrl(buildUrl("committransaction", transcode));
+  buildHeaders(netrequest);
+
+  QVariantMap commit;
+  commit.insert("commit", true);
+  QByteArray payload = QJsonDocument::fromVariant(commit).toJson();
+
+  connect(restclient, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+
+  QNetworkReply *reply = restclient->post(netrequest, payload);
+  eventLoop.exec();
+
+  if (reply->error() != QNetworkReply::NoError)
+    QMessageBox::information(0, tr("Avalara Tax Service"),
+                tr("<p>Error Committing Avalara Transaction<br>"
+                   "%1").arg(reply->errorString()));
+
+  delete reply;
   return;
 }

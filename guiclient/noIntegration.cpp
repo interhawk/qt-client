@@ -10,6 +10,7 @@
 
 #include "noIntegration.h"
 
+#include <QJsonDocument>
 #include <QJsonObject>
 
 NoIntegration::NoIntegration() : TaxIntegration()
@@ -19,4 +20,11 @@ NoIntegration::NoIntegration() : TaxIntegration()
 QJsonObject NoIntegration::sendRequest(QJsonObject request)
 {
   return request;
+}
+
+QJsonObject NoIntegration::getTaxCodeList()
+{
+  QJsonObject ret = QJsonDocument::fromJson(QString("{\"integration\": false}").toUtf8()).object();
+
+  return ret;
 }

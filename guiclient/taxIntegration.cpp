@@ -20,9 +20,7 @@
 
 TaxIntegration* TaxIntegration::getTaxIntegration()
 {
-  QString service = _metrics->value("TaxService");
-
-  if (service == "Avalara")
+  if (_metrics->value("TaxService") == "A")
     return new AvalaraIntegration();
   else
     return new NoIntegration();
@@ -59,3 +57,9 @@ double TaxIntegration::calculateTax(QString orderType, int orderId)
                                 qry, __FILE__, __LINE__))
     return 0.0;
 }
+
+QJsonObject TaxIntegration::getTaxCodes()
+{
+  return getTaxCodeList();
+}
+

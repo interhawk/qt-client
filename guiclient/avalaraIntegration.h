@@ -22,16 +22,19 @@ class AvalaraIntegration : public TaxIntegration
 
   public:
     AvalaraIntegration();
-    virtual void test();
-    virtual void buildHeaders(QNetworkRequest &);
+    virtual bool        testService();
 
   protected:
     virtual QJsonObject sendRequest(QJsonObject);
-    virtual QUrl        buildUrl(const QString);
+    virtual QJsonObject getTaxCodeList();
+    virtual void        commitTransaction(const QString);
+    virtual QUrl        buildUrl(const QString, const QString);
     virtual QString     buildAuthKey();
+    virtual void buildHeaders(QNetworkRequest &);
 
   private:
     QNetworkAccessManager * restclient;
+    QMap<QString, QString> urlmap;
 };
 
 #endif

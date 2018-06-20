@@ -26,7 +26,7 @@ public:
 public slots:
     virtual bool sSave();
     virtual bool sCheck();
-    virtual bool sTest();
+    virtual void sTest();
 
 protected slots:
     virtual void languageChange();

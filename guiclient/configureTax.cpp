@@ -83,10 +83,10 @@ bool configureTax::sCheck()
   return valid;
 }
 
-bool configureTax::sTest()
+void configureTax::sTest()
 {
-  AvalaraIntegration ai;
-  ai.test();
+  AvalaraIntegration tax;
+  tax.testService();
 
-  return false;
+  return;
 }
