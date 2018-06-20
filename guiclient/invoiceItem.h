@@ -68,7 +68,6 @@ private:
     double _qtyinvuomratio;
     double _priceinvuomratio;
     double _listprice;
-    bool _saved;
     bool _trackqoh;
     QStandardItemModel * _itemchar;
 };

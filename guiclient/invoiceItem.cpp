@@ -20,7 +20,7 @@
 
 #include "xdoublevalidator.h"
 #include "priceList.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
 #include "itemCharacteristicDelegate.h"
@@ -36,13 +36,11 @@ invoiceItem::invoiceItem(QWidget* parent, const char * name, Qt::WindowFlags fl)
   connect(_billed,       SIGNAL(editingFinished()),       this, SLOT(sCalculateExtendedPrice()));
   connect(_item,         SIGNAL(newId(int)),              this, SLOT(sPopulateItemInfo(int)));
   connect(_item,         SIGNAL(newId(int)),              this, SLOT(sHandleUpdateInv()));
-  connect(_extended,     SIGNAL(valueChanged()),          this, SLOT(sLookupTax()));
   connect(_listPrices,   SIGNAL(clicked()),               this, SLOT(sListPrices()));
   connect(_price,        SIGNAL(idChanged(int)),          this, SLOT(sPriceGroup()));
   connect(_price,        SIGNAL(valueChanged()),          this, SLOT(sCalculateExtendedPrice()));
   connect(_save,         SIGNAL(clicked()),               this, SLOT(sSave()));
   connect(_taxLit,       SIGNAL(leftClickedURL(QString)), this, SLOT(sTaxDetail()));
-  connect(_taxtype,      SIGNAL(newID(int)),              this, SLOT(sLookupTax()));
   connect(_qtyUOM,       SIGNAL(newID(int)),              this, SLOT(sQtyUOMChanged()));
   connect(_pricingUOM,   SIGNAL(newID(int)),              this, SLOT(sPriceUOMChanged()));
   connect(_miscSelected, SIGNAL(toggled(bool)),           this, SLOT(sMiscSelected(bool)));
@@ -84,7 +82,6 @@ invoiceItem::invoiceItem(QWidget* parent, const char * name, Qt::WindowFlags fl)
     _warehouseLit->hide();
     _warehouse->hide();
   }
-  _saved = false;
   
   adjustSize();
 }
@@ -342,7 +339,6 @@ void invoiceItem::sSave()
     invoiceSave.exec();
   }
 
-  _saved = true;
   emit saved(_invcitemid);
 
   done(_invcitemid);
@@ -455,7 +451,6 @@ void invoiceItem::populate()
 
   sCalculateExtendedPrice();
 
-  _saved = true;
   emit populated();
 }
 
@@ -645,32 +640,14 @@ void invoiceItem::sPriceGroup()
 
 void invoiceItem::sTaxDetail()
 {
-  taxDetail newdlg(this, "", true);
+  taxBreakdown newdlg(this, "", true);
   ParameterList params;
-  params.append("taxzone_id", _taxzoneid);
-  params.append("taxtype_id", _taxtype->id());
-  params.append("date", _price->effective());
-  params.append("subtotal",  CurrDisplay::convert(_extended->id(), _tax->id(),
-						 _extended->localValue(),
-						 _extended->effective()));
-  params.append("curr_id",  _tax->id());
-  
-  if(cView == _mode)
-    params.append("readOnly");
-  
-  if(_saved == true)
-  {
-	params.append("order_id", _invcitemid);
-    params.append("order_type", "II");
-  }
+  params.append("order_id", _invcitemid);
+  params.append("order_type", "INVI");
+  params.append("mode", "view");
 
   newdlg.set(params);
-  
-  if (newdlg.set(params) == NoError && newdlg.exec())
-  {
-    if (_taxtype->id() != newdlg.taxtype())
-      _taxtype->setId(newdlg.taxtype());
-  }
+  newdlg.exec();
 }
 
 void invoiceItem::sPopulateUOM()
@@ -911,21 +888,17 @@ void invoiceItem::sListPrices()
 void invoiceItem::sLookupTax()
 {
   XSqlQuery taxcal;
-  taxcal.prepare("SELECT calculatetax(:taxzone_id, :taxtype_id, :date, :curr_id, :amount) AS taxamount;");
-  taxcal.bindValue(":taxzone_id", _taxzoneid);
-  taxcal.bindValue(":taxtype_id", _taxtype->id());
-  taxcal.bindValue(":date", _price->effective());
-  taxcal.bindValue(":curr_id", _tax->id());
-  taxcal.bindValue(":amount", CurrDisplay::convert(_extended->id(), _tax->id(), _extended->localValue(), _extended->effective()));
+  taxcal.prepare("SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
+                 "  FROM taxhist "
+                 " WHERE taxhist_doctype = 'INVI' "
+                 "   AND taxhist_parent_id = :invcitemid;");
+  taxcal.bindValue(":invcitemid", _invcitemid);
   taxcal.exec();
   if (taxcal.first())
   {
-    _tax->setLocalValue(taxcal.value("taxamount").toDouble());
-	_saved = false;
+    _tax->setLocalValue(taxcal.value("tax").toDouble());
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Line Item Tax"),
                                 taxcal, __FILE__, __LINE__))
-  {
     return;
-  }
 }

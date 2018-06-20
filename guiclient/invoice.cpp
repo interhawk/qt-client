@@ -25,6 +25,7 @@
 #include "invoiceItem.h"
 #include "storedProcErrorLookup.h"
 #include "taxBreakdown.h"
+#include "taxIntegration.h"
 #include "allocateARCreditMemo.h"
 #include "guiErrorCheck.h"
 
@@ -126,6 +127,9 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _recurring->setParent(-1, "I");
 
   _miscChargeAccount->setType(GLCluster::cRevenue | GLCluster::cExpense);
+
+  _freightTaxtype->setCode("Freight");
+  _miscChargeTaxtype->setCode("Misc");
 
   _postInvoice->setEnabled(_privileges->check("PostMiscInvoices"));
 }
@@ -662,7 +666,10 @@ bool invoice::save()
              "    invchead_shipchrg_id=:invchead_shipchrg_id, "
              "    invchead_taxzone_id=:invchead_taxzone_id,"
              "    invchead_shipzone_id=:invchead_shipzone_id,"
-             "    invchead_saletype_id=:invchead_saletype_id "
+             "    invchead_saletype_id=:invchead_saletype_id, "
+             "    invchead_freight_taxtype_id=:invchead_freight_taxtype_id, "
+             "    invchead_misc_taxtype_id=:invchead_misc_taxtype_id, "
+             "    invchead_misc_discount=:invchead_misc_discount "
 	     "WHERE (invchead_id=:invchead_id);" );
 
   invoiceave.bindValue(":invchead_id",			_invcheadid);
@@ -707,6 +714,9 @@ bool invoice::save()
   invoiceave.bindValue(":invchead_notes",	_notes->toPlainText());
   invoiceave.bindValue(":invchead_prj_id",	_project->id());
   invoiceave.bindValue(":invchead_shipchrg_id",	_shipChrgs->id());
+  invoiceave.bindValue(":invchead_freight_taxtype_id", _freightTaxtype->id());
+  invoiceave.bindValue(":invchead_misc_taxtype_id", _miscChargeTaxtype->id());
+  invoiceave.bindValue(":invchead_misc_discount", _miscChargeDiscount->isChecked());
   if(_shippingZone->isValid())
     invoiceave.bindValue(":invchead_shipzone_id",	_shippingZone->id());
   if(_saleType->isValid())
@@ -1071,6 +1081,9 @@ void invoice::populate()
     _miscChargeDescription->setText(invoicepopulate.value("invchead_misc_descrip"));
     _miscChargeAccount->setId(invoicepopulate.value("invchead_misc_accnt_id").toInt());
     _miscAmount->setLocalValue(invoicepopulate.value("invchead_misc_amount").toDouble());
+    _miscChargeTaxtype->setId(invoicepopulate.value("invchead_misc_taxtype_id").toInt());
+    _miscChargeDiscount->setChecked(invoicepopulate.value("invchead_misc_discount").toBool());
+    _freightTaxtype->setId(invoicepopulate.value("invchead_freight_taxtype_id").toInt());
 
     _notes->setText(invoicepopulate.value("invchead_notes").toString());
 
@@ -1214,7 +1227,7 @@ void invoice::sTaxDetail()
 
   ParameterList params;
   params.append("order_id", _invcheadid);
-  params.append("order_type", "I");
+  params.append("order_type", "INV");
 
   if (_mode == cView || _posted)
     params.append("mode", "view");
@@ -1231,22 +1244,9 @@ void invoice::sTaxDetail()
 
 void invoice::sCalculateTax()
 {
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(tax) AS tax "
-                "FROM ("
-                "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-                "FROM tax "
-                " JOIN calculateTaxDetailSummary('I', :invchead_id, 'T') ON (taxdetail_tax_id=tax_id)"
-	        "GROUP BY tax_id) AS data;" );
-  taxq.bindValue(":invchead_id", _invcheadid);
-  taxq.exec();
-  if (taxq.first())
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax Amounts"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
+  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+  _tax->setLocalValue(tax->calculateTax("INV", _invcheadid));
+
   // changing _tax fires sCalculateTotal()
 }
 

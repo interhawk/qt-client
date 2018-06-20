@@ -91,19 +91,7 @@ void taxBreakdown::sPopulate()
 {
   XSqlQuery taxPopulate;
   ParameterList params;
-  if (_ordertype == "I")
-  {
-    _currencyLit->setText(tr("Invoice Currency:"));
-    _header->setText(tr("Tax Breakdown for Invoice:"));
-
-    taxPopulate.prepare("SELECT invchead_invcnumber AS number, invchead_taxzone_id AS taxzone_id, "
-                        "       invchead_curr_id AS curr_id, invchead_invcdate AS date "
-                        "  FROM invchead "
-                        " WHERE invchead_id = :orderid ");
-
-    params.append("invchead_id", _orderid);
-  }
-  else if (_ordertype == "S")
+  if (_ordertype == "S")
   {
     _currencyLit->setText(tr("Sales Order Currency:"));
     _header->setText(tr("Tax Breakdown for Sales Order:"));
@@ -165,21 +153,6 @@ void taxBreakdown::sPopulate()
 
     params.append("quitem_id", _orderid);
   }
-  else if (_ordertype == "RA")
-  {
-    _currencyLit->setText(tr("Return Authorization Currency:"));
-    _header->setText(tr("Tax Breakdown for Return:"));
- 
-    _new->hide();
-    _delete->hide();
-
-    taxPopulate.prepare("SELECT rahead_number AS number, rahead_taxzone_id AS taxzone_id, "
-                        "       rahead_curr_id AS curr_id, rahead_authdate AS date "
-                        "  FROM rahead "
-                        " WHERE rahead_id = :orderid ");
-
-    params.append("rahead_id", _orderid);
-  }
   else if (_ordertype == "COB")
   {
     _currencyLit->setText(tr("Billing Currency:"));
@@ -192,6 +165,46 @@ void taxBreakdown::sPopulate()
                         " WHERE cobmisc_id = :orderid ");
 
     params.append("cobmisc_id", _orderid);
+  }
+  else if (_ordertype == "INV")
+  {
+    _currencyLit->setText(tr("Invoice Currency:"));
+    _header->setText(tr("Tax Breakdown for Invoice:"));
+
+    taxPopulate.prepare("SELECT invchead_invcnumber AS number, invchead_taxzone_id AS taxzone_id, "
+                        "       invchead_curr_id AS curr_id, invchead_invcdate AS date "
+                        "  FROM invchead "
+                        " WHERE invchead_id = :orderid ");
+
+    params.append("invchead_id", _orderid);
+  }
+  else if (_ordertype == "INVI")
+  {
+    _currencyLit->setText(tr("Invoice Currency:"));
+    _header->setText(tr("Tax Breakdown for Invoice:"));
+
+    taxPopulate.prepare("SELECT invchead_invcnumber AS number, invchead_taxzone_id AS taxzone_id, "
+                        "       invchead_curr_id AS curr_id, invchead_invcdate AS date "
+                        "  FROM invcitem "
+                        "  JOIN invchead ON invcitem_invchead_id = invchead_id "
+                        " WHERE invcitem_id = :orderid ");
+
+    params.append("invcitem_id", _orderid);
+  }
+  else if (_ordertype == "RA")
+  {
+    _currencyLit->setText(tr("Return Authorization Currency:"));
+    _header->setText(tr("Tax Breakdown for Return:"));
+
+    _new->hide();
+    _delete->hide();
+
+    taxPopulate.prepare("SELECT rahead_number AS number, rahead_taxzone_id AS taxzone_id, "
+                        "       rahead_curr_id AS curr_id, rahead_authdate AS date "
+                        "  FROM rahead "
+                        " WHERE rahead_id = :orderid ");
+
+    params.append("rahead_id", _orderid);
   }
   else if (_ordertype == "CM")
   {

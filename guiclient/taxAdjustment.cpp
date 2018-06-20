@@ -54,7 +54,7 @@ enum SetResponse taxAdjustment::set(const ParameterList &pParams)
   {
     _ordertype = param.toString();
 
-    if (param.toString() == "I")
+    if (param.toString() == "INV")
       _table = "invcheadtax";
     else if (param.toString() == "COB")
       _table = "cobmisctax";
