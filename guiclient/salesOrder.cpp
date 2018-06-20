@@ -3140,8 +3140,7 @@ bool salesOrder::deleteForCancel()
       return false;
   }
 
-  if (_mode == cNew &&
-      !_captive)
+  if ((_mode == cNew && !_captive) || (!_metrics->boolean("EnableRentals") && ISORDER(_mode) && _soitem->topLevelItemCount() == 0))
   {
     query.prepare("SELECT deleteSO(:sohead_id, :sohead_number) AS result;");
     query.bindValue(":sohead_id", _soheadid);
@@ -3159,8 +3158,7 @@ bool salesOrder::deleteForCancel()
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Sales Order"),
                          query, __FILE__, __LINE__);
   }
-  else if (_mode == cNewQuote &&
-           !_captive)
+  else if ((_mode == cNewQuote && !_captive) || (ISQUOTE(_mode) && _soitem->topLevelItemCount() == 0))
   {
     query.prepare("SELECT deleteQuote(:head_id, :quhead_number) AS result;");
     query.bindValue(":head_id", _soheadid);
@@ -3193,6 +3191,8 @@ bool salesOrder::deleteForCancel()
                        query, __FILE__, __LINE__);
     }
   }
+
+  omfgThis->sSalesOrdersUpdated(_soheadid);
 
   if (! _lock.release())
     ErrorReporter::error(QtCriticalMsg, this, tr("Locking Error"),
@@ -3275,6 +3275,7 @@ void salesOrder::clear()
   _CCAmount->clear();
   _CCCVV->clear();
   _project->setId(-1);
+  _docNumber->clear();
   _fromQuoteLit->setText(tr("From Quote:"));
 
   _fromQuote->setText(tr("No"));

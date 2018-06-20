@@ -482,6 +482,7 @@ void item::saveCore()
 void item::sSave()
 {
   XSqlQuery itemSave;
+  XSqlQuery checks;
   QList<GuiErrorCheck> errors;
   QString sql;
   QString itemNumber = _itemNumber->text().trimmed().toUpper();
@@ -693,7 +694,76 @@ void item::sSave()
     itemSave.exec();
     if (itemSave.first())
     {
-      if(QMessageBox::question( this, tr("Item Sites Exist"),
+      // Item Sites exist so we have to check for open order before we allow
+      // those sites to be deactivated
+      sql = "SELECT coitem_id "
+            "  FROM coitem "
+            "  JOIN itemsite ON itemsite_id=coitem_itemsite_id "
+            " WHERE itemsite_item_id=<? value('item_id') ?>"
+            "  AND  coitem_status NOT IN ('X','C') "
+            "UNION "
+            "SELECT wo_id "
+            "  FROM wo "
+            "  JOIN itemsite ON itemsite_id=wo_itemsite_id "
+            " WHERE itemsite_item_id=<? value('item_id') ?>"
+            "  AND  wo_status <> 'C' "
+            "UNION "
+            "SELECT womatl_id "
+            "  FROM womatl "
+            "  JOIN wo ON wo_id=womatl_wo_id "
+            "  JOIN itemsite ON itemsite_id=wo_itemsite_id "
+            " WHERE itemsite_item_id=<? value('item_id') ?>"
+            "  AND  wo_status <> 'C' "
+            "UNION "
+            "SELECT poitem_id "
+            "  FROM poitem "
+            "  JOIN itemsite ON itemsite_id=poitem_itemsite_id "
+            " WHERE itemsite_item_id=<? value('item_id') ?>"
+            "  AND  poitem_status <> 'C' "
+            "<? if exists('MultiWhs') ?> "
+            "UNION "
+            "SELECT raitem_id "
+            "  FROM raitem "
+            "  JOIN itemsite ON itemsite_id=raitem_itemsite_id "
+            " WHERE itemsite_item_id=<? value('item_id') ?>"
+            "  AND  raitem_status <> 'C' "
+            "UNION "
+            "SELECT planord_id "
+            "  FROM planord "
+            "  JOIN itemsite ON itemsite_id=planord_itemsite_id "
+            " WHERE itemsite_item_id=<? value('item_id') ?>"
+            "UNION "
+            "SELECT planreq_id "
+            "  FROM planreq "
+            "  JOIN itemsite ON itemsite_id=planreq_itemsite_id "
+            " WHERE itemsite_item_id=<? value('item_id') ?>"
+            "<? endif ?>"
+            "LIMIT 1; ";
+      MetaSQLQuery mql(sql);
+      ParameterList params;
+      params.append("item_id", _itemid);
+      if (_metrics->boolean("MultiWhs"))
+        params.append("MultiWhs", true);
+      checks = mql.toQuery(params);
+      checks.exec();
+      if (checks.first())
+      {
+         QMessageBox::warning( this, tr("Item Sites Exist"),
+                                tr("<p>You have changed the Item Type of this "
+                                   "Item. To ensure Item Sites do not have "
+                                   "invalid settings, all Item Sites for it "
+                                   "are inactivated before this change "
+                                   "may occur.  However open orders exist for "
+                                   "one or more of the Item Sites so inactivating "
+                                   "the Site will fail."));
+          _itemtype->setText(_originalItemType);
+          return;
+      }
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Information"),
+                                checks, __FILE__, __LINE__))
+        return;
+
+     if(QMessageBox::question( this, tr("Item Sites Exist"),
                                 tr("<p>You have changed the Item Type of this "
                                    "Item. To ensure Item Sites do not have "
                                    "invalid settings, all Item Sites for it "

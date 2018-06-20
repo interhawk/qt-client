@@ -236,6 +236,17 @@ void enterPoitemReceipt::populate()
 
     // Set class vars
     _itemsiteId = enterpopulate.value("itemsiteid").toInt();
+
+    if (!enterpopulate.value("itemsite_active").toBool())
+    {
+      QMessageBox::warning( this, tr("Inactive Item Site"),
+                       tr("The Item Site is marked inactive and cannot be receipted against. "
+                          "Please correct this before proceeding.") );
+      _RecievTab->setEnabled(false);
+      _buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+      XDialog::reject();
+    }
+
     if (_mode == cEdit)
       _recvPosted = enterpopulate.value("recv_posted").toBool();
 
