@@ -71,7 +71,7 @@ CLineEdit::CLineEdit(QWidget *pParent, const char *pName) :
            "           prospect_active AS active,"
            "           'G' AS cust_creditstatus,"
            "           crmacct_id, false AS iscustomer,"
-           "           prospect_cntct_id AS cust_cntct_id"
+           "           getcrmaccountcontact(prospect_crmacct_id) AS cust_cntct_id"
            "      FROM prospect"
            "      LEFT OUTER JOIN crmacct ON prospect_crmacct_id = crmacct_id"
            "     WHERE :number IS NULL or prospect_number ~* :number"
