@@ -294,6 +294,9 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   _bankaccnt->setType(XComboBox::ARBankAccounts);
   _salescat->setType(XComboBox::SalesCategoriesActive);
 
+  _freightTaxtype->setCode("Freight");
+  _miscChargeTaxtype->setCode("Misc");
+
   sHandleMore();
 }
 
@@ -951,7 +954,10 @@ bool salesOrder::save(bool partial)
                "    cohead_billto_cntct_fax=:billto_cntct_fax,"
                "    cohead_billto_cntct_email=:billto_cntct_email, "
                "    cohead_shipzone_id=:shipzone_id,"
-               "    cohead_saletype_id=:saletype_id "
+               "    cohead_saletype_id=:saletype_id, "
+               "    cohead_freight_taxtype_id=:freight_taxtype_id, "
+               "    cohead_misc_taxtype_id=:misc_taxtype_id, "
+               "    cohead_misc_discount=:misc_discount "
                "WHERE (cohead_id=:id);" );
   else if (_mode == cNew)
   {
@@ -998,7 +1004,8 @@ bool salesOrder::save(bool partial)
               "    cohead_billto_cntct_title,"
               "    cohead_billto_cntct_fax,"
               "    cohead_billto_cntct_email,"
-              "    cohead_shipzone_id, cohead_saletype_id)"
+              "    cohead_shipzone_id, cohead_saletype_id,"
+              "    cohead_freight_taxtype_id, cohead_misc_taxtype_id, cohead_misc_discount)"
               "    VALUES (:id,:number, :cust_id,"
               "    :custponumber,:shipto_id,"
               "    :billtoname, :billtoaddress1,"
@@ -1041,7 +1048,8 @@ bool salesOrder::save(bool partial)
               "    :billto_cntct_title,"
               "    :billto_cntct_fax,"
               "    :billto_cntct_email,"
-              "    :shipzone_id, :saletype_id) ");
+              "    :shipzone_id, :saletype_id,"
+              "    :freight_taxtype_id, :misc_taxtype_id, :misc_discount) ");
   }
   else if ((_mode == cEditQuote) || ((_mode == cNewQuote) && _saved))
     saveSales.prepare( "UPDATE quhead "
@@ -1084,7 +1092,10 @@ bool salesOrder::save(bool partial)
                "    quhead_billto_cntct_fax=:billto_cntct_fax,"
                "    quhead_billto_cntct_email=:billto_cntct_email,"
                "    quhead_shipzone_id=:shipzone_id,"
-               "    quhead_saletype_id=:saletype_id "
+               "    quhead_saletype_id=:saletype_id, "
+               "    quhead_freight_taxtype_id=:freight_taxtype_id, "
+               "    quhead_misc_taxtype_id=:misc_taxtype_id, "
+               "    quhead_misc_discount=:misc_discount "
                "WHERE (quhead_id=:id);" );
   else if (_mode == cNewQuote)
     saveSales.prepare( "INSERT INTO quhead ("
@@ -1128,7 +1139,8 @@ bool salesOrder::save(bool partial)
                "    quhead_billto_cntct_fax,"
                "    quhead_billto_cntct_email,"
                "    quhead_status,"
-               "    quhead_shipzone_id, quhead_saletype_id)"
+               "    quhead_shipzone_id, quhead_saletype_id,"
+               "    quhead_freight_taxtype_id, quhead_misc_taxtype_id, quhead_misc_discount)"
                "    VALUES ("
                "    :id, :number, :cust_id,"
                "    :custponumber, :shipto_id,"
@@ -1170,7 +1182,8 @@ bool salesOrder::save(bool partial)
                "    :billto_cntct_fax,"
                "    :billto_cntct_email,"
                "    :quhead_status,"
-               "    :shipzone_id, :saletype_id) ");
+               "    :shipzone_id, :saletype_id,"
+               "    :freight_taxtype_id, :misc_taxtype_id, :misc_discount) ");
   saveSales.bindValue(":id", _soheadid );
   saveSales.bindValue(":number", _orderNumber->text());
   saveSales.bindValue(":orderdate", _orderDate->date());
@@ -1265,6 +1278,9 @@ bool salesOrder::save(bool partial)
   if(_saleType->isValid())
     saveSales.bindValue(":saletype_id", _saleType->id());
   saveSales.bindValue(":quhead_status", "O");
+  saveSales.bindValue(":freight_taxtype_id", _freightTaxtype->id());
+  saveSales.bindValue(":misc_taxtype_id", _miscChargeTaxtype->id());
+  saveSales.bindValue(":misc_discount", _miscChargeDiscount->isChecked());
 
   saveSales.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Saving Order"),
@@ -2683,6 +2699,9 @@ void salesOrder::populate()
       _miscCharge->setLocalValue(so.value("cohead_misc").toDouble());
       _miscChargeDescription->setText(so.value("cohead_misc_descrip"));
       _miscChargeAccount->setId(so.value("cohead_misc_accnt_id").toInt());
+      _miscChargeTaxtype->setId(so.value("cohead_misc_taxtype_id").toInt());
+      _miscChargeDiscount->setChecked(so.value("cohead_misc_discount").toBool());
+      _freightTaxtype->setId(so.value("cohead_freight_taxtype_id").toInt());
 
       _orderComments->setText(so.value("cohead_ordercomments").toString());
       _shippingComments->setText(so.value("cohead_shipcomments").toString());
@@ -2882,6 +2901,9 @@ void salesOrder::populate()
       _miscCharge->setLocalValue(qu.value("quhead_misc").toDouble());
       _miscChargeDescription->setText(qu.value("quhead_misc_descrip"));
       _miscChargeAccount->setId(qu.value("quhead_misc_accnt_id").toInt());
+      _miscChargeTaxtype->setId(qu.value("quhead_misc_taxtype_id").toInt());
+      _miscChargeDiscount->setChecked(qu.value("quhead_misc_discount").toBool());
+      _freightTaxtype->setId(qu.value("quhead_freight_taxtype_id").toInt());
 
       _orderComments->setText(qu.value("quhead_ordercomments").toString());
       _shippingComments->setText(qu.value("quhead_shipcomments").toString());

@@ -105,8 +105,8 @@ void taxAdjustment::sSave()
 
   QString sql;
   if (_mode == cNew)
-    sql = QString( "INSERT into %1 (taxhist_basis,taxhist_percent,taxhist_amount,taxhist_docdate, taxhist_tax_id, taxhist_tax, taxhist_taxtype_id, taxhist_parent_id, taxhist_doctype  ) "
-                   "VALUES (0, 0, 0, :date, :taxcode_id, :amount, getadjustmenttaxtypeid(), :order_id, :ordertype) ").arg(_table);
+    sql = QString( "INSERT into %1 (taxhist_basis,taxhist_percent,taxhist_amount,taxhist_docdate, taxhist_tax_id, taxhist_tax, taxhist_taxtype_id, taxhist_parent_id, taxhist_doctype, taxhist_line_type  ) "
+                   "VALUES (0, 0, 0, :date, :taxcode_id, :amount, getadjustmenttaxtypeid(), :order_id, :ordertype, 'A') ").arg(_table);
 
   else if (_mode == cEdit)
     sql = QString( "UPDATE taxhist "
