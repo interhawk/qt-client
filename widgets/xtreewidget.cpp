@@ -1173,9 +1173,9 @@ void XTreeWidget::sortItems(int column, Qt::SortOrder order)
     priority++;
 
     if (sort.second == Qt::AscendingOrder)
-      headerItem()->setIcon(sort.first, QIcon(QPixmap(":/widgets/images/arrow_down.png")));
-    else
       headerItem()->setIcon(sort.first, QIcon(QPixmap(":/widgets/images/arrow_up.png")));
+    else
+      headerItem()->setIcon(sort.first, QIcon(QPixmap(":/widgets/images/arrow_down.png")));
 
     if (_sort.size()>1)
       headerItem()->setText(sort.first, (priority < 10 ? " " : "") + QString::number(priority) +
@@ -1717,7 +1717,8 @@ void XTreeWidget::sHeaderClicked(int column)
   if (_roles.size() <= 0)
   {
     _sort.clear();
-    _sort.append(qMakePair(column, header()->sortIndicatorOrder()));
+	
+	_sort.append(qMakePair(column, header()->sortIndicatorOrder()));
 
     if (!header()->isSortIndicatorShown())
       header()->setSortIndicatorShown(true);
