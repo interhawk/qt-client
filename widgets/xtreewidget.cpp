@@ -1052,13 +1052,19 @@ bool XTreeWidgetItem::operator<(const XTreeWidgetItem &other) const
       case QVariant::String:
         sorted = true;
         if (v1.toString().toDouble() == 0.0 && v2.toDouble() == 0.0)
-          returnVal = (v1.toString() < v2.toString());
+		{
+		  QString w1 = QString(v1.toString()).toUpper();
+		  QString w2 = QString(v2.toString()).toUpper();
+		  returnVal = (w1<w2);
+		}
+          
         else if (v1.toString().toDouble() == 0.0 && v2.toDouble(&ok2)) //v1 is string, v2 is number
-          returnVal = false; //the number should always be treated as greater than a string
+		{qDebug() << "S #";
+		returnVal = false;} //the number should always be treated as greater than a string
         else if (v1.toDouble(&ok1) && v2.toString().toDouble() == 0.0)
-          returnVal = true;
+		{returnVal = true; qDebug() << "# S";}
         else
-          returnVal = (v1.toDouble() < v2.toDouble());
+		{returnVal = (v1.toDouble() < v2.toDouble()); qDebug() << "# #";}
         break;
 
       default:
