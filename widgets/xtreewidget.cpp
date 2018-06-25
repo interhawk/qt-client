@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1059,12 +1059,11 @@ bool XTreeWidgetItem::operator<(const XTreeWidgetItem &other) const
 		}
           
         else if (v1.toString().toDouble() == 0.0 && v2.toDouble(&ok2)) //v1 is string, v2 is number
-		{qDebug() << "S #";
-		returnVal = false;} //the number should always be treated as greater than a string
+		  returnVal = false; //the number should always be treated as greater than a string
         else if (v1.toDouble(&ok1) && v2.toString().toDouble() == 0.0)
-		{returnVal = true; qDebug() << "# S";}
+		  returnVal = true
         else
-		{returnVal = (v1.toDouble() < v2.toDouble()); qDebug() << "# #";}
+		  returnVal = (v1.toDouble() < v2.toDouble()); 
         break;
 
       default:
