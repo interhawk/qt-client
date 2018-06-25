@@ -1061,7 +1061,7 @@ bool XTreeWidgetItem::operator<(const XTreeWidgetItem &other) const
         else if (v1.toString().toDouble() == 0.0 && v2.toDouble(&ok2)) //v1 is string, v2 is number
           returnVal = false; //the number should always be treated as greater than a string
         else if (v1.toDouble(&ok1) && v2.toString().toDouble() == 0.0)
-          returnVal = true
+          returnVal = true;
         else
           returnVal = (v1.toDouble() < v2.toDouble()); 
         break;
