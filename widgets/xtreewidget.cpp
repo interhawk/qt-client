@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1052,13 +1052,18 @@ bool XTreeWidgetItem::operator<(const XTreeWidgetItem &other) const
       case QVariant::String:
         sorted = true;
         if (v1.toString().toDouble() == 0.0 && v2.toDouble() == 0.0)
-          returnVal = (v1.toString() < v2.toString());
+		{
+		  QString w1 = QString(v1.toString()).toUpper();
+		  QString w2 = QString(v2.toString()).toUpper();
+		  returnVal = (w1<w2);
+		}
+          
         else if (v1.toString().toDouble() == 0.0 && v2.toDouble(&ok2)) //v1 is string, v2 is number
           returnVal = false; //the number should always be treated as greater than a string
         else if (v1.toDouble(&ok1) && v2.toString().toDouble() == 0.0)
           returnVal = true;
         else
-          returnVal = (v1.toDouble() < v2.toDouble());
+          returnVal = (v1.toDouble() < v2.toDouble()); 
         break;
 
       default:
@@ -1173,9 +1178,9 @@ void XTreeWidget::sortItems(int column, Qt::SortOrder order)
     priority++;
 
     if (sort.second == Qt::AscendingOrder)
-      headerItem()->setIcon(sort.first, QIcon(QPixmap(":/widgets/images/arrow_down.png")));
-    else
       headerItem()->setIcon(sort.first, QIcon(QPixmap(":/widgets/images/arrow_up.png")));
+    else
+      headerItem()->setIcon(sort.first, QIcon(QPixmap(":/widgets/images/arrow_down.png")));
 
     if (_sort.size()>1)
       headerItem()->setText(sort.first, (priority < 10 ? " " : "") + QString::number(priority) +
