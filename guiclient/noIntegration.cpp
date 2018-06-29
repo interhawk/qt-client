@@ -17,14 +17,10 @@ NoIntegration::NoIntegration() : TaxIntegration()
 {
 }
 
-QJsonObject NoIntegration::sendRequest(QJsonObject request)
+void NoIntegration::sendRequest(QString type, QString orderType, int orderId, QJsonObject request, QStringList config)
 {
-  return request;
-}
-
-QJsonObject NoIntegration::getTaxCodeList()
-{
-  QJsonObject ret = QJsonDocument::fromJson(QString("{\"integration\": false}").toUtf8()).object();
-
-  return ret;
+  if (type == "taxcodes")
+  handleResponse("taxcodes", QString(), 0, QJsonObject(), "");
+  else if (type == "createtransaction")
+    handleResponse(type, orderType, orderId, request, "");
 }

@@ -26,6 +26,7 @@ class GuiErrorCheck
     ~GuiErrorCheck();
 
     static bool reportErrors(QWidget *parent, QString title, QList<GuiErrorCheck> list);
+    static bool checkForErrors(QList<GuiErrorCheck> list);
 
     // order of declarations should match order in constructor:
     // http://gcc.gnu.org/ml/gcc-help/2006-06/msg00068.html

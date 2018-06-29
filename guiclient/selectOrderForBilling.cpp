@@ -17,12 +17,12 @@
 
 #include <metasql.h>
 
+#include "guiErrorCheck.h"
 #include "salesOrder.h"
 #include "salesOrderList.h"
 #include "selectBillingQty.h"
 #include "storedProcErrorLookup.h"
 #include "taxBreakdown.h"
-#include "taxIntegration.h"
 #include "errorReporter.h"
 
 selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -35,10 +35,17 @@ selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, 
   _so->setAllowedTypes(OrderLineEdit::Sales);
   _so->setAllowedStatuses(OrderLineEdit::Open);
 
+  _taxCalc = TaxIntegration::getTaxIntegration();
+
   connect(_cancel, SIGNAL(clicked()), this, SLOT(sCancelSelection()));
   connect(_edit, SIGNAL(clicked()), this, SLOT(sEditOrder()));
+  connect(_freightTaxtype, SIGNAL(newID(int)), this, SLOT(sMiscTaxtypeChanged()));
   connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
-  connect(_miscCharge, SIGNAL(valueChanged()), this, SLOT(sUpdateTotal()));
+  connect(_miscChargeTaxtype, SIGNAL(newID(int)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeDiscount, SIGNAL(toggled(bool)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeAccount, SIGNAL(valid(bool)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscCharge, SIGNAL(valueChanged()), this, SLOT(sMiscChargeChanged()));
+  connect(_taxCalc, SIGNAL(taxCalculated(double, QString)), this, SLOT(sCalculateTax(double, QString)));
   connect(_salesTaxLit, SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
   connect(_save, SIGNAL(clicked()), this, SLOT(sSave()));
   connect(_select, SIGNAL(clicked()), this, SLOT(sEditSelection()));
@@ -169,36 +176,46 @@ void selectOrderForBilling::clear()
 
 void selectOrderForBilling::sSave()
 {
+  save(false);
+
+  omfgThis->sBillingSelectionUpdated(_so->id(), true);
+
+  if (_captive)
+    close();
+  else
+  {
+    clear();
+    _so->setFocus();
+  }
+}
+
+bool selectOrderForBilling::save(bool partial)
+{
   XSqlQuery selectSave;
-  if (!_shipDate->isValid())
-  {
-    QMessageBox::information(this, tr("No Ship Date Entered"),
-                             tr("<p>You must enter a Ship Date before "
-				"approving this order for billing."  ) );
 
-    _shipDate->setFocus();
-    return;
-  }
-
-  if ( (! _miscCharge->isZero()) && (!_miscChargeAccount->isValid()) )
-  {
-    QMessageBox::warning( this, tr("No Misc. Charge Account Number"),
+  QList<GuiErrorCheck> errors;
+  errors << GuiErrorCheck(!_shipDate->isValid(), _shipDate,
+                          tr("<p>You must enter a Ship Date before "
+                             "approving this order for billing."))
+         << GuiErrorCheck(!_miscCharge->isZero() && !_miscChargeAccount->isValid(), _miscChargeAccount,
                           tr("<p>You may not enter a Misc. Charge without "
-			     "indicating the G/L Sales Account number for the "
-			     "charge. Please set the Misc. Charge amount to 0 "
-			     "or select a Misc. Charge Sales Account." ) );
-    _miscChargeAccount->setFocus();
-    return;
-  }
-  
-  if (_total->localValue() < 0)
-  {
-    QMessageBox::warning( this, tr("Negative total"),
+                             "indicating the G/L Sales Account number for the "
+                             "charge.  Please set the Misc. Charge amount to 0 "
+                             "or select a Misc. Charge Sales Account."))
+         << GuiErrorCheck(_miscCharge->isZero() && _miscChargeAccount->isValid(), _miscCharge,
+                          tr("<p>You must enter a Misc. Charge when "
+                             "specifying a Misc. Charge Sales Account. "
+                             "Please enter Misc. Charge amount "
+                             "or remove the Misc. Charge Sales Account."))
+         << GuiErrorCheck(_total->localValue() < 0, _miscCharge,
                           tr("<p>You may not approve "
-			     "for billing a negative total amount" ) );
-    _miscCharge->setFocus();
-    return;
-  }
+			     "for billing a negative total amount"));
+
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
+
+  if (GuiErrorCheck::reportErrors(this, tr("Cannot Approve for Billing"), errors))
+      return false;
 
   if (_cobmiscid != -1)
   {
@@ -239,19 +256,11 @@ void selectOrderForBilling::sSave()
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Selected Orders For Billing"),
                                   selectSave, __FILE__, __LINE__))
     {
-      return;
+      return false;
     }
   }
 
-  omfgThis->sBillingSelectionUpdated(_so->id(), true);
-
-  if (_captive)
-    close();
-  else
-  {
-    clear();
-    _so->setFocus();
-  }
+  return true;
 }
 
 void selectOrderForBilling::sSoList()
@@ -392,6 +401,7 @@ void selectOrderForBilling::sEditSelection()
   if (newdlg.exec() != XDialog::Rejected)
   {
     sFillList();
+    sCalculateTax();
     _updated = true;
   }
 }
@@ -408,6 +418,7 @@ void selectOrderForBilling::sCancelSelection()
   selectCancelSelection.exec();
 
   sFillList();
+  sCalculateTax();
 }
 
 void selectOrderForBilling::sSelectBalance()
@@ -434,14 +445,22 @@ void selectOrderForBilling::sSelectBalance()
   }
 
   sFillList();
+  sCalculateTax();
 }
 
 void selectOrderForBilling::sCalculateTax()   
 {
-  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-  _salesTax->setLocalValue(tax->calculateTax("COB", _cobmiscid));
+  _taxCalc->calculateTax("COB", _cobmiscid);
 
   // changing _tax fires sCalculateTotal()
+}
+
+void selectOrderForBilling::sCalculateTax(double tax, QString error)
+{
+  if (error.isEmpty())
+    _salesTax->setLocalValue(tax);
+  else
+    QMessageBox::critical(0, tr("Avalara Error"), tr("Error Calculating Tax:\n%1").arg(error));
 }
 
 void selectOrderForBilling::sUpdateTotal()
@@ -529,8 +548,6 @@ void selectOrderForBilling::sFillList()
                            selectFillList, __FILE__, __LINE__);
       _subtotal->clear();
     }
-
-    sCalculateTax();
   }
 }
 
@@ -631,6 +648,22 @@ void selectOrderForBilling::sTaxZoneChanged()
       return;
     }
     _taxzoneidCache = _taxZone->id();
+    if (_metrics->value("TaxService") == "N")
+      sCalculateTax();
+  }
+}
+
+void selectOrderForBilling::sMiscTaxtypeChanged()
+{
+  if (save(true))
+    sCalculateTax();
+}
+
+void selectOrderForBilling::sMiscChargeChanged()
+{
+  if (save(true))
+  {
+    sUpdateTotal();
     sCalculateTax();
   }
 }
@@ -652,6 +685,11 @@ void selectOrderForBilling::sFreightChanged()
       return;
     }
     _freightCache = _freight->localValue();
-    sCalculateTax();
+
+    if (save(true))
+    {
+      sUpdateTotal();
+      sCalculateTax();
+    }
   }   
 }

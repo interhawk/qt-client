@@ -12,6 +12,9 @@
 #define TAXINTEGRATION_H
 
 #include <QObject>
+#include <QJsonObject>
+
+#include "xsqlquery.h"
 
 class TaxIntegration : public QObject
 {
@@ -19,12 +22,22 @@ class TaxIntegration : public QObject
 
   public:
     Q_INVOKABLE static TaxIntegration* getTaxIntegration();
-    Q_INVOKABLE virtual double calculateTax(QString, int);
-                virtual QJsonObject getTaxCodes();
+    Q_INVOKABLE virtual void test(QStringList);
+    Q_INVOKABLE virtual void getTaxCodes();
+    Q_INVOKABLE virtual void calculateTax(QString, int);
+    Q_INVOKABLE virtual void wait();
+
+  signals:
+    void connectionTested(QString);
+    void taxCodesFetched(QJsonObject, QString);
+    void taxCalculated(double, QString);
 
   protected:
-    virtual QJsonObject sendRequest(QJsonObject) = 0;
-    virtual QJsonObject getTaxCodeList() = 0;
+    virtual void sendRequest(QString, QString = QString(), int = 0, QJsonObject = QJsonObject(), QStringList = QStringList()) = 0;
+    virtual void done();
+
+  protected slots:
+    virtual void handleResponse(QString, QString, int, QJsonObject, QString);
 };
 
 #endif

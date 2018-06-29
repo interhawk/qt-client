@@ -18,6 +18,8 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
 {
   setupUi(this);
 
+  _tax = new AvalaraIntegration();
+
   _service->append(0, "None",    "N");
   _service->append(1, "Avalara", "A");
 
@@ -26,6 +28,7 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
   connect(_url, SIGNAL(editingFinished()), this, SLOT(sCheck()));
   connect(_company, SIGNAL(editingFinished()), this, SLOT(sCheck()));
   connect(_test, SIGNAL(clicked()), this, SLOT(sTest()));
+  connect(_tax, SIGNAL(connectionTested(QString)), this, SLOT(sTest(QString)));
 
   if (_metrics->value("TaxService") != "")
     _service->setCode(_metrics->value("TaxService"));
@@ -63,14 +66,6 @@ bool configureTax::sSave()
     _metrics->set("AvalaraCompany", _company->text());
     _metrics->set("NoAvaTaxCommit", _disableRecording->isChecked());
   }
-  else
-  {
-    _metrics->set("AvalaraAccount", QString());
-    _metrics->set("AvalaraKey", QString());
-    _metrics->set("AvalaraUrl", QString());
-    _metrics->set("AvalaraCompany", QString());
-    _metrics->set("NoAvaTaxCommit", false);
-  }
 
   return true;
 }
@@ -85,8 +80,19 @@ bool configureTax::sCheck()
 
 void configureTax::sTest()
 {
-  AvalaraIntegration tax;
-  tax.testService();
+  QStringList configuration;
+  configuration << _account->text() << _key->text() << _url->text() << _company->text();
+
+  _tax->test(configuration);
+  _tax->wait();
 
   return;
+}
+
+void configureTax::sTest(QString error)
+{
+  if (error.isEmpty())
+    QMessageBox::information(this, tr("Avalara Integration Test"), tr("Connection Test Succeeded"));
+  else
+    QMessageBox::information(this, tr("Avalara Integration Test"), tr("Connection Test Failed:\n%1").arg(error));
 }

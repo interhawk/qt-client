@@ -12,9 +12,9 @@
 #define AVALARAINTEGRATION_H
 
 #include "taxIntegration.h"
-#include "guiclient.h"
 
 #include <QNetworkAccessManager>
+#include <QEventLoop>
 
 class AvalaraIntegration : public TaxIntegration
 {
@@ -22,19 +22,20 @@ class AvalaraIntegration : public TaxIntegration
 
   public:
     AvalaraIntegration();
-    virtual bool        testService();
+    void wait();
 
   protected:
-    virtual QJsonObject sendRequest(QJsonObject);
-    virtual QJsonObject getTaxCodeList();
-    virtual void        commitTransaction(const QString);
-    virtual QUrl        buildUrl(const QString, const QString);
-    virtual QString     buildAuthKey();
-    virtual void buildHeaders(QNetworkRequest &);
+    virtual void        sendRequest(QString, QString, int, QJsonObject, QStringList);
+    virtual QString     error(QString, QNetworkReply*, QJsonObject);
+    virtual void        done();
+
+  protected slots:
+    virtual void        handleResponse(QNetworkReply*);
 
   private:
     QNetworkAccessManager * restclient;
-    QMap<QString, QString> urlmap;
+    QList<QNetworkReply*> replies;
+    QEventLoop eventLoop;
 };
 
 #endif

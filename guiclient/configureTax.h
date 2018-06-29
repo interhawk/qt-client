@@ -11,6 +11,7 @@
 #ifndef CONFIGURETAX_H
 #define CONFIGURETAX_H
 
+#include "avalaraIntegration.h"
 #include "xabstractconfigure.h"
 
 #include "ui_configureTax.h"
@@ -27,12 +28,16 @@ public slots:
     virtual bool sSave();
     virtual bool sCheck();
     virtual void sTest();
+    virtual void sTest(QString);
 
 protected slots:
     virtual void languageChange();
 
 signals:
     void saving();
+
+private:
+  AvalaraIntegration* _tax;
 
 };
 

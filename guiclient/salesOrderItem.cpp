@@ -4534,11 +4534,9 @@ void salesOrderItem::reject()
     if (ISQUOTE(_mode)) {
       salesreject.prepare("SELECT deleteQuoteItem(:coitem_id);");
       errMsg = "Quote";
-      omfgThis->sQuotesUpdated(_soheadid);
     } else {
       salesreject.prepare("SELECT deleteSoItem(:coitem_id);");
       errMsg = "Sales Order";
-      omfgThis->sSalesOrdersUpdated(_soheadid);
     }
     salesreject.bindValue(":coitem_id", _soitemid);
     salesreject.exec();
@@ -4547,6 +4545,14 @@ void salesOrderItem::reject()
     {
       return;
     }
+  }
+
+  if (!_orderRefresh->isChecked())
+  {
+    if (ISQUOTE(_mode))
+      omfgThis->sQuotesUpdated(_soheadid);
+    else
+      omfgThis->sSalesOrdersUpdated(_soheadid);
   }
 
   XDialog::reject();

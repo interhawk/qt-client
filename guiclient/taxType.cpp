@@ -16,7 +16,6 @@
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
 #include "mqlutil.h"
-#include "taxIntegration.h"
 
 
 taxType::taxType(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
@@ -46,6 +45,10 @@ taxType::taxType(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
     _searchLit->setVisible(false);
     _search->setVisible(false);
   }
+
+  _tax = TaxIntegration::getTaxIntegration();
+
+  connect(_tax, SIGNAL(taxCodesFetched(QJsonObject, QString)), this, SLOT(populateServiceList(QJsonObject, QString)));
 }
 
 taxType::~taxType()
@@ -224,33 +227,74 @@ void taxType::populate()
     _description->setText(taxpopulate.value("taxtype_descrip").toString());
     _externalCode->setText(taxpopulate.value("taxtype_external_code").toString());
   }
+
+  if (_name->text() == "Adjustment")
+  {
+    _extService = false;
+    _externalCode->setVisible(false);
+    _externalCodeLit->setVisible(false);
+    _externalCodeList->setVisible(false);
+    _externalCodeListLit->setVisible(false);
+    _searchLit->setVisible(false);
+    _search->setVisible(false);
+  }
 }
 
 void taxType::populateServiceList()
 {
-  XSqlQuery qry;
-  QJsonObject taxCodes;
+  _tax->getTaxCodes();
+}
 
-  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-  taxCodes = tax->getTaxCodes();
-  QString sql("SELECT * FROM formatExternalTaxCodes(<? value('taxCodes') ?>) "
-              "<? if exists('search') ?>"
-              "WHERE taxcode ~* <? value('search') ?>"
-              "   OR description ~* <? value('search') ?>"
-              "<? endif ?>"
-              "ORDER BY taxcode;");
-  MetaSQLQuery  mql(sql);
-  ParameterList params;
-  params.append("taxCodes", QString::fromUtf8(QJsonDocument(taxCodes).toJson()));
-  if (!_search->text().trimmed().isEmpty())
-    params.append("search", _search->text().trimmed());
+void taxType::populateServiceList(QJsonObject taxCodes, QString error)
+{
+  if (error.isEmpty())
+  {
+    XSqlQuery qry;
 
-  qry = mql.toQuery(params);
-  _externalCodeList->populate(qry);
-  ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Type Information"),
+    QString sql("WITH taxcodes AS "
+                "( "
+                " SELECT taxcode, description, parent, type, path, level "
+                "   FROM formatExternalTaxCodes(<? value('taxCodes') ?>) "
+                ") "
+                "SELECT taxcode, description, level AS xtindentrole "
+                "  FROM taxcodes "
+                " WHERE TRUE "
+                "<? if exists('search') ?>"
+                "   AND taxcode IN ( "
+                "                   WITH RECURSIVE _taxcodes AS "
+                "                   ( "
+                "                    SELECT taxcode, parent "
+                "                      FROM taxcodes "
+                "                     WHERE (taxcode ~* <? value('search') ?> "
+                "                            OR description ~* <? value('search') ?>) "
+                "                    UNION "
+                "                    SELECT parent.taxcode, parent.parent "
+                "                      FROM _taxcodes "
+                "                      JOIN taxcodes parent ON _taxcodes.parent = parent.taxcode "
+                "                   ) "
+                "                   SELECT taxcode "
+                "                     FROM _taxcodes "
+                "                  ) "
+                "<? endif ?> "
+                "<? if exists('freight') ?> "
+                "   AND type = 'F' "
+                "<? endif ?> "
+                "ORDER BY path, level;");
+    MetaSQLQuery  mql(sql);
+    ParameterList params;
+    params.append("taxCodes", QString::fromUtf8(QJsonDocument(taxCodes).toJson()));
+    if (!_search->text().trimmed().isEmpty())
+      params.append("search", _search->text().trimmed());
+    if (_name->text() == "Freight")
+      params.append("freight");
+
+    qry = mql.toQuery(params);
+    _externalCodeList->populate(qry);
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Type Information"),
                          qry, __FILE__, __LINE__);
-
-  return;
+  }
+  else
+    QMessageBox::critical(this, tr("Avalara Error"), tr("Error retrieving Avalara Tax Codes\n%1").arg(error));
 }
 
 void taxType::sUpdateExtTaxCode()

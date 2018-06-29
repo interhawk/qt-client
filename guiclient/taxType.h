@@ -12,6 +12,7 @@
 #define TAXTYPE_H
 
 #include "guiclient.h"
+#include "taxIntegration.h"
 #include "xdialog.h"
 #include <parameter.h>
 #include "ui_taxType.h"
@@ -30,6 +31,7 @@ public slots:
     virtual void sSave();
     virtual void populate();
     virtual void populateServiceList();
+    virtual void populateServiceList(QJsonObject, QString);
     virtual void sUpdateExtTaxCode();
 
 protected slots:
@@ -39,6 +41,7 @@ private:
     int _mode;
     int _taxtypeid;
     bool _extService;
+    TaxIntegration* _tax;
 
 };
 
