@@ -56,6 +56,15 @@ bool GuiErrorCheck::reportErrors(QWidget *parent, QString title,
   return false;
 }
 
+bool GuiErrorCheck::checkForErrors(QList<GuiErrorCheck> list)
+{
+  for (int i = 0; i < list.length(); i++)
+    if (list[i].hasError)
+      return true;
+
+  return false;
+}
+
 // Script exposure
 
 QScriptValue QListGuiErrorChecktoScriptValue(QScriptEngine *engine, const QList<GuiErrorCheck> &list)

@@ -21,8 +21,7 @@ class NoIntegration : public TaxIntegration
     NoIntegration();
 
   protected:
-    virtual QJsonObject sendRequest(QJsonObject);
-    virtual QJsonObject getTaxCodeList();
+    virtual void sendRequest(QString, QString, int, QJsonObject, QStringList);
 };
 
 #endif

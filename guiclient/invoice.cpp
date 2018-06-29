@@ -25,7 +25,6 @@
 #include "invoiceItem.h"
 #include "storedProcErrorLookup.h"
 #include "taxBreakdown.h"
-#include "taxIntegration.h"
 #include "allocateARCreditMemo.h"
 #include "guiErrorCheck.h"
 
@@ -38,6 +37,8 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
     setObjectName(name);
 
   setupUi(this);
+
+  _taxCalc = TaxIntegration::getTaxIntegration();
 
   connect(_close,               SIGNAL(clicked()),                       this,         SLOT(sClose()));
   connect(_save,                SIGNAL(clicked()),                       this,         SLOT(sSave()));
@@ -53,6 +54,7 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_shipToName,          SIGNAL(textChanged(const QString&)),     this,         SLOT(sShipToModified()));
   connect(_subtotal,            SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_tax,                 SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
+  connect(_taxCalc,             SIGNAL(taxCalculated(double, QString)),  this,         SLOT(sCalculateTax(double, QString)));
   connect(_miscAmount,          SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_freight,             SIGNAL(valueChanged()),                  this,         SLOT(sFreightChanged()));
   connect(_allocatedCM,         SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
@@ -1244,10 +1246,17 @@ void invoice::sTaxDetail()
 
 void invoice::sCalculateTax()
 {
-  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-  _tax->setLocalValue(tax->calculateTax("INV", _invcheadid));
+  _taxCalc->calculateTax("INV", _invcheadid);
 
   // changing _tax fires sCalculateTotal()
+}
+
+void invoice::sCalculateTax(double tax, QString error)
+{
+  if (error.isEmpty())
+    _tax->setLocalValue(tax);
+  else
+    QMessageBox::critical(0, tr("Avalara Error"), tr("Error Calculating Tax:\n%1").arg(error));
 }
 
 void invoice::setFreeFormShipto(bool pFreeForm)

@@ -35,7 +35,6 @@
 #include "salesOrderItem.h"
 #include "storedProcErrorLookup.h"
 #include "taxBreakdown.h"
-#include "taxIntegration.h"
 #include "freightBreakdown.h"
 #include "printPackingList.h"
 #include "printSoForm.h"
@@ -102,6 +101,8 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
 
   sCheckValidContacts();
 
+  _taxCalc = TaxIntegration::getTaxIntegration();
+
   connect(_action,              SIGNAL(clicked()),                              this,         SLOT(sAction()));
   connect(_authorize,           SIGNAL(clicked()),                              this,         SLOT(sAuthorizeCC()));
   connect(_charge,              SIGNAL(clicked()),                              this,         SLOT(sChargeCC()));
@@ -139,8 +140,14 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   connect(_reserveStock,        SIGNAL(clicked()),                              this,         SLOT(sReserveStock()));
   connect(_reserveLineBalance,  SIGNAL(clicked()),                              this,         SLOT(sReserveLineBalance()));
   connect(_subtotal,            SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
-  connect(_miscCharge,          SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
+  connect(_miscChargeTaxtype,   SIGNAL(newID(int)),                             this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeDiscount,  SIGNAL(toggled(bool)),                          this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeAccount,   SIGNAL(valid(bool)),                            this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscCharge,          SIGNAL(valueChanged()),                         this,         SLOT(sMiscChargeChanged()));
+  connect(_freightTaxtype,      SIGNAL(newID(int)),                             this,         SLOT(sMiscTaxtypeChanged()));
   connect(_freight,             SIGNAL(valueChanged()),                         this,         SLOT(sFreightChanged()));
+  connect(_taxCalc,             SIGNAL(taxCalculated(double, QString)),         this,         SLOT(sCalculateTax(double, QString)));
+  connect(_tax,                 SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
   if (_privileges->check("ApplyARMemos"))
     connect(_allocatedCMLit,    SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sCreditAllocate()));
   connect(_allocatedCM,         SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
@@ -810,6 +817,11 @@ bool salesOrder::save(bool partial)
                              "indicating the G/L Sales Account number for the "
                              "charge.  Please set the Misc. Charge amount to 0 "
                              "or select a Misc. Charge Sales Account." ) )
+         << GuiErrorCheck((_miscCharge->isZero()) && (_miscChargeAccount->isValid()), _miscCharge,
+                          tr("<p>You must enter a Misc. Charge when "
+                             "specifying a Misc. Charge Sales Account. "
+                             "Please enter Misc. Charge amount "
+                             "or remove the Misc. Charge Sales Account." ) )
          << GuiErrorCheck(_cashReceived->localValue() > 0.0, _postCash,
                           tr( "<p>You must Post Cash Payment before you may save it." ) )
          << GuiErrorCheck(!partial && !_project->isValid() && _metrics->boolean("RequireProjectAssignment"), _project,
@@ -905,6 +917,9 @@ bool salesOrder::save(bool partial)
         return false;
     }
   }
+
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
 
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Sales Order"), errors))
       return false;
@@ -2554,6 +2569,12 @@ void salesOrder::sDelete()
         }
       }
     }
+
+    if (save(true))
+    {
+      sCalculateTotal();
+      sCalculateTax();
+    }
   }
 }
 
@@ -3109,7 +3130,7 @@ void salesOrder::sFillItemList()
     }
   }
 
-  sCalculateTax();  // triggers sCalculateTotal();
+  sCalculateTotal();
 
   _orderCurrency->setEnabled(_soitem->topLevelItemCount() == 0);
 }
@@ -3408,7 +3429,6 @@ void salesOrder::sHandleShipchrg(int pShipchrgid)
         disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
         _freight->clear();
         connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
-        sCalculateTax();
       }
     }
   }
@@ -3417,7 +3437,10 @@ void salesOrder::sHandleShipchrg(int pShipchrgid)
 void salesOrder::sHandleSalesOrderEvent(int pSoheadid, bool)
 {
   if (pSoheadid == _soheadid)
+  {
     sFillItemList();
+    sCalculateTax();
+  }
 }
 
 void salesOrder::sTaxDetail()
@@ -4687,6 +4710,21 @@ void salesOrder::sIssueLineBalance()
   sPopulateShipments();
 }
 
+void salesOrder::sMiscTaxtypeChanged()
+{
+  if (save(true))
+    sCalculateTax();
+}
+
+void salesOrder::sMiscChargeChanged()
+{
+  if (save(true))
+  {
+    sCalculateTotal();
+    sCalculateTax();
+  }
+}
+
 void salesOrder::sFreightChanged()
 {
   if (_freight->localValue() == _freightCache)
@@ -4735,17 +4773,25 @@ void salesOrder::sFreightChanged()
       _freightCache = _freight->localValue();
   }
 
-  save(true);
-
-  sCalculateTax();
+  if (save(true))
+  {
+    sCalculateTotal();
+    sCalculateTax();
+  }
 }
 
 void salesOrder::sCalculateTax()
 {
-  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-  _tax->setLocalValue(tax->calculateTax(ISORDER(_mode) ? "S" : "Q", _soheadid));
+  if (_saved)
+    _taxCalc->calculateTax(ISORDER(_mode) ? "S" : "Q", _soheadid);
+}
 
-  sCalculateTotal();
+void salesOrder::sCalculateTax(double tax, QString error)
+{
+  if (error.isEmpty())
+    _tax->setLocalValue(tax);
+  else
+    QMessageBox::critical(0, tr("Avalara Error"), tr("Error Calculating Tax:\n%1").arg(error));
 }
 
 void salesOrder::sTaxZoneChanged()
@@ -4753,7 +4799,9 @@ void salesOrder::sTaxZoneChanged()
   if (_taxZone->id() != _taxzoneidCache && _saved)
     save(true);
 
-  sCalculateTax();
+  if (_metrics->value("TaxService") == "N")
+    sCalculateTax();
+
   _taxzoneidCache=_taxZone->id();
 }
 
