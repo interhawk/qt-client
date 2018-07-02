@@ -24,7 +24,7 @@
 #include "distributeInventory.h"
 #include "invoiceItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
+#include "taxIntegration.h"
 #include "allocateARCreditMemo.h"
 #include "guiErrorCheck.h"
 
@@ -38,8 +38,6 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   setupUi(this);
 
-  _taxCalc = TaxIntegration::getTaxIntegration();
-
   connect(_close,               SIGNAL(clicked()),                       this,         SLOT(sClose()));
   connect(_save,                SIGNAL(clicked()),                       this,         SLOT(sSave()));
   connect(_cust,                SIGNAL(newId(int)),                      _shipTo,      SLOT(setCustid(int)));
@@ -49,12 +47,10 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_view,                SIGNAL(clicked()),                       this,         SLOT(sView()));
   connect(_delete,              SIGNAL(clicked()),                       this,         SLOT(sDelete()));
   connect(_copyToShipto,        SIGNAL(clicked()),                       this,         SLOT(sCopyToShipto()));
-  connect(_taxLit,              SIGNAL(leftClickedURL(const QString&)),  this,         SLOT(sTaxDetail()));
   connect(_shipTo,              SIGNAL(newId(int)),                      this,         SLOT(populateShipto(int)));
   connect(_shipToName,          SIGNAL(textChanged(const QString&)),     this,         SLOT(sShipToModified()));
   connect(_subtotal,            SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_tax,                 SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
-  connect(_taxCalc,             SIGNAL(taxCalculated(double, QString)),  this,         SLOT(sCalculateTax(double, QString)));
   connect(_miscAmount,          SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_freight,             SIGNAL(valueChanged()),                  this,         SLOT(sFreightChanged()));
   connect(_allocatedCM,         SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
@@ -160,6 +156,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     _documents->setId(_invcheadid);
     _charass->setId(_invcheadid);
     _comments->setId(_invcheadid);
+    _tax->setId(_invcheadid);
     populate();
     populateCMInfo();
     populateCCInfo();
@@ -181,6 +178,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
         _documents->setId(_invcheadid);
         _charass->setId(_invcheadid);
         _comments->setId(_invcheadid);
+        _tax->setId(_invcheadid);
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Invoice Information"),
                                     invoiceet, __FILE__, __LINE__))
@@ -1219,44 +1217,11 @@ void invoice::sReleaseNumber()
 }
 
 
-void invoice::sTaxDetail()
-{
-  if (_mode != cView)
-  {
-    if (!save())
-	  return;
-  }
-
-  ParameterList params;
-  params.append("order_id", _invcheadid);
-  params.append("order_type", "INV");
-
-  if (_mode == cView || _posted)
-    params.append("mode", "view");
-  else if (_mode == cNew || _mode == cEdit)
-    params.append("mode", "edit");
-
-  taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError)
-  {
-    newdlg.exec();
-    sCalculateTax();
-  }
-}
-
 void invoice::sCalculateTax()
 {
-  _taxCalc->calculateTax("INV", _invcheadid);
+  _tax->sRecalculate();
 
   // changing _tax fires sCalculateTotal()
-}
-
-void invoice::sCalculateTax(double tax, QString error)
-{
-  if (error.isEmpty())
-    _tax->setLocalValue(tax);
-  else
-    QMessageBox::critical(0, tr("Avalara Error"), tr("Error Calculating Tax:\n%1").arg(error));
 }
 
 void invoice::setFreeFormShipto(bool pFreeForm)

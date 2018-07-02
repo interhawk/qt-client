@@ -1201,6 +1201,7 @@ HEADERS = ../common/format.h                    \
           taskAssignment.h              \
           taskTemplate.h                \
           taskTemplates.h               \
+          taxdisplay.h                  \
           taxAdjustment.h               \
           taxAssignment.h               \
           taxAssignments.h              \
@@ -1829,6 +1830,7 @@ SOURCES = absoluteCalendarItem.cpp              \
           taskAssignment.cpp                    \
           taskTemplate.cpp                      \
           taskTemplates.cpp                     \
+          taxdisplay.cpp                        \
           taxAdjustment.cpp                     \
           taxAssignment.cpp                     \
           taxAssignments.cpp                    \

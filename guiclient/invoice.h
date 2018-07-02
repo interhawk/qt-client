@@ -12,7 +12,6 @@
 #define INVOICE_H
 
 #include "guiclient.h"
-#include "taxIntegration.h"
 #include "xwidget.h"
 #include <parameter.h>
 
@@ -49,7 +48,6 @@ public slots:
     virtual void sFillItemList();
     virtual void sCalculateTotal();
     virtual void sCalculateTax();
-    virtual void sCalculateTax(double, QString);
     virtual void closeEvent( QCloseEvent * pEvent );
     virtual void setFreeFormShipto( bool pFreeForm );
     virtual void sShipToModified();
@@ -67,7 +65,6 @@ protected:
 
 protected slots:
     virtual void languageChange();
-    virtual void sTaxDetail();
 
 private:
     int		_mode;
@@ -83,7 +80,6 @@ private:
     bool        _saved;
     bool        _posted;
     int         _NumberGen;
-    TaxIntegration* _taxCalc;
 
 };
 

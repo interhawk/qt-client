@@ -13,7 +13,6 @@
 
 #include "applock.h"
 #include "guiclient.h"
-#include "taxIntegration.h"
 #include "xdocumentwindow.h"
 #include <parameter.h>
 #include "ui_salesOrder.h"
@@ -71,7 +70,6 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
     virtual void        sHandleShipchrg( int pShipchrgid );
     virtual void        sHandleSalesOrderEvent( int pSoheadid, bool );
     virtual void        sTaxZoneChanged();
-    virtual void        sTaxDetail();
     virtual void        sFreightDetail();
     virtual void        setFreeFormShipto( bool pFreeForm );
     virtual void        sNewCharacteristic();
@@ -101,7 +99,6 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
     virtual void        sCheckValidContacts();
     virtual void        sHandleMore();
     virtual void        sCalculateTax();
-    virtual void        sCalculateTax(double, QString);
     virtual void        sRecalculatePrice();
     virtual void        sOrderDateChanged();
     virtual void        sShipDateChanged();
@@ -157,7 +154,6 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
     QDate   _orderDateCache;
     QDate   _shipDateCache;
     QString _holdTypeCache;
-    TaxIntegration* _taxCalc;
 };
 
 #endif  // SALESORDER_H

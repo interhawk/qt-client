@@ -657,7 +657,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="3" column="2">
-              <widget class="XURLLabel" name="_salesTaxLit">
+              <widget class="XLabel" name="_salesTaxLit">
                <property name="text">
                 <string>Tax:</string>
                </property>
@@ -667,7 +667,10 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="3" column="3">
-              <widget class="CurrDisplay" name="_salesTax">
+              <widget class="TaxDisplay" name="_salesTax">
+               <property name="type">
+                <string>COB</string>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>120</width>
