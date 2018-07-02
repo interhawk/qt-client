@@ -34,7 +34,7 @@
 #include "mqlutil.h"
 #include "salesOrderItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
+#include "taxIntegration.h"
 #include "freightBreakdown.h"
 #include "printPackingList.h"
 #include "printSoForm.h"
@@ -101,8 +101,6 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
 
   sCheckValidContacts();
 
-  _taxCalc = TaxIntegration::getTaxIntegration();
-
   connect(_action,              SIGNAL(clicked()),                              this,         SLOT(sAction()));
   connect(_authorize,           SIGNAL(clicked()),                              this,         SLOT(sAuthorizeCC()));
   connect(_charge,              SIGNAL(clicked()),                              this,         SLOT(sChargeCC()));
@@ -130,7 +128,6 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   connect(_soitem,              SIGNAL(populateMenu(QMenu*,QTreeWidgetItem *)), this,         SLOT(sPopulateMenu(QMenu *)));
   connect(_soitem,              SIGNAL(itemSelectionChanged()),                 this,         SLOT(sHandleButtons()));
   connect(_taxZone,             SIGNAL(newID(int)),                             this,         SLOT(sTaxZoneChanged()));
-  connect(_taxLit,              SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sTaxDetail()));
   connect(_freightLit,          SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sFreightDetail()));
   connect(_upCC,                SIGNAL(clicked()),                              this,         SLOT(sMoveUp()));
   connect(_viewCC,              SIGNAL(clicked()),                              this,         SLOT(sViewCreditCard()));
@@ -146,7 +143,6 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   connect(_miscCharge,          SIGNAL(valueChanged()),                         this,         SLOT(sMiscChargeChanged()));
   connect(_freightTaxtype,      SIGNAL(newID(int)),                             this,         SLOT(sMiscTaxtypeChanged()));
   connect(_freight,             SIGNAL(valueChanged()),                         this,         SLOT(sFreightChanged()));
-  connect(_taxCalc,             SIGNAL(taxCalculated(double, QString)),         this,         SLOT(sCalculateTax(double, QString)));
   connect(_tax,                 SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
   if (_privileges->check("ApplyARMemos"))
     connect(_allocatedCMLit,    SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sCreditAllocate()));
@@ -487,6 +483,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
 
   // argument must match source_docass
   _documents->setType(ISQUOTE(_mode) ? "Q" : "S");
+  _tax->setType(ISQUOTE(_mode) ? "Q" : "S");
 
   sHandleMore();
 
@@ -512,6 +509,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
       emit newId(_soheadid);
       _comments->setId(_soheadid);
       _documents->setId(_soheadid);
+      _tax->setId(_soheadid);
       _orderDateCache = omfgThis->dbDate();
       _orderDate->setDate(_orderDateCache, true);
     }
@@ -2570,11 +2568,10 @@ void salesOrder::sDelete()
       }
     }
 
-    if (save(true))
-    {
-      sCalculateTotal();
+    sCalculateTotal();
+
+    if (save(true) && _metrics->value("TaxService") != "A")
       sCalculateTax();
-    }
   }
 }
 
@@ -2744,6 +2741,7 @@ void salesOrder::populate()
 
       _comments->setId(_soheadid);
       _documents->setId(_soheadid);
+      _tax->setId(_soheadid);
 
       // Check for link to Return Authorization
       if (_metrics->boolean("EnableReturnAuth"))
@@ -2933,6 +2931,7 @@ void salesOrder::populate()
 
       _comments->setId(_soheadid);
       _documents->setId(_soheadid);
+      _tax->setId(_soheadid);
       sFillCharacteristic();
       sFillItemList();
       emit populated();
@@ -3360,6 +3359,7 @@ void salesOrder::clear()
     emit newId(_soheadid);
     _comments->setId(_soheadid);
     _documents->setId(_soheadid);
+    _tax->setId(_soheadid);
     if (ISORDER(_mode))
     {
       populateCMInfo();
@@ -3439,57 +3439,8 @@ void salesOrder::sHandleSalesOrderEvent(int pSoheadid, bool)
   if (pSoheadid == _soheadid)
   {
     sFillItemList();
-    sCalculateTax();
-  }
-}
-
-void salesOrder::sTaxDetail()
-{
-  XSqlQuery taxq;
-  if (!ISVIEW(_mode))
-  {
-    if (ISORDER(_mode))
-      taxq.prepare("UPDATE cohead SET cohead_taxzone_id=:taxzone_id, "
-                   "  cohead_freight=:freight,"
-                   "  cohead_orderdate=:date "
-                   "WHERE (cohead_id=:head_id);");
-    else
-      taxq.prepare("UPDATE quhead SET quhead_taxzone_id=:taxzone_id, "
-                   "  quhead_freight=:freight,"
-                   "  quhead_quotedate=:date "
-                   "WHERE (quhead_id=:head_id);");
-    if (_taxZone->isValid())
-      taxq.bindValue(":taxzone_id",        _taxZone->id());
-    taxq.bindValue(":freight",        _freight->localValue());
-    taxq.bindValue(":date",        _orderDate->date());
-    taxq.bindValue(":head_id", _soheadid);
-    taxq.exec();
-    if (taxq.lastError().type() != QSqlError::NoError)
-    {
-      if (ISORDER(_mode))
-        ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Information"),
-                           taxq, __FILE__, __LINE__);
-      else
-        ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Quote Information"),
-                           taxq, __FILE__, __LINE__);
-      return;
-    }
-  }
-
-  ParameterList params;
-  params.append("order_id", _soheadid);
-  if (ISORDER(_mode))
-    params.append("order_type", "S");
-  else
-    params.append("order_type", "Q");
-
-  // mode => view since there are no fields to hold modified tax data
-  params.append("mode", "view");
-
-  taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError && newdlg.exec() == XDialog::Accepted)
-  {
-    populate();
+    if (_metrics->value("TaxService") != "A")
+      sCalculateTax();
   }
 }
 
@@ -3581,6 +3532,7 @@ void salesOrder::setViewMode()
   _comments->setType(Comments::SalesOrder);
   _comments->setReadOnly(true);
   _documents->setType("S");
+  _tax->setType("S");
   // _documents->setReadOnly(true); 20996, 25319, 26431
   _shipComplete->setEnabled(false);
   setFreeFormShipto(false);
@@ -4712,17 +4664,16 @@ void salesOrder::sIssueLineBalance()
 
 void salesOrder::sMiscTaxtypeChanged()
 {
-  if (save(true))
+  if (save(true) && _metrics->value("TaxService") != "A")
     sCalculateTax();
 }
 
 void salesOrder::sMiscChargeChanged()
 {
-  if (save(true))
-  {
-    sCalculateTotal();
+  sCalculateTotal();
+
+  if (save(true) && _metrics->value("TaxService") != "A")
     sCalculateTax();
-  }
 }
 
 void salesOrder::sFreightChanged()
@@ -4773,25 +4724,15 @@ void salesOrder::sFreightChanged()
       _freightCache = _freight->localValue();
   }
 
-  if (save(true))
-  {
-    sCalculateTotal();
+  sCalculateTotal();
+
+  if (save(true) && _metrics->value("TaxService") != "A")
     sCalculateTax();
-  }
 }
 
 void salesOrder::sCalculateTax()
 {
-  if (_saved)
-    _taxCalc->calculateTax(ISORDER(_mode) ? "S" : "Q", _soheadid);
-}
-
-void salesOrder::sCalculateTax(double tax, QString error)
-{
-  if (error.isEmpty())
-    _tax->setLocalValue(tax);
-  else
-    QMessageBox::critical(0, tr("Avalara Error"), tr("Error Calculating Tax:\n%1").arg(error));
+  _tax->sRecalculate();
 }
 
 void salesOrder::sTaxZoneChanged()

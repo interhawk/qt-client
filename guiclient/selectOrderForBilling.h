@@ -12,7 +12,6 @@
 #define SELECTORDERFORBILLING_H
 
 #include "guiclient.h"
-#include "taxIntegration.h"
 #include "xwidget.h"
 #include <parameter.h>
 #include "ui_selectOrderForBilling.h"
@@ -32,7 +31,6 @@ public slots:
 
     virtual void clear();
     virtual void sCalculateTax();
-    virtual void sCalculateTax(double, QString);
     virtual void sCancelSelection();
     virtual void sEditOrder();
     virtual void sEditSelection();
@@ -51,8 +49,6 @@ public slots:
 protected slots:
     virtual void languageChange();
 
-    virtual void sTaxDetail();
-
 protected:
     virtual void closeEvent(QCloseEvent * event);
 
@@ -63,7 +59,6 @@ private:
     int _mode;
     int	_taxzoneidCache;
     double _freightCache;
-    TaxIntegration* _taxCalc;
 };
 
 #endif // SELECTORDERFORBILLING_H

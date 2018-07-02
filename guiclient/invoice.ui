@@ -1163,7 +1163,7 @@ to be bound by its terms.</comment>
           </widget>
          </item>
          <item row="4" column="3">
-          <widget class="XURLLabel" name="_taxLit">
+          <widget class="XLabel" name="_taxLit">
            <property name="text">
             <string>Tax:</string>
            </property>
@@ -1176,7 +1176,10 @@ to be bound by its terms.</comment>
           </widget>
          </item>
          <item row="4" column="4">
-          <widget class="CurrDisplay" name="_tax">
+          <widget class="TaxDisplay" name="_tax">
+           <property name="type">
+            <string>INV</string>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
