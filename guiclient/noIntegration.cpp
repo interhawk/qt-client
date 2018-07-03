@@ -17,10 +17,10 @@ NoIntegration::NoIntegration() : TaxIntegration()
 {
 }
 
-void NoIntegration::sendRequest(QString type, QString orderType, int orderId, QJsonObject request, QStringList config)
+void NoIntegration::sendRequest(QString type, QString orderType, int orderId, QString request, QStringList config)
 {
   if (type == "taxcodes")
-  handleResponse("taxcodes", QString(), 0, QJsonObject(), "");
+  handleResponse("taxcodes", QString(), 0, QString(), "");
   else if (type == "createtransaction")
     handleResponse(type, orderType, orderId, request, "");
 }

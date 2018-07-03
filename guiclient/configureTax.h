@@ -27,6 +27,7 @@ public:
 public slots:
     virtual bool sSave();
     virtual bool sCheck();
+    virtual void sLog(bool);
     virtual void sTest();
     virtual void sTest(QString);
 

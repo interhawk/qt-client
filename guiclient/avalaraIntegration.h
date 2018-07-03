@@ -25,7 +25,7 @@ class AvalaraIntegration : public TaxIntegration
     void wait();
 
   protected:
-    virtual void        sendRequest(QString, QString, int, QJsonObject, QStringList);
+    virtual void        sendRequest(QString, QString, int, QString, QStringList);
     virtual QString     error(QString, QNetworkReply*, QJsonObject);
     virtual void        done();
 

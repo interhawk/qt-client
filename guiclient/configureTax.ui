@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>245</width>
-    <height>224</height>
+    <height>250</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,8 +78,18 @@ to be bound by its terms.</comment>
          </property>
         </widget>
        </item>
+       <item row="3" column="2">
+        <widget class="XLineEdit" name="_company"/>
+       </item>
        <item row="2" column="2">
         <widget class="XLineEdit" name="_url"/>
+       </item>
+       <item row="4" column="1" colspan="2">
+        <widget class="XCheckBox" name="_disableRecording">
+         <property name="text">
+          <string>Disable Document Recording</string>
+         </property>
+        </widget>
        </item>
        <item row="3" column="1">
         <widget class="XLabel" name="_companyLit">
@@ -91,23 +101,20 @@ to be bound by its terms.</comment>
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="XLineEdit" name="_company"/>
-       </item>
-       <item row="4" column="1" colspan="2">
-        <widget class="XCheckBox" name="_disableRecording">
-         <property name="text">
-          <string>Disable Document Recording</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1" colspan="2">
+       <item row="6" column="1" colspan="2">
         <widget class="QPushButton" name="_test">
          <property name="enabled">
           <bool>false</bool>
          </property>
          <property name="text">
           <string>Test Connection</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="XCheckBox" name="_log">
+         <property name="text">
+          <string>Enable Logging</string>
          </property>
         </widget>
        </item>

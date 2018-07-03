@@ -11,6 +11,7 @@
 #ifndef TAXINTEGRATION_H
 #define TAXINTEGRATION_H
 
+#include <QElapsedTimer>
 #include <QObject>
 #include <QJsonObject>
 
@@ -33,11 +34,13 @@ class TaxIntegration : public QObject
     void taxCalculated(double, QString);
 
   protected:
-    virtual void sendRequest(QString, QString = QString(), int = 0, QJsonObject = QJsonObject(), QStringList = QStringList()) = 0;
+    virtual void sendRequest(QString, QString = QString(), int = 0, QString = QString(), QStringList = QStringList()) = 0;
     virtual void done();
 
+    QElapsedTimer timer;
+
   protected slots:
-    virtual void handleResponse(QString, QString, int, QJsonObject, QString);
+    virtual void handleResponse(QString, QString, int, QString, QString);
 };
 
 #endif
