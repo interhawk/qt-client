@@ -20,7 +20,7 @@ TaxDisplay::TaxDisplay(QWidget* parent, const char* name)
   : CurrDisplay(parent, name)
 {
   _type = "";
-  _id = -1;
+  _orderId = -1;
 
   _tax = TaxIntegration::getTaxIntegration();
 
@@ -60,9 +60,9 @@ QString TaxDisplay::type()
   return _type;
 }
 
-int TaxDisplay::id()
+int TaxDisplay::orderId()
 {
-  return _id;
+  return _orderId;
 }
 
 void TaxDisplay::setType(QString type)
@@ -74,10 +74,10 @@ void TaxDisplay::setType(QString type)
     sRefresh();
 }
 
-void TaxDisplay::setId(int id)
+void TaxDisplay::setOrderId(int id)
 {
-  bool refresh = (_id == id);
-  _id = id;
+  bool refresh = (_orderId == id);
+  _orderId = id;
 
   if (refresh)
     sRefresh();
@@ -85,7 +85,7 @@ void TaxDisplay::setId(int id)
 
 void TaxDisplay::sRecalculate()
 {
-  _tax->calculateTax(_type, _id);
+  _tax->calculateTax(_type, _orderId);
 }
 
 void TaxDisplay::sOpen()
@@ -99,7 +99,7 @@ void TaxDisplay::sOpen()
 
   ParameterList params;
   params.append("order_type", _type);
-  params.append("order_id", _id);
+  params.append("order_id", _orderId);
   params.append("mode", "mode");
 
   _tax->wait();
@@ -122,13 +122,13 @@ void TaxDisplay::sUpdate(double tax, QString error)
 
 void TaxDisplay::sRefresh()
 {
-  if (_id < 0)
+  if (_orderId < 0)
     return;
 
   XSqlQuery tax;
   tax.prepare("SELECT getOrderTax(:type, :id) AS tax;");
   tax.bindValue(":type", _type);
-  tax.bindValue(":id", _id);
+  tax.bindValue(":id", _orderId);
   tax.exec();
   if (tax.first())
     setLocalValue(tax.value("tax").toDouble());
