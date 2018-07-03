@@ -33,7 +33,7 @@ void TaxIntegration::getTaxCodes()
 
 void TaxIntegration::test(QStringList config)
 {
-  sendRequest("test", QString(), 0, QJsonObject(), config);
+  sendRequest("test", QString(), 0, QString(), config);
 }
 
 void TaxIntegration::calculateTax(QString orderType, int orderId)
@@ -44,16 +44,13 @@ void TaxIntegration::calculateTax(QString orderType, int orderId)
   qry.bindValue(":orderId", orderId);
   qry.exec();
   if (qry.first())
-  {
-    QJsonObject request = QJsonDocument::fromJson(qry.value("request").toString().toUtf8()).object();
-    sendRequest("createtransaction", orderType, orderId, request);
-  }
+    sendRequest("createtransaction", orderType, orderId, qry.value("request").toString());
   else
     ErrorReporter::error(QtCriticalMsg, 0, tr("Error calculating tax"),
                          qry, __FILE__, __LINE__);
 }
 
-void TaxIntegration::handleResponse(QString type, QString orderType, int orderId, QJsonObject response, QString error)
+void TaxIntegration::handleResponse(QString type, QString orderType, int orderId, QString response, QString error)
 {
   if (type == "test")
   {
@@ -63,7 +60,7 @@ void TaxIntegration::handleResponse(QString type, QString orderType, int orderId
   else if (type=="taxcodes")
   {
     done();
-    emit taxCodesFetched(response, error);
+    emit taxCodesFetched(QJsonDocument::fromJson(response.toUtf8()).object(), error);
   }
   else if (type=="createtransaction")
   {
@@ -73,7 +70,7 @@ void TaxIntegration::handleResponse(QString type, QString orderType, int orderId
       qry.prepare("SELECT saveTax(:orderType, :orderId, :response) AS tax;");
       qry.bindValue(":orderType", orderType);
       qry.bindValue(":orderId", orderId);
-      qry.bindValue(":response", QString::fromUtf8(QJsonDocument(response).toJson()));
+      qry.bindValue(":response", response);
       qry.exec();
       if (qry.first())
       {

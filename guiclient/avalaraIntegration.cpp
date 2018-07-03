@@ -21,6 +21,7 @@
 #include <QJsonObject>
 
 #include "errorReporter.h"
+#include "guiclient.h"
 
 AvalaraIntegration::AvalaraIntegration() : TaxIntegration()
 {
@@ -28,7 +29,7 @@ AvalaraIntegration::AvalaraIntegration() : TaxIntegration()
   connect(restclient, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleResponse(QNetworkReply*)));
 }
 
-void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderId, QJsonObject payload, QStringList config)
+void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderId, QString payload, QStringList config)
 {
   XSqlQuery build;
   build.prepare("SELECT buildAvalaraUrl(:type, :orderType, :orderId, :url) AS url, "
@@ -48,7 +49,7 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
   if (build.first())
   {
     QNetworkRequest netrequest;
-    QJsonDocument doc(payload);
+    QJsonDocument doc = QJsonDocument::fromJson(payload.toUtf8());
 
     netrequest.setUrl(build.value("url").toString());
 
@@ -72,14 +73,25 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
     }
 
     QNetworkReply* reply;
+    QDateTime time;
     if (type == "test" || type == "taxcodes")
+    {
+      timer.start();
+      time = QDateTime::currentDateTime();
       reply = restclient->get(netrequest);
+    }
     else
+    {
+      timer.start();
+      time = QDateTime::currentDateTime();
       reply = restclient->post(netrequest, doc.toJson(QJsonDocument::Compact));
+    }
     reply->setProperty("type", type);
     reply->setProperty("orderType", orderType);
     reply->setProperty("orderId", orderId);
     reply->setProperty("config", config);
+    reply->setProperty("request", QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+    reply->setProperty("time", time);
     replies.append(reply);
   }
 
@@ -89,11 +101,44 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
 
 void AvalaraIntegration::handleResponse(QNetworkReply* reply)
 {
+  int elapsed = timer.nsecsElapsed();
+  QString orderType = reply->property("orderType").toString();
+  int orderId = reply->property("orderId").toInt();
+  QString type = reply->property("type").toString();
+  QByteArray response = reply->readAll();
+
+  if (_metrics->boolean("LogTaxService"))
+  {
+    XSqlQuery log;
+    log.prepare("INSERT INTO taxlog "
+                "(taxlog_service, taxlog_order_type, taxlog_order_id, taxlog_type, "
+                " taxlog_request, taxlog_response, taxlog_start, taxlog_time) "
+                " VALUES ('A', :orderType, :orderId, :type, "
+                "         :request, :response, :start, :time);");
+    log.bindValue(":orderType", orderType);
+    log.bindValue(":orderId", orderId);
+    log.bindValue(":request", reply->property("request"));
+    log.bindValue(":response", QString::fromUtf8(response));
+    log.bindValue(":start", reply->property("time"));
+    log.bindValue(":time", elapsed);
+    if (type == "test")
+      log.bindValue(":type", "Ping");
+    else if (type == "taxcodes")
+      log.bindValue(":type", "ListTaxCodes");
+    else if (type == "createtransaction")
+      log.bindValue(":type", "CreateOrAdjustTransaction");
+    else
+      log.bindValue(":type", "Error");
+    log.exec();
+    ErrorReporter::error(QtCriticalMsg, 0, "Error logging Avalara call",
+                         log, __FILE__, __LINE__);
+  }
+
   if (reply->error() != QNetworkReply::OperationCanceledError)
   {
-    QJsonObject response = QJsonDocument::fromJson(reply->readAll()).object();
+    QJsonObject responseJson = QJsonDocument::fromJson(response).object();
     replies.removeOne(reply);
-    TaxIntegration::handleResponse(reply->property("type").toString(), reply->property("orderType").toString(), reply->property("orderId").toInt(), response, error(reply->property("type").toString(), reply, response));
+    TaxIntegration::handleResponse(type, orderType, orderId, QString::fromUtf8(response), error(type, reply, responseJson));
   }
 
   delete reply;
