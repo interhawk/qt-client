@@ -509,7 +509,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
       emit newId(_soheadid);
       _comments->setId(_soheadid);
       _documents->setId(_soheadid);
-      _tax->setId(_soheadid);
+      _tax->setOrderId(_soheadid);
       _orderDateCache = omfgThis->dbDate();
       _orderDate->setDate(_orderDateCache, true);
     }
@@ -2741,7 +2741,7 @@ void salesOrder::populate()
 
       _comments->setId(_soheadid);
       _documents->setId(_soheadid);
-      _tax->setId(_soheadid);
+      _tax->setOrderId(_soheadid);
 
       // Check for link to Return Authorization
       if (_metrics->boolean("EnableReturnAuth"))
@@ -2931,7 +2931,7 @@ void salesOrder::populate()
 
       _comments->setId(_soheadid);
       _documents->setId(_soheadid);
-      _tax->setId(_soheadid);
+      _tax->setOrderId(_soheadid);
       sFillCharacteristic();
       sFillItemList();
       emit populated();
@@ -3359,7 +3359,7 @@ void salesOrder::clear()
     emit newId(_soheadid);
     _comments->setId(_soheadid);
     _documents->setId(_soheadid);
-    _tax->setId(_soheadid);
+    _tax->setOrderId(_soheadid);
     if (ISORDER(_mode))
     {
       populateCMInfo();

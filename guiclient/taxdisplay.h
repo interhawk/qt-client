@@ -19,17 +19,17 @@ class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
   Q_OBJECT
 
   Q_PROPERTY(QString type READ type WRITE setType)
-  Q_PROPERTY(int id READ id WRITE setId)
+  Q_PROPERTY(int orderId READ orderId WRITE setOrderId)
 
   public:
     TaxDisplay(QWidget* = 0, const char* = 0);
 
     Q_INVOKABLE QString type();
-    Q_INVOKABLE int     id();
+    Q_INVOKABLE int     orderId();
 
   public slots:
     void setType(QString);
-    void setId(int);
+    void setOrderId(int);
     void sRecalculate();
     void sOpen();
     void sUpdate(double, QString);
@@ -42,7 +42,7 @@ class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
 
   private:
     QString         _type;
-    int             _id;
+    int             _orderId;
     QLabel*         _menuLabel;
     QMenu*          _menu;
     QAction*        _recalculateAct;

@@ -156,7 +156,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     _documents->setId(_invcheadid);
     _charass->setId(_invcheadid);
     _comments->setId(_invcheadid);
-    _tax->setId(_invcheadid);
+    _tax->setOrderId(_invcheadid);
     populate();
     populateCMInfo();
     populateCCInfo();
@@ -178,7 +178,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
         _documents->setId(_invcheadid);
         _charass->setId(_invcheadid);
         _comments->setId(_invcheadid);
-        _tax->setId(_invcheadid);
+        _tax->setOrderId(_invcheadid);
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Invoice Information"),
                                     invoiceet, __FILE__, __LINE__))

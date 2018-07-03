@@ -149,7 +149,7 @@ void selectOrderForBilling::clear()
 {
   _so->setId(-1);
   _cobmiscid = -1;
-  _salesTax->setId(_cobmiscid);
+  _salesTax->setOrderId(_cobmiscid);
   _orderDate->clear();
   _shipDate->clear();
   _invoiceDate->clear();
@@ -289,7 +289,7 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
     if (selectPopulate.first())
     {
       _cobmiscid = selectPopulate.value("cobmisc_id").toInt();
-      _salesTax->setId(_cobmiscid);
+      _salesTax->setOrderId(_cobmiscid);
       if (_cobmiscid < 0)
       {
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Sales Order Information"),
@@ -331,7 +331,7 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
     if (cobmisc.first())
     {
       _cobmiscid = cobmisc.value("cobmisc_id").toInt();
-      _salesTax->setId(_cobmiscid);
+      _salesTax->setOrderId(_cobmiscid);
       // do taxzone first so we can overwrite the result of the signal cascade
       _taxzoneidCache = cobmisc.value("cobmisc_taxzone_id").toInt();
       _taxZone->setId(cobmisc.value("cobmisc_taxzone_id").toInt());
