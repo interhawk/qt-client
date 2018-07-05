@@ -51,7 +51,11 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_shipToName,          SIGNAL(textChanged(const QString&)),     this,         SLOT(sShipToModified()));
   connect(_subtotal,            SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_tax,                 SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
-  connect(_miscAmount,          SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
+  connect(_miscChargeTaxtype,   SIGNAL(newID(int)),                      this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeDiscount,  SIGNAL(toggled(bool)),                   this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeAccount,   SIGNAL(valid(bool)),                     this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscAmount,          SIGNAL(valueChanged()),                  this,         SLOT(sMiscAmountChanged()));
+  connect(_freightTaxtype,      SIGNAL(newID(int)),                      this,         SLOT(sMiscTaxtypeChanged()));
   connect(_freight,             SIGNAL(valueChanged()),                  this,         SLOT(sFreightChanged()));
   connect(_allocatedCM,         SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_outstandingCM,       SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
@@ -542,75 +546,11 @@ void invoice::sCopyToShipto()
 
 void invoice::sSave()
 {
-  QList<GuiErrorCheck> errors;
-    errors<< GuiErrorCheck(_cust->id() <= 0, _cust,
-                           tr("You must enter a Customer for this Invoice before saving it."))
-          << GuiErrorCheck(_total->localValue() < 0, _cust,
-                           tr("The Total must be a positive value."))
-          << GuiErrorCheck(_invcitem->topLevelItemCount() <= 0, _new,
-                           tr("There must be at least one line item for an invoice."))
-    ;
-    if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Invoice"), errors))
-      return;
-
-  //  We can't post a Misc. Charge without a Sales Account
-  if ( (! _miscAmount->isZero()) && (!_miscChargeAccount->isValid()) )
-  {
-    QMessageBox::warning( this, tr("No Misc. Charge Account Number"),
-                          tr("<p>You may not enter a Misc. Charge without "
-                             "indicating the G/L Sales Account number for the "
-                             "charge.  Please set the Misc. Charge amount to 0 "
-                             "or select a Misc. Charge Sales Account." ) );
-    _tabWidget->setCurrentIndex(_tabWidget->indexOf(lineItemsTab));
-    _miscChargeAccount->setFocus();
-    return;
-  }
-  // save address info in case someone wants to use 'em again later
-  // but don't make any global changes to the data and ignore errors
-  _shipToAddr->blockSignals(true);
-  _billToAddr->save(AddressCluster::CHANGEONE);
-  _shipToAddr->save(AddressCluster::CHANGEONE);
-  _shipToAddr->blockSignals(false);
-  // finally save the invchead
-  if (!save())
+  if (!save(false))
     return;
 
-  // If this is a recurring invoice check whether the newly saved invoice
-  // should supercede the original recurring invoice settings
-  if (_recurring->isRecurring() && _mode == cEdit && _recurring->parentId() != _invcheadid)
-  {
-    if (QMessageBox::question(this, tr("Recurring Invoice"),
-                          tr("You have edited a recurring Invoice.\n"
-                          "Do you wish to change all future invoice recurrences?"),
-                          QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
-    {
-    // Update Recurring Invoice with latest saved detail
-      XSqlQuery recurUpd;
-      recurUpd.prepare("UPDATE recur SET recur_parent_id=:newinvoice "
-                       "WHERE ((recur_parent_type = 'I') "
-                       " AND   (recur_parent_id = :oldinvoice));");
-      recurUpd.bindValue(":newinvoice", _invcheadid);
-      recurUpd.bindValue(":oldinvoice", _recurring->parentId());
-      recurUpd.exec();
-      if (recurUpd.lastError().type() != QSqlError::NoError)
-      {
-         ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
-                     recurUpd, __FILE__, __LINE__);
-           return;
-      }
-      // Also update this invoice
-      recurUpd.prepare("UPDATE invchead SET invchead_recurring_invchead_id=:invoice "
-                       "WHERE (invchead_id = :invoice); ");
-      recurUpd.bindValue(":invoice",  _invcheadid);
-      recurUpd.exec();
-      if (recurUpd.lastError().type() != QSqlError::NoError)
-      {
-         ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
-                     recurUpd, __FILE__, __LINE__);
-           return;
-      }
-    }
-  }
+  if (_metrics->value("TaxService") == "A")
+    _tax->save();
 
   // post the Invoice if user desires
   if (_postInvoice->isVisible() && _postInvoice->isChecked())
@@ -622,8 +562,43 @@ void invoice::sSave()
   close();
 }
 
-bool invoice::save()
+bool invoice::save(bool partial)
 {
+  QList<GuiErrorCheck> errors;
+    errors<< GuiErrorCheck(_cust->id() <= 0, _cust,
+                           tr("You must enter a Customer for this Invoice before saving it."))
+          << GuiErrorCheck(_total->localValue() < 0, _cust,
+                           tr("The Total must be a positive value."))
+          << GuiErrorCheck(_invcitem->topLevelItemCount() <= 0, _new,
+                           tr("There must be at least one line item for an invoice."))
+          << GuiErrorCheck(!_miscAmount->isZero() && !_miscChargeAccount->isValid(),
+                           _miscChargeAccount,
+                           tr("<p>You may not enter a Misc. Charge without "
+                              "indicating the G/L Sales Account number for the "
+                              "charge.  Please set the Misc. Charge amount to 0 "
+                              "or select a Misc. Charge Sales Account."))
+          << GuiErrorCheck(_miscAmount->isZero() && _miscChargeAccount->isValid(), _miscAmount,
+                           tr("<p>You must enter a Misc. Charge when "
+                              "specifying a Misc. Charge Sales Account. "
+                              "Please enter Misc. Charge amount "
+                              "or remove the Misc. Charge Sales Account."));
+
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
+
+  if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Invoice"), errors))
+    return false;
+
+  if (!partial)
+  {
+    // save address info in case someone wants to use 'em again later
+    // but don't make any global changes to the data and ignore errors
+    _shipToAddr->blockSignals(true);
+    _billToAddr->save(AddressCluster::CHANGEONE);
+    _shipToAddr->save(AddressCluster::CHANGEONE);
+    _shipToAddr->blockSignals(false);
+  }
+
   XSqlQuery invoiceave;
   RecurrenceWidget::RecurrenceChangePolicy cp = _recurring->getChangePolicy();
   if (cp == RecurrenceWidget::NoPolicy)
@@ -751,6 +726,46 @@ bool invoice::save()
   }
 
   XSqlQuery commitq("COMMIT;");
+
+  if (!partial)
+  {
+    // If this is a recurring invoice check whether the newly saved invoice
+    // should supercede the original recurring invoice settings
+    if (_recurring->isRecurring() && _mode == cEdit && _recurring->parentId() != _invcheadid)
+    {
+      if (QMessageBox::question(this, tr("Recurring Invoice"),
+                            tr("You have edited a recurring Invoice.\n"
+                            "Do you wish to change all future invoice recurrences?"),
+                            QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+      {
+      // Update Recurring Invoice with latest saved detail
+        XSqlQuery recurUpd;
+        recurUpd.prepare("UPDATE recur SET recur_parent_id=:newinvoice "
+                         "WHERE ((recur_parent_type = 'I') "
+                         " AND   (recur_parent_id = :oldinvoice));");
+        recurUpd.bindValue(":newinvoice", _invcheadid);
+        recurUpd.bindValue(":oldinvoice", _recurring->parentId());
+        recurUpd.exec();
+        if (recurUpd.lastError().type() != QSqlError::NoError)
+        {
+           ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
+                       recurUpd, __FILE__, __LINE__);
+             return false;
+        }
+        // Also update this invoice
+        recurUpd.prepare("UPDATE invchead SET invchead_recurring_invchead_id=:invoice "
+                         "WHERE (invchead_id = :invoice); ");
+        recurUpd.bindValue(":invoice",  _invcheadid);
+        recurUpd.exec();
+        if (recurUpd.lastError().type() != QSqlError::NoError)
+        {
+           ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
+                       recurUpd, __FILE__, __LINE__);
+             return false;
+        }
+      }
+    }
+  }
 
   return true;
 }
@@ -923,11 +938,13 @@ void invoice::postInvoice()
     return;
   }
   post.exec("COMMIT;");
+
+  _tax->post();
 }
 
 void invoice::sNew()
 {
-  if (!save())
+  if (!save(true))
     return;
 
   ParameterList params;
@@ -942,7 +959,7 @@ void invoice::sNew()
 
 void invoice::sEdit()
 {
-  if (!save())
+  if (!save(true))
     return;
 
   ParameterList params;
@@ -982,6 +999,11 @@ void invoice::sDelete()
   }
 
   sFillItemList();
+
+  sCalculateTotal();
+
+  if (save(true) && _metrics->value("TaxService") != "A")
+    sCalculateTax();
 }
 
 void invoice::populate()
@@ -1155,7 +1177,7 @@ void invoice::sFillItemList()
   _custCurrency->setEnabled(_invcitem->topLevelItemCount() == 0);
 
   // TODO: Calculate the Freight weight here.
-  sCalculateTax();
+  sCalculateTotal();
 }
 
 void invoice::sCalculateTotal()
@@ -1506,21 +1528,41 @@ void invoice::sTaxZoneChanged()
 {
   if (_loading == false && _invcheadid != -1 && _taxzoneidCache != _taxzone->id())
   {
-    if (!save())
+    if (!save(true))
 	  return;
     _taxzoneidCache = _taxzone->id();
-    sCalculateTax();
+
+    if (_metrics->value("TaxService") == "N")
+      sCalculateTax();
   }
+}
+
+void invoice::sMiscTaxtypeChanged()
+{
+  if (save(true) && _metrics->value("TaxService") != "A")
+    sCalculateTax();
+}
+
+void invoice::sMiscAmountChanged()
+{
+  sCalculateTotal();
+
+  if (save(true) && _metrics->value("TaxService") != "A")
+    sCalculateTax();
 }
 
 void invoice::sFreightChanged()
 {
   if (_loading == false && _invcheadid != -1 && _freightCache != _freight->localValue())
   {
-    if (!save())
+    if (!save(true))
 	  return;
     _freightCache = _freight->localValue();
-    sCalculateTax();
+
+    sCalculateTotal();
+
+    if (_metrics->value("TaxService") != "A")
+      sCalculateTax();
   }
 }
 

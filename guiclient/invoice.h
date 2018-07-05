@@ -57,6 +57,8 @@ public slots:
     virtual bool sCheckInvoiceNumber();
     virtual void sHandleShipchrg( int pShipchrgid );
     virtual void sTaxZoneChanged();
+    virtual void sMiscTaxtypeChanged();
+    virtual void sMiscAmountChanged();
     virtual void sFreightChanged();
     virtual void sReleaseNumber();
 
@@ -76,7 +78,7 @@ private:
     int		_taxzoneidCache;
     bool        _loading;
     double      _freightCache;
-    bool        save();
+    bool        save(bool);
     bool        _saved;
     bool        _posted;
     int         _NumberGen;

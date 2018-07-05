@@ -23,4 +23,6 @@ void NoIntegration::sendRequest(QString type, QString orderType, int orderId, QS
   handleResponse("taxcodes", QString(), 0, QString(), "");
   else if (type == "createtransaction")
     handleResponse(type, orderType, orderId, request, "");
+  else if (type == "committransaction")
+    handleResponse(type, orderType, orderId, request, "");
 }
