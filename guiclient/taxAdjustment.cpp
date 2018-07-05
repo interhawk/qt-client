@@ -16,6 +16,7 @@
 
 #include "storedProcErrorLookup.h"
 #include "errorReporter.h"
+#include "taxIntegration.h"
 
 taxAdjustment::taxAdjustment(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl)
@@ -125,6 +126,13 @@ void taxAdjustment::sSave()
   {
     return;
   }
+
+  if (_ordertype == "INV" && _metrics->value("TaxService") != "N")
+  {
+    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+    tax->calculateTax(_ordertype, _orderid, true);
+  }
+
   accept();
 }
 

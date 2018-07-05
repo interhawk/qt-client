@@ -136,6 +136,16 @@ void TaxDisplay::sRefresh()
                        tax, __FILE__, __LINE__);
 }
 
+void TaxDisplay::save()
+{
+  _tax->calculateTax(_type, _orderId, true);
+}
+
+void TaxDisplay::post()
+{
+  _tax->commit(_type, _orderId);
+}
+
 bool TaxDisplay::eventFilter(QObject *obj, QEvent *event)
 {
     if (!_menu || obj != _menuLabel)

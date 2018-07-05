@@ -36,17 +36,32 @@ void TaxIntegration::test(QStringList config)
   sendRequest("test", QString(), 0, QString(), config);
 }
 
-void TaxIntegration::calculateTax(QString orderType, int orderId)
+void TaxIntegration::calculateTax(QString orderType, int orderId, bool record)
 {
   XSqlQuery qry;
-  qry.prepare("SELECT calculateOrderTax(:orderType, :orderId) AS request;");
+  qry.prepare("SELECT calculateOrderTax(:orderType, :orderId, :record) AS request;");
   qry.bindValue(":orderType", orderType);
   qry.bindValue(":orderId", orderId);
+  qry.bindValue(":record", record);
   qry.exec();
   if (qry.first())
     sendRequest("createtransaction", orderType, orderId, qry.value("request").toString());
   else
     ErrorReporter::error(QtCriticalMsg, 0, tr("Error calculating tax"),
+                         qry, __FILE__, __LINE__);
+}
+
+void TaxIntegration::commit(QString orderType, int orderId)
+{
+  XSqlQuery qry;
+  qry.prepare("SELECT postTax(:orderType, :orderId) AS request;");
+  qry.bindValue(":orderType", orderType);
+  qry.bindValue(":orderId", orderId);
+  qry.exec();
+  if (qry.first())
+    sendRequest("committransaction", orderType, orderId, qry.value("request").toString());
+  else
+    ErrorReporter::error(QtCriticalMsg, 0, tr("Error posting tax transaction"),
                          qry, __FILE__, __LINE__);
 }
 

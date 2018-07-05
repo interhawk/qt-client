@@ -63,7 +63,8 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
       if ((other->property("type") == "test" &&
            other->property("config") == config) ||
           (other->property("type") == "taxcodes") ||
-          (other->property("type") == "createtransaction" &&
+          ((other->property("type") == "createtransaction" ||
+            other->property("type") == "committransaction") &&
            other->property("orderType") == orderType &&
            other->property("orderId") == orderId))
       {
@@ -127,6 +128,8 @@ void AvalaraIntegration::handleResponse(QNetworkReply* reply)
       log.bindValue(":type", "ListTaxCodes");
     else if (type == "createtransaction")
       log.bindValue(":type", "CreateOrAdjustTransaction");
+    else if (type == "committransaction")
+      log.bindValue(":type", "CommitTransaction");
     else
       log.bindValue(":type", "Error");
     log.exec();
