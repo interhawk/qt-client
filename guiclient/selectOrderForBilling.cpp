@@ -637,6 +637,46 @@ void selectOrderForBilling::sFreightChanged()
 {
   if (_cobmiscid != -1 && _freightCache != _freight->localValue())
   {
+    if (_metrics->value("TaxService") == "A")
+    {
+      XSqlQuery qry;
+      qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                  "                      addr_line1 || addr_line2 || addr_line3 || "
+                  "                      addr_city || addr_state || addr_postalcode || "
+                  "                      addr_country) != 1 "
+                  "       AS check "
+                  "  FROM cobill "
+                  "  JOIN coitem ON cobill_coitem_id = coitem_id "
+                  "  JOIN itemsite ON coitem_itemsite_id = itemsite_id "
+                  "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                  "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                  " WHERE cobill_cobmisc_id = :cobmiscid;");
+      qry.bindValue(":cobmiscid", _cobmiscid);
+      qry.exec();
+      if (qry.first() && qry.value("check").toBool())
+      {
+        QMessageBox::critical(this, tr("Cannot override freight"),
+                              tr("Freight must be calculated automatically when lines are "
+                                 "shipping from different addresses for Avalara tax "
+                                 "calculation."));
+
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+        return;
+      }
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                    qry, __FILE__, __LINE__))
+      {
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+        return;
+      }
+    }
+
     XSqlQuery taxq;
     taxq.prepare("UPDATE cobmisc SET "
       "  cobmisc_freight=:freight "
