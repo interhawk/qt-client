@@ -567,9 +567,9 @@ bool invoice::save(bool partial)
   QList<GuiErrorCheck> errors;
     errors<< GuiErrorCheck(_cust->id() <= 0, _cust,
                            tr("You must enter a Customer for this Invoice before saving it."))
-          << GuiErrorCheck(_total->localValue() < 0, _cust,
+          << GuiErrorCheck(!partial && _total->localValue() < 0, _cust,
                            tr("The Total must be a positive value."))
-          << GuiErrorCheck(_invcitem->topLevelItemCount() <= 0, _new,
+          << GuiErrorCheck(!partial && _invcitem->topLevelItemCount() <= 0, _new,
                            tr("There must be at least one line item for an invoice."))
           << GuiErrorCheck(!_miscAmount->isZero() && !_miscChargeAccount->isValid(),
                            _miscChargeAccount,
