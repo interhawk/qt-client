@@ -4685,6 +4685,49 @@ void salesOrder::sFreightChanged()
   {
     if (_calcfreight)
     {
+      if (_metrics->value("TaxService") == "A")
+      {
+        XSqlQuery qry;
+        qry.prepare(QString("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                            "                      addr_line1 || addr_line2 || addr_line3 || "
+                            "                      addr_city || addr_state || addr_postalcode || "
+                            "                      addr_country) != 1 "
+                            "       AS check "
+                            "  FROM %1 "
+                            "  JOIN itemsite ON %2 = itemsite_id "
+                            "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                            "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                            " WHERE %3 = :soheadid;").arg(ISORDER(_mode) ? "coitem" : "quitem")
+                                                     .arg(ISORDER(_mode) ? "coitem_itemsite_id" :
+                                                                           "quitem_itemsite_id")
+                                                     .arg(ISORDER(_mode) ? "coitem_cohead_id" :
+                                                                           "quitem_quhead_id"));
+        qry.bindValue(":soheadid", _soheadid);
+        qry.exec();
+        if (qry.first() && qry.value("check").toBool())
+        {
+          QMessageBox::critical(this, tr("Cannot override freight"),
+                                tr("Freight must be calculated automatically when lines are "
+                                   "shipping from different addresses for Avalara tax "
+                                   "calculation."));
+
+          disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+          _freight->setLocalValue(_freightCache);
+          connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+          return;
+        }
+        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                      qry, __FILE__, __LINE__))
+        {
+          disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+          _freight->setLocalValue(_freightCache);
+          connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+          return;
+        }
+      }
+
       int answer;
       answer = QMessageBox::question(this, tr("Manual Freight?"),
                                      tr("<p>Manually editing the freight will disable "

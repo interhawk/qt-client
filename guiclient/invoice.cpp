@@ -1555,6 +1555,45 @@ void invoice::sFreightChanged()
 {
   if (_loading == false && _invcheadid != -1 && _freightCache != _freight->localValue())
   {
+    if (_metrics->value("TaxService") == "A")
+    {
+      XSqlQuery qry;
+      qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                  "                      addr_line1 || addr_line2 || addr_line3 || "
+                  "                      addr_city || addr_state || addr_postalcode || "
+                  "                      addr_country) != 1 "
+                  "       AS check "
+                  "  FROM invcitem "
+                  "  JOIN itemsite ON invcitem_itemsite_id = itemsite_id "
+                  "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                  "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                  " WHERE invcitem_invchead_id = :invcheadid;");
+      qry.bindValue(":invcheadid", _invcheadid);
+      qry.exec();
+      if (qry.first() && qry.value("check").toBool())
+      {
+        QMessageBox::critical(this, tr("Cannot override freight"),
+                              tr("Freight must be calculated automatically when lines are "
+                                 "shipping from different addresses for Avalara tax "
+                                 "calculation."));
+
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+        return;
+      }
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                    qry, __FILE__, __LINE__))
+      {
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+        return;
+      }
+    }
+
     if (!save(true))
 	  return;
     _freightCache = _freight->localValue();
