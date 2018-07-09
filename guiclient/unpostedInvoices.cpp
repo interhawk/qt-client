@@ -27,6 +27,7 @@
 #include "storedProcErrorLookup.h"
 #include "distributeInventory.h"
 #include "errorReporter.h"
+#include "taxIntegration.h"
 
 unpostedInvoices::unpostedInvoices(QWidget* parent, const char* name, Qt::WindowFlags fl)
     : display(parent, "unpostedInvoices", fl)
@@ -441,6 +442,8 @@ void unpostedInvoices::sPost()
         }
 
         unpostedPost.exec("COMMIT;");
+        TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+        tax->commit("INV", invoiceId);
       }
       else 
       {

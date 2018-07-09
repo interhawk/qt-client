@@ -15,6 +15,8 @@
 #include <QVariant>
 #include <QMessageBox>
 
+#include "taxIntegration.h"
+
 printInvoice::printInvoice(QWidget *parent, const char *name, bool modal, Qt::WindowFlags fl)
     : printMulticopyDocument("InvoiceCopies",     "InvoiceWatermark",
                              "InvoiceShowPrices", "PostMiscInvoices",
@@ -59,6 +61,7 @@ printInvoice::printInvoice(QWidget *parent, const char *name, bool modal, Qt::Wi
 
   connect(this, SIGNAL(docUpdated(int)),       this, SLOT(sHandleDocUpdated(int)));
   connect(this, SIGNAL(populated(XSqlQuery*)), this, SLOT(sHandlePopulated(XSqlQuery*)));
+  connect(this, SIGNAL(posted(int)),           this, SLOT(sHandlePosted(int)));
 }
 
 printInvoice::~printInvoice()
@@ -82,6 +85,12 @@ void printInvoice::sHandlePopulated(XSqlQuery *qry)
 void printInvoice::sHandleDocUpdated(int docid)
 {
   omfgThis->sInvoicesUpdated(docid, true);
+}
+
+void printInvoice::sHandlePosted(int docid)
+{
+  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+  tax->commit("INV", docid);
 }
 
 int printInvoice::distributeInventory(XSqlQuery *qry)
