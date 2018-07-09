@@ -67,7 +67,7 @@ int TaxDisplay::orderId()
 
 void TaxDisplay::setType(QString type)
 {
-  bool refresh = (_type == type);
+  bool refresh = (_type != type);
   _type = type;
 
   if (refresh)
@@ -76,7 +76,7 @@ void TaxDisplay::setType(QString type)
 
 void TaxDisplay::setOrderId(int id)
 {
-  bool refresh = (_orderId == id);
+  bool refresh = (_orderId != id);
   _orderId = id;
 
   if (refresh)
