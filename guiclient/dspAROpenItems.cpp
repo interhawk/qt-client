@@ -45,6 +45,7 @@
 #include "printStatementByCustomer.h"
 #include "salesOrder.h"
 #include "storedProcErrorLookup.h"
+#include "taxIntegration.h"
 
 #include "errorReporter.h"
 
@@ -1513,7 +1514,11 @@ void dspAROpenItems::sPostInvoice()
                            __FILE__, __LINE__);
     }
     else
+    {
       dspPostInvoice.exec("COMMIT;");
+      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+      tax->commit("INV", list()->currentItem()->id("docnumber"));
+    }
   }
   else if (post.lastError().type() != QSqlError::NoError)
   {
