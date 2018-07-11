@@ -109,7 +109,7 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
     bool    _canceling;
     bool    _partialsaved;
     bool    _error;
-    bool    _stocked;
+    bool    _noautoord;
     int     _availabilityLastItemid;
     int     _availabilityLastWarehousid;
     QDate   _availabilityLastSchedDate;
