@@ -104,7 +104,7 @@ void TaxDisplay::sOpen()
 
   _tax->wait();
 
-  taxBreakdown newdlg(this, "", true);
+  taxBreakdown newdlg(0, "", true);
   newdlg.set(params);
   newdlg.exec();
 
