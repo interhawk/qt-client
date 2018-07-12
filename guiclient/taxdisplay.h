@@ -26,16 +26,19 @@ class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
 
     Q_INVOKABLE QString type();
     Q_INVOKABLE int     orderId();
+    Q_INVOKABLE int     mode();
     Q_INVOKABLE void    save();
     Q_INVOKABLE void    post();
 
   public slots:
     void setType(QString);
     void setOrderId(int);
+    void setMode(int);
     void sRecalculate();
     void sOpen();
     void sUpdate(double, QString);
     void sRefresh();
+    void sUpdateMenu();
 
   protected:
     virtual bool eventFilter(QObject*, QEvent*);
@@ -45,6 +48,7 @@ class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
   private:
     QString         _type;
     int             _orderId;
+    int             _mode;
     QLabel*         _menuLabel;
     QMenu*          _menu;
     QAction*        _recalculateAct;

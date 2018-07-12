@@ -14,6 +14,7 @@
 #include <QMessageBox>
 
 #include "errorReporter.h"
+#include "guiclient.h"
 #include "taxBreakdown.h"
 
 TaxDisplay::TaxDisplay(QWidget* parent, const char* name)
@@ -21,6 +22,7 @@ TaxDisplay::TaxDisplay(QWidget* parent, const char* name)
 {
   _type = "";
   _orderId = -1;
+  _mode = cNew;
 
   _tax = TaxIntegration::getTaxIntegration();
 
@@ -53,6 +55,8 @@ TaxDisplay::TaxDisplay(QWidget* parent, const char* name)
   menu->addAction(_openAct);
 
   _menu = menu;
+
+  connect(menu, SIGNAL(aboutToShow()), this, SLOT(sUpdateMenu()));
 }
 
 QString TaxDisplay::type()
@@ -63,6 +67,11 @@ QString TaxDisplay::type()
 int TaxDisplay::orderId()
 {
   return _orderId;
+}
+
+int TaxDisplay::mode()
+{
+  return _mode;
 }
 
 void TaxDisplay::setType(QString type)
@@ -78,6 +87,15 @@ void TaxDisplay::setOrderId(int id)
 {
   bool refresh = (_orderId != id);
   _orderId = id;
+
+  if (refresh)
+    sRefresh();
+}
+
+void TaxDisplay::setMode(int mode)
+{
+  bool refresh = (_mode != mode);
+  _mode = mode;
 
   if (refresh)
     sRefresh();
@@ -117,12 +135,15 @@ void TaxDisplay::sUpdate(double tax, QString error)
   if (error.isEmpty())
     setLocalValue(tax);
   else
+  {
+    clear();
     QMessageBox::critical(0, tr("Avalara Error"), tr("Error Calculating Tax:\n%1").arg(error));
+  }
 }
 
 void TaxDisplay::sRefresh()
 {
-  if (_orderId < 0)
+  if (_orderId < 0 || _mode == cNew)
     return;
 
   XSqlQuery tax;
@@ -132,6 +153,8 @@ void TaxDisplay::sRefresh()
   tax.exec();
   if (tax.first())
     setLocalValue(tax.value("tax").toDouble());
+  else
+    clear();
   ErrorReporter::error(QtCriticalMsg, 0, tr("Error fetching tax"),
                        tax, __FILE__, __LINE__);
 }
@@ -174,4 +197,21 @@ void TaxDisplay::positionMenuLabel()
   _menuLabel->setStyleSheet("QLabel { margin-left:6}");
 
   _menuLabel->setGeometry(0, 0, _menuLabel->pixmap()->width() + 6, height());
+}
+
+void TaxDisplay::sUpdateMenu()
+{
+  if (isEmpty())
+  {
+    _recalculateAct->setText(tr("Calculate Tax"));
+    _openAct->setEnabled(false);
+  }
+  else
+  {
+    _recalculateAct->setText(tr("Recalculate Tax"));
+    _openAct->setEnabled(true);
+  }
+
+  _recalculateAct->setVisible(_metrics->value("TaxService") == "A");
+  _recalculateAct->setEnabled(_mode != cView);
 }

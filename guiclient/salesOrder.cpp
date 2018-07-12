@@ -327,6 +327,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     {
       setObjectName("salesOrder new");
       _mode = cNew;
+      _tax->setMode(modeState());
       emit newModeType(OrderMode);
       emit newModeState(cNew);
 
@@ -343,6 +344,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     else if (param.toString() == "newQuote")
     {
       _mode = cNewQuote;
+      _tax->setMode(modeState());
       emit newModeType(QuoteMode);
       emit newModeState(cNew);
 
@@ -374,6 +376,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
+      _tax->setMode(modeState());
       emit newModeType(OrderMode);
       emit newModeState(cEdit);
 
@@ -391,6 +394,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     else if (param.toString() == "editQuote")
     {
       _mode = cEditQuote;
+      _tax->setMode(modeState());
       emit newModeType(QuoteMode);
       emit newModeState(cEdit);
 
@@ -430,6 +434,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     else if (param.toString() == "viewQuote")
     {
       _mode = cViewQuote;
+      _tax->setMode(modeState());
       emit newModeType(QuoteMode);
       emit newModeState(cView);
 
@@ -1699,6 +1704,7 @@ void salesOrder::sHandleOrderNumber()
       if (query.first())
       {
         _mode      = cEdit;
+        _tax->setMode(modeState());
         emit newModeType(OrderMode);
         emit newModeState(cEdit);
         _soheadid  = query.value("cohead_id").toInt();
@@ -1770,6 +1776,7 @@ void salesOrder::sHandleOrderNumber()
         {
           _orderNumber->setText(orderNumber);
           _mode = cNewQuote;
+          _tax->setMode(modeState());
           emit newModeType(QuoteMode);
           emit newModeState(cNew);
           _orderNumber->setEnabled(false);
@@ -3328,6 +3335,7 @@ void salesOrder::clear()
   if ( (_mode == cEdit) || (_mode == cNew) )
   {
     _mode = cNew;
+    _tax->setMode(modeState());
     emit newModeType(OrderMode);
     emit newModeState(cNew);
     setObjectName("salesOrder new");
@@ -3337,6 +3345,7 @@ void salesOrder::clear()
   else if ( (_mode == cEditQuote) || (_mode == cNewQuote) )
   {
     _mode = cNewQuote;
+    _tax->setMode(modeState());
     emit newModeType(QuoteMode);
     emit newModeState(cNew);
   }
@@ -3501,6 +3510,7 @@ void salesOrder::setViewMode()
   _paymentInformation->removeTab(_paymentInformation->indexOf(_creditCardPage));
 
   _mode = ISORDER(_mode) ? cView : cViewQuote;
+  _tax->setMode(modeState());
   emit newModeType(ISORDER(_mode) ? OrderMode : QuoteMode);
   emit newModeState(cView);
   setObjectName(QString("salesOrder view %1").arg(_soheadid));

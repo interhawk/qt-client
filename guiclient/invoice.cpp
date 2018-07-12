@@ -173,6 +173,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     {
       setObjectName("invoice new");
       _mode = cNew;
+      _tax->setMode(_mode);
 
       invoiceet.exec("SELECT NEXTVAL('invchead_invchead_id_seq') AS invchead_id;");
       if (invoiceet.first())
@@ -246,6 +247,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     {
       setObjectName(QString("invoice edit %1").arg(_invcheadid));
       _mode = cEdit;
+      _tax->setMode(_mode);
 
       _new->setEnabled(true);
       _cust->setReadOnly(true);
@@ -254,6 +256,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     {
       setObjectName(QString("invoice view %1").arg(_invcheadid));
       _mode = cView;
+      _tax->setMode(_mode);
 
       _invoiceNumber->setEnabled(false);
       _orderNumber->setEnabled(false);
