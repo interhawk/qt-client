@@ -131,11 +131,12 @@ SetResponse selectOrderForBilling::set(const ParameterList &pParams)
     if (param.toString() == "new")
     {
       _mode = cNew;
-
+      _salesTax->setMode(_mode);
     }
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
+      _salesTax->setMode(_mode);
 
       _close->setText(tr("&Cancel"));
 
