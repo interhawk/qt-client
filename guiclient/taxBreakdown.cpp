@@ -37,7 +37,7 @@ taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::Wi
   _tax->addColumn(tr("Code"), -1, Qt::AlignLeft, true, "tax_code");
   _tax->addColumn(tr("Description"), -1, Qt::AlignLeft, true, "tax_descrip");
   _tax->addColumn(tr("Sequence"), -1, Qt::AlignLeft, true, "taxhist_sequence");
-  _tax->addColumn(tr("Amount"), -1, Qt::AlignLeft, true, "taxhist_amount");
+  _tax->addColumn(tr("Flat Amount"), -1, Qt::AlignLeft, true, "taxhist_amount");
   _tax->addColumn(tr("Percent"), -1, Qt::AlignLeft, true, "taxhist_percent");
   _tax->addColumn(tr("Tax"), -1, Qt::AlignLeft, true, "taxhist_tax");
   _tax->addColumn(tr("Total"), -1, Qt::AlignLeft, true, "total");
