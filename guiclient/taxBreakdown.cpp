@@ -104,7 +104,9 @@ void taxBreakdown::sPopulate()
                         "  FROM cohead "
                         " WHERE cohead_id = :orderid ");
 
-    params.append("cohead_id", _orderid);
+    params.append("headtype", "S");
+    params.append("itemtype", "SI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "SI")
   {
@@ -120,7 +122,8 @@ void taxBreakdown::sPopulate()
                         "  JOIN cohead ON coitem_cohead_id = cohead_id "
                         " WHERE coitem_id = :orderid ");
 
-    params.append("coitem_id", _orderid);
+    params.append("itemtype", "SI");
+    params.append("docitem_id", _orderid);
   }
   else if (_ordertype == "Q")
   {
@@ -135,7 +138,9 @@ void taxBreakdown::sPopulate()
                         "  FROM quhead "
                         " WHERE quhead_id = :orderid ");
 
-    params.append("quhead_id", _orderid);
+    params.append("headtype", "Q");
+    params.append("itemtype", "QI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "QI")
   {
@@ -151,7 +156,8 @@ void taxBreakdown::sPopulate()
                         "  JOIN quhead ON quitem_quhead_id = quhead_id "
                         " WHERE quitem_id = :orderid ");
 
-    params.append("quitem_id", _orderid);
+    params.append("itemtype", "QI");
+    params.append("docitem_id", _orderid);
   }
   else if (_ordertype == "COB")
   {
@@ -164,7 +170,9 @@ void taxBreakdown::sPopulate()
                         "  JOIN cohead ON cobmisc_cohead_id = cohead_id "
                         " WHERE cobmisc_id = :orderid ");
 
-    params.append("cobmisc_id", _orderid);
+    params.append("headtype", "COB");
+    params.append("itemtype", "COBI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "INV")
   {
@@ -176,7 +184,9 @@ void taxBreakdown::sPopulate()
                         "  FROM invchead "
                         " WHERE invchead_id = :orderid ");
 
-    params.append("invchead_id", _orderid);
+    params.append("headtype", "INV");
+    params.append("itemtype", "INVI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "INVI")
   {
@@ -189,7 +199,8 @@ void taxBreakdown::sPopulate()
                         "  JOIN invchead ON invcitem_invchead_id = invchead_id "
                         " WHERE invcitem_id = :orderid ");
 
-    params.append("invcitem_id", _orderid);
+    params.append("itemtype", "INVI");
+    params.append("docitem_id", _orderid);
   }
   else if (_ordertype == "RA")
   {
@@ -204,7 +215,9 @@ void taxBreakdown::sPopulate()
                         "  FROM rahead "
                         " WHERE rahead_id = :orderid ");
 
-    params.append("rahead_id", _orderid);
+    params.append("headtype", "RA");
+    params.append("itemtype", "RI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "CM")
   {
@@ -216,7 +229,9 @@ void taxBreakdown::sPopulate()
                         "  FROM cmhead "
                         " WHERE cmhead_id = :orderid ");
 
-    params.append("cmhead_id", _orderid);
+    params.append("headtype", "CM");
+    params.append("itemtype", "CMI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "TO")
   {
@@ -228,7 +243,9 @@ void taxBreakdown::sPopulate()
                         "  FROM tohead "
                         " WHERE tohead_id = :orderid ");
 
-    params.append("tohead_id", _orderid);
+    params.append("headtype", "TO");
+    params.append("headtype", "TI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "PO")
   {
@@ -240,7 +257,9 @@ void taxBreakdown::sPopulate()
                         "  FROM pohead "
                         " WHERE pohead_id = :orderid ");
 
-    params.append("pohead_id", _orderid);
+    params.append("headtype", "P");
+    params.append("itemtype", "PI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "PI")
   {
@@ -253,7 +272,8 @@ void taxBreakdown::sPopulate()
                         "  JOIN pohead ON poitem_pohead_id = pohead_id "
                         " WHERE poitem_id = :orderid ");
 
-    params.append("poitem_id", _orderid);
+    params.append("itemtype", "PI");
+    params.append("docitem_id", _orderid);
   }
    else if (_ordertype == "VO")
   {
@@ -265,7 +285,9 @@ void taxBreakdown::sPopulate()
                         "  FROM vohead "
                         " WHERE vohead_id = :orderid ");
 
-    params.append("vohead_id", _orderid);
+    params.append("headtype", "VCH");
+    params.append("itemtype", "VCHI");
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "VI")
   {
@@ -278,7 +300,8 @@ void taxBreakdown::sPopulate()
                         "  JOIN vohead ON voitem_vohead_id = vohead_id "
                         " WHERE voitem_id = :orderid ");
 
-    params.append("voitem_id", _orderid);
+    params.append("itemtype", "VCHI");
+    params.append("docitem_id", _orderid);
   }
 
   taxPopulate.bindValue(":orderid", _orderid);
