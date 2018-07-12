@@ -30,13 +30,15 @@ taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::Wi
 
   _tax->addColumn(tr("Line"), -1, Qt::AlignLeft, true, "line");
   _tax->addColumn(tr("Item"), -1, Qt::AlignLeft, true, "item_number");
-  _tax->addColumn(tr("Qty"), -1, Qt::AlignLeft, true, "qty");
   _tax->addColumn(tr("Amount"), -1, Qt::AlignLeft, true, "amount");
+  _tax->addColumn(tr("Qty"), -1, Qt::AlignLeft, true, "qty");
   _tax->addColumn(tr("Extended"), -1, Qt::AlignLeft, true, "extended");
   _tax->addColumn(tr("Taxable Amount"), -1, Qt::AlignLeft, true, "taxhist_basis");
   _tax->addColumn(tr("Code"), -1, Qt::AlignLeft, true, "tax_code");
   _tax->addColumn(tr("Description"), -1, Qt::AlignLeft, true, "tax_descrip");
   _tax->addColumn(tr("Sequence"), -1, Qt::AlignLeft, true, "taxhist_sequence");
+  _tax->addColumn(tr("Amount"), -1, Qt::AlignLeft, true, "taxhist_amount");
+  _tax->addColumn(tr("Percent"), -1, Qt::AlignLeft, true, "taxhist_percent");
   _tax->addColumn(tr("Tax"), -1, Qt::AlignLeft, true, "taxhist_tax");
   _tax->addColumn(tr("Total"), -1, Qt::AlignLeft, true, "total");
 
@@ -122,6 +124,7 @@ void taxBreakdown::sPopulate()
                         "  JOIN cohead ON coitem_cohead_id = cohead_id "
                         " WHERE coitem_id = :orderid ");
 
+    params.append("headtype", "S");
     params.append("itemtype", "SI");
     params.append("docitem_id", _orderid);
   }
@@ -156,6 +159,7 @@ void taxBreakdown::sPopulate()
                         "  JOIN quhead ON quitem_quhead_id = quhead_id "
                         " WHERE quitem_id = :orderid ");
 
+    params.append("headtype", "Q");
     params.append("itemtype", "QI");
     params.append("docitem_id", _orderid);
   }
@@ -199,6 +203,7 @@ void taxBreakdown::sPopulate()
                         "  JOIN invchead ON invcitem_invchead_id = invchead_id "
                         " WHERE invcitem_id = :orderid ");
 
+    params.append("headtype", "INV");
     params.append("itemtype", "INVI");
     params.append("docitem_id", _orderid);
   }
@@ -272,6 +277,7 @@ void taxBreakdown::sPopulate()
                         "  JOIN pohead ON poitem_pohead_id = pohead_id "
                         " WHERE poitem_id = :orderid ");
 
+    params.append("headtype", "P");
     params.append("itemtype", "PI");
     params.append("docitem_id", _orderid);
   }
@@ -300,6 +306,7 @@ void taxBreakdown::sPopulate()
                         "  JOIN vohead ON voitem_vohead_id = vohead_id "
                         " WHERE voitem_id = :orderid ");
 
+    params.append("headtype", "VCH");
     params.append("itemtype", "VCHI");
     params.append("docitem_id", _orderid);
   }
@@ -324,6 +331,7 @@ void taxBreakdown::sPopulate()
   params.append("freight", tr("Freight"));
   params.append("misc", tr("Misc"));
   params.append("adjustment", tr("Adjustment"));
+  params.append("total", tr("Total"));
 
   XSqlQuery qry = mql.toQuery(params);
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
