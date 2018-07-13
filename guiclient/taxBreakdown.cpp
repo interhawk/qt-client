@@ -329,6 +329,7 @@ void taxBreakdown::sPopulate()
 
   MetaSQLQuery mql = mqlLoad("taxBreakdown", "detail");
   params.append("freight", tr("Freight"));
+  params.append("group", tr("Group"));
   params.append("misc", tr("Misc"));
   params.append("adjustment", tr("Adjustment"));
   params.append("total", tr("Total"));
