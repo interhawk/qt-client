@@ -292,6 +292,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
       _shipChrgs->setEnabled(false);
       _shippingZone->setEnabled(false);
       _saleType->setEnabled(false);
+      _warehouse->setEnabled(false);
 //      _documents->setReadOnly(true);
       _charass->setReadOnly(true);
       _postInvoice->setVisible(false);
@@ -645,6 +646,7 @@ bool invoice::save(bool partial)
              "    invchead_taxzone_id=:invchead_taxzone_id,"
              "    invchead_shipzone_id=:invchead_shipzone_id,"
              "    invchead_saletype_id=:invchead_saletype_id, "
+             "    invchead_warehous_id=:invchead_warehous_id, "
              "    invchead_freight_taxtype_id=:invchead_freight_taxtype_id, "
              "    invchead_misc_taxtype_id=:invchead_misc_taxtype_id, "
              "    invchead_misc_discount=:invchead_misc_discount "
@@ -692,6 +694,7 @@ bool invoice::save(bool partial)
   invoiceave.bindValue(":invchead_notes",	_notes->toPlainText());
   invoiceave.bindValue(":invchead_prj_id",	_project->id());
   invoiceave.bindValue(":invchead_shipchrg_id",	_shipChrgs->id());
+  invoiceave.bindValue(":invchead_warehous_id", _warehouse->id());
   invoiceave.bindValue(":invchead_freight_taxtype_id", _freightTaxtype->id());
   invoiceave.bindValue(":invchead_misc_taxtype_id", _miscChargeTaxtype->id());
   invoiceave.bindValue(":invchead_misc_discount", _miscChargeDiscount->isChecked());
@@ -1069,6 +1072,7 @@ void invoice::populate()
     _project->setId(invoicepopulate.value("invchead_prj_id").toInt());
     _shippingZone->setId(invoicepopulate.value("invchead_shipzone_id").toInt());
     _saleType->setId(invoicepopulate.value("invchead_saletype_id").toInt());
+    _warehouse->setId(invoicepopulate.value("invchead_warehous_id").toInt());
 
     bool ffBillTo = invoicepopulate.value("cust_ffbillto").toBool();
     if (_mode != cView)
@@ -1131,6 +1135,7 @@ void invoice::populate()
       _freight->setEnabled(false);
       _shippingZone->setEnabled(false);
       _saleType->setEnabled(false);
+      _warehouse->setEnabled(false);
       _postInvoice->setVisible(false);
     }
 
@@ -1567,8 +1572,9 @@ void invoice::sFreightChanged()
                   "                      addr_country) != 1 "
                   "       AS check "
                   "  FROM invcitem "
-                  "  JOIN itemsite ON invcitem_itemsite_id = itemsite_id "
-                  "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                  "  JOIN invchead ON invcitem_invchead_id = invchead_id "
+                  "  LEFT OUTER JOIN whsinfo "
+                  "    ON COALESCE(invcitem_warehous_id, invchead_warehous_id) = warehous_id "
                   "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
                   " WHERE invcitem_invchead_id = :invcheadid;");
       qry.bindValue(":invcheadid", _invcheadid);
