@@ -751,50 +751,38 @@ to be bound by its terms.</comment>
                </property>
               </widget>
              </item>
-            </layout>
-           </item>
-           <item row="0" column="1">
-            <layout class="QVBoxLayout">
-             <property name="topMargin">
-              <number>3</number>
-             </property>
-             <item>
+             <item row="0" column="6">
+              <widget class="QLabel" name="_projectLit">
+               <property name="text">
+                <string>Project #:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="7">
               <widget class="ProjectCluster" name="_project">
                <property name="focusPolicy">
                 <enum>Qt::StrongFocus</enum>
                </property>
                <property name="label">
-                <string>Project #:</string>
+                <string/>
                </property>
               </widget>
              </item>
-             <item>
-              <spacer>
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
+             <item row="1" column="6">
+              <widget class="QLabel" name="_warehouseLit">
+               <property name="text">
+                <string>Site:</string>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>0</height>
-                </size>
+              </widget>
+             </item>
+             <item row="1" column="7">
+              <widget class="WComboBox" name="_warehouse">
+               <property name="type">
+                <enum>WComboBox::Shipping</enum>
                </property>
-              </spacer>
+              </widget>
              </item>
             </layout>
-           </item>
-           <item row="0" column="2">
-            <spacer>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>0</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </item>
