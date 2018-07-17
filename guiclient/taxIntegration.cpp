@@ -97,7 +97,7 @@ void TaxIntegration::handleResponse(QString type, QString orderType, int orderId
                              qry, __FILE__, __LINE__);
     }
     else
-      emit (0.0, error);
+      emit taxCalculated(0.0, error);
   }
 }
 
