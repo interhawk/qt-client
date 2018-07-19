@@ -743,6 +743,9 @@ void salesOrder::sSave()
       }
     }
 
+    if (_metrics->value("TaxService") == "A")
+      _tax->save();
+
     if (_captive)
       close();
     else
