@@ -178,6 +178,9 @@ void selectOrderForBilling::sSave()
 
   omfgThis->sBillingSelectionUpdated(_so->id(), true);
 
+  if (_metrics->value("TaxService") == "A")
+    _salesTax->save();
+
   if (_captive)
     close();
   else
