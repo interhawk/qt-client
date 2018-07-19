@@ -98,7 +98,6 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
     virtual void        sAllocateCreditMemos();
     virtual void        sCheckValidContacts();
     virtual void        sHandleMore();
-    virtual void        sCalculateTax();
     virtual void        sRecalculatePrice();
     virtual void        sOrderDateChanged();
     virtual void        sShipDateChanged();

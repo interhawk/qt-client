@@ -2581,8 +2581,8 @@ void salesOrder::sDelete()
 
     sCalculateTotal();
 
-    if (_metrics->value("TaxService") != "A" && save(true))
-      sCalculateTax();
+    if (_metrics->value("TaxService") != "A")
+      _tax->sRecalculate();
   }
 }
 
@@ -3453,7 +3453,7 @@ void salesOrder::sHandleSalesOrderEvent(int pSoheadid, bool)
   {
     sFillItemList();
     if (_metrics->value("TaxService") != "A")
-      sCalculateTax();
+      _tax->sRecalculate();
   }
 }
 
@@ -4678,16 +4678,16 @@ void salesOrder::sIssueLineBalance()
 
 void salesOrder::sMiscTaxtypeChanged()
 {
-  if (_metrics->value("TaxService") != "A" && save(true))
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void salesOrder::sMiscChargeChanged()
 {
   sCalculateTotal();
 
-  if (_metrics->value("TaxService") != "A" && save(true))
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void salesOrder::sFreightChanged()
@@ -4783,13 +4783,8 @@ void salesOrder::sFreightChanged()
 
   sCalculateTotal();
 
-  if (_metrics->value("TaxService") != "A" && save(true))
-    sCalculateTax();
-}
-
-void salesOrder::sCalculateTax()
-{
-  _tax->sRecalculate();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void salesOrder::sTaxZoneChanged()
@@ -4798,7 +4793,7 @@ void salesOrder::sTaxZoneChanged()
     save(true);
 
   if (_metrics->value("TaxService") == "N")
-    sCalculateTax();
+    _tax->sRecalculate();
 
   _taxzoneidCache=_taxZone->id();
 }

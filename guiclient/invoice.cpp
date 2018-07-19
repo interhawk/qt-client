@@ -1009,8 +1009,8 @@ void invoice::sDelete()
 
   sCalculateTotal();
 
-  if (_metrics->value("TaxService") != "A" && save(true))
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void invoice::populate()
@@ -1245,14 +1245,6 @@ void invoice::sReleaseNumber()
                          invoiceReleaseNumber, __FILE__, __LINE__);
     _NumberGen = -1;
   }
-}
-
-
-void invoice::sCalculateTax()
-{
-  _tax->sRecalculate();
-
-  // changing _tax fires sCalculateTotal()
 }
 
 void invoice::setFreeFormShipto(bool pFreeForm)
@@ -1542,22 +1534,22 @@ void invoice::sTaxZoneChanged()
     _taxzoneidCache = _taxzone->id();
 
     if (_metrics->value("TaxService") == "N")
-      sCalculateTax();
+      _tax->sRecalculate();
   }
 }
 
 void invoice::sMiscTaxtypeChanged()
 {
-  if (_metrics->value("TaxService") != "A" && save(true))
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void invoice::sMiscAmountChanged()
 {
   sCalculateTotal();
 
-  if (_metrics->value("TaxService") != "A" && save(true))
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void invoice::sFreightChanged()
@@ -1611,7 +1603,7 @@ void invoice::sFreightChanged()
     sCalculateTotal();
 
     if (_metrics->value("TaxService") != "A")
-      sCalculateTax();
+      _tax->sRecalculate();
   }
 }
 

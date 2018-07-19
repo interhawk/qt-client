@@ -162,7 +162,6 @@ void TaxDisplay::sRefresh()
 
 void TaxDisplay::save()
 {
-  emit save(true);
   _tax->calculateTax(_type, _orderId, true);
 }
 
