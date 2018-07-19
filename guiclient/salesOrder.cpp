@@ -143,6 +143,7 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   connect(_miscCharge,          SIGNAL(valueChanged()),                         this,         SLOT(sMiscChargeChanged()));
   connect(_freightTaxtype,      SIGNAL(newID(int)),                             this,         SLOT(sMiscTaxtypeChanged()));
   connect(_freight,             SIGNAL(valueChanged()),                         this,         SLOT(sFreightChanged()));
+  connect(_tax,                 SIGNAL(save(bool)),                             this,         SLOT(save(bool)));
   connect(_tax,                 SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
   if (_privileges->check("ApplyARMemos"))
     connect(_allocatedCMLit,    SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sCreditAllocate()));
@@ -2580,7 +2581,7 @@ void salesOrder::sDelete()
 
     sCalculateTotal();
 
-    if (save(true) && _metrics->value("TaxService") != "A")
+    if (_metrics->value("TaxService") != "A" && save(true))
       sCalculateTax();
   }
 }
@@ -4677,7 +4678,7 @@ void salesOrder::sIssueLineBalance()
 
 void salesOrder::sMiscTaxtypeChanged()
 {
-  if (save(true) && _metrics->value("TaxService") != "A")
+  if (_metrics->value("TaxService") != "A" && save(true))
     sCalculateTax();
 }
 
@@ -4685,7 +4686,7 @@ void salesOrder::sMiscChargeChanged()
 {
   sCalculateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
+  if (_metrics->value("TaxService") != "A" && save(true))
     sCalculateTax();
 }
 
@@ -4782,7 +4783,7 @@ void salesOrder::sFreightChanged()
 
   sCalculateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
+  if (_metrics->value("TaxService") != "A" && save(true))
     sCalculateTax();
 }
 

@@ -48,6 +48,7 @@ selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, 
   connect(_selectBalance, SIGNAL(clicked()), this, SLOT(sSelectBalance()));
   connect(_showClosed, SIGNAL(toggled(bool)), this, SLOT(sFillList()));
   connect(_so, SIGNAL(newId(int,QString)), this, SLOT(sPopulate(int)));
+  connect(_salesTax,    SIGNAL(save(bool)),     this, SLOT(save(bool)));
   connect(_salesTax,	SIGNAL(valueChanged()),	this, SLOT(sUpdateTotal()));
   connect(_subtotal,	SIGNAL(valueChanged()),	this, SLOT(sUpdateTotal()));
   connect(_taxZone,	SIGNAL(newID(int)),	this, SLOT(sTaxZoneChanged()));
@@ -625,7 +626,7 @@ void selectOrderForBilling::sTaxZoneChanged()
 
 void selectOrderForBilling::sMiscTaxtypeChanged()
 {
-  if (save(true) && _metrics->value("TaxService") != "A")
+  if (_metrics->value("TaxService") != "A" && save(true))
     sCalculateTax();
 }
 
@@ -633,7 +634,7 @@ void selectOrderForBilling::sMiscChargeChanged()
 {
   sUpdateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
+  if (_metrics->value("TaxService") != "A" && save(true))
     sCalculateTax();
 }
 
@@ -697,7 +698,7 @@ void selectOrderForBilling::sFreightChanged()
 
     sUpdateTotal();
 
-    if (save(true) && _metrics->value("TaxService") != "A")
+    if (_metrics->value("TaxService") != "A" && save(true))
       sCalculateTax();
   }   
 }

@@ -40,6 +40,9 @@ class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
     void sRefresh();
     void sUpdateMenu();
 
+  signals:
+    void save(bool);
+
   protected:
     virtual bool eventFilter(QObject*, QEvent*);
     virtual void resizeEvent(QResizeEvent *);

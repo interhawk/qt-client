@@ -50,6 +50,7 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_shipTo,              SIGNAL(newId(int)),                      this,         SLOT(populateShipto(int)));
   connect(_shipToName,          SIGNAL(textChanged(const QString&)),     this,         SLOT(sShipToModified()));
   connect(_subtotal,            SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
+  connect(_tax,                 SIGNAL(save(bool)),                      this,         SLOT(save(bool)));
   connect(_tax,                 SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_miscChargeTaxtype,   SIGNAL(newID(int)),                      this,         SLOT(sMiscTaxtypeChanged()));
   connect(_miscChargeDiscount,  SIGNAL(toggled(bool)),                   this,         SLOT(sMiscTaxtypeChanged()));
@@ -1008,7 +1009,7 @@ void invoice::sDelete()
 
   sCalculateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
+  if (_metrics->value("TaxService") != "A" && save(true))
     sCalculateTax();
 }
 
@@ -1547,7 +1548,7 @@ void invoice::sTaxZoneChanged()
 
 void invoice::sMiscTaxtypeChanged()
 {
-  if (save(true) && _metrics->value("TaxService") != "A")
+  if (_metrics->value("TaxService") != "A" && save(true))
     sCalculateTax();
 }
 
@@ -1555,7 +1556,7 @@ void invoice::sMiscAmountChanged()
 {
   sCalculateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
+  if (_metrics->value("TaxService") != "A" && save(true))
     sCalculateTax();
 }
 
