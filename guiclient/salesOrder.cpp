@@ -143,6 +143,7 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   connect(_miscCharge,          SIGNAL(valueChanged()),                         this,         SLOT(sMiscChargeChanged()));
   connect(_freightTaxtype,      SIGNAL(newID(int)),                             this,         SLOT(sMiscTaxtypeChanged()));
   connect(_freight,             SIGNAL(valueChanged()),                         this,         SLOT(sFreightChanged()));
+  connect(_tax,                 SIGNAL(save(bool)),                             this,         SLOT(save(bool)));
   connect(_tax,                 SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
   if (_privileges->check("ApplyARMemos"))
     connect(_allocatedCMLit,    SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sCreditAllocate()));
@@ -2580,8 +2581,8 @@ void salesOrder::sDelete()
 
     sCalculateTotal();
 
-    if (save(true) && _metrics->value("TaxService") != "A")
-      sCalculateTax();
+    if (_metrics->value("TaxService") != "A")
+      _tax->sRecalculate();
   }
 }
 
@@ -3452,7 +3453,7 @@ void salesOrder::sHandleSalesOrderEvent(int pSoheadid, bool)
   {
     sFillItemList();
     if (_metrics->value("TaxService") != "A")
-      sCalculateTax();
+      _tax->sRecalculate();
   }
 }
 
@@ -4677,16 +4678,16 @@ void salesOrder::sIssueLineBalance()
 
 void salesOrder::sMiscTaxtypeChanged()
 {
-  if (save(true) && _metrics->value("TaxService") != "A")
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void salesOrder::sMiscChargeChanged()
 {
   sCalculateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void salesOrder::sFreightChanged()
@@ -4782,13 +4783,8 @@ void salesOrder::sFreightChanged()
 
   sCalculateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
-    sCalculateTax();
-}
-
-void salesOrder::sCalculateTax()
-{
-  _tax->sRecalculate();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void salesOrder::sTaxZoneChanged()
@@ -4797,7 +4793,7 @@ void salesOrder::sTaxZoneChanged()
     save(true);
 
   if (_metrics->value("TaxService") == "N")
-    sCalculateTax();
+    _tax->sRecalculate();
 
   _taxzoneidCache=_taxZone->id();
 }

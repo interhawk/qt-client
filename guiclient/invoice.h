@@ -47,7 +47,6 @@ public slots:
     virtual void postInvoice();
     virtual void sFillItemList();
     virtual void sCalculateTotal();
-    virtual void sCalculateTax();
     virtual void closeEvent( QCloseEvent * pEvent );
     virtual void setFreeFormShipto( bool pFreeForm );
     virtual void sShipToModified();

@@ -30,7 +30,6 @@ public slots:
     virtual SetResponse set( const ParameterList & pParams );
 
     virtual void clear();
-    virtual void sCalculateTax();
     virtual void sCancelSelection();
     virtual void sEditOrder();
     virtual void sEditSelection();

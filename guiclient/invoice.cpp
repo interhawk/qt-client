@@ -50,6 +50,7 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_shipTo,              SIGNAL(newId(int)),                      this,         SLOT(populateShipto(int)));
   connect(_shipToName,          SIGNAL(textChanged(const QString&)),     this,         SLOT(sShipToModified()));
   connect(_subtotal,            SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
+  connect(_tax,                 SIGNAL(save(bool)),                      this,         SLOT(save(bool)));
   connect(_tax,                 SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_miscChargeTaxtype,   SIGNAL(newID(int)),                      this,         SLOT(sMiscTaxtypeChanged()));
   connect(_miscChargeDiscount,  SIGNAL(toggled(bool)),                   this,         SLOT(sMiscTaxtypeChanged()));
@@ -1008,8 +1009,8 @@ void invoice::sDelete()
 
   sCalculateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void invoice::populate()
@@ -1244,14 +1245,6 @@ void invoice::sReleaseNumber()
                          invoiceReleaseNumber, __FILE__, __LINE__);
     _NumberGen = -1;
   }
-}
-
-
-void invoice::sCalculateTax()
-{
-  _tax->sRecalculate();
-
-  // changing _tax fires sCalculateTotal()
 }
 
 void invoice::setFreeFormShipto(bool pFreeForm)
@@ -1541,22 +1534,22 @@ void invoice::sTaxZoneChanged()
     _taxzoneidCache = _taxzone->id();
 
     if (_metrics->value("TaxService") == "N")
-      sCalculateTax();
+      _tax->sRecalculate();
   }
 }
 
 void invoice::sMiscTaxtypeChanged()
 {
-  if (save(true) && _metrics->value("TaxService") != "A")
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void invoice::sMiscAmountChanged()
 {
   sCalculateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void invoice::sFreightChanged()
@@ -1610,7 +1603,7 @@ void invoice::sFreightChanged()
     sCalculateTotal();
 
     if (_metrics->value("TaxService") != "A")
-      sCalculateTax();
+      _tax->sRecalculate();
   }
 }
 

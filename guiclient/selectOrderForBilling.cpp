@@ -48,6 +48,7 @@ selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, 
   connect(_selectBalance, SIGNAL(clicked()), this, SLOT(sSelectBalance()));
   connect(_showClosed, SIGNAL(toggled(bool)), this, SLOT(sFillList()));
   connect(_so, SIGNAL(newId(int,QString)), this, SLOT(sPopulate(int)));
+  connect(_salesTax,    SIGNAL(save(bool)),     this, SLOT(save(bool)));
   connect(_salesTax,	SIGNAL(valueChanged()),	this, SLOT(sUpdateTotal()));
   connect(_subtotal,	SIGNAL(valueChanged()),	this, SLOT(sUpdateTotal()));
   connect(_taxZone,	SIGNAL(newID(int)),	this, SLOT(sTaxZoneChanged()));
@@ -406,7 +407,7 @@ void selectOrderForBilling::sEditSelection()
     sFillList();
 
     if (_metrics->value("TaxService") != "A")
-      sCalculateTax();
+      _salesTax->sRecalculate();
 
     _updated = true;
   }
@@ -426,7 +427,7 @@ void selectOrderForBilling::sCancelSelection()
   sFillList();
 
   if (_metrics->value("TaxService") != "A")
-    sCalculateTax();
+    _salesTax->sRecalculate();
 }
 
 void selectOrderForBilling::sSelectBalance()
@@ -455,14 +456,7 @@ void selectOrderForBilling::sSelectBalance()
   sFillList();
 
   if (_metrics->value("TaxService") != "A")
-    sCalculateTax();
-}
-
-void selectOrderForBilling::sCalculateTax()   
-{
-  _salesTax->sRecalculate();
-
-  // changing _tax fires sCalculateTotal()
+    _salesTax->sRecalculate();
 }
 
 void selectOrderForBilling::sUpdateTotal()
@@ -619,22 +613,22 @@ void selectOrderForBilling::sTaxZoneChanged()
     }
     _taxzoneidCache = _taxZone->id();
     if (_metrics->value("TaxService") == "N")
-      sCalculateTax();
+      _salesTax->sRecalculate();
   }
 }
 
 void selectOrderForBilling::sMiscTaxtypeChanged()
 {
-  if (save(true) && _metrics->value("TaxService") != "A")
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _salesTax->sRecalculate();
 }
 
 void selectOrderForBilling::sMiscChargeChanged()
 {
   sUpdateTotal();
 
-  if (save(true) && _metrics->value("TaxService") != "A")
-    sCalculateTax();
+  if (_metrics->value("TaxService") != "A")
+    _salesTax->sRecalculate();
 }
 
 void selectOrderForBilling::sFreightChanged()
@@ -697,7 +691,7 @@ void selectOrderForBilling::sFreightChanged()
 
     sUpdateTotal();
 
-    if (save(true) && _metrics->value("TaxService") != "A")
-      sCalculateTax();
+    if (_metrics->value("TaxService") != "A")
+      _salesTax->sRecalculate();
   }   
 }
