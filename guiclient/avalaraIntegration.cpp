@@ -33,11 +33,10 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
 {
   XSqlQuery build;
   build.prepare("SELECT buildAvalaraUrl(:type, :orderType, :orderId, :url) AS url, "
-                "       buildAvalaraHeaders(:localhost, :account, :key) AS headers;");
+                "       buildAvalaraHeaders(:account, :key) AS headers;");
   build.bindValue(":type", type);
   build.bindValue(":orderType", orderType);
   build.bindValue(":orderId", orderId);
-  build.bindValue(":localhost", QHostInfo::localHostName());
   if (config.size() >= 3)
   {
     build.bindValue(":account", config[0]);
@@ -57,6 +56,12 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
     {
       netrequest.setRawHeader(header.split(": ")[0].toUtf8(), header.split(": ")[1].toUtf8());
     }
+
+    netrequest.setRawHeader("X-Avalara-UID", QByteArray("a0o0b000003PfVt"));
+    netrequest.setRawHeader("X-Avalara-Client",
+                            (QString("xTuple; %1; REST; V2; %2")
+                             .arg(_metrics->value("ServerVersion"))
+                             .arg(QHostInfo::localHostName())).toUtf8());
 
     foreach (QNetworkReply* other, replies)
     {
