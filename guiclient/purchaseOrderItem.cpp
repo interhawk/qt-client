@@ -57,9 +57,6 @@ purchaseOrderItem::purchaseOrderItem(QWidget* parent, const char* name, bool mod
   connect(_notesButton, SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
   connect(_listPrices, SIGNAL(clicked()), this, SLOT(sVendorListPrices()));
   connect(_taxLit, SIGNAL(leftClickedURL(QString)), this, SLOT(sTaxDetail()));  // new slot added for tax url //
-  connect(_extendedPrice, SIGNAL(valueChanged()), this, SLOT(sCalculateTax()));  // new slot added for price //
-  connect(_freight, SIGNAL(valueChanged()), this, SLOT(sCalculateTax()));  // new slot added for line freight //
-  connect(_taxtype, SIGNAL(newID(int)), this, SLOT(sCalculateTax()));            // new slot added for taxtype //
 
   _bomRevision->setMode(RevisionLineEdit::Use);
   _bomRevision->setType("BOM");
@@ -1263,22 +1260,13 @@ void purchaseOrderItem::sVendorListPrices()
 
 void purchaseOrderItem::sCalculateTax()
 {
-  QString sql("SELECT COALESCE(calculateTax(pohead_taxzone_id,<? value('taxtype_id') ?>,pohead_orderdate,pohead_curr_id,ROUND(<? value('ext') ?>,2)),0.00) + "
-                "       <? if exists('freight') ?> "
-                "       COALESCE(calculateTax(pohead_taxzone_id,getfreighttaxtypeid(),pohead_orderdate,pohead_curr_id,ROUND(COALESCE(<? value('freight') ?>,0.00),2)), 0.00) "
-                "       <? else ?> 0 <? endif ?> AS tax "
-                "FROM pohead "
-                "WHERE (pohead_id=<? value('pohead_id') ?>); " );
-
-  MetaSQLQuery  mql(sql);
-  ParameterList params;
-  params.append("pohead_id", _poheadid);
-  params.append("taxtype_id", _taxtype->id());
-  params.append("ext", _extendedPrice->localValue());
-  if (_freight->localValue() > 0)
-    params.append("freight", _freight->localValue());
-
-  XSqlQuery calcq = mql.toQuery(params);
+  XSqlQuery calcq;
+  calcq.prepare("SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
+                "  FROM taxhist "
+                " WHERE taxhist_doctype = 'PI' "
+                "   AND taxhist_parent_id = :poitemid");
+  calcq.bindValue(":poitemid", _poitemid);
+  calcq.exec();
   if (calcq.first())
     _tax->setLocalValue(calcq.value("tax").toDouble());
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("P/O Tax Calculation"),
@@ -1288,21 +1276,10 @@ void purchaseOrderItem::sCalculateTax()
 
 void purchaseOrderItem::sTaxDetail()
 {
-  if (_poitemid < 0)
-    return;
-
-  if (_mode == cNew)
-  {
-    QMessageBox::information( this, tr("Tax Breakdown"),
-                    tr("<p>Please save the Purchase Order Item before viewing the tax breakdown."));
-    return;
-  }
-
   ParameterList params;
   params.append("order_id", _poitemid);
   params.append("order_type", "PI");
-  if (_mode == cView)
-    params.append("mode", "view");
+  params.append("mode", "view");
 
   taxBreakdown newdlg(this, "", true);
   newdlg.set(params);

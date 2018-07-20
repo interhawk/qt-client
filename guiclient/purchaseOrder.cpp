@@ -27,7 +27,7 @@
 #include "printPurchaseOrder.h"
 #include "purchaseOrderItem.h"
 #include "vendorAddressList.h"
-#include "taxBreakdown.h"
+#include "taxIntegration.h"
 #include "salesOrder.h"
 #include "workOrder.h"
 #include "openPurchaseOrder.h" 
@@ -49,8 +49,8 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   connect(_poitem,                   SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this,          SLOT(sPopulateMenu(QMenu*,QTreeWidgetItem*)));
   connect(_delete,                   SIGNAL(clicked()),                                 this,          SLOT(sDelete()));
   connect(_edit,                     SIGNAL(clicked()),                                 this,          SLOT(sEdit()));
-  connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTax()));
-  connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTotals()));
+  connect(_freightTaxtype,           SIGNAL(newID(int)),                                this,          SLOT(sFreightTaxtypeChanged()));
+  connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sFreightChanged()));
   connect(_new,                      SIGNAL(clicked()),                                 this,          SLOT(sNew()));
   connect(_orderDate,                SIGNAL(newDate(QDate)),                            this,          SLOT(sHandleOrderDate()));
   connect(_orderNumber,              SIGNAL(editingFinished()),                         this,          SLOT(sHandleOrderNumber()));
@@ -62,7 +62,7 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   connect(_qedelete,                 SIGNAL(clicked()),                                 this,          SLOT(sQEDelete()));
   connect(_qesave,                   SIGNAL(clicked()),                                 this,          SLOT(sQESave()));
   connect(_save,                     SIGNAL(clicked()),                                 this,          SLOT(sSave()));
-  connect(_taxLit,                   SIGNAL(leftClickedURL(const QString&)),            this,          SLOT(sTaxDetail()));
+  connect(_tax,                      SIGNAL(save(bool)),                                this,          SLOT(save(bool)));
   connect(_tax,                      SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTotals()));
   connect(_taxZone,                  SIGNAL(newID(int)),                                this,          SLOT(sTaxZoneChanged()));
   connect(_vendaddrList,             SIGNAL(clicked()),                                 this,          SLOT(sVendaddrList()));
@@ -132,6 +132,7 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   _cachedTabIndex = 0;
 
   _mode = cView;        // initialize _mode to something safe - bug 3768
+  _tax->setMode(_mode);
  
   _printPO->setChecked(_metrics->boolean("DefaultPrintPOOnSave"));
 
@@ -161,12 +162,15 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
 
   _purchaseType->populate("SELECT potype_id, potype_code ||' - '||potype_descr, potype_code "
                            " FROM potype WHERE potype_active ORDER BY potype_default DESC");
+
+  _freightTaxtype->setCode("Freight");
 }
 
 void purchaseOrder::setPoheadid(const int pId)
 {
   _poheadid = pId;
   _qeitem->setHeadId(pId);
+  _tax->setOrderId(pId);
   emit newId(_poheadid);
 }
 
@@ -223,6 +227,7 @@ enum SetResponse purchaseOrder::set(const ParameterList &pParams)
     if ( (param.toString() == "new") || (param.toString() == "releasePr") )
     {
       _mode = cNew;
+      _tax->setMode(_mode);
       emit newMode(_mode);
       connect(omfgThis, SIGNAL(purchaseOrdersUpdated(int, bool)), this, SLOT(sHandlePurchaseOrderEvent(int, bool)));
 
@@ -377,6 +382,7 @@ enum SetResponse purchaseOrder::set(const ParameterList &pParams)
             }
 //  Use an existing pohead
             _mode = cEdit;
+            _tax->setMode(_mode);
             emit newMode(_mode);
 
             setPoheadid(openpoid);
@@ -470,6 +476,7 @@ enum SetResponse purchaseOrder::set(const ParameterList &pParams)
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
+      _tax->setMode(_mode);
       emit newMode(_mode);
 
       _orderNumber->setEnabled(false);
@@ -550,6 +557,7 @@ void purchaseOrder::setViewMode()
   }
 
   _mode = cView;
+  _tax->setMode(_mode);
   emit newMode(_mode);
   
   _orderNumber->setEnabled(false);
@@ -768,6 +776,7 @@ void purchaseOrder::populate()
     _taxZone->setId(po.value("pohead_taxzone_id").toInt());
     _poCurrency->setId(po.value("pohead_curr_id").toInt());
     _freight->setLocalValue(po.value("pohead_freight").toDouble());
+    _freightTaxtype->setId(po.value("pohead_freight_taxtype_id").toInt());
 
    // must be after _vendor
     _purchaseType->setId(po.value("pohead_potype_id").toInt());
@@ -782,6 +791,84 @@ void purchaseOrder::populate()
 
 void purchaseOrder::sSave()
 {
+  if(!save(false))
+    return;
+
+  if (!_pridList.isEmpty())
+  {
+    XSqlQuery purchaseSave;
+    purchaseSave.prepare("SELECT deletePr(:pr_id) AS _result;");
+    for(int i = 0; i < _pridList.size(); ++i)
+    {
+      purchaseSave.bindValue(":pr_id", _pridList.at(i));
+      purchaseSave.exec();
+    }
+    omfgThis->sPurchaseRequestsUpdated();
+  }
+
+  if (_printPO->isChecked() && (_status->currentIndex() != 2)) // don't print closed
+  {
+    ParameterList params;
+    params.append("pohead_id", _poheadid);
+
+    printPurchaseOrder newdlgP(this, "", true);
+    newdlgP.set(params);
+    newdlgP.exec();
+  }
+
+  emit saved(_poheadid);
+
+  if(_metrics->value("TaxService") == "A")
+    _tax->save();
+
+  XSqlQuery clearq;
+  if (! _lock.release())
+    ErrorReporter::error(QtCriticalMsg, this, tr("Locking Error"),
+                         _lock.lastError(), __FILE__, __LINE__);
+ 
+  if (_mode == cNew && !_captive)
+  {
+    _purchaseOrderInformation->setCurrentIndex(0);
+
+    _agent->setText(omfgThis->username());
+    _terms->setId(-1);
+    _vendor->setReadOnly(false);
+    _vendor->setId(-1);
+    _taxZone->setId(-1);
+
+    _orderNumber->clear();
+    _orderDate->clear();
+    _shipVia->clear();
+    _status->setCurrentIndex(0);
+    _fob->clear();
+    _notes->clear();
+    _tax->clear();
+    _freight->clear();
+    _total->clear();
+    _totalWeight->clear();
+    _totalQtyOrd->clear();
+    _poitem->clear();
+    _poCurrency->setEnabled(true);
+    _qecurrency->setEnabled(true);
+    _qeitem->removeRows(0, _qeitem->rowCount());
+    _vendaddrCode->clear();
+    _vendCntct->clear();
+    _vendAddr->clear();
+    _shiptoCntct->clear();
+    _shiptoName->clear();
+    _shiptoAddr->clear();
+
+    createHeader();
+    _subtotal->clear();
+  }
+  else
+  {
+    close();
+  }
+}
+
+bool purchaseOrder::save(bool partial)
+{
   XSqlQuery purchaseSave;
   _save->setFocus();
 
@@ -791,69 +878,75 @@ void purchaseOrder::sSave()
   QList<GuiErrorCheck> errors;
   errors << GuiErrorCheck(_orderNumber->text().isEmpty(), _orderNumber,
                           tr("You may not save this Purchase Order until you have entered a valid Purchase Order Number."))
-         << GuiErrorCheck(!_vendor->isValid(), _vendor,
+         << GuiErrorCheck(!partial && !_vendor->isValid(), _vendor,
                           tr("You may not save this Purchase Order until you have selected a Vendor." ))
-         << GuiErrorCheck(_metrics->boolean("RequirePOTax") && !_taxZone->isValid(), _taxZone,
+         << GuiErrorCheck(!partial && _metrics->boolean("RequirePOTax") && !_taxZone->isValid(), _taxZone,
                           tr("You may not save this Purchase Order until you have selected a Tax Zone." ))
-         << GuiErrorCheck(!_orderDate->isValid(), _orderDate,
+         << GuiErrorCheck(!partial && !_orderDate->isValid(), _orderDate,
                           tr("You may not save this Purchase Order until you have entered a valid Purchase Order Date."))
      ;
 
-  if (_qeitem->isDirty() && ! sQESave())
-    return;
-
-  purchaseSave.prepare( "SELECT poitem_id " 
-                        "FROM poitem "
-                        "WHERE (poitem_pohead_id=:pohead_id) "
-                        "LIMIT 1;" );
-  purchaseSave.bindValue(":pohead_id", _poheadid);
-  purchaseSave.exec();
-  if (!purchaseSave.first())
+  if (!partial)
   {
-    errors << GuiErrorCheck(true, _new,
-                            tr( "You may not save this Purchase Order until you have created at least one Line Item for it." ));
-  }
+    if (_qeitem->isDirty() && ! sQESave())
+      return false;
 
-  purchaseSave.prepare( "SELECT pohead_status "
-                        "FROM pohead "
-                        "WHERE (pohead_id=:pohead_id);" );
-  purchaseSave.bindValue(":pohead_id", _poheadid);
-  purchaseSave.exec();
-  if (purchaseSave.first())
-  {
-    if ((purchaseSave.value("pohead_status") == "O") && (_status->currentIndex() == 0))
+    purchaseSave.prepare( "SELECT poitem_id " 
+                          "FROM poitem "
+                          "WHERE (poitem_pohead_id=:pohead_id) "
+                          "LIMIT 1;" );
+    purchaseSave.bindValue(":pohead_id", _poheadid);
+    purchaseSave.exec();
+    if (!purchaseSave.first())
     {
-      if (!_privileges->check("UnreleasePurchaseOrders"))
-        errors << GuiErrorCheck(true, _status,
-                                tr( "You do not have the privilege to set the status back to 'Unreleased'." ));
-      else
+      errors << GuiErrorCheck(true, _new,
+                              tr( "You may not save this Purchase Order until you have created at least one Line Item for it." ));
+    }
+
+    purchaseSave.prepare( "SELECT pohead_status "
+                          "FROM pohead "
+                          "WHERE (pohead_id=:pohead_id);" );
+    purchaseSave.bindValue(":pohead_id", _poheadid);
+    purchaseSave.exec();
+    if (purchaseSave.first())
+    {
+      if ((purchaseSave.value("pohead_status") == "O") && (_status->currentIndex() == 0))
       {
-        XSqlQuery unRelease;
-        unRelease.prepare("SELECT unreleasePurchaseOrder(:pohead_id) AS result;");
-        unRelease.bindValue(":pohead_id", _poheadid);
-        unRelease.exec();
-        if (unRelease.first())
+        if (!_privileges->check("UnreleasePurchaseOrders"))
+          errors << GuiErrorCheck(true, _status,
+                                  tr( "You do not have the privilege to set the status back to 'Unreleased'." ));
+        else
         {
-          int result = unRelease.value("result").toInt();
-          if (result < 0)
+          XSqlQuery unRelease;
+          unRelease.prepare("SELECT unreleasePurchaseOrder(:pohead_id) AS result;");
+          unRelease.bindValue(":pohead_id", _poheadid);
+          unRelease.exec();
+          if (unRelease.first())
           {
-            ErrorReporter::error(QtCriticalMsg, this, tr("Error Unreleasing Purchase Order"),
-                                   storedProcErrorLookup("unreleasePurchaseOrder", result),
-                                   __FILE__, __LINE__);
-            return;
+            int result = unRelease.value("result").toInt();
+            if (result < 0)
+            {
+              ErrorReporter::error(QtCriticalMsg, this, tr("Error Unreleasing Purchase Order"),
+                                     storedProcErrorLookup("unreleasePurchaseOrder", result),
+                                     __FILE__, __LINE__);
+              return false;
+            }
           }
-        }
-        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Purchase Order Information"),
-                                      unRelease, __FILE__, __LINE__))
-        {
-          return;
+          else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Purchase Order Information"),
+                                        unRelease, __FILE__, __LINE__))
+          {
+            return false;
+          }
         }
       }
     }
   }
 
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
+
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Purchase Order"), errors))
-    return;
+    return false;
 
   purchaseSave.prepare( "UPDATE pohead "
              "SET pohead_warehous_id=:pohead_warehous_id, pohead_orderdate=:pohead_orderdate,"
@@ -903,7 +996,8 @@ void purchaseOrder::sSave()
              "    pohead_shiptostate=:pohead_shiptostate,"
              "    pohead_shiptozipcode=:pohead_shiptozipcode,"
              "    pohead_shiptocountry=:pohead_shiptocountry,"
-             "    pohead_dropship=:pohead_dropship "
+             "    pohead_dropship=:pohead_dropship,"
+             "    pohead_freight_taxtype_id=:pohead_freight_taxtype_id "
              "WHERE (pohead_id=:pohead_id);" );
   purchaseSave.bindValue(":pohead_id", _poheadid);
   if (_warehouse->isValid())
@@ -969,82 +1063,17 @@ void purchaseOrder::sSave()
   if (_purchaseType->id() >= 0)
     purchaseSave.bindValue(":pohead_potype_id", _purchaseType->id());
   purchaseSave.bindValue(":pohead_dropship", QVariant(_dropShip->isChecked()));
+  purchaseSave.bindValue(":pohead_freight_taxtype_id", _freightTaxtype->id());
 
   purchaseSave.exec();
 
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Purchase Order"),
                            purchaseSave, __FILE__, __LINE__))
-    return;
+    return false;
  
   omfgThis->sPurchaseOrdersUpdated(_poheadid, true);
 
-  if (!_pridList.isEmpty())
-  {
-    purchaseSave.prepare("SELECT deletePr(:pr_id) AS _result;");
-    for(int i = 0; i < _pridList.size(); ++i)
-    {
-      purchaseSave.bindValue(":pr_id", _pridList.at(i));
-      purchaseSave.exec();
-    }
-    omfgThis->sPurchaseRequestsUpdated();
-  }
-
-  if (_printPO->isChecked() && (_status->currentIndex() != 2)) // don't print closed
-  {
-    ParameterList params;
-    params.append("pohead_id", _poheadid);
-
-    printPurchaseOrder newdlgP(this, "", true);
-    newdlgP.set(params);
-    newdlgP.exec();
-  }
-
-  emit saved(_poheadid);
-
-  XSqlQuery clearq;
-  if (! _lock.release())
-    ErrorReporter::error(QtCriticalMsg, this, tr("Locking Error"),
-                         _lock.lastError(), __FILE__, __LINE__);
-  
-  if (_mode == cNew && !_captive)
-  {
-    _purchaseOrderInformation->setCurrentIndex(0);
-
-    _agent->setText(omfgThis->username());
-    _terms->setId(-1);
-    _vendor->setReadOnly(false);
-    _vendor->setId(-1);
-    _taxZone->setId(-1);
-
-    _orderNumber->clear();
-    _orderDate->clear();
-    _shipVia->clear();
-    _status->setCurrentIndex(0);
-    _fob->clear();
-    _notes->clear();
-    _tax->clear();
-    _freight->clear();
-    _total->clear();
-    _totalWeight->clear();
-    _totalQtyOrd->clear();
-    _poitem->clear();
-    _poCurrency->setEnabled(true);
-    _qecurrency->setEnabled(true);
-    _qeitem->removeRows(0, _qeitem->rowCount());
-    _vendaddrCode->clear();
-    _vendCntct->clear();
-    _vendAddr->clear();
-    _shiptoCntct->clear();
-    _shiptoName->clear();
-    _shiptoAddr->clear();
-
-    createHeader();
-    _subtotal->clear();
-  }
-  else
-  {
-    close();
-  }
+  return true;
 }
 
 void purchaseOrder::sNew()
@@ -1325,7 +1354,11 @@ void purchaseOrder::sHandleVendor(int pVendid)
 void purchaseOrder::sHandlePurchaseOrderEvent(int pPoheadid, bool)
 {
   if (pPoheadid == _poheadid)
+  {
     sFillList();
+    if (_metrics->value("TaxService") != "A")
+      _tax->sRecalculate();
+  }
 }
 
 void purchaseOrder::sFillList()
@@ -1351,7 +1384,6 @@ void purchaseOrder::sFillList()
     return;
   }
 
-  sCalculateTax();
   sCalculateTotals();
 
   _poCurrency->setEnabled(_poitem->topLevelItemCount() == 0);
@@ -1442,6 +1474,7 @@ void purchaseOrder::sHandleOrderNumber()
                              _lock.lastError(), __FILE__, __LINE__);
       
       _mode = cEdit;
+      _tax->setMode(_mode);
       emit newMode(_mode);
       setPoheadid(poheadid);
       populate();
@@ -1641,6 +1674,57 @@ void purchaseOrder::sHandleOrderDate()
   static_cast<PoitemTableModel*>(_qeitemView->model())->setTransDate(_orderDate->date());
 }
 
+void purchaseOrder::sFreightTaxtypeChanged()
+{
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
+}
+
+void purchaseOrder::sFreightChanged()
+{
+  if (_freight->localValue() > 0.0 && _metrics->value("TaxService") == "A")
+  {
+    XSqlQuery qry;
+    qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                "                      addr_line1 || addr_line2 || addr_line3 || "
+                "                      addr_city || addr_state || addr_postalcode || "
+                "                      addr_country) != 1 "
+                "       AS check "
+                "  FROM poitem "
+                "  JOIN itemsite ON poitem_itemsite_id = itemsite_id "
+                "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                " WHERE poitem_pohead_id = :pohead_id;");
+    qry.bindValue(":pohead_id", _poheadid);
+    qry.exec();
+    if (qry.first() && qry.value("check").toBool())
+    {
+      QMessageBox::critical(this, tr("Cannot enter order level freight"),
+                            tr("Cannot enter order level freight when lines are "
+                               "shipping to different addresses for Avalara tax "
+                               "calculation."));
+
+      disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      _freight->setLocalValue(0.0);
+      connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+      return;
+    }
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                  qry, __FILE__, __LINE__))
+    {
+      disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      _freight->setLocalValue(0.0);
+      connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+      return;
+    }
+  }
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
+}
+
 void purchaseOrder::sTaxZoneChanged()
 {
  if (_poheadid == -1 )
@@ -1659,48 +1743,10 @@ void purchaseOrder::sTaxZoneChanged()
     {
       return;
     }
-    sCalculateTax();
+
+    if (_metrics->value("TaxService") == "N")
+      _tax->sRecalculate();
   }
-}
-
-void purchaseOrder::sCalculateTax()
-{ 
-  if (!_vendor->isValid())
-    return; 
-  if (!saveDetail())
-    return;
-
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(tax) AS tax "
-                "FROM ("
-                "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-                "FROM tax "
-                " JOIN calculateTaxDetailSummary('PO', :pohead_id, 'T') ON (taxdetail_tax_id=tax_id)"
-                "GROUP BY tax_id) AS data;" );
-  taxq.bindValue(":pohead_id", _poheadid);
-  taxq.exec();
-  if (taxq.first())
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Calculating P/O Tax"),
-                                    taxq, __FILE__, __LINE__))
-        return;
-}
-
-void purchaseOrder::sTaxDetail()
-{
-  if (!saveDetail())
-    return;
-
-  ParameterList params;
-  params.append("order_id", _poheadid);
-  params.append("order_type", "PO");
-  // mode => view since there are no fields to hold modified tax data
-  if (_mode == cView)
-    params.append("mode", "view");
-
-  taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError && newdlg.exec() == XDialog::Accepted)
-    populate();
 }
 
 bool purchaseOrder::saveDetail()
