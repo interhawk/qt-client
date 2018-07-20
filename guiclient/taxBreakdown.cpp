@@ -252,7 +252,7 @@ void taxBreakdown::sPopulate()
     params.append("headtype", "TI");
     params.append("dochead_id", _orderid);
   }
-  else if (_ordertype == "PO")
+  else if (_ordertype == "P")
   {
     _currencyLit->setText(tr("Purchase Order Currency:"));
     _header->setText(tr("Tax Breakdown for Purchase Order:"));
