@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -13,6 +13,7 @@
 
 #include "applock.h"
 #include "guiclient.h"
+#include "taskList.h"
 #include "xwidget.h"
 #include <parameter.h>
 #include "contacts.h"
@@ -63,6 +64,7 @@ protected slots:
 protected:
     virtual void closeEvent(QCloseEvent*);
     contacts *_contacts;
+    taskList *_taskList;
     QPushButton *_add;
 
 private:
