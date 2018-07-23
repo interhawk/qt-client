@@ -525,7 +525,24 @@ to be bound by its terms.</comment>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" colspan="4">
+         <item row="2" column="1">
+          <widget class="QLabel" name="_freightTaxtypeLit">
+           <property name="text">
+            <string>Freight Tax Type:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="XComboBox" name="_freightTaxtype">
+           <property name="type">
+            <enum>XComboBox::TaxTypes</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="4">
           <widget class="QStackedWidget" name="_freightStack">
            <property name="currentIndex">
             <number>0</number>
@@ -718,10 +735,17 @@ to be bound by its terms.</comment>
        </layout>
       </item>
       <item row="3" column="1">
-       <widget class="CurrDisplay" name="_tax"/>
+       <widget class="TaxDisplay" name="_tax">
+        <property name="type">
+         <string>VCH</string>
+        </property>
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="3" column="0">
-       <widget class="XURLLabel" name="_taxLit">
+       <widget class="XLabel" name="_taxLit">
         <property name="text">
          <string>Tax:</string>
         </property>
