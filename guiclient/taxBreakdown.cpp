@@ -281,7 +281,7 @@ void taxBreakdown::sPopulate()
     params.append("itemtype", "PI");
     params.append("docitem_id", _orderid);
   }
-   else if (_ordertype == "VO")
+   else if (_ordertype == "VCH")
   {
     _currencyLit->setText(tr("Voucher Currency:"));
     _header->setText(tr("Tax Breakdown for Voucher:"));
@@ -295,7 +295,7 @@ void taxBreakdown::sPopulate()
     params.append("itemtype", "VCHI");
     params.append("dochead_id", _orderid);
   }
-  else if (_ordertype == "VI")
+  else if (_ordertype == "VCHI")
   {
     _currencyLit->setText(tr("Voucher Currency:"));
     _header->setText(tr("Tax Breakdown for Voucher:"));
