@@ -561,6 +561,13 @@ void ParameterWidget::applySaved(int pId, int filter_id)
             custCluster->setId(tempFilterList[1].toInt());
           }
           break;
+        case Prospect:
+          {
+          CustCluster *prospectCluster = qobject_cast<CustCluster*>(found);
+          if (prospectCluster != 0)
+            prospectCluster->setId(tempFilterList[1].toInt());
+          }
+          break;
         case Shipto:
           {
           ShiptoCluster *shiptoCluster = qobject_cast<ShiptoCluster*>(found);
@@ -779,6 +786,13 @@ void ParameterWidget::applySaved(int pId, int filter_id)
         CustCluster *custCluster = qobject_cast<CustCluster*>(found);
         if (custCluster != 0)
           custCluster->setId(pp->defaultValue.toInt());
+        }
+        break;
+      case Prospect:
+        {
+        CustCluster *prospectCluster = qobject_cast<CustCluster*>(found);
+        if (prospectCluster != 0)
+          prospectCluster->setId(pp->defaultValue.toInt());
         }
         break;
       case Shipto:
@@ -1041,6 +1055,18 @@ void ParameterWidget::changeFilterObject(int index)
       custCluster->setDescriptionVisible(false);
 
       connect(custCluster, SIGNAL(newId(int)), this, SLOT( storeFilterValue(int) ) );
+    }
+    break;
+  case Prospect:
+    {
+      CustCluster *prospectCluster = new CustCluster(_filterGroup);
+      newWidget = prospectCluster;
+      prospectCluster->setOrientation(Qt::Horizontal);
+      prospectCluster->setLabel("");
+      prospectCluster->setDescriptionVisible(false);
+      prospectCluster->setType(CLineEdit::AllProspects);
+
+      connect(prospectCluster, SIGNAL(newId(int)), this, SLOT( storeFilterValue(int) ) );
     }
     break;
   case Shipto:
