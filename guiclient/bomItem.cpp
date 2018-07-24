@@ -60,7 +60,6 @@ bomItem::bomItem(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   _qtyFxd->setValidator(omfgThis->qtyVal());
   _qtyPer->setValidator(omfgThis->qtyPerVal());
   _scrap->setValidator(omfgThis->scrapVal());
-  _seqnumber->setValidator(new QIntValidator(1,999999999));
 
   _bomitemsub->addColumn(tr("Rank"),        _whsColumn,  Qt::AlignCenter, true, "bomitemsub_rank");
   _bomitemsub->addColumn(tr("Item Number"), _itemColumn, Qt::AlignLeft,  true, "item_number");
@@ -126,6 +125,7 @@ enum SetResponse bomItem::set(const ParameterList &pParams)
     if (param.toString() == "new")
     {
       _mode = cNew;
+
       _seqnumberLit->setVisible(false);
       _seqnumber->setVisible(false);
 
@@ -358,7 +358,7 @@ void bomItem::sSave()
   bomitem.bindValue(":bomitem_schedatwooper", false);
 
   if (_mode == cEdit)
-    bomitem.bindValue(":bomitem_seqnumber", _seqnumber->toDouble());
+    bomitem.bindValue(":bomitem_seqnumber", _seqnumber->value());
 
   if (_noSubstitutes->isChecked())
     bomitem.bindValue(":bomitem_subtype", "N");
@@ -564,7 +564,7 @@ void bomItem::populate()
     _uom->setId(qbomitem.value("bomitem_uom_id").toInt());
     _notes->setText(qbomitem.value("bomitem_notes").toString());
     _ref->setText(qbomitem.value("bomitem_ref").toString());
-    _seqnumber->setText(qbomitem.value("bomitem_seqnumber").toInt());
+    _seqnumber->setValue(qbomitem.value("bomitem_seqnumber").toInt());
 
     for (int counter = 0; counter < _issueMethod->count(); counter++)
     {
