@@ -65,6 +65,20 @@ void TaxIntegration::commit(QString orderType, int orderId)
                          qry, __FILE__, __LINE__);
 }
 
+void TaxIntegration::cancel(QString orderType, int orderId)
+{
+  XSqlQuery qry;
+  qry.prepare("SELECT voidTax(:orderType, :orderId) AS request;");
+  qry.bindValue(":orderType", orderType);
+  qry.bindValue(":orderId", orderId);
+  qry.exec();
+  if (qry.first())
+    sendRequest("voidtransaction", orderType, orderId, qry.value("request").toString());
+  else
+    ErrorReporter::error(QtCriticalMsg, 0, tr("Error voiding tax transaction"),
+                         qry, __FILE__, __LINE__);
+}
+
 void TaxIntegration::handleResponse(QString type, QString orderType, int orderId, QString response, QString error)
 {
   if (type == "test")

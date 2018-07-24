@@ -27,6 +27,7 @@ class TaxIntegration : public QObject
     Q_INVOKABLE virtual void getTaxCodes();
     Q_INVOKABLE virtual void calculateTax(QString, int, bool = false);
     Q_INVOKABLE virtual void commit(QString, int);
+    Q_INVOKABLE virtual void cancel(QString, int);
     Q_INVOKABLE virtual void wait();
 
   signals:

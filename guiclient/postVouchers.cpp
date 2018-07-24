@@ -16,6 +16,7 @@
 
 #include <openreports.h>
 #include "errorReporter.h"
+#include "taxIntegration.h"
 
 postVouchers::postVouchers(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl)
@@ -73,6 +74,25 @@ void postVouchers::sPost()
                            postPost, __FILE__, __LINE__);
       return;
     }
+
+    XSqlQuery posted;
+    posted.prepare("SELECT vohead_id "
+                   "  FROM apopen "
+                   "  JOIN vohead ON apopen_doctype = 'V' "
+                   "             AND apopen_docnumber = vohead_number "
+                   " WHERE apopen_journalnumber = :journalnumber "
+                   "   AND NOT vohead_misc;");
+    posted.bindValue(":journalnumber", result);
+    posted.exec();
+    while (posted.next())
+    {
+      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+      tax->commit("VCH", posted.value("vohead_id").toInt());
+    }
+
+    if(ErrorReporter::error(QtCriticalMsg, this, tr("Error Fetching Posted Vouchers"),
+                            posted, __FILE__, __LINE__))
+      return;
 
     omfgThis->sVouchersUpdated();
  
