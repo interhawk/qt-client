@@ -25,4 +25,6 @@ void NoIntegration::sendRequest(QString type, QString orderType, int orderId, QS
     handleResponse(type, orderType, orderId, request, "");
   else if (type == "committransaction")
     handleResponse(type, orderType, orderId, request, "");
+  else if (type == "voidtransaction")
+    handleResponse(type, orderType, orderId, request, "");
 }

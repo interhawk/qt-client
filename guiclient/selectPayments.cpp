@@ -653,6 +653,22 @@ void selectPayments::sVoidVoucher()
                                  dspVoidVoucher, __FILE__, __LINE__);
             return;
           }
+
+          XSqlQuery vohead;
+          vohead.prepare("SELECT vohead_id, vohead_misc "
+                         "  FROM apopen "
+                         "  JOIN vohead ON apopen_docnumber = vohead_number "
+                         " WHERE apopen_id = :apopen_id;");
+          vohead.bindValue(":apopen_id", cursor->id());
+          vohead.exec();
+          if (vohead.first() && !vohead.value("vohead_misc").toBool())
+          {
+            TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+            tax->cancel("VCH", vohead.value("vohead_id").toInt());
+          }
+          else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error checking voucher"),
+                                        vohead, __FILE__, __LINE__))
+            return;
         }
         else
         {

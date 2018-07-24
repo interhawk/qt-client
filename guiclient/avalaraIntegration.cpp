@@ -31,6 +31,10 @@ AvalaraIntegration::AvalaraIntegration() : TaxIntegration()
 
 void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderId, QString payload, QStringList config)
 {
+  if (_metrics->boolean("NoAvaTaxCommit") &&
+      (type == "committransaction" || type == "voidtransaction"))
+    return;
+
   XSqlQuery build;
   build.prepare("SELECT buildAvalaraUrl(:type, :orderType, :orderId, :url) AS url, "
                 "       buildAvalaraHeaders(:account, :key) AS headers;");
@@ -69,7 +73,8 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
            other->property("config") == config) ||
           (other->property("type") == "taxcodes") ||
           ((other->property("type") == "createtransaction" ||
-            other->property("type") == "committransaction") &&
+            other->property("type") == "committransaction" ||
+            other->property("type") == "voidtransaction") &&
            other->property("orderType") == orderType &&
            other->property("orderId") == orderId))
       {
@@ -135,6 +140,8 @@ void AvalaraIntegration::handleResponse(QNetworkReply* reply)
       log.bindValue(":type", "CreateOrAdjustTransaction");
     else if (type == "committransaction")
       log.bindValue(":type", "CommitTransaction");
+    else if (type == "voidtransaction")
+      log.bindValue(":type", "VoidTransaction");
     else
       log.bindValue(":type", "Error");
     log.exec();
@@ -180,6 +187,11 @@ QString AvalaraIntegration::error(QString type, QNetworkReply* reply, QJsonObjec
     }
   }
   else if (type == "committransaction")
+  {
+    if (reply->error() != QNetworkReply::NoError)
+      return reply->errorString();
+  }
+  else if (type == "voidtransaction")
   {
     if (reply->error() != QNetworkReply::NoError)
       return reply->errorString();

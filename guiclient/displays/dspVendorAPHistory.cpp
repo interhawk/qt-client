@@ -236,7 +236,25 @@ void dspVendorAPHistory::sVoidVoucher()
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Voucher Information"),
                              dspVoidVoucher, __FILE__, __LINE__);
       else
+      {
+        XSqlQuery vohead;
+        vohead.prepare("SELECT vohead_id, vohead_misc "
+                       "  FROM apopen "
+                       "  JOIN vohead ON apopen_docnumber = vohead_number "
+                       " WHERE apopen_id = :apopen_id;");
+        vohead.bindValue(":apopen_id", list()->id());
+        vohead.exec();
+        if (vohead.first() && !vohead.value("vohead_misc").toBool())
+        {
+          TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+          tax->cancel("VCH", vohead.value("vohead_id").toInt());
+        }
+        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error checking voucher"),
+                                      vohead, __FILE__, __LINE__))
+          return;
+
         sFillList();
+      }
     }
     else
       ErrorReporter::error(QtCriticalMsg, this, tr("Voiding Voucher"),

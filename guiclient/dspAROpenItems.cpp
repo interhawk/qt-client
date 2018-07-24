@@ -954,6 +954,8 @@ void dspAROpenItems::sVoidInvoiceDetails()
     }
 
     dspVoidInvoiceDetails.exec("COMMIT;");
+    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+    tax->cancel("INV", list()->currentItem()->id("docnumber"));
     sFillList();
   }
   else if (post.lastError().type() != QSqlError::NoError)
