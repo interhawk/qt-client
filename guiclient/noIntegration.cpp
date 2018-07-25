@@ -19,12 +19,8 @@ NoIntegration::NoIntegration() : TaxIntegration()
 
 void NoIntegration::sendRequest(QString type, QString orderType, int orderId, QString request, QStringList config)
 {
-  if (type == "taxcodes")
-  handleResponse("taxcodes", QString(), 0, QString(), "");
-  else if (type == "createtransaction")
-    handleResponse(type, orderType, orderId, request, "");
-  else if (type == "committransaction")
-    handleResponse(type, orderType, orderId, request, "");
-  else if (type == "voidtransaction")
+  if (type == "taxcodes" || type == "taxexempt")
+    handleResponse(type, QString(), 0, QString(), "");
+  else
     handleResponse(type, orderType, orderId, request, "");
 }

@@ -72,6 +72,7 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
       if ((other->property("type") == "test" &&
            other->property("config") == config) ||
           (other->property("type") == "taxcodes") ||
+          (other->property("type") == "taxexempt") ||
           ((other->property("type") == "createtransaction" ||
             other->property("type") == "committransaction" ||
             other->property("type") == "voidtransaction") &&
@@ -85,7 +86,7 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
 
     QNetworkReply* reply;
     QDateTime time;
-    if (type == "test" || type == "taxcodes")
+    if (type == "test" || type == "taxcodes" || type == "taxexempt")
     {
       timer.start();
       time = QDateTime::currentDateTime();
@@ -136,6 +137,8 @@ void AvalaraIntegration::handleResponse(QNetworkReply* reply)
       log.bindValue(":type", "Ping");
     else if (type == "taxcodes")
       log.bindValue(":type", "ListTaxCodes");
+    else if (type == "taxexempt")
+      log.bindValue(":type", "ListEntityUseCodes");
     else if (type == "createtransaction")
       log.bindValue(":type", "CreateOrAdjustTransaction");
     else if (type == "committransaction")
@@ -168,11 +171,6 @@ QString AvalaraIntegration::error(QString type, QNetworkReply* reply, QJsonObjec
     else if (!response["authenticated"].toBool())
       return tr("Invalid authentication details.");
   }
-  else if (type == "taxcodes")
-  {
-    if (reply->error() != QNetworkReply::NoError)
-      return reply->errorString();
-  }
   else if (type == "createtransaction")
   {
     if (reply->error() != QNetworkReply::NoError)
@@ -186,12 +184,7 @@ QString AvalaraIntegration::error(QString type, QNetworkReply* reply, QJsonObjec
       return tr("%1: %2<br><br>Caused by:<br>%3.").arg(errcode).arg(errmsg).arg(errhelp);
     }
   }
-  else if (type == "committransaction")
-  {
-    if (reply->error() != QNetworkReply::NoError)
-      return reply->errorString();
-  }
-  else if (type == "voidtransaction")
+  else
   {
     if (reply->error() != QNetworkReply::NoError)
       return reply->errorString();
