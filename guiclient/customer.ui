@@ -1480,7 +1480,7 @@ to be bound by its terms.</comment>
          </widget>
          <widget class="QWidget" name="_taxPage">
           <layout class="QGridLayout" name="gridLayout_25">
-           <item row="1" column="0">
+           <item row="2" column="0">
             <layout class="QVBoxLayout" name="verticalLayout">
              <property name="spacing">
               <number>0</number>
@@ -1582,6 +1582,39 @@ to be bound by its terms.</comment>
                 <enum>XComboBox::TaxZones</enum>
                </property>
               </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>5</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="_taxExemptLit">
+               <property name="text">
+                <string>Tax Exempt Category:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="XComboBox" name="_taxExempt"/>
              </item>
              <item>
               <spacer>

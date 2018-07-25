@@ -31,6 +31,11 @@ void TaxIntegration::getTaxCodes()
   sendRequest("taxcodes");
 }
 
+void TaxIntegration::getTaxExemptCategories()
+{
+  sendRequest("taxexempt");
+}
+
 void TaxIntegration::test(QStringList config)
 {
   sendRequest("test", QString(), 0, QString(), config);
@@ -90,6 +95,11 @@ void TaxIntegration::handleResponse(QString type, QString orderType, int orderId
   {
     done();
     emit taxCodesFetched(QJsonDocument::fromJson(response.toUtf8()).object(), error);
+  }
+  else if (type == "taxexempt")
+  {
+    done();
+    emit taxExemptCategoriesFetched(QJsonDocument::fromJson(response.toUtf8()).object(), error);
   }
   else if (type=="createtransaction")
   {
