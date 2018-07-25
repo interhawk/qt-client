@@ -5,7 +5,7 @@ CONFIG += qt \
     warn_on \
     staticlib
 
-QT += core network printsupport script sql webkit webkitwidgets widgets xml webengine webenginewidgets
+QT += core network printsupport script sql widgets xml webengine webenginewidgets
 QT += websockets webchannel serialport
 
 DBFILE = scriptapi.db
