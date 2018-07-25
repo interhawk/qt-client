@@ -4,14 +4,10 @@ TARGET   = xtuplewidgets
 TEMPLATE = lib
 CONFIG  += qt warn_on plugin
 QT      += core network printsupport script scripttools sql \
-           webkit webkitwidgets widgets xml
+           webengine webenginewidgets widgets xml
+QT      += designer printsupport serialport uitools \
+           webchannel websockets
 
-greaterThan(QT_MAJOR_VERSION, 4) {
-  QT += designer printsupport serialport uitools \
-        webchannel websockets widgets
-} else {
-  CONFIG += designer uitools
-}
 
 DBFILE       = widgets.db
 LANGUAGE     = C++

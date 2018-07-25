@@ -5,11 +5,8 @@ CONFIG += qt \
     warn_on \
     staticlib
 
-QT += core network printsupport script sql webkit webkitwidgets widgets xml
-
-greaterThan (QT_MAJOR_VERSION, 4) {
-  QT += websockets webchannel serialport
-}
+QT += core network printsupport script sql webkit webkitwidgets widgets xml webengine webenginewidgets
+QT += websockets webchannel serialport
 
 DBFILE = scriptapi.db
 LANGUAGE = C++
@@ -142,17 +139,13 @@ HEADERS += setupscriptapi.h \
     quuidproto.h \
     qvalidatorproto.h \
     qwebchannelproto.h \
-    qwebelementcollectionproto.h \
-    qwebelementproto.h \
-    qwebframeproto.h \
-    qwebpageproto.h \
-    qwebsecurityoriginproto.h \
-    qwebsettingsproto.h \
+    qwebenginepageproto.h \
+    qwebenginesettingsproto.h \
     qwebsocketcorsauthenticatorproto.h \
     qwebsocketproto.h             \
     qwebsocketprotocolproto.h     \
     qwebsocketserverproto.h       \
-    qwebviewproto.h \
+    qwebengineviewproto.h \
     qwidgetproto.h \
     webchanneltransport.h \
     xsqlqueryproto.h \
@@ -278,17 +271,13 @@ SOURCES += setupscriptapi.cpp \
     quuidproto.cpp \
     qvalidatorproto.cpp \
     qwebchannelproto.cpp \
-    qwebelementcollectionproto.cpp \
-    qwebelementproto.cpp \
-    qwebframeproto.cpp \
-    qwebpageproto.cpp \
-    qwebsecurityoriginproto.cpp \
-    qwebsettingsproto.cpp \
+    qwebenginepageproto.cpp \
+    qwebenginesettingsproto.cpp \
     qwebsocketcorsauthenticatorproto.cpp \
     qwebsocketproto.cpp           \
     qwebsocketprotocolproto.cpp   \
     qwebsocketserverproto.cpp     \
-    qwebviewproto.cpp \
+    qwebengineviewproto.cpp \
     qwidgetproto.cpp \
     webchanneltransport.cpp \
     xsqlqueryproto.cpp \
