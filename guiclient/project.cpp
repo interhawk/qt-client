@@ -578,7 +578,8 @@ void project::sStatusChanged(const int pStatus)
       _completed->clear();
       break;
     case 2: // Completed
-      _completed->setDate(omfgThis->dbDate());
+      if(!_completed->isValid())
+        _completed->setDate(omfgThis->dbDate());
       break;
   }
 }
@@ -587,7 +588,7 @@ void project::sCompletedChanged()
 {
   if (_completed->isValid())
     _pctCompl->setValue(100);
-  if (_pctCompl->value() == 100)
+  if (_pctCompl->value() == 100 && !_completed->isValid())
     _completed->setDate(omfgThis->dbDate());
 }
 
@@ -715,7 +716,10 @@ bool project::sSave(bool partial)
   emit saved(_prjid);
 
   if (!partial)
+  {
+    omfgThis->sProjectsUpdated(_prjid);
     done(_prjid);
+  }
   else
     _saved=true;
   return true;
