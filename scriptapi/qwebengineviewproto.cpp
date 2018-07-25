@@ -91,6 +91,14 @@ QIcon QWebEngineViewProto::icon() const
   return QIcon();
 }
 
+QUrl QWebEngineViewProto::iconUrl() const
+{
+  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
+  if (item)
+    return item->iconUrl();
+  return QUrl();
+}
+
 void QWebEngineViewProto::load(const QUrl &url)
 {
   QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());

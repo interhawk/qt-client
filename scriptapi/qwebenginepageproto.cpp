@@ -13,8 +13,7 @@
 
 #include <QAction>
 #include <QMenu>
-#include <QNetworkAccessManager>
-#include <QPalette>
+#include <QPageLayout>
 #include <QSize>
 #include <QString>
 #include <QStringList>
@@ -23,10 +22,8 @@
 #include <QWebFrame>
 #include <QWebHistory>
 #include <QWebEnginePage>
-#include <QWebPluginFactory>
 #include <QWebSettings>
 #include <QWidget>
-
 
 QScriptValue FeatureToScriptValue(QScriptEngine *engine, const QWebEnginePage::Feature &item)
 {
@@ -37,6 +34,15 @@ void FeatureFromScriptValue(const QScriptValue &obj, QWebEnginePage::Feature &it
   item = (QWebEnginePage::Feature)obj.toInt32();
 }
 
+QScriptValue FileSelectionModeToScriptValue(QScriptEngine *engine, const QWebEnginePage::FileSelectionMode &item)
+{
+  return engine->newVariant(item);
+}
+void FileSelectionModeFromScriptValue(const QScriptValue &obj, QWebEnginePage::FileSelectionMode &item)
+{
+  item = (QWebEnginePage::FileSelectionMode)obj.toInt32();
+}
+
 QScriptValue FindFlagToScriptValue(QScriptEngine *engine, const QWebEnginePage::FindFlag &item)
 {
   return engine->newVariant(item);
@@ -44,6 +50,15 @@ QScriptValue FindFlagToScriptValue(QScriptEngine *engine, const QWebEnginePage::
 void FindFlagFromScriptValue(const QScriptValue &obj, QWebEnginePage::FindFlag &item)
 {
   item = (QWebEnginePage::FindFlag)obj.toInt32();
+}
+
+QScriptValue JavaScriptConsoleMessageLevelToScriptValue(QScriptEngine *engine, const QWebEnginePage::JavaScriptConsoleMessageLevel &item)
+{
+  return engine->newVariant(item);
+}
+void JavaScriptConsoleMessageLevelFromScriptValue(const QScriptValue &obj, QWebEnginePage::JavaScriptConsoleMessageLevel &item)
+{
+  item = (QWebEnginePage::JavaScriptConsoleMessageLevel)obj.toInt32();
 }
 
 QScriptValue NavigationTypeToScriptValue(QScriptEngine *engine, const QWebEnginePage::NavigationType &item)
@@ -62,6 +77,15 @@ QScriptValue PermissionPolicyToScriptValue(QScriptEngine *engine, const QWebEngi
 void PermissionPolicyFromScriptValue(const QScriptValue &obj, QWebEnginePage::PermissionPolicy &item)
 {
   item = (QWebEnginePage::PermissionPolicy)obj.toInt32();
+}
+
+QScriptValue RenderProcessTerminationStatusToScriptValue(QScriptEngine *engine, const QWebEnginePage::RenderProcessTerminationStatus &item)
+{
+  return engine->newVariant(item);
+}
+void RenderProcessTerminationStatusFromScriptValue(const QScriptValue &obj, QWebEnginePage::RenderProcessTerminationStatus &item)
+{
+  item = (QWebEnginePage::RenderProcessTerminationStatus)obj.toInt32();
 }
 
 QScriptValue WebActionToScriptValue(QScriptEngine *engine, const QWebEnginePage::WebAction &item)
@@ -103,16 +127,32 @@ void setupQWebEnginePageProto(QScriptEngine *engine)
   engine->globalObject().setProperty("QWebEnginePage",  constructor);
 
   qScriptRegisterMetaType(engine, FeatureToScriptValue, FeatureFromScriptValue);
-  constructor.setProperty("Notifications", QScriptValue(engine, QWebEnginePage::Notifications), permanent);
   constructor.setProperty("Geolocation", QScriptValue(engine, QWebEnginePage::Geolocation), permanent);
+  constructor.setProperty("MediaAudioCapture", QScriptValue(engine, QWebEnginePage::MediaAudioCapture), permanent);
+  constructor.setProperty("MediaVideoCapture", QScriptValue(engine, QWebEnginePage::MediaVideoCapture), permanent);
+  constructor.setProperty("MediaAudioVideoCapture", QScriptValue(engine, QWebEnginePage::MediaAudioVideoCapture), permanent);
+  constructor.setProperty("MouseLock", QScriptValue(engine, QWebEnginePage::MouseLock), permanent);
+  constructor.setProperty("DesktopVideoCapture", QScriptValue(engine, QWebEnginePage::DesktopVideoCapture), permanent);
+  constructor.setProperty("DesktopAudioVideoCapture", QScriptValue(engine, QWebEnginePage::DesktopAudioVideoCapture), permanent);
+
+  qScriptRegisterMetaType(engine, FileSelectionModeToScriptValue, FileSelectionModeFromScriptValue);
+  constructor.setProperty("FileSelectOpen", QScriptValue(engine, QWebEnginePage::FileSelectOpen), permanent);
+  constructor.setProperty("FileSelectOpenMultiple", QScriptValue(engine, QWebEnginePage::FileSelectOpenMultiple), permanent);
 
   qScriptRegisterMetaType(engine, FindFlagToScriptValue, FindFlagFromScriptValue);
   constructor.setProperty("FindBackward", QScriptValue(engine, QWebEnginePage::FindBackward), permanent);
   constructor.setProperty("FindCaseSensitively", QScriptValue(engine, QWebEnginePage::FindCaseSensitively), permanent);
 
+  qScriptRegisterMetaType(engine, JavaScriptConsoleMessageLevelToScriptValue, JavaScriptConsoleMessageLevelFromScriptValue);
+  constructor.setProperty("InfoMessageLevel", QScriptValue(engine, QWebEnginePage::InfoMessageLevel), permanent);
+  constructor.setProperty("WarningMessageLevel", QScriptValue(engine, QWebEnginePage::WarningMessageLevel), permanent);
+  constructor.setProperty("ErrorMessageLevel", QScriptValue(engine, QWebEnginePage::ErrorMessageLevel), permanent);
+
   qScriptRegisterMetaType(engine, NavigationTypeToScriptValue, NavigationTypeFromScriptValue);
   constructor.setProperty("NavigationTypeLinkClicked", QScriptValue(engine, QWebEnginePage::NavigationTypeLinkClicked), permanent);
+  constructor.setProperty("NavigationTypeTyped", QScriptValue(engine, QWebEnginePage::NavigationTypeTyped), permanent);
   constructor.setProperty("NavigationTypeFormSubmitted", QScriptValue(engine, QWebEnginePage::NavigationTypeFormSubmitted), permanent);
+  constructor.setProperty("NavigationTypeBackForward", QScriptValue(engine, QWebEnginePage::NavigationTypeBackForward), permanent);
   constructor.setProperty("NavigationTypeReload", QScriptValue(engine, QWebEnginePage::NavigationTypeReload), permanent);
   constructor.setProperty("NavigationTypeOther", QScriptValue(engine, QWebEnginePage::NavigationTypeOther), permanent);
 
@@ -121,9 +161,17 @@ void setupQWebEnginePageProto(QScriptEngine *engine)
   constructor.setProperty("PermissionGrantedByUser", QScriptValue(engine, QWebEnginePage::PermissionGrantedByUser), permanent);
   constructor.setProperty("PermissionDeniedByUser", QScriptValue(engine, QWebEnginePage::PermissionDeniedByUser), permanent);
 
+  qScriptRegisterMetaType(engine, RenderProcessTerminationStatusToScriptValue, RenderProcessTerminationStatusFromScriptValue);
+  constructor.setProperty("NormalTerminationStatus", QScriptValue(engine, QWebEnginePage::NormalTerminationStatus), permanent);
+  constructor.setProperty("AbnormalTerminationStatus", QScriptValue(engine, QWebEnginePage::AbnormalTerminationStatus), permanent);
+  constructor.setProperty("CrashedTerminationStatus", QScriptValue(engine, QWebEnginePage::CrashedTerminationStatus), permanent);
+  constructor.setProperty("KilledTerminationStatus", QScriptValue(engine, QWebEnginePage::KilledTerminationStatus), permanent);
+
   qScriptRegisterMetaType(engine, WebActionToScriptValue, WebActionFromScriptValue);
   constructor.setProperty("NoWebAction", QScriptValue(engine, QWebEnginePage::NoWebAction), permanent);
   constructor.setProperty("OpenLinkInNewWindow", QScriptValue(engine, QWebEnginePage::OpenLinkInNewWindow), permanent);
+  constructor.setProperty("OpenLinkInNewTab", QScriptValue(engine, QWebEnginePage::OpenLinkInNewTab), permanent);
+  constructor.setProperty("OpenLinkInNewBackgroundTab", QScriptValue(engine, QWebEnginePage::OpenLinkInNewBackgroundTab), permanent);
   constructor.setProperty("OpenLinkInThisWindow", QScriptValue(engine, QWebEnginePage::OpenLinkInThisWindow), permanent);
   constructor.setProperty("DownloadLinkToDisk", QScriptValue(engine, QWebEnginePage::DownloadLinkToDisk), permanent);
   constructor.setProperty("CopyLinkToClipboard", QScriptValue(engine, QWebEnginePage::CopyLinkToClipboard), permanent);
@@ -144,7 +192,12 @@ void setupQWebEnginePageProto(QScriptEngine *engine)
   constructor.setProperty("ToggleItalic", QScriptValue(engine, QWebEnginePage::ToggleItalic), permanent);
   constructor.setProperty("ToggleUnderline", QScriptValue(engine, QWebEnginePage::ToggleUnderline), permanent);
   constructor.setProperty("InspectElement", QScriptValue(engine, QWebEnginePage::InspectElement), permanent);
-  constructor.setProperty("SelectAll", QScriptValue(engine, QWebEnginePage::SelectAll), permanent);
+  constructor.setProperty("ExitFullScreen", QScriptValue(engine, QWebEnginePage::ExitFullScreen), permanent);
+  constructor.setProperty("RequestClose", QScriptValue(engine, QWebEnginePage::RequestClose), permanent);
+  constructor.setProperty("ExitFullScreen", QScriptValue(engine, QWebEnginePage::ExitFullScreen), permanent);
+  constructor.setProperty("Unselect", QScriptValue(engine, QWebEnginePage::Unselect), permanent);
+  constructor.setProperty("SavePage", QScriptValue(engine, QWebEnginePage::SavePage), permanent);
+  constructor.setProperty("ViewSource", QScriptValue(engine, QWebEnginePage::ViewSource), permanent);
   constructor.setProperty("PasteAndMatchStyle", QScriptValue(engine, QWebEnginePage::PasteAndMatchStyle), permanent);
   constructor.setProperty("ToggleStrikethrough", QScriptValue(engine, QWebEnginePage::ToggleStrikethrough), permanent);
   constructor.setProperty("InsertUnorderedList", QScriptValue(engine, QWebEnginePage::InsertUnorderedList), permanent);
@@ -164,6 +217,10 @@ void setupQWebEnginePageProto(QScriptEngine *engine)
 
   qScriptRegisterMetaType(engine, WebWindowTypeToScriptValue, WebWindowTypeFromScriptValue);
   constructor.setProperty("WebBrowserWindow", QScriptValue(engine, QWebEnginePage::WebBrowserWindow), permanent);
+  constructor.setProperty("WebBrowserTab", QScriptValue(engine, QWebEnginePage::WebBrowserTab), permanent);
+  constructor.setProperty("WebDialog", QScriptValue(engine, QWebEnginePage::WebDialog), permanent);
+  constructor.setProperty("WebBrowserBackgroundTab", QScriptValue(engine, QWebEnginePage::WebBrowserBackgroundTab), permanent);
+
 }
 
 QScriptValue constructQWebEnginePage(QScriptContext * context, QScriptEngine  *engine)
@@ -192,12 +249,43 @@ QAction* QWebEnginePageProto::action(QWebEnginePage::WebAction action) const
   return 0;
 }
 
+QColor QWebEnginePageProto::backgroundColor() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->backgroundColor();
+  return QColor();
+}
+
+QSizeF QWebEnginePageProto::contentsSize() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->contentsSize();
+  return QSizeF();
+}
+
 QMenu* QWebEnginePageProto::createStandardContextMenu()
 {
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
   if (item)
     return item->createStandardContextMenu();
   return 0;
+}
+
+QWebEnginePage* QWebEnginePageProto::devToolsPage() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->devToolsPage();
+  return 0;
+}
+
+void QWebEnginePageProto::download(const QUrl &url, const QString &filename)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->download(url, filename);
 }
 
 bool QWebEnginePageProto::hasSelection() const
@@ -216,12 +304,174 @@ QWebEngineHistory* QWebEnginePageProto::history() const
   return 0;
 }
 
+QIcon QWebEnginePageProto::icon() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->icon();
+  return QIcon();
+}
+
+QUrl QWebEnginePageProto::iconUrl() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->iconUrl();
+  return QUrl();
+}
+
+QWebEnginePage* QWebEnginePageProto::inspectedPage() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->inspectedPage();
+  return 0;
+}
+
+bool QWebEnginePageProto::isAudioMuted() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->isAudioMuted();
+  return false;
+}
+
+void QWebEnginePageProto::load(const QUrl &url)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->load(url);
+}
+
+void QWebEnginePageProto::print(QPrinter *printer, const QWebEngineCallback<bool> &resultCallback)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->print(printer, resultCallback);
+}
+
+void QWebEnginePageProto::printToPdf(const QString &filePath, const QPageLayout &pageLayout)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+      item->printToPdf(filePath, pageLayout);
+}
+
+void QWebEnginePageProto::printToPdf(const QWebEngineCallback<const QByteArray &> &resultCallback, const QPageLayout &pageLayout)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+      item->printToPdf(resultCallback, pageLayout);
+}
+
+QWebEngineProfile* QWebEnginePageProto::profile() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->profile();
+  return 0;
+}
+
+bool QWebEnginePageProto::recentlyAudible() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->recentlyAudible();
+  return false;
+}
+
+void QWebEnginePageProto::replaceMisspelledWord(const QString &replacement)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->replaceMisspelledWord(replacement);
+}
+
+QUrl QWebEnginePageProto::requestedUrl() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->requestedUrl();
+  return QUrl();
+}
+
+void QWebEnginePageProto::runJavaScript(const QString &scriptSource)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->runJavaScript(scriptSource);
+}
+
+void QWebEnginePageProto::runJavaScript(const QString &scriptSource, quint32 worldId)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->runJavaScript(scriptSource, worldId);
+}
+
+void QWebEnginePageProto::runJavaScript(const QString &scriptSource, const QWebEngineCallback<const QVariant &> &resultCallback)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->runJavaScript(scriptSource, resultCallback);
+}
+
+void QWebEnginePageProto::runJavaScript(const QString &scriptSource, quint32 worldId, const QWebEngineCallback<const QVariant &> &resultCallback)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->runJavaScript(scriptSource, worldId, resultCallback);
+}
+
+void QWebEnginePageProto::save(const QString &filePath, QWebEngineDownloadItem::SavePageFormat format) const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->save(filePath, format);
+}
+
+QPointF QWebEnginePageProto::scrollPosition() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->scrollPosition();
+  return QPointF();
+}
+
 QString QWebEnginePageProto::selectedText() const
 {
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
   if (item)
     return item->selectedText();
   return QString();
+}
+
+void QWebEnginePageProto::setAudioMuted(bool muted)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setAudioMuted(muted);
+}
+
+void QWebEnginePageProto::setBackgroundColor(const QColor &color)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setBackgroundColor(color);
+}
+
+void QWebEnginePageProto::setContent(const QByteArray &data, const QString &mimeType, const QUrl &baseUrl)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setContent(data, mimeType, baseUrl);
+}
+
+void QWebEnginePageProto::setDevToolsPage(QWebEnginePage *devToolsPage)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setDevToolsPage(devToolsPage);
 }
 
 void QWebEnginePageProto::setFeaturePermission(const QUrl &securityOrigin, QWebEnginePage::Feature feature, QWebEnginePage::PermissionPolicy policy)
@@ -231,11 +481,53 @@ void QWebEnginePageProto::setFeaturePermission(const QUrl &securityOrigin, QWebE
     item->setFeaturePermission(securityOrigin, feature, policy);
 }
 
+void QWebEnginePageProto::setHtml(const QString &html, const QUrl &baseUrl)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setHtml(html, baseUrl);
+}
+
+void QWebEnginePageProto::setInspectedPage(QWebEnginePage *page)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setInspectedPage(page);
+}
+
+void QWebEnginePageProto::setUrl(const QUrl &url)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setUrl(url);
+}
+
 void QWebEnginePageProto::setView(QWidget * view)
 {
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
   if (item)
     item->setView(view);
+}
+
+void QWebEnginePageProto::setWebChannel(QWebChannel *channel, uint worldId)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setWebChannel(channel, worldId);
+}
+
+void QWebEnginePageProto::setWebChannel(QWebChannel *channel)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setWebChannel(channel);
+}
+
+void QWebEnginePageProto::setZoomFactor(qreal factor)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setZoomFactor(factor);
 }
 
 QWebEngineSettings* QWebEnginePageProto::settings() const
@@ -246,11 +538,41 @@ QWebEngineSettings* QWebEnginePageProto::settings() const
   return 0;
 }
 
+QString QWebEnginePageProto::title() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->title();
+  return QString();
+}
+
+void QWebEnginePageProto::toHtml(const QWebEngineCallback<const QString &> &resultCallback) const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->toHtml(resultCallback);
+}
+
+void QWebEnginePageProto::toPlainText(const QWebEngineCallback<const QString &> &resultCallback) const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->toPlainText(resultCallback);
+}
+
 void QWebEnginePageProto::triggerAction(QWebEnginePage::WebAction action, bool checked)
 {
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
   if (item)
     item->triggerAction(action, checked);
+}
+
+QUrl QWebEnginePageProto::url() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->url();
+  return QUrl();
 }
 
 QWidget* QWebEnginePageProto::view() const
@@ -259,4 +581,28 @@ QWidget* QWebEnginePageProto::view() const
   if (item)
     return item->view();
   return 0;
+}
+
+QWebChannel* QWebEnginePageProto::webChannel() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->webChannel();
+  return 0;
+}
+
+qreal QWebEnginePageProto::zoomFactor() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->zoomFactor();
+  return 0;
+}
+
+bool QWebEnginePageProto::event(QEvent *e)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->event(e);
+  return false;
 }

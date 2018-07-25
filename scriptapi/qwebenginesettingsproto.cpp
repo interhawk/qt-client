@@ -29,6 +29,15 @@ void FontSizeFromScriptValue(const QScriptValue &obj, QWebEngineSettings::FontSi
   item = (QWebEngineSettings::FontSize)obj.toInt32();
 }
 
+QScriptValue UnknownUrlSchemePolicyToScriptValue(QScriptEngine *engine, const QWebEngineSettings::UnknownUrlSchemePolicy &item)
+{
+  return engine->newVariant(item);
+}
+void UnknownUrlSchemePolicyFromScriptValue(const QScriptValue &obj, QWebEngineSettings::UnknownUrlSchemePolicy &item)
+{
+  item = (QWebEngineSettings::UnknownUrlSchemePolicy)obj.toInt32();
+}
+
 QScriptValue WebAttributeToScriptValue(QScriptEngine *engine, const QWebEngineSettings::WebAttribute &item)
 {
   return engine->newVariant(item);
@@ -61,12 +70,20 @@ void setupQWebEngineSettingsProto(QScriptEngine *engine)
   constructor.setProperty("SansSerifFont", QScriptValue(engine, QWebEngineSettings::SansSerifFont), permanent);
   constructor.setProperty("CursiveFont", QScriptValue(engine, QWebEngineSettings::CursiveFont), permanent);
   constructor.setProperty("FantasyFont", QScriptValue(engine, QWebEngineSettings::FantasyFont), permanent);
+  constructor.setProperty("PictographFont", QScriptValue(engine, QWebEngineSettings::PictographFont), permanent);
 
   qScriptRegisterMetaType(engine, FontSizeToScriptValue, FontSizeFromScriptValue);
   constructor.setProperty("MinimumFontSize", QScriptValue(engine, QWebEngineSettings::MinimumFontSize), permanent);
   constructor.setProperty("MinimumLogicalFontSize", QScriptValue(engine, QWebEngineSettings::MinimumLogicalFontSize), permanent);
   constructor.setProperty("DefaultFontSize", QScriptValue(engine, QWebEngineSettings::DefaultFontSize), permanent);
   constructor.setProperty("DefaultFixedFontSize", QScriptValue(engine, QWebEngineSettings::DefaultFixedFontSize), permanent);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
+  qScriptRegisterMetaType(engine, UnknownUrlSchemePolicyToScriptValue, UnknownUrlSchemePolicyFromScriptValue);
+  constructor.setProperty("DisallowUnknownUrlSchemes", QScriptValue(engine, QWebEngineSettings::DisallowUnknownUrlSchemes), permanent);
+  constructor.setProperty("AllowUnknownUrlSchemesFromUserInteraction", QScriptValue(engine, QWebEngineSettings::AllowUnknownUrlSchemesFromUserInteraction), permanent);
+  constructor.setProperty("AllowAllUnknownUrlSchemes", QScriptValue(engine, QWebEngineSettings::AllowAllUnknownUrlSchemes), permanent);
+#endif
 
   qScriptRegisterMetaType(engine, WebAttributeToScriptValue, WebAttributeFromScriptValue);
   constructor.setProperty("AutoLoadImages", QScriptValue(engine, QWebEngineSettings::AutoLoadImages), permanent);
@@ -85,28 +102,29 @@ void setupQWebEngineSettingsProto(QScriptEngine *engine)
   constructor.setProperty("Accelerated2dCanvasEnabled", QScriptValue(engine, QWebEngineSettings::Accelerated2dCanvasEnabled), permanent);
   constructor.setProperty("WebGLEnabled", QScriptValue(engine, QWebEngineSettings::WebGLEnabled), permanent);
   constructor.setProperty("HyperlinkAuditingEnabled", QScriptValue(engine, QWebEngineSettings::HyperlinkAuditingEnabled), permanent);
+  constructor.setProperty("ErrorPageEnabled", QScriptValue(engine, QWebEngineSettings::ErrorPageEnabled), permanent);
+  constructor.setProperty("FullScreenSupportEnabled", QScriptValue(engine, QWebEngineSettings::FullScreenSupportEnabled), permanent);
+  constructor.setProperty("ScreenCaptureEnabled", QScriptValue(engine, QWebEngineSettings::ScreenCaptureEnabled), permanent);
+  constructor.setProperty("AutoLoadIconsForPage", QScriptValue(engine, QWebEngineSettings::AutoLoadIconsForPage), permanent);
+  constructor.setProperty("TouchIconsEnabled", QScriptValue(engine, QWebEngineSettings::TouchIconsEnabled), permanent);
+  constructor.setProperty("FocusOnNavigationEnabled", QScriptValue(engine, QWebEngineSettings::FocusOnNavigationEnabled), permanent);
+  constructor.setProperty("PrintElementBackgrounds", QScriptValue(engine, QWebEngineSettings::PrintElementBackgrounds), permanent);
+  constructor.setProperty("AllowRunningInsecureContent", QScriptValue(engine, QWebEngineSettings::AllowRunningInsecureContent), permanent);
+  constructor.setProperty("AllowGeolocationOnInsecureOrigins", QScriptValue(engine, QWebEngineSettings::AllowGeolocationOnInsecureOrigins), permanent);
+  constructor.setProperty("AllowWindowActivationFromJavaScript", QScriptValue(engine, QWebEngineSettings::AllowWindowActivationFromJavaScript), permanent);
+  constructor.setProperty("ShowScrollBars", QScriptValue(engine, QWebEngineSettings::ShowScrollBars), permanent);
+  constructor.setProperty("PlaybackRequiresUserGesture", QScriptValue(engine, QWebEngineSettings::PlaybackRequiresUserGesture), permanent);
+  constructor.setProperty("JavascriptCanPaste", QScriptValue(engine, QWebEngineSettings::JavascriptCanPaste), permanent);
+  constructor.setProperty("WebRTCPublicInterfacesOnly", QScriptValue(engine, QWebEngineSettings::WebRTCPublicInterfacesOnly), permanent);
 
   QScriptValue globalSettings = engine->newFunction(globalSettingsForJS);
   constructor.setProperty("globalSettings", globalSettings);
 
-  // TODO: Can't seem to get this working. Something is wrong with how we expose QUrl.
-  /*
-  QScriptValue iconForUrl = engine->newFunction(iconForUrlForJS);
-  constructor.setProperty("iconForUrl", iconForUrl);
-  */
-
-  // TODO: Expose QPixmap for this to work.
-  /*
-  QScriptValue webGraphic = engine->newFunction(webGraphicForJS);
-  constructor.setProperty("webGraphic", webGraphic);
-  */
 }
 
 QScriptValue constructQWebEngineSettings(QScriptContext * /*context*/, QScriptEngine  *engine)
 {
   QWebEngineSettings *obj = 0;
-  // TODO: QWebEngineSettings does not have a constructor.
-  //obj = new QWebEngineSettings();
   return engine->toScriptValue(obj);
 }
 
@@ -195,3 +213,13 @@ bool QWebEngineSettingsProto::testAttribute(QWebEngineSettings::WebAttribute att
     return item->testAttribute(attribute);
   return false;
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
+QWebEngineSettings::UnknownUrlSchemePolicy QWebEngineSettingsProto::unknownUrlSchemePolicy() const
+{
+  QWebEngineSettings *item = qscriptvalue_cast<QWebEngineSettings*>(thisObject());
+  if (item)
+    return item->unknownUrlSchemePolicy();
+  return QWebEngineSettings::DisallowUnknownUrlSchemes;
+}
+#endif
