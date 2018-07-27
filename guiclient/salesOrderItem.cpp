@@ -2770,15 +2770,45 @@ void salesOrderItem::sHandleSupplyOrder()
       }
 
       // check _supplyOrderType to determine type of order
-      if (_supplyOrderType == "W" && (_supplyOrderId > 0) && _item->isConfigured())
+      if (_supplyOrderType == "W")
       {
-        XSqlQuery implodeq;
-        implodeq.prepare( "SELECT implodeWo(:wo_id, true) AS result;" );
-        implodeq.bindValue(":wo_id", _supplyOrderId);
-        implodeq.exec();
+        ordq.prepare( "SELECT createWo(:orderNumber, itemsite_id, :qty, itemsite_leadtime, :dueDate,"
+                      "                :comments, :parent_type, :parent_id ) AS result, itemsite_id "
+                      "  FROM itemsite "
+                      " WHERE itemsite_item_id=:item_id"
+                      "   AND itemsite_warehous_id=:warehous_id "
+                      "   AND NOT EXISTS (SELECT 1 FROM wo "
+                      "                    WHERE wo_number  =:orderNumber "
+                      "                      AND wo_ordtype =:parent_type "
+                      "                      AND wo_ordid   =:parent_id);"  );
+        ordq.bindValue(":orderNumber", _orderNumber->text().toInt());
+        ordq.bindValue(":qty", valqty);
+        ordq.bindValue(":dueDate", _scheduledDate->date());
+        ordq.bindValue(":comments", _custName + "\n" + _notes->toPlainText());
+        ordq.bindValue(":item_id", _item->id());
+        ordq.bindValue(":warehous_id", _supplyWarehouse->id());
+        ordq.bindValue(":parent_type", QString("S"));
+        ordq.bindValue(":parent_id", _soitemid);
+        ordq.exec();
+        if (ordq.first())
+        {
+          int _woid = ordq.value("result").toInt();
+          _supplyOrderId = _woid;
+          if ((_woid > 0) && _item->isConfigured())
+          {
+            XSqlQuery implodeq;
+            implodeq.prepare( "SELECT implodeWo(:wo_id, true) AS result;" );
+            implodeq.bindValue(":wo_id", _woid);
+            implodeq.exec();
+          }
+        }
+        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Item Information"),
+                                      ordq, __FILE__, __LINE__))
+        {
+          return;
+        }
       }
-
-      if (_supplyOrderId == -1)
+      else if (_supplyOrderType == "P")
       {
         int   itemsrcid  = _itemsrc;
         int   poheadid   = -1;
