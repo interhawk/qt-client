@@ -1133,7 +1133,8 @@ void salesOrderItem::sSave(bool pPartial)
                "       :soitem_cos_accnt_id, :soitem_rev_accnt_id, :soitem_dropship "
                "FROM itemsite "
                "WHERE ( (itemsite_item_id=:item_id)"
-               " AND (itemsite_warehous_id=:warehous_id) );" );
+               " AND (itemsite_warehous_id=:warehous_id) ) "
+               "RETURNING * ;" );
     salesSave.bindValue(":soitem_id", _soitemid);
     salesSave.bindValue(":soitem_sohead_id", _soheadid);
     salesSave.bindValue(":soitem_linenumber", _lineNumber->text().toInt());
@@ -1167,6 +1168,9 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":soitem_order_id", _supplyOrderId);
     salesSave.bindValue(":soitem_dropship", _supplyDropShip->isChecked());
     salesSave.exec();
+    if (salesSave.first())
+      _supplyOrderId = salesSave.value("coitem_order_id").toInt();
+
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
       rollback.exec();
@@ -1175,18 +1179,6 @@ void salesOrderItem::sSave(bool pPartial)
       return;
     }
 
-    salesSave.prepare("SELECT coitem_order_id "
-                      "FROM coitem "
-                      "WHERE coitem_id=:soitem_id;");
-    salesSave.bindValue(":soitem_id", _soitemid);
-    salesSave.exec();
-    if (salesSave.first())
-      _supplyOrderId = salesSave.value("coitem_order_id").toInt();
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
-                                  salesSave, __FILE__, __LINE__))
-    {
-      return;
-    }
     if (_supplyOrderType == "W")
     {
       // WO can auto-explode so need to determine WO status
@@ -1233,7 +1225,8 @@ void salesOrderItem::sSave(bool pPartial)
                       "    coitem_warranty=:soitem_warranty, "
                       "    coitem_custpn=:custpn, "
                       "    coitem_dropship=:soitem_dropship "
-                      "WHERE (coitem_id=:soitem_id);" );
+                      "WHERE coitem_id=:soitem_id "
+                      "RETURNING * ;" );
     salesSave.bindValue(":item_id", _item->id());
     salesSave.bindValue(":warehous_id", _warehouse->id());
     salesSave.bindValue(":soitem_scheddate", _scheduledDate->date());
@@ -1248,12 +1241,15 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":soitem_pricemode", _priceMode);
     salesSave.bindValue(":price_uom_id", _priceUOM->id());
     salesSave.bindValue(":price_invuomratio", _priceinvuomratio);
+    salesSave.bindValue(":soitem_order_type", _supplyOrderType);
     if (_supplyOrderId > -1)
     {
-      salesSave.bindValue(":soitem_order_type", _supplyOrderType);
       salesSave.bindValue(":soitem_order_id", _supplyOrderId);
       salesSave.bindValue(":soitem_prcost", _supplyOverridePrice->localValue());
     }
+    else if (_createSupplyOrder->isChecked())
+      salesSave.bindValue(":soitem_order_id", -1);
+
     salesSave.bindValue(":soitem_memo", _notes->toPlainText());
     salesSave.bindValue(":soitem_id", _soitemid);
     if (_sub->isChecked())
@@ -1269,6 +1265,9 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":soitem_dropship", _supplyDropShip->isChecked());
 
     salesSave.exec();
+    if (salesSave.first())
+      _supplyOrderId = salesSave.value("coitem_order_id").toInt();
+
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
       rollback.exec();
@@ -2757,7 +2756,6 @@ void salesOrderItem::sHandleSupplyOrder()
     {
       return;
     }
-
     if (_supplyOrderId == -1 && _qtyOrdered->toDouble() == 0)
       return;   // nothing to undo, nothing to create yet
     else if (_supplyOrderId == -1)
@@ -2770,45 +2768,14 @@ void salesOrderItem::sHandleSupplyOrder()
       }
 
       // check _supplyOrderType to determine type of order
-      if (_supplyOrderType == "W")
+      if (_supplyOrderType == "W" && (_supplyOrderId > 0) && _item->isConfigured())
       {
-        ordq.prepare( "SELECT createWo(:orderNumber, itemsite_id, :qty, itemsite_leadtime, :dueDate,"
-                      "                :comments, :parent_type, :parent_id ) AS result, itemsite_id "
-                      "  FROM itemsite "
-                      " WHERE itemsite_item_id=:item_id"
-                      "   AND itemsite_warehous_id=:warehous_id "
-                      "   AND NOT EXISTS (SELECT 1 FROM wo "
-                      "                    WHERE wo_number  =:orderNumber "
-                      "                      AND wo_ordtype =:parent_type "
-                      "                      AND wo_ordid   =:parent_id);"  );
-        ordq.bindValue(":orderNumber", _orderNumber->text().toInt());
-        ordq.bindValue(":qty", valqty);
-        ordq.bindValue(":dueDate", _scheduledDate->date());
-        ordq.bindValue(":comments", _custName + "\n" + _notes->toPlainText());
-        ordq.bindValue(":item_id", _item->id());
-        ordq.bindValue(":warehous_id", _supplyWarehouse->id());
-        ordq.bindValue(":parent_type", QString("S"));
-        ordq.bindValue(":parent_id", _soitemid);
-        ordq.exec();
-        if (ordq.first())
-        {
-          int _woid = ordq.value("result").toInt();
-          _supplyOrderId = _woid;
-          if ((_woid > 0) && _item->isConfigured())
-          {
-            XSqlQuery implodeq;
-            implodeq.prepare( "SELECT implodeWo(:wo_id, true) AS result;" );
-            implodeq.bindValue(":wo_id", _woid);
-            implodeq.exec();
-          }
-        }
-        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Item Information"),
-                                      ordq, __FILE__, __LINE__))
-        {
-          return;
-        }
+        XSqlQuery implodeq;
+        implodeq.prepare( "SELECT implodeWo(:wo_id, true) AS result;" );
+        implodeq.bindValue(":wo_id", _supplyOrderId);
+        implodeq.exec();
       }
-      else if (_supplyOrderType == "P")
+      else if (_supplyOrderType == "P" && _supplyOrderId == -1)
       {
         int   itemsrcid  = _itemsrc;
         int   poheadid   = -1;
@@ -4263,10 +4230,6 @@ void salesOrderItem::populate()
     return;
   }
 
-  if (item.value("coitem_order_type").toString() != "")
-    _supplyOrderType = item.value("coitem_order_type").toString();
-  if (item.value("coitem_order_id").toInt() != -1)
-    _supplyOrderId = item.value("coitem_order_id").toInt();
   if (_supplyOrderId != -1)
   {
     _createSupplyOrder->setChecked(true);
