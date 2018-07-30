@@ -574,7 +574,8 @@ void project::sStatusChanged(const int pStatus)
       _completed->clear();
       break;
     case 1: // In Process
-      _started->setDate(omfgThis->dbDate());
+      if(!_started->isValid())
+        _started->setDate(omfgThis->dbDate());
       _completed->clear();
       break;
     case 2: // Completed
@@ -682,12 +683,12 @@ bool project::sSave(bool partial)
   if (_cntct->id() > 0)
     projectSave.bindValue(":prj_cntct_id", _cntct->id());
   if (_projectType->id() > 0)
-    projectSave.bindValue(":prj_prjtype_id", _projectType->id());
-  projectSave.bindValue(":prj_start_date", _started->date());
-  projectSave.bindValue(":prj_due_date",	_due->date());
-  projectSave.bindValue(":prj_assigned_date", _assigned->date());
+    projectSave.bindValue(":prj_prjtype_id",   _projectType->id());
+  projectSave.bindValue(":prj_start_date",     _started->date());
+  projectSave.bindValue(":prj_due_date",       _due->date());
+  projectSave.bindValue(":prj_assigned_date",  _assigned->date());
   projectSave.bindValue(":prj_completed_date", _completed->date());
-  projectSave.bindValue(":prj_pct_complete", _pctCompl->value());
+  projectSave.bindValue(":prj_pct_complete",   _pctCompl->value());
   if (_recurring->isRecurring())
     projectSave.bindValue(":prj_recurring_prj_id", _recurring->parentId());
 
