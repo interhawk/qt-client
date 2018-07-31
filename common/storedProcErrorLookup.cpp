@@ -531,9 +531,9 @@ const struct {
                                "you may delete the selected Characteristic."),
 			       					 0, "" },
 
-  { "deleteCheck", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot delete this Payment because either it has not "
-                          "been voided, it has already been posted or replaced,"
-                          " or it has been transmitted electronically."),
+  { "deleteCheck",     -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot delete this Payment because either it has not "
+                          "been voided, it has already been posted or replaced, "
+                          "or it has been transmitted electronically and printed."),
 			           					0, "" },
 
   { "deleteClassCode", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup",  "The selected Class Code cannot be deleted "
