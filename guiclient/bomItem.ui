@@ -480,7 +480,7 @@ to be bound by its terms.</comment>
           <enum>Qt::StrongFocus</enum>
          </property>
          <property name="type">
-          <number>Comments::BOMItem</number>
+          <enum>Comments::BOMItem</enum>
          </property>
         </widget>
        </item>
