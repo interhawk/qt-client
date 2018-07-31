@@ -411,6 +411,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     }
     else if (param.toString() == "view")
     {
+      _mode = cView;
       setViewMode();
       _cust->setType(CLineEdit::AllCustomers);
 
