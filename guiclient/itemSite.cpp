@@ -667,7 +667,7 @@ bool itemSite::sSave()
                          "  itemsite_ordertoqty, itemsite_minordqty, itemsite_maxordqty, itemsite_multordqty,"
                          "  itemsite_safetystock, itemsite_cyclecountfreq,"
                          "  itemsite_leadtime, itemsite_eventfence, itemsite_plancode_id, itemsite_costcat_id,"
-                         "  itemsite_poSupply, itemsite_woSupply, itemsite_noautoord, itemsite_createpr, itemsite_createwo,"
+                         "  itemsite_poSupply, itemsite_woSupply, itemsite_autoord, itemsite_createpr, itemsite_createwo,"
 						 "  itemsite_dropship, itemsite_createsopr, itemsite_createsopo,"
                          "  itemsite_sold, itemsite_soldranking,"
                          "  itemsite_stocked, itemsite_planning_type, itemsite_supply_itemsite_id,"
@@ -688,7 +688,7 @@ bool itemSite::sSave()
                          "  :itemsite_ordertoqty, :itemsite_minordqty, :itemsite_maxordqty, :itemsite_multordqty,"
                          "  :itemsite_safetystock, :itemsite_cyclecountfreq,"
                          "  :itemsite_leadtime, :itemsite_eventfence, :itemsite_plancode_id, :itemsite_costcat_id,"
-                         "  :itemsite_poSupply, :itemsite_woSupply, :itemsite_noautoord, :itemsite_createpr, :itemsite_createwo,"
+                         "  :itemsite_poSupply, :itemsite_woSupply, :itemsite_autoord, :itemsite_createpr, :itemsite_createwo,"
 						 "  :itemsite_dropship, :itemsite_createsopr, :itemsite_createsopo,"
                          "  :itemsite_sold, :itemsite_soldranking,"
                          "  :itemsite_stocked, :itemsite_planning_type, :itemsite_supply_itemsite_id,"
@@ -767,7 +767,7 @@ bool itemSite::sSave()
                          "    itemsite_safetystock=:itemsite_safetystock, itemsite_cyclecountfreq=:itemsite_cyclecountfreq,"
                          "    itemsite_leadtime=:itemsite_leadtime, itemsite_eventfence=:itemsite_eventfence,"
                          "    itemsite_plancode_id=:itemsite_plancode_id, itemsite_costcat_id=:itemsite_costcat_id,"
-                         "    itemsite_poSupply=:itemsite_poSupply, itemsite_woSupply=:itemsite_woSupply, itemsite_noautoord=:itemsite_noautoord,"
+                         "    itemsite_poSupply=:itemsite_poSupply, itemsite_woSupply=:itemsite_woSupply, itemsite_autoord=:itemsite_autoord,"
 						 "    itemsite_createsopr=:itemsite_createsopr, itemsite_createsopo=:itemsite_createsopo,"
 						 "    itemsite_dropship=:itemsite_dropship,"
                          "    itemsite_createpr=:itemsite_createpr, itemsite_createwo=:itemsite_createwo,"
@@ -817,7 +817,7 @@ bool itemSite::sSave()
     newItemSite.bindValue(":itemsite_supply_itemsite_id", _supplyItemsiteId);
   newItemSite.bindValue(":itemsite_poSupply", QVariant(_poSupply->isChecked()));
   newItemSite.bindValue(":itemsite_woSupply", QVariant(_woSupply->isChecked()));
-  newItemSite.bindValue(":itemsite_noautoord", _noAutoOrd->isChecked());
+  newItemSite.bindValue(":itemsite_autoord", !_noAutoOrd->isChecked());
   newItemSite.bindValue(":itemsite_createsopr", QVariant(_createSoPr->isChecked()));
   newItemSite.bindValue(":itemsite_createsopo", QVariant(_createPo->isChecked()));
   newItemSite.bindValue(":itemsite_createpr", QVariant(_createPr->isChecked()));
@@ -1513,7 +1513,7 @@ void itemSite::populate()
     if ( (itemsite.value("item_type").toString() == "P") ||
          (itemsite.value("item_type").toString() == "O")    )
     {
-      _noAutoOrd->setChecked(itemsite.value("itemsite_noautoord").toBool());
+      _noAutoOrd->setChecked(!itemsite.value("itemsite_autoord").toBool());
       _createPr->setChecked(itemsite.value("itemsite_createpr").toBool());
       _createSoPr->setChecked(itemsite.value("itemsite_createsopr").toBool());
       _createPo->setChecked(itemsite.value("itemsite_createsopo").toBool());

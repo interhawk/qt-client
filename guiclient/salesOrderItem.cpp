@@ -110,7 +110,7 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
   _canceling             = false;
   _partialsaved          = false;
   _error                 = false;
-  _noautoord             = false;
+  _autoord               = true;
   _originalQtyOrd        = 0.0;
   _updateItemsite        = false;
   _updatePrice           = true;
@@ -1660,7 +1660,7 @@ void salesOrderItem::sPopulateItemsiteInfo()
     itemsite.prepare("SELECT itemsite_leadtime, itemsite_costmethod,"
                      "       itemsite_createsopo, itemsite_createsopr,"
                      "       itemsite_createwo, itemsite_dropship,"
-                     "       itemsite_noautoord,"
+                     "       itemsite_autoord,"
                      "       itemCost(:item_id, :cust_id, :shipto_id, :qty, :qtyUOM, :priceUOM,"
                      "                :curr_id, :effective, :asof, :warehous_id, :dropShip) AS unitcost,"
                      "       itemCost(itemsite_id) AS invunitcost, itemsite_costmethod "
@@ -1687,7 +1687,7 @@ void salesOrderItem::sPopulateItemsiteInfo()
     if (itemsite.first())
     {
       _leadTime    = itemsite.value("itemsite_leadtime").toInt();
-      _noautoord   = itemsite.value("itemsite_noautoord").toBool();
+      _autoord     = itemsite.value("itemsite_autoord").toBool();
       _costmethod  = itemsite.value("itemsite_costmethod").toString();
       _unitCost->setBaseValue(itemsite.value("unitcost").toDouble() * _priceinvuomratio);
       _invCost->setBaseValue(itemsite.value("invunitcost").toDouble());
@@ -2711,7 +2711,7 @@ void salesOrderItem::sCheckSupplyOrder()
     if (_createSupplyOrder->isChecked())
       sHandleSupplyOrder();
     else
-      if (((_mode == cNew || _mode == cNewQuote) && !_noautoord) || _costmethod == "J" || _supplyOrderId > -1)
+      if (((_mode == cNew || _mode == cNewQuote) && _autoord) || _costmethod == "J" || _supplyOrderId > -1)
         _createSupplyOrder->setChecked(true);
   }
 }
