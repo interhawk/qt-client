@@ -69,7 +69,6 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   connect(_vendor,                   SIGNAL(newId(int)),                                this,          SLOT(sHandleVendor(int)));
   connect(_vendAddr,                 SIGNAL(changed()),                                 _vendaddrCode, SLOT(clear()));
   connect(_warehouse,                SIGNAL(newID(int)),                                this,          SLOT(sHandleShipTo()));
-  connect(_shiptoAddr,               SIGNAL(newId(int)),                                this,          SLOT(sHandleShipToName()));
 
   connect(_vendAddr, SIGNAL(addressChanged(QString,QString,QString,QString,QString,QString, QString)),
           _vendCntct, SLOT(setNewAddr(QString,QString,QString,QString,QString,QString, QString)));
@@ -757,8 +756,6 @@ void purchaseOrder::populate()
     _shiptoAddr->setState(po.value("pohead_shiptostate").toString());
     _shiptoAddr->setPostalCode(po.value("pohead_shiptozipcode").toString());
     _shiptoAddr->setCountry(po.value("pohead_shiptocountry").toString());
-
-    // must be after _shiptoAddr
     _shiptoName->setText(po.value("pohead_shiptoname").toString());
     
     _comments->setId(_poheadid);
@@ -1838,58 +1835,20 @@ void purchaseOrder::sEditWo()
 void purchaseOrder::sHandleShipTo()
 {
   XSqlQuery purchaseHandleShipTo;
-  purchaseHandleShipTo.prepare("SELECT"
-                   "       cntct_id, cntct_honorific, cntct_first_name,"
-                   "       cntct_middle, cntct_last_name, cntct_suffix,"
-                   "       cntct_phone, cntct_title, cntct_fax, cntct_email,"
-                   "       addr_id, addr_line1, addr_line2, addr_line3,"
-                   "       addr_city, addr_state, addr_postalcode, addr_country"
-                   "  FROM whsinfo"
-                   "  LEFT OUTER JOIN cntct ON (warehous_cntct_id=cntct_id)"
-                   "  LEFT OUTER JOIN addr ON (warehous_addr_id=addr_id)"
-                   " WHERE (warehous_id=:warehous_id);");
+// Clarify Ship To Name default to Warehouse Description instead of CRM account which has a
+// tenuous relationship to warehouse
+  purchaseHandleShipTo.prepare("SELECT warehous_descrip, warehous_cntct_id, warehous_addr_id"
+                               "  FROM whsinfo"
+                               " WHERE warehous_id=:warehous_id;");
   purchaseHandleShipTo.bindValue(":warehous_id", _warehouse->id());
   purchaseHandleShipTo.exec();
   if (purchaseHandleShipTo.first())
   {
-    _shiptoCntct->setId(purchaseHandleShipTo.value("cntct_id").toInt());
-    _shiptoCntct->setHonorific(purchaseHandleShipTo.value("cntct_honorific").toString());
-    _shiptoCntct->setFirst(purchaseHandleShipTo.value("cntct_first_name").toString());
-    _shiptoCntct->setMiddle(purchaseHandleShipTo.value("cntct_middle").toString());
-    _shiptoCntct->setLast(purchaseHandleShipTo.value("cntct_last_name").toString());
-    _shiptoCntct->setSuffix(purchaseHandleShipTo.value("cntct_suffix").toString());
-    _shiptoCntct->setPhone(purchaseHandleShipTo.value("cntct_phone").toString());
-    _shiptoCntct->setTitle(purchaseHandleShipTo.value("cntct_title").toString());
-    _shiptoCntct->setFax(purchaseHandleShipTo.value("cntct_fax").toString());
-    _shiptoCntct->setEmailAddress(purchaseHandleShipTo.value("cntct_email").toString());
-
-        _shiptoAddr->setId(purchaseHandleShipTo.value("addr_id").toInt());
-    _shiptoAddr->setLine1(purchaseHandleShipTo.value("addr_line1").toString());
-    _shiptoAddr->setLine2(purchaseHandleShipTo.value("addr_line2").toString());
-    _shiptoAddr->setLine3(purchaseHandleShipTo.value("addr_line3").toString());
-    _shiptoAddr->setCity(purchaseHandleShipTo.value("addr_city").toString());
-    _shiptoAddr->setState(purchaseHandleShipTo.value("addr_state").toString());
-    _shiptoAddr->setPostalCode(purchaseHandleShipTo.value("addr_postalcode").toString());
-    _shiptoAddr->setCountry(purchaseHandleShipTo.value("addr_country").toString());
+    _shiptoName->setText(purchaseHandleShipTo.value("warehous_descrip").toString());
+    _shiptoCntct->setId(purchaseHandleShipTo.value("warehous_cntct_id").toInt());
+    _shiptoAddr->setId(purchaseHandleShipTo.value("warehous_addr_id").toInt());
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting Site Info"),
                                 purchaseHandleShipTo, __FILE__, __LINE__))
     return;
-}
-
-void purchaseOrder::sHandleShipToName()
-{
-  if (!_dropShip->isChecked())
-  {
-    XSqlQuery purchaseHandleShipTo;
-    purchaseHandleShipTo.prepare("SELECT * "
-                                 "FROM address "
-                                 "WHERE (addr_id=:addr_id);" );
-    purchaseHandleShipTo.bindValue(":addr_id", _shiptoAddr->id());
-    purchaseHandleShipTo.exec();
-    if (purchaseHandleShipTo.first())
-    {
-      _shiptoName->setText(purchaseHandleShipTo.value("crmacct_name").toString());
-    }
-  }
 }
