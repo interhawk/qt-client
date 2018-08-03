@@ -21,7 +21,7 @@
 #include "guiErrorCheck.h"
 
 #include "priceList.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 #include "xdoublevalidator.h"
 
 creditMemoItem::creditMemoItem(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
@@ -34,7 +34,6 @@ creditMemoItem::creditMemoItem(QWidget* parent, const char* name, bool modal, Qt
 #endif
 
   connect(_discountFromSale, SIGNAL(editingFinished()),              this, SLOT(sCalculateFromDiscount()));
-  connect(_extendedPrice,    SIGNAL(valueChanged()),                 this, SLOT(sCalculateTax()));
   connect(_item,	     SIGNAL(newId(int)),                     this, SLOT(sPopulateItemInfo()));
   connect(_warehouse,	     SIGNAL(newID(int)),                     this, SLOT(sPopulateItemsiteInfo()));
   connect(_listPrices,	     SIGNAL(clicked()),                      this, SLOT(sListPrices()));
@@ -44,7 +43,6 @@ creditMemoItem::creditMemoItem(QWidget* parent, const char* name, bool modal, Qt
   connect(_qtyToCredit,	     SIGNAL(textChanged(const QString&)),    this, SLOT(sCalculateExtendedPrice()));
   connect(_save,	     SIGNAL(clicked()),                      this, SLOT(sSave()));
   connect(_taxLit,           SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
-  connect(_taxType,	     SIGNAL(newID(int)),	             this, SLOT(sCalculateTax()));
   connect(_qtyUOM,           SIGNAL(newID(int)),                     this, SLOT(sQtyUOMChanged()));
   connect(_pricingUOM,       SIGNAL(newID(int)),                     this, SLOT(sPriceUOMChanged()));
   connect(_itemSelected,     SIGNAL(clicked()),                      this, SLOT(sHandleSelection()));
@@ -213,6 +211,8 @@ enum SetResponse creditMemoItem::set(const ParameterList &pParams)
                      .arg(_invoiceNumber) );
   else
     _item->addExtraClause( QString("(item_id IN (SELECT custitem FROM custitem(%1, %2) ) )").arg(_custid).arg(_shiptoid) );
+
+  sCalculateTax();
 
   return NoError;
 }
@@ -533,7 +533,6 @@ void creditMemoItem::populate()
 void creditMemoItem::sCalculateExtendedPrice()
 {
   _extendedPrice->setLocalValue(((_qtyToCredit->toDouble() * _qtyinvuomratio) / _priceinvuomratio) * _netUnitPrice->localValue());
-  sCalculateTax();
 }
 
 void creditMemoItem::sCalculateDiscountPrcnt()
@@ -597,51 +596,31 @@ void creditMemoItem::sListPrices()
 
 void creditMemoItem::sCalculateTax()
 {
-  _saved = false;
   XSqlQuery calcq;
-  calcq.prepare( "SELECT calculateTax(cmhead_taxzone_id,:taxtype_id,cmhead_docdate,cmhead_curr_id,ROUND(:ext,2)) AS tax "
-                 "FROM cmhead "
-                 "WHERE (cmhead_id=:cmhead_id); ");
-  calcq.bindValue(":cmhead_id", _cmheadid);
-  calcq.bindValue(":taxtype_id", _taxType->id());
-  calcq.bindValue(":ext", _extendedPrice->localValue());
+  calcq.prepare( "SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
+                "  FROM taxhist "
+                " WHERE taxhist_doctype = 'CMI' "
+                "   AND taxhist_parent_id = :cmitem_id");
+  calcq.bindValue(":cmitem_id", _cmitemid);
   calcq.exec();
   if (calcq.first())
     _tax->setLocalValue(calcq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Credit Memo Information"),
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Tax Calculation"),
                                 calcq, __FILE__, __LINE__))
-  {
     return;
-  }
 }
 
 void creditMemoItem::sTaxDetail()
 {
-  taxDetail newdlg(this, "", true);
   ParameterList params;
-  params.append("taxzone_id", _taxzoneid);
-  params.append("taxtype_id", _taxType->id());
-  params.append("date", _netUnitPrice->effective());
-  params.append("subtotal", _extendedPrice->localValue());
-  params.append("curr_id",  _tax->id());
-  params.append("sense", -1);
-
-  if(cView == _mode)
-    params.append("readOnly");
-
-  if(_saved == true)
-  {
-    params.append("order_id", _cmitemid);
-    params.append("order_type", "CI");
-  }
-
-  newdlg.set(params);
-
-  if (newdlg.set(params) == NoError && newdlg.exec())
-  {
-    if (_taxType->id() != newdlg.taxtype())
-      _taxType->setId(newdlg.taxtype());
-  }
+  params.append("order_id", _cmitemid);
+  params.append("order_type", "CMI");
+  if (_mode == cView)
+    params.append("mode", "view");
+ 
+   taxBreakdown newdlg(this, "", true);
+   newdlg.set(params);
+   newdlg.exec();
 }
 
 void creditMemoItem::sPopulateUOM()

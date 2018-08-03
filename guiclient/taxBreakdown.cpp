@@ -238,6 +238,21 @@ void taxBreakdown::sPopulate()
     params.append("itemtype", "CMI");
     params.append("dochead_id", _orderid);
   }
+  else if (_ordertype == "CMI")
+  {
+    _currencyLit->setText(tr("Sales Credit Currency:"));
+    _header->setText(tr("Tax Breakdown for Sales Credit:"));
+
+    taxPopulate.prepare("SELECT cmhead_number AS number, cmhead_taxzone_id AS taxzone_id, "
+                        "       cmhead_curr_id AS curr_id, cmhead_docdate AS date "
+                        "  FROM cmitem "
+                        "  JOIN cmhead ON cmitem_cmhead_id = cmhead_id "
+                        " WHERE cmitem_id = :orderid ");
+
+    params.append("headtype", "CM");
+    params.append("itemtype", "CMI");
+    params.append("docitem_id", _orderid);
+  }
   else if (_ordertype == "TO")
   {
     _currencyLit->setText(tr("Transfer Order Currency:"));
