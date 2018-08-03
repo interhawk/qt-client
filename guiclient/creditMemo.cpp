@@ -22,7 +22,7 @@
 #include "creditMemoItem.h"
 #include "invoiceList.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
+#include "taxIntegration.h"
 #include "guiErrorCheck.h"
 
 creditMemo::creditMemo(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -38,10 +38,14 @@ creditMemo::creditMemo(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
   connect(_shipTo, SIGNAL(newId(int)), this, SLOT(populateShipto(int)));
   connect(_save, SIGNAL(clicked()), this, SLOT(sSave()));
-  connect(_taxLit, SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
   connect(_subtotal, SIGNAL(valueChanged()), this, SLOT(sCalculateTotal()));
+  connect(_tax, SIGNAL(save(bool)), this, SLOT(save(bool)));
   connect(_tax, SIGNAL(valueChanged()), this, SLOT(sCalculateTotal()));
-  connect(_miscCharge, SIGNAL(valueChanged()), this, SLOT(sCalculateTotal()));
+  connect(_miscChargeTaxtype, SIGNAL(newID(int)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeDiscount, SIGNAL(toggled(bool)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeAccount, SIGNAL(valid(bool)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscCharge, SIGNAL(valueChanged()), this, SLOT(sMiscChargeChanged()));
+  connect(_freightTaxtype, SIGNAL(newID(int)), this, SLOT(sMiscTaxtypeChanged()));
   connect(_freight,	SIGNAL(valueChanged()),	this, SLOT(sFreightChanged()));
   connect(_taxzone,	SIGNAL(newID(int)),	this, SLOT(sTaxZoneChanged()));
   connect(_cust, SIGNAL(newCrmacctId(int)), _billToAddr, SLOT(setSearchAcct(int)));
@@ -55,6 +59,7 @@ creditMemo::creditMemo(QWidget* parent, const char* name, Qt::WindowFlags fl)
 #endif
 
   _custtaxzoneid        = -1;
+  _calcfreight          = false;
   _freightCache         = 0;
   _taxzoneidCache       = -1;
   _NumberGen            = -1;
@@ -79,6 +84,9 @@ creditMemo::creditMemo(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _cmitem->addColumn(tr("Extended"),    _moneyColumn, Qt::AlignRight,  true,  "extprice"  );
 
   _miscChargeAccount->setType(GLCluster::cRevenue | GLCluster::cExpense);
+
+   _freightTaxtype->setCode("Freight");
+   _miscChargeTaxtype->setCode("Misc");
 }
 
 creditMemo::~creditMemo()
@@ -103,6 +111,7 @@ enum SetResponse creditMemo::set(const ParameterList &pParams)
   {
     _cmheadid = param.toInt();
     _documents->setId(_cmheadid);
+    _tax->setOrderId(_cmheadid);
     populate();
   }
 
@@ -110,6 +119,7 @@ enum SetResponse creditMemo::set(const ParameterList &pParams)
   if (valid)
   {
     _mode = cNew;
+    _tax->setMode(_mode);
 
     if (param.toString() == "new")
     {
@@ -119,6 +129,7 @@ enum SetResponse creditMemo::set(const ParameterList &pParams)
       {
         _cmheadid = creditet.value("cmhead_id").toInt();
         _documents->setId(_cmheadid);
+        _tax->setOrderId(_cmheadid);
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Credit Memo Information"),
                                     creditet, __FILE__, __LINE__))
@@ -128,6 +139,7 @@ enum SetResponse creditMemo::set(const ParameterList &pParams)
 
       setNumber();
       _memoDate->setDate(omfgThis->dbDate(), true);
+      _calcfreight = _metrics->boolean("CalculateFreight");
 
       creditet.prepare("INSERT INTO cmhead ("
 		"    cmhead_id, cmhead_number, cmhead_docdate, cmhead_posted"
@@ -150,6 +162,7 @@ enum SetResponse creditMemo::set(const ParameterList &pParams)
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
+      _tax->setMode(_mode);
 
       _memoNumber->setEnabled(false);
       _cust->setReadOnly(true);
@@ -161,6 +174,7 @@ enum SetResponse creditMemo::set(const ParameterList &pParams)
     else if (param.toString() == "view")
     {
       _mode = cView;
+      _tax->setMode(_mode);
 
       _memoNumber->setEnabled(false);
       _memoDate->setEnabled(false);
@@ -260,14 +274,32 @@ void creditMemo::setNumber()
 
 void creditMemo::sSave()
 {
+  // save the cmhead
+  if (!save(false))
+    return;
+
+  // save address info in case someone wants to use 'em again later
+  // but don't make any global changes to the data and ignore errors
+  _billToAddr->save(AddressCluster::CHANGEONE);
+  _shipToAddr->save(AddressCluster::CHANGEONE);
+
+  if(_metrics->value("TaxService") == "A")
+    _tax->save();
+  
+  omfgThis->sCreditMemosUpdated();
+
+  _cmheadid = -1;
+  _tax->setOrderId(_cmheadid);
+  close();
+}
+
+bool creditMemo::save(bool partial)
+{
   //  Make sure that all of the required field have been populated
   QList<GuiErrorCheck>errors;
-  errors<<GuiErrorCheck(_memoNumber->text().length() == 0, _memoNumber,
+  errors<<GuiErrorCheck(_memoNumber->text().trimmed().length() == 0, _memoNumber,
                         tr("<p>You must enter a valid Memo # for this Credit "
                            "Memo before you may save it."));
-
-  if(GuiErrorCheck::reportErrors(this,tr("Cannot Save Credit Memo"),errors))
-      return;
 
   if ( _mode == cNew &&
        ( (_metrics->value("CMNumberGeneration") == "O") ||
@@ -283,18 +315,16 @@ void creditMemo::sSave()
     query.exec();
     if (query.first())
     {
-      QMessageBox::warning( this, tr("Invalid Memo # Entered"),
+      errors<<GuiErrorCheck(true, _memoNumber,
                             tr( "<p>The Memo # is already in use.  "
                             "You must enter an unused Memo # for this Credit "
                             "Memo before you may save it." ) );
-      _memoNumber->setFocus();
-      return;
     }
   }
 
   errors<<GuiErrorCheck(!_cust->isValid(), _cust,
                         tr("Please select a Customer before continuing.."))
-        <<GuiErrorCheck(_total->localValue() < 0, _total,
+        <<GuiErrorCheck(!partial && _total->localValue() < 0, _total,
                        tr("<p>The Total must be a positive value."))
         <<GuiErrorCheck(! _miscCharge->isZero() && !_miscChargeAccount->isValid(), _miscCharge,
                          tr("<p>You may not enter a Misc. Charge without "
@@ -302,28 +332,11 @@ void creditMemo::sSave()
                          "charge. Please set the Misc. Charge amount to 0 "
                          "or select a Misc. Charge Sales Account."));
 
-  if(GuiErrorCheck::reportErrors(this,tr("Cannot Save Credit Memo"),errors))
-      return;
-
-  // save the cmhead
-  if (!save())
-    return;
-
-  // save address info in case someone wants to use 'em again later
-  // but don't make any global changes to the data and ignore errors
-  _billToAddr->save(AddressCluster::CHANGEONE);
-  _shipToAddr->save(AddressCluster::CHANGEONE);
-  
-  omfgThis->sCreditMemosUpdated();
-
-  _cmheadid = -1;
-  close();
-}
-
-bool creditMemo::save()
-{
-  if(_memoNumber->text().trimmed().length() == 0)
+  if (partial && GuiErrorCheck::checkForErrors(errors))
     return false;
+
+  if(GuiErrorCheck::reportErrors(this,tr("Cannot Save Credit Memo"),errors))
+      return false;
 
   XSqlQuery creditave;
   creditave.prepare( "UPDATE cmhead "
@@ -352,7 +365,13 @@ bool creditMemo::save()
              "    cmhead_curr_id=:cmhead_curr_id, "
              "    cmhead_prj_id=:cmhead_prj_id,"
              "    cmhead_shipzone_id=:cmhead_shipzone_id,"
-             "    cmhead_saletype_id=:cmhead_saletype_id "
+             "    cmhead_saletype_id=:cmhead_saletype_id,"
+             "    cmhead_calcfreight=:cmhead_calcfreight,"
+             "    cmhead_shipvia=:cmhead_shipvia,"
+             "    cmhead_warehous_id=:cmhead_warehous_id,"
+             "    cmhead_freight_taxtype_id=:cmhead_freight_taxtype_id,"
+             "    cmhead_misc_taxtype_id=:cmhead_misc_taxtype_id,"
+             "    cmhead_misc_discount=:cmhead_misc_discount "
 	     "WHERE (cmhead_id=:cmhead_id);" );
 
   creditave.bindValue(":cmhead_id", _cmheadid);
@@ -398,6 +417,13 @@ bool creditMemo::save()
     creditave.bindValue(":cmhead_shipzone_id", _shippingZone->id());
   if(_saleType->isValid())
     creditave.bindValue(":cmhead_saletype_id", _saleType->id());
+  creditave.bindValue(":cmhead_calcfreight", _calcfreight);
+  creditave.bindValue(":cmhead_shipvia", _shipVia->currentText());
+  creditave.bindValue(":cmhead_warehous_id", _warehouse->id());
+  creditave.bindValue(":cmhead_freight_taxtype_id", _freightTaxtype->id());
+  creditave.bindValue(":cmhead_misc_taxtype_id", _miscChargeTaxtype->id());
+  creditave.bindValue(":cmhead_misc_discount", _miscChargeDiscount->isChecked());
+
   creditave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Credit Memo Information"),
                                 creditave, __FILE__, __LINE__))
@@ -448,6 +474,7 @@ void creditMemo::sInvoiceList()
       _shipToName->setEnabled(false);
       _shipToAddr->setEnabled(false);
       _ignoreShiptoSignals = true;
+      _shipTo->setId(sohead.value("invchead_shipto_id").toInt());
       _shipToName->setText(sohead.value("invchead_shipto_name"));
       _shipToAddr->setLine1(sohead.value("invchead_shipto_address1").toString());
       _shipToAddr->setLine2(sohead.value("invchead_shipto_address2").toString());
@@ -466,6 +493,12 @@ void creditMemo::sInvoiceList()
       _taxzone->setId(sohead.value("invchead_taxzone_id").toInt());
       _customerPO->setText(sohead.value("invchead_ponumber"));
       _project->setId(sohead.value("invchead_prj_id").toInt());
+
+      _shipVia->setText(sohead.value("invchead_shipvia").toString());
+      _warehouse->setId(sohead.value("invchead_warehous_id").toInt());
+      _freightTaxtype->setId(sohead.value("invchead_freight_taxtype_id").toInt());
+      _miscChargeTaxtype->setId(sohead.value("invchead_misc_taxtype_id").toInt());
+      _miscChargeDiscount->setChecked(sohead.value("invchead_misc_discount").toBool());
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Credit Memo Information"),
                                   sohead, __FILE__, __LINE__))
@@ -610,6 +643,7 @@ qDebug("_numbergen->%d, memo#->%d", _NumberGen, _memoNumber->text().toInt());
     if (query.first())
     {
       _cmheadid = query.value("cmhead_id").toInt();
+      _tax->setOrderId(_cmheadid);
 
       _cust->setReadOnly(true);
 
@@ -639,9 +673,13 @@ qDebug("_numbergen->%d, memo#->%d", _NumberGen, _memoNumber->text().toInt());
         _edit->hide();
 
         _mode = cView;
+        _tax->setMode(_mode);
       }
       else
+      {
         _mode = cEdit;
+        _tax->setMode(_mode);
+      }
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Credit Memo Information"),
                                   query, __FILE__, __LINE__))
@@ -686,7 +724,7 @@ void creditMemo::sCopyToShipto()
 
 void creditMemo::sNew()
 {
-  if (!save())
+  if (!save(true))
     return;
 
   ParameterList params;
@@ -702,7 +740,7 @@ void creditMemo::sNew()
 
 void creditMemo::sEdit()
 {
-  if (!save())
+  if (!save(true))
     return;
 
   ParameterList params;
@@ -787,7 +825,41 @@ void creditMemo::sFillList()
     return;
 
   sCalculateSubtotal();
-  sCalculateTax();
+
+  if (_calcfreight)
+  {
+    creditFillList.prepare("SELECT SUM(freightdata_total) AS freight "
+                           "FROM freightDetail('CM', :head_id, :cust_id, :shipto_id, "
+                           "                   :orderdate, :shipvia, :curr_id);");
+    creditFillList.bindValue(":head_id", _cmheadid);
+    creditFillList.bindValue(":cust_id", _cust->id());
+    creditFillList.bindValue(":shipto_id", _shipTo->id());
+    creditFillList.bindValue(":orderdate", _memoDate->date());
+    creditFillList.bindValue(":shipvia", _shipVia->currentText());
+    creditFillList.bindValue(":curr_id", _currency->id());
+    creditFillList.exec();
+    if (creditFillList.first())
+    {
+      _freightCache = creditFillList.value("freight").toDouble();
+      disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      _freight->setLocalValue(_freightCache);
+      connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+    }
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving CM Information"),
+                                  creditFillList, __FILE__, __LINE__))
+    {
+      return;
+    }
+  }
+  else
+  {
+    disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+    _freight->setLocalValue(_freightCache);
+    connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+  }
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 
   _currency->setEnabled(_cmitem->topLevelItemCount() == 0);
 }
@@ -848,12 +920,24 @@ void creditMemo::populate()
     _hold->setChecked(cmhead.value("cmhead_hold").toBool());
 
     _currency->setId(cmhead.value("cmhead_curr_id").toInt());
-    _freightCache = cmhead.value("cmhead_freight").toDouble();
-    _freight->setLocalValue(cmhead.value("cmhead_freight").toDouble());
+
+    _calcfreight = cmhead.value("cmhead_calcfreight").toBool();
+
+    if (!_calcfreight)
+    {
+      _freightCache = cmhead.value("cmhead_freight").toDouble();
+      disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      _freight->setLocalValue(cmhead.value("cmhead_freight").toDouble());
+      connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+    }
+
+    _freightTaxtype->setId(cmhead.value("cmhead_freight_taxtype_id").toInt());
 
     _miscCharge->setLocalValue(cmhead.value("cmhead_misc").toDouble());
     _miscChargeDescription->setText(cmhead.value("cmhead_misc_descrip"));
     _miscChargeAccount->setId(cmhead.value("cmhead_misc_accnt_id").toInt());
+    _miscChargeTaxtype->setId(cmhead.value("cmhead_misc_taxtype_id").toInt());
+    _miscChargeDiscount->setChecked(cmhead.value("cmhead_misc_discount").toBool());
 
     _comments->setText(cmhead.value("cmhead_comments").toString());
 
@@ -894,8 +978,8 @@ void creditMemo::populate()
 
     _shippingZone->setId(cmhead.value("cmhead_shipzone_id").toInt());
     _saleType->setId(cmhead.value("cmhead_saletype_id").toInt());
-
-    sCalculateTax();
+    _shipVia->setText(cmhead.value("cmhead_shipvia").toString());
+    _warehouse->setId(cmhead.value("cmhead_warehous_id").toInt());
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Credit Memo Information"),
                                 cmhead, __FILE__, __LINE__))
@@ -947,70 +1031,118 @@ void creditMemo::sReleaseNumber()
   }
 }
 
-void creditMemo::sTaxDetail()
-{
-  if (!save())
-    return;
-
-  ParameterList params;
-  params.append("order_id",	_cmheadid);
-  params.append("order_type",	"CM");
-  params.append("sense", -1);
-
-  if(cView == _mode)
-    params.append("mode", "view");
-  else
-    params.append("mode", "edit");
-
-  taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError)
-  {
-    newdlg.exec();
-    populate();
-  }
-}
-
-void creditMemo::sCalculateTax()
-{
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(tax) * -1 AS tax "
-                "FROM ("
-                "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-                "FROM tax "
-                " JOIN calculateTaxDetailSummary('CM', :cmhead_id, 'T') ON (taxdetail_tax_id=tax_id)"
-	        "GROUP BY tax_id) AS data;" );
-  taxq.bindValue(":cmhead_id", _cmheadid);
-  taxq.exec();
-  if (taxq.first())
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
-  // changing _tax fires sCalculateTotal()
-}
-
 void creditMemo::sTaxZoneChanged()
 {
   if (_cmheadid != -1 && _taxzoneidCache != _taxzone->id())
   {
-    if (!save())
-      return;
     _taxzoneidCache = _taxzone->id();
-    sCalculateTax();
+
+    if (_metrics->value("TaxService") == "N")
+      _tax->sRecalculate();
   }
+}
+
+void creditMemo::sMiscTaxtypeChanged()
+{
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
+}
+
+void creditMemo::sMiscChargeChanged()
+{
+  sCalculateTotal();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void creditMemo::sFreightChanged()
 {
   if (_cmheadid != -1 && _freightCache != _freight->localValue())
   {
-    if (!save())
-      return;
-    _freightCache = _freight->localValue();
-    sCalculateTax();
-    sCalculateTotal();
+    if (_calcfreight)
+    {
+      if (_metrics->value("TaxService") == "A")
+      {
+        XSqlQuery qry;
+        qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                    "                      addr_line1 || addr_line2 || addr_line3 || "
+                    "                      addr_city || addr_state || addr_postalcode || "
+                    "                      addr_country) != 1 "
+                    "       AS check "
+                    "  FROM cmitem "
+                    "  JOIN itemsite ON cmitem_itemsite_id = itemsite_id "
+                    "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                    "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                    " WHERE cmitem_cmhead_id = :cmheadid;");
+        qry.bindValue(":cmheadid", _cmheadid);
+        qry.exec();
+        if (qry.first() && qry.value("check").toBool())
+        {
+          QMessageBox::critical(this, tr("Cannot override freight"),
+                                tr("Freight must be calculated automatically when lines are "
+                                   "shipping from different addresses for Avalara tax "
+                                   "calculation."));
+
+          disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+          _freight->setLocalValue(_freightCache);
+          connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+          return;
+        }
+        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                      qry, __FILE__, __LINE__))
+        {
+          disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+          _freight->setLocalValue(_freightCache);
+          connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+          return;
+        }
+      }
+
+      int answer;
+      answer = QMessageBox::question(this, tr("Manual Freight?"),
+                                     tr("<p>Manually editing the freight will disable "
+                                          "automatic Freight recalculations.  Are you "
+                                          "sure you want to do this?"),
+                                     QMessageBox::Yes,
+                                     QMessageBox::No | QMessageBox::Default);
+      if (answer == QMessageBox::Yes)
+        _calcfreight = false;
+      else
+      {
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      }
+    }
+    else if ( (!_calcfreight) &&
+              (_freight->localValue() == 0) &&
+              (_metrics->boolean("CalculateFreight")))
+    {
+      int answer;
+      answer = QMessageBox::question(this, tr("Automatic Freight?"),
+                                     tr("<p>Manually clearing the freight will enable "
+                                          "automatic Freight recalculations.  Are you "
+                                          "sure you want to do this?"),
+                                     QMessageBox::Yes,
+                                     QMessageBox::No | QMessageBox::Default);
+      if (answer == QMessageBox::Yes)
+      {
+        _calcfreight = true;
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      }
+    }
+    else
+      _freightCache = _freight->localValue();
   }
+
+  sCalculateTotal();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 

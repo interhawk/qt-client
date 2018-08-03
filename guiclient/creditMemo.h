@@ -32,7 +32,6 @@ public:
   
 public slots:
     virtual SetResponse set( const ParameterList & pParams );
-    virtual void sCalculateTax();
     virtual void sSave();
     virtual void sInvoiceList();
     virtual void populateShipto( int pShiptoid );
@@ -50,12 +49,14 @@ public slots:
     virtual void populate();
     virtual void closeEvent( QCloseEvent * pEvent );
     virtual void sTaxZoneChanged();
-    virtual void sTaxDetail();
+    virtual void sMiscTaxtypeChanged();
+    virtual void sMiscChargeChanged();
     virtual void sFreightChanged();
     virtual void sReleaseNumber();
 
 protected slots:
     virtual void languageChange();
+    virtual bool save(bool);
 
 private:
     int _mode;
@@ -67,8 +68,8 @@ private:
     double _subtotalCache;
     double _freightCache;
     int _taxzoneidCache;
-    bool save();
     int _NumberGen;
+    bool _calcfreight;
 };
 
 #endif // CREDITMEMO_H
