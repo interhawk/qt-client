@@ -31,7 +31,6 @@ public:
 
 public slots:
     virtual SetResponse set( const ParameterList & pParams );
-    virtual void sCalculateTax();
     virtual bool sSave( bool partial );
     virtual void sSaveClick();
     virtual void populateShipto( int pShiptoid );
@@ -53,7 +52,6 @@ public slots:
     virtual void sTaxZoneChanged();
     virtual void sRecvWhsChanged();
     virtual void sShipWhsChanged();
-    virtual void sTaxDetail();
     virtual void sOrigSoChanged();
     virtual void sDispositionChanged();
     virtual void sCreditByChanged();
@@ -76,6 +74,8 @@ public slots:
     virtual void sShipment();
     virtual void sShipmentStatus();
     virtual void sCheckNumber();
+    virtual void sMiscTaxtypeChanged();
+    virtual void sMiscChargeChanged();
     virtual void sFreightChanged();
     virtual void sFreightDetail();
 
