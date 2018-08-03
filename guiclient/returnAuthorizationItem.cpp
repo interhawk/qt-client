@@ -20,7 +20,7 @@
 #include "errorReporter.h"
 
 #include "priceList.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 #include "storedProcErrorLookup.h"
 #include "returnAuthItemLotSerial.h"
 
@@ -70,7 +70,6 @@ returnAuthorizationItem::returnAuthorizationItem(QWidget* parent, const char* na
 
   connect(_discountFromSale,     SIGNAL(editingFinished()),                    this, SLOT(sCalculateFromDiscount()));
   connect(_saleDiscountFromSale, SIGNAL(editingFinished()),                    this, SLOT(sCalculateSaleFromDiscount()));
-  connect(_extendedPrice,        SIGNAL(valueChanged()),                 this, SLOT(sCalculateTax()));
   connect(_item,                 SIGNAL(newId(int)),                     this, SLOT(sPopulateItemInfo()));
   connect(_listPrices,           SIGNAL(clicked()),                      this, SLOT(sListPrices()));
   connect(_saleListPrices,       SIGNAL(clicked()),                      this, SLOT(sSaleListPrices()));
@@ -85,7 +84,6 @@ returnAuthorizationItem::returnAuthorizationItem(QWidget* parent, const char* na
   connect(_qtyAuth,              SIGNAL(textChanged(const QString&)),    this, SLOT(sCalcWoUnitCost()));
   connect(_save,                 SIGNAL(clicked()),                      this, SLOT(sSaveClicked()));
   connect(_taxLit,               SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
-  connect(_taxType,              SIGNAL(newID(int)),                     this, SLOT(sCalculateTax()));
   connect(_qtyUOM,               SIGNAL(newID(int)),                     this, SLOT(sQtyUOMChanged()));
   connect(_qtyUOM,               SIGNAL(newID(int)),                     this, SLOT(sPopulateOrderInfo()));
   connect(_pricingUOM,           SIGNAL(newID(int)),                     this, SLOT(sPriceUOMChanged()));
@@ -327,6 +325,8 @@ enum SetResponse returnAuthorizationItem::set(const ParameterList &pParams)
     _raitemid = param.toInt();
     populate();
   }
+
+  sCalculateTax();
 
   return NoError;
 }
@@ -1278,39 +1278,31 @@ void returnAuthorizationItem::sCalculateTax()
 {
   XSqlQuery calcq;
 
-  calcq.prepare("SELECT calculateTax(rahead_taxzone_id,:taxtype_id,rahead_authdate,rahead_curr_id,ROUND(:ext,2)) AS tax "
-                "FROM rahead "
-                "WHERE (rahead_id=:rahead_id); " );
+  calcq.prepare("SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
+                "  FROM taxhist "
+                " WHERE taxhist_doctype = 'RI' "
+                "   AND taxhist_parent_id = :raitem_id");
 
-  calcq.bindValue(":rahead_id", _raheadid);
-  calcq.bindValue(":taxtype_id", _taxType->id());
-  calcq.bindValue(":ext", _extendedPrice->localValue());
+  calcq.bindValue(":raitem_id", _raitemid);
   calcq.exec();
   if (calcq.first())
     _tax->setLocalValue(calcq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax Information"),
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Tax Calculation"),
                                 calcq, __FILE__, __LINE__))
-  {
     return;
-  }
 }
 
 void returnAuthorizationItem::sTaxDetail()
 {
-  taxDetail newdlg(this, "", true);
   ParameterList params;
-  params.append("taxzone_id",   _taxzoneid);
-  params.append("taxtype_id",  _taxType->id());
-  params.append("date", _netUnitPrice->effective());
-  params.append("curr_id", _netUnitPrice->id());
-  params.append("subtotal", _extendedPrice->localValue());
-  params.append("readOnly");
-
-  if (newdlg.set(params) == NoError && newdlg.exec())
-  {
-    if (_taxType->id() != newdlg.taxtype())
-      _taxType->setId(newdlg.taxtype());
-  }
+  params.append("order_id", _raitemid);
+  params.append("order_type", "RI");
+  if (_mode == cView)
+    params.append("mode", "view");
+ 
+   taxBreakdown newdlg(this, "", true);
+   newdlg.set(params);
+   newdlg.exec();
 }
 
 void returnAuthorizationItem::sPopulateUOM()

@@ -25,7 +25,7 @@
 #include "mqlutil.h"
 #include "returnAuthorizationItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
+#include "taxIntegration.h"
 #include "freightBreakdown.h"
 #include "printRaForm.h"
 
@@ -65,11 +65,15 @@ returnAuthorization::returnAuthorization(QWidget* parent, const char* name, Qt::
   connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
   connect(_shipTo, SIGNAL(newId(int)), this, SLOT(populateShipto(int)));
   connect(_save, SIGNAL(clicked()), this, SLOT(sSaveClick()));
-  connect(_taxLit, SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
   connect(_freightLit, SIGNAL(leftClickedURL(const QString&)), this, SLOT(sFreightDetail()));
   connect(_subtotal, SIGNAL(valueChanged()), this, SLOT(sCalculateTotal()));
+  connect(_tax, SIGNAL(save(bool)), this, SLOT(sSave(bool)));
   connect(_tax, SIGNAL(valueChanged()), this, SLOT(sCalculateTotal()));
-  connect(_miscCharge, SIGNAL(valueChanged()), this, SLOT(sCalculateTotal()));
+  connect(_miscChargeTaxtype, SIGNAL(newID(int)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeDiscount, SIGNAL(toggled(bool)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeAccount, SIGNAL(valid(bool)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscCharge, SIGNAL(valueChanged()), this, SLOT(sMiscChargeChanged()));
+  connect(_freightTaxtype, SIGNAL(newID(int)), this, SLOT(sMiscTaxtypeChanged()));
   connect(_freight, SIGNAL(editingFinished()), this, SLOT(sFreightChanged()));
   connect(_taxzone, SIGNAL(newID(int)), this, SLOT(sTaxZoneChanged()));
   connect(_warehouse, SIGNAL(newID(int)), this, SLOT(sRecvWhsChanged()));
@@ -174,6 +178,9 @@ returnAuthorization::returnAuthorization(QWidget* parent, const char* name, Qt::
 
   _miscChargeAccount->setType(GLCluster::cRevenue | GLCluster::cExpense);
   _incident->setDescriptionVisible(true);
+
+  _freightTaxtype->setCode("Freight");
+  _miscChargeTaxtype->setCode("Misc");
 }
 
 returnAuthorization::~returnAuthorization()
@@ -198,6 +205,7 @@ enum SetResponse returnAuthorization::set(const ParameterList &pParams)
   if (valid)
   {
     _mode = cNew;
+    _tax->setMode(_mode);
 
     if (param.toString() == "new")
     {
@@ -209,6 +217,7 @@ enum SetResponse returnAuthorization::set(const ParameterList &pParams)
         _comments->setId(_raheadid);
         _documents->setId(_raheadid);
         _charass->setId(_raheadid);
+        _tax->setOrderId(_raheadid);
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving RA Information"),
                                     returnet, __FILE__, __LINE__))
@@ -247,6 +256,7 @@ enum SetResponse returnAuthorization::set(const ParameterList &pParams)
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
+      _tax->setMode(_mode);
 
       _authNumber->setEnabled(false);
       _cancel->setText("&Close");
@@ -256,6 +266,7 @@ enum SetResponse returnAuthorization::set(const ParameterList &pParams)
     else if (param.toString() == "view")
     {
       _mode = cView;
+      _tax->setMode(_mode);
       disconnect(_raitem, SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*)), this, SLOT(sPopulateMenu(QMenu*, QTreeWidgetItem*)));
     }
   }
@@ -279,6 +290,7 @@ enum SetResponse returnAuthorization::set(const ParameterList &pParams)
     _comments->setId(_raheadid);
     _documents->setId(_raheadid);
     _charass->setId(_raheadid);
+    _tax->setOrderId(_raheadid);
     populate();
   }
 
@@ -410,6 +422,9 @@ bool returnAuthorization::sSave(bool partial)
   << GuiErrorCheck((!partial && !_shipWhs->isValid()), _shipWhs,
                    tr("<p>You must enter a valid Shipping Site."))
   ;
+
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
   
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Return Authorization"), errors))
     return false;
@@ -444,7 +459,11 @@ bool returnAuthorization::sSave(bool partial)
              "       rahead_freight=:rahead_freight, rahead_calcfreight=:rahead_calcfreight,"
              "       rahead_printed=:rahead_printed,"
              "       rahead_warehous_id=:rahead_warehous_id, rahead_cohead_warehous_id=:rahead_cohead_warehous_id,"
-             "       rahead_shipzone_id=:rahead_shipzone_id, rahead_saletype_id=:rahead_saletype_id "
+             "       rahead_shipzone_id=:rahead_shipzone_id, rahead_saletype_id=:rahead_saletype_id, "
+             "       rahead_shipvia=:rahead_shipvia, "
+             "       rahead_freight_taxtype_id=:rahead_freight_taxtype_id, "
+             "       rahead_misc_taxtype_id=:rahead_misc_taxtype_id, "
+             "       rahead_misc_discount=:rahead_misc_discount "
              " WHERE(rahead_id=:rahead_id);" );
 
   returnSave.bindValue(":rahead_id", _raheadid);
@@ -506,6 +525,10 @@ bool returnAuthorization::sSave(bool partial)
   if (_shippingZone->id() != -1)
     returnSave.bindValue(":rahead_shipzone_id", _shippingZone->id());
   returnSave.bindValue(":rahead_saletype_id", _saleType->id());
+  returnSave.bindValue(":rahead_shipvia", _shipVia->currentText());
+  returnSave.bindValue(":rahead_freight_taxtype_id", _freightTaxtype->id());
+  returnSave.bindValue(":rahead_misc_taxtype_id", _miscChargeTaxtype->id());
+  returnSave.bindValue(":rahead_misc_discount", _miscChargeDiscount->isChecked());
 
   returnSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving RA Information"),
@@ -532,6 +555,7 @@ void returnAuthorization::sPostReceipts()
    enterPoReceipt::post("RA", _raheadid);
    populate();
    _mode = cEdit;
+   _tax->setMode(_mode);
    _cancel->setText("&Close");
 }
 
@@ -560,7 +584,12 @@ void returnAuthorization::sSaveClick()
       }
   */
     }
+
+    if(_metrics->value("TaxService") == "A")
+      _tax->save();
+
     _raheadid=-1;
+    _tax->setOrderId(_raheadid);
 
     close();
   }
@@ -905,6 +934,7 @@ void returnAuthorization::sCheckAuthorizationNumber()
     if (query.first())
     {
       _raheadid = query.value("rahead_id").toInt();
+      _tax->setOrderId(_raheadid);
 
       if (_cust->id() > 0)
         _cust->setReadOnly(true);
@@ -912,6 +942,7 @@ void returnAuthorization::sCheckAuthorizationNumber()
       populate();
 
       _mode = cEdit;
+      _tax->setMode(_mode);
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving RA Information"),
                                   query, __FILE__, __LINE__))
@@ -1139,7 +1170,9 @@ void returnAuthorization::sFillList()
     _freight->setLocalValue(_freightCache);
 
   sCalculateNetDue();
-  sCalculateTax();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 
   _currency->setEnabled((_raitem->topLevelItemCount() == 0) && (_mode == cEdit));
 
@@ -1311,6 +1344,7 @@ void returnAuthorization::populate()
       _freight->setLocalValue(_freightCache);
     }
 
+    _freightTaxtype->setId(rahead.value("rahead_freight_taxtype_id").toInt());
 
     _ignoreWhsSignals = true;
     _warehouse->setId(rahead.value("rahead_warehous_id").toInt());
@@ -1320,9 +1354,12 @@ void returnAuthorization::populate()
     _miscCharge->setLocalValue(rahead.value("rahead_misc").toDouble());
     _miscChargeDescription->setText(rahead.value("rahead_misc_descrip"));
     _miscChargeAccount->setId(rahead.value("rahead_misc_accnt_id").toInt());
+    _miscChargeTaxtype->setId(rahead.value("rahead_misc_taxtype_id").toInt());
+    _miscChargeDiscount->setChecked(rahead.value("rahead_misc_discount").toBool());
 
     _shippingZone->setId(rahead.value("rahead_shipzone_id").toInt());
     _saleType->setId(rahead.value("rahead_saletype_id").toInt());
+    _shipVia->setText(rahead.value("rahead_shipvia").toString());
 
     _notes->setText(rahead.value("rahead_notes").toString());
 
@@ -1387,45 +1424,10 @@ void returnAuthorization::closeEvent(QCloseEvent *pEvent)
   XWidget::closeEvent(pEvent);
 }
 
-void returnAuthorization::sTaxDetail()
-{
-  if (!sSave(true))
-    return;
-
-  ParameterList params;
-  params.append("order_id", _raheadid);
-  params.append("order_type", "RA");
-  // mode => view since there are no fields to hold modified tax data
-  if (_mode == cView)
-    params.append("mode", "view");
-
-  taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError && newdlg.exec() == XDialog::Accepted)
-    populate();
-
-}
-
-void returnAuthorization::sCalculateTax()
-{
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT calcRATaxAmt(:rahead_id) AS tax;" );
-
-  taxq.bindValue(":rahead_id", _raheadid);
-  taxq.exec();
-  if (taxq.first())
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
-}
-
 void returnAuthorization::sTaxZoneChanged()
 {
-  if (_saved)
-    sSave(true);
-  sCalculateTax();
+  if (_metrics->value("TaxService") == "N")
+    _tax->sRecalculate();
 }
 
 void returnAuthorization::sRecvWhsChanged()
@@ -2003,7 +2005,9 @@ void returnAuthorization::sCheckNumber()
   if (returnCheckNumber.first())
   {
     _mode = cEdit;
+    _tax->setMode(_mode);
     _raheadid = returnCheckNumber.value("rahead_id").toInt();
+    _tax->setOrderId(_raheadid);
     populate();
     _authNumber->setEnabled(false);
     _cust->setReadOnly(true);
@@ -2017,6 +2021,19 @@ void returnAuthorization::sCheckNumber()
   sFillList();
 }
 
+void returnAuthorization::sMiscTaxtypeChanged()
+{
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
+}
+
+void returnAuthorization::sMiscChargeChanged()
+{
+  sCalculateTotal();
+   if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
+}
+
 void returnAuthorization::sFreightChanged()
 {
   if (_freight->localValue() == _freightCache)
@@ -2026,6 +2043,38 @@ void returnAuthorization::sFreightChanged()
   {
     if (_calcfreight)
     {
+      if (_metrics->value("TaxService") == "A")
+      {
+        XSqlQuery qry;
+        qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                    "                      addr_line1 || addr_line2 || addr_line3 || "
+                    "                      addr_city || addr_state || addr_postalcode || "
+                    "                      addr_country) != 1 "
+                    "       AS check "
+                    "  FROM raitem "
+                    "  JOIN itemsite ON raitem_itemsite_id = itemsite_id "
+                    "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                    "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                    " WHERE raitem_rahead_id = :raheadid;");
+        qry.bindValue(":raheadid", _raheadid);
+        qry.exec();
+        if (qry.first() && qry.value("check").toBool())
+        {
+          QMessageBox::critical(this, tr("Cannot override freight"),
+                                tr("Freight must be calculated automatically when lines are "
+                                   "shipping from different addresses for Avalara tax "
+                                   "calculation."));
+          _freight->setLocalValue(_freightCache);
+          return;
+        }
+        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                      qry, __FILE__, __LINE__))
+        {
+          _freight->setLocalValue(_freightCache);
+          return;
+        }
+      }
+
       int answer;
       answer = QMessageBox::question(this, tr("Manual Freight?"),
                                      tr("<p>Manually editing the freight will disable "
@@ -2061,9 +2110,9 @@ void returnAuthorization::sFreightChanged()
       _freightCache = _freight->localValue();
   }
 
-  sSave(true);
-  sCalculateTax();
   sCalculateTotal();
+   if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void returnAuthorization::sFreightDetail()

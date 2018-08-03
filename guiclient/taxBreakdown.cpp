@@ -224,6 +224,24 @@ void taxBreakdown::sPopulate()
     params.append("itemtype", "RI");
     params.append("dochead_id", _orderid);
   }
+  else if (_ordertype == "RI")
+  {
+    _currencyLit->setText(tr("Return Authorization Currency:"));
+    _header->setText(tr("Tax Breakdown for Return:"));
+
+    _new->hide();
+    _delete->hide();
+
+    taxPopulate.prepare("SELECT rahead_number AS number, rahead_taxzone_id AS taxzone_id, "
+                        "       rahead_curr_id AS curr_id, rahead_authdate AS date "
+                        "  FROM raitem "
+                        "  JOIN rahead ON raitem_rahead_id = rahead_id "
+                        " WHERE raitem_id = :orderid ");
+
+    params.append("headtype", "RA");
+    params.append("itemtype", "RI");
+    params.append("docitem_id", _orderid);
+  }
   else if (_ordertype == "CM")
   {
     _currencyLit->setText(tr("Sales Credit Currency:"));
