@@ -117,39 +117,41 @@ void AvalaraIntegration::handleResponse(QNetworkReply* reply)
   QString orderType = reply->property("orderType").toString();
   int orderId = reply->property("orderId").toInt();
   QString type = reply->property("type").toString();
+  QByteArray request = reply->property("request").toByteArray();
   QByteArray response = reply->readAll();
 
   if (_metrics->boolean("LogTaxService"))
   {
-    XSqlQuery log;
-    log.prepare("INSERT INTO taxlog "
-                "(taxlog_service, taxlog_order_type, taxlog_order_id, taxlog_type, "
-                " taxlog_request, taxlog_response, taxlog_start, taxlog_time) "
-                " VALUES ('A', :orderType, :orderId, :type, "
-                "         :request, :response, :start, :time);");
-    log.bindValue(":orderType", orderType);
-    log.bindValue(":orderId", orderId);
-    log.bindValue(":request", reply->property("request"));
-    log.bindValue(":response", QString::fromUtf8(response));
-    log.bindValue(":start", reply->property("time"));
-    log.bindValue(":time", elapsed);
-    if (type == "test")
-      log.bindValue(":type", "Ping");
-    else if (type == "taxcodes")
-      log.bindValue(":type", "ListTaxCodes");
-    else if (type == "taxexempt")
-      log.bindValue(":type", "ListEntityUseCodes");
-    else if (type == "createtransaction")
-      log.bindValue(":type", "CreateOrAdjustTransaction");
-    else if (type == "committransaction")
-      log.bindValue(":type", "CommitTransaction");
-    else if (type == "voidtransaction")
-      log.bindValue(":type", "VoidTransaction");
-    else
-      log.bindValue(":type", "Error");
-    log.exec();
-    ErrorReporter::error(QtCriticalMsg, 0, "Error logging Avalara call",
-                         log, __FILE__, __LINE__);
+    QFile log(_metrics->value("TaxServiceLogFile"));
+    if (log.open(QIODevice::Append))
+    {
+      QString txt = reply->property("time").toString() + ":\n";
+      txt += "AvaTax ";
+      if (type == "test")
+        txt += "Ping";
+      else if (type == "taxcodes")
+        txt += "ListTaxCodes";
+      else if (type == "taxexempt")
+        txt += "ListEntityUseCodes";
+      else if (type == "createtransaction")
+        txt += "CreateOrAdjustTransaction";
+      else if (type == "committransaction")
+        txt += "CommitTransaction";
+      else if (type == "voidtransaction")
+        txt += "VoidTransaction";
+      else
+        txt += "Error";
+      txt += "\n";
+      txt += QString::number(elapsed) + " ns elapsed\n";
+      txt += "Request:\n";
+      txt += QString::fromUtf8(QJsonDocument::fromJson(request).toJson(QJsonDocument::Indented));
+      txt += "\nResponse:\n";
+      txt += QString::fromUtf8(QJsonDocument::fromJson(response).toJson(QJsonDocument::Indented));
+      txt += "\n";
+
+      log.write(txt.toUtf8());
+    }
+    log.close();
   }
 
   if (reply->error() != QNetworkReply::OperationCanceledError)

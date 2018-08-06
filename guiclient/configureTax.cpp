@@ -13,6 +13,7 @@
 #include "errorReporter.h"
 
 #include <QMessageBox>
+#include <QStandardPaths>
 
 configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt::WindowFlags fl)
     : XAbstractConfigure(parent, fl)
@@ -28,7 +29,6 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
   connect(_key, SIGNAL(editingFinished()), this, SLOT(sCheck()));
   connect(_url, SIGNAL(editingFinished()), this, SLOT(sCheck()));
   connect(_company, SIGNAL(editingFinished()), this, SLOT(sCheck()));
-  connect(_log, SIGNAL(toggled(bool)), this, SLOT(sLog(bool)));
   connect(_test, SIGNAL(clicked()), this, SLOT(sTest()));
   connect(_tax, SIGNAL(connectionTested(QString)), this, SLOT(sTest(QString)));
 
@@ -41,6 +41,10 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
   _company->setText(_metrics->value("AvalaraCompany"));
   _disableRecording->setChecked(_metrics->boolean("NoAvaTaxCommit"));
   _log->setChecked(_metrics->boolean("LogTaxService"));
+  _logFile->setText(_metrics->value("TaxServiceLogFile"));
+
+  if (_logFile->text().isEmpty())
+    _logFile->setText(QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/log.txt");
 
   sCheck();
 }
@@ -69,6 +73,7 @@ bool configureTax::sSave()
     _metrics->set("AvalaraCompany", _company->text());
     _metrics->set("NoAvaTaxCommit", _disableRecording->isChecked());
     _metrics->set("LogTaxService", _log->isChecked());
+    _metrics->set("TaxServiceLogFile", _logFile->text());
   }
 
   return true;
@@ -80,23 +85,6 @@ bool configureTax::sCheck()
   _test->setEnabled(valid);
 
   return valid;
-}
-
-void configureTax::sLog(bool log)
-{
-  if (!log && QMessageBox::question(this, tr("Clear Log?"),
-                                    tr("Do you wish to clear all logged data?"),
-                                    QMessageBox::Yes | QMessageBox::No,
-                                    QMessageBox::No) == QMessageBox::Yes)
-  {
-    XSqlQuery del;
-    del.prepare("DELETE FROM taxlog "
-                " WHERE taxlog_service = :service;");
-    del.bindValue(":service", _service->code());
-    del.exec();
-    ErrorReporter::error(QtCriticalMsg, this, tr("Error clearing log"),
-                         del, __FILE__, __LINE__);
-  }
 }
 
 void configureTax::sTest()
