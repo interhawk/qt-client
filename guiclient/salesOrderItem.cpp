@@ -110,7 +110,7 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
   _canceling             = false;
   _partialsaved          = false;
   _error                 = false;
-  _stocked               = false;
+  _autoord               = true;
   _originalQtyOrd        = 0.0;
   _updateItemsite        = false;
   _updatePrice           = true;
@@ -1660,7 +1660,7 @@ void salesOrderItem::sPopulateItemsiteInfo()
     itemsite.prepare("SELECT itemsite_leadtime, itemsite_costmethod,"
                      "       itemsite_createsopo, itemsite_createsopr,"
                      "       itemsite_createwo, itemsite_dropship,"
-                     "       itemsite_stocked,"
+                     "       itemsite_autoord,"
                      "       itemCost(:item_id, :cust_id, :shipto_id, :qty, :qtyUOM, :priceUOM,"
                      "                :curr_id, :effective, :asof, :warehous_id, :dropShip) AS unitcost,"
                      "       itemCost(itemsite_id) AS invunitcost, itemsite_costmethod "
@@ -1687,7 +1687,7 @@ void salesOrderItem::sPopulateItemsiteInfo()
     if (itemsite.first())
     {
       _leadTime    = itemsite.value("itemsite_leadtime").toInt();
-      _stocked     = itemsite.value("itemsite_stocked").toBool();
+      _autoord     = itemsite.value("itemsite_autoord").toBool();
       _costmethod  = itemsite.value("itemsite_costmethod").toString();
       _unitCost->setBaseValue(itemsite.value("unitcost").toDouble() * _priceinvuomratio);
       _invCost->setBaseValue(itemsite.value("invunitcost").toDouble());
@@ -2711,7 +2711,7 @@ void salesOrderItem::sCheckSupplyOrder()
     if (_createSupplyOrder->isChecked())
       sHandleSupplyOrder();
     else
-      if (((_mode == cNew || _mode == cNewQuote) && !_stocked) || _costmethod == "J" || _supplyOrderId > -1)
+      if (((_mode == cNew || _mode == cNewQuote) && _autoord) || _costmethod == "J" || _supplyOrderId > -1)
         _createSupplyOrder->setChecked(true);
   }
 }
@@ -2762,26 +2762,11 @@ void salesOrderItem::sHandleSupplyOrder()
       return;   // nothing to undo, nothing to create yet
     else if (_supplyOrderId == -1)
     {
-      sSave(true);
-      if (_modified)  // catch an error saving
-      {
-        _createSupplyOrder->setChecked(false);
-        return;
-      }
-
-      // check _supplyOrderType to determine type of order
-      if (_supplyOrderType == "W" && (_supplyOrderId > 0) && _item->isConfigured())
-      {
-        XSqlQuery implodeq;
-        implodeq.prepare( "SELECT implodeWo(:wo_id, true) AS result;" );
-        implodeq.bindValue(":wo_id", _supplyOrderId);
-        implodeq.exec();
-      }
-
-      if (_supplyOrderId == -1)
+      if (_supplyOrderType == "P")
       {
         int   itemsrcid  = _itemsrc;
         int   poheadid   = -1;
+        bool  create     = true;
 
         if (itemsrcid==-1)
         {
@@ -2806,6 +2791,8 @@ void salesOrderItem::sHandleSupplyOrder()
             itemSourceList newdlg(omfgThis, "", true);
             newdlg.set(itemSourceParams);
             itemsrcid = newdlg.exec();
+
+            create = true;
           }
         }
 
@@ -2828,43 +2815,77 @@ void salesOrderItem::sHandleSupplyOrder()
                                ordq, __FILE__, __LINE__);
           return;
         }
-        if (! ordq.value("pohead_id").isNull() &&
-            QMessageBox::question(this, tr("Purchase Order Exists"),
-                                  tr("An Unreleased Purchase Order already exists for this Vendor.\n"
-                                     "Click Yes to use an existing Purchase Order\n"
-                                     "otherwise a new one will be created."),
-                                  QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+        if (! ordq.value("pohead_id").isNull())
         {
-          ParameterList openPurchaseOrderParams;
-          openPurchaseOrderParams.append("vend_id",    ordq.value("itemsrc_vend_id"));
-          openPurchaseOrderParams.append("vend_name",  ordq.value("vend_name"));
-          openPurchaseOrderParams.append("drop_ship", _supplyDropShip->isChecked());
-          openPurchaseOrderParams.append("sohead_id", _soheadid);
-          openPurchaseOrder newdlg(omfgThis, "", true);
-          newdlg.set(openPurchaseOrderParams);
-          poheadid = newdlg.exec();
-          if (poheadid == XDialog::Rejected)
-            return;
+          create = true;
+
+          if (QMessageBox::question(this, tr("Purchase Order Exists"),
+                                    tr("An Unreleased Purchase Order already exists for this Vendor.\n"
+                                       "Click Yes to use an existing Purchase Order\n"
+                                       "otherwise a new one will be created."),
+                                    QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
+          {
+            ParameterList openPurchaseOrderParams;
+            openPurchaseOrderParams.append("vend_id",    ordq.value("itemsrc_vend_id"));
+            openPurchaseOrderParams.append("vend_name",  ordq.value("vend_name"));
+            openPurchaseOrderParams.append("drop_ship", _supplyDropShip->isChecked());
+            openPurchaseOrderParams.append("sohead_id", _soheadid);
+            openPurchaseOrder newdlg(omfgThis, "", true);
+            newdlg.set(openPurchaseOrderParams);
+            poheadid = newdlg.exec();
+            if (poheadid == XDialog::Rejected)
+              return;
+          }
         }
 
-        ordq.prepare("SELECT createPurchaseToSale(:soitem_id, :itemsrc_id, :drop_ship,"
-                     "                            :qty, :duedate, :price, :pohead_id) AS result;");
-        ordq.bindValue(":soitem_id", _soitemid);
-        ordq.bindValue(":itemsrc_id", itemsrcid);
-        ordq.bindValue(":drop_ship", _supplyDropShip->isChecked());
-        ordq.bindValue(":qty", valqty);
-        ordq.bindValue(":duedate", _scheduledDate->date());
-        if (_supplyOverridePrice->localValue() > 0.00)
-          ordq.bindValue(":price", _supplyOverridePrice->localValue());
-        ordq.bindValue(":pohead_id", poheadid);
-        ordq.exec();
-        if (ordq.first())
-          _supplyOrderId = ordq.value("result").toInt();
-        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Creating Purchase Order"),
-                                      ordq, __FILE__, __LINE__))
+        if (create)
         {
+          _supplyOrderId = 0; // Don't automatically create supply order
+          sSave(true);
+          _supplyOrderId = -1;
+          if (_modified)  // catch an error saving
+          {
+            _createSupplyOrder->setChecked(false);
+            return;
+          }
+
+          ordq.prepare("SELECT createPurchaseToSale(:soitem_id, :itemsrc_id, :drop_ship,"
+                       "                            :qty, :duedate, :price, :pohead_id) AS result;");
+          ordq.bindValue(":soitem_id", _soitemid);
+          ordq.bindValue(":itemsrc_id", itemsrcid);
+          ordq.bindValue(":drop_ship", _supplyDropShip->isChecked());
+          ordq.bindValue(":qty", valqty);
+          ordq.bindValue(":duedate", _scheduledDate->date());
+          if (_supplyOverridePrice->localValue() > 0.00)
+            ordq.bindValue(":price", _supplyOverridePrice->localValue());
+          ordq.bindValue(":pohead_id", poheadid);
+          ordq.exec();
+          if (ordq.first())
+            _supplyOrderId = ordq.value("result").toInt();
+          else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Creating Purchase Order"),
+                                        ordq, __FILE__, __LINE__))
+          {
+            return;
+          }
+
           return;
         }
+      }
+
+      sSave(true);
+      if (_modified)  // catch an error saving
+      {
+        _createSupplyOrder->setChecked(false);
+        return;
+      }
+
+      // check _supplyOrderType to determine type of order
+      if (_supplyOrderType == "W" && (_supplyOrderId > 0) && _item->isConfigured())
+      {
+        XSqlQuery implodeq;
+        implodeq.prepare( "SELECT implodeWo(:wo_id, true) AS result;" );
+        implodeq.bindValue(":wo_id", _supplyOrderId);
+        implodeq.exec();
       }
     }  // end supply order does not exist
     else
