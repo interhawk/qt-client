@@ -45,6 +45,12 @@ taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::Wi
   connect(_tax, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
   connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
   connect(_delete, SIGNAL(clicked()), this, SLOT(sDelete()));
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _new->hide();
+    _delete->hide();
+  }
 }
 
 taxBreakdown::~taxBreakdown()

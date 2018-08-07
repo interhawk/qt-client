@@ -74,6 +74,13 @@ arOpenItem::arOpenItem(QWidget* parent, const char* name, bool modal, Qt::Window
 
   _journalNumber->setEnabled(false);
 
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+    _taxLit->hide();
+    _tax->hide();
+  }
 }
 
 arOpenItem::~arOpenItem()

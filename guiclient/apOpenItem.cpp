@@ -55,6 +55,14 @@ apOpenItem::apOpenItem(QWidget* parent, const char* name, bool modal, Qt::Window
   _journalNumber->setEnabled(false);
 
   sToggleAccount();
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxZoneLit->hide();
+    _taxzone->hide();
+    _taxLit->hide();
+    _tax->hide();
+  }
 }
 
 apOpenItem::~apOpenItem()
