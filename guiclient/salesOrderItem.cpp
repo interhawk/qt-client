@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1027,7 +1027,6 @@ void salesOrderItem::sSave(bool pPartial)
   if (DEBUG) qDebug() << "sSave(pPartial) entered with" << pPartial;
   if (_soitemid < 0)
     return;
-
   XSqlQuery salesSave;
   _save->setFocus();
 
@@ -1431,7 +1430,7 @@ void salesOrderItem::sSave(bool pPartial)
 
   if (_supplyOrderType == "W" && salesSave.first())
     _supplyOrderId = salesSave.value("coitem_order_id").toInt();
-  else
+  else if (_supplyOrderType == "P" || _supplyOrderType == "R")
   {
     salesSave.prepare("SELECT coitem_order_id "
                       "  FROM coitem "
@@ -1439,7 +1438,9 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":soitem_id", _soitemid);
     salesSave.exec();
     if (salesSave.first())
+    {
       _supplyOrderId = salesSave.value("coitem_order_id").toInt();
+    }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
                                   salesSave, __FILE__, __LINE__))
       return;
@@ -2770,22 +2771,7 @@ void salesOrderItem::sHandleSupplyOrder()
       return;   // nothing to undo, nothing to create yet
     else if (_supplyOrderId == -1)
     {
-      sSave(true);
-      if (_modified)  // catch an error saving
-      {
-        _createSupplyOrder->setChecked(false);
-        return;
-      }
-
-      // check _supplyOrderType to determine type of order
-      if (_supplyOrderType == "W" && (_supplyOrderId > 0) && _item->isConfigured())
-      {
-        XSqlQuery implodeq;
-        implodeq.prepare( "SELECT implodeWo(:wo_id, true) AS result;" );
-        implodeq.bindValue(":wo_id", _supplyOrderId);
-        implodeq.exec();
-      }
-      else if (_supplyOrderType == "P" && _supplyOrderId == -1)
+      if (_supplyOrderType == "P")
       {
         int   itemsrcid  = _itemsrc;
         int   poheadid   = -1;
@@ -2871,7 +2857,6 @@ void salesOrderItem::sHandleSupplyOrder()
             _createSupplyOrder->setChecked(false);
             return;
           }
-
           ordq.prepare("SELECT createPurchaseToSale(:soitem_id, :itemsrc_id, :drop_ship,"
                        "                            :qty, :duedate, :price, :pohead_id) AS result;");
           ordq.bindValue(":soitem_id", _soitemid);
@@ -2890,11 +2875,8 @@ void salesOrderItem::sHandleSupplyOrder()
           {
             return;
           }
-
-          return;
         }
       }
-
       sSave(true);
       if (_modified)  // catch an error saving
       {
