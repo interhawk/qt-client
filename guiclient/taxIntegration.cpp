@@ -50,7 +50,10 @@ void TaxIntegration::calculateTax(QString orderType, int orderId, bool record)
   qry.bindValue(":record", record);
   qry.exec();
   if (qry.first())
-    sendRequest("createtransaction", orderType, orderId, qry.value("request").toString());
+    if (qry.value("request").isNull())
+      emit taxCalculated(0.0, "");
+    else
+      sendRequest("createtransaction", orderType, orderId, qry.value("request").toString());
   else
     ErrorReporter::error(QtCriticalMsg, 0, tr("Error calculating tax"),
                          qry, __FILE__, __LINE__);
