@@ -2354,6 +2354,7 @@ void GUIClient::loadScriptGlobals(QScriptEngine * engine)
   mainwindowval.setProperty("cNoReportDefinition", QScriptValue(engine, cNoReportDefinition), ro);
 
   setupWidgetsScriptApi(engine, ScriptableWidget::_guiClientInterface); // what's a better way?
+  setupSetupApi(engine);
   setupGuiErrorCheck(engine);
 
   // TODO: Make all classes work this way instead of setup* as above?
