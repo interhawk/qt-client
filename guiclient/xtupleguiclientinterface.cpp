@@ -24,7 +24,9 @@
   */
 
 xTupleGuiClientInterface::xTupleGuiClientInterface(QObject *pParent)
-  : GuiClientInterface(pParent)
+  : GuiClientInterface(pParent),
+    _mqlhash(0),
+    _scriptCache(0)
 {
   if (pParent)
     connect(pParent, SIGNAL(dbConnectionLost()), this, SIGNAL(dbConnectionLost()));
@@ -135,3 +137,12 @@ void xTupleGuiClientInterface::setMqlHash(MqlHash *pHash)
   _mqlhash = pHash;
 }
 
+ScriptCache *xTupleGuiClientInterface::getScriptCache()
+{
+  return _scriptCache;
+}
+
+void xTupleGuiClientInterface::setScriptCache(ScriptCache *pCache)
+{
+  _scriptCache = pCache;
+}
