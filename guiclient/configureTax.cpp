@@ -46,6 +46,8 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
   if (_logFile->text().isEmpty())
     _logFile->setText(QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/log.txt");
 
+  _glAccount->setId(_metrics->value("AvalaraGLAccountId").toInt());
+
   sCheck();
 }
 
@@ -74,6 +76,7 @@ bool configureTax::sSave()
     _metrics->set("NoAvaTaxCommit", _disableRecording->isChecked());
     _metrics->set("LogTaxService", _log->isChecked());
     _metrics->set("TaxServiceLogFile", _logFile->text());
+    _metrics->set("AvalaraGLAccountId", _glAccount->id());
   }
 
   return true;
