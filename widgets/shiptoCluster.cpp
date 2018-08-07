@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -110,9 +110,9 @@ void ShiptoEdit::sNew()
         w = _guiClientInterface->openWindow(_uiName, params, parentWidget()->window() , Qt::NonModal, Qt::Window);
     }
 
-    if (w->inherits("QDialog"))
+    QDialog* newdlg = qobject_cast<QDialog*>(w);
+    if (newdlg)
     {
-      QDialog* newdlg = qobject_cast<QDialog*>(w);
       int id = newdlg->exec();
       if (id != QDialog::Rejected)
       {
