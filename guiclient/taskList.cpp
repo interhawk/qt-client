@@ -13,8 +13,9 @@
 #include "incident.h"
 #include "customer.h"
 #include "crmaccount.h"
-#include "project.h"
 #include "opportunity.h"
+#include "project.h"
+#include "prospect.h"
 #include "storedProcErrorLookup.h"
 #include "task.h"
 #include "parameterwidget.h"
@@ -53,6 +54,7 @@ taskList::taskList(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->appendComboBox(tr("Account Group"), "crmacctgrp", XComboBox::AccountGroups);
   parameterWidget()->append(tr("Incident"), "incdt_id", ParameterWidget::Incident);
   parameterWidget()->append(tr("Opportunity"), "ophead_id", ParameterWidget::Opportunity);
+  parameterWidget()->append(tr("Prospect"), "prospect_id", ParameterWidget::Prospect);
   parameterWidget()->append(tr("Project"), "prj_id", ParameterWidget::Project);
   parameterWidget()->append(tr("Start Date on or Before"), "startStartDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Start Date on or After"), "startEndDate", ParameterWidget::Date);
@@ -219,6 +221,14 @@ void taskList::sNew()
   if (valid)
   {
     params.append("parent", "CRMA");
+    params.append("parent_id", param);
+    linkedid = true;
+  }
+
+  param = params.value("prospect_id", &valid);
+  if (valid)
+  {
+    params.append("parent", "PSPCT");
     params.append("parent_id", param);
     linkedid = true;
   }

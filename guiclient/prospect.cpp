@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -64,6 +64,26 @@ prospect::prospect(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   _prospectid = -1;
   _crmacctid = -1;
+
+  _taskList = new taskList(this, "taskList", Qt::Widget);
+  _taskListTab->layout()->addWidget(_taskList);
+  _taskList->setCloseVisible(false);
+  _taskList->list()->hideColumn("crmacct_number");
+  _taskList->list()->hideColumn("crmacct_name");
+  _taskList->list()->hideColumn("parent");
+  _taskList->parameterWidget()->setDefault(tr("User"), QVariant(), true);
+  _taskList->parameterWidget()->append("hasContext", "hasContext", ParameterWidget::Exists, true);
+  _taskList->setParameterWidgetVisible(false);
+  _taskList->setQueryOnStartEnabled(false);
+  _taskList->_opportunities->setForgetful(true);
+  _taskList->_opportunities->setChecked(false);
+  _taskList->_incidents->setForgetful(true);
+  _taskList->_incidents->setChecked(false);
+  _taskList->_projects->setForgetful(true);
+  _taskList->_projects->setChecked(false);
+  _taskList->_showGroup->setVisible(false);
+  _taskList->_showCompleted->setVisible(true);
+  _taskList->setParent("PSPCT");
 
   _taxzone->setAllowNull(true);
   _taxzone->setType(XComboBox::TaxZones);
@@ -137,6 +157,8 @@ enum SetResponse prospect::set(const ParameterList &pParams)
       if(getq.first())
       {
         _prospectid = getq.value("prospect_id").toInt();
+        emit newId(_prospectid);
+        _taskList->parameterWidget()->setDefault(tr("Prospect"), _prospectid, true);
         _created->setDate(QDate::currentDate());
       }
       
@@ -580,6 +602,9 @@ bool prospect::sPopulate()
                         (omfgThis->username() == _crmowner && _privileges->check("ViewPersonalCRMAccounts"))));
 
   sFillQuotesList();
+  _taskList->parameterWidget()->setDefault(tr("Prospect"), _prospectid, true);
+  _taskList->sFillList();
+
   emit populated();
 
   return true;
