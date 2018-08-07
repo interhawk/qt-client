@@ -1134,7 +1134,7 @@ void salesOrderItem::sSave(bool pPartial)
                "FROM itemsite "
                "WHERE ( (itemsite_item_id=:item_id)"
                " AND (itemsite_warehous_id=:warehous_id) ) "
-               "RETURNING * ;" );
+               "RETURNING coitem_order_id ;" );
     salesSave.bindValue(":soitem_id", _soitemid);
     salesSave.bindValue(":soitem_sohead_id", _soheadid);
     salesSave.bindValue(":soitem_linenumber", _lineNumber->text().toInt());
@@ -1168,8 +1168,6 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":soitem_order_id", _supplyOrderId);
     salesSave.bindValue(":soitem_dropship", _supplyDropShip->isChecked());
     salesSave.exec();
-    if (salesSave.first())
-      _supplyOrderId = salesSave.value("coitem_order_id").toInt();
 
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
@@ -1226,7 +1224,7 @@ void salesOrderItem::sSave(bool pPartial)
                       "    coitem_custpn=:custpn, "
                       "    coitem_dropship=:soitem_dropship "
                       "WHERE coitem_id=:soitem_id "
-                      "RETURNING * ;" );
+                      "RETURNING coitem_order_id ;" );
     salesSave.bindValue(":item_id", _item->id());
     salesSave.bindValue(":warehous_id", _warehouse->id());
     salesSave.bindValue(":soitem_scheddate", _scheduledDate->date());
@@ -1242,11 +1240,9 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":price_uom_id", _priceUOM->id());
     salesSave.bindValue(":price_invuomratio", _priceinvuomratio);
     salesSave.bindValue(":soitem_order_type", _supplyOrderType);
+    salesSave.bindValue(":soitem_prcost", _supplyOverridePrice->localValue());
     if (_supplyOrderId > -1)
-    {
       salesSave.bindValue(":soitem_order_id", _supplyOrderId);
-      salesSave.bindValue(":soitem_prcost", _supplyOverridePrice->localValue());
-    }
     else if (_createSupplyOrder->isChecked())
       salesSave.bindValue(":soitem_order_id", -1);
 
@@ -1265,8 +1261,6 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":soitem_dropship", _supplyDropShip->isChecked());
 
     salesSave.exec();
-    if (salesSave.first())
-      _supplyOrderId = salesSave.value("coitem_order_id").toInt();
 
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
@@ -1433,6 +1427,22 @@ void salesOrderItem::sSave(bool pPartial)
         return;
       }
     }
+  }
+
+  if (_supplyOrderType == "W" && salesSave.first())
+    _supplyOrderId = salesSave.value("coitem_order_id").toInt();
+  else
+  {
+    salesSave.prepare("SELECT coitem_order_id "
+                      "  FROM coitem "
+                      " WHERE coitem_id=:soitem_id;");
+    salesSave.bindValue(":soitem_id", _soitemid);
+    salesSave.exec();
+    if (salesSave.first())
+      _supplyOrderId = salesSave.value("coitem_order_id").toInt();
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
+                                  salesSave, __FILE__, __LINE__))
+      return;
   }
 
   // Update supply order characteristics
@@ -4529,11 +4539,9 @@ void salesOrderItem::reject()
     if (ISQUOTE(_mode)) {
       salesreject.prepare("SELECT deleteQuoteItem(:coitem_id);");
       errMsg = "Quote";
-      omfgThis->sQuotesUpdated(_soheadid);
     } else {
       salesreject.prepare("SELECT deleteSoItem(:coitem_id);");
       errMsg = "Sales Order";
-      omfgThis->sSalesOrdersUpdated(_soheadid);
     }
     salesreject.bindValue(":coitem_id", _soitemid);
     salesreject.exec();
@@ -4543,6 +4551,11 @@ void salesOrderItem::reject()
       return;
     }
   }
+
+  if (_mode == cNew)
+    omfgThis->sSalesOrdersUpdated(_soheadid);
+  else if (_mode == cNewQuote)
+    omfgThis->sQuotesUpdated(_soheadid);
 
   XDialog::reject();
 }
@@ -4615,6 +4628,7 @@ void salesOrderItem::sCancel()
 
   _modified  = false;
   _canceling = false;
+
   if (_prev->isEnabled())
   {
     sPrev();
@@ -4623,6 +4637,7 @@ void salesOrderItem::sCancel()
   {
     sNext();
   }
+
 }
 
 void salesOrderItem::sLookupTax()
