@@ -183,6 +183,13 @@ to be bound by its terms.</comment>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
+           <widget class="QCheckBox" name="_noAutoOrd">
+            <property name="text">
+             <string>Suppress Automatic Order Creation</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="_createPr">
             <property name="text">
              <string>Create Purchase Requests for Work Order requirements</string>
@@ -434,7 +441,7 @@ to be bound by its terms.</comment>
               <item row="0" column="0">
                <widget class="QCheckBox" name="_stocked">
                 <property name="text">
-                 <string>Stocked</string>
+                 <string>Calculate Inventory Buffer</string>
                 </property>
                </widget>
               </item>

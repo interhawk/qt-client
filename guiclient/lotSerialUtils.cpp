@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -11,6 +11,10 @@
  */
 
 #include "lotSerialUtils.h"
+
+#include "format.h"
+#include "xdoublevalidator.h"
+
 #include <metasql.h>
 #include <xsqlquery.h>
 #include <QtSql>
@@ -186,18 +190,27 @@ QList<QWidget *> LotSerialUtils::addLotCharsToGridLayout(QWidget *parent, QGridL
         {
           XLineEdit *x = new XLineEdit(parent);
           XSqlQuery mask;
-          mask.prepare( "SELECT COALESCE(char_mask, '') AS char_mask,"
-                        "       COALESCE(char_validator, '.*') AS char_validator "
-                        "FROM char "
-                        "WHERE (char_id=:char_id);" );
-          mask.bindValue(":char_id", charIds.at(i));
-          mask.exec();
-          if (mask.first())
+
+          if (charTypes.at(i) == 3) // Number char
           {
-            x->setInputMask(mask.value("char_mask").toString());
-            QRegExp rx(mask.value("char_validator").toString());
-            QValidator *validator = new QRegExpValidator(rx, x);
-            x->setValidator(validator);
+            XDoubleValidator *numberVal = new XDoubleValidator(0, 9999999.0, decimalPlaces("purchprice"), parent);
+            x->setValidator(numberVal);
+          }
+          else
+          {
+            mask.prepare( "SELECT COALESCE(char_mask, '') AS char_mask,"
+                          "       COALESCE(char_validator, '.*') AS char_validator "
+                          "FROM char "
+                          "WHERE (char_id=:char_id);" );
+            mask.bindValue(":char_id", charIds.at(i));
+            mask.exec();
+            if (mask.first())
+            {
+              x->setInputMask(mask.value("char_mask").toString());
+              QRegExp rx(mask.value("char_validator").toString());
+              QValidator *validator = new QRegExpValidator(rx, x);
+              x->setValidator(validator);
+            }
           }
           edit = x;
         }

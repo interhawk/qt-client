@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -746,7 +746,10 @@ void workOrder::sPopulateItemChar( int pItemid )
                "         UNION SELECT char_id, char_type, char_name, char_order"
                "         FROM charass, char "
                "         WHERE ((charass_char_id=char_id)"
-               "         AND  (charass_target_type = 'W' AND charass_target_id=:wo_id))   ) AS data "
+               "           AND charass_char_id IN (SELECT charuse_char_id FROM charuse "
+               "                                   WHERE charuse_target_type = 'I') "
+               "           AND (charass_target_type = 'W' AND charass_target_id=:wo_id)) "
+               "   ) AS data "
                "   LEFT OUTER JOIN charass b ON ((:wo_id=b.charass_target_id)"
                "                                  AND ('W'=b.charass_target_type)"
                "                                  AND (b.charass_char_id=char_id))"

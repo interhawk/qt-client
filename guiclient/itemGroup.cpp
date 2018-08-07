@@ -33,6 +33,9 @@ itemGroup::itemGroup(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   _itemgrpparent->addColumn(tr("Name"),        _itemColumn,  Qt::AlignLeft, true, "itemgrp_name" );
   _itemgrpparent->addColumn(tr("Description"), -1,           Qt::AlignLeft, true, "itemgrp_descrip" );
+
+  _documents->setType("ITEMGRP");
+  _chars->setType("ITEMGRP");
 }
 
 itemGroup::~itemGroup()
@@ -94,11 +97,16 @@ enum SetResponse itemGroup::set(const ParameterList &pParams)
       _catalog->setEnabled(false);
       _new->setEnabled(false);
       _newParent->setEnabled(false);
+      _documents->setReadOnly(true);
+      _chars->setReadOnly(true);
       _close->setText(tr("&Close"));
       _save->hide();
       emit newMode(_mode);
     }
   }
+
+  _documents->setId(_itemgrpid);
+  _chars->setId(_itemgrpid);
 
   return NoError;
 }
