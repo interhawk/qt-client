@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -31,7 +31,7 @@
 #include "guiErrorCheck.h"
 #include "distributeInventory.h"
 #include "issueLineToShipping.h"
-#include "mqlutil.h"
+#include "mqlhash.h"
 #include "salesOrderItem.h"
 #include "storedProcErrorLookup.h"
 #include "taxBreakdown.h"
@@ -2950,7 +2950,7 @@ void salesOrder::sFillItemList()
   _soitem->clear();
   if (ISORDER(_mode))
   {
-    MetaSQLQuery mql = mqlLoad("salesOrderItems", "list");
+    MetaSQLQuery mql(omfgThis->_mqlhash->value("salesOrderItems", "list"));
 
     ParameterList params;
     if (!_showCanceled->isChecked())
@@ -2998,7 +2998,7 @@ void salesOrder::sFillItemList()
   }
   else if (ISQUOTE(_mode))
   {
-    MetaSQLQuery mql = mqlLoad("quoteItems", "list");
+    MetaSQLQuery mql(omfgThis->_mqlhash->value("quoteItems", "list"));
 
     ParameterList params;
     params.append("quhead_id", _soheadid);
@@ -4138,7 +4138,7 @@ void salesOrder::sFillCcardList()
   fillSales.bindValue(":key", omfgThis->_key);
   fillSales.exec();
 
-  MetaSQLQuery  mql = mqlLoad("creditCards", "detail");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("creditCards", "detail"));
   ParameterList params;
   params.append("cust_id",         _cust->id());
   params.append("masterCard",      tr("MasterCard"));

@@ -463,14 +463,13 @@ void Documents::sDetachDoc()
 
 void Documents::refresh()
 {
-  if(-1 == _sourceid)
+  if (-1 == _sourceid || ! _guiClientInterface || ! _guiClientInterface->getMqlHash())
   {
     _doc->clear();
     return;
   }
 
-  //Populate doc list
-  MetaSQLQuery mql = mqlLoad("documents", "list");
+  MetaSQLQuery mql = _guiClientInterface->getMqlHash()->value("documents", "list");
   ParameterList params;
 
   params.append("inventory", tr("Inventory Description"));

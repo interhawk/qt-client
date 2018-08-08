@@ -25,11 +25,12 @@
 
 xTupleGuiClientInterface::xTupleGuiClientInterface(QObject *pParent)
   : GuiClientInterface(pParent),
-    _mqlhash(0),
     _scriptCache(0)
 {
   if (pParent)
     connect(pParent, SIGNAL(dbConnectionLost()), this, SIGNAL(dbConnectionLost()));
+  _mqlhash = (omfgThis && omfgThis->_mqlhash) ? omfgThis->_mqlhash
+                                              : new MqlHash(this);
 }
 
 QWidget* xTupleGuiClientInterface::openWindow(const QString      pname,

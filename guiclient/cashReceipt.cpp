@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -22,7 +22,7 @@
 #include "creditcardprocessor.h"
 #include "errorReporter.h"
 #include "getGLDistDate.h"
-#include "mqlutil.h"
+#include "mqlhash.h"
 #include "storedProcErrorLookup.h"
 
 cashReceipt::cashReceipt(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -212,9 +212,8 @@ void cashReceipt::grpFillApplyList()
 {
 
   ParameterList qparams = getParams();
-  MetaSQLQuery dbquery = mqlLoad("arOpenApplications", "detail");
-  XSqlQuery db;
-  db = dbquery.toQuery(qparams);
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("arOpenApplications", "detail"));
+  XSqlQuery db = mql.toQuery(qparams);
   if (db.first())
     _aropen->populate(db, true);
 
@@ -1068,7 +1067,7 @@ void cashReceipt::sFillApplyList()
     if (_mode == cNew)
       activateButtons();
     _aropen->clear();
-    MetaSQLQuery mql = mqlLoad("arOpenApplications", "detail");
+    MetaSQLQuery mql(omfgThis->_mqlhash->value("arOpenApplications", "detail"));
     ParameterList params = getParams();
     if (_posted)
       params.append("posted", true);
@@ -1363,7 +1362,7 @@ void cashReceipt::setCreditCard()
     return;
   }
 
-  MetaSQLQuery mql = mqlLoad("creditCards", "detail");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("creditCards", "detail"));
   ParameterList params;
   params.append("cust_id", _customerSelector->custId());
   params.append("ccard_type", _fundsType->code());
