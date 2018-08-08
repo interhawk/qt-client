@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -27,9 +27,10 @@ AropenCluster::AropenCluster(QWidget *pParent, const char *pName) :
   addNumberWidget(new AropenLineEdit(this, pName));
 }
 
-AropenLineEdit::DocTypes AropenCluster::allowedDocTypes()  const
+AropenLineEdit::DocTypes AropenCluster::allowedDocTypes() const
 {
-  return (qobject_cast<AropenLineEdit*>(_number))->allowedDocTypes();
+  AropenLineEdit *w = qobject_cast<AropenLineEdit*>(_number);
+  return w ? w->allowedDocTypes() : AropenLineEdit::AnyType;
 }
 
 void AropenLineEdit::setExtraClause(const QString &clause)
@@ -39,27 +40,32 @@ void AropenLineEdit::setExtraClause(const QString &clause)
 
 void AropenCluster::setExtraClause(const QString &clause, const QString&)
 {
-  (qobject_cast<AropenLineEdit*>(_number))->setExtraClause(clause);
+  AropenLineEdit *w = qobject_cast<AropenLineEdit*>(_number);
+  if (w) w->setExtraClause(clause);
 }
 
-AropenLineEdit::DocType  AropenCluster::type()             const
+AropenLineEdit::DocType AropenCluster::type() const
 {
-  return (qobject_cast<AropenLineEdit*>(_number))->type();
+  AropenLineEdit *w = qobject_cast<AropenLineEdit*>(_number);
+  return w ? w->type() : AropenLineEdit::AnyType;
 }
 
-QString  AropenCluster::typeString()       const
+QString AropenCluster::typeString() const
 {
-  return (qobject_cast<AropenLineEdit*>(_number))->typeString();
+  AropenLineEdit *w = qobject_cast<AropenLineEdit*>(_number);
+  return w ? w->typeString() : QString();
 }
 
 void AropenCluster::setCustId(int pcustid)
 {
-  return (qobject_cast<AropenLineEdit*>(_number))->setCustId(pcustid);
+  AropenLineEdit *w = qobject_cast<AropenLineEdit*>(_number);
+  if (w) w->setCustId(pcustid);
 }
 
 void AropenCluster::setAllowedDocTypes(const AropenLineEdit::DocTypes ptypes)
 {
-  return (qobject_cast<AropenLineEdit*>(_number))->setAllowedDocTypes(ptypes);
+  AropenLineEdit *w = qobject_cast<AropenLineEdit*>(_number);
+  if (w) w->setAllowedDocTypes(ptypes);
 }
 
 AropenLineEdit::AropenLineEdit(QWidget *pParent, const char *pName) :

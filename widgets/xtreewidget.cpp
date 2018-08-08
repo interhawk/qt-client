@@ -729,16 +729,18 @@ void XTreeWidget::populateWorker()
         _last->setHidden(true);
       }
 
-      if (qobject_cast<XTreeWidget*>(parentItem))
+      XTreeWidget     *tree = qobject_cast<XTreeWidget*>(parentItem);
+      XTreeWidgetItem *item = qobject_cast<XTreeWidgetItem*>(parentItem);
+      if (tree)
       {
         //#13439 optimization - do not add items to 'this' until the very end
-        if(parentItem == this)
+        if (parentItem == this)
           topLevelItems.append(_last);
         else
-          qobject_cast<XTreeWidget*>(parentItem)->addTopLevelItem(_last);
+          tree->addTopLevelItem(_last);
       }
-      else if (qobject_cast<XTreeWidgetItem*>(parentItem))
-        qobject_cast<XTreeWidgetItem*>(parentItem)->addChild(_last);
+      else if (item)
+        item->addChild(_last);
 
     } while (pQuery.next());
 

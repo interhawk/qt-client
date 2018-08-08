@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2015 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -23,7 +23,8 @@ ApopenCluster::ApopenCluster(QWidget *pParent, const char *pName) :
 
 ApopenLineEdit::DocTypes ApopenCluster::allowedDocTypes()  const
 {
-  return (qobject_cast<ApopenLineEdit*>(_number))->allowedDocTypes();
+  ApopenLineEdit *w = qobject_cast<ApopenLineEdit*>(_number);
+  return w ? w->allowedDocTypes() : ApopenLineEdit::AnyType;
 }
 
 void ApopenLineEdit::setExtraClause(const QString &clause)
@@ -33,27 +34,32 @@ void ApopenLineEdit::setExtraClause(const QString &clause)
 
 void ApopenCluster::setExtraClause(const QString &clause, const QString&)
 {
-  (qobject_cast<ApopenLineEdit*>(_number))->setExtraClause(clause);
+  ApopenLineEdit *w = qobject_cast<ApopenLineEdit*>(_number);
+  if (w) w->setExtraClause(clause);
 }
 
-ApopenLineEdit::DocType  ApopenCluster::type()             const
+ApopenLineEdit::DocType ApopenCluster::type() const
 {
-  return (qobject_cast<ApopenLineEdit*>(_number))->type();
+  ApopenLineEdit *w = qobject_cast<ApopenLineEdit*>(_number);
+  return w ? w->type() : ApopenLineEdit::AnyType;
 }
 
-QString  ApopenCluster::typeString()       const
+QString ApopenCluster::typeString() const
 {
-  return (qobject_cast<ApopenLineEdit*>(_number))->typeString();
+  ApopenLineEdit *w = qobject_cast<ApopenLineEdit*>(_number);
+  return w ? w->typeString() : QString();
 }
 
 void ApopenCluster::setVendId(int pvendid)
 {
-  return (qobject_cast<ApopenLineEdit*>(_number))->setVendId(pvendid);
+  ApopenLineEdit *w = qobject_cast<ApopenLineEdit*>(_number);
+  if (w) w->setVendId(pvendid);
 }
 
 void ApopenCluster::setAllowedDocTypes(const ApopenLineEdit::DocTypes ptypes)
 {
-  return (qobject_cast<ApopenLineEdit*>(_number))->setAllowedDocTypes(ptypes);
+  ApopenLineEdit *w = qobject_cast<ApopenLineEdit*>(_number);
+  if (w) w->setAllowedDocTypes(ptypes);
 }
 
 ApopenLineEdit::ApopenLineEdit(QWidget *pParent, const char *pName) :
