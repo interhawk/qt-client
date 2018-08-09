@@ -29,6 +29,7 @@ public slots:
     virtual bool sCheck();
     virtual void sTest();
     virtual void sTest(QString);
+    virtual void sOpenUrl(QString);
 
 protected slots:
     virtual void languageChange();

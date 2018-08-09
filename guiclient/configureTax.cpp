@@ -31,6 +31,7 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
   connect(_company, SIGNAL(editingFinished()), this, SLOT(sCheck()));
   connect(_test, SIGNAL(clicked()), this, SLOT(sTest()));
   connect(_tax, SIGNAL(connectionTested(QString)), this, SLOT(sTest(QString)));
+  connect(_console, SIGNAL(leftClickedURL(QString)), this, SLOT(sOpenUrl(QString)));
 
   if (_metrics->value("TaxService") != "")
     _service->setCode(_metrics->value("TaxService"));
@@ -39,6 +40,7 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
   _key->setText(_metrics->value("AvalaraKey"));
   _url->setText(_metrics->value("AvalaraUrl"));
   _company->setText(_metrics->value("AvalaraCompany"));
+  _upc->setChecked(_metrics->boolean("AvalaraUPC"));
   _disableRecording->setChecked(_metrics->boolean("NoAvaTaxCommit"));
   _log->setChecked(_metrics->boolean("LogTaxService"));
   _logFile->setText(_metrics->value("TaxServiceLogFile"));
@@ -73,6 +75,7 @@ bool configureTax::sSave()
     _metrics->set("AvalaraKey", _key->text());
     _metrics->set("AvalaraUrl", _url->text());
     _metrics->set("AvalaraCompany", _company->text());
+    _metrics->set("AvalaraUPC", _upc->isChecked());
     _metrics->set("NoAvaTaxCommit", _disableRecording->isChecked());
     _metrics->set("LogTaxService", _log->isChecked());
     _metrics->set("TaxServiceLogFile", _logFile->text());
@@ -107,4 +110,9 @@ void configureTax::sTest(QString error)
     QMessageBox::information(this, tr("Avalara Integration Test"), tr("Connection Test Succeeded"));
   else
     QMessageBox::information(this, tr("Avalara Integration Test"), tr("Connection Test Failed:\n%1").arg(error));
+}
+
+void configureTax::sOpenUrl(QString url)
+{
+  omfgThis->launchBrowser(this, url);
 }
