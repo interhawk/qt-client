@@ -1619,6 +1619,10 @@ const struct {
 			      "was not found."),			0, "" },
   { "reverseCashReceipt", -8, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot reverse this Cash Receipt because the "
                             "credit card records could not be found."),  0, "" },
+  { "_soitemBeforeDeleteTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to delete a Sales Order."), 0, "" },
+  { "_soitemBeforeDeleteTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You can not delete this Sales Order Line as it has several "
+                              "sub components that have already been shipped."), 0, "" },
+  { "_soitemBeforeDeleteTrigger", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Error deleting kit components."), 0, "" },
 
   { "saveAlarm", -10, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An alarm for this item already exists."), 0, "" },
 
