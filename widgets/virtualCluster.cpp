@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -96,28 +96,31 @@ VirtualCluster::VirtualCluster(QWidget* pParent,
     addNumberWidget(pNumberWidget);
 }
 
-int     VirtualCluster::id()             const { return _number->id(); }
-QString VirtualCluster::label()          const { return _label->text(); }
-QString VirtualCluster::number()         const { return _number->text(); }
-QString VirtualCluster::description()    const { return _description->text(); }
-bool    VirtualCluster::isValid()        const { return _number->isValid(); }
-QString VirtualCluster::name()           const { return _name->text(); }
-bool    VirtualCluster::isStrict()       const { return _number->isStrict(); }
+int     VirtualCluster::id()             const { return _number ? _number->id()             : -1; }
+QString VirtualCluster::label()          const { return _label  ? _label->text()            : QString(); }
+QString VirtualCluster::number()         const { return _number ? _number->text()           : QString(); }
+QString VirtualCluster::description()    const { return _description ? _description->text() : QString(); }
+bool    VirtualCluster::isValid()        const { return _number ? _number->isValid()        : false; }
+QString VirtualCluster::name()           const { return _name   ? _name->text()             : QString(); }
+bool    VirtualCluster::isStrict()       const { return _number ? _number->isStrict()       : false; }
 bool    VirtualCluster::readOnly()       const { return _readOnly; }
 QString VirtualCluster::defaultNumber()  const { return _default; }
 QString VirtualCluster::fieldName()      const { return _fieldName; }
-QString VirtualCluster::extraClause()    const { return _number->extraClause(); }
+QString VirtualCluster::extraClause()    const { return _number ? _number->extraClause()    : QString(); }
 
 // most of the heavy lifting is done by VirtualClusterLineEdit _number
-void VirtualCluster::clearExtraClause()                 { _number->clearExtraClause(); }
+void VirtualCluster::clearExtraClause()                 { if (_number) _number->clearExtraClause(); }
 void VirtualCluster::setDefaultNumber(const QString& p) { _default=p;}
-void VirtualCluster::setDescription(const QString& p)   { _description->setText(p); }
-void VirtualCluster::setExtraClause(const QString& p, const QString&)  { _number->setExtraClause(p); }
+void VirtualCluster::setDescription(const QString& p)   { if (_description) _description->setText(p); }
+void VirtualCluster::setExtraClause(const QString& p, const QString&)
+{
+  if (_number) _number->setExtraClause(p);
+}
 void VirtualCluster::setFieldName(QString p)            { _fieldName = p; }
-void VirtualCluster::setId(const int p, const QString&) { _number->setId(p); }
-void VirtualCluster::setName(int, const QString& p)     { _name->setText(p); }
-void VirtualCluster::setNumber(const int p)             { _number->setNumber(QString::number(p)); }
-void VirtualCluster::setNumber(QString p)               { _number->setNumber(p); }
+void VirtualCluster::setId(const int p, const QString&) { if (_number) _number->setId(p); }
+void VirtualCluster::setName(int, const QString& p)     { if (_name)   _name->setText(p); }
+void VirtualCluster::setNumber(const int p)             { if (_number) _number->setNumber(QString::number(p)); }
+void VirtualCluster::setNumber(QString p)               { if (_number) _number->setNumber(p); }
 
 void VirtualCluster::clear()
 {
@@ -994,9 +997,9 @@ QWidget* VirtualClusterLineEdit::sOpenWindow(const QString &uiName, ParameterLis
   if (parentWidget()->window())
     w = _guiClientInterface->openWindow(uiName, params, parentWidget()->window() , Qt::WindowModal, Qt::Dialog);
 
-  if (w->inherits("QDialog"))
+  QDialog* newdlg = qobject_cast<QDialog*>(w);
+  if (newdlg)
   {
-    QDialog* newdlg = qobject_cast<QDialog*>(w);
     int id = newdlg->exec();
     if (id != QDialog::Rejected)
     {

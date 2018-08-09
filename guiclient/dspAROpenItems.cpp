@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -190,7 +190,8 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
     menuItem = pMenu->addAction(tr("Edit Invoice..."), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
   }
-  else if (((XTreeWidgetItem *)pItem)->altId() == 1 && ((XTreeWidgetItem *)pItem)->id("docnumber") > -1)
+  else if (((XTreeWidgetItem *)pItem)->altId() == 1 && ((XTreeWidgetItem *)pItem)->id("docnumber") > -1
+             && ((XTreeWidgetItem *)pItem)->rawValue("posted") == 0)
   // Credit Memo
   {
     menuItem = pMenu->addAction(tr("Edit Sales Credit..."), this, SLOT(sEdit()));
@@ -559,7 +560,8 @@ void dspAROpenItems::sEdit()
     }
     return;
   }
-  else if (list()->altId() == 1 && list()->currentItem()->id("docnumber") > -1 && list()->id() -1)
+  else if (list()->altId() == 1 && list()->currentItem()->id("docnumber") > -1 && list()->id() -1
+           && list()->currentItem()->rawValue("posted") == 0)
   // Edit Unposted Credit Memo
   {
     if (checkCreditMemoSitePrivs(list()->currentItem()->id("docnumber")))
