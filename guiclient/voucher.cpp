@@ -245,7 +245,7 @@ bool voucher::sSave()
 
   omfgThis->sVouchersUpdated();
 
-  if(_metrics->value("TaxService") == "A")
+  if(_metrics->value("TaxService") == "A" && _taxOwed->localValue() >= 0.0)
     _tax->save();
 
   _voheadid = -1;
