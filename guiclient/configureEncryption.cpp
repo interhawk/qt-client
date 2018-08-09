@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QCryptographicHash>
+#include <QInputDialog>
 
 extern bool shownEncryptedMsg;
 
@@ -79,6 +80,7 @@ void configureEncryption::sCreate()
   QString filename;
   QString dir;
   QString defdir;
+  QString tempkey;
   QString key;
 
   if (_ccEncKeyName->text().trimmed().isEmpty())
@@ -95,7 +97,7 @@ void configureEncryption::sCreate()
   defdir = _metrics->value("CCLinEncKey");
 #endif
 
-  dir = QFileDialog::getExistingDirectory(this, tr("Save Key File"),
+  dir = QFileDialog::getExistingDirectory(this, tr("Encryption Key Directory"),
                                           defdir,
                                           QFileDialog::ShowDirsOnly
                                           | QFileDialog::DontResolveSymlinks);
@@ -111,11 +113,27 @@ void configureEncryption::sCreate()
     return;
   }
 
+  // User enters a key for the file or we generate a hash for them
+  bool ok;
   QDateTime d =  QDateTime::currentDateTime();
-  QString tempkey = d.toString(QString("yyyyMMMddhhmmss"));
+  tempkey = d.toString(QString("yyyyMMMddhhmmss"));
   if (_metrics->value("DatabaseName").size() > 5)
     tempkey = tempkey + _metrics->value("DatabaseName");
-  key = QString(QCryptographicHash::hash(tempkey.toLocal8Bit(),QCryptographicHash::Md5).toHex());
+  tempkey = QString(QCryptographicHash::hash(tempkey.toLocal8Bit(),QCryptographicHash::Md5).toHex());
+  tempkey = QInputDialog::getText(this, tr("Encryption Key"),
+                              tr("A key has been generated for your file. Please select this key or enter one of your own."), QLineEdit::Normal,
+                              tempkey, &ok);
+  if (ok && !tempkey.isEmpty())
+    key = tempkey;
+  else
+  {
+    QMessageBox::information( this, tr("Encryption Key Required"),
+                              tr("The file must have valid Encryption Key text entered."));
+    _ccEncKeyName->setText("");
+    return;
+  }
+
+  // Write key to open file
   QTextStream ts(&file);
   ts.setCodec("UTF-8");
   ts << key;
@@ -123,8 +141,8 @@ void configureEncryption::sCreate()
 
   QMessageBox::information( this, tr("xTuple Key File"),
                          tr("<p>The xTuple key file was generated. You will need to distribute the "
-                            "file to all users who need access to credit card or EFT information. "
-                            "The file must be located on each desktop in a directory specified on this screen. "
+                            "file to all users who need access to encrypted information (such as credit card or EFT information). "
+                            "The file must be located on each desktop in the directory specified on this screen. "
                             "Once the key file has been used you cannot change the file without risking loss of data."));
   return;
 }
