@@ -38,6 +38,7 @@ addresses::addresses(QWidget* parent, const char*, Qt::WindowFlags fl)
   setNewVisible(true);
   setQueryOnStartEnabled(true);
   setParameterWidgetVisible(true);
+  setSearchVisible(true);
 
   _crmacctid = -1;
   _detachAct = 0;
