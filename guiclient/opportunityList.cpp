@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -67,6 +67,7 @@ opportunityList::opportunityList(QWidget* parent, const char*, Qt::WindowFlags f
   parameterWidget()->append(tr("Assigned To"), "assigned_username", ParameterWidget::User);
   parameterWidget()->append(tr("Target Date on or After"), "startDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Target Date on or Before"),   "endDate",   ParameterWidget::Date);
+  parameterWidget()->append(tr("Name Pattern"), "name_pattern",    ParameterWidget::Text);
   parameterWidget()->append(tr("Account"), "crmacct_id",  ParameterWidget::Crmacct);
   parameterWidget()->appendComboBox(tr("Type"), "optype_id", XComboBox::OpportunityTypes);
   parameterWidget()->append(tr("Type Pattern"), "optype_pattern",    ParameterWidget::Text);
