@@ -531,9 +531,9 @@ const struct {
                                "you may delete the selected Characteristic."),
 			       					 0, "" },
 
-  { "deleteCheck", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot delete this Payment because either it has not "
-                          "been voided, it has already been posted or replaced,"
-                          " or it has been transmitted electronically."),
+  { "deleteCheck",     -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot delete this Payment because either it has not "
+                          "been voided, it has already been posted or replaced, "
+                          "or it has been transmitted electronically and printed."),
 			           					0, "" },
 
   { "deleteClassCode", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup",  "The selected Class Code cannot be deleted "
@@ -1113,6 +1113,10 @@ const struct {
   { "issueWoMaterial", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Expected Count of Distribution Detail Records Posted for Controlled Item."),0, ""},
   { "issueWoMaterial", -4, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Qty to Issue Must be Positive"),0, ""},
 
+  { "_itemsrcTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to maintain Item Sources."), 0, "" },
+  { "_itemsrcTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An Item Source already exists for this Vendor/Item combination "
+                      "with an overlapping effective date range. "),    0, "" },
+
   { "login",  -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The specified Username does not exist in the specified "
                      "Database. Contact your Systems Administrator to report "
                      "this issue"),                                     0, "" },
@@ -1615,6 +1619,10 @@ const struct {
 			      "was not found."),			0, "" },
   { "reverseCashReceipt", -8, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot reverse this Cash Receipt because the "
                             "credit card records could not be found."),  0, "" },
+  { "_soitemBeforeDeleteTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to delete a Sales Order."), 0, "" },
+  { "_soitemBeforeDeleteTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You can not delete this Sales Order Line as it has several "
+                              "sub components that have already been shipped."), 0, "" },
+  { "_soitemBeforeDeleteTrigger", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Error deleting kit components."), 0, "" },
 
   { "saveAlarm", -10, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An alarm for this item already exists."), 0, "" },
 

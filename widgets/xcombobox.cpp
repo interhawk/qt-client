@@ -869,10 +869,11 @@ void XComboBoxPrivate::sEdit()
                                      _parent->parentWidget()->window(),
                                      Qt::ApplicationModal,
                                      Qt::Dialog);
-    if (qobject_cast<QDialog*>(w))
+    QDialog *dlg = qobject_cast<QDialog*>(w);
+    if (dlg)
     {
-      connect(w, SIGNAL(accepted()), _parent, SLOT(populate()));
-      (qobject_cast<QDialog*>(w))->exec();
+      connect(dlg, SIGNAL(accepted()), _parent, SLOT(populate()));
+      dlg->exec();
     }
     else
     {

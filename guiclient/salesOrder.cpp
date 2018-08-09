@@ -423,6 +423,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     }
     else if (param.toString() == "view")
     {
+      _mode = cView;
       setViewMode();
       _cust->setType(CLineEdit::AllCustomers);
 
@@ -3613,7 +3614,7 @@ bool salesOrder::deleteSalesOrder(int pId, QWidget *parent)
   {
     QMessageBox::critical(parent, tr("Open Dropship"),
                           tr("You may not delete this Sales Order as it "
-                             "has one or more dropshipped line items "
+                             "has one or more line items "
                              "on a Purchase Order.")) ;
     return false;
   }

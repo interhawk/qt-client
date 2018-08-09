@@ -171,7 +171,7 @@ enum SetResponse returnAuthorizationItem::set(const ParameterList &pParams)
     _raheadid = param.toInt();
     returnet.prepare("SELECT rahead.*,"
               "       COALESCE(cust_preferred_warehous_id,-1) AS prefwhs, "
-              "       COALESCE(rahead_orig_cohead_id,-1) AS cohead_id, "
+              "       COALESCE(rahead_orig_cohead_id,-1) AS cohead_id "
               "FROM rahead, custinfo "
               "WHERE ( (rahead_cust_id=cust_id) "
               "AND (rahead_id=:rahead_id) );");
