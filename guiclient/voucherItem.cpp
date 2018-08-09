@@ -37,7 +37,6 @@ voucherItem::voucherItem(QWidget* parent, const char* name, bool modal, Qt::Wind
   connect(_uninvoiced,       SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(sToggleReceiving(QTreeWidgetItem*)));
   connect(_uninvoiced,       SIGNAL(populateMenu(QMenu*,XTreeWidgetItem*)), this, SLOT(sPopulateMenu(QMenu*, XTreeWidgetItem*)));
   connect(_freightToVoucher, SIGNAL(editingFinished()), this, SLOT(sFillList()));
-  connect(_taxLit,           SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
 
   _item->setReadOnly(true);
   
@@ -85,14 +84,12 @@ enum SetResponse voucherItem::set(const ParameterList &pParams)
   if (valid)
   {
     _freightToVoucher->setId(param.toInt());
-    _tax->setId(param.toInt());
   }
 
   param = pParams.value("effective", &valid);
   if (valid)
   {
     _freightToVoucher->setEffective(param.toDate());
-    _tax->setEffective(param.toDate());
   }
 
   param = pParams.value("mode", &valid);
@@ -262,7 +259,6 @@ enum SetResponse voucherItem::set(const ParameterList &pParams)
     return UndefinedError;
   }
 
-  sCalculateTax();
   sFillList();
   _saved = true;
   return NoError;
@@ -622,7 +618,6 @@ void voucherItem::sFillList()
   totalDist.exec();
   if (totalDist.first())
     _totalDistributed->setLocalValue(totalDist.value("totalamount").toDouble() +
-                                     _tax->localValue() +
                                      _freightToVoucher->localValue());
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Voucher Item Information"),
                                 totalDist, __FILE__, __LINE__))
@@ -695,34 +690,4 @@ void voucherItem::closeEvent(QCloseEvent * event)
   rollback();
 
   XDialog::closeEvent(event);
-}
-
-void voucherItem::sCalculateTax()
-{
-  XSqlQuery calcq;
-  calcq.prepare("SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
-                "  FROM taxhist "
-                " WHERE taxhist_doctype = 'VCHI' "
-                "   AND taxhist_parent_id = :voitem_id");
-  calcq.bindValue(":voitem_id", _voitemid);
-  calcq.exec();
-  if (calcq.first())
-   _tax->setLocalValue(calcq.value("tax").toDouble());
- else if (ErrorReporter::error(QtCriticalMsg, this, tr("Tax Calculation"),
-                               calcq, __FILE__, __LINE__))
-   return;
-}
-
-void voucherItem::sTaxDetail()
-{
-  ParameterList params;
-  params.append("order_id", _voitemid);
-  params.append("order_type", "VCHI");
-  // mode => view since there are no fields to hold modified tax data
-  if (_mode == cView)
-    params.append("mode", "view");
-
-  taxBreakdown newdlg(this, "", true);
-  newdlg.set(params);
-  newdlg.exec();
 }

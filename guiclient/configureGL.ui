@@ -636,31 +636,29 @@ to be bound by its terms.</comment>
                  </widget>
                 </item>
                 <item row="1" column="3" rowspan="3">
-                  <widget class="QWidget">
-                    <layout class="QGridLayout">
-                      <item row="0" column="0">
-                        <widget class="QRadioButton" name="_companyIdIsEIN">
-                          <property name="text">
-                            <string>EIN/TIN</string>
-                          </property>
-                        </widget>
-                      </item>
-                      <item row="1" column="0">
-                        <widget class="QRadioButton" name="_companyIdIsDUNS">
-                          <property name="text">
-                            <string>DUNS Number</string>
-                          </property>
-                        </widget>
-                      </item>
-                      <item row="2" column="0">
-                        <widget class="QRadioButton" name="_companyIdIsOther">
-                          <property name="text">
-                            <string>Other</string>
-                          </property>
-                        </widget>
-                      </item>
-                    </layout>
-                  </widget>
+                 <layout class="QGridLayout">
+                  <item row="0" column="0">
+                   <widget class="QRadioButton" name="_companyIdIsEIN">
+                    <property name="text">
+                     <string>EIN/TIN</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QRadioButton" name="_companyIdIsDUNS">
+                    <property name="text">
+                     <string>DUNS Number</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QRadioButton" name="_companyIdIsOther">
+                    <property name="text">
+                     <string>Other</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                 <item row="6" column="0" colspan="4">
                  <widget class="QGroupBox" name="_eftStyle">
@@ -854,7 +852,7 @@ to be bound by its terms.</comment>
              </item>
             </layout>
            </item>
-           <item row="3" column="0" colspan="2">
+           <item row="4" column="0" colspan="2">
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <layout class="QGridLayout" name="gridLayout_7">
@@ -896,7 +894,7 @@ to be bound by its terms.</comment>
              </item>
             </layout>
            </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <layout class="QHBoxLayout" name="_4">
              <item>
               <widget class="QLabel" name="_recurringVoucherBufferLit">
@@ -930,10 +928,17 @@ to be bound by its terms.</comment>
              </item>
             </layout>
            </item>
-           <item row="4" column="0">
+           <item row="5" column="0">
             <widget class="QCheckBox" name="_reprint">
              <property name="text">
               <string>Allow Reprinting Payment #</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="_acceptFullUseTax">
+             <property name="text">
+              <string>Accept Full Tax as Use Tax on Voucher</string>
              </property>
             </widget>
            </item>
@@ -1083,7 +1088,16 @@ to be bound by its terms.</comment>
                 <property name="spacing">
                  <number>5</number>
                 </property>
-                <property name="margin">
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
                  <number>5</number>
                 </property>
                 <item>
@@ -1171,7 +1185,16 @@ to be bound by its terms.</comment>
                 <bool>false</bool>
                </property>
                <layout class="QHBoxLayout">
-                <property name="margin">
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
                  <number>5</number>
                 </property>
                 <item>
