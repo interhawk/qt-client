@@ -52,8 +52,6 @@ public slots:
     virtual void sPopulateDistributed();
     virtual void sPopulateBalanceDue();
     virtual void sCalculateTaxOwed();
-    virtual void sUseTaxFull();
-    virtual void sUseTaxOverride();
     virtual void sNewDistDate();
     virtual void populateNumber();
     virtual void populate();
@@ -77,8 +75,6 @@ private:
     int _voheadid;
     int _mode;
     double _frghtdistr;
-    bool _useTaxOverride;
-    double _taxOwedCache;
 };
 
 #endif // VOUCHER_H
