@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -399,11 +399,9 @@ void Documents::sOpenDoc(QString mode)
                                           Qt::NonModal, Qt::Window);
   }
 
-  if (w && w->inherits("QDialog"))
-  {
-    QDialog* newdlg = qobject_cast<QDialog*>(w);
+  QDialog* newdlg = qobject_cast<QDialog*>(w);
+  if (newdlg)
     newdlg->exec();
-  }
 
   refresh();
 }

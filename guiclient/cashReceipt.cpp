@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -357,7 +357,7 @@ void cashReceipt::updateCustomerGroup()
 
 enum SetResponse cashReceipt::set(const ParameterList &pParams)
 {
-  XSqlQuery cashet, d;
+  XSqlQuery d;
   XWidget::set(pParams);
   QVariant param;
   bool     valid;
@@ -372,33 +372,7 @@ enum SetResponse cashReceipt::set(const ParameterList &pParams)
   if (valid)
   {
     if (param.toString() == "new")
-    {
-      _mode = cNew;
-      _transType = cNew;
-
-      cashet.exec("SELECT fetchCashRcptNumber() AS number;");
-      if (cashet.first())
-        _number->setText(cashet.value("number").toString());
-      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Cash Receipts Information"),
-                                    cashet, __FILE__, __LINE__))
-      {
-        return UndefinedError;
-      }
-
-      cashet.exec("SELECT NEXTVAL('cashrcpt_cashrcpt_id_seq') AS cashrcpt_id;");
-      if (cashet.first())
-      {
-        _cashrcptid = cashet.value("cashrcpt_id").toInt();
-      }
-      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Cash Receipts Information"),
-                                    cashet, __FILE__, __LINE__))
-      {
-        return UndefinedError;
-      }
-
-      _applDate->setDate(omfgThis->dbDate(), true);
-      _distDate->setDate(omfgThis->dbDate(), true);
-    }
+      sClearAndNew();
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
@@ -694,6 +668,46 @@ void cashReceipt::sApplyLineBalance()
   sFillApplyList();
 }
 
+void cashReceipt::sClearAndNew()
+{
+  XSqlQuery cashrc;
+
+  _mode = cNew;
+  _transType = cNew;
+
+  cashrc.exec("SELECT fetchCashRcptNumber() AS number, "
+              "       NEXTVAL('cashrcpt_cashrcpt_id_seq') AS cashrcpt_id;");
+  if (cashrc.first())
+  {
+    _number->setText(cashrc.value("number").toString());
+    _cashrcptid = cashrc.value("cashrcpt_id").toInt();
+  }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Cash Receipts Information"),
+                                cashrc, __FILE__, __LINE__))
+  {
+    return;
+  }
+
+  _customerSelector->setCustId(-1);
+  _received->clear();
+  _discount->clear();
+  _docNumber->setText("");
+  _docDate->clear();
+  _altAccnt->setChecked(false);
+  _altExchRate->setChecked(false);
+  _project->setId(-1);
+  _notes->clear();
+  _applDate->setDate(omfgThis->dbDate(), true);
+  _distDate->setDate(omfgThis->dbDate(), true);
+  sFillMiscList();
+
+  _overapplied = false;
+  _ccpayid = -1;
+  _posted = false;
+
+  _customerSelector->findChild<CustCluster*>("_cust")->setFocus();
+}
+
 void cashReceipt::sClear()
 {
 
@@ -833,8 +847,7 @@ void cashReceipt::sSave()
 
     omfgThis->sCashReceiptsUpdated(_cashrcptid, true);
     _cashrcptid = -1;
-
-    close();
+    sClearAndNew();
   }
 
   updateCustomerGroup();
