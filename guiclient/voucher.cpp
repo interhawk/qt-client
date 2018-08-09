@@ -59,11 +59,8 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sFreightChanged()));
   connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
   connect(_tax,                      SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTaxOwed()));
-  connect(_useTaxFull,               SIGNAL(toggled(bool)),                             this,          SLOT(sUseTaxFull()));
   connect(_taxCharged,               SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTaxOwed()));
   connect(_taxCharged,               SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
-  connect(_taxOwed,                  SIGNAL(valueChanged()),                            this,
-   SLOT(sUseTaxOverride()));
   connect(_freightDistr,             SIGNAL(toggled(bool)),                             this,          SLOT(sFreightDistribution(bool)));
   connect(_distributeFreight,        SIGNAL(clicked()),                                 this,          SLOT(sDistributeFreight()));
 
@@ -112,14 +109,10 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   if (_metrics->value("DefaultFreightCostElement") > 0)
     _freightCostElement->setId(_metrics->value("DefaultFreightCostElement").toInt());
 
-  _useTaxFull->setChecked(_metrics->boolean("AcceptFullUseTax"));
-
   _freightTaxtype->setCode("Freight");
 
   _frghtdistr = 0;
   _vendid = -1;
-  _useTaxOverride = false;
-  _taxOwedCache = 0.0;
 
   setWindowModified(false);
 }
@@ -370,9 +363,6 @@ bool voucher::save(bool partial)
              "    vohead_freight_expcat_id=:vohead_freight_expcat,"
              "    vohead_freight_distributed=:frghtDistr,"
              "    vohead_tax_charged=:vohead_tax_charged,"
-             "    vohead_tax_owed=:vohead_tax_owed,"
-             "    vohead_tax_full=:vohead_tax_full,"
-             "    vohead_tax_override=:vohead_tax_override,"
              "    vohead_freight_taxtype_id=:vohead_freight_taxtype_id,"
              "    vohead_1099=:vohead_1099, "
              "    vohead_curr_id=:vohead_curr_id, "
@@ -396,9 +386,6 @@ bool voucher::save(bool partial)
   if (_freightExpcat->isValid())
     updq.bindValue(":vohead_freight_expcat", _freightExpcat->id());
   updq.bindValue(":vohead_tax_charged", _taxCharged->localValue());
-  updq.bindValue(":vohead_tax_owed", _taxOwed->localValue());
-  updq.bindValue(":vohead_tax_full", _useTaxFull->isChecked());
-  updq.bindValue(":vohead_tax_override", _useTaxOverride);
   updq.bindValue(":vohead_freight_taxtype_id", _freightTaxtype->id());
   updq.bindValue(":vohead_1099", QVariant(_flagFor1099->isChecked()));
   updq.bindValue(":vohead_curr_id", _amountToDistribute->id());
@@ -845,8 +832,8 @@ void voucher::populate()
   vohead.prepare( "SELECT vohead_number, vohead_pohead_id, vohead_taxzone_id, vohead_terms_id,"
                   "       vohead_distdate, vohead_docdate, vohead_duedate,"
                   "       vohead_invcnumber, vohead_reference, vohead_freight, vohead_freight_expcat_id,"
-                  "       vohead_freight_distributed, vohead_tax_charged, vohead_tax_owed, "
-                  "       vohead_tax_full, vohead_tax_override, vohead_freight_taxtype_id, "
+                  "       vohead_freight_distributed, vohead_tax_charged, "
+                  "       vohead_freight_taxtype_id, "
                   "       vohead_1099, vohead_amount, vohead_curr_id, vohead_notes "
                   "FROM vohead "
                   "WHERE (vohead_id=:vohead_id);" );
@@ -864,10 +851,7 @@ void voucher::populate()
     _freight->set(vohead.value("vohead_freight").toDouble(),
                              vohead.value("vohead_curr_id").toInt(),
                              vohead.value("vohead_docdate").toDate(), false);
-    _useTaxOverride = vohead.value("vohead_tax_override").toBool();
-    _useTaxFull->setChecked(vohead.value("vohead_tax_full").toBool());
     _taxCharged->setLocalValue(vohead.value("vohead_tax_charged").toDouble());
-    _taxOwed->setLocalValue(vohead.value("vohead_tax_owed").toDouble());
 
     _frghtdistr = vohead.value("vohead_freight_distributed").toDouble();
     if (_frghtdistr > 0)
@@ -1050,76 +1034,8 @@ bool voucher::saveDetail()
 
 void voucher::sCalculateTaxOwed()
 {
-  if (_useTaxFull->isChecked())
-  {
-    disconnect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-    _taxOwed->setLocalValue(_tax->localValue());
-    connect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-  }
-  else if (!_useTaxOverride)
-  {
-    double diff = _tax->localValue() - _taxCharged->localValue();
-    disconnect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-    _taxOwed->setLocalValue(diff < 0.0 ? 0.0 : diff);
-    _taxOwedCache = _taxOwed->localValue();
-    connect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-  }
-}
-
-void voucher::sUseTaxFull()
-{
-  if (!_useTaxFull->isChecked() && _useTaxOverride)
-  {
-    disconnect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-    _taxOwed->setLocalValue(_taxOwedCache);
-    connect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-  }
-  else
-    sCalculateTaxOwed();
-}
-
-void voucher::sUseTaxOverride()
-{
-  if (_taxOwed->localValue() == _taxOwedCache)
-    return;
-
-  if (!_useTaxOverride)
-  {
-    if (QMessageBox::question(this, tr("Use Tax Override?"),
-                              tr("Manually editing the Use Tax Owed will override the calculated "
-                                 "use tax with the specified amount. Are you sure you want to do "
-                                 " this?"),
-                              QMessageBox::Yes | QMessageBox::No,
-                              QMessageBox::No) == QMessageBox::Yes)
-      _useTaxOverride = true;
-    else
-    {
-      disconnect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-      _taxOwed->setLocalValue(_taxOwedCache);
-      connect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-    }
-  }
-  else if (_taxOwed->isEmpty())
-  {
-    if (QMessageBox::question(this, tr("Disable Tax Override?"),
-                              tr("Manually clearing the Use Tax Owed will disable use tax override "
-                                 "and instead use calculated use tax. Are you sure you want to do "
-                                 " this?"),
-                              QMessageBox::Yes | QMessageBox::No,
-                              QMessageBox::No) == QMessageBox::Yes)
-    {
-      _useTaxOverride = false;
-      sCalculateTaxOwed();
-    }
-    else
-    {
-      disconnect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-      _taxOwed->setLocalValue(_taxOwedCache);
-      connect(_taxOwed, SIGNAL(valueChanged()), this, SLOT(sUseTaxOverride()));
-    }
-  }
-
-  _taxOwedCache = _taxOwed->localValue();
+  double diff = _tax->localValue() - _taxCharged->localValue();
+  _taxOwed->setLocalValue(diff < 0.0 ? 0.0 : diff);
 }
 
 void voucher::sNewDistDate()

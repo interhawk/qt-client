@@ -737,13 +737,6 @@ to be bound by its terms.</comment>
       <item row="3" column="0" colspan="2">
        <widget class="QGroupBox" name="groupBox">
         <layout class="QGridLayout" name="gridLayout_12">
-         <item row="0" column="2">
-          <widget class="QCheckBox" name="_useTaxFull">
-           <property name="text">
-            <string>Accept as Use Tax</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="TaxDisplay" name="_tax" native="true">
            <property name="enabled">
@@ -781,6 +774,16 @@ to be bound by its terms.</comment>
            </property>
           </widget>
          </item>
+         <item row="2" column="1">
+          <widget class="CurrCluster" name="_taxOwed">
+           <property name="currencyVisible">
+            <bool>false</bool>
+           </property>
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="0">
           <widget class="XLabel" name="_taxOwedLit">
            <property name="text">
@@ -788,13 +791,6 @@ to be bound by its terms.</comment>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="CurrCluster" name="_taxOwed">
-           <property name="currencyVisible">
-            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -1399,22 +1395,6 @@ to be bound by its terms.</comment>
     <hint type="destinationlabel">
      <x>990</x>
      <y>782</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_useTaxFull</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>_taxOwed</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>875</x>
-     <y>430</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>796</x>
-     <y>482</y>
     </hint>
    </hints>
   </connection>
