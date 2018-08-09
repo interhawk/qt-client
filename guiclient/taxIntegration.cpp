@@ -66,7 +66,7 @@ void TaxIntegration::commit(QString orderType, int orderId)
   qry.bindValue(":orderType", orderType);
   qry.bindValue(":orderId", orderId);
   qry.exec();
-  if (qry.first())
+  if (qry.first() && !qry.value("request").isNull())
     sendRequest("committransaction", orderType, orderId, qry.value("request").toString());
   else
     ErrorReporter::error(QtCriticalMsg, 0, tr("Error posting tax transaction"),
@@ -80,7 +80,7 @@ void TaxIntegration::cancel(QString orderType, int orderId)
   qry.bindValue(":orderType", orderType);
   qry.bindValue(":orderId", orderId);
   qry.exec();
-  if (qry.first())
+  if (qry.first() && !qry.value("request").isNull())
     sendRequest("voidtransaction", orderType, orderId, qry.value("request").toString());
   else
     ErrorReporter::error(QtCriticalMsg, 0, tr("Error voiding tax transaction"),
