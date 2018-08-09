@@ -237,6 +237,10 @@ vendor::vendor(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _crmacctid   = -1;
   _captive     = false;
   _NumberGen   = -1;
+
+  _tax = TaxIntegration::getTaxIntegration();
+  connect(_tax, SIGNAL(taxExemptCategoriesFetched(QJsonObject, QString)), this, SLOT(sPopulateTaxExempt(QJsonObject, QString)));
+  _tax->getTaxExemptCategories();
 }
 
 vendor::~vendor()
@@ -537,7 +541,8 @@ bool vendor::sSave()
           "       vend_accnt_id = <? value('vend_accnt_id') ?>,"
           "       vend_expcat_id = <? value('vend_expcat_id') ?>,"
           "       vend_tax_id = <? value('vend_tax_id') ?>, "
-          "       vend_taxtype_id = <? value('vend_taxtype_id') ?> "
+          "       vend_taxtype_id = <? value('vend_taxtype_id') ?>, "
+          "       vend_tax_exemption = <? value('vend_tax_exemption') ?> "
           " WHERE vend_id = <? value('vend_id') ?> "
           " RETURNING vend_crmacct_id;" ;
   }
@@ -556,7 +561,7 @@ bool vendor::sSave()
           "  vend_ach_use_vendinfo,"
           "  vend_ach_accnttype, vend_ach_indiv_number,"
           "  vend_ach_indiv_name,"
-          "  vend_accnt_id, vend_expcat_id, vend_tax_id, vend_taxtype_id) "
+          "  vend_accnt_id, vend_expcat_id, vend_tax_id, vend_taxtype_id, vend_tax_exemption) "
           "VALUES "
           "( <? value('vend_id') ?>,"
           "  <? value('vend_number') ?>,"
@@ -598,7 +603,8 @@ bool vendor::sSave()
           "  <? value('vend_accnt_id') ?>,"
           "  <? value('vend_expcat_id') ?>,"
           "  <? value('vend_tax_id') ?>, "
-          "  <? value('vend_taxtype_id') ?> "
+          "  <? value('vend_taxtype_id') ?>, "
+          "  <? value('vend_tax_exemption') ?> "
           "   ) "
           " RETURNING vend_crmacct_id;" ;
 
@@ -672,6 +678,8 @@ bool vendor::sSave()
   }
   else if (_taxSelected->isChecked() && _taxCode->isValid())
     params.append("vend_tax_id", _taxCode->id());
+
+  params.append("vend_tax_exemption", _taxExempt->code());
 
   MetaSQLQuery mql(sql);
   XSqlQuery upsq = mql.toQuery(params);
@@ -997,6 +1005,9 @@ bool vendor::sPopulate()
       _taxCode->setId(vendorPopulate.value("vend_tax_id").toInt());
     }
 
+    if (!vendorPopulate.value("vend_tax_exemption").toString().isEmpty())
+      _taxExempt->setCode(vendorPopulate.value("vend_tax_exemption").toString());
+
     sFillAddressList();
     sFillTaxregList();
 
@@ -1180,6 +1191,24 @@ void vendor::sFillAddressList()
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting Vendor Addresses"),
                            addrq, __FILE__, __LINE__))
     return;
+}
+
+void vendor::sPopulateTaxExempt(QJsonObject result, QString error)
+{
+  if (error.isEmpty())
+  {
+    XSqlQuery qry;
+    qry.prepare("SELECT row_number() OVER (), value->>'name', value->>'code' "
+                "  FROM json_array_elements((:result)::JSON->'value');");
+    qry.bindValue(":result", QString::fromUtf8(QJsonDocument(result).toJson()));
+    _taxExempt->populate(qry);
+    _taxExempt->setCode(_metrics->value("AvalaraUserExemptionCode"));
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Exempt Categories"),
+                         qry, __FILE__, __LINE__);
+  }
+  else
+    QMessageBox::critical(this, tr("Avalara Error"),
+                          tr("Error retrieving Avalara Tax Exempt Categories\n%1").arg(error));
 }
 
 void vendor::sFillTaxregList()

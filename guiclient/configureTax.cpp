@@ -12,6 +12,7 @@
 #include "avalaraIntegration.h"
 #include "errorReporter.h"
 
+#include <QJsonDocument>
 #include <QMessageBox>
 #include <QStandardPaths>
 
@@ -21,6 +22,8 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
   setupUi(this);
 
   _tax = new AvalaraIntegration();
+  connect(_tax, SIGNAL(taxExemptCategoriesFetched(QJsonObject, QString)), this, SLOT(sPopulateTaxExempt(QJsonObject, QString)));
+  _tax->getTaxExemptCategories();
 
   _service->append(0, "None",    "N");
   _service->append(1, "Avalara", "A");
@@ -80,9 +83,31 @@ bool configureTax::sSave()
     _metrics->set("LogTaxService", _log->isChecked());
     _metrics->set("TaxServiceLogFile", _logFile->text());
     _metrics->set("AvalaraGLAccountId", _glAccount->id());
+    _metrics->set("AvalaraUserExemptionCode", _taxExempt->code());
   }
 
   return true;
+}
+
+void configureTax::sPopulateTaxExempt(QJsonObject result, QString error)
+{
+  if (error.isEmpty())
+  {
+    XSqlQuery qry;
+    qry.prepare("SELECT row_number() OVER (), value->>'name', value->>'code' "
+                "  FROM json_array_elements((:result)::JSON->'value');");
+    qry.bindValue(":result", QString::fromUtf8(QJsonDocument(result).toJson()));
+    _taxExempt->populate(qry);
+    if (_metrics->value("AvalaraUserExemptionCode").isEmpty())
+      _taxExempt->setCode("TAXABLE");
+    else
+      _taxExempt->setCode(_metrics->value("AvalaraUserExemptionCode"));
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Exempt Categories"),
+                         qry, __FILE__, __LINE__);
+  }
+  else
+    QMessageBox::critical(this, tr("Avalara Error"),
+                          tr("Error retrieving Avalara Tax Exempt Categories\n%1").arg(error));
 }
 
 bool configureTax::sCheck()

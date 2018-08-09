@@ -26,6 +26,7 @@ public:
 
 public slots:
     virtual bool sSave();
+    virtual void sPopulateTaxExempt(QJsonObject, QString);
     virtual bool sCheck();
     virtual void sTest();
     virtual void sTest(QString);
