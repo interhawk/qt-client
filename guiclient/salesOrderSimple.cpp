@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -30,7 +30,7 @@
 #include "guiErrorCheck.h"
 #include "distributeInventory.h"
 #include "issueLineToShipping.h"
-#include "mqlutil.h"
+#include "mqlhash.h"
 #include "storedProcErrorLookup.h"
 #include "taxBreakdown.h"
 #include "allocateARCreditMemo.h"
@@ -372,7 +372,7 @@ bool salesOrderSimple::save(bool partial)
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Sales Order"), errors))
       return false;
 
-  MetaSQLQuery mql = mqlLoad("salesOrder", "simple");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("salesOrder", "simple"));
 
   ParameterList params;
   params.append("id", _soheadid );
@@ -454,7 +454,7 @@ void salesOrderSimple::sSaveLine()
   params.append("sohead_id", _soheadid);
   params.append("item_id", _item->id());
 
-  MetaSQLQuery mql = mqlLoad("salesOrderItem", "simple");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("salesOrderItem", "simple"));
 
   // check to see if this item can be priced
   params.append("CheckPriceMode", true);
@@ -849,7 +849,7 @@ void salesOrderSimple::sDelete()
                             QMessageBox::No | QMessageBox::Default) == QMessageBox::Yes)
   {
     XSqlQuery deleteSales;
-    MetaSQLQuery mql = mqlLoad("salesOrderItem", "simple");
+    MetaSQLQuery mql(omfgThis->_mqlhash->value("salesOrderItem", "simple"));
 
     ParameterList params;
     params.append("id", _soitem->id());
@@ -932,7 +932,7 @@ void salesOrderSimple::sFillItemList()
   XSqlQuery fillSales;
 
   _soitem->clear();
-  MetaSQLQuery mql = mqlLoad("salesOrderItems", "list");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("salesOrderItems", "list"));
 
   ParameterList params;
   params.append("excludeCancelled", true);
@@ -1317,7 +1317,7 @@ void salesOrderSimple::sFillCcardList()
   fillSales.bindValue(":key", omfgThis->_key);
   fillSales.exec();
 
-  MetaSQLQuery  mql = mqlLoad("creditCards", "detail");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("creditCards", "detail"));
   ParameterList params;
   params.append("cust_id",         _cust->id());
   params.append("masterCard",      tr("MasterCard"));
@@ -2093,7 +2093,7 @@ void salesOrderSimple::sEnterCashPayment()
 void salesOrderSimple::sRecalculatePrice()
 {
   XSqlQuery salesSave;
-  MetaSQLQuery mql = mqlLoad("salesOrderItem", "simple");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("salesOrderItem", "simple"));
 
   ParameterList params;
   params.append("sohead_id", _soheadid);

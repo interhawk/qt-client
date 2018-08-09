@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -26,7 +26,7 @@
 #include "custCharacteristicDelegate.h"
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
-#include "mqlutil.h"
+#include "mqlhash.h"
 #include "shipTo.h"
 #include "storedProcErrorLookup.h"
 #include "taxRegistration.h"
@@ -1424,7 +1424,7 @@ void customer::sPopulateSummary()
 
   ParameterList params;
   params.append("cust_id", _custid);
-  MetaSQLQuery lySales = mqlLoad("customer", "lastYearSales");
+  MetaSQLQuery lySales(omfgThis->_mqlhash->value("customer", "lastYearSales"));
   query = lySales.toQuery(params);
   if (query.first())
     _lastYearSales->setDouble(query.value("lysales").toDouble());
@@ -1432,7 +1432,7 @@ void customer::sPopulateSummary()
                                   query, __FILE__, __LINE__))
       return;
 
-  MetaSQLQuery ytdSales = mqlLoad("customer", "ytdSales");
+  MetaSQLQuery ytdSales(omfgThis->_mqlhash->value("customer", "ytdSales"));
   query = ytdSales.toQuery(params);
   if (query.first())
     _ytdSales->setDouble(query.value("ytdsales").toDouble());
@@ -1682,7 +1682,7 @@ void customer::sFillCcardList()
                            r, __FILE__, __LINE__))
     return;
 
-  MetaSQLQuery mql = mqlLoad("creditCards", "detail");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("creditCards", "detail"));
   ParameterList params;
   params.append("cust_id",         _custid);
   params.append("masterCard",      tr("MasterCard"));

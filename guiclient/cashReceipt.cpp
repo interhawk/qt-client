@@ -23,7 +23,7 @@
 #include "creditcardprocessor.h"
 #include "errorReporter.h"
 #include "getGLDistDate.h"
-#include "mqlutil.h"
+#include "mqlhash.h"
 #include "storedProcErrorLookup.h"
 
 cashReceipt::cashReceipt(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -256,9 +256,8 @@ void cashReceipt::grpFillApplyList()
 {
 
   ParameterList qparams = getParams();
-  MetaSQLQuery dbquery = mqlLoad("arOpenApplications", "detail");
-  XSqlQuery db;
-  db = dbquery.toQuery(qparams);
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("arOpenApplications", "detail"));
+  XSqlQuery db = mql.toQuery(qparams);
   if (db.first())
     _aropen->populate(db, true);
 
@@ -1131,7 +1130,7 @@ void cashReceipt::sFillApplyList()
     if (_mode == cNew)
       activateButtons();
     _aropen->clear();
-    MetaSQLQuery mql = mqlLoad("arOpenApplications", "detail");
+    MetaSQLQuery mql(omfgThis->_mqlhash->value("arOpenApplications", "detail"));
     ParameterList params = getParams();
     if (_posted)
       params.append("posted", true);
@@ -1426,7 +1425,7 @@ void cashReceipt::setCreditCard()
     return;
   }
 
-  MetaSQLQuery mql = mqlLoad("creditCards", "detail");
+  MetaSQLQuery mql(omfgThis->_mqlhash->value("creditCards", "detail"));
   ParameterList params;
   params.append("cust_id", _customerSelector->custId());
   params.append("ccard_type", _fundsType->code());

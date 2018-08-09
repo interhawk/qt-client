@@ -21,6 +21,7 @@ class Metrics;
 class Metricsenc;
 class Preferences;
 class Privileges;
+class ScriptCache;
 
 class GuiClientInterface : public QObject
 {
@@ -48,6 +49,8 @@ class GuiClientInterface : public QObject
     virtual Privileges  *getPrivileges()            = 0;
     virtual MqlHash     *getMqlHash()               = 0;
     virtual void         setMqlHash(MqlHash *pHash) = 0;
+    virtual ScriptCache *getScriptCache()           = 0;
+    virtual void         setScriptCache(ScriptCache *pCache) = 0;
 
   signals:
     void dbConnectionLost();
