@@ -64,18 +64,14 @@ class QWebEnginePageProto : public QObject, public QScriptable
     Q_INVOKABLE void                            runJavaScript(const QString &scriptSource, const QWebEngineCallback<const QVariant &> &resultCallback);
     Q_INVOKABLE void                            runJavaScript(const QString &scriptSource, quint32 worldId, const QWebEngineCallback<const QVariant &> &resultCallback);
     Q_INVOKABLE void                            save(const QString &filePath, QWebEngineDownloadItem::SavePageFormat format = QWebEngineDownloadItem::MimeHtmlSaveFormat) const;
-    Q_INVOKABLE void                            setAudioMuted(bool muted);
-    Q_INVOKABLE void                            setBackgroundColor(const QColor &color);
     Q_INVOKABLE void                            setContent(const QByteArray &data, const QString &mimeType = QString(), const QUrl &baseUrl = QUrl());
     Q_INVOKABLE void                            setDevToolsPage(QWebEnginePage *devToolsPage);
     Q_INVOKABLE void                            setFeaturePermission(const QUrl &securityOrigin, QWebEnginePage::Feature feature, QWebEnginePage::PermissionPolicy policy);
     Q_INVOKABLE void                            setHtml(const QString &html, const QUrl &baseUrl = QUrl());
     Q_INVOKABLE void                            setInspectedPage(QWebEnginePage *page);
-    Q_INVOKABLE void                            setUrl(const QUrl &url);
     Q_INVOKABLE void                            setView(QWidget * view);
     Q_INVOKABLE void                            setWebChannel(QWebChannel *channel, uint worldId);
     Q_INVOKABLE void                            setWebChannel(QWebChannel *channel);
-    Q_INVOKABLE void                            setZoomFactor(qreal factor);
     Q_INVOKABLE QWebEngineSettings             *settings() const;
     Q_INVOKABLE void                            toHtml(const QWebEngineCallback<const QString &> &resultCallback) const;
     Q_INVOKABLE void                            toPlainText(const QWebEngineCallback<const QString &> &resultCallback) const;

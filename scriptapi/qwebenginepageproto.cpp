@@ -176,20 +176,6 @@ void QWebEnginePageProto::save(const QString &filePath, QWebEngineDownloadItem::
     item->save(filePath, format);
 }
 
-void QWebEnginePageProto::setAudioMuted(bool muted)
-{
-  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
-  if (item)
-    item->setAudioMuted(muted);
-}
-
-void QWebEnginePageProto::setBackgroundColor(const QColor &color)
-{
-  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
-  if (item)
-    item->setBackgroundColor(color);
-}
-
 void QWebEnginePageProto::setContent(const QByteArray &data, const QString &mimeType, const QUrl &baseUrl)
 {
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
@@ -225,13 +211,6 @@ void QWebEnginePageProto::setInspectedPage(QWebEnginePage *page)
     item->setInspectedPage(page);
 }
 
-void QWebEnginePageProto::setUrl(const QUrl &url)
-{
-  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
-  if (item)
-    item->setUrl(url);
-}
-
 void QWebEnginePageProto::setView(QWidget * view)
 {
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
@@ -251,13 +230,6 @@ void QWebEnginePageProto::setWebChannel(QWebChannel *channel)
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
   if (item)
     item->setWebChannel(channel);
-}
-
-void QWebEnginePageProto::setZoomFactor(qreal factor)
-{
-  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
-  if (item)
-    item->setZoomFactor(factor);
 }
 
 QWebEngineSettings* QWebEnginePageProto::settings() const
