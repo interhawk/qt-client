@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -30,14 +30,16 @@
      CRMAcctSearch can control lots of OR'ed search criteria + activeOnly
  */
 static QString _listAndSearchQueryString(
-      "SELECT *, formataddr(addr.addr_id) AS street"
+      "SELECT *, getcontactphone(cntct.cntct_id, 'Office') AS contact_phone, formataddr(addr.addr_id) AS street"
       "  FROM ("
       "<? if exists('crmaccount') ?>"
       "    SELECT crmacct_id AS id,         crmacct_number AS number,"
-      "           crmacct_name AS name,     crmacct_cntct_id_1 AS cntct_id,"
+      "           crmacct_name AS name,     cntct_id,"
       "           crmacct_active AS active, cntct_addr_id AS addr_id"
       "      FROM crmacct()"
-      "      LEFT OUTER JOIN cntct ON (crmacct_cntct_id_1=cntct_id)"
+      "      LEFT OUTER JOIN crmacctcntctass ON (crmacct_id=crmacctcntctass_crmacct_id "
+      "                                          AND crmacctcntctass_crmrole_id=getcrmroleid('Primary')) "
+      "      LEFT OUTER JOIN cntct ON (crmacctcntctass_cntct_id=cntct_id)"
       "<? elseif exists('customer') ?>"
       "    SELECT cust_id AS id,         cust_number AS number,"
       "           cust_name AS name,     cust_cntct_id AS cntct_id,"
@@ -78,10 +80,10 @@ static QString _listAndSearchQueryString(
       "<? if exists('prospect') ?>"
       "    <? if exists('customer') ?>UNION<? endif ?>"
       "    SELECT prospect_id AS id,         prospect_number AS number,"
-      "           prospect_name AS name,     prospect_cntct_id AS cntct_id,"
+      "           prospect_name AS name,     getcrmaccountcontact(prospect_crmacct_id) AS cntct_id,"
       "           prospect_active AS active, cntct_addr_id AS addr_id"
       "      FROM prospect"
-      "      LEFT OUTER JOIN cntct ON (prospect_cntct_id=cntct_id)"
+      "      LEFT OUTER JOIN cntct ON (getcrmaccountcontact(prospect_crmacct_id)=cntct_id)"
       "<? endif ?>"
       "  ) AS crminfo"
       "  LEFT OUTER JOIN cntct ON (crminfo.cntct_id=cntct.cntct_id)"
@@ -102,8 +104,7 @@ static QString _listAndSearchQueryString(
       "                 ~ <? value('searchString') ?>)"
       "    <? endif ?>"
       "    <? if exists('searchPhone') ?>"
-      "       OR (UPPER(cntct_phone || ' ' || cntct_phone2 || ' ' || "
-      "                 cntct_fax) ~ <? value('searchString') ?>)"
+      "       OR (phonejson(cntct_id) ~ <? value('searchString') ?>)"
       "    <? endif ?>"
       "    <? if exists('searchEmail') ?>"
       "       OR (cntct_email ~* <? value('searchString') ?>)"
@@ -133,6 +134,66 @@ static QString _listAndSearchQueryString(
       " ORDER BY number;"
 );
 
+static void getCRMAcctSubtypeFromParent(QObject *pParent, CRMAcctLineEdit::CRMAcctSubtype &pType, bool &pInactive)
+{
+  pInactive = false;
+  CRMAcctCluster  *crmcluster   = qobject_cast<CRMAcctCluster*>(pParent);
+  CRMAcctLineEdit *crmedit      = qobject_cast<CRMAcctLineEdit*>(pParent);
+  CustCluster     *custcluster  = qobject_cast<CustCluster*>(pParent);
+  CLineEdit       *custedit     = qobject_cast<CLineEdit*>(pParent);
+
+  if (crmcluster)
+    pType = crmcluster->subtype();
+  else if (crmedit)
+    pType = crmedit->subtype();
+  else if (custcluster || custedit || pParent->inherits("CustInfo"))
+  {
+    CLineEdit::CLineEditTypes type = CLineEdit::AllCustomersAndProspects;
+
+    if (custedit)
+      type = custedit->type();
+    else if (custcluster)
+      type = custcluster->type();
+
+    switch (type)
+    {
+      case CLineEdit::AllCustomers:
+	pInactive = true;
+	pType = CRMAcctLineEdit::Cust;
+	break;
+
+      case CLineEdit::ActiveCustomers:
+	pType = CRMAcctLineEdit::Cust;
+	break;
+
+      case CLineEdit::AllProspects:
+	pInactive = true;
+	pType = CRMAcctLineEdit::Prospect;
+	break;
+
+      case CLineEdit::ActiveProspects:
+	pType = CRMAcctLineEdit::Prospect;
+	break;
+
+      case CLineEdit::AllCustomersAndProspects:
+	pInactive = true;
+	pType = CRMAcctLineEdit::CustAndProspect;
+	break;
+
+      case CLineEdit::ActiveCustomersAndProspects:
+	pType = CRMAcctLineEdit::CustAndProspect;
+	break;
+    }
+  }
+
+  else if (pParent->inherits("VendorLineEdit") || pParent->inherits("VendorCluster"))
+    pType = CRMAcctLineEdit::Vend;
+  else if (pParent->inherits("UsernameCluster"))
+    pType = CRMAcctLineEdit::User;
+  else
+    pType = CRMAcctLineEdit::Crmacct;
+}
+
 CRMAcctCluster::CRMAcctCluster(QWidget* pParent, const char* pName) :
     VirtualCluster(pParent, pName)
 {
@@ -143,22 +204,19 @@ CRMAcctCluster::CRMAcctCluster(QWidget* pParent, const char* pName) :
 
 void CRMAcctCluster::setSubtype(const CRMAcctLineEdit::CRMAcctSubtype subtype)
 {
-
   // is this calling setSubtype on a class that sets its own type in its
   // constructor?
 
-  // TODO: make this do something useful
-  if (_number->inherits("CRMAcctLineEdit"))
-    (qobject_cast<CRMAcctLineEdit*>(_number))->setSubtype(subtype);
+  CRMAcctLineEdit *w = qobject_cast<CRMAcctLineEdit*>(_number);
+  if (w) w->setSubtype(subtype);
 }
 
 ///////////////////////////////////////////////////////////////////////
 
 CRMAcctLineEdit::CRMAcctSubtype CRMAcctCluster::subtype() const
 {
-  if (_number->inherits("CRMAcctLineEdit"))
-    return (qobject_cast<CRMAcctLineEdit*>(_number))->subtype();
-  return CRMAcctLineEdit::Crmacct;
+  CRMAcctLineEdit *w = qobject_cast<CRMAcctLineEdit*>(_number);
+  return w ? w->subtype() : CRMAcctLineEdit::Crmacct;
 }
 
 CRMAcctLineEdit::CRMAcctLineEdit(QWidget* pParent, const char* pName) :
@@ -207,7 +265,6 @@ CRMAcctList::CRMAcctList(QWidget* pParent, const char* pName, bool, Qt::WindowFl
   _parent = pParent;
   _queryParams = 0;
 
-  
   if (!pName)
     setObjectName("CRMAcctList");
 
@@ -217,7 +274,7 @@ CRMAcctList::CRMAcctList(QWidget* pParent, const char* pName, bool, Qt::WindowFl
   _listTab->addColumn(tr("Name"),        75, Qt::AlignLeft,  true, "name"  );
   _listTab->addColumn(tr("First"),      100, Qt::AlignLeft,  true, "cntct_first_name");
   _listTab->addColumn(tr("Last"),       100, Qt::AlignLeft,  true, "cntct_last_name");
-  _listTab->addColumn(tr("Phone"),      100, Qt::AlignLeft,  true, "cntct_phone");
+  _listTab->addColumn(tr("Phone"),      100, Qt::AlignLeft,  true, "contact_phone");
   _listTab->addColumn(tr("Email"),      100, Qt::AlignLeft,  true, "cntct_email");
   _listTab->addColumn(tr("Address"),    100, Qt::AlignLeft|Qt::AlignTop,true,"street");
   _listTab->addColumn(tr("City"),        75, Qt::AlignLeft,  true, "addr_city");
@@ -225,64 +282,10 @@ CRMAcctList::CRMAcctList(QWidget* pParent, const char* pName, bool, Qt::WindowFl
   _listTab->addColumn(tr("Country"),    100, Qt::AlignLeft,  true, "addr_country");
   _listTab->addColumn(tr("Postal Code"), 75, Qt::AlignLeft,  true, "addr_postalcode");
 
-  _showInactive = false;	// must be before inherits() checks
-
-  if (_parent->inherits("CRMAcctCluster")) // handles Crmacct, Competitor, Employee, Partner, Prospect, SalesRep, Taxauth
-    setSubtype((qobject_cast<CRMAcctCluster*>(_parent))->subtype());
-  else if (_parent->inherits("CRMAcctLineEdit"))
-    setSubtype((qobject_cast<CRMAcctLineEdit*>(_parent))->subtype());
-  else if (_parent->inherits("CLineEdit") || _parent->inherits("CustCluster") ||
-           _parent->inherits("CustInfo"))
-  {
-    CLineEdit::CLineEditTypes type = CLineEdit::AllCustomersAndProspects;
-
-    if (_parent->inherits("CLineEdit"))
-      type = (qobject_cast<CLineEdit*>(_parent))->type();
-    else if (_parent->inherits("CustCluster"))
-      type = (qobject_cast<CustCluster*>(_parent))->type();
- //   else if (_parent->inherits("CustInfo"))
- //     type = (qobject_cast<CustInfo*>(_parent))->type();
-
-    switch (type)
-    {
-      case CLineEdit::AllCustomers:
-	_showInactive = true;
-	setSubtype(CRMAcctLineEdit::Cust);
-	break;
-
-      case CLineEdit::ActiveCustomers:
-	_showInactive = false;
-	setSubtype(CRMAcctLineEdit::Cust);
-	break;
-
-      case CLineEdit::AllProspects:
-	_showInactive = true;
-	setSubtype(CRMAcctLineEdit::Prospect);
-	break;
-
-      case CLineEdit::ActiveProspects:
-	_showInactive = false;
-	setSubtype(CRMAcctLineEdit::Prospect);
-	break;
-
-      case CLineEdit::AllCustomersAndProspects:
-	_showInactive = true;
-	setSubtype(CRMAcctLineEdit::CustAndProspect);
-	break;
-
-      case CLineEdit::ActiveCustomersAndProspects:
-	_showInactive = false;
-	setSubtype(CRMAcctLineEdit::CustAndProspect);
-	break;
-
-    }
-  }
-  else if (_parent->inherits("VendorLineEdit") || _parent->inherits("VendorCluster"))
-    setSubtype(CRMAcctLineEdit::Vend);
-  else if (_parent->inherits("UsernameCluster"))
-    setSubtype(CRMAcctLineEdit::User);
-  else
-    setSubtype(CRMAcctLineEdit::Crmacct);
+  _showInactive = false;
+  CRMAcctLineEdit::CRMAcctSubtype type = CRMAcctLineEdit::Crmacct;
+  getCRMAcctSubtypeFromParent(_parent, type, _showInactive);
+  setSubtype(type);
 
   resize(800, 600);
 }
@@ -376,7 +379,7 @@ void CRMAcctList::setSubtype(const CRMAcctLineEdit::CRMAcctSubtype subtype)
 
   _listTab->setColumnHidden(_listTab->column("cntct_first_name"), ! hasContact);
   _listTab->setColumnHidden(_listTab->column("cntct_last_name"),  ! hasContact);
-  _listTab->setColumnHidden(_listTab->column("cntct_phone"),      ! hasContact);
+  _listTab->setColumnHidden(_listTab->column("contact_phone"),      ! hasContact);
   _listTab->setColumnHidden(_listTab->column("street"),           ! hasAddress);
   _listTab->setColumnHidden(_listTab->column("addr_city"),        ! hasAddress);
   _listTab->setColumnHidden(_listTab->column("addr_state"),       ! hasAddress);
@@ -471,7 +474,7 @@ CRMAcctSearch::CRMAcctSearch(QWidget* pParent, Qt::WindowFlags pFlags) :
   _listTab->addColumn(tr("Name"),        75, Qt::AlignLeft,  true, "name"  );
   _listTab->addColumn(tr("First"),      100, Qt::AlignLeft,  true, "cntct_first_name");
   _listTab->addColumn(tr("Last"),       100, Qt::AlignLeft,  true, "cntct_last_name");
-  _listTab->addColumn(tr("Phone"),      100, Qt::AlignLeft,  true, "cntct_phone");
+  _listTab->addColumn(tr("Phone"),      100, Qt::AlignLeft,  true, "contact_phone");
   _listTab->addColumn(tr("Email"),      100, Qt::AlignLeft,  true, "cntct_email");
   _listTab->addColumn(tr("Address"),    100, Qt::AlignLeft|Qt::AlignTop,true,"street");
   _listTab->addColumn(tr("City"),        75, Qt::AlignLeft,  true, "addr_city");
@@ -500,58 +503,12 @@ CRMAcctSearch::CRMAcctSearch(QWidget* pParent, Qt::WindowFlags pFlags) :
   
   _parent = pParent;
   setObjectName("crmacctSearch");
-  if (_parent->inherits("CRMAcctCluster")) // handles Crmacct, Competitor, Partner, Prospect, Taxauth
-    setSubtype((qobject_cast<CRMAcctCluster*>(_parent))->subtype());
-  else if (_parent->inherits("CRMAcctLineEdit"))
-    setSubtype((qobject_cast<CRMAcctLineEdit*>(_parent))->subtype());
-  else if (_parent->inherits("CLineEdit") || _parent->inherits("CustCluster"))
-  {
-    CLineEdit::CLineEditTypes type = _parent->inherits("CLineEdit") ?
-				  (qobject_cast<CLineEdit*>(_parent))->type() :
-				  (qobject_cast<CustCluster*>(_parent))->type();
 
-    switch (type)
-    {
-      case CLineEdit::AllCustomers:
-	setSubtype(CRMAcctLineEdit::Cust);
-	_showInactive->setChecked(true);
-	break;
-
-      case CLineEdit::ActiveCustomers:
-	setSubtype(CRMAcctLineEdit::Cust);
-	_showInactive->setChecked(false);
-	break;
-
-      case CLineEdit::AllProspects:
-	setSubtype(CRMAcctLineEdit::Prospect);
-	_showInactive->setChecked(true);
-	break;
-
-      case CLineEdit::ActiveProspects:
-	setSubtype(CRMAcctLineEdit::Prospect);
-	_showInactive->setChecked(false);
-	break;
-
-      case CLineEdit::AllCustomersAndProspects:
-	setSubtype(CRMAcctLineEdit::CustAndProspect);
-	_showInactive->setChecked(true);
-	break;
-
-      case CLineEdit::ActiveCustomersAndProspects:
-	setSubtype(CRMAcctLineEdit::CustAndProspect);
-	_showInactive->setChecked(false);
-	break;
-
-    }
-  }
-  else if (_parent->inherits("VendorCluster")	||
-	   _parent->inherits("VendorInfo")	||
-	   _parent->inherits("VendorLineEdit"))
-  {
-    setSubtype(CRMAcctLineEdit::Vend);
-  }
-  else
-    setSubtype(CRMAcctLineEdit::Crmacct);
+  bool shouldShowInactive = false;
+  CRMAcctLineEdit::CRMAcctSubtype type = CRMAcctLineEdit::Crmacct;
+  getCRMAcctSubtypeFromParent(_parent, type, shouldShowInactive);
+  setSubtype(type);
+  _showInactive->setChecked(shouldShowInactive);
 
   // do this late so the constructor can set defaults without triggering queries
   connect(_searchStreet, SIGNAL(toggled(bool)), this, SLOT(sFillList()));
@@ -713,7 +670,7 @@ void CRMAcctSearch::setSubtype(const CRMAcctLineEdit::CRMAcctSubtype subtype)
 
   _listTab->setColumnHidden(_listTab->column("cntct_first_name"), ! hasContact);
   _listTab->setColumnHidden(_listTab->column("cntct_last_name"),  ! hasContact);
-  _listTab->setColumnHidden(_listTab->column("cntct_phone"),      ! hasContact);
+  _listTab->setColumnHidden(_listTab->column("contact_phone"),      ! hasContact);
   _listTab->setColumnHidden(_listTab->column("street"),           ! hasAddress);
   _listTab->setColumnHidden(_listTab->column("addr_city"),        ! hasAddress);
   _listTab->setColumnHidden(_listTab->column("addr_state"),       ! hasAddress);

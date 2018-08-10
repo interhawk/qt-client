@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -103,8 +103,9 @@ void XLabel::setImage(QString image)
 
 void XLabel::setPrecision(QValidator *pVal)
 {
-  if (qobject_cast<QDoubleValidator *>(pVal))
-    _data->_precision = (qobject_cast<QDoubleValidator *>(pVal))->decimals();
+  QDoubleValidator *dval = qobject_cast<QDoubleValidator *>(pVal);
+  if (dval)
+    _data->_precision = dval->decimals();
   else if (qobject_cast<QIntValidator *>(pVal))
     _data->_precision = 0;
   else

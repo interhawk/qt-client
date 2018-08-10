@@ -228,7 +228,8 @@ const struct {
                                     "because there are prior years that are still open."), 0, "" },
   { "closeToItem",	 -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The item cannot be Closed at this time "
 				"as there is inventory at shipping."),	0, "" },
-
+  { "cntctEmailUnique", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Emails are required to be unique. "
+                                                                   "You cannot use this email more than once."),	0, "" },
   { "convertCustomerToProspect",	-1, "", -1, "deleteCustomer" },
   { "convertCustomerToProspect",	-2, "", -2, "deleteCustomer" },
   { "convertCustomerToProspect",	-3, "", -3, "deleteCustomer" },
@@ -426,7 +427,6 @@ const struct {
   { "CRMAccount",	-2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "User does not exist so this CRM Account Number is invalid."
                                                                   ),		 0, "" },
   { "CRMAccount",	-3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot change the Username"), 0, "" },
-
   { "deleteAccount",  -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Ledger Account cannot be deleted as it "
                              "is currently used in one or more Cost Categories."
                              "  You must reassign these Cost Category "
@@ -531,9 +531,9 @@ const struct {
                                "you may delete the selected Characteristic."),
 			       					 0, "" },
 
-  { "deleteCheck", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot delete this Payment because either it has not "
-                          "been voided, it has already been posted or replaced,"
-                          " or it has been transmitted electronically."),
+  { "deleteCheck",     -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot delete this Payment because either it has not "
+                          "been voided, it has already been posted or replaced, "
+                          "or it has been transmitted electronically and printed."),
 			           					0, "" },
 
   { "deleteClassCode", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup",  "The selected Class Code cannot be deleted "
@@ -698,8 +698,8 @@ const struct {
                                         "without a valid parent item."),0, "" },
 
   { "deleteOpportunity", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Opportunity cannot be deleted because "
-                            "there are ToDo Items assigned to it.  You must "
-                            "delete or reassign these ToDo Items "
+                            "there are Task Items assigned to it.  You must first "
+                            "delete or reassign these Tasks "
                             "before you may delete it."),                      0, "" },
   { "deleteOpportunity", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Opportunity cannot be deleted because "
                             "there are Quotes assigned to it.  You must "
@@ -836,6 +836,9 @@ const struct {
                            "is in use by existing Account. You must reclass "
                            "these Accounts before you may delete the selected "
                            "Subaccount."),                              0, "" },
+  { "deleteTask",	-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The Task was not found."), 0, "" },
+  { "deleteTask",	-2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Actual hours have been posted to this task (or sub-task)."), 0, "" },
+  { "deleteTask",	-3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Actual expenses have been posted to this task (or sub-task)."), 0, "" },
 
   { "deleteTO",		-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "This Transfer Order cannot be deleted as some of "
 			       "its line items have already been shipped."),
@@ -1110,6 +1113,10 @@ const struct {
   { "issueWoMaterial", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Expected Count of Distribution Detail Records Posted for Controlled Item."),0, ""},
   { "issueWoMaterial", -4, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Qty to Issue Must be Positive"),0, ""},
 
+  { "_itemsrcTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to maintain Item Sources."), 0, "" },
+  { "_itemsrcTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An Item Source already exists for this Vendor/Item combination "
+                      "with an overlapping effective date range. "),    0, "" },
+
   { "login",  -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The specified Username does not exist in the specified "
                      "Database. Contact your Systems Administrator to report "
                      "this issue"),                                     0, "" },
@@ -1124,7 +1131,8 @@ const struct {
   { "massReplaceBomitem",  -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot make this BOM Item replacement "
 				  "because it would create a recursive BOM."),
 									0, "" },
-
+  { "mergeAccounts", -6, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot merge two CRM Accounts that both refer to the same entity."),
+                                                         		0, "" },
   { "openAccountingPeriod", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot open this Accounting Period because "
 				   "it is already open."),		0, "" },
   { "openAccountingPeriod", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot open this Accounting Period because "
@@ -1611,6 +1619,10 @@ const struct {
 			      "was not found."),			0, "" },
   { "reverseCashReceipt", -8, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot reverse this Cash Receipt because the "
                             "credit card records could not be found."),  0, "" },
+  { "_soitemBeforeDeleteTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to delete a Sales Order."), 0, "" },
+  { "_soitemBeforeDeleteTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You can not delete this Sales Order Line as it has several "
+                              "sub components that have already been shipped."), 0, "" },
+  { "_soitemBeforeDeleteTrigger", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Error deleting kit components."), 0, "" },
 
   { "saveAlarm", -10, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An alarm for this item already exists."), 0, "" },
 

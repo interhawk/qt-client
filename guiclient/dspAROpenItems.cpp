@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -190,7 +190,8 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
     menuItem = pMenu->addAction(tr("Edit Invoice..."), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
   }
-  else if (((XTreeWidgetItem *)pItem)->altId() == 1 && ((XTreeWidgetItem *)pItem)->id("docnumber") > -1)
+  else if (((XTreeWidgetItem *)pItem)->altId() == 1 && ((XTreeWidgetItem *)pItem)->id("docnumber") > -1
+             && ((XTreeWidgetItem *)pItem)->rawValue("posted") == 0)
   // Credit Memo
   {
     menuItem = pMenu->addAction(tr("Edit Sales Credit..."), this, SLOT(sEdit()));
@@ -559,7 +560,8 @@ void dspAROpenItems::sEdit()
     }
     return;
   }
-  else if (list()->altId() == 1 && list()->currentItem()->id("docnumber") > -1 && list()->id() -1)
+  else if (list()->altId() == 1 && list()->currentItem()->id("docnumber") > -1 && list()->id() -1
+           && list()->currentItem()->rawValue("posted") == 0)
   // Edit Unposted Credit Memo
   {
     if (checkCreditMemoSitePrivs(list()->currentItem()->id("docnumber")))
@@ -978,10 +980,14 @@ void dspAROpenItems::sViewInvoiceDetails()
 void dspAROpenItems::sIncident()
 {
   XSqlQuery dspIncident;
-  dspIncident.prepare("SELECT crmacct_id, crmacct_cntct_id_1 "
-            "FROM crmacct, aropen "
-            "WHERE ((aropen_id=:aropen_id) "
-            "AND (crmacct_cust_id=aropen_cust_id));");
+  dspIncident.prepare("SELECT crmacct_id, pc.crmacctcntctass_cntct_id AS cntct_id_1 "
+            "FROM crmacct"
+            "JOIN custinfo ON (cust_crmacct_id=crmacct_id) "
+            "JOIN aropen ON (cust_id=aropen_cust_id) "
+            "  LEFT OUTER JOIN crmacctcntctass pc "
+            "                  ON (crmacct_id=pc.crmacctcntctass_crmacct_id "
+            "                      AND pc.crmacctcntctass_crmrole_id=getcrmroleid('Primary')) "
+            "WHERE aropen_id=:aropen_id;");
   dspIncident.bindValue(":aropen_id", list()->id());
   dspIncident.exec();
   if (dspIncident.first())
@@ -990,7 +996,7 @@ void dspAROpenItems::sIncident()
     params.append("mode", "new");
     params.append("aropen_id", list()->id());
     params.append("crmacct_id", dspIncident.value("crmacct_id"));
-    params.append("cntct_id", dspIncident.value("crmacct_cntct_id_1"));
+    params.append("cntct_id", dspIncident.value("cntct_id_1"));
     incident newdlg(this, 0, true);
     newdlg.set(params);
 

@@ -729,16 +729,18 @@ void XTreeWidget::populateWorker()
         _last->setHidden(true);
       }
 
-      if (qobject_cast<XTreeWidget*>(parentItem))
+      XTreeWidget     *tree = qobject_cast<XTreeWidget*>(parentItem);
+      XTreeWidgetItem *item = qobject_cast<XTreeWidgetItem*>(parentItem);
+      if (tree)
       {
         //#13439 optimization - do not add items to 'this' until the very end
-        if(parentItem == this)
+        if (parentItem == this)
           topLevelItems.append(_last);
         else
-          qobject_cast<XTreeWidget*>(parentItem)->addTopLevelItem(_last);
+          tree->addTopLevelItem(_last);
       }
-      else if (qobject_cast<XTreeWidgetItem*>(parentItem))
-        qobject_cast<XTreeWidgetItem*>(parentItem)->addChild(_last);
+      else if (item)
+        item->addChild(_last);
 
     } while (pQuery.next());
 
@@ -869,9 +871,13 @@ void XTreeWidget::addColumn(const QString &pString, int pWidth, int pAlignment, 
         part = savedParts.at(i);
         key  = part.left(part.indexOf(","));
         val  = part.right(part.length() - part.indexOf(",") - 1);
-        int c = key.toInt(&b1);
+
+        // Check preferences for column id or name
+        int c = key.toInt(&b1) ? key.toInt(&b1) : i;
+        if (c == i) { b1 = true; } 
         if (b1 && (val == "on" || val == "off"))
-          _savedVisibleColumns.insert(c, (val == "on" ? true : false));
+          _preferenceColumns[key] = (val == "on" ? true : false);
+
       }
     }
   }
@@ -909,7 +915,7 @@ void XTreeWidget::addColumn(const QString &pString, int pWidth, int pAlignment, 
   }
   bool forgetCache = _forgetful;
   _forgetful = true;
-  setColumnVisible(column, _savedVisibleColumns.value(column, pVisible));
+  setColumnVisible(column, _preferenceColumns.value(pEditColumn, pVisible));
   _forgetful = forgetCache;
   if (_sort.contains(qMakePair(column, Qt::AscendingOrder)) ||
       _sort.contains(qMakePair(column, Qt::DescendingOrder)))
@@ -1860,9 +1866,8 @@ void XTreeWidget::setColumnVisible(int pColumn, bool pVisible)
   {
     QString savedString = "";
     for (int i = 0; i < header()->count(); i++)
-    {
-      savedString.append(QString::number(i) + "," + (header()->isSectionHidden(i) ? "off" : "on") + "|");
-    }
+        savedString.append(column(i) + "," + (header()->isSectionHidden(i) ? "off" : "on") + "|");
+
     if (!savedString.isEmpty())
       _x_preferences->set(_settingsName + "/columnsShown", savedString);
     else
@@ -2537,7 +2542,9 @@ QString XTreeWidget::toCsv() const
 QString XTreeWidget::toVcf() const
 {
   XSqlQuery qry;
-  qry.prepare("SELECT * FROM cntct WHERE (cntct_id=:cntct_id);");
+  qry.prepare("SELECT *, getcontactphone(cntct_id, 'Office') AS contact_phone, "
+              "          getcontactphone(cntct_id, 'Office') AS contact_phone2 "
+              "  FROM cntct WHERE (cntct_id=:cntct_id);");
   qry.bindValue(":cntct_id", this->selectedItems().at(0)->id());
   qry.exec();
   if (qry.first()) {
@@ -2563,8 +2570,8 @@ QString XTreeWidget::toVcf() const
     QString org = "";
     QString title = qry.value("cntct_title").toString();
     QString photo = "";
-    QString phoneWork = qry.value("cntct_phone").toString();
-    QString phoneHome = qry.value("cntct_phone2").toString();
+    QString phoneWork = qry.value("contact_phone").toString();
+    QString phoneHome = qry.value("contact_phone2").toString();
     QString addressId = qry.value("cntct_addr_id").toString();
     XSqlQuery qry2;
     qry2.prepare("SELECT * FROM addr WHERE (addr_id=:addr_id);");
