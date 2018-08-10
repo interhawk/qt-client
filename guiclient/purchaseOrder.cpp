@@ -791,6 +791,8 @@ void purchaseOrder::sSave()
   if(!save(false))
     return;
 
+  omfgThis->sPurchaseOrdersUpdated(_poheadid, true);
+
   if (!_pridList.isEmpty())
   {
     XSqlQuery purchaseSave;
@@ -1068,8 +1070,6 @@ bool purchaseOrder::save(bool partial)
                            purchaseSave, __FILE__, __LINE__))
     return false;
  
-  omfgThis->sPurchaseOrdersUpdated(_poheadid, true);
-
   return true;
 }
 

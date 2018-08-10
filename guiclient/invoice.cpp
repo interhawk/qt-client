@@ -962,6 +962,9 @@ void invoice::sNew()
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
     sFillItemList();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void invoice::sEdit()
@@ -978,6 +981,9 @@ void invoice::sEdit()
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
     sFillItemList();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void invoice::sView()
