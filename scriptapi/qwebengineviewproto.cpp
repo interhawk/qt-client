@@ -11,45 +11,30 @@
 #include "scriptapi_internal.h"
 #include "qwebengineviewproto.h"
 
-#include <QAction>
-#include <QIcon>
-#include <QPrinter>
-#include <QUrl>
 #include <QWebEngineHistory>
 #include <QWebEngineSettings>
 #include <QWebEngineView>
 
-QScriptValue QWebEngineViewtoScriptValue(QScriptEngine *engine, QWebEngineView* const &item)
-{
-  return engine->newQObject(item);
-}
-
-void QWebEngineViewfromScriptValue(const QScriptValue &obj, QWebEngineView* &item)
-{
-  item = qobject_cast<QWebEngineView*>(obj.toQObject());
-}
-
 void setupQWebEngineViewProto(QScriptEngine *engine)
 {
-  qScriptRegisterMetaType(engine, QWebEngineViewtoScriptValue, QWebEngineViewfromScriptValue);
+
+  QScriptValue constructor = engine->newFunction(constructQWebEngineView);
+  QScriptValue metaObject = engine->newQMetaObject(&QWebEngineView::staticMetaObject, constructor);
+  engine->globalObject().setProperty("QWebEngineView", metaObject);
 
   QScriptValue proto = engine->newQObject(new QWebEngineViewProto(engine));
   engine->setDefaultPrototype(qMetaTypeId<QWebEngineView*>(), proto);
 
-  QScriptValue constructor = engine->newFunction(constructQWebEngineView,
-                                                 proto);
-  engine->globalObject().setProperty("QWebEngineView",  constructor);
 }
 
-QScriptValue constructQWebEngineView(QScriptContext * context,
-                                    QScriptEngine  *engine)
+QScriptValue constructQWebEngineView(QScriptContext * context, QScriptEngine  *engine)
 {
-  QWebEngineView *obj = 0;
+  QWebEngineView *obj = nullptr;
   if (context->argumentCount() == 1)
     obj = new QWebEngineView(qobject_cast<QWidget*>(context->argument(0).toQObject()));
   else
     obj = new QWebEngineView();
-  return engine->toScriptValue(obj);
+  return engine->newQObject(obj);
 }
 
 QWebEngineViewProto::QWebEngineViewProto(QObject *parent)
@@ -58,14 +43,6 @@ QWebEngineViewProto::QWebEngineViewProto(QObject *parent)
 }
 QWebEngineViewProto::~QWebEngineViewProto()
 {
-}
-
-bool QWebEngineViewProto::hasSelection() const
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->hasSelection();
-  return false;
 }
 
 void QWebEngineViewProto::findText(const QString &subString, QWebEnginePage::FindFlags options)
@@ -80,23 +57,7 @@ QWebEngineHistory* QWebEngineViewProto::history() const
   QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
   if (item)
     return item->history();
-  return 0;
-}
-
-QIcon QWebEngineViewProto::icon() const
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->icon();
-  return QIcon();
-}
-
-QUrl QWebEngineViewProto::iconUrl() const
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->iconUrl();
-  return QUrl();
+  return nullptr;
 }
 
 void QWebEngineViewProto::load(const QUrl &url)
@@ -111,7 +72,7 @@ QWebEnginePage* QWebEngineViewProto::page() const
   QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
   if (item)
     return item->page();
-  return 0;
+  return nullptr;
 }
 
 QAction* QWebEngineViewProto::pageAction(QWebEnginePage::WebAction action)  const
@@ -119,15 +80,7 @@ QAction* QWebEngineViewProto::pageAction(QWebEnginePage::WebAction action)  cons
   QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
   if (item)
     return item->pageAction(action);
-  return 0;
-}
-
-QString QWebEngineViewProto::selectedText() const
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->selectedText();
-  return QString();
+  return nullptr;
 }
 
 void QWebEngineViewProto::setContent(const QByteArray &data, const QString &mimeType, const QUrl &baseUrl)
@@ -156,14 +109,7 @@ QWebEngineSettings* QWebEngineViewProto::settings() const
   QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
   if (item)
     return item->settings();
-  return 0;
-}
-
-void QWebEngineViewProto::setUrl(const QUrl & url)
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    item->setUrl(url);
+  return nullptr;
 }
 
 void QWebEngineViewProto::setZoomFactor(qreal factor)
@@ -173,27 +119,11 @@ void QWebEngineViewProto::setZoomFactor(qreal factor)
     item->setZoomFactor(factor);
 }
 
-QString QWebEngineViewProto::title() const
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->title();
-  return QString();
-}
-
 void QWebEngineViewProto::triggerPageAction(QWebEnginePage::WebAction action, bool checked)
 {
   QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
   if (item)
     item->triggerPageAction(action, checked);
-}
-
-QUrl QWebEngineViewProto::url() const
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->url();
-  return QUrl();
 }
 
 qreal QWebEngineViewProto::zoomFactor() const
@@ -219,33 +149,4 @@ QSize QWebEngineViewProto::sizeHint() const
   if (item)
     return item->sizeHint();
   return QSize();
-}
-
-// Public Slots.
-void QWebEngineViewProto::back()
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->back();
-}
-
-void QWebEngineViewProto::forward()
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->forward();
-}
-
-void QWebEngineViewProto::reload()
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->reload();
-}
-
-void QWebEngineViewProto::stop()
-{
-  QWebEngineView *item = qscriptvalue_cast<QWebEngineView*>(thisObject());
-  if (item)
-    return item->stop();
 }

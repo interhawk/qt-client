@@ -28,58 +28,27 @@ class QWebEngineViewProto : public QObject, public QScriptable
 {
   Q_OBJECT
 
-  Q_PROPERTY (const bool hasSelection               READ hasSelection)
-  Q_PROPERTY (const QIcon icon                      READ icon)
-  Q_PROPERTY (const QUrl  iconUrl                   READ iconUrl)
-  Q_PROPERTY (const QString selectedText            READ selectedText)
-  Q_PROPERTY (const QString title                   READ title)
-  Q_PROPERTY (QUrl url                              READ url            WRITE setUrl)
-
   public:
     QWebEngineViewProto(QObject *parent);
     virtual ~QWebEngineViewProto();
 
-    Q_INVOKABLE void                    findText(const QString &subString, QWebEnginePage::FindFlags options = 0);
-    Q_INVOKABLE bool                    hasSelection() const;
+    Q_INVOKABLE void                    findText(const QString &subString, QWebEnginePage::FindFlags options = nullptr);
     Q_INVOKABLE QWebEngineHistory      *history() const;
-    Q_INVOKABLE QIcon                   icon() const;
-    Q_INVOKABLE QUrl                    iconUrl() const;
     Q_INVOKABLE void                    load(const QUrl &url);
     //Q_INVOKABLE void                  load(const QWebEngineHttpRequest &request); TODO: Expose QWebEngineHttpRequest
     Q_INVOKABLE QWebEnginePage         *page() const;
     Q_INVOKABLE QAction                *pageAction(QWebEnginePage::WebAction action) const;
-    Q_INVOKABLE QString                 selectedText() const;
     Q_INVOKABLE void                    setContent(const QByteArray &data, const QString &mimeType = QString(), const QUrl &baseUrl = QUrl());
     Q_INVOKABLE void                    setHtml(const QString &html, const QUrl &baseUrl = QUrl());
     Q_INVOKABLE void                    setPage(QWebEnginePage *page);
     Q_INVOKABLE QWebEngineSettings     *settings() const;
-    Q_INVOKABLE void                    setUrl(const QUrl & url);
     Q_INVOKABLE void                    setZoomFactor(qreal factor);
-    Q_INVOKABLE QString                 title() const;
     Q_INVOKABLE void                    triggerPageAction(QWebEnginePage::WebAction action, bool checked = false);
-    Q_INVOKABLE QUrl                    url() const;
     Q_INVOKABLE qreal                   zoomFactor() const;
 
   // Reimplemented Public Functions.
     Q_INVOKABLE QVariant                inputMethodQuery(Qt::InputMethodQuery property) const;
     Q_INVOKABLE QSize                   sizeHint() const;
-
-  public Q_SLOTS:
-    Q_INVOKABLE void                    back();
-    Q_INVOKABLE void                    forward();
-    Q_INVOKABLE void                    reload();
-    Q_INVOKABLE void                    stop();
-
-  signals:
-    void    iconChanged();
-    void    iconUrlChanges(const QUrl & url);
-    void    loadFinished(bool ok);
-    void    loadProgress(int progress);
-    void    loadStarted();
-    void    renderProcessTerminated(QWebEnginePage::RenderProcessTerminationStatus terminationStatus, int exitCode);
-    void    selectionChanged();
-    void    titleChanged(const QString & title);
-    void    urlChanged(const QUrl & url);
 
 };
 
