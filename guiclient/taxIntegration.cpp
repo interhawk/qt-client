@@ -61,6 +61,8 @@ void TaxIntegration::calculateTax(QString orderType, int orderId, bool record)
 
 void TaxIntegration::commit(QString orderType, int orderId)
 {
+  calculateTax(orderType, orderId, true);
+
   XSqlQuery qry;
   qry.prepare("SELECT postTax(:orderType, :orderId) AS request;");
   qry.bindValue(":orderType", orderType);
