@@ -67,14 +67,6 @@ QMenu* QWebEnginePageProto::createStandardContextMenu()
   return nullptr;
 }
 
-QWebEnginePage* QWebEnginePageProto::devToolsPage() const
-{
-  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
-  if (item)
-    return item->devToolsPage();
-  return nullptr;
-}
-
 void QWebEnginePageProto::download(const QUrl &url, const QString &filename)
 {
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
@@ -87,14 +79,6 @@ QWebEngineHistory* QWebEnginePageProto::history() const
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
   if (item)
     return item->history();
-  return nullptr;
-}
-
-QWebEnginePage* QWebEnginePageProto::inspectedPage() const
-{
-  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
-  if (item)
-    return item->inspectedPage();
   return nullptr;
 }
 
@@ -183,13 +167,6 @@ void QWebEnginePageProto::setContent(const QByteArray &data, const QString &mime
     item->setContent(data, mimeType, baseUrl);
 }
 
-void QWebEnginePageProto::setDevToolsPage(QWebEnginePage *devToolsPage)
-{
-  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
-  if (item)
-    item->setDevToolsPage(devToolsPage);
-}
-
 void QWebEnginePageProto::setFeaturePermission(const QUrl &securityOrigin, QWebEnginePage::Feature feature, QWebEnginePage::PermissionPolicy policy)
 {
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
@@ -202,13 +179,6 @@ void QWebEnginePageProto::setHtml(const QString &html, const QUrl &baseUrl)
   QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
   if (item)
     item->setHtml(html, baseUrl);
-}
-
-void QWebEnginePageProto::setInspectedPage(QWebEnginePage *page)
-{
-  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
-  if (item)
-    item->setInspectedPage(page);
 }
 
 void QWebEnginePageProto::setView(QWidget * view)
@@ -276,6 +246,38 @@ QWebChannel* QWebEnginePageProto::webChannel() const
     return item->webChannel();
   return nullptr;
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
+QWebEnginePage* QWebEnginePageProto::devToolsPage() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->devToolsPage();
+  return nullptr;
+}
+
+QWebEnginePage* QWebEnginePageProto::inspectedPage() const
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    return item->inspectedPage();
+  return nullptr;
+}
+
+void QWebEnginePageProto::setDevToolsPage(QWebEnginePage *devToolsPage)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setDevToolsPage(devToolsPage);
+}
+
+void QWebEnginePageProto::setInspectedPage(QWebEnginePage *page)
+{
+  QWebEnginePage *item = qscriptvalue_cast<QWebEnginePage*>(thisObject());
+  if (item)
+    item->setInspectedPage(page);
+}
+#endif
 
 bool QWebEnginePageProto::event(QEvent *e)
 {

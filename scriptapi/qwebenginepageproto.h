@@ -44,10 +44,8 @@ class QWebEnginePageProto : public QObject, public QScriptable
 
     Q_INVOKABLE QAction                        *action(QWebEnginePage::WebAction action) const;
     Q_INVOKABLE QMenu                          *createStandardContextMenu();
-    Q_INVOKABLE QWebEnginePage                 *devToolsPage() const;
     Q_INVOKABLE void                            download(const QUrl &url, const QString &filename = QString());
     Q_INVOKABLE QWebEngineHistory              *history() const;
-    Q_INVOKABLE QWebEnginePage                 *inspectedPage() const;
     Q_INVOKABLE void                            load(const QUrl &url);
     //Q_INVOKABLE void                          load(const QWebEngineHttpRequest &request); TODO: Expose QWebEngineHttpRequest
     Q_INVOKABLE void                            print(QPrinter *printer, const QWebEngineCallback<bool> &resultCallback);
@@ -61,10 +59,8 @@ class QWebEnginePageProto : public QObject, public QScriptable
     Q_INVOKABLE void                            runJavaScript(const QString &scriptSource, quint32 worldId, const QWebEngineCallback<const QVariant &> &resultCallback);
     Q_INVOKABLE void                            save(const QString &filePath, QWebEngineDownloadItem::SavePageFormat format = QWebEngineDownloadItem::MimeHtmlSaveFormat) const;
     Q_INVOKABLE void                            setContent(const QByteArray &data, const QString &mimeType = QString(), const QUrl &baseUrl = QUrl());
-    Q_INVOKABLE void                            setDevToolsPage(QWebEnginePage *devToolsPage);
     Q_INVOKABLE void                            setFeaturePermission(const QUrl &securityOrigin, QWebEnginePage::Feature feature, QWebEnginePage::PermissionPolicy policy);
     Q_INVOKABLE void                            setHtml(const QString &html, const QUrl &baseUrl = QUrl());
-    Q_INVOKABLE void                            setInspectedPage(QWebEnginePage *page);
     Q_INVOKABLE void                            setView(QWidget * view);
     Q_INVOKABLE void                            setWebChannel(QWebChannel *channel, uint worldId);
     Q_INVOKABLE void                            setWebChannel(QWebChannel *channel);
@@ -74,7 +70,12 @@ class QWebEnginePageProto : public QObject, public QScriptable
     Q_INVOKABLE virtual void                    triggerAction(QWebEnginePage::WebAction action, bool checked = false);
     Q_INVOKABLE QWidget                        *view() const;
     Q_INVOKABLE QWebChannel                    *webChannel() const;
-
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
+    Q_INVOKABLE QWebEnginePage                 *devToolsPage() const;
+    Q_INVOKABLE QWebEnginePage                 *inspectedPage() const;
+    Q_INVOKABLE void                            setDevToolsPage(QWebEnginePage *devToolsPage);
+    Q_INVOKABLE void                            setInspectedPage(QWebEnginePage *page);
+#endif
     //Reimplemented Public Functions
     virtual bool 	event(QEvent *e);
 

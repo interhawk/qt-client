@@ -113,9 +113,11 @@ void setupQWebEngineSettingsProto(QScriptEngine *engine)
   constructor.setProperty("AllowGeolocationOnInsecureOrigins", QScriptValue(engine, QWebEngineSettings::AllowGeolocationOnInsecureOrigins), permanent);
   constructor.setProperty("AllowWindowActivationFromJavaScript", QScriptValue(engine, QWebEngineSettings::AllowWindowActivationFromJavaScript), permanent);
   constructor.setProperty("ShowScrollBars", QScriptValue(engine, QWebEngineSettings::ShowScrollBars), permanent);
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
   constructor.setProperty("PlaybackRequiresUserGesture", QScriptValue(engine, QWebEngineSettings::PlaybackRequiresUserGesture), permanent);
   constructor.setProperty("JavascriptCanPaste", QScriptValue(engine, QWebEngineSettings::JavascriptCanPaste), permanent);
   constructor.setProperty("WebRTCPublicInterfacesOnly", QScriptValue(engine, QWebEngineSettings::WebRTCPublicInterfacesOnly), permanent);
+#endif
 
   QScriptValue globalSettings = engine->newFunction(globalSettingsForJS);
   constructor.setProperty("globalSettings", globalSettings);
