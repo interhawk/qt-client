@@ -25,7 +25,6 @@
 #include <QUndoStack>
 #include <QVariant>
 #include <QWebEnginePage>
-#include <QWebEngineRegisterProtocolHandlerRequest>
 #include <QWebEngineHistory>
 #include <QWebEngineSettings>
 #include <QWidget>
