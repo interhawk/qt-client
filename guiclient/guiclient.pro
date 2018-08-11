@@ -1068,7 +1068,7 @@ HEADERS = ../common/format.h                    \
           profitCenters.h               \
           project.h                     \
           projects.h                    \
-          projectType.h	                \
+          projectType.h                 \
           projectTypes.h                \
           prospect.h                    \
           prospects.h                   \

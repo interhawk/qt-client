@@ -24,10 +24,7 @@
 #include <QtScript>
 #include <QUndoStack>
 #include <QVariant>
-#include <QWebEngineContextMenuData>
-#include <QWebEngineFullScreenRequest>
 #include <QWebEnginePage>
-#include <QWebEngineQuotaRequest>
 #include <QWebEngineRegisterProtocolHandlerRequest>
 #include <QWebEngineHistory>
 #include <QWebEngineSettings>
