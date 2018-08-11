@@ -29,6 +29,7 @@ void FontSizeFromScriptValue(const QScriptValue &obj, QWebEngineSettings::FontSi
   item = (QWebEngineSettings::FontSize)obj.toInt32();
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,11,0)
 QScriptValue UnknownUrlSchemePolicyToScriptValue(QScriptEngine *engine, const QWebEngineSettings::UnknownUrlSchemePolicy &item)
 {
   return engine->newVariant(item);
@@ -37,6 +38,7 @@ void UnknownUrlSchemePolicyFromScriptValue(const QScriptValue &obj, QWebEngineSe
 {
   item = (QWebEngineSettings::UnknownUrlSchemePolicy)obj.toInt32();
 }
+#endif
 
 QScriptValue WebAttributeToScriptValue(QScriptEngine *engine, const QWebEngineSettings::WebAttribute &item)
 {
