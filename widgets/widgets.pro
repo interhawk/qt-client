@@ -3,11 +3,11 @@ include( ../global.pri )
 TARGET   = xtuplewidgets
 TEMPLATE = lib
 CONFIG  += qt warn_on plugin
+
 QT      += core network printsupport script scripttools sql \
            webengine webenginewidgets widgets xml
 QT      += designer printsupport serialport uitools \
            webchannel websockets
-
 
 DBFILE       = widgets.db
 LANGUAGE     = C++
@@ -16,7 +16,7 @@ DEPENDPATH  += $${INCLUDEPATH} ../lib
 LIBS        += -lxtuplescriptapi -lxtuplecommon -lwrtembed \
                -lrenderer -ldmtx -lqzint -lMetaSQL -lopenrptcommon
 
-dynamic { 
+dynamic {
     CONFIG      += dll # plugin implies dll but this fixes a cross-compile problem
     DESTDIR      = $$[QT_INSTALL_PLUGINS]/designer
     MOC_DIR      = tmp/dll
@@ -36,7 +36,7 @@ HEADERS += plugins/addressclusterplugin.h \
     plugins/alarmsplugin.h \
     plugins/cmheadclusterplugin.h \
     plugins/calendarcomboboxplugin.h \
-    plugins/characteristicswidgetplugin.h       \
+    plugins/characteristicswidgetplugin.h \
     plugins/clineeditplugin.h \
     plugins/apopenclusterplugin.h \
     plugins/aropenclusterplugin.h \
@@ -103,7 +103,7 @@ HEADERS += plugins/addressclusterplugin.h \
     plugins/workcenterlineeditplugin.h \
     plugins/xcheckboxplugin.h \
     plugins/xcomboboxplugin.h \
-    plugins/xdoccopysetterplugin.h      \
+    plugins/xdoccopysetterplugin.h \
     plugins/xlabelplugin.h \
     plugins/xlineeditplugin.h \
     plugins/xtreewidgetplugin.h \
@@ -115,16 +115,16 @@ HEADERS += plugins/addressclusterplugin.h \
     plugins/xtableviewplugin.h \
 
 SOURCES += widgets.cpp \
-    scriptablewidget.cpp                \
-    scriptcache.cpp                     \
+    scriptablewidget.cpp \
+    scriptcache.cpp \
     addressCluster.cpp \
     alarmMaint.cpp \
     alarms.cpp \
     apopencluster.cpp \
     aropencluster.cpp \
     calendarTools.cpp \
-    characteristicAssignment.cpp        \
-    characteristicswidget.cpp           \
+    characteristicAssignment.cpp \
+    characteristicswidget.cpp \
     cmheadcluster.cpp \
     comment.cpp \
     comments.cpp \
@@ -140,7 +140,7 @@ SOURCES += widgets.cpp \
     deptCluster.cpp \
     docAttach.cpp \
     documents.cpp \
-    editwatermark.cpp   \
+    editwatermark.cpp \
     empcluster.cpp \
     empgroupcluster.cpp \
     expensecluster.cpp \
@@ -202,7 +202,7 @@ SOURCES += widgets.cpp \
     xlistbox.cpp \
     xspinbox.cpp \
     xsqltablemodel.cpp \
-    xt.cpp             \
+    xt.cpp \
     xtableview.cpp \
     xtextedit.cpp \
     xtreeview.cpp \
@@ -211,8 +211,8 @@ SOURCES += widgets.cpp \
     xurllabel.cpp \
 
 HEADERS += widgets.h \
-    scriptablewidget.h          \
-    scriptcache.h               \
+    scriptablewidget.h \
+    scriptcache.h \
     xtupleplugin.h \
     guiclientinterface.h \
     addresscluster.h \
@@ -221,8 +221,8 @@ HEADERS += widgets.h \
     apopencluster.h \
     aropencluster.h \
     calendarTools.h \
-    characteristicAssignment.h  \
-    characteristicswidget.h     \
+    characteristicAssignment.h \
+    characteristicswidget.h \
     cmheadcluster.h \
     comment.h \
     comments.h \
@@ -239,7 +239,7 @@ HEADERS += widgets.h \
     deptcluster.h \
     docAttach.h \
     documents.h \
-    editwatermark.h     \
+    editwatermark.h \
     empcluster.h \
     empgroupcluster.h \
     expensecluster.h \
@@ -259,7 +259,7 @@ HEADERS += widgets.h \
     itemgroupcluster.h \
     lotserialcluster.h \
     lotserialseqcluster.h \
-    menubutton.h        \
+    menubutton.h \
     numbergencombobox.h \
     opportunitycluster.h \
     ordercluster.h \
@@ -302,7 +302,7 @@ HEADERS += widgets.h \
     xlistbox.h \
     xspinbox.h \
     xsqltablemodel.h \
-    xt.h             \
+    xt.h \
     xtableview.h \
     xtextedit.h \
     xtreeview.h \
@@ -312,14 +312,14 @@ HEADERS += widgets.h \
 
 FORMS += alarmMaint.ui \
     alarms.ui \
-    characteristicAssignment.ui         \
-    characteristicswidget.ui            \
-    comment.ui                          \
+    characteristicAssignment.ui \
+    characteristicswidget.ui \
+    comment.ui \
     contactemail.ui \
     customerselector.ui \
     docAttach.ui \
     documents.ui \
-    editwatermark.ui    \
+    editwatermark.ui \
     filemoveselector.ui \
     filterManager.ui \
     filterSave.ui \
@@ -330,8 +330,8 @@ FORMS += alarmMaint.ui \
     queryitem.ui \
     queryset.ui \
     recurrencewidget.ui \
-    vendorgroup.ui      \
-    womatlcluster.ui    \
+    vendorgroup.ui \
+    womatlcluster.ui \
     xdoccopysetter.ui
 
 RESOURCES += widgets.qrc

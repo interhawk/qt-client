@@ -1,9 +1,7 @@
 include( ../global.pri )
 TARGET = xtuplescriptapi
 TEMPLATE = lib
-CONFIG += qt \
-    warn_on \
-    staticlib
+CONFIG += qt warn_on staticlib
 
 QT += core network printsupport script sql widgets xml webengine webenginewidgets
 QT += websockets webchannel serialport
@@ -98,8 +96,8 @@ HEADERS += setupscriptapi.h \
     qnetworkrequestproto.h \
     qobjectproto.h \
     qprinterproto.h \
-    qprocessenvironmentproto.h     \
-    qprocessproto.h     \
+    qprocessenvironmentproto.h \
+    qprocessproto.h \
     qpushbuttonproto.h \
     qserialportinfoproto.h \
     qserialportproto.h \
@@ -142,15 +140,15 @@ HEADERS += setupscriptapi.h \
     qwebenginepageproto.h \
     qwebenginesettingsproto.h \
     qwebsocketcorsauthenticatorproto.h \
-    qwebsocketproto.h             \
-    qwebsocketprotocolproto.h     \
-    qwebsocketserverproto.h       \
+    qwebsocketproto.h \
+    qwebsocketprotocolproto.h \
+    qwebsocketserverproto.h \
     qwebengineviewproto.h \
     qwidgetproto.h \
     webchanneltransport.h \
     xsqlqueryproto.h \
     xvariantsetup.h \
-    xwebsync.h                    \
+    xwebsync.h \
     xwebsync_p.h \
 
 SOURCES += setupscriptapi.cpp \
@@ -243,7 +241,7 @@ SOURCES += setupscriptapi.cpp \
     qsqlproto.cpp \
     qsqlqueryproto.cpp \
     qsqlrecordproto.cpp \
-    qsqltablemodelproto.cpp           \
+    qsqltablemodelproto.cpp \
     qsslcertificateextensionproto.cpp \
     qsslcertificateproto.cpp \
     qsslcipherproto.cpp \
@@ -274,9 +272,9 @@ SOURCES += setupscriptapi.cpp \
     qwebenginepageproto.cpp \
     qwebenginesettingsproto.cpp \
     qwebsocketcorsauthenticatorproto.cpp \
-    qwebsocketproto.cpp           \
-    qwebsocketprotocolproto.cpp   \
-    qwebsocketserverproto.cpp     \
+    qwebsocketproto.cpp \
+    qwebsocketprotocolproto.cpp \
+    qwebsocketserverproto.cpp \
     qwebengineviewproto.cpp \
     qwidgetproto.cpp \
     webchanneltransport.cpp \
