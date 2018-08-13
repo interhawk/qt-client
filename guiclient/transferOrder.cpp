@@ -81,7 +81,6 @@ transferOrder::transferOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   connect(_srcWhs,         SIGNAL(newID(int)), this, SLOT(sHandleSrcWhs(int)));
   connect(_tabs,  SIGNAL(currentChanged(int)), this, SLOT(sTabChanged(int)));
   connect(_taxLit, SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
-  connect(_taxzone,        SIGNAL(newID(int)), this, SLOT(sCalculateTax()));
   connect(_toitem, SIGNAL(itemSelectionChanged()), this, SLOT(sHandleButtons()));
   connect(_toitem, SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateMenu(QMenu*)));
   connect(_trnsWhs,  SIGNAL(newID(int)), this, SLOT(sHandleTrnsWhs(int)));
@@ -905,7 +904,6 @@ void transferOrder::sEdit()
       ((_mode == cNew) || (_mode == cEdit)) )
   {
     sFillItemList();
-    sCalculateTax();
   }
     
 }
@@ -1355,7 +1353,7 @@ void transferOrder::sFillItemList()
                                 transferFillItemList, __FILE__, __LINE__))
     return;
 
-  sCalculateTax(); // triggers sCalculateTotal();
+  sCalculateTotal();
 
   _srcWhs->setEnabled(_toitem->topLevelItemCount() == 0);
   _freightCurrency->setEnabled(_toitem->topLevelItemCount() == 0);
@@ -1981,32 +1979,6 @@ void transferOrder::sIssueLineBalance()
   }
 
   sFillItemList();
-}
-
-void transferOrder::sCalculateTax()
-{
-  XSqlQuery taxq;
-
-  taxq.prepare( "SELECT SUM(tax) AS tax "
-                "FROM ("
-                "SELECT ROUND(calculateTax(:taxzone_id,getFreightTaxTypeId(),:date,:curr_id,toitem_freight),2) AS tax "
-                "FROM toitem "
-                "WHERE (toitem_tohead_id=:tohead_id) "
-                "UNION ALL "
-                "SELECT ROUND(calculateTax(:taxzone_id,getFreightTaxTypeId(),:date,:curr_id,:freight),2) AS tax "
-                ") AS data;" );
-  taxq.bindValue(":tohead_id", _toheadid);
-  taxq.bindValue(":taxzone_id", _taxzone->id());
-  taxq.bindValue(":date", _orderDate->date());
-  taxq.bindValue(":freight", _freight->localValue());
-  taxq.exec();
-  if (taxq.first())
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax"),
-                                taxq, __FILE__, __LINE__))
-    return;
-  
-  sCalculateTotal();
 }
 
 bool transferOrder::sQESave()

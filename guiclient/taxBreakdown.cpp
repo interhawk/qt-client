@@ -291,6 +291,21 @@ void taxBreakdown::sPopulate()
     params.append("headtype", "TI");
     params.append("dochead_id", _orderid);
   }
+  else if (_ordertype == "TI")
+  {
+    _currencyLit->setText(tr("Transfer Order Currency:"));
+    _header->setText(tr("Tax Breakdown for Transfer Order:"));
+
+    taxPopulate.prepare("SELECT tohead_number AS number, tohead_taxzone_id AS taxzone_id, "
+                        "       tohead_freight_curr_id AS curr_id, tohead_orderdate AS date "
+                        "  FROM toitem "
+                        "  JOIN tohead ON toitem_tohead_id = tohead_id "
+                        " WHERE toitem_id = :orderid ");
+
+    params.append("headtype", "TO");
+    params.append("headtype", "TI");
+    params.append("dochead_id", _orderid);
+  }
   else if (_ordertype == "P")
   {
     _currencyLit->setText(tr("Purchase Order Currency:"));
@@ -347,6 +362,34 @@ void taxBreakdown::sPopulate()
 
     params.append("headtype", "VCH");
     params.append("itemtype", "VCHI");
+    params.append("docitem_id", _orderid);
+  }
+  else if (_ordertype == "AR")
+  {
+    _currencyLit->setText(tr("A/R Open Currency:"));
+    _header->setText(tr("Tax Breakdown for A/R Open:"));
+
+    taxPopulate.prepare("SELECT aropen_docnumber AS number, aropen_taxzone_id AS taxzone_id, "
+                        "       aropen_curr_id AS curr_id, aropen_docdate AS date "
+                        "  FROM aropen "
+                        " WHERE aropen_id = :orderid ");
+
+    params.append("headtype", "AR");
+    params.append("itemtype", "AR");
+    params.append("docitem_id", _orderid);
+  }
+  else if (_ordertype == "AP")
+  {
+    _currencyLit->setText(tr("A/P Open Currency:"));
+    _header->setText(tr("Tax Breakdown for A/P Open:"));
+
+    taxPopulate.prepare("SELECT apopen_docnumber AS number, apopen_taxzone_id AS taxzone_id, "
+                        "       apopen_curr_id AS curr_id, apopen_docdate AS date "
+                        "  FROM apopen "
+                        " WHERE apopen_id = :orderid ");
+
+    params.append("headtype", "AP");
+    params.append("itemtype", "AP");
     params.append("docitem_id", _orderid);
   }
 
