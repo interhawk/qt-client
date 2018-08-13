@@ -390,7 +390,7 @@ to be bound by its terms.</comment>
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="XURLLabel" name="_taxLit">
+            <widget class="XLabel" name="_taxLit">
              <property name="text">
               <string>Tax:</string>
              </property>
@@ -410,7 +410,7 @@ to be bound by its terms.</comment>
             </widget>
            </item>
            <item row="1" column="2">
-            <widget class="CurrCluster" name="_tax">
+            <widget class="TaxDisplay" name="_tax">
              <property name="currencyEditable" stdset="0">
               <bool>false</bool>
              </property>

@@ -45,7 +45,6 @@ public slots:
     virtual void populate();
     virtual void populateOrderNumber();
     virtual void sAction();
-    virtual void sCalculateTax();
     virtual void sCalculateTotal();
     virtual void sClear();
     virtual void sDelete();

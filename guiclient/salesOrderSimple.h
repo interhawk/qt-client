@@ -66,7 +66,6 @@ class salesOrderSimple : public XWidget, public Ui::salesOrderSimple
     virtual bool        sShipInvoice();
     virtual void        sHandleFundsType();
     virtual void        sEnterCashPayment();
-    virtual void        sCalculateTax();
     virtual void        sRecalculatePrice();
     virtual void        sViewItemWorkbench();
     virtual void        sDelete();

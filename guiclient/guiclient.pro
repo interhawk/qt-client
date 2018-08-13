@@ -597,7 +597,6 @@ FORMS =   absoluteCalendarItem.ui               \
           taxCode.ui                            \
           taxCodeRate.ui                        \
           taxCodes.ui                           \
-          taxDetail.ui                          \
           taxRegistration.ui                    \
           taxRegistrations.ui                   \
           taxType.ui                            \
@@ -1213,7 +1212,6 @@ HEADERS = ../common/format.h                    \
           taxCode.h                     \
           taxCodeRate.h                 \
           taxCodes.h                    \
-          taxDetail.h                   \
           taxIntegration.h              \
           taxRegistration.h             \
           taxRegistrations.h            \
@@ -1842,7 +1840,6 @@ SOURCES = absoluteCalendarItem.cpp              \
           taxCode.cpp                           \
           taxCodeRate.cpp                       \
           taxCodes.cpp                          \
-          taxDetail.cpp                         \
           taxIntegration.cpp                    \
           taxRegistration.cpp                   \
           taxRegistrations.cpp                  \

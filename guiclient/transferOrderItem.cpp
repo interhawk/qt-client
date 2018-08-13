@@ -17,7 +17,7 @@
 #include "itemCharacteristicDelegate.h"
 #include "itemSite.h"
 #include "storedProcErrorLookup.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 
 #include "errorReporter.h"
 
@@ -27,7 +27,6 @@ transferOrderItem::transferOrderItem(QWidget* parent, const char* name, bool mod
   setupUi(this);
 
   connect(_cancel,	SIGNAL(clicked()),      this, SLOT(sCancel()));
-  connect(_freight,     SIGNAL(valueChanged()), this, SLOT(sCalculateTax()));
   connect(_freight,	SIGNAL(valueChanged()), this, SLOT(sChanged()));
   connect(_item,	SIGNAL(newId(int)),     this, SLOT(sChanged()));
   connect(_item,	SIGNAL(newId(int)),     this, SLOT(sPopulateItemInfo(int)));
@@ -289,6 +288,8 @@ enum SetResponse transferOrderItem::set(const ParameterList &pParams)
   populate();	// TODO: should this go BEFORE pParams.value("item_id")?
 
   _modified = false;
+
+  sCalculateTax();
 
   return NoError;
 }
@@ -1089,38 +1090,29 @@ void transferOrderItem::sCancel()
 void transferOrderItem::sCalculateTax()
 {  
   XSqlQuery calcq;
-  calcq.prepare("SELECT ROUND(calculateTax(tohead_taxzone_id,getFreightTaxTypeId(),tohead_orderdate,tohead_freight_curr_id,:freight),2) AS tax "
-                "FROM tohead "
-                "WHERE (tohead_id=:tohead_id); " );
-
-  calcq.bindValue(":tohead_id", _toheadid);
-  calcq.bindValue(":freight", _freight->localValue());
+  calcq.prepare( "SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
+                "  FROM taxhist "
+                " WHERE taxhist_doctype = 'TI' "
+                "   AND taxhist_parent_id = :toitem_id");
+  calcq.bindValue(":toitem_id", _toitemid);
   calcq.exec();
   if (calcq.first())
     _tax->setLocalValue(calcq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax"),
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Tax Calculation"),
                                 calcq, __FILE__, __LINE__))
-  {
     return;
-  }
 }
 
 void transferOrderItem::sTaxDetail()
 {
-  XSqlQuery fid;
-  fid.exec("SELECT getFreightTaxTypeId() AS taxtype_id;");
-  fid.first();
-  taxDetail newdlg(this, "", true);
+  taxBreakdown newdlg(this, "", true);
   ParameterList params;
-  params.append("taxzone_id",   _taxzoneid);
-  params.append("taxtype_id",  fid.value("taxtype_id").toInt());
-  params.append("date", _tax->effective());
-  params.append("curr_id", _tax->id());
-  params.append("subtotal", _freight->localValue());
-  params.append("readOnly");
+  params.append("order_id", _toitemid);
+  params.append("order_type", "TI");
+  params.append("mode", "view");
 
-  if (newdlg.set(params) == NoError)
-    newdlg.exec();
+  newdlg.set(params);
+  newdlg.exec();
 }
 
 void transferOrderItem::sHandleButton()

@@ -19,7 +19,7 @@
 #include "errorReporter.h"
 #include "printArOpenItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 #include "currcluster.h"
 #include "guiErrorCheck.h"
 
@@ -680,46 +680,31 @@ void arOpenItem::sTaxDetail()
       return;
   }
 
-  taxDetail newdlg(this, "", true);
   ParameterList params;
-
-  params.append("curr_id", _tax->id());
-  params.append("date",    _tax->effective());
-  if (_docType->code() == "C")
-    params.append("sense",-1);
-  if (_mode != cNew)
-    params.append("readOnly");
-
-  ar.exec("SELECT getadjustmenttaxtypeid() as taxtype;");
-  if(ar.first())
-    params.append("taxtype_id", ar.value("taxtype").toInt());
-
-  params.append("order_type", "AR");
   params.append("order_id", _aropenid);
-  params.append("display_type", "A");
-  params.append("subtotal", _amount->localValue());
-  params.append("adjustment");
-  if (newdlg.set(params) == NoError)
+  params.append("order_type", "AR");
+ 
+  taxBreakdown newdlg(this, "", true);
+  newdlg.set(params);
+  newdlg.exec();
+
+  XSqlQuery taxq;
+  taxq.prepare( "SELECT SUM(taxhist_tax) AS tax "
+    "FROM aropentax "
+    "WHERE (taxhist_parent_id=:aropen_id);" );
+  taxq.bindValue(":aropen_id", _aropenid);
+  taxq.exec();
+  if (taxq.first())
   {
-    newdlg.exec();
-    XSqlQuery taxq;
-    taxq.prepare( "SELECT SUM(taxhist_tax) AS tax "
-      "FROM aropentax "
-      "WHERE (taxhist_parent_id=:aropen_id);" );
-    taxq.bindValue(":aropen_id", _aropenid);
-    taxq.exec();
-    if (taxq.first())
-    {
-      if (_docType->code() == "C")
-        _tax->setLocalValue(taxq.value("tax").toDouble() * -1);
-      else
-        _tax->setLocalValue(taxq.value("tax").toDouble());
-    }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Cannot set tax amounts"),
-                                  taxq, __FILE__, __LINE__))
-    {
-      return;
-    }
+    if (_docType->code() == "C")
+      _tax->setLocalValue(taxq.value("tax").toDouble() * -1);
+    else
+      _tax->setLocalValue(taxq.value("tax").toDouble());
+  }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Cannot set tax amounts"),
+                                taxq, __FILE__, __LINE__))
+  {
+    return;
   }
 }
 
