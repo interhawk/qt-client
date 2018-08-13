@@ -107,6 +107,7 @@ project::project(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   _prjtask->addColumn(tr("Status"),      _orderColumn, Qt::AlignLeft,   true,  "status" );
   _prjtask->addColumn(tr("Name"),         _itemColumn, Qt::AlignLeft,   true,  "name"   );
   _prjtask->addColumn(tr("Description"),           -1, Qt::AlignLeft,   true,  "descrip");
+  _prjtask->addColumn(tr("Assigned To"),           -1, Qt::AlignLeft,   true,  "assignedto");
   _prjtask->addColumn(tr("Due Date"),     _dateColumn, Qt::AlignRight,  true,  "due"  );
   _prjtask->addColumn(tr("Assigned"),     _dateColumn, Qt::AlignRight,  true,  "assigned" );
   _prjtask->addColumn(tr("Started"),      _dateColumn, Qt::AlignRight,  true,  "started"  );
