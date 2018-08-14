@@ -31,9 +31,9 @@ void TaxIntegration::getTaxCodes()
   sendRequest("taxcodes");
 }
 
-void TaxIntegration::getTaxExemptCategories()
+void TaxIntegration::getTaxExemptCategories(QStringList config)
 {
-  sendRequest("taxexempt");
+  sendRequest("taxexempt", QString(), 0, QString(), config);
 }
 
 void TaxIntegration::test(QStringList config)
