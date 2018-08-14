@@ -1111,7 +1111,7 @@ const struct {
   { "issueWoMaterial", -4, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Qty to Issue Must be Positive"),0, ""},
 
   { "_itemsrcTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to maintain Item Sources."), 0, "" },
-  { "_itemsrcTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An Item Source already exists for this Vendor/Item combination "
+  { "_itemsrcTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An Item Source already exists for this Vendor/Item/Vendor Number combination "
                       "with an overlapping effective date range. "),    0, "" },
 
   { "login",  -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The specified Username does not exist in the specified "
