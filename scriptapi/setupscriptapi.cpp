@@ -136,21 +136,13 @@
 #include "quuidproto.h"
 #include "qvalidatorproto.h"
 #include "qwebchannelproto.h"
-#if QT_VERSION < 0x050900
-#include "qwebelementcollectionproto.h"
-#include "qwebelementproto.h"
-#include "qwebframeproto.h"
-#include "qwebpageproto.h"
-#include "qwebsecurityoriginproto.h"
-#include "qwebsettingsproto.h"
-#endif
+#include "qwebenginepageproto.h"
+#include "qwebenginesettingsproto.h"
 #include "qwebsocketcorsauthenticatorproto.h"
 #include "qwebsocketproto.h"
 #include "qwebsocketprotocolproto.h"
 #include "qwebsocketserverproto.h"
-#if QT_VERSION < 0x050900
-#include "qwebviewproto.h"
-#endif
+#include "qwebengineviewproto.h"
 #include "qwidgetproto.h"
 #include "webchanneltransport.h"
 #include "xsqlqueryproto.h"
@@ -295,21 +287,13 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQUuidProto(engine);
   setupQValidatorProto(engine);
   setupQWebChannelProto(engine);
-#if QT_VERSION < 0x050900
-  setupQWebElementCollectionProto(engine);
-  setupQWebElementProto(engine);
-  setupQWebFrameProto(engine);
-  setupQWebPageProto(engine);
-  setupQWebSecurityOriginProto(engine);
-  setupQWebSettingsProto(engine);
-#endif
+  setupQWebEnginePageProto(engine);
+  setupQWebEngineSettingsProto(engine);
   setupQWebSocketCorsAuthenticatorProto(engine);
   setupQWebSocketProto(engine);
   setupQWebSocketProtocolProto(engine);
   setupQWebSocketServerProto(engine);
-#if QT_VERSION < 0x050900
-  setupQWebViewProto(engine);
-#endif
+  setupQWebEngineViewProto(engine);
   setupQWidgetProto(engine);
   setupQt(engine);
   setupWebChannelTransport(engine);

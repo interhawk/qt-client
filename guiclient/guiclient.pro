@@ -4,22 +4,8 @@ TARGET   = xtuple
 CONFIG   += qt warn_on
 
 QT += xml sql script scripttools network
-QT += xmlpatterns printsupport
-
-lessThan(QT_MINOR_VERSION, 6) : equals(QT_MAJOR_VERSION, 5) {
-  QT += webkit webkitwidgets
-} else {
-  QT += webengine webenginewidgets
-}
-
+QT += xmlpatterns printsupport webengine webenginewidgets
 QT += designer uitools quick websockets webchannel serialport
-QT += xmlpatterns printsupport
-
-equals(QT_MAJOR_VERSION, 5) {
-  lessThan (QT_MINOR_VERSION, 9) {
-    QT += webkit webkitwidgets
-  }
-}
 
 CONFIG -= staticlib
 
@@ -235,7 +221,7 @@ FORMS =   absoluteCalendarItem.ui               \
           crmaccountMergePickDataPage.ui        \
           crmaccountMergePickTaskPage.ui        \
           crmaccountMergeResultPage.ui          \
-          crmGroup.ui                          \
+          crmGroup.ui                           \
           crmGroups.ui                          \
           crmRole.ui                            \
           crmRoles.ui                           \
@@ -1082,8 +1068,8 @@ HEADERS = ../common/format.h                    \
           profitCenters.h               \
           project.h                     \
           projects.h                    \
-	  projectType.h			\
-	  projectTypes.h		\
+          projectType.h                 \
+          projectTypes.h                \
           prospect.h                    \
           prospects.h                   \
           purchaseOrder.h               \
