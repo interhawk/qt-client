@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -51,15 +51,14 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _taskList = new taskList(this, "taskList", Qt::Widget);
   _taskListPage->layout()->addWidget(_taskList);
   _taskList->setCloseVisible(false);
-  _taskList->setParameterWidgetVisible(false);
-  _taskList->setQueryOnStartEnabled(false);
-  _taskList->parameterWidget()->setDefault(tr("User"), QVariant(), true);
-  _taskList->parameterWidget()->append("", "hasContext", ParameterWidget::Exists, true);
   _taskList->list()->hideColumn("crmacct_number");
   _taskList->list()->hideColumn("crmacct_name");
-  _taskList->_projects->setForgetful(true);
-  _taskList->_projects->setVisible(false);
-  _taskList->_projects->setChecked(false);
+  _taskList->list()->hideColumn("parent");
+  _taskList->parameterWidget()->setDefault(tr("User"), QVariant(), true);
+  _taskList->parameterWidget()->append("hasContext", "hasContext", ParameterWidget::Exists, true);
+  _taskList->setParameterWidgetVisible(false);
+  _taskList->setQueryOnStartEnabled(false);
+  _taskList->setParent("CRMA");
 
   _contacts = new contacts(this, "contacts", Qt::Widget);
   _contactsPage->layout()->addWidget(_contacts);
@@ -1317,9 +1316,9 @@ void customer::populate()
     _cachedNumber = cust.value("cust_number").toString();
     _name->setText(cust.value("cust_name"));
     _corrCntct->setId(cust.value("cust_corrcntct_id").toInt());
-    _corrCntct->setSearchAcct(cust.value("crmacct_id").toInt());
+    _corrCntct->setSearchAcct(cust.value("cust_crmacct_id").toInt());
     _billCntct->setId(cust.value("cust_cntct_id").toInt());
-    _billCntct->setSearchAcct(cust.value("crmacct_id").toInt());
+    _billCntct->setSearchAcct(cust.value("cust_crmacct_id").toInt());
     _creditLimit->set(cust.value("cust_creditlmt").toDouble(),
                       cust.value("cust_creditlmt_curr_id").toInt(),
                       QDate::currentDate(),
@@ -1392,6 +1391,7 @@ void customer::populate()
     _cctrans->findChild<CustomerSelector*>("_customerSelector")->setCustId(_custid);
 
     sFillList();
+    _taskList->sFillList();
 
     emit populated();
     _autoSaved=false;
@@ -1867,10 +1867,10 @@ void customer::sIdChanged(int id)
 
   if(qry.first())
   {
-    _contacts->parameterWidget()->setDefault(tr("Account"), qry.value("crmacct_id").toInt(), true);
-    _taskList->parameterWidget()->setDefault(tr("Account"), qry.value("crmacct_id").toInt(), true);
-    _billCntct->setSearchAcct(qry.value("crmacct_id").toInt());
-    _corrCntct->setSearchAcct(qry.value("crmacct_id").toInt());
+    _contacts->parameterWidget()->setDefault(tr("Account"), qry.value("cust_crmacct_id").toInt(), true);
+    _taskList->parameterWidget()->setDefault(tr("Account"), qry.value("cust_crmacct_id").toInt(), true);
+    _billCntct->setSearchAcct(qry.value("cust_crmacct_id").toInt());
+    _corrCntct->setSearchAcct(qry.value("cust_crmacct_id").toInt());
   }
   else if(qry.lastError().type() != QSqlError::NoError)
     QMessageBox::warning(this, tr("Database Error"),
