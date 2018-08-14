@@ -23,7 +23,6 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
 
   _tax = new AvalaraIntegration();
   connect(_tax, SIGNAL(taxExemptCategoriesFetched(QJsonObject, QString)), this, SLOT(sPopulateTaxExempt(QJsonObject, QString)));
-  _tax->getTaxExemptCategories();
 
   _service->append(0, "None",    "N");
   _service->append(1, "Avalara", "A");
@@ -105,15 +104,19 @@ void configureTax::sPopulateTaxExempt(QJsonObject result, QString error)
     ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Exempt Categories"),
                          qry, __FILE__, __LINE__);
   }
-  else
-    QMessageBox::critical(this, tr("Avalara Error"),
-                          tr("Error retrieving Avalara Tax Exempt Categories\n%1").arg(error));
 }
 
 bool configureTax::sCheck()
 {
   bool valid = (!_account->isNull() && !_key->isNull() && !_url->isNull() && !_company->isNull());
   _test->setEnabled(valid);
+
+  if (valid)
+  {
+    QStringList configuration;
+    configuration << _account->text() << _key->text() << _url->text() << _company->text();
+    _tax->getTaxExemptCategories(configuration);
+  }
 
   return valid;
 }
