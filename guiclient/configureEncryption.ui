@@ -2,7 +2,7 @@
 <ui version="4.0">
  <comment>This file is part of the xTuple ERP: PostBooks Edition, a free and
 open source Enterprise Resource Planning software suite,
-Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
 It is licensed to you under the Common Public Attribution License
 version 1.0, the full text of which (including xTuple-specific Exhibits)
 is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -48,20 +48,22 @@ to be bound by its terms.</comment>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="_ccEncKeyName">
-           <property name="text">
-            <string>keyfile.txt</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLineEdit" name="_ccEncKeyName">
+            </widget>
+           </item>
+           <item>
+           <widget class="QPushButton" name="_createFile">
+            <property name="text">
+             <string>&amp;Create Key File</string>
+            </property>
+           </widget>
+          </item>
+          </layout>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="_ccWinEncKeyLit">
-           <property name="whatsThis">
-            <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Lucida Grande'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;whatsthis for a label with a buddy that's an empty text field&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
            <property name="text">
             <string>Windows Location:</string>
            </property>
