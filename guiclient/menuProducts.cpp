@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -168,7 +168,7 @@ menuProducts::menuProducts(GUIClient *Pparent) :
   { "pd.maintainItemCosts", tr("&Maintain Item Costs..."), SLOT(sMaintainItemCosts()), costingMenu, "ViewCosts", NULL, NULL, true , NULL },
   
   // Product | Lot Serial
-  { "pd.lotSerial", tr("&Lot/Serial..."), SLOT(sLotSerial()), mainMenu, "true", NULL, NULL, _metrics->boolean("LotSerialControl"), NULL }, 
+  { "pd.lotSerial", tr("&Lot/Serial..."), SLOT(sLotSerial()), mainMenu, "MaintainLotSerial", NULL, NULL, _metrics->boolean("LotSerialControl"), NULL },
 
   { "separator", NULL, NULL, costingMenu,	"true", NULL, NULL, true , NULL },
   
