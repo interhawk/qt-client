@@ -280,12 +280,15 @@ void CLineEdit::setCanEdit(bool p)
   if (p)
   {
     if (_x_privileges && _subtype == CRMAcctLineEdit::Cust)
-      _canEdit = _x_privileges->check("MaintainCustomerMasters");
+      _canEdit = _x_privileges->check("MaintainCustomerMasters") &&
+                 _x_privileges->check("MaintainCustomerNumbers");
     else if (_x_privileges && _subtype == CRMAcctLineEdit::Prospect)
-      _canEdit = _x_privileges->check("MaintainProspectMasters");
+      _canEdit = _x_privileges->check("MaintainProspectMasters") &&
+                 _x_privileges->check("MaintainCustomerNumbers");
     else if (_x_privileges)
-      _canEdit = _x_privileges->check("MaintainCustomerMasters") ||
-                 _x_privileges->check("MaintainProspectMasters");
+      _canEdit = (_x_privileges->check("MaintainCustomerMasters") ||
+                 _x_privileges->check("MaintainProspectMasters")) &&
+                 _x_privileges->check("MaintainCustomerNumbers");
   }
   else
     _canEdit=p;
