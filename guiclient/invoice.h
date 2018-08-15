@@ -39,6 +39,7 @@ public slots:
     virtual void populateShipto( int pShiptoid );
     virtual void sCopyToShipto();
     virtual void sSave();
+    virtual bool save(bool);
     virtual void sNew();
     virtual void sEdit();
     virtual void sView();
@@ -77,7 +78,6 @@ private:
     int		_taxzoneidCache;
     bool        _loading;
     double      _freightCache;
-    bool        save(bool);
     bool        _saved;
     bool        _posted;
     int         _NumberGen;

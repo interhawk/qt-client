@@ -1068,7 +1068,7 @@ void creditMemo::sFreightChanged()
         qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
                     "                      addr_line1 || addr_line2 || addr_line3 || "
                     "                      addr_city || addr_state || addr_postalcode || "
-                    "                      addr_country) != 1 "
+                    "                      addr_country) > 1 "
                     "       AS check "
                     "  FROM cmitem "
                     "  JOIN itemsite ON cmitem_itemsite_id = itemsite_id "
