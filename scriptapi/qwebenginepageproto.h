@@ -27,6 +27,7 @@
 #include <QWebEnginePage>
 #include <QWebEngineHistory>
 #include <QWebEngineSettings>
+#include <QWebEngineDownloadItem>
 #include <QWidget>
 
 Q_DECLARE_METATYPE(QWebEnginePage*)
