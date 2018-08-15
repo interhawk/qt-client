@@ -1089,7 +1089,7 @@ void voucher::sFreightChanged()
     qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
                 "                      addr_line1 || addr_line2 || addr_line3 || "
                 "                      addr_city || addr_state || addr_postalcode || "
-                "                      addr_country) != 1 "
+                "                      addr_country) > 1 "
                 "       AS check "
                 "  FROM voitem "
                 "  JOIN poitem ON voitem_poitem_id = poitem_id "

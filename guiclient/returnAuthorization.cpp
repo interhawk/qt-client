@@ -1765,6 +1765,12 @@ void returnAuthorization::sRefund()
   {
     int cmheadid = cmq.value("result").toInt();
 
+    if (_post)
+    {
+      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+      tax->commit("CM", cmheadid);
+    }
+
     ParameterList ccp;
     ccp.append("cmhead_id", cmheadid);
     MetaSQLQuery ccm = mqlLoad("creditMemoCreditCards", "detail");
@@ -2049,7 +2055,7 @@ void returnAuthorization::sFreightChanged()
         qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
                     "                      addr_line1 || addr_line2 || addr_line3 || "
                     "                      addr_city || addr_state || addr_postalcode || "
-                    "                      addr_country) != 1 "
+                    "                      addr_country) > 1 "
                     "       AS check "
                     "  FROM raitem "
                     "  JOIN itemsite ON raitem_itemsite_id = itemsite_id "

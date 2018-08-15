@@ -717,6 +717,10 @@ void dspAROpenItems::sVoidCreditMemo()
     }
 
     dspVoidCreditMemo.exec("COMMIT;");
+
+    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+    tax->cancel("CM", list()->currentItem()->id("docnumber"));
+
     sFillList();
   }
   else if (post.lastError().type() != QSqlError::NoError)
@@ -1297,7 +1301,12 @@ void dspAROpenItems::sPostCreditMemo()
       return;
     }
     else
+    {
       dspPostCreditMemo.exec("COMMIT;");
+
+      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+      tax->commit("CM", id);
+    }
   }
   else if (postq.lastError().type() != QSqlError::NoError)
   {

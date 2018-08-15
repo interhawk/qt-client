@@ -18,6 +18,7 @@
 
 #include "storedProcErrorLookup.h"
 #include "distributeInventory.h"
+#include "taxIntegration.h"
 
 printCreditMemos::printCreditMemos(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : printMulticopyDocument("CreditMemoCopies",     "CreditMemoWatermark",
@@ -72,6 +73,12 @@ void printCreditMemos::sHandleFinishedWithAll()
 {
   omfgThis->sCreditMemosUpdated();
   this->close();
+}
+
+void printCreditMemos::sHandlePosted(int docid)
+{
+  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+  tax->commit("CM", docid);
 }
 
 int printCreditMemos::distributeInventory(XSqlQuery *qry)
