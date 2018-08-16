@@ -245,7 +245,9 @@ bool voucher::sSave()
 
   omfgThis->sVouchersUpdated();
 
-  if(_metrics->value("TaxService") == "A" && _taxOwed->localValue() >= 0.0)
+  _tax->sRecalculate();
+
+  if (_metrics->value("TaxService") == "A" && _taxOwed->localValue() >= 0.0)
     _tax->save();
 
   _voheadid = -1;
@@ -476,6 +478,9 @@ void voucher::sDistributions()
   }
   sFillList();
   sPopulateDistributed();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void voucher::sDistributeLine()
@@ -528,6 +533,9 @@ void voucher::sDistributeLine()
   }
   sFillList();
   sPopulateDistributed();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void voucher::sClear()
@@ -564,6 +572,9 @@ void voucher::sClear()
   _poNumber->setEnabled(true);
   sFillList();
   sPopulateDistributed();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void voucher::sDistributeAll()
@@ -617,6 +628,9 @@ void voucher::sDistributeAll()
   }
   sFillList();
   sPopulateDistributed();
+
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 }
 
 void voucher::sNewMiscDistribution()
