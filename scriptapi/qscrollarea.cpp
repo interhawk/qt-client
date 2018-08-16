@@ -13,7 +13,8 @@
 #include <QWidget>
 #include <QSize>
 
-void setupQScrollAreaProto(QScriptEngine *engine) {
+void setupQScrollAreaProto(QScriptEngine *engine)
+{
 
   QScriptValue constructor = engine->newFunction(constructQScrollArea);
   QScriptValue metaObject = engine->newQMetaObject(&QScrollArea::staticMetaObject, constructor);
@@ -37,52 +38,60 @@ QScrollAreaProto::QScrollAreaProto(QObject *parent) : QObject(parent)
 {
 }
 
-void QScrollAreaProto::ensureVisible(int x, int y, int xmargin, int ymargin) {
+void QScrollAreaProto::ensureVisible(int x, int y, int xmargin, int ymargin)
+{
   QScrollArea *item = qscriptvalue_cast<QScrollArea*>(thisObject());
   if (item)
     item->ensureVisible(x, y, xmargin, ymargin);
 }
 
-void QScrollAreaProto::ensureWidgetVisible(QWidget *childWidget, int xmargin, int ymargin) {
+void QScrollAreaProto::ensureWidgetVisible(QWidget *childWidget, int xmargin, int ymargin)
+{
   QScrollArea *item = qscriptvalue_cast<QScrollArea*>(thisObject());
   if (item)
     item->ensureWidgetVisible(childWidget, xmargin, ymargin);
 }
 
-void QScrollAreaProto::setWidget(QWidget *widget) {
+void QScrollAreaProto::setWidget(QWidget *widget)
+{
   QScrollArea *item = qscriptvalue_cast<QScrollArea*>(thisObject());
   if (item)
     item->setWidget(widget);
 }
 
-void QScrollAreaProto::setWidgetResizable(bool resizable) {
+void QScrollAreaProto::setWidgetResizable(bool resizable)
+{
   QScrollArea *item = qscriptvalue_cast<QScrollArea*>(thisObject());
   if (item)
     item->setWidgetResizable(resizable);
 }
 
-QWidget* QScrollAreaProto::takeWidget() {
+QWidget* QScrollAreaProto::takeWidget()
+{
   QScrollArea *item = qscriptvalue_cast<QScrollArea*>(thisObject());
   if (item)
     return item->takeWidget();
   return new QWidget();
 }
 
-QWidget* QScrollAreaProto::widget() const {
+QWidget* QScrollAreaProto::widget() const
+{
   QScrollArea *item = qscriptvalue_cast<QScrollArea*>(thisObject());
   if (item)
     return item->widget();
   return new QWidget();
 }
 
-bool QScrollAreaProto::focusNextPrevChild(bool next) {
+bool QScrollAreaProto::focusNextPrevChild(bool next)
+{
   QScrollArea *item = qscriptvalue_cast<QScrollArea*>(thisObject());
   if (item)
     return item->focusNextPrevChild(next);
   return false;
 }
 
-QSize QScrollAreaProto::sizeHint() const {
+QSize QScrollAreaProto::sizeHint() const
+{
   QScrollArea *item = qscriptvalue_cast<QScrollArea*>(thisObject());
   if (item)
     return item->sizeHint();
