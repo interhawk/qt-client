@@ -91,7 +91,7 @@ void configureEncryption::sCreate()
 
 #ifdef Q_OS_WIN
   defdir = _metrics->value("CCWinEncKey");
-#elif Q_OS_MAC
+#elif defined Q_OS_MAC
   defdir = _metrics->value("CCMacEncKey");
 #else
   defdir = _metrics->value("CCLinEncKey");
