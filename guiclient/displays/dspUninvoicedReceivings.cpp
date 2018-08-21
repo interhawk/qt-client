@@ -41,7 +41,8 @@ dspUninvoicedReceivings::dspUninvoicedReceivings(QWidget* parent, const char*, Q
   list()->addColumn(tr("Item Number"), _itemColumn,  Qt::AlignLeft,   true, "itemnumber");
   list()->addColumn(tr("Uninvoiced"),  _qtyColumn,   Qt::AlignRight,  true, "qty");
   list()->addColumn(tr("Type"),        _itemColumn,  Qt::AlignLeft,   true, "type"); 
-  list()->addColumn(tr("Value"),       _moneyColumn, Qt::AlignRight,  true, "value");
+  list()->addColumn(tr("Cost Value"),       _moneyColumn, Qt::AlignRight,  true, "stdvalue");
+  list()->addColumn(tr("P/O Value"),       _moneyColumn, Qt::AlignRight,  true, "purchvalue");
 
   sFillList();
 }
