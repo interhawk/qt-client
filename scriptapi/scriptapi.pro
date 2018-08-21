@@ -104,6 +104,7 @@ HEADERS += setupscriptapi.h \
     qprocessenvironmentproto.h     \
     qprocessproto.h     \
     qpushbuttonproto.h \
+    qscrollarea.h \
     qserialportinfoproto.h \
     qserialportproto.h \
     qsizepolicyproto.h \
@@ -240,6 +241,7 @@ SOURCES += setupscriptapi.cpp \
     qprocessenvironmentproto.cpp \
     qprocessproto.cpp \
     qpushbuttonproto.cpp \
+    qscrollarea.cpp \
     qserialportinfoproto.cpp \
     qserialportproto.cpp \
     qsizepolicyproto.cpp \
