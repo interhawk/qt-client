@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -409,6 +409,8 @@ bool returnAuthorization::sSave(bool partial)
                    tr("<p>You must enter a valid Receiving Site."))
   << GuiErrorCheck((!partial && !_shipWhs->isValid()), _shipWhs,
                    tr("<p>You must enter a valid Shipping Site."))
+  << GuiErrorCheck(_expireDate->isValid() && (_expireDate->date() < _authDate->date()), _expireDate,
+                   tr("<p>Expiry Date must be on or later than the Authorization Date."))
   ;
   
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Return Authorization"), errors))
