@@ -64,7 +64,6 @@ class CharacteristicAssignmentPrivate
         }
       }
     }
-    
     void handleTargetType();
 };
 
@@ -427,11 +426,11 @@ void CharacteristicAssignmentPrivate::handleTargetType()
   parent->setWindowTitle(parent->tr("Characteristic: %1").arg(targetTypeMap.value(targetType)));
 
   QSqlQueryModel *model = new QSqlQueryModel;
-  qDebug() << "@@@@@charuseTargetType =  " << charuseTargetType;
+  
   model->setQuery("SELECT char_id, char_name, char_type"
                   "  FROM char JOIN charuse ON char_id = charuse_char_id"
                   " WHERE charuse_target_type = '" + charuseTargetType + "'"
-                  //" AND ('" + charuseTargetType + "' NOT IN ('INVI','PI','QI','SI','W') "
+                  " AND ('" + charuseTargetType + "' NOT IN ('INVI','PI','QI','SI','W') "
                   "       OR charuse_char_id NOT IN (SELECT charuse_char_id FROM charuse"
                   "                              WHERE charuse_target_type = 'I'))"
                   " ORDER BY char_order, char_name");
