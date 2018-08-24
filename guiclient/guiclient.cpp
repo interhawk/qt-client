@@ -146,12 +146,6 @@ Metricsenc    *_metricsenc=0;
   */
 QList<QString> _hotkeyList;
 
-/** @brief A global variable indicating whether this is an evaluation copy
-           of the application.
-    @todo Determine if this is still useful and possibly remove.
-  */
-bool _evaluation;
-
 #include <SaveSizePositionEventFilter.h>
 static SaveSizePositionEventFilter * __saveSizePositionEventFilter = 0;
 
@@ -578,50 +572,27 @@ bool GUIClient::singleCurrency()
   */
 void GUIClient::setWindowTitle()
 {
-  XSqlQuery _GetWindowTitle;
-  QString name;
-
   _splash->showMessage(tr("Loading Database Information"), SplashTextAlignment, SplashTextColor);
   qApp->processEvents();
 
-  _GetWindowTitle.exec( "SELECT metric_value, getEffectiveXtUser() AS username "
-           "FROM metric "
-           "WHERE (metric_name='DatabaseName')" );
-  if (_GetWindowTitle.first())
+  QSqlDatabase db       = QSqlDatabase::database();
+  QString      username = db.userName();
+  QString      edition  = tr("[ unknown edition ]");
+  XSqlQuery q("SELECT getEffectiveXtUser() AS u, getEdition() AS e;");
+  if (q.first())
   {
-    if (_GetWindowTitle.value("metric_value").toString().isEmpty())
-      name = tr("Unnamed Database");
-    else
-      name = _GetWindowTitle.value("metric_value").toString();
-
-    QString server;
-    QString protocol;
-    QString database;
-    QString port;
-    parseDatabaseURL(_databaseURL, protocol, server, database, port);
-
-    if (_evaluation)
-      QMainWindow::setWindowTitle( tr("%1 Evaluation %2 - Logged on as %3")
-                               .arg(_Name)
-                               .arg(_Version)
-                               .arg(_GetWindowTitle.value("username").toString()) );
-    else
-      QMainWindow::setWindowTitle( tr("%1 %2 - %3 on %4:%5/%6 AS %7")
-                               .arg(_Name)
-                               .arg(_Version)
-                               .arg(name)
-                               .arg(server)
-                               .arg(port)
-                               .arg(database)
-                               .arg(_GetWindowTitle.value("username").toString()) );
+    username = q.value("u").toString();
+    edition  = q.value("e").toString();
   }
-  else
-    QMainWindow::setWindowTitle(_Name);
-}
+  ErrorReporter::error(QtCriticalMsg, this, tr("Could not get user and edition"),
+                       q, __FILE__, __LINE__);
+  
 
-/** @deprecated */
-void GUIClient::setCaption()
-{
+  QMainWindow::setWindowTitle(tr("%1 %2 - %3 on %4:%5/%6 AS %7")
+                              .arg(_Name.arg(edition), _Version,
+                                   _metrics->value("DatabaseName"),
+                                   db.hostName(),      QString::number(db.port()),
+                                   db.databaseName(),  username));
 }
 
 /** @brief Build the application menus and toolbars based on

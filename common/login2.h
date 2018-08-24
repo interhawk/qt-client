@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -23,6 +23,7 @@ class QWidget;
 #include "parameter.h"
 
 class XAbstractMessageHandler;
+class login2Private;
 
 class login2 : public QDialog, public Ui::login2
 {
@@ -35,18 +36,15 @@ class login2 : public QDialog, public Ui::login2
     QString _databaseURL;
     QString _user;
 
-    virtual int set(const ParameterList & pParams, QSplashScreen * pSplash);
     virtual void populateDatabaseInfo();
     virtual QString username();
     virtual QString password();
-    virtual QString company();
-    virtual bool useCloud() const;
 
     QPushButton* _recent;
     QPushButton* _options;
 
   public slots:
-    virtual int set(const ParameterList & pParams);
+    virtual int set(const ParameterList & pParams, QSplashScreen *pSplash = 0);
     virtual void setLogo( const QImage & );
     virtual void updateRecentOptions();
     virtual void updateRecentOptionsActions();
@@ -57,27 +55,11 @@ class login2 : public QDialog, public Ui::login2
     virtual void languageChange();
 
     virtual void sChangeURL();
-    virtual void sHandleButton();
     virtual void sOpenHelp();
     virtual void sLogin();
 
   private:
-    bool _captive;
-    bool _nonxTupleDB;
-    bool _multipleConnections;
-    bool _saveSettings;
-    bool _setSearchPath;
-    QSplashScreen *_splash;
-    QString _cUsername;
-    QString _cPassword;
-    QString _cServer;
-    QString _cDatabase;
-    QString _cPort;
-    QString _cloudDatabaseURL;
-    QString _cCompany;
-    QString _connAppName;
-
-    XAbstractMessageHandler* _handler;
+    login2Private *_d;
 };
 
 #endif
