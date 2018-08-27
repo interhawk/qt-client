@@ -222,7 +222,7 @@ int main(int argc, char *argv[])
 
   QStringList lang;
   QLocale sysl = QLocale::system();
-  qDebug()<<sysl.name().toLower();
+  qDebug()<<sysl.name().toLower(); 
   if (sysl.language() != QLocale::C && sysl.language() != QLocale::English)
   {
     lang.append(sysl.name().toLower());
