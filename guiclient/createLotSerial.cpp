@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -121,7 +121,7 @@ enum SetResponse createLotSerial::set(const ParameterList &pParams)
         // First check for "pre-assigned/associated" lots. A couple example use cases:
         // 1) Receiving TO - get lot(s) from issue to shipping trans. 2) Receiving RA - get lot(s) from original SO (if exists).
         XSqlQuery origTransLots;
-        origTransLots.prepare("SELECT ls_number, ls_number FROM ls WHERE ls_id IN (SELECT UNNEST(getAssocLotSerialIds(:itemlocdist_id)));");
+        origTransLots.prepare("SELECT ls_id, ls_number, ls_number FROM ls WHERE ls_id IN (SELECT UNNEST(getAssocLotSerialIds(:itemlocdist_id)));");
         origTransLots.bindValue(":itemlocdist_id", _itemlocdistid);
         origTransLots.exec();
         if (origTransLots.first())
