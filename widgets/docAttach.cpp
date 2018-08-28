@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -48,6 +48,7 @@ class docAttachPrivate {
       : p(parent)
     {
       // url and file match _docType->populate below, at least for now
+      map.insert(-4,                           new StackDescriptor(p->_existingFilePage, p->_exfile));
       map.insert(-3,                           new StackDescriptor(p->_urlPage,     p->_url));
       map.insert(-2,                           new StackDescriptor(p->_filePage,    p->_file));
       map.insert(Documents::Contact,           new StackDescriptor(p->_cntctPage,   p->_cntct));
@@ -144,6 +145,10 @@ docAttach::docAttach(QWidget* parent, const char* name, bool modal, Qt::WindowFl
   connect(_filetitle,   SIGNAL(textChanged(QString)), this, SLOT(sHandleButtons()));
   connect(_fileList,  SIGNAL(clicked()),  this, SLOT(sFileList()));
   connect(_save,      SIGNAL(clicked()),  this, SLOT(sSave()));
+  connect(_fileAdd,   SIGNAL(clicked()),  this, SLOT(sAddFilePriv()));
+  connect(_fileRem,   SIGNAL(clicked()),  this, SLOT(sRemFilePriv()));
+  connect(_urlAdd,    SIGNAL(clicked()),  this, SLOT(sAddUrlPriv()));
+  connect(_urlRem,    SIGNAL(clicked()),  this, SLOT(sRemUrlPriv()));
 
   _sourcetype = "";
   _sourceid = -1;
@@ -160,8 +165,20 @@ docAttach::docAttach(QWidget* parent, const char* name, bool modal, Qt::WindowFl
                      "  FROM source"
                      " WHERE source_widget != ''"
                      " UNION SELECT -2, 'File',     'FILE'"
-                     " UNION SELECT -3, 'Web Site', 'URL') data"
+                     " UNION SELECT -3, 'Web Site', 'URL' "
+                     " UNION SELECT -4, 'Existing Document', 'XFILE') data"
                      " ORDER BY source_descrip;");
+
+  _charassFile->setType("FILE");
+  _charassUrl->setType("FILE");
+  _charid = qrand() % 100000000;
+  _charassFile->setId(_charid);
+  _charassUrl->setId(_charid);
+
+  _fileAvailable->addColumn(tr("Available Roles"),    -1,  Qt::AlignLeft, true, "file_available" );
+  _fileAssigned->addColumn(tr("Assigned Roles"),  -1,  Qt::AlignLeft, true, "file_assigned" );
+  _urlAvailable->addColumn(tr("Available Roles"),     -1,  Qt::AlignLeft, true, "url_available" );
+  _urlAssigned->addColumn(tr("Assigned Roles"),   -1,  Qt::AlignLeft, true, "url_assigned" );
 
 #ifndef Q_OS_MAC
     _fileList->setMaximumWidth(25);
@@ -241,7 +258,8 @@ void docAttach::set(const ParameterList &pParams)
     if (DEBUG) qDebug() << "got url_id" << param;
     XSqlQuery qry;
     _id = param.toInt();
-    qry.prepare("SELECT url_source, url_source_id, url_title, url_url, url_stream, url_mime_type, docass_target_id "
+    qry.prepare("SELECT url_source, url_source_id, url_title, url_url, url_stream, url_mime_type, "
+                "       docass_target_id, docass_notes "
                 "  FROM url"
                 "  JOIN docass ON url_id = docass_id"
                 " WHERE (url_id=:url_id);" );
@@ -251,6 +269,9 @@ void docAttach::set(const ParameterList &pParams)
     {
       setWindowTitle(tr("Edit Attachment Link"));
       _targetid = qry.value("docass_target_id").toInt();
+      _charid = _targetid;
+      _charassFile->setId(_charid);
+      _charassUrl->setId(_charid);
       QUrl url(qry.value("url_url").toString());
       if (url.scheme().isEmpty())
         url.setScheme("file");
@@ -284,12 +305,15 @@ void docAttach::set(const ParameterList &pParams)
         _urltitle->setText(qry.value("url_title").toString());
         _url->setText(url.toString());
       }
+       _notes->setText(qry.value("docass_notes").toString());
       _mode = "edit";
       _docType->setEnabled(false);
     }
     ErrorReporter::error(QtCriticalMsg, 0, tr("Error URL"),
                          qry, __FILE__, __LINE__);
   }
+
+  sPopulateDocPrivs();
 }
 
 void docAttach::showEvent(QShowEvent *e)
@@ -362,6 +386,8 @@ void docAttach::sSave()
   XSqlQuery newDocass;
   QString title;
   QUrl url;
+  QStringList isFile;
+  isFile << "URL" << "FILE";
 
   //set the purpose
   if (_docAttachPurpose->currentIndex() == 0)
@@ -493,7 +519,7 @@ void docAttach::sSave()
                        "( :docass_source_type, :docass_source_id, :docass_target_id, :docass_purpose )"
                        " RETURNING imageass_id AS docass_id, imageass_image_id AS docass_target_id;" );
   }
-  else if (_targettype == "URL" || _targettype == "FILE")
+  else if (isFile.contains(_targettype))
   {
     if(!url.isValid())
     {
@@ -542,11 +568,11 @@ void docAttach::sSave()
       newDocass.prepare( "INSERT INTO docass ("
                          "  docass_source_id, docass_source_type,"
                          "  docass_target_id, docass_target_type,"
-                         "  docass_purpose"
+                         "  docass_purpose, docass_notes"
                          ") VALUES ("
                          "  :docass_source_id, :docass_source_type,"
                          "  createurl(:title, :url), 'URL'::text,"
-                         "  'S'::bpchar"
+                         "  'S'::bpchar, :docass_notes"
                          ") RETURNING docass_id, docass_target_id;");
     }
     else if (_mode == "new")
@@ -554,11 +580,11 @@ void docAttach::sSave()
       newDocass.prepare( "INSERT INTO docass ("
                          "  docass_source_id, docass_source_type,"
                          "  docass_target_id, docass_target_type,"
-                         "  docass_purpose"
+                         "  docass_purpose, docass_notes"
                          ") VALUES ("
                          "  :docass_source_id, :docass_source_type,"
                          "  createfile(:title, :url, :stream, :mime_type), 'FILE'::text,"
-                         "  'S'::bpchar"
+                         "  'S'::bpchar, :docass_notes"
                          ") RETURNING docass_id, docass_target_id;");
 
       QMimeDatabase mimeDb;
@@ -571,8 +597,9 @@ void docAttach::sSave()
     {
       newDocass.prepare( "UPDATE url SET"
                          "  url_title = :title,"
-                         "  url_url = :url"
-                         " WHERE (url_id=:url_id);");
+                         "  url_url = :url,"
+                         "  url_notes = :docass_notes "
+                         " WHERE url_id=:url_id;");
     }
 
     newDocass.bindValue(":url_id", _id);
@@ -582,9 +609,11 @@ void docAttach::sSave()
   else
   {
     newDocass.prepare( "INSERT INTO docass "
-                       "( docass_source_type, docass_source_id, docass_target_type, docass_target_id, docass_purpose ) "
+                       "( docass_source_type, docass_source_id, docass_target_type, "
+                       "  docass_target_id, docass_purpose, docass_notes ) "
                        "VALUES "
-                       "( :docass_source_type, :docass_source_id, :docass_target_type, :docass_target_id, :docass_purpose )"
+                       "( :docass_source_type, :docass_source_id, :docass_target_type, "
+                       "  :docass_target_id, :docass_purpose, :docass_notes )"
                        " RETURNING docass_id, docass_target_id;");
     newDocass.bindValue(":docass_target_type", _targettype);
   }
@@ -604,6 +633,7 @@ void docAttach::sSave()
   newDocass.bindValue(":docass_source_id", _sourceid);
   newDocass.bindValue(":docass_target_id", _targetid);
   newDocass.bindValue(":docass_purpose", _purpose);
+  newDocass.bindValue(":docass_notes", _notes->text().trimmed());
 
   newDocass.exec();
 
@@ -622,6 +652,34 @@ void docAttach::sSave()
   {
     _id = newDocass.value("docass_id").toInt();
     _targetid = newDocass.value("docass_target_id").toInt();
+
+    // Update temporary Characteristics &  Permissions with actual file ID
+    if (isFile.contains(_targettype) && _targetid != _charid)
+    {
+      XSqlQuery updc;
+      updc.prepare("UPDATE charass SET charass_target_id=:targetid "
+                   " WHERE charass_target_type = 'FILE' "
+                   "   AND charass_target_id=:charid; ");
+      updc.bindValue(":targetid", _targetid);  
+      updc.bindValue(":charid", _charid);
+      updc.exec();
+      if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error saving"),
+                               updc, __FILE__, __LINE__))
+        return;
+
+      updc.prepare("UPDATE filegrp SET filegrp_file_id=:targetid "
+                   " WHERE filegrp_file_id = :charid; ");
+      updc.bindValue(":targetid", _targetid);  
+      updc.bindValue(":charid", _charid);
+      updc.exec();
+      if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error saving"),
+                               updc, __FILE__, __LINE__))
+        return;
+
+      _charid = _targetid;
+      _charassFile->setId(_charid);
+      _charassUrl->setId(_charid);
+    }
   }
 
   emit saveBeforeCommit();
@@ -673,4 +731,129 @@ void docAttach::sFileList()
     QFileInfo fi = QFileInfo(_file->text());
     _filetitle->setText(fi.fileName());
   }
+}
+
+void docAttach::sPopulateDocPrivs()
+{
+   XSqlQuery privs;
+
+   privs.prepare("SELECT grp_id, grp_name AS file_available "
+                 " FROM grp "
+                 " WHERE grp_id NOT IN (SELECT filegrp_grp_id FROM filegrp WHERE filegrp_file_id=:file);" );
+   privs.bindValue(":file", _charid);
+   if (privs.exec() && privs.first())
+     _fileAvailable->populate(privs);
+   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
+                                 privs, __FILE__, __LINE__))
+     return;
+
+   privs.prepare("SELECT grp_id, grp_name AS file_assigned "
+                 " FROM filegrp "
+                 " JOIN grp ON filegrp_grp_id=grp_id AND filegrp_file_id=:file;" );
+   privs.bindValue(":file", _charid);
+   if (privs.exec() && privs.first())
+     _fileAssigned->populate(privs);
+   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
+                                 privs, __FILE__, __LINE__))
+     return;
+
+   privs.prepare("SELECT grp_id, grp_name AS url_available "
+                 " FROM grp "
+                 " WHERE grp_id NOT IN (SELECT filegrp_grp_id FROM filegrp WHERE filegrp_file_id=:url);" );
+   privs.bindValue(":url", _charid);
+   if (privs.exec() && privs.first())
+     _urlAvailable->populate(privs);
+   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
+                                 privs, __FILE__, __LINE__))
+     return;
+
+   privs.prepare("SELECT grp_id, grp_name AS url_assigned "
+                 " FROM filegrp "
+                 " JOIN grp ON filegrp_grp_id=grp_id AND filegrp_file_id=:url;" );
+   privs.bindValue(":url", _charid);
+   if (privs.exec() && privs.first())
+     _urlAssigned->populate(privs);
+   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
+                                 privs, __FILE__, __LINE__))
+     return;
+}
+
+void docAttach::sAddFilePriv()
+{
+  XSqlQuery addq;
+
+  if (_fileAvailable->id() == -1)
+    return;
+
+  addq.prepare("INSERT INTO filegrp (filegrp_file_id, filegrp_grp_id) "
+               " VALUES (:file, :role) "
+               " ON CONFLICT DO NOTHING;" );
+  addq.bindValue(":role", _fileAvailable->id());
+  addq.bindValue(":file", _charid);
+  addq.exec();
+  if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Adding Permissions"),
+                                 addq, __FILE__, __LINE__))
+     return;
+
+  sPopulateDocPrivs();
+}
+
+void docAttach::sRemFilePriv()
+{
+  XSqlQuery remq;
+
+  if (_fileAssigned->id() == -1)
+    return;
+
+  remq.prepare("DELETE FROM filegrp "
+               " WHERE filegrp_file_id = :file "
+               "   AND filegrp_grp_id = :role " );
+  remq.bindValue(":role", _fileAssigned->id());
+  remq.bindValue(":file", _charid);
+  remq.exec();
+  if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Removing Permissions"),
+                                 remq, __FILE__, __LINE__))
+     return;
+
+  sPopulateDocPrivs();
+}
+
+void docAttach::sAddUrlPriv()
+{
+  XSqlQuery addq;
+
+  if (_urlAvailable->id() == -1)
+    return;
+
+  addq.prepare("INSERT INTO filegrp (filegrp_file_id, filegrp_grp_id) "
+               " VALUES (:url, :role) "
+               " ON CONFLICT DO NOTHING;" );
+  addq.bindValue(":role", _urlAvailable->id());
+  addq.bindValue(":url", _charid);
+  addq.exec();
+  if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Adding Permissions"),
+                                 addq, __FILE__, __LINE__))
+     return;
+
+  sPopulateDocPrivs();
+}
+
+void docAttach::sRemUrlPriv()
+{
+  XSqlQuery remq;
+
+  if (_urlAssigned->id() == -1)
+    return;
+
+  remq.prepare("DELETE FROM filegrp "
+               " WHERE filegrp_file_id = :url "
+               "   AND filegrp_grp_id = :role " );
+  remq.bindValue(":role", _urlAssigned->id());
+  remq.bindValue(":url", _charid);
+  remq.exec();
+  if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Removing Permissions"),
+                                 remq, __FILE__, __LINE__))
+     return;
+
+  sPopulateDocPrivs();
 }

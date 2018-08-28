@@ -103,6 +103,7 @@ Documents::Documents(QWidget *pParent) :
   _doc->addColumn(tr("Type"),  _itemColumn,  Qt::AlignLeft, true, "target_type" );
   _doc->addColumn(tr("Number"), _itemColumn, Qt::AlignLeft, true, "target_number" );
   _doc->addColumn(tr("Name"), -1,  Qt::AlignLeft, true, "name" );
+  _doc->addColumn(tr("Note"), -1,  Qt::AlignLeft, true, "notes" );
   _doc->addColumn(tr("Description"),  -1, Qt::AlignLeft, true, "description");
   _doc->addColumn(tr("Relationship"),  _itemColumn, Qt::AlignLeft,true, "purpose");
   _doc->addColumn(tr("Can View"), _ynColumn, Qt::AlignCenter, false, "canview");
@@ -368,7 +369,7 @@ void Documents::sOpenDoc(QString mode)
       return;
     else
     {
-      QUrl url(_doc->currentItem()->rawValue("description").toString());
+      QUrl url(qfile.value("url_url").toString());
       if (url.scheme().isEmpty())
         url.setScheme("file");
       QDesktopServices::openUrl(url);
@@ -495,6 +496,8 @@ void Documents::refresh()
   params.append("creditmemoitem", _strMap.contains("CMI") ? _strMap.value("CMI")->translation : "CMI");
   params.append("cust",           _strMap.contains("C") ? _strMap.value("C")->translation : "C");
   params.append("emp",            _strMap.contains("EMP") ? _strMap.value("EMP")->translation : "EMP");
+  params.append("asset",          _strMap.contains("FADOC") ? _strMap.value("FADOC")->translation : "FADOC");
+  params.append("maintorder",     _strMap.contains("FAMAINT") ? _strMap.value("FAMAINT")->translation : "FAMAINT");
   params.append("incident",       _strMap.contains("INCDT") ? _strMap.value("INCDT")->translation : "INCDT");
   params.append("invoice",        _strMap.contains("INV") ? _strMap.value("INV")->translation : "INV");
   params.append("invoiceitem",    _strMap.contains("INVI") ? _strMap.value("INVI")->translation : "INVI");

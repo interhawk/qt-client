@@ -131,6 +131,7 @@ HEADERS += displays/dspAllocations.h \
            displays/dspDepositsRegister.h \
            displays/dspDetailedInventoryHistoryByLocation.h \
            displays/dspDetailedInventoryHistoryByLotSerial.h \
+           displays/dspDocuments.h \
            displays/dspEarnedCommissions.h \
            displays/dspExpediteExceptionsByPlannerCode.h \
            displays/dspExpiredInventoryByClassCode.h \
@@ -264,6 +265,7 @@ SOURCES += displays/dspAllocations.cpp \
            displays/dspDepositsRegister.cpp \
            displays/dspDetailedInventoryHistoryByLocation.cpp \
            displays/dspDetailedInventoryHistoryByLotSerial.cpp \
+           displays/dspDocuments.cpp \
            displays/dspEarnedCommissions.cpp \
            displays/dspExpediteExceptionsByPlannerCode.cpp \
            displays/dspExpiredInventoryByClassCode.cpp \

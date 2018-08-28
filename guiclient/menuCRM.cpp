@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -18,6 +18,7 @@
 #include "project.h"
 #include "projects.h"
 #include "dspOrderActivityByProject.h"
+#include "dspDocuments.h"
 
 #include "contact.h"
 #include "contacts.h"
@@ -63,6 +64,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
   accountsMenu      = new QMenu(parent);
   contactsMenu      = new QMenu(parent);
   addressMenu       = new QMenu(parent);
+  documentsMenu     = new QMenu(parent);
   utilitiesMenu     = new QMenu(parent);
   opportunityMenu   = new QMenu(parent);
 
@@ -74,6 +76,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
   accountsMenu->setObjectName("menu.crm.accounts");
   contactsMenu->setObjectName("menu.crm.contacts");
   addressMenu->setObjectName("menu.crm.address");
+  documentsMenu->setObjectName("menu.crm.documents");
   utilitiesMenu->setObjectName("menu.crm.utilities");
   opportunityMenu->setObjectName("menu.crm.opportunity");
 
@@ -120,7 +123,11 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     // CRM | Address
     { "menu",		tr("A&ddress"),		(char*)addressMenu,	crmMenu,		"true", NULL, NULL, true	, NULL },
     { "crm.address",	tr("&New..."),		SLOT(sAddress()),	addressMenu,	"MaintainAddresses", NULL, NULL, true	, NULL },
-    { "crm.addresses",	tr("&List..."),	SLOT(sAddresses()),	addressMenu,	"MaintainAddresses ViewAddresses", NULL, NULL, true , NULL },
+    { "crm.addresses",	tr("&List..."),	        SLOT(sAddresses()),	addressMenu,	"MaintainAddresses ViewAddresses", NULL, NULL, true , NULL },
+
+    // CRM | Documents
+    { "menu",		tr("Documents"),        (char*)documentsMenu,	crmMenu,	"true", NULL, NULL, true	, NULL },
+    { "crm.documents",	tr("&List..."),	        SLOT(sDocuments()),	documentsMenu,	"ViewDocuments", NULL, NULL, true , NULL },
 
     { "separator",		NULL,				NULL,			crmMenu,	"true", NULL, NULL, true	, NULL },
 
@@ -278,6 +285,11 @@ void menuCRM::sAddress()
 void menuCRM::sAddresses()
 {
   omfgThis->handleNewWindow(new addresses());
+}
+
+void menuCRM::sDocuments()
+{
+  omfgThis->handleNewWindow(new dspDocuments());
 }
 
 void menuCRM::sIncidentWorkbench()
