@@ -40,6 +40,7 @@
 #include <QtScript>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QDesktopServices>
 
 #include "xtreewidgetprogress.h"
 #include "xtsettings.h"
@@ -1638,9 +1639,10 @@ void XTreeWidget::sExport()
   QString item = qid.getItem(this, tr("Delimiter selection"),
                                         tr("Select Delimiter :"), items, 0, true, &ok);
   
-  if(!items.contains(item)){
-    items << item;
-  }
+  if(item == "{tab}")
+    item = "\t";
+
+
   if (ok && !item.isEmpty())
       qDebug() << "Cool";
   ///////////////////////////
@@ -1675,7 +1677,7 @@ void XTreeWidget::sExport()
     }
     else if (fi.suffix() == "csv")
     {
-      doc->setPlainText(toCsv());
+      doc->setPlainText(toSV(item));
       writer.setFormat("plaintext");
     }
     else if (fi.suffix() == "vcf")
@@ -1695,6 +1697,7 @@ void XTreeWidget::sExport()
     }
     writer.write(doc);
   }
+  QDesktopServices::openUrl(fi.filePath());
 }
 
 void XTreeWidget::mousePressEvent(QMouseEvent *event)
