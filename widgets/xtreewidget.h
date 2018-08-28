@@ -211,7 +211,8 @@ class XTUPLEWIDGETS_EXPORT XTreeWidget : public QTreeWidget
     Q_INVOKABLE XTreeWidgetItem         *findXTreeWidgetItemWithId(const XTreeWidgetItem *ptreeitem, const int pid);
 
     Q_INVOKABLE QString toTxt() const;
-    Q_INVOKABLE QString toCsv() const;
+    Q_INVOKABLE QString toSV(QString pSep) const;
+    Q_INVOKABLE QString toCsv() {return toSV(QString(','));} ;
     Q_INVOKABLE QString toVcf() const;
     Q_INVOKABLE QString toHtml() const;
 

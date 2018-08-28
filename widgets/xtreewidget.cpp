@@ -39,6 +39,7 @@
 #include <QTextTableFormat>
 #include <QtScript>
 #include <QMessageBox>
+#include <QInputDialog>
 
 #include "xtreewidgetprogress.h"
 #include "xtsettings.h"
@@ -1625,8 +1626,27 @@ void XTreeWidget::sExport()
 {
   QString   path = xtsettingsValue(_settingsName + "/exportPath").toString();
   QString selectedFilter;
+  
+  // ask user to select separator
+  #pragma comment(linker, "/SUBSYSTEM:CONSOLE")
+  qDebug() << "qinput dialog";
+  QStringList items;
+  items << "," <<"{tab}" <<";" << "|" << "^";
+
+  bool ok;
+  QInputDialog qid;
+  QString item = qid.getItem(this, tr("Delimiter selection"),
+                                        tr("Select Delimiter :"), items, 0, true, &ok);
+  
+  if(!items.contains(item)){
+    items << item;
+  }
+  if (ok && !item.isEmpty())
+      qDebug() << "Cool";
+  ///////////////////////////
+
   QFileInfo fi(QFileDialog::getSaveFileName(this, tr("Export Save Filename"), path,
-                                            tr("Text CSV (*.csv);;Text VCF (*.vcf);;Text (*.txt);;ODF Text Document (*.odt);;HTML Document (*.html)"), &selectedFilter));
+                                            tr("Text, Other Separator (*.csv);;Text VCF (*.vcf);;Text (*.txt);;ODF Text Document (*.odt);;HTML Document (*.html)"), &selectedFilter));
   QString defaultSuffix;
   if(selectedFilter.contains("csv"))
     defaultSuffix = ".csv";
@@ -1636,7 +1656,7 @@ void XTreeWidget::sExport()
     defaultSuffix = ".odt";
   else if(selectedFilter.contains("html"))
     defaultSuffix = ".html";
-  else
+  else  
     defaultSuffix = ".txt";
 
   if (!fi.filePath().isEmpty())
@@ -2482,7 +2502,7 @@ QString XTreeWidget::toTxt() const
   return opText;
 }
 
-QString XTreeWidget::toCsv() const
+QString XTreeWidget::toSV(QString pSep) const
 {
   QString line;
   QString opText;
@@ -2495,7 +2515,7 @@ QString XTreeWidget::toCsv() const
     if (!QTreeWidget::isColumnHidden(counter))
     {
       if (colcount)
-        line = line + ",";
+        line = line + pSep;
       line = line + header->text(counter).replace("\"","\"\"").replace("\r\n"," ").replace("\n"," ");
       colcount++;
     }
@@ -2517,7 +2537,7 @@ QString XTreeWidget::toCsv() const
           if (!QTreeWidget::isColumnHidden(counter))
           {
             if (colcount)
-              line = line + ",";
+              line = line + pSep;
             if (item->data(counter,Qt::DisplayRole).type() == QVariant::String)
               line = line + "\"";
             line = line + item->text(counter).replace("\"","\"\"");
