@@ -312,6 +312,7 @@ void docAttach::set(const ParameterList &pParams)
     ErrorReporter::error(QtCriticalMsg, 0, tr("Error URL"),
                          qry, __FILE__, __LINE__);
   }
+qDebug() << "sourceType" << _sourcetype << "sourceid" << _sourceid << "urlid" << _id;
 
   sPopulateDocPrivs();
 }

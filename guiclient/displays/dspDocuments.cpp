@@ -74,10 +74,10 @@ void dspDocuments::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, int p
   Q_UNUSED(pColumn);
 
   QAction* viewDocAct = pMenu->addAction(tr("Open Document"), this, SLOT(sViewDoc()));
-  viewDocAct->setEnabled(_privileges->check("ViewDocuments"));
+  viewDocAct->setEnabled(list()->currentItem()->rawValue("canview").toBool());
 
   QAction* editDocAct = pMenu->addAction(tr("Edit Document"), this, SLOT(sEditDoc()));
-  editDocAct->setEnabled(_privileges->check("ViewDocuments"));
+  editDocAct->setEnabled(list()->currentItem()->rawValue("canedit").toBool());
 
   if (pSelected->parent())
   {

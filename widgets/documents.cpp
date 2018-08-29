@@ -256,8 +256,14 @@ void Documents::sEditDoc()
 void Documents::sOpenDoc(QString mode)
 {
   QString ui;
+  QStringList isFile;
+  isFile << "URL" << "FILE";
   QString docType = _doc->currentItem()->rawValue("target_type").toString();
-  int targetid = _doc->currentItem()->id("target_number");
+  int targetid;
+
+  targetid = isFile.contains(docType) ? _doc->currentItem()->rawValue("target_number").toInt()
+                                      : _doc->currentItem()->id("target_number");
+
   ParameterList params;
   if (docType == "Q" && mode == "view")
     params.append("mode", "viewQuote");
