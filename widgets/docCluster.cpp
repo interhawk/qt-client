@@ -20,10 +20,10 @@ DocCluster::DocCluster(QWidget* pParent, const char* pName) :
 }
 
 DocClusterLineEdit::DocClusterLineEdit(QWidget* pParent, const char* pName) :
-    VirtualClusterLineEdit(pParent, "file", "file_id", "file_descrip", "file_title", 0, 0, pName)
+    VirtualClusterLineEdit(pParent, "files", "files_id", "files_descrip", "files_title", 0, 0, pName)
 {
     setTitles(tr("Document"), tr("Documents"));
-    setUiName("file");
-    setEditPriv("MaintainDepartments");
-    setViewPriv("ViewDepartments");
+    setUiName("docAttach");
+    setEditPriv("ViewDocuments");
+    setViewPriv("ViewDocuments");
 }
