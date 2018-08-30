@@ -50,6 +50,7 @@ dspDocuments::dspDocuments(QWidget* parent, const char*, Qt::WindowFlags fl)
   list()->addColumn(tr("Created"),           -1,    Qt::AlignLeft,   true,  "assigned" );
   list()->addColumn(tr("Can View"),   _ynColumn,  Qt::AlignCenter,  false,  "canview");
   list()->addColumn(tr("Can Edit"),   _ynColumn,  Qt::AlignCenter,  false,  "canedit");
+  list()->addColumn(tr("File Edit"),  _ynColumn,  Qt::AlignCenter,  false,  "fileedit");
 
   setupCharacteristics("FILE");
 }
@@ -74,10 +75,10 @@ void dspDocuments::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, int p
   Q_UNUSED(pColumn);
 
   QAction* viewDocAct = pMenu->addAction(tr("Open Document"), this, SLOT(sViewDoc()));
-  viewDocAct->setEnabled(list()->currentItem()->rawValue("canview").toBool());
+  viewDocAct->setEnabled(list()->currentItem()->rawValue("fileedit").toBool());
 
   QAction* editDocAct = pMenu->addAction(tr("Edit Document"), this, SLOT(sEditDoc()));
-  editDocAct->setEnabled(list()->currentItem()->rawValue("canedit").toBool());
+  editDocAct->setEnabled(list()->currentItem()->rawValue("fileedit").toBool());
 
   if (pSelected->parent())
   {
