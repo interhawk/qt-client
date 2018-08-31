@@ -255,6 +255,7 @@ void Documents::sEditDoc()
 
 void Documents::sOpenDoc(QString mode)
 {
+  QUrl url;
   QString ui;
   QStringList isFile;
   isFile << "URL" << "FILE";
@@ -351,16 +352,15 @@ void Documents::sOpenDoc(QString mode)
         return;
       }
       tfile.write(qfile.value("url_stream").toByteArray());
-      QUrl urldb;
-      urldb.setUrl(tfile.fileName());
+      url.setUrl(tfile.fileName());
 #ifndef Q_OS_WIN
-      urldb.setScheme("file");
+      url.setScheme("file");
 #endif
       tfile.close();
-      if (! QDesktopServices::openUrl(urldb))
+      if (! QDesktopServices::openUrl(url))
       {
         QMessageBox::warning(this, tr("File Open Error"),
-			     tr("Could not open %1.").arg(urldb.toString()));
+                                   tr("Could not open %1.").arg(url.toString()));
 	return;
       }
 
@@ -375,10 +375,15 @@ void Documents::sOpenDoc(QString mode)
       return;
     else
     {
-      QUrl url(qfile.value("url_url").toString());
+      url.setUrl(qfile.value("url_url").toString());
       if (url.scheme().isEmpty())
         url.setScheme("file");
-      QDesktopServices::openUrl(url);
+      if (! QDesktopServices::openUrl(url))
+      {
+        QMessageBox::warning(this, tr("Url Open Error"),
+                             tr("Could not open %1.").arg(url.toString()));
+        return;
+      }
       return;
     }
   }

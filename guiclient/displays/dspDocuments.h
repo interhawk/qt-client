@@ -26,9 +26,16 @@ public slots:
     virtual void sPopulateMenu(QMenu * pMenu, QTreeWidgetItem * pSelected, int pColumn);
     void sViewDoc();
     void sEditDoc();
-    void sOpenDoc(QString mode = "edit");
     void sOpenAssignment();
     void sDetach();
+    virtual bool setParams(ParameterList &);
+
+protected slots:
+    void sOpenDoc(QString mode = "edit");
+
+private:
+    int  _fileid;
+
 };
 
 #endif // DSPDOCUMENTS_H

@@ -53,6 +53,8 @@ dspDocuments::dspDocuments(QWidget* parent, const char*, Qt::WindowFlags fl)
   list()->addColumn(tr("File Edit"),  _ynColumn,  Qt::AlignCenter,  false,  "fileedit");
 
   setupCharacteristics("FILE");
+
+  _fileid = -1;
 }
 
 enum SetResponse dspDocuments::set(const ParameterList &pParams)
@@ -65,7 +67,7 @@ enum SetResponse dspDocuments::set(const ParameterList &pParams)
 
   param = pParams.value("file_id", &valid);
   if (valid)
-    parameterWidget()->setDefault(tr("Customer"), param.toInt());
+    _fileid = param.toInt();
 
   return NoError;
 }
@@ -91,7 +93,16 @@ void dspDocuments::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, int p
     QAction* detachDocAct = pMenu->addAction(tr("Detach Assignment"), this, SLOT(sDetach()));
     detachDocAct->setEnabled(_privileges->check("ViewDocuments"));
   }
+}
 
+bool dspDocuments::setParams(ParameterList &params)
+{
+  display::setParams(params);
+
+  if (_fileid > 0)
+    params.append("file_id", _fileid);
+
+  return true;
 }
 
 void dspDocuments::sEditDoc()
@@ -106,6 +117,7 @@ void dspDocuments::sViewDoc()
 
 void dspDocuments::sOpenDoc(QString mode)
 {
+  QUrl url;
   QString ui;
   QString docType = list()->currentItem()->rawValue("doctype").toString();
   int targetid = list()->id();
@@ -159,16 +171,15 @@ void dspDocuments::sOpenDoc(QString mode)
       return;
     }
     tfile.write(qfile.value("url_stream").toByteArray());
-    QUrl urldb;
-    urldb.setUrl(tfile.fileName());
+    url.setUrl(tfile.fileName());
 #ifndef Q_OS_WIN
-    urldb.setScheme("file");
+    url.setScheme("file");
 #endif
     tfile.close();
-    if (! QDesktopServices::openUrl(urldb))
+    if (! QDesktopServices::openUrl(url))
     {
       QMessageBox::warning(this, tr("File Open Error"),
-                           tr("Could not open %1.").arg(urldb.toString()));
+                           tr("Could not open %1.").arg(url.toString()));
       return;
     }
 
@@ -182,10 +193,15 @@ void dspDocuments::sOpenDoc(QString mode)
     return;
   else
   {
-    QUrl url(qfile.value("url_url").toString());
+    url.setUrl(qfile.value("url_url").toString());
     if (url.scheme().isEmpty())
       url.setScheme("file");
-    QDesktopServices::openUrl(url);
+    if (! QDesktopServices::openUrl(url))
+    {
+      QMessageBox::warning(this, tr("Url Open Error"),
+                           tr("Could not open %1.").arg(url.toString()));
+      return;
+    }
     return;
   }
 }
