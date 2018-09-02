@@ -171,7 +171,7 @@ docAttach::docAttach(QWidget* parent, const char* name, bool modal, Qt::WindowFl
 
   _charassFile->setType("FILE");
   _charassUrl->setType("FILE");
-  _charid = qrand() % 100000000;
+  _charid = qrand();
   _charassFile->setId(_charid);
   _charassUrl->setId(_charid);
 
@@ -653,7 +653,7 @@ void docAttach::sSave()
     _id = newDocass.value("docass_id").toInt();
     _targetid = newDocass.value("docass_target_id").toInt();
 
-    // Update temporary Characteristics &  Permissions with actual file ID
+    // Update temporary Characteristics & Permissions with actual file ID
     if (isFile.contains(_targettype) && _targetid != _charid)
     {
       XSqlQuery updc;
