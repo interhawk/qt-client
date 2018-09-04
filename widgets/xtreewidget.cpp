@@ -1626,47 +1626,42 @@ void XTreeWidget::sShowHeaderMenu(const QPoint &pntThis)
 void XTreeWidget::sExport()
 {
   QString   path = xtsettingsValue(_settingsName + "/exportPath").toString();
-  QString selectedFilter;
-  
-  // ask user to select separator
+
   #pragma comment(linker, "/SUBSYSTEM:CONSOLE")
-  qDebug() << "qinput dialog";
-  QStringList items;
-  items << "," <<"{tab}" <<";" << "|" << "^";
 
-  bool ok;
+  bool invalid = true;
   QInputDialog qid;
-  QString item = qid.getItem(this, tr("Delimiter selection"),
-                                        tr("Select Delimiter :"), items, 0, true, &ok);
+  QStringList items;
+  if(_x_preferences)
+    items = parseDelim(_x_preferences->value("Delimiter"));
+  QString item;
   
-  if(item == "{tab}")
-    item = "\t";
-
-
-  if (ok && !item.isEmpty())
-      qDebug() << "Cool";
-  ///////////////////////////
-
+  while (invalid){
+    item = qid.getItem(this, tr("Delimiter selection"),
+                                        tr("Select Delimiter :"), items, 0, true);
+    if(!invalidDelim(item))
+    {
+      if(item == "{tab}")
+        item = "\t";
+      saveDelim(item);
+      invalid = false;
+    }
+    else
+    {
+      if(item.length()>1)
+        items[0]= item[0];
+    }
+  }
+  
   QFileInfo fi(QFileDialog::getSaveFileName(this, tr("Export Save Filename"), path,
-                                            tr("Text, Other Separator (*.csv);;Text VCF (*.vcf);;Text (*.txt);;ODF Text Document (*.odt);;HTML Document (*.html)"), &selectedFilter));
-  QString defaultSuffix;
-  if(selectedFilter.contains("csv"))
-    defaultSuffix = ".csv";
-  else if(selectedFilter.contains("vcf"))
-    defaultSuffix = ".vcf";
-  else if(selectedFilter.contains("odt"))
-    defaultSuffix = ".odt";
-  else if(selectedFilter.contains("html"))
-    defaultSuffix = ".html";
-  else  
-    defaultSuffix = ".txt";
+                                             tr("All Files (*);;Text, Other Separator (*.csv);;Text VCF (*.vcf);;Text (*.txt);;ODF Text Document (*.odt);;HTML Document (*.html)") ));
 
   if (!fi.filePath().isEmpty())
   {
     QTextDocument       *doc = new QTextDocument();
     QTextDocumentWriter writer;
     if (fi.suffix().isEmpty())
-      fi.setFile(fi.filePath() += defaultSuffix);
+      fi.setFile(fi.filePath() += ".csv");
     xtsettingsSetValue(_settingsName + "/exportPath", fi.path());
     writer.setFileName(fi.filePath());
 
@@ -2902,4 +2897,69 @@ void XTreeWidget::keyPressEvent(QKeyEvent* e)
   }
   else
     QTreeWidget::keyPressEvent(e);
+}
+
+QStringList parseDelim(QString delim)
+{ 
+  QStringList delimItems; 
+  
+  int i = delim.indexOf('{') ;
+  if ( i >=0)
+    delim.remove("{tab}");  
+  foreach(QChar c, delim)
+    delimItems.append(c);  
+  if(i>=0)
+    delimItems.insert(i,"{tab}");
+  return delimItems;
+}
+
+
+bool invalidDelim(QString delim)
+{
+  bool invalid = false;
+  if (delim.length() > 1)
+  {
+    if(delim != "{tab}")
+    {
+      invalid = true;
+      QMessageBox msgBox;
+      msgBox.setText("Avoid delimiters more than 1 char long.");
+      msgBox.exec();
+    }
+  }
+  else //don't allow or encourage against certain characters
+  {
+    QString disallowed = "(){}[]\"'`<>.{blank}";
+    QString notEncouraged = " @#$%&*_=-+/? ";
+    if (disallowed.contains(delim))
+    {
+      invalid = true;
+      QMessageBox msgBox;
+      msgBox.setText("Invalid delimiter");
+      msgBox.setInformativeText("These characters cannot be used as delimiters: (){}[]\"'`<>.{blank} ");
+      msgBox.exec();
+    }
+    else if (notEncouraged.contains(delim))
+    {
+      QMessageBox msgBox;
+      msgBox.setText("Be careful with your selection of delimiter");
+      msgBox.setInformativeText("We suggest you avoid using these delimiters : @#$%&*_=-+/? ");
+      msgBox.exec();
+    }
+  } 
+  qDebug() << "\n^^^^^^^^^^^^^^ invalid : " << invalid;
+  return invalid;
+}
+
+void saveDelim(QString delim)
+{
+  QString db;
+  if (_x_preferences)
+    db = _x_preferences->value("Delimiter");
+ 
+  if (db.contains(delim))
+    db.remove(delim);
+  
+  db.prepend(delim);
+  _x_preferences->set("Delimiter", db);
 }

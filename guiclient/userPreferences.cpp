@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -29,6 +29,7 @@
 #include "timeoutHandler.h"
 #include "translations.h"
 #include "dictionaries.h"
+#include "xtreewidget.h"
 
 extern QString __password;
 
@@ -52,11 +53,10 @@ userPreferences::userPreferences(QWidget* parent, const char* name, bool modal, 
   connect(apply, SIGNAL(clicked()), this, SLOT(sApply()));
   connect(_buttonBox,         SIGNAL(rejected()),     this, SLOT(sClose()));
   connect(_buttonBox,          SIGNAL(accepted()),     this, SLOT(sSave()));
-
   connect(_backgroundList,SIGNAL(clicked()),     this, SLOT(sBackgroundList()));
   connect(_selectedUser,  SIGNAL(toggled(bool)), this, SLOT(sPopulate()));
   connect(_user,          SIGNAL(newID(int)),    this, SLOT(sPopulate()));
-    //hot key signals and slots connections
+  //hot key signals and slots connections
   connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
   connect(_edit, SIGNAL(clicked()), this, SLOT(sEdit()));
   connect(_delete, SIGNAL(clicked()), this, SLOT(sDelete()));
@@ -109,6 +109,18 @@ userPreferences::userPreferences(QWidget* parent, const char* name, bool modal, 
     params.append("maintainSelf", true);
   userPref = mql.toQuery(params);
   _user->populate(userPref);
+
+  /////////////////////////////////////////
+  _delimiter->clear();
+  QString delim;
+  if(!_pref->value("Delimiter").isEmpty())
+    delim = _pref->value("Delimiter");
+  else
+    delim = ",{tab}~|;:^!";
+  _delimiter->insertItems(0,parseDelim(delim));
+  _delimiter->setCurrentIndex(0);
+  //////////////////////////////////////////////
+
 
   _ellipsesAction->append(1, tr("List"));
   _ellipsesAction->append(2, tr("Search"));
@@ -344,6 +356,18 @@ void userPreferences::sSave(bool close)
 
   _pref->set("IdleTimeout", _idleTimeout->value());
   omfgThis->_timeoutHandler->setIdleMinutes(_idleTimeout->value());
+
+  //////////////////////////////////////////////////////////////////
+  if(invalidDelim(_delimiter->currentText()))
+  {
+    if(_delimiter->currentText().length() > 1)
+      _delimiter->setCurrentText(_delimiter->currentText().at(0));
+    else
+      _delimiter->clearEditText();
+    return;
+  }
+  saveDelim(_delimiter->currentText());
+  //////////////////////////////////////////////////////////////////
 
   if(_ellipsesAction->id() == 2)
     _pref->set("DefaultEllipsesAction", QString("search"));
