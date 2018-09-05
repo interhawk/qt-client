@@ -375,6 +375,5 @@ void  setupXTreeWidget(QScriptEngine *engine);
 //for delimiter handling
 QStringList parseDelim(QString delim);
 bool invalidDelim(QString delim);
-void saveDelim(QString delim);
 
 #endif

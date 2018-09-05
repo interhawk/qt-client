@@ -366,7 +366,14 @@ void userPreferences::sSave(bool close)
       _delimiter->clearEditText();
     return;
   }
-  saveDelim(_delimiter->currentText());
+  QString delim;
+  for (int i=0; i<_delimiter->count(); i++)
+    delim += _delimiter->itemText(i);
+  if(delim.contains(_delimiter->currentText()))
+    delim.remove(_delimiter->currentText());
+  delim.prepend(_delimiter->currentText());
+  _pref->set("Delimiter",delim);
+  
   //////////////////////////////////////////////////////////////////
 
   if(_ellipsesAction->id() == 2)

@@ -1632,29 +1632,50 @@ void XTreeWidget::sExport()
   bool invalid = true;
   QInputDialog qid;
   QStringList items;
-  if(_x_preferences)
-    items = parseDelim(_x_preferences->value("Delimiter"));
   QString item;
+
+  //get file type
+  bool ok;
+  items  << "Text, Other Separator (*)" << "Text VCF (*.vcf)" << "Text (*.txt)" << "ODF Text Document (*.odt)" << "HTML Document (*.html)";
+
+  item = qid.getItem(this, tr("Select Export File Type"),
+                                        tr("File Type :"), items, 0, false, &ok);
+
+  QString type = item;
+  //char * type = item.toLatin1().data(); qDebug() << type;
+  if (!ok)
+    return;
+  if ( item.contains("Other") )
+  {
+    if(_x_preferences)
+      items = parseDelim(_x_preferences->value("Delimiter"));
+    while (invalid){
+      item = qid.getItem(this, tr("Delimiter selection"),
+                                          tr("Select Delimiter :"), items, 0, true);
+      if(!invalidDelim(item))
+      {
+        if(item == "{tab}")
+          item = "\t";
+        invalid = false;
+      }
+      else
+      {
+        if(item.length()>1)
+          items[0]= item[0];
+      }
+    }
+    QString delim;
+    foreach(QString i, items)
+      delim += i;
+    if(delim.contains(item))
+      delim.remove(item);
+    delim.prepend(item);
+    _x_preferences->set("Delimiter",delim);
+  } 
   
-  while (invalid){
-    item = qid.getItem(this, tr("Delimiter selection"),
-                                        tr("Select Delimiter :"), items, 0, true);
-    if(!invalidDelim(item))
-    {
-      if(item == "{tab}")
-        item = "\t";
-      saveDelim(item);
-      invalid = false;
-    }
-    else
-    {
-      if(item.length()>1)
-        items[0]= item[0];
-    }
-  }
   
   QFileInfo fi(QFileDialog::getSaveFileName(this, tr("Export Save Filename"), path,
-                                             tr("All Files (*);;Text, Other Separator (*.csv);;Text VCF (*.vcf);;Text (*.txt);;ODF Text Document (*.odt);;HTML Document (*.html)") ));
+                                             type ));
 
   if (!fi.filePath().isEmpty())
   {
@@ -2947,19 +2968,6 @@ bool invalidDelim(QString delim)
       msgBox.exec();
     }
   } 
-  qDebug() << "\n^^^^^^^^^^^^^^ invalid : " << invalid;
   return invalid;
 }
 
-void saveDelim(QString delim)
-{
-  QString db;
-  if (_x_preferences)
-    db = _x_preferences->value("Delimiter");
- 
-  if (db.contains(delim))
-    db.remove(delim);
-  
-  db.prepend(delim);
-  _x_preferences->set("Delimiter", db);
-}
