@@ -1011,7 +1011,6 @@ void XComboBox::setListIdFieldName(QString p)
   _data->_listIdFieldName = p;
 }
 
-// exists only for script exposure
 void XComboBox::removeItem(int idx)
 {
   QComboBox::removeItem(idx);
