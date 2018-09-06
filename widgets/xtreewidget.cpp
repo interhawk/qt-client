@@ -46,6 +46,7 @@
 #include "xtsettings.h"
 #include "xsqlquery.h"
 #include "format.h"
+#include "exportOptions.h"
 
 #define DEBUG false
 
@@ -1629,60 +1630,26 @@ void XTreeWidget::sExport()
 
   #pragma comment(linker, "/SUBSYSTEM:CONSOLE")
 
-  bool invalid = true;
-  QInputDialog qid;
-  QStringList items;
-  QString item;
+  ExportOptions eo;
+  QString filetype, delimSelected;
 
-  //get file type
-  bool ok;
-  items  << "Text, Other Separator (*)" << "Text VCF (*.vcf)" << "Text (*.txt)" << "ODF Text Document (*.odt)" << "HTML Document (*.html)";
-
-  item = qid.getItem(this, tr("Select Export File Type"),
-                                        tr("File Type :"), items, 0, false, &ok);
-
-  QString type = item;
-  //char * type = item.toLatin1().data(); qDebug() << type;
-  if (!ok)
+  if (!eo.exec())
     return;
-  if ( item.contains("Other") )
-  {
-    if(_x_preferences)
-      items = parseDelim(_x_preferences->value("Delimiter"));
-    while (invalid){
-      item = qid.getItem(this, tr("Delimiter selection"),
-                                          tr("Select Delimiter :"), items, 0, true);
-      if(!invalidDelim(item))
-      {
-        if(item == "{tab}")
-          item = "\t";
-        invalid = false;
-      }
-      else
-      {
-        if(item.length()>1)
-          items[0]= item[0];
-      }
-    }
-    QString delim;
-    foreach(QString i, items)
-      delim += i;
-    if(delim.contains(item))
-      delim.remove(item);
-    delim.prepend(item);
-    _x_preferences->set("Delimiter",delim);
-  } 
+  filetype = eo.getFiletype();
+  delimSelected = eo.getDelim();
   
-  
+  if(delimSelected == "{tab}")
+      delimSelected = "\t";
+   
   QFileInfo fi(QFileDialog::getSaveFileName(this, tr("Export Save Filename"), path,
-                                             type ));
+                                             filetype ));
 
   if (!fi.filePath().isEmpty())
   {
     QTextDocument       *doc = new QTextDocument();
     QTextDocumentWriter writer;
     if (fi.suffix().isEmpty())
-      fi.setFile(fi.filePath() += ".csv");
+      fi.setFile(fi.filePath() += ".csv"); 
     xtsettingsSetValue(_settingsName + "/exportPath", fi.path());
     writer.setFileName(fi.filePath());
 
@@ -1693,7 +1660,7 @@ void XTreeWidget::sExport()
     }
     else if (fi.suffix() == "csv")
     {
-      doc->setPlainText(toSV(item));
+      doc->setPlainText(toSV(delimSelected));
       writer.setFormat("plaintext");
     }
     else if (fi.suffix() == "vcf")
@@ -1710,6 +1677,11 @@ void XTreeWidget::sExport()
     {
       doc->setHtml(toHtml());
       writer.setFormat("HTML");
+    }
+    else 
+    {
+      doc->setPlainText(toSV(delimSelected));
+      writer.setFormat("plaintext");
     }
     writer.write(doc);
   }
@@ -2923,7 +2895,6 @@ void XTreeWidget::keyPressEvent(QKeyEvent* e)
 QStringList parseDelim(QString delim)
 { 
   QStringList delimItems; 
-  
   int i = delim.indexOf('{') ;
   if ( i >=0)
     delim.remove("{tab}");  

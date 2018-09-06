@@ -148,6 +148,7 @@ SOURCES += widgets.cpp \
     empcluster.cpp \
     empgroupcluster.cpp \
     expensecluster.cpp \
+    exportOptions.cpp \
     filecluster.cpp \
     filemoveselector.cpp \
     filterManager.cpp \
@@ -247,6 +248,7 @@ HEADERS += widgets.h \
     empcluster.h \
     empgroupcluster.h \
     expensecluster.h \
+    exportOptions.h \
     filecluster.h \
     filemoveselector.h \
     filterManager.h \
@@ -324,6 +326,7 @@ FORMS += alarmMaint.ui \
     docAttach.ui \
     documents.ui \
     editwatermark.ui    \
+    exportOptions.ui \
     filemoveselector.ui \
     filterManager.ui \
     filterSave.ui \

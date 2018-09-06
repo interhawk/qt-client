@@ -110,7 +110,6 @@ userPreferences::userPreferences(QWidget* parent, const char* name, bool modal, 
   userPref = mql.toQuery(params);
   _user->populate(userPref);
 
-  /////////////////////////////////////////
   _delimiter->clear();
   QString delim;
   if(!_pref->value("Delimiter").isEmpty())
@@ -119,7 +118,6 @@ userPreferences::userPreferences(QWidget* parent, const char* name, bool modal, 
     delim = ",{tab}~|;:^!";
   _delimiter->insertItems(0,parseDelim(delim));
   _delimiter->setCurrentIndex(0);
-  //////////////////////////////////////////////
 
 
   _ellipsesAction->append(1, tr("List"));
@@ -357,7 +355,6 @@ void userPreferences::sSave(bool close)
   _pref->set("IdleTimeout", _idleTimeout->value());
   omfgThis->_timeoutHandler->setIdleMinutes(_idleTimeout->value());
 
-  //////////////////////////////////////////////////////////////////
   if(invalidDelim(_delimiter->currentText()))
   {
     if(_delimiter->currentText().length() > 1)
@@ -374,7 +371,6 @@ void userPreferences::sSave(bool close)
   delim.prepend(_delimiter->currentText());
   _pref->set("Delimiter",delim);
   
-  //////////////////////////////////////////////////////////////////
 
   if(_ellipsesAction->id() == 2)
     _pref->set("DefaultEllipsesAction", QString("search"));
