@@ -71,7 +71,7 @@ login2::login2(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl
 
   connect(_buttonBox, SIGNAL(accepted()), this, SLOT(sLogin()));
   connect(_buttonBox, SIGNAL(helpRequested()), this, SLOT(sOpenHelp()));
-  connect(_server, SIGNAL(textChanged()), this, SLOT(sChangeURL()));
+  connect(_server, SIGNAL(textChanged(const QString &)), this, SLOT(sChangeURL()));
   connect(_database->lineEdit(), SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
   connect(_port, SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
 
@@ -100,7 +100,7 @@ void login2::languageChange()
 int login2::set(const ParameterList &pParams, QSplashScreen *pSplash)
 {
   _d->_splash = pSplash;
-  
+
   QVariant param;
   bool     valid;
 
@@ -215,12 +215,12 @@ void login2::sLogin()
   {
     if (_d->_splash)
       _d->_splash->hide();
-    
+
     _d->_handler->message(QtWarningMsg, tr("<p>A connection could not be established with "
                                        "the specified Database as the Proper Database "
                                        "Drivers have not been installed. Contact your "
                                        "Systems Administator."));
-    
+
     return;
   }
 
@@ -228,7 +228,7 @@ void login2::sLogin()
   {
     if (_d->_splash)
       _d->_splash->hide();
-    
+
     _d->_handler->message(QtWarningMsg, tr("<p>One or more connection options are missing. "
                                            "Please check that you have specified the host "
                                            "name, database name, and any other required "
@@ -271,22 +271,28 @@ void login2::sLogin()
     salt = "xTuple";
   }
 
-  QList<QPair<QString, QString> > method;
-  method << QPair<QString, QString>("requiressl=1", QMd5(QString(_d->_cPassword + salt  + _d->_cUsername)))
-         << QPair<QString, QString>("requiressl=1", _d->_cPassword)
-         << QPair<QString, QString>("requiressl=1", QMd5(QString(_d->_cPassword + "OpenMFG" + _d->_cUsername)))
-         << QPair<QString, QString>("",             QMd5(QString(_d->_cPassword + salt  + _d->_cUsername)))
-         << QPair<QString, QString>("",             _d->_cPassword)
-         << QPair<QString, QString>("",             QMd5(QString(_d->_cPassword + "OpenMFG" + _d->_cUsername)))
-      ;
-  int methodidx; // not declared in for () because we'll need it later
-  for (methodidx = 0; methodidx < method.size(); methodidx++)
+  QStringList connectionOptions;
+  QStringList password;
+
+  connectionOptions << QString("requiressl=1;application_name='%1'").arg(_d->_connAppName)
+                    << "requiressl=1"
+                    << QString("application_name='%1'").arg(_d->_connAppName)
+                    << "";
+  password << QMd5(QString(_d->_cPassword + salt  + _d->_cUsername))
+           << _d->_cPassword
+           << QMd5(QString(_d->_cPassword + "OpenMFG" + _d->_cUsername)) ;
+  int passwordidx; // not declared in for () because we need it later
+  foreach (QString p, password)
   {
-    db.setConnectOptions(QString("application_name='%1';%2")
-                         .arg(_d->_connAppName, method.at(methodidx).first));
-    db.setPassword(method.at(methodidx).second);
-    if (db.open())
-      break;  // break instead of for-loop condition to preserve methodidx
+    passwordidx = 0;
+    foreach (QString options, connectionOptions)
+    {
+      db.setConnectOptions(options);
+      db.setPassword(p);
+      if (db.open())
+        break;
+      passwordidx++;
+    }
   }
 
   if (db.isOpen())
@@ -339,26 +345,19 @@ void login2::sLogin()
   }
 
    // if connected using OpenMFG enhanced auth, remangle the password
-
-  if (db.isOpen() && (methodidx == 2 || methodidx == 5))
+  if (db.isOpen() && passwordidx == 2)
       XSqlQuery chgpass(QString("ALTER USER \"%1\" WITH PASSWORD '%2'")
                       .arg(_d->_cUsername, QMd5(QString(_d->_cPassword + salt + _d->_cUsername))));
-  else if (db.isOpen() && method.at(methodidx).first.isEmpty())
-  {
-    XSqlQuery sslq("SHOW ssl;");
-  }
 
   if (! db.isOpen())
   {
     if (_d->_splash)
       _d->_splash->hide();
-    
+
     setCursor(QCursor(Qt::ArrowCursor));
 
-    _d->_handler->message(QtCriticalMsg, tr("<p>Sorry, can't connect to the specified xTuple ERP server. "
-                                        "<p>This may be due to a problem with your user name, password, or server connection information. "
-                                        "<p>Below is more detail on the connection problem: "
-                                        "<p>%1" ).arg(db.lastError().text()));
+    _d->_handler->message(QtCriticalMsg, tr("<p>Sorry, can't connect to the specified xTuple ERP server:</p>"
+                                            "<pre>%1</pre>" ).arg(db.lastError().text()));
     _password->setFocus();
     _password->setText("");
     return;
@@ -369,7 +368,7 @@ void login2::sLogin()
     _d->_splash->showMessage(tr("Logging into the Database"), SplashTextAlignment, SplashTextColor);
     qApp->processEvents();
   }
-  
+
   QString errormsg;
   XSqlQuery checkSchema("SELECT COUNT(*) AS tablecount"
                         "  FROM pg_class AS c"
@@ -473,56 +472,44 @@ void login2::updateRecentOptions()
   _recent->setEnabled(list.size());
   list.removeAll(_databaseURL);
   list.prepend(_databaseURL);
-      
+
   xtsettingsSetValue("/xTuple/_recentOptionsList", list);
   xtsettingsSetValue("/xTuple/_databaseURL", _databaseURL);
 }
 
 void login2::updateRecentOptionsActions()
-{ 
+{
   QMenu * recentMenu = new QMenu;
   QStringList list = xtsettingsValue("/xTuple/_recentOptionsList").toStringList();
-  if (list.size())
+  if (! list.isEmpty())
   {
     list.takeFirst();
-    int size = list.size();
-    if (size > 10)
-      size = 10;
 
     QString protocol;
     QString hostName;
     QString dbName;
     QString port;
-    int alreadyExists;
-  
-    if (size)
-    {
-      _recent->setEnabled(true);
-      QAction *act;
-      for (int i = 0; i < size; ++i) 
-      {
-        act = new QAction(list.value(i).remove("psql://"),this);
-        connect(act, SIGNAL(triggered()), this, SLOT(selectRecentOptions()));
-        recentMenu->addAction(act);
-        parseDatabaseURL(list.value(i), protocol, hostName, dbName, port);
-        alreadyExists = _database->findText(dbName);
-        if (alreadyExists == -1)
-          _database->addItem(dbName);
-      }
-  
-      recentMenu->addSeparator();
 
-      act = new QAction(tr("Clear &Menu"), this);
-      act->setObjectName(QLatin1String("__xt_action_clear_menu_"));
-      connect(act, SIGNAL(triggered()), this, SLOT(clearRecentOptions()));
+    _recent->setEnabled(true);
+    QAction *act;
+    for (int i = 0; i < list.size() && i < 10; ++i)
+    {
+      act = new QAction(list.value(i).remove("psql://"), this);
+      connect(act, SIGNAL(triggered()), this, SLOT(selectRecentOptions()));
       recentMenu->addAction(act);
+      parseDatabaseURL(list.value(i), protocol, hostName, dbName, port);
+      if (_database->findText(dbName) == -1)
+        _database->addItem(dbName);
     }
-    else
-      _recent->setEnabled(false);
+
+    recentMenu->addSeparator();
+
+    act = new QAction(tr("Clear &Menu"), this);
+    act->setObjectName(QLatin1String("__xt_action_clear_menu_"));
+    connect(act, SIGNAL(triggered()), this, SLOT(clearRecentOptions()));
+    recentMenu->addAction(act);
   }
-  else
-    _recent->setEnabled(false);
-  
+  _recent->setEnabled(! list.isEmpty());
   _recent->setMenu(recentMenu);
 }
 
