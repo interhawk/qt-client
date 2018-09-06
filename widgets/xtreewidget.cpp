@@ -1628,8 +1628,6 @@ void XTreeWidget::sExport()
 {
   QString   path = xtsettingsValue(_settingsName + "/exportPath").toString();
 
-  #pragma comment(linker, "/SUBSYSTEM:CONSOLE")
-
   ExportOptions eo;
   QString filetype, delimSelected;
 
