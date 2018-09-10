@@ -103,6 +103,7 @@ Documents::Documents(QWidget *pParent) :
   _doc->addColumn(tr("Type"),  _itemColumn,  Qt::AlignLeft, true, "target_type" );
   _doc->addColumn(tr("Number"), _itemColumn, Qt::AlignLeft, true, "target_number" );
   _doc->addColumn(tr("Name"), -1,  Qt::AlignLeft, true, "name" );
+  _doc->addColumn(tr("Note"), -1,  Qt::AlignLeft, true, "notes" );
   _doc->addColumn(tr("Description"),  -1, Qt::AlignLeft, true, "description");
   _doc->addColumn(tr("Relationship"),  _itemColumn, Qt::AlignLeft,true, "purpose");
   _doc->addColumn(tr("Can View"), _ynColumn, Qt::AlignCenter, false, "canview");
@@ -254,9 +255,16 @@ void Documents::sEditDoc()
 
 void Documents::sOpenDoc(QString mode)
 {
+  QUrl url;
   QString ui;
+  QStringList isFile;
+  isFile << "URL" << "FILE";
   QString docType = _doc->currentItem()->rawValue("target_type").toString();
-  int targetid = _doc->currentItem()->id("target_number");
+  int targetid;
+
+  targetid = isFile.contains(docType) ? _doc->currentItem()->rawValue("target_number").toInt()
+                                      : _doc->currentItem()->id("target_number");
+
   ParameterList params;
   if (docType == "Q" && mode == "view")
     params.append("mode", "viewQuote");
@@ -344,16 +352,15 @@ void Documents::sOpenDoc(QString mode)
         return;
       }
       tfile.write(qfile.value("url_stream").toByteArray());
-      QUrl urldb;
-      urldb.setUrl(tfile.fileName());
+      url.setUrl(tfile.fileName());
 #ifndef Q_OS_WIN
-      urldb.setScheme("file");
+      url.setScheme("file");
 #endif
       tfile.close();
-      if (! QDesktopServices::openUrl(urldb))
+      if (! QDesktopServices::openUrl(url))
       {
         QMessageBox::warning(this, tr("File Open Error"),
-			     tr("Could not open %1.").arg(urldb.toString()));
+                                   tr("Could not open %1.").arg(url.toString()));
 	return;
       }
 
@@ -368,10 +375,15 @@ void Documents::sOpenDoc(QString mode)
       return;
     else
     {
-      QUrl url(_doc->currentItem()->rawValue("description").toString());
+      url.setUrl(qfile.value("url_url").toString());
       if (url.scheme().isEmpty())
         url.setScheme("file");
-      QDesktopServices::openUrl(url);
+      if (! QDesktopServices::openUrl(url))
+      {
+        QMessageBox::warning(this, tr("Url Open Error"),
+                             tr("Could not open %1.").arg(url.toString()));
+        return;
+      }
       return;
     }
   }
@@ -495,6 +507,8 @@ void Documents::refresh()
   params.append("creditmemoitem", _strMap.contains("CMI") ? _strMap.value("CMI")->translation : "CMI");
   params.append("cust",           _strMap.contains("C") ? _strMap.value("C")->translation : "C");
   params.append("emp",            _strMap.contains("EMP") ? _strMap.value("EMP")->translation : "EMP");
+  params.append("asset",          _strMap.contains("FADOC") ? _strMap.value("FADOC")->translation : "FADOC");
+  params.append("maintorder",     _strMap.contains("FAMAINT") ? _strMap.value("FAMAINT")->translation : "FAMAINT");
   params.append("incident",       _strMap.contains("INCDT") ? _strMap.value("INCDT")->translation : "INCDT");
   params.append("invoice",        _strMap.contains("INV") ? _strMap.value("INV")->translation : "INV");
   params.append("invoiceitem",    _strMap.contains("INVI") ? _strMap.value("INVI")->translation : "INVI");

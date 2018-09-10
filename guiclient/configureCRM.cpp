@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -58,6 +58,7 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
   _opportunityChangeLog->setChecked(_metrics->boolean("OpportunityChangeLog"));
   _requireProjectAssignment->setChecked(_metrics->boolean("RequireProjectAssignment"));
   _projectWarningDays->setValue(_metrics->value("ProjectDueDateWarning").toInt());
+  _documentPrivileges->setChecked(_metrics->boolean("UnprivilegedViewDocInList"));
 
   if (! _metrics->value("DefaultAddressCountry").isEmpty())
     _country->setText(_metrics->value("DefaultAddressCountry"));
@@ -143,6 +144,7 @@ bool configureCRM::sSave()
   _metrics->set("OpportunityChangeLog", _opportunityChangeLog->isChecked());
   _metrics->set("RequireProjectAssignment", _requireProjectAssignment->isChecked());
   _metrics->set("ProjectDueDateWarning", _projectWarningDays->value());
+  _metrics->set("UnprivilegedViewDocInList", _documentPrivileges->isChecked());
 
   if (_country->isValid())
     _metrics->set("DefaultAddressCountry", _country->currentText());
