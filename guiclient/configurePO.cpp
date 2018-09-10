@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -26,6 +26,7 @@ configurePO::configurePO(QWidget* parent, const char* name, bool /*modal*/, Qt::
   {  
     _enableDropShip->hide();
     _billDropShip->hide();
+    _sonotes->hide();
   }
   else
   {
@@ -39,12 +40,14 @@ configurePO::configurePO(QWidget* parent, const char* name, bool /*modal*/, Qt::
       _enableDropShip->setEnabled(false);
       _billDropShip->setChecked(_metrics->boolean("BillDropShip"));
       _billDropShip->setEnabled(false);
-
+      _sonotes->setChecked(_metrics->boolean("CopySOShippingNotestoPO"));
+      _sonotes->setEnabled(false);
     }
     else
     {
       _enableDropShip->setChecked(_metrics->boolean("EnableDropShipments"));
       _billDropShip->setChecked(_metrics->boolean("BillDropShip"));
+      _sonotes->setChecked(_metrics->boolean("CopySOShippingNotestoPO"));
     }
   }
 
@@ -98,7 +101,7 @@ configurePO::configurePO(QWidget* parent, const char* name, bool /*modal*/, Qt::
   _printPO->setChecked(_metrics->boolean("DefaultPrintPOOnSave"));
   _requirePoitemStdCost->setChecked(_metrics->boolean("RequireStdCostForPOItem"));
   _requirePOTax->setChecked(_metrics->boolean("RequirePOTax"));
-  _notes->setChecked(_metrics->boolean("CopyPRtoPOItem"));
+  _prnotes->setChecked(_metrics->boolean("CopyPRtoPOItem"));
   _defaultShipVia->setText(_metrics->value("DefaultPOShipVia"));
 
   this->setWindowTitle("Purchase Configuration");
@@ -146,7 +149,8 @@ bool configurePO::sSave()
  
   _metrics->set("RequireStdCostForPOItem", _requirePoitemStdCost->isChecked());
   _metrics->set("RequirePOTax", _requirePOTax->isChecked());
-  _metrics->set("CopyPRtoPOItem", _notes->isChecked());
+  _metrics->set("CopyPRtoPOItem", _prnotes->isChecked());
+  _metrics->set("CopySOShippingNotestoPO", _sonotes->isChecked());
   _metrics->set("DefaultPOShipVia", _defaultShipVia->text().trimmed());
 
   XSqlQuery configq;

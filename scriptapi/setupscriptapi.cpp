@@ -98,6 +98,7 @@
 #include "qprocessenvironmentproto.h"
 #include "qprocessproto.h"
 #include "qpushbuttonproto.h"
+#include "qscrollarea.h"
 #include "qserialportinfoproto.h"
 #include "qserialportproto.h"
 #include "qsizepolicyproto.h"
@@ -245,6 +246,7 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQProcessEnvironmentProto(engine);
   setupQProcessProto(engine);
   setupQPushButtonProto(engine);
+  setupQScrollAreaProto(engine);
   setupQSerialPortInfoProto(engine);
   setupQSerialPortProto(engine);
   setupQSizePolicy(engine);

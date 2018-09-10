@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -785,8 +785,8 @@ void purchaseOrderItem::sSave()
   purchaseSave.bindValue(":poitem_linenumber", _lineNumber->text().toInt());
   if (_itemsrcid != -1)
     purchaseSave.bindValue(":poitem_itemsrc_id", _itemsrcid);
-  purchaseSave.bindValue(":poitem_vend_item_number", _vendorItemNumber->text());
-  purchaseSave.bindValue(":poitem_vend_item_descrip", _vendorDescrip->toPlainText());
+  purchaseSave.bindValue(":poitem_vend_item_number", _vendorItemNumber->text().trimmed());
+  purchaseSave.bindValue(":poitem_vend_item_descrip", _vendorDescrip->toPlainText().trimmed());
   purchaseSave.bindValue(":poitem_vend_uom", _vendorUOM->text());
   purchaseSave.bindValue(":poitem_invvenduomratio", _invVendorUOMRatio->toDouble());
   purchaseSave.bindValue(":poitem_qty_ordered", _ordered->toDouble());
@@ -796,7 +796,7 @@ void purchaseOrderItem::sSave()
   purchaseSave.bindValue(":poitem_manuf_name", _manufName->currentText());
   purchaseSave.bindValue(":poitem_manuf_item_number", _manufItemNumber->text());
   purchaseSave.bindValue(":poitem_manuf_item_descrip", _manufItemDescrip->toPlainText());
-  purchaseSave.bindValue(":poitem_comments", _notes->toPlainText());
+  purchaseSave.bindValue(":poitem_comments", _notes->toPlainText().trimmed());
   if (_project->isValid())
     purchaseSave.bindValue(":poitem_prj_id", _project->id());
   if (_metrics->boolean("RevControl"))

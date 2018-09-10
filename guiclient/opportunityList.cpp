@@ -75,6 +75,7 @@ opportunityList::opportunityList(QWidget* parent, const char*, Qt::WindowFlags f
   parameterWidget()->append(tr("Target Date on or After"), "startDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Target Date on or Before"),   "endDate",   ParameterWidget::Date);
   parameterWidget()->append(tr("Project"), "prj_id", ParameterWidget::Project);
+  parameterWidget()->append(tr("Name Pattern"), "name_pattern",    ParameterWidget::Text);
   parameterWidget()->append(tr("Account"), "crmacct_id",  ParameterWidget::Crmacct);
   parameterWidget()->appendComboBox(tr("Type"), "optype_id", XComboBox::OpportunityTypes);
   parameterWidget()->append(tr("Type Pattern"), "optype_pattern",    ParameterWidget::Text);

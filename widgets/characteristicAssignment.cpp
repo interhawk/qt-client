@@ -427,6 +427,7 @@ void CharacteristicAssignmentPrivate::handleTargetType()
 
   parent->setWindowTitle(parent->tr("Characteristic: %1").arg(targetTypeMap.value(targetType)));
   QSqlQueryModel *model = new QSqlQueryModel;
+  
   model->setQuery("SELECT char_id, char_name, char_type"
                   "  FROM char JOIN charuse ON char_id = charuse_char_id"
                   " WHERE charuse_target_type = '" + charuseTargetType + "'"
