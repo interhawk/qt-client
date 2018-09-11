@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -36,7 +36,7 @@ class printPackingListPrivate
       Q_UNUSED(parent);
     }
 
-    int          _shipformid;
+    int _shipformid;
 };
 
 printPackingList::printPackingList(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
@@ -56,8 +56,8 @@ printPackingList::printPackingList(QWidget* parent, const char* name, bool modal
                         ";" ;
 
   connect(_order,     SIGNAL(valid(bool)), this, SLOT(sPopulate()));
-  connect(_reprint, SIGNAL(toggled(bool)), this, SLOT(sHandleReprint()));
-  connect(_shipment,   SIGNAL(newId(int)), this, SLOT(sHandleShipment()));
+  connect(_reprint,   SIGNAL(toggled(bool)), this, SLOT(sHandleReprint()));
+  connect(_shipment,  SIGNAL(newId(int)), this, SLOT(sHandleShipment()));
 
   _order->setAllowedStatuses(OrderLineEdit::Open);
   _order->setAllowedTypes(OrderLineEdit::Sales | OrderLineEdit::Transfer);
@@ -119,10 +119,10 @@ enum SetResponse printPackingList::set(const ParameterList &pParams)
     if (ordertype.isEmpty())
       return UndefinedError;
     else
-	{
-	  _order->setAllowedStatuses(OrderLineEdit::AnyStatus);
+    {
+      _order->setAllowedStatuses(OrderLineEdit::AnyStatus);
       _order->setId(param.toInt(), ordertype);
-	}
+    }
   }
 
   param = pParams.value("shiphead_id", &valid);
@@ -140,10 +140,10 @@ enum SetResponse printPackingList::set(const ParameterList &pParams)
       _pldata->_shipformid = shipq.value("shiphead_shipform_id").toInt();
       ordertype            = shipq.value("shiphead_order_type").toString();
       if (ordertype == "SO" || ordertype == "TO")
-	  {
-	    _order->setAllowedStatuses(OrderLineEdit::AnyStatus);
+      {
+        _order->setAllowedStatuses(OrderLineEdit::AnyStatus);
         _order->setId(shipq.value("shiphead_order_id").toInt(), ordertype);
-	  }
+      }
       else
         return UndefinedError;
     }

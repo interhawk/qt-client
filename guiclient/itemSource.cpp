@@ -228,6 +228,7 @@ enum SetResponse itemSource::set(const ParameterList &pParams)
       _item->setReadOnly(true);
       _vendorItemNumber->setText(_vendorItemNumber->text().prepend("Copy Of "));
       _dates->setStartDate(omfgThis->dbDate());
+      _dates->setEndDate(-1);
 
       if (sSave())
       {

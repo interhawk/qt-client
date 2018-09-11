@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -77,10 +77,11 @@ reconcileBankaccount::reconcileBankaccount(QWidget* parent, const char* name, Qt
     _bankaccntid = -1;	// do this before _bankaccnt->populate()
     _datesAreOK = false;
     
-    _bankaccnt->populate("SELECT bankaccnt_id,"
-			 "       (bankaccnt_name || '-' || bankaccnt_descrip) "
-			 "FROM bankaccnt "
-			 "ORDER BY bankaccnt_name;");
+    _bankaccnt->populate("SELECT DISTINCT ON (bankaccnt_accnt_id) "
+                         "       bankaccnt_id, "
+                         "       (bankaccnt_name || '-' || bankaccnt_descrip) "
+                         "  FROM bankaccnt "
+                         "ORDER BY bankaccnt_accnt_id, bankaccnt_id;");
     _currency->setLabel(_currencyLit);
 
     _addAdjustment->setEnabled(_privileges->check("MaintainBankAdjustments"));

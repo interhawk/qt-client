@@ -1174,22 +1174,6 @@ void salesOrderItem::sSave(bool pPartial)
                            salesSave, __FILE__, __LINE__);
       return;
     }
-
-    if (_supplyOrderType == "W")
-    {
-      // WO can auto-explode so need to determine WO status
-      XSqlQuery ordStatus;
-      ordStatus.prepare("SELECT wo_status FROM wo WHERE wo_id=:wo_id;");
-      ordStatus.bindValue(":wo_id", _supplyOrderId);
-      ordStatus.exec();
-      if (ordStatus.first())
-        _supplyOrderStatus->setText(ordStatus.value("wo_status").toString());
-      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error returning order status"),
-                                  ordStatus, __FILE__, __LINE__))
-      {
-        return;
-      }
-    }
   }
   else if ( (_mode == cEdit) || ((_mode == cNew) && _partialsaved) )
   {
@@ -1428,7 +1412,20 @@ void salesOrderItem::sSave(bool pPartial)
   }
 
   if (_supplyOrderType == "W" && salesSave.first())
+  {
     _supplyOrderId = salesSave.value("coitem_order_id").toInt();
+
+      // WO can auto-explode so need to determine WO status
+      XSqlQuery ordStatus;
+      ordStatus.prepare("SELECT wo_status FROM wo WHERE wo_id=:wo_id;");
+      ordStatus.bindValue(":wo_id", _supplyOrderId);
+      ordStatus.exec();
+      if (ordStatus.first())
+        _supplyOrderStatus->setText(ordStatus.value("wo_status").toString());
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error returning order status"),
+                                  ordStatus, __FILE__, __LINE__))
+        return;
+  }
   else if (_supplyOrderType == "P" || _supplyOrderType == "R")
   {
     salesSave.prepare("SELECT coitem_order_id "
@@ -1503,7 +1500,6 @@ void salesOrderItem::sSave(bool pPartial)
                                          QMessageBox::No  | QMessageBox::Escape) == QMessageBox::Yes)
             applychange = true;
         }
-
         if (applychange)
         {
           if ( (_supplyOrderType == "W") && (_supplyOrderStatus->text() == "E") && _item->isConfigured() )
@@ -1597,8 +1593,8 @@ void salesOrderItem::sSave(bool pPartial)
       else if (salesSave.lastError().type() != QSqlError::NoError)
       {
         rollback.exec();
-          ErrorReporter::error(QtCriticalMsg, this, tr("Error Retreiving Item Information"),
-                               salesSave, __FILE__, __LINE__);
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Retreiving Item Information"),
+                             salesSave, __FILE__, __LINE__);
         return;
       }
     }
@@ -4093,7 +4089,7 @@ void salesOrderItem::populate()
   XSqlQuery item;
   QString sql;
   sql = "<? if exists('isSalesOrder') ?>"
-          "SELECT itemsite_leadtime, warehous_id, warehous_code, "
+          "SELECT cohead_cust_id, itemsite_leadtime, warehous_id, warehous_code, "
           "       item_id, uom_name, iteminvpricerat(item_id) AS invpricerat,"
           "       item_inv_uom_id, item_fractional,"
           "       coitem_status, coitem_cohead_id,"
@@ -4131,7 +4127,7 @@ void salesOrderItem::populate()
           " AND (coitem_id=<? value('id') ?>) "
           " AND (locale_id = usr_locale_id));"
           "<? else ?>"
-            "SELECT itemsite_leadtime, COALESCE(warehous_id, -1) AS warehous_id, "
+            "SELECT quhead_cust_id, itemsite_leadtime, COALESCE(warehous_id, -1) AS warehous_id, "
             "       warehous_code,"
             "       item_id, uom_name, iteminvpricerat(item_id) AS invpricerat,"
             "       item_inv_uom_id, item_fractional,"
@@ -4177,6 +4173,7 @@ void salesOrderItem::populate()
   if (item.first())
   {
     _soheadid = item.value("coitem_cohead_id").toInt();
+    _custid = item.value("cohead_cust_id").toInt();
     _supplyOrderType = item.value("coitem_order_type").toString();
     _supplyOrderId = item.value("coitem_order_id").toInt();
     _comments->setId(_soitemid);

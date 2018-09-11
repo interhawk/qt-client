@@ -27,6 +27,9 @@ ScriptCache::ScriptCache(QObject *parent)
   QObject::connect(db.driver(), SIGNAL(notification(const QString&)), this, SLOT(sNotified(const QString &)));
   if (parent)
     connect(parent, SIGNAL(dbConnectionLost()), this, SLOT(sDbConnectionLost()));
+  GuiClientInterface *g = dynamic_cast<GuiClientInterface*>(parent);
+  if (g)
+    g->setScriptCache(this);
 }
 
 ScriptCache::~ScriptCache()

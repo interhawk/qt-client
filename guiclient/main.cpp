@@ -218,13 +218,11 @@ int main(int argc, char *argv[])
   _splash = new QSplashScreen();
   _splash->setPixmap(QPixmap(":/images/splashEmpty.png"));
 
-  _evaluation = false;
-
   QTranslator *translatorSys = new QTranslator(&app);
 
   QStringList lang;
   QLocale sysl = QLocale::system();
-  qDebug()<<sysl.name().toLower();
+  qDebug()<<sysl.name().toLower(); 
   if (sysl.language() != QLocale::C && sysl.language() != QLocale::English)
   {
     lang.append(sysl.name().toLower());
@@ -253,9 +251,6 @@ int main(int argc, char *argv[])
 
     if (haveEnhancedAuth)
       params.append("enhancedAuth", _enhancedAuth);
-
-    if (_evaluation)
-      params.append("evaluation");
 
     if ( (haveDatabaseURL) && (haveUsername) && (havePasswd) )
       params.append("login");
