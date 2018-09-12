@@ -95,6 +95,8 @@ void AddressCluster::init()
   _state->setEditable(true);
   _state->setAllowNull(true);
   _state->setMaximumWidth(250);
+  _country->setAllowNull(true);
+  _country->setType(XComboBox::Countries);
   _country->setMaximumWidth(250);
   _country->setEditable(! (_x_metrics &&
                            _x_metrics->boolean("StrictAddressCountry")));
@@ -309,22 +311,6 @@ void AddressCluster::populateStateComboBox()
          _state->id(), qPrintable(_state->currentText()), qPrintable(tmpstate));
 }
 
-void AddressCluster::populateCountryComboBox()
-{
-  if(_x_metrics == 0)
-    return;
-
-  _country->clear();
-  XSqlQuery country;
-  country.prepare("SELECT -1, '','' AS country_name "
-                  "UNION "
-                  "SELECT country_id, country_name, country_name "
-                  "FROM country ORDER BY country_name;");
-  country.exec();
-  _country->populate(country);
-  setCountry(_x_metrics->value("DefaultAddressCountry"));
-}
-
 void AddressCluster::setNumber(QString pNumber)
 {
   XSqlQuery address;
@@ -342,7 +328,9 @@ void AddressCluster::setId(const int pId, const QString&)
 {
   if (pId == _id)
     return;
+  blockSignals(true);
   silentSetId(pId);
+  blockSignals(false);
   emit newId(pId);
 }
 
@@ -481,8 +469,6 @@ void AddressCluster::clear()
   _id = -1;
   _valid = false;
 
-  populateCountryComboBox();
-
   // reset cache
   c_active     = true;
   c_addr1      = "";
@@ -500,6 +486,7 @@ void AddressCluster::clear()
   _addr3->clear();
   _city->clear();
   _state->setText(QString());
+  _country->setId(-1);
   _postalcode->clear();
   _active->setChecked(c_active);
   _selected = false;
