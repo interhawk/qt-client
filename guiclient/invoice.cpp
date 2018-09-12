@@ -963,8 +963,7 @@ void invoice::sNew()
   if (newdlg.exec() != XDialog::Rejected)
     sFillItemList();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void invoice::sEdit()
@@ -982,8 +981,7 @@ void invoice::sEdit()
   if (newdlg.exec() != XDialog::Rejected)
     sFillItemList();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void invoice::sView()
@@ -1015,8 +1013,7 @@ void invoice::sDelete()
 
   sCalculateTotal();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void invoice::populate()
@@ -1546,16 +1543,14 @@ void invoice::sTaxZoneChanged()
 
 void invoice::sMiscTaxtypeChanged()
 {
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void invoice::sMiscAmountChanged()
 {
   sCalculateTotal();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void invoice::sFreightChanged()
@@ -1608,8 +1603,7 @@ void invoice::sFreightChanged()
 
     sCalculateTotal();
 
-    if (_metrics->value("TaxService") != "A")
-      _tax->sRecalculate();
+    _tax->invalidate();
   }
 }
 

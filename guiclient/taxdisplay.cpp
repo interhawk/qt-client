@@ -140,6 +140,8 @@ void TaxDisplay::sUpdate(double tax, QString error)
     clear();
     QMessageBox::critical(0, tr("Avalara Error"), tr("Error Calculating Tax:\n%1").arg(error));
   }
+
+  _menuLabel->setPixmap(QPixmap(":/widgets/images/gear.png"));
 }
 
 void TaxDisplay::sRefresh()
@@ -156,8 +158,24 @@ void TaxDisplay::sRefresh()
     setLocalValue(tax.value("tax").toDouble());
   else
     clear();
-  ErrorReporter::error(QtCriticalMsg, 0, tr("Error fetching tax"),
-                       tax, __FILE__, __LINE__);
+  if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error fetching tax"),
+                           tax, __FILE__, __LINE__))
+    return;
+
+  if (_metrics->value("TaxService") == "A")
+  {
+    tax.prepare("SELECT taxhead_valid AS valid "
+                "  FROM taxhead "
+                " WHERE taxhead_doc_type = :type "
+                "   AND taxhead_doc_id = :id;");
+    tax.bindValue(":type", _type);
+    tax.bindValue(":id", _orderId);
+    tax.exec();
+    if (tax.first() && !tax.value("valid").toBool())
+      _menuLabel->setPixmap(QPixmap(":/widgets/images/warning.png"));
+    ErrorReporter::error(QtCriticalMsg, 0, tr("Error fetching tax"),
+                         tax, __FILE__, __LINE__);
+  }
 }
 
 void TaxDisplay::save()
@@ -168,6 +186,30 @@ void TaxDisplay::save()
 void TaxDisplay::post()
 {
   _tax->commit(_type, _orderId);
+}
+
+void TaxDisplay::invalidate()
+{
+  if (isEmpty())
+    return;
+
+  if (_metrics->value("TaxService") == "A")
+  {
+    _menuLabel->setPixmap(QPixmap(":/widgets/images/warning.png"));
+
+    XSqlQuery tax;
+    tax.prepare("UPDATE taxhead "
+                "   SET taxhead_valid = FALSE "
+                " WHERE taxhead_doc_type = :type "
+                "   AND taxhead_doc_id = :id;");
+    tax.bindValue(":type", _type);
+    tax.bindValue(":id", _orderId);
+    tax.exec();
+    ErrorReporter::error(QtCriticalMsg, 0, tr("Error invalidating tax"),
+                         tax, __FILE__, __LINE__);
+  }
+  else
+    sRecalculate();
 }
 
 bool TaxDisplay::eventFilter(QObject *obj, QEvent *event)
