@@ -71,9 +71,9 @@ login2::login2(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl
 
   connect(_buttonBox, SIGNAL(accepted()), this, SLOT(sLogin()));
   connect(_buttonBox, SIGNAL(helpRequested()), this, SLOT(sOpenHelp()));
-  connect(_server, SIGNAL(textChanged(const QString &)), this, SLOT(sChangeURL()));
+  connect(_server,               SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
   connect(_database->lineEdit(), SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
-  connect(_port, SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
+  connect(_port,                 SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
 
   GuiMessageHandler *g = new GuiMessageHandler(this);
   g->setDestination(QtWarningMsg, this);
