@@ -33,13 +33,13 @@ taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::Wi
   _tax->addColumn(tr("Amount"), -1, Qt::AlignLeft, true, "amount");
   _tax->addColumn(tr("Qty"), -1, Qt::AlignLeft, true, "qty");
   _tax->addColumn(tr("Extended"), -1, Qt::AlignLeft, true, "extended");
-  _tax->addColumn(tr("Taxable Amount"), -1, Qt::AlignLeft, true, "taxhist_basis");
+  _tax->addColumn(tr("Taxable Amount"), -1, Qt::AlignLeft, true, "taxdetail_taxable");
   _tax->addColumn(tr("Code"), -1, Qt::AlignLeft, true, "tax_code");
   _tax->addColumn(tr("Description"), -1, Qt::AlignLeft, true, "tax_descrip");
-  _tax->addColumn(tr("Sequence"), -1, Qt::AlignLeft, true, "taxhist_sequence");
-  _tax->addColumn(tr("Flat Amount"), -1, Qt::AlignLeft, true, "taxhist_amount");
-  _tax->addColumn(tr("Percent"), -1, Qt::AlignLeft, true, "taxhist_percent");
-  _tax->addColumn(tr("Tax"), -1, Qt::AlignLeft, true, "taxhist_tax");
+  _tax->addColumn(tr("Sequence"), -1, Qt::AlignLeft, true, "taxdetail_sequence");
+  _tax->addColumn(tr("Flat Amount"), -1, Qt::AlignLeft, true, "taxdetail_amount");
+  _tax->addColumn(tr("Percent"), -1, Qt::AlignLeft, true, "taxdetail_percent");
+  _tax->addColumn(tr("Tax"), -1, Qt::AlignLeft, true, "taxdetail_tax");
   _tax->addColumn(tr("Total"), -1, Qt::AlignLeft, true, "total");
 
   connect(_tax, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
@@ -454,9 +454,9 @@ void taxBreakdown::sDelete()
                             QMessageBox::No) == QMessageBox::Yes)
   {
     XSqlQuery taxDelete;
-    taxDelete.prepare("DELETE FROM taxhist "
-                      " WHERE taxhist_id = :taxhist_id;");
-    taxDelete.bindValue(":taxhist_id", _tax->id());
+    taxDelete.prepare("DELETE FROM taxdetail "
+                      " WHERE taxdetail_id = :taxdetail_id;");
+    taxDelete.bindValue(":taxdetail_id", _tax->id());
     taxDelete.exec();
 
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Tax Adjustment Information"),

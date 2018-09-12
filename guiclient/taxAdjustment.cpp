@@ -26,8 +26,7 @@ taxAdjustment::taxAdjustment(QWidget* parent, const char* name, bool modal, Qt::
   connect(_save, SIGNAL(clicked()), this, SLOT(sSave()));
   connect(_taxcode, SIGNAL(newID(int)), this, SLOT(sCheck()));
 
-  _taxhistid = -1;
-  _sense = 1;
+  _taxdetailid = -1;
 }
 
 taxAdjustment::~taxAdjustment()
@@ -52,22 +51,7 @@ enum SetResponse taxAdjustment::set(const ParameterList &pParams)
 
   param = pParams.value("order_type", &valid);
   if (valid)
-  {
     _ordertype = param.toString();
-
-    if (param.toString() == "INV")
-      _table = "invcheadtax";
-    else if (param.toString() == "COB")
-      _table = "cobmisctax";
-    else if (param.toString() == "CM")
-      _table = "cmheadtax";
-    else if (param.toString() == "AR")
-      _table = "aropentax";
-    else if (param.toString() == "AP")
-      _table = "apopentax";
-    else
-      _table = param.toString();
-  }
 
   param = pParams.value("mode", &valid);
   if (valid)
@@ -86,10 +70,6 @@ enum SetResponse taxAdjustment::set(const ParameterList &pParams)
    if (valid)
      _amount->setId(param.toInt());
 
-   param = pParams.value("sense", &valid);
-   if (valid)
-    _sense = param.toInt();
-
   return NoError;
 }
 
@@ -104,33 +84,50 @@ void taxAdjustment::sSave()
     return;
   }
 
-  QString sql;
   if (_mode == cNew)
-    sql = QString( "INSERT into %1 (taxhist_basis,taxhist_percent,taxhist_amount,taxhist_docdate, taxhist_tax_id, taxhist_tax, taxhist_taxtype_id, taxhist_parent_id, taxhist_doctype, taxhist_line_type  ) "
-                   "VALUES (0, 0, 0, :date, :taxcode_id, :amount, getadjustmenttaxtypeid(), :order_id, :ordertype, 'A') ").arg(_table);
-
-  else if (_mode == cEdit)
-    sql = QString( "UPDATE taxhist "
-                   "SET taxhist_tax=:amount, taxhist_docdate=:date "
-                   "WHERE (taxhist_id=:taxhist_id) ");
-  taxSave.prepare(sql);
-  taxSave.bindValue(":taxhist_id", _taxhistid);
-  taxSave.bindValue(":taxcode_id", _taxcode->id());
-  taxSave.bindValue(":amount", _amount->localValue() * _sense);
-  taxSave.bindValue(":order_id", _orderid);
-  taxSave.bindValue(":ordertype", _ordertype);
-  taxSave.bindValue(":date", _amount->effective());
-  taxSave.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Tax Adjustment Information"),
-                                taxSave, __FILE__, __LINE__))
   {
-    return;
+    taxSave.prepare("INSERT INTO taxline (taxline_taxhead_id, taxline_line_type, "
+                    "                     taxline_taxtype_id) "
+                    "SELECT taxhead_id, 'A', "
+                    "       getAdjustmentTaxtypeId() "
+                    "  FROM taxhead "
+                    " WHERE taxhead_doc_type = :ordertype "
+                    "   AND taxhead_doc_id = :orderid "
+                    "   AND NOT EXISTS (SELECT 1 "
+                    "                     FROM taxline "
+                    "                    WHERE taxline_taxhead_id = taxhead_id "
+                    "                      AND taxline_line_type = 'A');");
+    taxSave.bindValue(":ordertype", _ordertype);
+    taxSave.bindValue(":orderid", _orderid);
+    taxSave.exec();
+    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Tax Adjustment Information"),
+                             taxSave, __FILE__, __LINE__))
+      return;
+
+    taxSave.prepare("INSERT INTO taxdetail (taxdetail_taxline_id, taxdetail_tax_id, taxdetail_tax) "
+                    "SELECT taxline_id, :taxid, :tax "
+                    "  FROM taxhead "
+                    "  JOIN taxline ON taxhead_id = taxline_taxhead_id "
+                    "              AND taxline_line_type = 'A' "
+                    " WHERE taxhead_doc_type = :ordertype "
+                    "   AND taxhead_doc_id = :orderid;");
+    taxSave.bindValue(":ordertype", _ordertype);
+    taxSave.bindValue(":orderid", _orderid);
+    taxSave.bindValue(":taxid", _taxcode->id());
+    taxSave.bindValue(":tax", _amount->localValue());
+    taxSave.exec();
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Tax Adjustment Information"),
+                         taxSave, __FILE__, __LINE__);
   }
-
-  if (_ordertype == "INV" && _metrics->value("TaxService") != "N")
+  else if (_mode == cEdit)
   {
-    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-    tax->calculateTax(_ordertype, _orderid, true);
+    taxSave.prepare("UPDATE taxdetail "
+                    "   SET taxdetail_tax = :tax "
+                    " WHERE taxdetail_id = :taxdetail_id;");
+    taxSave.bindValue(":taxdetail_id", _taxdetailid);
+    taxSave.exec();
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Tax Adjustment Information"),
+                         taxSave, __FILE__, __LINE__);
   }
 
   accept();
@@ -139,33 +136,32 @@ void taxAdjustment::sSave()
 void taxAdjustment::sCheck()
 {
   XSqlQuery taxCheck;
-  QString table;
 
-   taxCheck.prepare( "SELECT taxhist_id, taxhist_tax_id, taxhist_tax "
-              "FROM taxhist "
-              " JOIN pg_class ON (pg_class.oid=taxhist.tableoid) "
-              "WHERE ((taxhist_parent_id=:order_id) "
-              " AND (taxhist_taxtype_id=getadjustmenttaxtypeid()) "
-              " AND (taxhist_tax_id=:tax_id) "
-              " AND (relname=:table) );" );
-  taxCheck.bindValue(":order_id", _orderid);
-  taxCheck.bindValue(":tax_id", _taxcode->id());
-  taxCheck.bindValue(":table", _table);
-
+  taxCheck.prepare("SELECT taxdetail_id, taxdetail_tax "
+                   "  FROM taxhead "
+                   "  JOIN taxline ON taxhead_id = taxline_taxhead_id "
+                   "              AND taxline_line_type = 'A' "
+                   "  JOIN taxdetail ON taxline_id = taxdetail_taxline_id "
+                   "                AND taxdetail_tax_id = :taxid "
+                   " WHERE taxhead_doc_type = :ordertype "
+                   "   AND taxhead_doc_id = :orderid;");
+  taxCheck.bindValue(":ordertype", _ordertype);
+  taxCheck.bindValue(":orderid", _orderid);
+  taxCheck.bindValue(":taxid", _taxcode->id());
   taxCheck.exec();
   if (taxCheck.first())
   {
-    _taxhistid=taxCheck.value("taxhist_id").toInt();
-    _amount->setLocalValue(taxCheck.value("taxhist_tax").toDouble() * _sense);
+    _taxdetailid = taxCheck.value("taxdetail_id").toInt();
+    _amount->setLocalValue(taxCheck.value("taxdetail_tax").toDouble());
     _amount->setFocus();
-    _mode=cEdit;
+    _mode = cEdit;
   }
   else
   {
-    _taxhistid=-1;
+    _taxdetailid = -1;
     _amount->clear();
     _amount->setFocus();
-    _mode=cNew;
+    _mode = cNew;
   }
 }
 

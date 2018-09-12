@@ -463,8 +463,12 @@ void creditMemoItem::populate()
   XSqlQuery cmitem;
   cmitem.prepare("SELECT cmitem.*,  "
                  "       cmhead_taxzone_id, cmhead_curr_id, "
-                 "      (SELECT SUM(taxhist_tax * -1) "
-		 "       FROM cmitemtax WHERE (cmitem_id=taxhist_parent_id)) AS tax,"
+                 "      (SELECT SUM(taxdetail_tax) "
+		 "       FROM taxhead "
+                 "       JOIN taxline ON taxhead_id = taxline_taxhead_id "
+                 "       JOIN taxdetail ON taxline_id = taxdetail_taxline_id "
+                 "      WHERE taxhead_doc_type = 'CM' "
+                 "        AND taxline_line_id = cmitem_id) AS tax,"
                  "       itemsite_warehous_id, itemsite_costmethod "
                  "FROM cmhead, cmitem "
                  "LEFT OUTER JOIN itemsite ON (cmitem_itemsite_id=itemsite_id)"
@@ -597,10 +601,12 @@ void creditMemoItem::sListPrices()
 void creditMemoItem::sCalculateTax()
 {
   XSqlQuery calcq;
-  calcq.prepare( "SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
-                "  FROM taxhist "
-                " WHERE taxhist_doctype = 'CMI' "
-                "   AND taxhist_parent_id = :cmitem_id");
+  calcq.prepare( "SELECT SUM(taxdetail_tax) AS tax "
+                 "  FROM taxhead " 
+                 "  JOIN taxline ON taxhead_id = taxline_taxhead_id " 
+                 "  JOIN taxdetail ON taxline_id = taxdetail_taxline_id " 
+                 " WHERE taxhead_doc_type = 'CM' "
+                 "   AND taxline_line_id = :cmitem_id;");
   calcq.bindValue(":cmitem_id", _cmitemid);
   calcq.exec();
   if (calcq.first())

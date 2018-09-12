@@ -1261,10 +1261,12 @@ void purchaseOrderItem::sVendorListPrices()
 void purchaseOrderItem::sCalculateTax()
 {
   XSqlQuery calcq;
-  calcq.prepare("SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
-                "  FROM taxhist "
-                " WHERE taxhist_doctype = 'PI' "
-                "   AND taxhist_parent_id = :poitemid");
+  calcq.prepare( "SELECT SUM(taxdetail_tax) AS tax "
+                 "  FROM taxhead "     
+                 "  JOIN taxline ON taxhead_id = taxline_taxhead_id "     
+                 "  JOIN taxdetail ON taxline_id = taxdetail_taxline_id "     
+                 " WHERE taxhead_doc_type = 'P' "
+                 "   AND taxline_line_id = :poitemid;");
   calcq.bindValue(":poitemid", _poitemid);
   calcq.exec();
   if (calcq.first())
