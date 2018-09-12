@@ -1,21 +1,18 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
  * to be bound by its terms.
  */
 
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QMenu>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QSqlError>
 #include <QSqlQueryModel>
-#include <QVBoxLayout>
 #include <QtScript>
 
 #include <metasql.h>
@@ -25,6 +22,10 @@
 #include "custcluster.h"
 #include "format.h"
 #include "storedProcErrorLookup.h"
+
+static const int CREDITSTATUS = 4;      // where do these come from?
+static const int CRMACCT_ID   = 5;
+static const int ISCUSTOMER   = 6;
 
 #define DEBUG false
 
