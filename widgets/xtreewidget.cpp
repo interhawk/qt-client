@@ -2491,6 +2491,8 @@ QString XTreeWidget::toTxt() const
   return opText;
 }
 
+
+
 QString XTreeWidget::toSV(QString pSep) const
 {
   QString line;
@@ -2540,6 +2542,11 @@ QString XTreeWidget::toSV(QString pSep) const
     }
   }
   return opText;
+}
+
+QString XTreeWidget::toCsv()
+{
+  return toSV(QString(','));
 }
 
 QString XTreeWidget::toVcf() const
@@ -2890,53 +2897,5 @@ void XTreeWidget::keyPressEvent(QKeyEvent* e)
     QTreeWidget::keyPressEvent(e);
 }
 
-QStringList parseDelim(QString delim)
-{ 
-  QStringList delimItems; 
-  int i = delim.indexOf('{') ;
-  if ( i >=0)
-    delim.remove("{tab}");  
-  foreach(QChar c, delim)
-    delimItems.append(c);  
-  if(i>=0)
-    delimItems.insert(i,"{tab}");
-  return delimItems;
-}
 
-
-bool invalidDelim(QString delim)
-{
-  bool invalid = false;
-  if (delim.length() > 1)
-  {
-    if(delim != "{tab}")
-    {
-      invalid = true;
-      QMessageBox msgBox;
-      msgBox.setText("Avoid delimiters more than 1 char long.");
-      msgBox.exec();
-    }
-  }
-  else //don't allow or encourage against certain characters
-  {
-    QString disallowed = "(){}[]\"'`<>.{blank}";
-    QString notEncouraged = " @#$%&*_=-+/? ";
-    if (disallowed.contains(delim))
-    {
-      invalid = true;
-      QMessageBox msgBox;
-      msgBox.setText("Invalid delimiter");
-      msgBox.setInformativeText("These characters cannot be used as delimiters: (){}[]\"'`<>.{blank} ");
-      msgBox.exec();
-    }
-    else if (notEncouraged.contains(delim))
-    {
-      QMessageBox msgBox;
-      msgBox.setText("Be careful with your selection of delimiter");
-      msgBox.setInformativeText("We suggest you avoid using these delimiters : @#$%&*_=-+/? ");
-      msgBox.exec();
-    }
-  } 
-  return invalid;
-}
 

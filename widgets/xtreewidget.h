@@ -213,7 +213,7 @@ class XTUPLEWIDGETS_EXPORT XTreeWidget : public QTreeWidget
 
     Q_INVOKABLE QString toTxt() const;
     Q_INVOKABLE QString toSV(QString pSep) const;
-    Q_INVOKABLE QString toCsv() {return toSV(QString(','));} ;
+    Q_INVOKABLE QString toCsv();
     Q_INVOKABLE QString toVcf() const;
     Q_INVOKABLE QString toHtml() const;
 
@@ -371,9 +371,5 @@ class XTreeWidgetPopulateParams
 
 void  setupXTreeWidgetItem(QScriptEngine *engine);
 void  setupXTreeWidget(QScriptEngine *engine);
-
-//for delimiter handling
-QStringList parseDelim(QString delim);
-bool invalidDelim(QString delim);
 
 #endif

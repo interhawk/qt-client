@@ -29,7 +29,7 @@
 #include "timeoutHandler.h"
 #include "translations.h"
 #include "dictionaries.h"
-#include "xtreewidget.h"
+#include "exporthelper.h"
 
 extern QString __password;
 
@@ -116,7 +116,7 @@ userPreferences::userPreferences(QWidget* parent, const char* name, bool modal, 
     delim = _pref->value("Delimiter");
   else
     delim = ",{tab}~|;:^!";
-  _delimiter->insertItems(0,parseDelim(delim));
+  _delimiter->insertItems(0,ExportHelper::parseDelim(delim));
   _delimiter->setCurrentIndex(0);
 
 
@@ -355,7 +355,7 @@ void userPreferences::sSave(bool close)
   _pref->set("IdleTimeout", _idleTimeout->value());
   omfgThis->_timeoutHandler->setIdleMinutes(_idleTimeout->value());
 
-  if(invalidDelim(_delimiter->currentText()))
+  if(ExportHelper::validDelim(_delimiter->currentText()))
   {
     if(_delimiter->currentText().length() > 1)
       _delimiter->setCurrentText(_delimiter->currentText().at(0));

@@ -66,13 +66,13 @@ void ExportOptions::populateDelim()
 {
   QStringList delimValues;
   if(_x_preferences)
-    delimValues = parseDelim(_x_preferences->value("Delimiter"));
+    delimValues = ExportHelper::parseDelim(_x_preferences->value("Delimiter"));
   delimCB->insertItems(0,delimValues);
 }
 
 void ExportOptions::sSave()
 {
-  if(invalidDelim(delimCB->currentText()))
+  if(!ExportHelper::validDelim(delimCB->currentText()))
   {
     if(delimCB->currentText().length() > 1)
       delimCB->setCurrentText(delimCB->currentText().at(0));

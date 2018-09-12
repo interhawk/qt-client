@@ -37,6 +37,8 @@ class ExportHelper : public QObject
     static bool    XSLTConvertFile(QString inputfilename, QString outputfilename, QString xsltfilename, QString &errmsg);
     static bool    XSLTConvertFile(QString inputfilename, QString outputfilename, int xsltmapid, QString &errmsg);
     static QString XSLTConvertString(QString input, int xsltmapid, QString &errmsg);
+    static QStringList parseDelim(QString delim);
+    static bool validDelim(QString delim);
 };
 
 void setupExportHelper(QScriptEngine *engine);

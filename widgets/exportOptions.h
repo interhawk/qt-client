@@ -16,6 +16,7 @@
 
 #include "ui_exportOptions.h"
 #include "xtreewidget.h"
+#include "exporthelper.h"
 
 QT_BEGIN_NAMESPACE
 
