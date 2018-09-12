@@ -397,9 +397,7 @@ void apOpenItem::populate()
              "                          WHEN 'O' THEN 1 "
              "                          WHEN 'H' THEN 2 "
              "       END AS status_id, apopen_status, "
-             "       (SELECT COALESCE(SUM(taxhist_tax),0) "
-             "        FROM apopentax "
-             "        WHERE (taxhist_parent_id=apopen_id)) AS tax, "
+             "       getOrderTax('AP', apopen_id) AS tax, "
              "       CASE WHEN (apopen_doctype IN ('D', 'C')) THEN true "
              "            ELSE false "
              "       END AS showTax "
@@ -621,9 +619,7 @@ void apOpenItem::sTaxDetail()
   newdlg.exec();
 
   XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(taxhist_tax) AS tax "
-    "FROM apopentax "
-    "WHERE (taxhist_parent_id=:apopen_id);" );
+  taxq.prepare( "SELECT getOrderTax('AP', :apopen_id) AS tax;" );
   taxq.bindValue(":apopen_id", _apopenid);
   taxq.exec();
   if (taxq.first())

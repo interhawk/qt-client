@@ -823,9 +823,12 @@ void transferOrderItem::populate()
 		 "         WHERE ((shipitem_shiphead_id=shiphead_id)"
 		 "           AND  (shiphead_order_type='TO')"
 		 "           AND  (shipitem_orderitem_id=toitem_id))) AS shipitem_qty, "
-     "        SUM(taxhist_tax) AS tax "
+                 "        SUM(taxdetail_tax) AS tax "
 		 "FROM whsinfo, tohead, itemsite, toitem  "
-     " LEFT OUTER JOIN toitemtax ON (toitem_id=taxhist_parent_id) "
+                 " LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'TO' "
+                 " LEFT OUTER JOIN taxline ON taxhead_id = taxline_taxhead_id "
+                 "                        AND taxline_line_id = toitem_id "
+                 " LEFT OUTER JOIN taxdetail ON taxline_id = taxdetail_taxline_id "
 		 "WHERE ((toitem_tohead_id=tohead_id)"
 		 "  AND  (tohead_src_warehous_id=warehous_id)"
 		 "  AND  (itemsite_item_id=toitem_item_id)"
@@ -1090,10 +1093,12 @@ void transferOrderItem::sCancel()
 void transferOrderItem::sCalculateTax()
 {  
   XSqlQuery calcq;
-  calcq.prepare( "SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
-                "  FROM taxhist "
-                " WHERE taxhist_doctype = 'TI' "
-                "   AND taxhist_parent_id = :toitem_id");
+  calcq.prepare( "SELECT SUM(taxdetail_tax) AS tax "
+                 "  FROM taxhead "     
+                 "  JOIN taxline ON taxhead_id = taxline_taxhead_id "     
+                 "  JOIN taxdetail ON taxline_id = taxdetail_taxline_id "     
+                 " WHERE taxhead_doc_type = 'TO' "
+                 "   AND taxline_line_id = :toitem_id;");
   calcq.bindValue(":toitem_id", _toitemid);
   calcq.exec();
   if (calcq.first())

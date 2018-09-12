@@ -354,7 +354,6 @@ void invoiceItem::populate()
                    " FROM invcitem JOIN invchead ON (invchead_id=invcitem_invchead_id)"
                    "               LEFT OUTER JOIN taxzone ON (taxzone_id=invchead_taxzone_id)"
                    "               LEFT OUTER JOIN item ON (item_id=invcitem_item_id)"
-                   "               LEFT OUTER JOIN invcitemtax ON (taxhist_parent_id=invcitem_id)"
                    "               LEFT OUTER JOIN itemsite ON (itemsite_item_id=item_id AND"
                    "                                            itemsite_warehous_id=invcitem_warehous_id)"
                    "               LEFT OUTER JOIN cobill ON (cobill_invcitem_id=invcitem_id) "
@@ -435,19 +434,7 @@ void invoiceItem::populate()
     return;
   }
 
-  invcitem.prepare( "SELECT SUM(COALESCE(taxhist_tax, 0.00)) AS lineTaxTotal "
-                    "FROM invcitem LEFT OUTER JOIN invcitemtax "
-                    "  ON (invcitem_id = taxhist_parent_id) "
-                    "WHERE invcitem_id = :invcitem_id;" );
-  invcitem.bindValue(":invcitem_id", _invcitemid);
-  invcitem.exec();
-  if (invcitem.first())
-    _tax->setLocalValue(invcitem.value("lineTaxTotal").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Invoice Line Item Information"),
-                                invcitem, __FILE__, __LINE__))
-  {
-    return;
-  }
+  sLookupTax();
 
   sCalculateExtendedPrice();
 
@@ -888,10 +875,12 @@ void invoiceItem::sListPrices()
 void invoiceItem::sLookupTax()
 {
   XSqlQuery taxcal;
-  taxcal.prepare("SELECT COALESCE(SUM(taxhist_tax), 0.0) AS tax "
-                 "  FROM taxhist "
-                 " WHERE taxhist_doctype = 'INVI' "
-                 "   AND taxhist_parent_id = :invcitemid;");
+  taxcal.prepare("SELECT SUM(taxdetail_tax) AS tax "
+                 "  FROM taxhead "     
+                 "  JOIN taxline ON taxhead_id = taxline_taxhead_id "     
+                 "  JOIN taxdetail ON taxline_id = taxdetail_taxline_id "     
+                 " WHERE taxhead_doc_type = 'INV' "
+                 "   AND taxline_line_id = :invcitemid;");
   taxcal.bindValue(":invcitemid", _invcitemid);
   taxcal.exec();
   if (taxcal.first())

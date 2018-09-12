@@ -33,8 +33,7 @@ protected slots:
     virtual void languageChange();
 
 private:
-  int _sense;
-  int _taxhistid;
+  int _taxdetailid;
   int _mode;
   int _orderid;
   QString _ordertype;

@@ -679,14 +679,7 @@ void voucher::sDeleteMiscDistribution()
 {
   saveDetail();
   XSqlQuery delq;
-  // TODO: split or write a function
-  delq.prepare("DELETE FROM voheadtax"
-               " WHERE (taxhist_parent_id=:vohead_id)"
-               "   AND (taxhist_taxtype_id=getadjustmenttaxtypeid())"
-               "   AND (taxhist_tax_id = (SELECT vodist_tax_id"
-               "                            FROM vodist"
-               "                           WHERE (vodist_id=:vodist_id)));"
-               "DELETE FROM vodist"
+  delq.prepare("DELETE FROM vodist"
                " WHERE (vodist_id=:vodist_id);");
 
   delq.bindValue(":vohead_id", _voheadid);
