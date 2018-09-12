@@ -858,8 +858,7 @@ void creditMemo::sFillList()
     connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
   }
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 
   _currency->setEnabled(_cmitem->topLevelItemCount() == 0);
 }
@@ -1044,16 +1043,14 @@ void creditMemo::sTaxZoneChanged()
 
 void creditMemo::sMiscTaxtypeChanged()
 {
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void creditMemo::sMiscChargeChanged()
 {
   sCalculateTotal();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void creditMemo::sFreightChanged()
@@ -1142,7 +1139,6 @@ void creditMemo::sFreightChanged()
 
   sCalculateTotal();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 

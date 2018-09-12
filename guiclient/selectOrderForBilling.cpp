@@ -406,8 +406,7 @@ void selectOrderForBilling::sEditSelection()
   {
     sFillList();
 
-    if (_metrics->value("TaxService") != "A")
-      _salesTax->sRecalculate();
+    _salesTax->invalidate();
 
     _updated = true;
   }
@@ -426,8 +425,7 @@ void selectOrderForBilling::sCancelSelection()
 
   sFillList();
 
-  if (_metrics->value("TaxService") != "A")
-    _salesTax->sRecalculate();
+  _salesTax->invalidate();
 }
 
 void selectOrderForBilling::sSelectBalance()
@@ -455,8 +453,7 @@ void selectOrderForBilling::sSelectBalance()
 
   sFillList();
 
-  if (_metrics->value("TaxService") != "A")
-    _salesTax->sRecalculate();
+  _salesTax->invalidate();
 }
 
 void selectOrderForBilling::sUpdateTotal()
@@ -619,16 +616,14 @@ void selectOrderForBilling::sTaxZoneChanged()
 
 void selectOrderForBilling::sMiscTaxtypeChanged()
 {
-  if (_metrics->value("TaxService") != "A")
-    _salesTax->sRecalculate();
+  _salesTax->invalidate();
 }
 
 void selectOrderForBilling::sMiscChargeChanged()
 {
   sUpdateTotal();
 
-  if (_metrics->value("TaxService") != "A")
-    _salesTax->sRecalculate();
+  _salesTax->invalidate();
 }
 
 void selectOrderForBilling::sFreightChanged()
@@ -691,7 +686,6 @@ void selectOrderForBilling::sFreightChanged()
 
     sUpdateTotal();
 
-    if (_metrics->value("TaxService") != "A")
-      _salesTax->sRecalculate();
+    _salesTax->invalidate();
   }   
 }

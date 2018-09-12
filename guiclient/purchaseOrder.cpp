@@ -1353,8 +1353,7 @@ void purchaseOrder::sHandlePurchaseOrderEvent(int pPoheadid, bool)
   if (pPoheadid == _poheadid)
   {
     sFillList();
-    if (_metrics->value("TaxService") != "A")
-      _tax->sRecalculate();
+    _tax->invalidate();
   }
 }
 
@@ -1673,8 +1672,7 @@ void purchaseOrder::sHandleOrderDate()
 
 void purchaseOrder::sFreightTaxtypeChanged()
 {
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void purchaseOrder::sFreightChanged()
@@ -1718,8 +1716,7 @@ void purchaseOrder::sFreightChanged()
     }
   }
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void purchaseOrder::sTaxZoneChanged()

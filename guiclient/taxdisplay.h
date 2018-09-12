@@ -29,6 +29,7 @@ class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
     Q_INVOKABLE int     mode();
     Q_INVOKABLE void    save();
     Q_INVOKABLE void    post();
+    Q_INVOKABLE void    invalidate();
 
   public slots:
     void setType(QString);

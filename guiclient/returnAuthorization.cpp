@@ -1171,8 +1171,7 @@ void returnAuthorization::sFillList()
 
   sCalculateNetDue();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 
   _currency->setEnabled((_raitem->topLevelItemCount() == 0) && (_mode == cEdit));
 
@@ -2029,15 +2028,13 @@ void returnAuthorization::sCheckNumber()
 
 void returnAuthorization::sMiscTaxtypeChanged()
 {
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void returnAuthorization::sMiscChargeChanged()
 {
   sCalculateTotal();
-   if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void returnAuthorization::sFreightChanged()
@@ -2117,8 +2114,7 @@ void returnAuthorization::sFreightChanged()
   }
 
   sCalculateTotal();
-   if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void returnAuthorization::sFreightDetail()

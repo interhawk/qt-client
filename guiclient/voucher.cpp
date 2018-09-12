@@ -479,8 +479,7 @@ void voucher::sDistributions()
   sFillList();
   sPopulateDistributed();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void voucher::sDistributeLine()
@@ -534,8 +533,7 @@ void voucher::sDistributeLine()
   sFillList();
   sPopulateDistributed();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void voucher::sClear()
@@ -573,8 +571,7 @@ void voucher::sClear()
   sFillList();
   sPopulateDistributed();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void voucher::sDistributeAll()
@@ -629,8 +626,7 @@ void voucher::sDistributeAll()
   sFillList();
   sPopulateDistributed();
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void voucher::sNewMiscDistribution()
@@ -1084,8 +1080,7 @@ void voucher::sFreightDistribution(bool distFreight)
 
 void voucher::sFreightTaxtypeChanged()
 {
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void voucher::sFreightChanged()
@@ -1130,8 +1125,7 @@ void voucher::sFreightChanged()
     }
   }
 
-  if (_metrics->value("TaxService") != "A")
-    _tax->sRecalculate();
+  _tax->invalidate();
 }
 
 void voucher::sIsDistributed()
