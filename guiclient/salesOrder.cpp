@@ -13,11 +13,9 @@
 
 #include <QAction>
 #include <QCloseEvent>
-#include <QKeyEvent>
 #include <QMenu>
 #include <QMessageBox>
 #include <QSqlError>
-#include <QValidator>
 #include <QVariant>
 
 #include <metasql.h>
@@ -25,8 +23,6 @@
 #include "characteristicAssignment.h"
 #include "creditCard.h"
 #include "creditcardprocessor.h"
-#include "crmacctcluster.h"
-#include "customer.h"
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
 #include "distributeInventory.h"
@@ -39,7 +35,6 @@
 #include "printPackingList.h"
 #include "printSoForm.h"
 #include "printQuote.h"
-#include "prospect.h"
 #include "allocateARCreditMemo.h"
 #include "reserveSalesOrderItem.h"
 #include "dspReservations.h"
@@ -71,6 +66,8 @@ enum OrderModeType  { QuoteMode = 1, OrderMode = 2 };
 #define iAskToUpdate  2
 #define iJustUpdate   3
 
+#define DEBUG false
+
 salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   : XDocumentWindow(parent, name, fl),
     _saved         (false),
@@ -101,59 +98,59 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
 
   sCheckValidContacts();
 
-  connect(_action,              SIGNAL(clicked()),                              this,         SLOT(sAction()));
-  connect(_authorize,           SIGNAL(clicked()),                              this,         SLOT(sAuthorizeCC()));
-  connect(_charge,              SIGNAL(clicked()),                              this,         SLOT(sChargeCC()));
-  connect(_postCash,            SIGNAL(clicked()),                              this,         SLOT(sEnterCashPayment()));
-  connect(_clear,               SIGNAL(pressed()),                              this,         SLOT(sClear()));
-  connect(_copyToShipto,        SIGNAL(clicked()),                              this,         SLOT(sCopyToShipto()));
-  connect(_cust,                SIGNAL(newId(int)),                             this,         SLOT(sPopulateCustomerInfo(int)));
-  connect(_cancel,              SIGNAL(clicked()),                              this,         SLOT(sCancel()));
-  connect(_delete,              SIGNAL(clicked()),                              this,         SLOT(sDelete()));
-  connect(_downCC,              SIGNAL(clicked()),                              this,         SLOT(sMoveDown()));
-  connect(_edit,                SIGNAL(clicked()),                              this,         SLOT(sEdit()));
-  connect(_editCC,              SIGNAL(clicked()),                              this,         SLOT(sEditCreditCard()));
-  connect(_new,                 SIGNAL(clicked()),                              this,         SLOT(sNew()));
-  connect(_newCC,               SIGNAL(clicked()),                              this,         SLOT(sNewCreditCard()));
-  connect(_orderNumber,         SIGNAL(editingFinished()),                      this,         SLOT(sHandleOrderNumber()));
-  connect(_orderNumber,         SIGNAL(textChanged(const QString &)),           this,         SLOT(sSetUserEnteredOrderNumber()));
-  connect(_save,                SIGNAL(clicked()),                              this,         SLOT(sSave()));
-  connect(_saveAndAdd,          SIGNAL(clicked()),                              this,         SLOT(sSaveAndAdd()));
-  connect(_close,               SIGNAL(clicked()),                              this,         SLOT(close()));
-  connect(_shippingCharges,     SIGNAL(newID(int)),                             this,         SLOT(sHandleShipchrg(int)));
-  connect(_shipToAddr,          SIGNAL(changed()),                              this,         SLOT(sConvertShipTo()));
-  connect(_shipToName,          SIGNAL(textChanged(const QString &)),           this,         SLOT(sConvertShipTo()));
-  connect(_shipTo,              SIGNAL(newId(int)),                             this,         SLOT(sParseShipToNumber()));
-  connect(_showCanceled,        SIGNAL(toggled(bool)),                          this,         SLOT(sFillItemList()));
-  connect(_soitem,              SIGNAL(populateMenu(QMenu*,QTreeWidgetItem *)), this,         SLOT(sPopulateMenu(QMenu *)));
-  connect(_soitem,              SIGNAL(itemSelectionChanged()),                 this,         SLOT(sHandleButtons()));
-  connect(_taxZone,             SIGNAL(newID(int)),                             this,         SLOT(sTaxZoneChanged()));
-  connect(_taxLit,              SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sTaxDetail()));
-  connect(_freightLit,          SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sFreightDetail()));
-  connect(_upCC,                SIGNAL(clicked()),                              this,         SLOT(sMoveUp()));
-  connect(_viewCC,              SIGNAL(clicked()),                              this,         SLOT(sViewCreditCard()));
-  connect(_warehouse,           SIGNAL(newID(int)),                             this,         SLOT(sPopulateFOB(int)));
-  connect(_issueStock,          SIGNAL(clicked()),                              this,         SLOT(sIssueStock()));
-  connect(_issueLineBalance,    SIGNAL(clicked()),                              this,         SLOT(sIssueLineBalance()));
-  connect(_reserveStock,        SIGNAL(clicked()),                              this,         SLOT(sReserveStock()));
-  connect(_reserveLineBalance,  SIGNAL(clicked()),                              this,         SLOT(sReserveLineBalance()));
-  connect(_subtotal,            SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
-  connect(_miscCharge,          SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
-  connect(_freight,             SIGNAL(valueChanged()),                         this,         SLOT(sFreightChanged()));
+  connect(_action,              SIGNAL(clicked()),                              this,         SLOT(sAction()), Qt::UniqueConnection);
+  connect(_authorize,           SIGNAL(clicked()),                              this,         SLOT(sAuthorizeCC()), Qt::UniqueConnection);
+  connect(_charge,              SIGNAL(clicked()),                              this,         SLOT(sChargeCC()), Qt::UniqueConnection);
+  connect(_postCash,            SIGNAL(clicked()),                              this,         SLOT(sEnterCashPayment()), Qt::UniqueConnection);
+  connect(_clear,               SIGNAL(pressed()),                              this,         SLOT(sClear()), Qt::UniqueConnection);
+  connect(_copyToShipto,        SIGNAL(clicked()),                              this,         SLOT(sCopyToShipto()), Qt::UniqueConnection);
+  connect(_cust,                SIGNAL(newId(int)),                             this,         SLOT(sPopulateCustomerInfo(int)), Qt::UniqueConnection);
+  connect(_cancel,              SIGNAL(clicked()),                              this,         SLOT(sCancel()), Qt::UniqueConnection);
+  connect(_delete,              SIGNAL(clicked()),                              this,         SLOT(sDelete()), Qt::UniqueConnection);
+  connect(_downCC,              SIGNAL(clicked()),                              this,         SLOT(sMoveDown()), Qt::UniqueConnection);
+  connect(_edit,                SIGNAL(clicked()),                              this,         SLOT(sEdit()), Qt::UniqueConnection);
+  connect(_editCC,              SIGNAL(clicked()),                              this,         SLOT(sEditCreditCard()), Qt::UniqueConnection);
+  connect(_new,                 SIGNAL(clicked()),                              this,         SLOT(sNew()), Qt::UniqueConnection);
+  connect(_newCC,               SIGNAL(clicked()),                              this,         SLOT(sNewCreditCard()), Qt::UniqueConnection);
+  connect(_orderNumber,         SIGNAL(editingFinished()),                      this,         SLOT(sHandleOrderNumber()), Qt::UniqueConnection);
+  connect(_orderNumber,         SIGNAL(textChanged(const QString &)),           this,         SLOT(sSetUserEnteredOrderNumber()), Qt::UniqueConnection);
+  connect(_save,                SIGNAL(clicked()),                              this,         SLOT(sSave()), Qt::UniqueConnection);
+  connect(_saveAndAdd,          SIGNAL(clicked()),                              this,         SLOT(sSaveAndAdd()), Qt::UniqueConnection);
+  connect(_close,               SIGNAL(clicked()),                              this,         SLOT(close()), Qt::UniqueConnection);
+  connect(_shippingCharges,     SIGNAL(newID(int)),                             this,         SLOT(sHandleShipchrg(int)), Qt::UniqueConnection);
+  connect(_shipToAddr,          SIGNAL(changed()),                              this,         SLOT(sConvertShipTo()), Qt::UniqueConnection);
+  connect(_shipToName,          SIGNAL(textChanged(const QString &)),           this,         SLOT(sConvertShipTo()), Qt::UniqueConnection);
+  connect(_shipTo,              SIGNAL(newId(int)),                             this,         SLOT(sParseShipToNumber()), Qt::UniqueConnection);
+  connect(_showCanceled,        SIGNAL(toggled(bool)),                          this,         SLOT(sFillItemList()), Qt::UniqueConnection);
+  connect(_soitem,              SIGNAL(populateMenu(QMenu*,QTreeWidgetItem *)), this,         SLOT(sPopulateMenu(QMenu *)), Qt::UniqueConnection);
+  connect(_soitem,              SIGNAL(itemSelectionChanged()),                 this,         SLOT(sHandleButtons()), Qt::UniqueConnection);
+  connect(_taxZone,             SIGNAL(newID(int)),                             this,         SLOT(sTaxZoneChanged()), Qt::UniqueConnection);
+  connect(_taxLit,              SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sTaxDetail()), Qt::UniqueConnection);
+  connect(_freightLit,          SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sFreightDetail()), Qt::UniqueConnection);
+  connect(_upCC,                SIGNAL(clicked()),                              this,         SLOT(sMoveUp()), Qt::UniqueConnection);
+  connect(_viewCC,              SIGNAL(clicked()),                              this,         SLOT(sViewCreditCard()), Qt::UniqueConnection);
+  connect(_warehouse,           SIGNAL(newID(int)),                             this,         SLOT(sPopulateFOB(int)), Qt::UniqueConnection);
+  connect(_issueStock,          SIGNAL(clicked()),                              this,         SLOT(sIssueStock()), Qt::UniqueConnection);
+  connect(_issueLineBalance,    SIGNAL(clicked()),                              this,         SLOT(sIssueLineBalance()), Qt::UniqueConnection);
+  connect(_reserveStock,        SIGNAL(clicked()),                              this,         SLOT(sReserveStock()), Qt::UniqueConnection);
+  connect(_reserveLineBalance,  SIGNAL(clicked()),                              this,         SLOT(sReserveLineBalance()), Qt::UniqueConnection);
+  connect(_subtotal,            SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()), Qt::UniqueConnection);
+  connect(_miscCharge,          SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()), Qt::UniqueConnection);
+  connect(_freight,             SIGNAL(valueChanged()),                         this,         SLOT(sFreightChanged()), Qt::UniqueConnection);
   if (_privileges->check("ApplyARMemos"))
-    connect(_allocatedCMLit,    SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sCreditAllocate()));
-  connect(_allocatedCM,         SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
-  connect(_outstandingCM,       SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
-  connect(_authCC,              SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
-  connect(_more,                SIGNAL(clicked()),                              this,         SLOT(sHandleMore()));
-  connect(_orderDate,           SIGNAL(newDate(QDate)),                         this,         SLOT(sOrderDateChanged()));
-  connect(_shipDate,            SIGNAL(newDate(QDate)),                         this,         SLOT(sShipDateChanged()));
-  connect(_cust,                SIGNAL(newCrmacctId(int)),                      _billToAddr,  SLOT(setSearchAcct(int)));
-  connect(_cust,                SIGNAL(newCrmacctId(int)),                      _shipToAddr,  SLOT(setSearchAcct(int)));
-  connect(_newCharacteristic,   SIGNAL(clicked()),                              this,         SLOT(sNewCharacteristic()));
-  connect(_editCharacteristic,  SIGNAL(clicked()),                              this,         SLOT(sEditCharacteristic()));
-  connect(_deleteCharacteristic,SIGNAL(clicked()),                              this,         SLOT(sDeleteCharacteristic()));
-  connect(_holdType,            SIGNAL(newID(int)),                             this,         SLOT(sHoldTypeChanged()));
+    connect(_allocatedCMLit,    SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sCreditAllocate()), Qt::UniqueConnection);
+  connect(_allocatedCM,         SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()), Qt::UniqueConnection);
+  connect(_outstandingCM,       SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()), Qt::UniqueConnection);
+  connect(_authCC,              SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()), Qt::UniqueConnection);
+  connect(_more,                SIGNAL(clicked()),                              this,         SLOT(sHandleMore()), Qt::UniqueConnection);
+  connect(_orderDate,           SIGNAL(newDate(QDate)),                         this,         SLOT(sOrderDateChanged()), Qt::UniqueConnection);
+  connect(_shipDate,            SIGNAL(newDate(QDate)),                         this,         SLOT(sShipDateChanged()), Qt::UniqueConnection);
+  connect(_cust,                SIGNAL(newCrmacctId(int)),                      _billToAddr,  SLOT(setSearchAcct(int)), Qt::UniqueConnection);
+  connect(_cust,                SIGNAL(newCrmacctId(int)),                      _shipToAddr,  SLOT(setSearchAcct(int)), Qt::UniqueConnection);
+  connect(_newCharacteristic,   SIGNAL(clicked()),                              this,         SLOT(sNewCharacteristic()), Qt::UniqueConnection);
+  connect(_editCharacteristic,  SIGNAL(clicked()),                              this,         SLOT(sEditCharacteristic()), Qt::UniqueConnection);
+  connect(_deleteCharacteristic,SIGNAL(clicked()),                              this,         SLOT(sDeleteCharacteristic()), Qt::UniqueConnection);
+  connect(_holdType,            SIGNAL(newID(int)),                             this,         SLOT(sHoldTypeChanged()), Qt::UniqueConnection);
 
   connect(_billToAddr,          SIGNAL(addressChanged(QString,QString,QString,QString,QString,QString, QString)),
           _billToCntct, SLOT(setNewAddr(QString,QString,QString,QString,QString,QString, QString)));
@@ -306,8 +303,9 @@ void salesOrder::languageChange()
   retranslateUi(this);
 }
 
-enum SetResponse salesOrder:: set(const ParameterList &pParams)
+enum SetResponse salesOrder::set(const ParameterList &pParams)
 {
+  ENTERED;
   XSqlQuery setSales;
   XDocumentWindow::set(pParams);
   QVariant  param;
@@ -329,9 +327,9 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
       _project->setAllowedStatuses(ProjectLineEdit::Concept |  ProjectLineEdit::InProcess);
       _calcfreight = _metrics->boolean("CalculateFreight");
 
-      connect(omfgThis, SIGNAL(salesOrdersUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)));
-      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)));
-      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)));
+      connect(omfgThis, SIGNAL(salesOrdersUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)), Qt::UniqueConnection);
+      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)), Qt::UniqueConnection);
+      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)), Qt::UniqueConnection);
     }
     else if (param.toString() == "newQuote")
     {
@@ -360,9 +358,9 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
       _quotestaus->show();
       _quotestaus->setText("Open");
 
-      connect(omfgThis, SIGNAL(quotesUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)));
-      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)));
-      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)));
+      connect(omfgThis, SIGNAL(quotesUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)), Qt::UniqueConnection);
+      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)), Qt::UniqueConnection);
+      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)), Qt::UniqueConnection);
     }
     else if (param.toString() == "edit")
     {
@@ -377,9 +375,9 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
       _comments->setType(Comments::SalesOrder);
       _cust->setType(CLineEdit::AllCustomers);
 
-      connect(omfgThis, SIGNAL(salesOrdersUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)));
-      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)));
-      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)));
+      connect(omfgThis, SIGNAL(salesOrdersUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)), Qt::UniqueConnection);
+      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)), Qt::UniqueConnection);
+      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)), Qt::UniqueConnection);
     }
     else if (param.toString() == "editQuote")
     {
@@ -405,9 +403,9 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
       _quotestatusLit->show();
       _quotestaus->show();
 
-      connect(omfgThis, SIGNAL(quotesUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)));
-      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)));
-      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)));
+      connect(omfgThis, SIGNAL(quotesUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)), Qt::UniqueConnection);
+      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)), Qt::UniqueConnection);
+      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)), Qt::UniqueConnection);
     }
     else if (param.toString() == "view")
     {
@@ -524,7 +522,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     _delete->setEnabled(false);
     _close->setText("&Cancel");
 
-    connect(_cust, SIGNAL(valid(bool)), _new, SLOT(setEnabled(bool)));
+    connect(_cust, SIGNAL(valid(bool)), _new, SLOT(setEnabled(bool)), Qt::UniqueConnection);
   }
   else if (ISEDIT(_mode))
   {
@@ -533,7 +531,7 @@ enum SetResponse salesOrder:: set(const ParameterList &pParams)
     _cust->setReadOnly(true);
     _orderCurrency->setEnabled(false);
 
-    connect(_cust, SIGNAL(valid(bool)), _new, SLOT(setEnabled(bool)));
+    connect(_cust, SIGNAL(valid(bool)), _new, SLOT(setEnabled(bool)), Qt::UniqueConnection);
 
   }
   else if (ISVIEW(_mode))
@@ -704,6 +702,7 @@ int salesOrder::modeType() const
 
 void salesOrder::sSave()
 {
+  ENTERED;
   _saving = true;
 
   if (save(false))
@@ -739,6 +738,7 @@ void salesOrder::sSave()
 
 void salesOrder::sSaveAndAdd()
 {
+  ENTERED;
   XSqlQuery saveSales;
   _saving = true;
 
@@ -783,6 +783,7 @@ void salesOrder::sSaveAndAdd()
 
 bool salesOrder::save(bool partial)
 {
+  ENTERED << "with" << partial;
   XSqlQuery saveSales;
 
   QList<GuiErrorCheck> errors;
@@ -1293,7 +1294,7 @@ bool salesOrder::save(bool partial)
     {
       disconnect(omfgThis, SIGNAL(salesOrdersUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)));
       omfgThis->sSalesOrdersUpdated(_soheadid);
-      connect(omfgThis, SIGNAL(salesOrdersUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)));
+      connect(omfgThis, SIGNAL(salesOrdersUpdated(int, bool)), this, SLOT(sHandleSalesOrderEvent(int, bool)), Qt::UniqueConnection);
       omfgThis->sProjectsUpdated(_soheadid);
     }
     else if ( (_mode == cNewQuote) || (_mode == cEditQuote) )
@@ -1343,6 +1344,7 @@ bool salesOrder::save(bool partial)
 
 void salesOrder::sPopulateMenu(QMenu *pMenu)
 {
+  ENTERED << "with" << pMenu;
   if (_mode == cView &&
       _numSelected == 1 &&
       _lineMode == cClosed)
@@ -1535,6 +1537,7 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
 
 void salesOrder::populateOrderNumber()
 {
+  ENTERED;
   XSqlQuery populateSales;
   if (_mode == cNew)
   {
@@ -1593,11 +1596,13 @@ void salesOrder::populateOrderNumber()
 
 void salesOrder::sSetUserEnteredOrderNumber()
 {
+  ENTERED;
   _userEnteredOrderNumber = true;
 }
 
 void salesOrder::sHandleOrderNumber()
 {
+  ENTERED;
   if (_ignoreSignals || !isActiveWindow())
     return;
 
@@ -1751,6 +1756,7 @@ void salesOrder::sHandleOrderNumber()
 
 void salesOrder::sPopulateFOB(int pWarehousid)
 {
+  ENTERED << "with" << pWarehousid;
   XSqlQuery fob;
   fob.prepare( "SELECT warehous_fob "
                "FROM whsinfo "
@@ -1764,6 +1770,7 @@ void salesOrder::sPopulateFOB(int pWarehousid)
 // Is the first SELECT here responsible for the bug where the Currency kept disappearing?
 void salesOrder::sPopulateCustomerInfo(int pCustid)
 {
+  ENTERED << "with" << pCustid;
   _holdType->setCode("N");
 
   if (_cust->isValid())
@@ -1775,16 +1782,16 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
                 "       cust_taxzone_id, cust_cntct_id,"
                 "       cust_ffshipto, cust_ffbillto, cust_usespos,"
                 "       cust_blanketpos, cust_shipvia,"
-                "       COALESCE(shipto_id, -1) AS shiptoid,"
+                "       shipto_id,"
                 "       cust_preferred_warehous_id, "
                 "       cust_curr_id, COALESCE(crmacct_id,-1) AS crmacct_id, "
                 "       true AS iscustomer "
                 "FROM custinfo "
+                "  JOIN crmacct           ON crmacct_cust_id = cust_id"
                 "  LEFT OUTER JOIN cntct  ON (cust_cntct_id=cntct_id) "
                 "  LEFT OUTER JOIN addr   ON (cntct_addr_id=addr_id) "
                 "  LEFT OUTER JOIN shiptoinfo ON ((shipto_cust_id=cust_id)"
                 "                         AND (shipto_default)) "
-                "LEFT OUTER JOIN crmacct ON (crmacct_cust_id = cust_id) "
                 "WHERE (cust_id=<? value('cust_id') ?>) "
                 "<? if exists('isQuote') ?>"
                 "UNION "
@@ -1797,14 +1804,14 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
                 "       true AS cust_ffshipto, true AS cust_ffbillto, "
                 "       NULL AS cust_usespos, NULL AS cust_blanketpos,"
                 "       NULL AS cust_shipvia,"
-                "       -1 AS shiptoid,"
+                "       NULL AS shipto_id,"
                 "       prospect_warehous_id AS cust_preferred_warehous_id, "
                 "       NULL AS cust_curr_id, COALESCE(crmacct_id,-1) AS crmacct_id, "
                 "       false AS iscustomer "
-                "FROM prospect "
+                "FROM prospect"
+                "  JOIN crmacct           ON crmacct_prospect_id = prospect_id"
                 "  LEFT OUTER JOIN cntct  ON (prospect_cntct_id=cntct_id) "
                 "  LEFT OUTER JOIN addr   ON (cntct_addr_id=addr_id) "
-                "  LEFT OUTER JOIN crmacct ON (crmacct_prospect_id = prospect_id) "
                 "WHERE (prospect_id=<? value('cust_id') ?>) "
                 "<? endif ?>"
                 ";" );
@@ -1900,12 +1907,13 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
       setFreeFormShipto(cust.value("cust_ffshipto").toBool());
       _shipTo->setCustid(pCustid);
 
-      if (ISNEW(_mode) && cust.value("shiptoid").toInt() != -1)
-        populateShipto(cust.value("shiptoid").toInt());
+      if (ISNEW(_mode) && ! cust.value("shipto_id").isNull())
+        populateShipto(cust.value("shipto_id").toInt());
       else
       {
         _ignoreSignals = true;
-        _shipTo->setId(cust.value("shiptoid").toInt());
+        _shipTo->setId(cust.value("shipto_id").isNull() ? -1
+                                                        : cust.value("shipto_id").toInt());
         _shipToName->clear();
         _shipToAddr->clear();
         _shipToCntct->clear();
@@ -1948,6 +1956,7 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
 
 void salesOrder::sParseShipToNumber()
 {
+  ENTERED;
   if (_ignoreSignals)
     return;
 
@@ -1958,25 +1967,25 @@ void salesOrder::sParseShipToNumber()
 
 void salesOrder::populateShipto(int pShiptoid)
 {
+  ENTERED << "with" << pShiptoid;
   if (pShiptoid != -1)
   {
     XSqlQuery shipto;
-    shipto.prepare( "SELECT shipto_num, shipto_name, shipto_addr_id, "
-                    "       cntct_phone, shipto_cntct_id, shipto_shipzone_id,"
+    shipto.prepare( "SELECT shipto_name, shipto_addr_id,"
+                    "       shipto_cntct_id, shipto_shipzone_id,"
                     "       shipto_shipvia, shipto_shipcomments, shipto_comments,"
                     "       shipto_shipchrg_id, shipto_shipform_id,"
-                    "       COALESCE(shipto_taxzone_id, -1) AS shipto_taxzone_id,"
+                    "       shipto_taxzone_id,"
                     "       shipto_preferred_warehous_id, "
-                    "       shipto_salesrep_id, shipto_commission AS commission "
-                    "FROM shiptoinfo LEFT OUTER JOIN "
-                    "     cntct ON (shipto_cntct_id = cntct_id) "
-                    "WHERE (shipto_id=:shipto_id);" );
+                    "       shipto_salesrep_id, shipto_commission AS commission"
+                    "  FROM shiptoinfo"
+                    " WHERE shipto_id = :shipto_id;" );
     shipto.bindValue(":shipto_id", pShiptoid);
     shipto.exec();
     if (shipto.first())
     {
-      //  Populate the dlg with the shipto information
       _ignoreSignals=true;
+
       if (_shipTo->id() != pShiptoid)
         _shipTo->setId(pShiptoid);
       _shipToName->setText(shipto.value("shipto_name").toString());
@@ -1990,7 +1999,7 @@ void salesOrder::populateShipto(int pShiptoid)
       _shippingZone->setId(shipto.value("shipto_shipzone_id").toInt());
       _shippingComments->setText(shipto.value("shipto_shipcomments").toString());
       _orderComments->setText(shipto.value("shipto_comments").toString());
-      if (shipto.value("shipto_taxzone_id").toInt() > 0)
+      if (! shipto.value("shipto_taxzone_id").isNull())
         _taxZone->setId(shipto.value("shipto_taxzone_id").toInt());
       if (shipto.value("shipto_preferred_warehous_id").toInt() > 0 )
         _warehouse->setId(shipto.value("shipto_preferred_warehous_id").toInt());
@@ -2046,8 +2055,10 @@ void salesOrder::populateShipto(int pShiptoid)
     save(true);
 }
 
+// sConvertShipTo should accept a full address and update _shipToAddr to be useful
 void salesOrder::sConvertShipTo()
 {
+  ENTERED;
   if (!_ignoreSignals)
   {
     //  Convert the captive shipto to a free-form shipto
@@ -2060,6 +2071,7 @@ void salesOrder::sConvertShipTo()
 
 void salesOrder::sNew()
 {
+  ENTERED;
   if ( !_saved && ((_mode == cNew) || (_mode == cNewQuote)) )
   {
     if (!save(true))
@@ -2104,12 +2116,14 @@ void salesOrder::sNew()
 
 void salesOrder::sCopyToShipto()
 {
+  ENTERED;
   _shipTo->setId(-1);
   _shipTo->setCustid(_cust->id());
   _shipToName->setText(_billToName->text());
   _shipToAddr->setId(_billToAddr->id());
   if (_billToAddr->id() <= 0)
   {
+    _shipToAddr->blockSignals(true);
     _shipToAddr->setLine1(_billToAddr->line1());
     _shipToAddr->setLine2(_billToAddr->line2());
     _shipToAddr->setLine3(_billToAddr->line3());
@@ -2117,6 +2131,7 @@ void salesOrder::sCopyToShipto()
     _shipToAddr->setState(_billToAddr->state());
     _shipToAddr->setPostalCode(_billToAddr->postalCode());
     _shipToAddr->setCountry(_billToAddr->country());
+    _shipToAddr->blockSignals(false);
   }
 
   _shipToCntct->setId(_billToCntct->id());
@@ -2125,6 +2140,7 @@ void salesOrder::sCopyToShipto()
 
 void salesOrder::sEdit()
 {
+  ENTERED;
   ParameterList params;
   params.append("soitem_id", _soitem->id());
   params.append("cust_id", _cust->id());
@@ -2159,6 +2175,7 @@ void salesOrder::sEdit()
 
 void salesOrder::sHandleButtons()
 {
+  ENTERED;
   XTreeWidgetItem *selected = 0;
 
   QList<XTreeWidgetItem *> selectedlist = _soitem->selectedItems();
@@ -2309,6 +2326,7 @@ void salesOrder::sHandleButtons()
 
 void salesOrder::sFirm()
 {
+  ENTERED;
   XSqlQuery firmSales;
   if (_lineMode == cCanceled)
     return;
@@ -2326,6 +2344,7 @@ void salesOrder::sFirm()
 
 void salesOrder::sSoften()
 {
+  ENTERED;
   XSqlQuery softenSales;
   if (_lineMode == cCanceled)
     return;
@@ -2343,6 +2362,7 @@ void salesOrder::sSoften()
 
 void salesOrder::sAction()
 {
+  ENTERED;
   XSqlQuery actionSales;
   if (_lineMode == cCanceled)
     return;
@@ -2382,6 +2402,7 @@ void salesOrder::sAction()
 
 void salesOrder::sCancel()
 {
+  ENTERED;
   XSqlQuery existpo;
   existpo.prepare("SELECT poitem_id "
                   "  FROM coitem JOIN poitem ON coitem_order_type='P' "
@@ -2438,6 +2459,7 @@ void salesOrder::sCancel()
 
 void salesOrder::sDelete()
 {
+  ENTERED;
   if (QMessageBox::question(this, tr("Delete Selected Line Item?"),
                             tr("<p>Are you sure that you want to delete the "
                                "selected Line Item?"),
@@ -2542,6 +2564,8 @@ void salesOrder::sDelete()
 void salesOrder::populate()
 {
   if (ISORDER(_mode))
+  ENTERED;
+  if ( (_mode == cNew) || (_mode == cEdit) || (_mode == cView) )
   {
     XSqlQuery so;
     if (ISEDIT(_mode) && ! _lock.acquire("cohead", _soheadid, AppLock::Interactive))
@@ -2638,8 +2662,8 @@ void salesOrder::populate()
         _billToAddr->setCountry(so.value("cohead_billtocountry").toString());
       }
 
-      _ignoreSignals=true;
       _shipToName->setText(so.value("cohead_shiptoname").toString());
+      _ignoreSignals=true;
       if (_shipToAddr->line1() !=so.value("cohead_shiptoaddress1").toString() ||
           _shipToAddr->line2() !=so.value("cohead_shiptoaddress2").toString() ||
           _shipToAddr->line3() !=so.value("cohead_shiptoaddress3").toString() ||
@@ -2649,7 +2673,7 @@ void salesOrder::populate()
           _shipToAddr->country()!=so.value("cohead_shiptocountry").toString() )
       {
         _shipToAddr->setId(-1);
-
+        _shipToAddr->blockSignals(true);
         _shipToAddr->setLine1(so.value("cohead_shiptoaddress1").toString());
         _shipToAddr->setLine2(so.value("cohead_shiptoaddress2").toString());
         _shipToAddr->setLine3(so.value("cohead_shiptoaddress3").toString());
@@ -2657,6 +2681,7 @@ void salesOrder::populate()
         _shipToAddr->setState(so.value("cohead_shiptostate").toString());
         _shipToAddr->setPostalCode(so.value("cohead_shiptozipcode").toString());
         _shipToAddr->setCountry(so.value("cohead_shiptocountry").toString());
+        _shipToAddr->blockSignals(false);
       }
 
       _shipTo->setId(so.value("cohead_shipto_id").toInt());
@@ -2695,7 +2720,7 @@ void salesOrder::populate()
       {
         disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
         _freight->setLocalValue(so.value("cohead_freight").toDouble());
-        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()), Qt::UniqueConnection);
       }
 
       _shipComplete->setChecked(so.value("cohead_shipcomplete").toBool());
@@ -2845,6 +2870,7 @@ void salesOrder::populate()
       {
         _shipToAddr->setId(-1);
 
+        _shipToAddr->blockSignals(true);
         _shipToAddr->setLine1(qu.value("quhead_shiptoaddress1").toString());
         _shipToAddr->setLine2(qu.value("quhead_shiptoaddress2").toString());
         _shipToAddr->setLine3(qu.value("quhead_shiptoaddress3").toString());
@@ -2852,6 +2878,7 @@ void salesOrder::populate()
         _shipToAddr->setState(qu.value("quhead_shiptostate").toString());
         _shipToAddr->setPostalCode(qu.value("quhead_shiptozipcode").toString());
         _shipToAddr->setCountry(qu.value("quhead_shiptocountry").toString());
+        _shipToAddr->blockSignals(false);
       }
 
       _shipTo->setId(qu.value("quhead_shipto_id").toInt());
@@ -2874,7 +2901,7 @@ void salesOrder::populate()
       {
         disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
         _freight->setLocalValue(qu.value("quhead_freight").toDouble());
-        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()), Qt::UniqueConnection);
       }
 
       _miscCharge->setLocalValue(qu.value("quhead_misc").toDouble());
@@ -2905,6 +2932,7 @@ void salesOrder::populate()
 
 void salesOrder::sFillItemList()
 {
+  ENTERED;
   XSqlQuery fillSales;
   if (ISORDER(_mode))
     fillSales.prepare( "SELECT COALESCE(getSoSchedDate(:head_id),:ship_date) AS shipdate;" );
@@ -3075,7 +3103,7 @@ void salesOrder::sFillItemList()
     {
       disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
       _freight->setLocalValue(fillSales.value("freight").toDouble());
-      connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()), Qt::UniqueConnection);
       _freightCache = _freight->localValue();
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Sales Order Information"),
@@ -3092,6 +3120,7 @@ void salesOrder::sFillItemList()
 
 void salesOrder::sCalculateTotal()
 {
+  ENTERED;
   double total = _subtotal->localValue() + _tax->localValue() + _miscCharge->localValue() + _freight->localValue();
   _total->setLocalValue(total);
   _cashTotal->setLocalValue(total);
@@ -3116,6 +3145,7 @@ void salesOrder::sCalculateTotal()
 
 bool salesOrder::deleteForCancel()
 {
+  ENTERED;
   XSqlQuery query;
 
   if (ISNEW(_mode) &&
@@ -3202,6 +3232,7 @@ bool salesOrder::deleteForCancel()
 
 void salesOrder::sClear()
 {
+  ENTERED;
   if (!deleteForCancel())
     return;
 
@@ -3211,6 +3242,7 @@ void salesOrder::sClear()
 
 void salesOrder::clear()
 {
+  ENTERED;
   XSqlQuery clearSales;
   if (! _lock.release())
     ErrorReporter::error(QtCriticalMsg, this, tr("Locking Error"),
@@ -3339,6 +3371,7 @@ void salesOrder::clear()
 
 void salesOrder::closeEvent(QCloseEvent *pEvent)
 {
+  ENTERED << "with" << pEvent;
   if (!deleteForCancel())
   {
     pEvent->ignore();
@@ -3359,6 +3392,7 @@ void salesOrder::closeEvent(QCloseEvent *pEvent)
 
 void salesOrder::sHandleShipchrg(int pShipchrgid)
 {
+  ENTERED << "with" << pShipchrgid;
   if ( (_mode == cView) || (_mode == cViewQuote) )
     _freight->setEnabled(false);
   else
@@ -3390,14 +3424,16 @@ void salesOrder::sHandleShipchrg(int pShipchrgid)
   }
 }
 
-void salesOrder::sHandleSalesOrderEvent(int pSoheadid, bool)
+void salesOrder::sHandleSalesOrderEvent(int pSoheadid, bool pLocal)
 {
+  ENTERED << "with" << pSoheadid << pLocal;
   if (pSoheadid == _soheadid)
     sFillItemList();
 }
 
 void salesOrder::sTaxDetail()
 {
+  ENTERED;
   XSqlQuery taxq;
   if (!ISVIEW(_mode))
   {
@@ -3448,6 +3484,7 @@ void salesOrder::sTaxDetail()
 
 void salesOrder::sFreightDetail()
 {
+  ENTERED;
   ParameterList params;
   params.append("calcfreight", _calcfreight);
   if (ISORDER(_mode))
@@ -3474,20 +3511,17 @@ void salesOrder::sFreightDetail()
 
 void salesOrder::setFreeFormShipto(bool pFreeForm)
 {
-  bool ffShipto = pFreeForm;
+  ENTERED << "with" << pFreeForm;
 
-  if (_mode == cView || _mode == cViewQuote)
-    ffShipto = false;
-
-  _shipToName->setEnabled(ffShipto);
-  _shipToAddr->setEnabled(ffShipto);
-  _shipToCntct->setEnabled(ffShipto);
-
-  _copyToShipto->setEnabled(ffShipto);
+  _shipToName->setEnabled(pFreeForm   && ! ISVIEW(_mode));
+  _shipToAddr->setEnabled(pFreeForm   && ! ISVIEW(_mode));
+  _shipToCntct->setEnabled(pFreeForm  && ! ISVIEW(_mode));
+  _copyToShipto->setEnabled(pFreeForm && ! ISVIEW(_mode));
 }
 
 void salesOrder::setViewMode()
 {
+  ENTERED;
   if (cEdit == _mode)
   {
     // Undo some changes set for the edit mode
@@ -3904,6 +3938,7 @@ void salesOrder::viewSalesOrder( int pId, QWidget *parent )
 
 void salesOrder::sNewCharacteristic()
 {
+  ENTERED;
   ParameterList params;
   params.append("mode", "new");
   if (ISQUOTE(_mode))
@@ -3920,6 +3955,7 @@ void salesOrder::sNewCharacteristic()
 
 void salesOrder::sEditCharacteristic()
 {
+  ENTERED;
   ParameterList params;
   params.append("mode", "edit");
   params.append("charass_id", _charass->id());
@@ -3933,6 +3969,7 @@ void salesOrder::sEditCharacteristic()
 
 void salesOrder::sDeleteCharacteristic()
 {
+  ENTERED;
   XSqlQuery itemDelete;
   itemDelete.prepare( "DELETE FROM charass "
                      "WHERE (charass_id=:charass_id);" );
@@ -3944,6 +3981,7 @@ void salesOrder::sDeleteCharacteristic()
 
 void salesOrder::sFillCharacteristic()
 {
+  ENTERED;
   XSqlQuery charassq;
   charassq.prepare( "SELECT charass_id, char_name, "
                     " CASE WHEN char_type < 2 THEN "
@@ -3966,39 +4004,45 @@ void salesOrder::sFillCharacteristic()
 
 void salesOrder::populateCMInfo()
 {
-  XSqlQuery populateSales;
+  ENTERED;
+  XSqlQuery aropenq;
+  XSqlQuery invoicedq;
+  XSqlQuery outstandingq;
   if (cNew != _mode && cEdit != _mode && cView != _mode)
     return;
+  double preAllocatedCM = 0.0; // prevents multiple recalcs from misfiring signals
 
   // Allocated C/M's and posted Invoices for partial shipments
-  populateSales.prepare("SELECT COALESCE(SUM(currToCurr(aropenalloc_curr_id, :curr_id,"
-                        "                               aropenalloc_amount, :effective)),0) AS amount"
-                        "  FROM aropenalloc JOIN aropen ON (aropen_id=aropenalloc_aropen_id) "
-                        " WHERE ( (aropenalloc_doctype='S')"
-                        "  AND    (aropenalloc_doc_id=:doc_id) );");
-  populateSales.bindValue(":doc_id",    _soheadid);
-  populateSales.bindValue(":curr_id",   _allocatedCM->id());
-  populateSales.bindValue(":effective", _allocatedCM->effective());
-  populateSales.exec();
-  if (populateSales.first())
-    _allocatedCM->setLocalValue(populateSales.value("amount").toDouble());
-  else
-    _allocatedCM->setLocalValue(0);
+  aropenq.prepare("SELECT COALESCE(SUM(currToCurr(aropenalloc_curr_id, :curr_id,"
+                  "                               aropenalloc_amount, :effective)),0) AS amount"
+                  "  FROM aropenalloc"
+                  " WHERE aropenalloc_doctype = 'S'"
+                  "   AND aropenalloc_doc_id  = :doc_id;");
+  aropenq.bindValue(":doc_id",    _soheadid);
+  aropenq.bindValue(":curr_id",   _allocatedCM->id());
+  aropenq.bindValue(":effective", _allocatedCM->effective());
+  aropenq.exec();
+  if (aropenq.first())
+    preAllocatedCM = aropenq.value("amount").toDouble();
 
-  populateSales.prepare("SELECT COALESCE(SUM(currToCurr(invchead_curr_id, :curr_id,"
-                        "                               calcInvoiceAmt(invchead_id), :effective)),0) AS amount"
-						" FROM invchead where invchead_id IN"
-						"      (select invchead_id from coitem join invcitem on (invcitem_coitem_id=coitem_id) join invchead on (invchead_id=invcitem_invchead_id and invchead_posted) where (coitem_cohead_id=:doc_id) group by invchead_id)");
+  invoicedq.prepare("SELECT COALESCE(SUM(currToCurr(invchead_curr_id, :curr_id,"
+                        "                    calcInvoiceAmt(invchead_id), :effective)), 0) AS amount"
+                        "  FROM invchead"
+                        "  JOIN invcitem ON invchead_id = invcitem_invchead_id"
+                        "  JOIN coitem   ON invcitem_coitem_id = coitem_id"
+                        " WHERE invchead_posted"
+                        "   AND coitem_cohead_id = :doc_id"
+                        " GROUP BY invchead_id;");
+  invoicedq.bindValue(":doc_id",    _soheadid);
+  invoicedq.bindValue(":curr_id",   _allocatedCM->id());
+  invoicedq.bindValue(":effective", _allocatedCM->effective());
+  invoicedq.exec();
+  if (invoicedq.first())
+    preAllocatedCM += invoicedq.value("amount").toDouble();
 
-  populateSales.bindValue(":doc_id",    _soheadid);
-  populateSales.bindValue(":curr_id",   _allocatedCM->id());
-  populateSales.bindValue(":effective", _allocatedCM->effective());
-  populateSales.exec();
-  if (populateSales.first())
-    _allocatedCM->setLocalValue(_allocatedCM->localValue() + populateSales.value("amount").toDouble());
+  _allocatedCM->setLocalValue(preAllocatedCM);
 
-  // Unallocated C/M's
-  populateSales.prepare("SELECT SUM(amount) AS f_amount"
+  outstandingq.prepare("SELECT SUM(amount) AS f_amount"
                         " FROM (SELECT aropen_id,"
                         "              noNeg(currToCurr(aropen_curr_id, :curr_id, (aropen_amount - aropen_paid), :effective) - "
                         "                    SUM(currToCurr(aropenalloc_curr_id, :curr_id, COALESCE(aropenalloc_amount,0), :effective))) AS amount "
@@ -4008,18 +4052,19 @@ void salesOrder::populateCMInfo()
                         "         AND   (aropen_open)"
                         "         AND   (cohead_id=:cohead_id) )"
                         "       GROUP BY aropen_id, aropen_amount, aropen_paid, aropen_curr_id) AS data; ");
-  populateSales.bindValue(":cohead_id", _soheadid);
-  populateSales.bindValue(":curr_id",   _outstandingCM->id());
-  populateSales.bindValue(":effective", _outstandingCM->effective());
-  populateSales.exec();
-  if (populateSales.first())
-    _outstandingCM->setLocalValue(populateSales.value("f_amount").toDouble());
+  outstandingq.bindValue(":cohead_id", _soheadid);
+  outstandingq.bindValue(":curr_id",   _outstandingCM->id());
+  outstandingq.bindValue(":effective", _outstandingCM->effective());
+  outstandingq.exec();
+  if (outstandingq.first())
+    _outstandingCM->setLocalValue(outstandingq.value("f_amount").toDouble());
   else
     _outstandingCM->setLocalValue(0);
 }
 
 void salesOrder::populateCCInfo()
 {
+  ENTERED;
   XSqlQuery populateSales;
   if (cNew != _mode && cEdit != _mode && cView != _mode)
     return;
@@ -4048,6 +4093,7 @@ void salesOrder::populateCCInfo()
 
 void salesOrder::sNewCreditCard()
 {
+  ENTERED;
   ParameterList params;
   params.append("mode", "new");
   params.append("cust_id", _cust->id());
@@ -4061,6 +4107,7 @@ void salesOrder::sNewCreditCard()
 
 void salesOrder::sEditCreditCard()
 {
+  ENTERED;
   ParameterList params;
   params.append("mode", "edit");
   params.append("cust_id", _cust->id());
@@ -4075,6 +4122,7 @@ void salesOrder::sEditCreditCard()
 
 void salesOrder::sViewCreditCard()
 {
+  ENTERED;
   ParameterList params;
   params.append("mode", "view");
   params.append("cust_id", _cust->id());
@@ -4087,6 +4135,7 @@ void salesOrder::sViewCreditCard()
 
 void salesOrder::sMoveUp()
 {
+  ENTERED;
   XSqlQuery moveSales;
   moveSales.prepare("SELECT moveCcardUp(:ccard_id) AS result;");
   moveSales.bindValue(":ccard_id", _cc->id());
@@ -4097,6 +4146,7 @@ void salesOrder::sMoveUp()
 
 void salesOrder::sMoveDown()
 {
+  ENTERED;
   XSqlQuery moveSales;
   moveSales.prepare("SELECT moveCcardDown(:ccard_id) AS result;");
   moveSales.bindValue(":ccard_id", _cc->id());
@@ -4107,6 +4157,7 @@ void salesOrder::sMoveDown()
 
 void salesOrder::sFillCcardList()
 {
+  ENTERED;
   if (_cust->id() == -1 || ISQUOTE(_mode) ||
       ! _metrics->boolean("CCAccept") || ! _privileges->check("ProcessCreditCards"))
   {
@@ -4141,6 +4192,7 @@ void salesOrder::sFillCcardList()
 
 void salesOrder::sAuthorizeCC()
 {
+  ENTERED;
   if (!okToProcessCC())
     return;
 
@@ -4195,6 +4247,7 @@ void salesOrder::sAuthorizeCC()
 
 void salesOrder::sChargeCC()
 {
+  ENTERED;
   if (!okToProcessCC())
     return;
 
@@ -4249,6 +4302,7 @@ void salesOrder::sChargeCC()
 
 bool salesOrder::okToProcessCC()
 {
+  ENTERED;
   XSqlQuery okSales;
   if (_usesPos)
   {
@@ -4299,6 +4353,7 @@ bool salesOrder::okToProcessCC()
 
 void salesOrder::sReturnStock()
 {
+  ENTERED;
   XSqlQuery returnSales;
   returnSales.prepare("SELECT returnItemShipments(:soitem_id) AS result;");
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
@@ -4319,6 +4374,7 @@ void salesOrder::sReturnStock()
 
 void salesOrder::sIssueStock()
 {
+  ENTERED;
   if (!creditLimitCheckIssue())
     return;
 
@@ -4351,6 +4407,7 @@ void salesOrder::sIssueStock()
 
 void salesOrder::sIssueLineBalance()
 {
+  ENTERED;
   if (!creditLimitCheckIssue())
     return;
 
@@ -4665,6 +4722,7 @@ void salesOrder::sIssueLineBalance()
 
 void salesOrder::sFreightChanged()
 {
+  ENTERED;
   if (_freight->localValue() == _freightCache)
     return;
 
@@ -4683,9 +4741,9 @@ void salesOrder::sFreightChanged()
         _calcfreight = false;
       else
       {
-        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->blockSignals(true);
         _freight->setLocalValue(_freightCache);
-        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->blockSignals(false);
       }
     }
     else if ( (!_calcfreight) &&
@@ -4702,9 +4760,9 @@ void salesOrder::sFreightChanged()
       if (answer == QMessageBox::Yes)
       {
         _calcfreight = true;
-        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->blockSignals(true);
         _freight->setLocalValue(_freightCache);
-        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->blockSignals(false);
       }
     }
     else
@@ -4718,6 +4776,7 @@ void salesOrder::sFreightChanged()
 
 void salesOrder::sCalculateTax()
 {
+  ENTERED;
   XSqlQuery taxq;
   taxq.prepare( "SELECT SUM(tax) AS tax "
                 "FROM ("
@@ -4744,6 +4803,7 @@ void salesOrder::sCalculateTax()
 
 void salesOrder::sTaxZoneChanged()
 {
+  ENTERED;
   if (_taxZone->id() != _taxzoneidCache && _saved)
     save(true);
 
@@ -4753,6 +4813,7 @@ void salesOrder::sTaxZoneChanged()
 
 void salesOrder::sReserveStock()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -4769,6 +4830,7 @@ void salesOrder::sReserveStock()
 
 void salesOrder::sReserveLineBalance()
 {
+  ENTERED;
   XSqlQuery reserveSales;
   reserveSales.prepare("SELECT reserveSoLineBalance(:soitem_id) AS result;");
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
@@ -4799,6 +4861,7 @@ void salesOrder::sReserveLineBalance()
 
 void salesOrder::sUnreserveStock()
 {
+  ENTERED;
   XSqlQuery unreserveSales;
   unreserveSales.prepare("SELECT unreserveSoLineQty(:soitem_id) AS result;");
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
@@ -4829,6 +4892,7 @@ void salesOrder::sUnreserveStock()
 
 void salesOrder::sShowReservations()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -4844,6 +4908,7 @@ void salesOrder::sShowReservations()
 
 void salesOrder::sEnterCashPayment()
 {
+  ENTERED;
   XSqlQuery cashsave;
 
   if (_cashReceived->baseValue() >  _balance->baseValue() &&
@@ -5014,6 +5079,7 @@ void salesOrder::sEnterCashPayment()
 
 void salesOrder::sCreditAllocate()
 {
+  ENTERED;
     ParameterList params;
     params.append("doctype", "S");
     params.append("cohead_id", _soheadid);
@@ -5032,6 +5098,7 @@ void salesOrder::sCreditAllocate()
 
 void salesOrder::sAllocateCreditMemos()
 {
+  ENTERED;
   XSqlQuery allocateSales;
   // Determine the balance I need to select
   // This is the same as in sCalculateTotal except that the Unallocated amount is not included.
@@ -5101,6 +5168,7 @@ void salesOrder::sAllocateCreditMemos()
 
 void salesOrder::sCheckValidContacts()
 {
+  ENTERED;
   if (_shipToCntct->isValid())
     _shipToCntct->setEnabled(true);
   else
@@ -5114,6 +5182,7 @@ void salesOrder::sCheckValidContacts()
 
 void salesOrder::sHandleMore()
 {
+  ENTERED;
   _warehouse->setVisible(_more->isChecked());
   _shippingWhseLit->setVisible(_more->isChecked());
   _commissionLit->setVisible(_more->isChecked());
@@ -5144,6 +5213,7 @@ void salesOrder::sHandleMore()
 
 void salesOrder::sRecalculatePrice()
 {
+  ENTERED;
   if (QMessageBox::question(this, tr("Update all prices?"),
                             tr("Do you want to recalculate all prices for the order including:\n\t- Line items\n\t - Taxes\n\t - Freight ?"),
                             QMessageBox::Yes | QMessageBox::Escape,
@@ -5309,6 +5379,7 @@ void salesOrder::sRecalculatePrice()
 
 void salesOrder::sOrderDateChanged()
 {
+  ENTERED;
   if (_orderDate->date() == _orderDateCache ||
       !_orderDate->isValid())
     return;
@@ -5327,6 +5398,7 @@ void salesOrder::sOrderDateChanged()
 
 void salesOrder::sShipDateChanged()
 {
+  ENTERED;
   XSqlQuery salesShipDateChanged;
   if (_shipDate->date() == _shipDateCache ||
       !_shipDate->isValid())
@@ -5531,6 +5603,7 @@ void salesOrder::sShipDateChanged()
 
 void salesOrder::sViewWO()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -5558,6 +5631,7 @@ void salesOrder::sViewWO()
 
 void salesOrder::sMaintainWO()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -5585,6 +5659,7 @@ void salesOrder::sMaintainWO()
 
 void salesOrder::sViewPO()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -5614,6 +5689,7 @@ void salesOrder::sViewPO()
 
 void salesOrder::sMaintainPO()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -5643,6 +5719,7 @@ void salesOrder::sMaintainPO()
 
 void salesOrder::sReleasePR()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -5671,6 +5748,7 @@ void salesOrder::sReleasePR()
 
 void salesOrder::sViewPR()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -5701,6 +5779,7 @@ void salesOrder::sViewPR()
 
 void salesOrder::sPopulateShipments()
 {
+  ENTERED;
   _dspShipmentsBySalesOrder->findChild<OrderCluster*>("_salesOrder")->setId(_soheadid);
   _dspShipmentsBySalesOrder->sFillList();
   _dspShipmentsBySalesOrder->list()->expandAll();
@@ -5708,6 +5787,7 @@ void salesOrder::sPopulateShipments()
 
 void salesOrder::sViewItemWorkbench()
 {
+  ENTERED;
   QList<XTreeWidgetItem *> selected = _soitem->selectedItems();
   for (int i = 0; i < selected.size(); i++)
   {
@@ -5733,6 +5813,7 @@ void salesOrder::sViewItemWorkbench()
 
 bool salesOrder::creditLimitCheck()
 {
+  ENTERED;
   XSqlQuery creditCheck;
   double    customerCurrent;
 
@@ -5763,6 +5844,7 @@ bool salesOrder::creditLimitCheck()
 
 bool salesOrder::creditLimitCheckIssue()
 {
+  ENTERED;
   if (_metrics->boolean("CreditCheckSOOnSave") && !creditLimitCheck() && _holdType->code() != "C")
   {
         QMessageBox::warning(this, tr("Sales Order Credit Check"),
@@ -5778,6 +5860,7 @@ bool salesOrder::creditLimitCheckIssue()
 
 void salesOrder::sHoldTypeChanged()
 {
+  ENTERED;
   if (ISEDIT(_mode) && _holdTypeCache == "C" && _holdType->code() != "C")
     _holdOverride = true;
 }
