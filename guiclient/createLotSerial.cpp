@@ -120,8 +120,20 @@ enum SetResponse createLotSerial::set(const ParameterList &pParams)
       {
         // First check for "pre-assigned/associated" lots. A couple example use cases:
         // 1) Receiving TO - get lot(s) from issue to shipping trans. 2) Receiving RA - get lot(s) from original SO (if exists).
+        // Only display lots with qty remaining available so we dont double allocate
         XSqlQuery origTransLots;
-        origTransLots.prepare("SELECT ls_id, ls_number, ls_number FROM ls WHERE ls_id IN (SELECT UNNEST(getAssocLotSerialIds(:itemlocdist_id)));");
+        origTransLots.prepare("SELECT ls_id, ls_number, ls_number, qtys - "
+                              " COALESCE((SELECT itemlocdist_qty FROM itemlocdist "
+                              "            WHERE itemlocdist_source_id=:itemlocdist_id "
+                              "              AND ls_id=itemlocdist_ls_id), 0) AS qty "
+                              "  FROM ls "
+                              "  JOIN (SELECT * FROM getassoclotserialids(:itemlocdist_id)) foo "
+                              "  ON ls_id=foo.ids "
+                              " WHERE qtys - "
+                              "       COALESCE((SELECT itemlocdist_qty FROM itemlocdist "
+                              "                  WHERE itemlocdist_source_id=:itemlocdist_id "
+                              "                    AND ls_id=itemlocdist_ls_id), 0) > 0 "
+                              " ORDER BY ls_number;" );
         origTransLots.bindValue(":itemlocdist_id", _itemlocdistid);
         origTransLots.exec();
         if (origTransLots.first())
@@ -131,6 +143,11 @@ enum SetResponse createLotSerial::set(const ParameterList &pParams)
           _preassigned = true;
           _lotSerial->setEditable(_privileges->check("EnterUnassociatedLotSerialNumbers"));
           connect(_lotSerial, SIGNAL(newID(int)), this, SLOT(sLotSerialSelected()));
+
+          // Populate _lsMap with ids and quantities
+          for ( origTransLots.seek(-1); origTransLots.next(); )
+            _lsMap.insert(origTransLots.value("ls_id").toInt(), origTransLots.value("qty").toDouble());
+
         }
         else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Lot/Serial Information"),
                                       origTransLots, __FILE__, __LINE__))
@@ -293,7 +310,6 @@ void createLotSerial::sAssign()
     _lotSerial->setFocus();
     return;
   }
-
   QList<GuiErrorCheck>errors;
   float decimals = _qtyToAssign->toDouble() - floor(_qtyToAssign->toDouble());
   errors<<GuiErrorCheck(lsnum.isEmpty() && _lotSerial->isEditable(), _lotSerial,
@@ -303,6 +319,11 @@ void createLotSerial::sAssign()
         <<GuiErrorCheck(_qtyToAssign->toDouble() == 0.0, _qtyToAssign,
                         tr("<p>You must enter a positive value to assign to "
                            "this Lot/Serial number."))
+        <<GuiErrorCheck((_qtyToAssign->toDouble() > _qtyRemaining->toDouble()), _qtyToAssign,
+                        tr("You cannot assign a quantity more than is remaining."))
+        <<GuiErrorCheck((_lsMap[_lotSerial->id()] > 0 &&
+                        (_qtyToAssign->toDouble() > _lsMap[_lotSerial->id()])), _qtyToAssign,
+                        tr("You cannot assign a quantity more than was issued on the lot/serial."))
         <<GuiErrorCheck((_expiration->isEnabled()) && (!_expiration->isValid()), _expiration,
                         tr("<p>You must enter an expiration date to this "
                            "Perishable Lot/Serial number."))
@@ -428,6 +449,8 @@ void createLotSerial::sAssign()
 
 void createLotSerial::sLotSerialSelected()
 {
+    _qtyToAssign->setDouble(_lsMap[_lotSerial->id()]);
+
     if (!_expiration->isEnabled() &&
         !_warranty->isEnabled())
       return;
@@ -441,9 +464,9 @@ void createLotSerial::sLotSerialSelected()
 
     XSqlQuery itemloc;
     itemloc.prepare("SELECT itemloc_expiration, itemloc_warrpurc "
-                    "FROM itemloc "
-                    "WHERE itemloc_id=:itemloc_id; ");
-    itemloc.bindValue(":itemloc_id", _lotSerial->id());
+                    "  FROM itemloc "
+                    " WHERE itemloc_ls_id=:lotserial_id; ");
+    itemloc.bindValue(":lotserial_id", _lotSerial->id());
     itemloc.exec();
     if (itemloc.first()) {
       if (_expiration->isEnabled() &&
@@ -452,4 +475,5 @@ void createLotSerial::sLotSerialSelected()
       if (_warranty->isEnabled())
         _warranty->setDate(itemloc.value("itemloc_warrpurc").toDate());
     }
+
 }

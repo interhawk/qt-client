@@ -183,10 +183,11 @@ item::item(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   _itemSite->addColumn(tr("Active"),        _dateColumn, Qt::AlignCenter, true, "itemsite_active" );
   _itemSite->addColumn(tr("Site"),          _whsColumn,  Qt::AlignCenter, true, "warehous_code" );
-  _itemSite->addColumn(tr("Description"),   -1,          Qt::AlignLeft, true, "warehous_descrip"   );
-  _itemSite->addColumn(tr("Cntrl. Method"), _itemColumn, Qt::AlignCenter, true, "controlmethod" );
-  _itemSite->addColumn(tr("Cost Method"),   _itemColumn, Qt::AlignCenter, true, "costmethod" );
-  _itemSite->addColumn(tr("Avg. Cost"),     _moneyColumn, Qt::AlignRight, true, "avgcost" );
+  _itemSite->addColumn(tr("Description"),   -1,          Qt::AlignLeft,   true, "warehous_descrip"   );
+  _itemSite->addColumn(tr("Cntrl. Method"), -1,          Qt::AlignCenter, true, "controlmethod" );
+  _itemSite->addColumn(tr("Loc. Cntrl."),   -1,          Qt::AlignCenter, true, "itemsite_loccntrl" );
+  _itemSite->addColumn(tr("Cost Method"),   -1,          Qt::AlignCenter, true, "costmethod" );
+  _itemSite->addColumn(tr("Avg. Cost"),     -1,          Qt::AlignRight,  true, "avgcost" );
   _itemSite->setDragString("itemsiteid=");
 
   connect(omfgThis, SIGNAL(itemsitesUpdated()), SLOT(sFillListItemSites()));

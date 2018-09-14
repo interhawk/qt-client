@@ -77,18 +77,16 @@ void LotSerialUtils::updateLotCharacteristics(int ls_id, const QList<QWidget *> 
         QString char_text;
 
         if (_charTypes.at(i) == 0)
-        {
-            char_text = qobject_cast<QLineEdit *>(widgets.at(i))->text();
-        }
+           char_text = qobject_cast<QLineEdit *>(widgets.at(i))->text();
         else if (_charTypes.at(i) == 1)
-        {
-            char_text = qobject_cast<XComboBox *>(widgets.at(i))->currentText();
-        }
+           char_text = qobject_cast<XComboBox *>(widgets.at(i))->currentText();
         else if (_charTypes.at(i) == 2)
         {
             QDate d = qobject_cast<DLineEdit *>(widgets.at(i))->date();
             char_text = d.toString("yyyy-MM-dd");
         }
+        else if (_charTypes.at(i) == 3)
+            char_text = qobject_cast<QLineEdit *>(widgets.at(i))->text();
 
         XSqlQuery q;
         q.prepare("INSERT INTO charass (charass_value, charass_target_type, charass_target_id, charass_char_id)"
