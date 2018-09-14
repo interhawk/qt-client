@@ -102,45 +102,52 @@ void dspBillingSelections::sPost()
 {
   XSqlQuery dspPost;
   int soheadid = -1;
-  dspPost.prepare("SELECT cobmisc_cohead_id AS sohead_id "
-            "FROM cobmisc "
-            "WHERE (cobmisc_id = :cobmisc_id)");
-  dspPost.bindValue(":cobmisc_id", _cobill->id());
-  dspPost.exec();
-  if (dspPost.first())
-  {
-    soheadid = dspPost.value("sohead_id").toInt();
-  }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
-                                dspPost, __FILE__, __LINE__))
-  {
-    return;
-  }
+  int result = 0;
 
-  dspPost.prepare("SELECT createInvoice(:cobmisc_id) AS result;");
-  dspPost.bindValue(":cobmisc_id", _cobill->id());
-  dspPost.exec();
-  if (dspPost.first())
+  foreach (XTreeWidgetItem *item, _cobill->selectedItems())
   {
-    int result = dspPost.value("result").toInt();
-    if (result < 0) {
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
-                               storedProcErrorLookup("createInvoice", result),
-                               __FILE__, __LINE__);
+    dspPost.prepare("SELECT cobmisc_cohead_id AS sohead_id "
+              "FROM cobmisc "
+              "WHERE (cobmisc_id = :cobmisc_id)");
+    dspPost.bindValue(":cobmisc_id", item->id());
+    dspPost.exec();
+    if (dspPost.first())
+    {
+      soheadid = dspPost.value("sohead_id").toInt();
+    }
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
+                                  dspPost, __FILE__, __LINE__))
+    {
       return;
-     }
+    }
 
-    omfgThis->sInvoicesUpdated(result, true);
-    omfgThis->sSalesOrdersUpdated(soheadid);
-    omfgThis->sBillingSelectionUpdated(soheadid, true);
+    dspPost.prepare("SELECT createInvoice(:cobmisc_id) AS result;");
+    dspPost.bindValue(":cobmisc_id", item->id());
+    dspPost.exec();
+    if (dspPost.first())
+    {
+      result = dspPost.value("result").toInt();
 
-    sFillList();
+      if (result < 0) {
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
+                                 storedProcErrorLookup("createInvoice", result),
+                                 __FILE__, __LINE__);
+        return;
+      }
+
+      omfgThis->sInvoicesUpdated(result, true);
+      omfgThis->sSalesOrdersUpdated(soheadid);
+    }
   }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
+
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
                                 dspPost, __FILE__, __LINE__))
   {
     return;
   }
+
+  omfgThis->sBillingSelectionUpdated(-1, -1);
+  sFillList();
 }
 
 void dspBillingSelections::sNew()
