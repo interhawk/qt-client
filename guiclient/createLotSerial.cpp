@@ -21,7 +21,7 @@
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
 
-#define DEBUG true
+#define DEBUG false
 
 createLotSerial::createLotSerial(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl),
