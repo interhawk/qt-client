@@ -335,6 +335,8 @@ void createLotSerial::sAssign()
         <<GuiErrorCheck((_expiration->isEnabled()) && (!_expiration->isValid()), _expiration,
                         tr("<p>You must enter an expiration date to this "
                            "Perishable Lot/Serial number."))
+        <<GuiErrorCheck((_expiration->isValid() && _expiration->date() <= omfgThis->dbDate()), _warranty,
+                        tr("<p>Please enter an expiration date greater than today."))
         <<GuiErrorCheck((_warranty->isEnabled()) && (!_warranty->isValid()), _warranty,
                         tr("<p>You must enter a warranty expiration date for this "
                            "Lot/Serial number."))
