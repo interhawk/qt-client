@@ -920,29 +920,27 @@ QStringList ExportHelper::parseDelim(QString delim)
 }
 
 
-bool ExportHelper::validDelim(QString delim)
+int ExportHelper::validDelim(QString delim, QString &msg)
 { 
-  QString msg;
   QString disallowed = "(){}[]\"'`<>.{blank}";
   QString discouraged = " @#$%&*_=-+/? ";
-  bool valid = true;
+  int valid = 0; // delim is valid
   if (delim.length() > 1 && delim != "{tab}")
+  {
     msg = tr("Avoid delimiters more than 1 char long.");
+    valid = 1; // delim is too long
+  }
+    
   else if (disallowed.contains(delim))
+  {
     msg = tr("%1 is not permitted as a delimiter. The following characters are not allowed: %2").arg(delim, disallowed);
+    valid = 2; // delim error
+  }
   else if (discouraged.contains(delim))
   {
     msg = tr("%1 may cause problems. We suggest avoiding the following: %2").arg(delim, discouraged);
-    valid = true;
+    valid = 3; // delim warning
   }
-  else
-    valid = true;
 
-  if(! msg.isEmpty())
-  {
-    QMessageBox msgBox;
-    msgBox.exec();
-  }
-    
   return valid;
 }

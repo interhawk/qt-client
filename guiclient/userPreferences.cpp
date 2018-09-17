@@ -354,15 +354,28 @@ void userPreferences::sSave(bool close)
 
   _pref->set("IdleTimeout", _idleTimeout->value());
   omfgThis->_timeoutHandler->setIdleMinutes(_idleTimeout->value());
-
-  if(ExportHelper::validDelim(_delimiter->currentText()))
+  
+  //////// check delimiter /////////////////////////////////////////
+  enum delimCheck{valid=0, tooLong=1, disallowed=2, disencouraged=3};
+  QString errMsg;
+  #pragma comment(linker,"/SUBSYSTEM:CONSOLE")
+  int delimiter = ExportHelper::validDelim(_delimiter->currentText(),errMsg); 
+  qDebug() << "error message: " << errMsg;
+  if(!errMsg.isEmpty())
   {
-    if(_delimiter->currentText().length() > 1)
-      _delimiter->setCurrentText(_delimiter->currentText().at(0));
-    else
-      _delimiter->clearEditText();
+    QMessageBox msgBox;
+    msgBox.setText(errMsg);
+    msgBox.exec();
+  } 
+  if(delimiter == tooLong)
+  {
+    _delimiter->setCurrentText(_delimiter->currentText().at(0));
     return;
   }
+  else if(delimiter == disallowed)
+    return;
+
+  // save to DB
   QString delim;
   for (int i=0; i<_delimiter->count(); i++)
     delim += _delimiter->itemText(i);
@@ -370,7 +383,7 @@ void userPreferences::sSave(bool close)
     delim.remove(_delimiter->currentText());
   delim.prepend(_delimiter->currentText());
   _pref->set("Delimiter",delim);
-  
+  ////////////////////////////////////////////////////////////////
 
   if(_ellipsesAction->id() == 2)
     _pref->set("DefaultEllipsesAction", QString("search"));
