@@ -358,9 +358,7 @@ void userPreferences::sSave(bool close)
   //////// check delimiter /////////////////////////////////////////
   enum delimCheck{valid=0, tooLong=1, disallowed=2, disencouraged=3};
   QString errMsg;
-  #pragma comment(linker,"/SUBSYSTEM:CONSOLE")
   int delimiter = ExportHelper::validDelim(_delimiter->currentText(),errMsg); 
-  qDebug() << "error message: " << errMsg;
   if(!errMsg.isEmpty())
   {
     QMessageBox msgBox;
