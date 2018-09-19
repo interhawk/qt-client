@@ -151,6 +151,9 @@ void taxTypes::sFillList(int pId)
 {
   _taxtype->populate( "SELECT taxtype_id, taxtype_name, taxtype_descrip "
                       "FROM taxtype "
+                      "WHERE CASE WHEN fetchMetricText('TaxService') = 'N' THEN TRUE "
+                      "           ELSE taxtype_name != 'Adjustment' "
+                      "       END "
                       "ORDER BY taxtype_name;", pId );
 }
 

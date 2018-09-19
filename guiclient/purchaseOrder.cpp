@@ -163,6 +163,12 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
                            " FROM potype WHERE potype_active ORDER BY potype_default DESC");
 
   _freightTaxtype->setCode("Freight");
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxZoneLite->hide();
+    _taxZone->hide();
+  }
 }
 
 void purchaseOrder::setPoheadid(const int pId)

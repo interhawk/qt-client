@@ -54,6 +54,12 @@ miscVoucher::miscVoucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   _charass->setType("VCH");
   _comments->setType(Comments::Voucher);
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
 }
 
 miscVoucher::~miscVoucher()

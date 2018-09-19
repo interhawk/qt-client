@@ -189,7 +189,7 @@ to be bound by its terms.</comment>
         <string/>
        </property>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
+        <item row="0" column="2">
          <widget class="QLabel" name="_taxzoneLit">
           <property name="text">
            <string>Tax Zone:</string>
@@ -199,7 +199,7 @@ to be bound by its terms.</comment>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="0" column="3">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="XComboBox" name="_taxzone">
@@ -251,6 +251,20 @@ to be bound by its terms.</comment>
            </spacer>
           </item>
          </layout>
+        </item>
+        <item row="0" column="1">
+         <widget class="XComboBox" name="_service">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="_serviceLit">
+          <property name="text">
+           <string>Tax Service:</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

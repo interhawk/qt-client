@@ -50,6 +50,12 @@ shipTo::shipTo(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl
   }
   else
     _sellingWarehouse->setId(_preferences->value("PreferredWarehouse").toInt());
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxZoneLit->hide();
+    _taxzone->hide();
+  }
 }
 
 shipTo::~shipTo()

@@ -181,6 +181,12 @@ returnAuthorization::returnAuthorization(QWidget* parent, const char* name, Qt::
 
   _freightTaxtype->setCode("Freight");
   _miscChargeTaxtype->setCode("Misc");
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
 }
 
 returnAuthorization::~returnAuthorization()

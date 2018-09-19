@@ -48,6 +48,12 @@ warehouse::warehouse(QWidget* parent, const char* name, bool modal, Qt::WindowFl
 
   _standard->setVisible(_metrics->boolean("MultiWhs"));
   _transit->setVisible(_metrics->boolean("MultiWhs"));
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
 }
 
 warehouse::~warehouse()

@@ -302,6 +302,12 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   _miscChargeTaxtype->setCode("Misc");
 
   sHandleMore();
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxZoneLit->hide();
+    _taxZone->hide();
+  }
 }
 
 salesOrder::~salesOrder()

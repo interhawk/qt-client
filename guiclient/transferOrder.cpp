@@ -120,6 +120,12 @@ transferOrder::transferOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   _freight->hide();
   _freightLit->hide();
   // end 5695
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
 }
 
 void transferOrder::setToheadid(const int pId)

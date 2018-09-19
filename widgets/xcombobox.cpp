@@ -760,6 +760,9 @@ XComboBoxPrivate::XComboBoxPrivate(XComboBox *pParent)
                        "taxTypes", "MaintainTaxTypes",
                        "SELECT taxtype_id, taxtype_name, taxtype_name"
                        "  FROM taxtype"
+                       " WHERE CASE WHEN fetchMetricText('TaxService') = 'N' THEN TRUE "
+                       "            ELSE taxtype_name != 'Adjustment' "
+                       "        END "
                        " ORDER BY taxtype_name;", "taxtype"));
     typeDescrip.insert(XComboBox::Terms,
                        new XComboBoxDescrip(XComboBox::Terms,

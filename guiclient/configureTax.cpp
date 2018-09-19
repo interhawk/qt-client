@@ -11,6 +11,7 @@
 #include "configureTax.h"
 #include "avalaraIntegration.h"
 #include "errorReporter.h"
+#include "guiErrorCheck.h"
 
 #include <QJsonDocument>
 #include <QMessageBox>
@@ -69,6 +70,26 @@ void configureTax::languageChange()
 bool configureTax::sSave()
 {
   emit saving();
+
+  if (_service->code() == "A")
+  {
+    QList<GuiErrorCheck> errors;
+    errors << GuiErrorCheck(_account->text().isEmpty(), _account,
+                            tr("You must enter an Account #."))
+           << GuiErrorCheck(_key->text().isEmpty(), _key,
+                            tr("You must enter a License Key."))
+           << GuiErrorCheck(_url->text().isEmpty(), _url,
+                            tr("You must enter a Service URL."))
+           << GuiErrorCheck(_company->text().isEmpty(), _company,
+                            tr("You must enter a Company Code."))
+           << GuiErrorCheck(!_salesAccount->isValid(), _salesAccount,
+                            tr("You must enter a Sales Tax Liability Account."))
+           << GuiErrorCheck(!_useAccount->isValid(), _useAccount,
+                            tr("You must enter a Use Tax Liability Account."));
+
+    if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Tax Configuration"), errors))
+      return false;
+  }
 
   _metrics->set("TaxService", _service->code());
 

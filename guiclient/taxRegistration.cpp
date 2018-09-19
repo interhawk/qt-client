@@ -36,6 +36,12 @@ taxRegistration::taxRegistration(QWidget* parent, const char* name, bool modal, 
   _dates->setStartNull(tr("Always"), omfgThis->startOfTime(), true); 
   _dates->setEndNull(tr("Never"), omfgThis->endOfTime(), true); 
 
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxZoneLit->hide();
+    _taxZone->hide();
+  }
+
 }
 
 taxRegistration::~taxRegistration() 
