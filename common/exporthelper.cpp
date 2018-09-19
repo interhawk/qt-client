@@ -928,7 +928,7 @@ int ExportHelper::validDelim(QString delim, QString &msg)
   if (delim.length() > 1 && delim != "{tab}")
   {
     msg = tr("Avoid delimiters more than 1 char long.");
-    valid = 1; // delim is too long
+    valid = tooLong; // delim is too long
   }
     
   else if (disallowed.contains(delim))

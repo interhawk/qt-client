@@ -9,6 +9,7 @@
  */
 
 #include "exportOptions.h"
+#include "exportHelper.h"
 #include <QMessageBox>
 
 ExportOptions::ExportOptions(QWidget* parent, Qt::WindowFlags fl): QDialog(parent, fl)
@@ -72,7 +73,6 @@ void ExportOptions::populateDelim()
 
 void ExportOptions::sSave()
 {
-  enum delimCheck{valid=0, tooLong=1, disallowed=2, disencouraged=3};
   QString errMsg;
   int delimiter = ExportHelper::validDelim(delimCB->currentText(),errMsg);
   
@@ -82,12 +82,12 @@ void ExportOptions::sSave()
     msgBox.setText(errMsg);
     msgBox.exec();
   } 
-  if(delimiter == tooLong)
+  if(delimiter == ExportHelper::tooLong)
   {
     delimCB->setCurrentText(delimCB->currentText().at(0));
     return;
   }
-  else if(delimiter == disallowed)
+  else if(delimiter == ExportHelper::disallowed)
     return;
 
   // save to DB

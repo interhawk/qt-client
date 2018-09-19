@@ -39,6 +39,8 @@ class ExportHelper : public QObject
     static QString XSLTConvertString(QString input, int xsltmapid, QString &errmsg);
     static QStringList parseDelim(QString delim);
     static int validDelim(QString delim, QString &errMsg);
+
+    enum delimCheck{valid=0, tooLong=1, disallowed=2, disencouraged=3};
 };
 
 void setupExportHelper(QScriptEngine *engine);

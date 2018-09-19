@@ -356,7 +356,6 @@ void userPreferences::sSave(bool close)
   omfgThis->_timeoutHandler->setIdleMinutes(_idleTimeout->value());
   
   //////// check delimiter /////////////////////////////////////////
-  enum delimCheck{valid=0, tooLong=1, disallowed=2, disencouraged=3};
   QString errMsg;
   int delimiter = ExportHelper::validDelim(_delimiter->currentText(),errMsg); 
   if(!errMsg.isEmpty())
@@ -365,12 +364,12 @@ void userPreferences::sSave(bool close)
     msgBox.setText(errMsg);
     msgBox.exec();
   } 
-  if(delimiter == tooLong)
+  if(delimiter == ExportHelper::tooLong)
   {
     _delimiter->setCurrentText(_delimiter->currentText().at(0));
     return;
   }
-  else if(delimiter == disallowed)
+  else if(delimiter == ExportHelper::disallowed)
     return;
 
   // save to DB
