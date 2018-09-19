@@ -176,6 +176,8 @@ void lotSerialSequence::sSave()
   lotSave.bindValue(":sequence", QString("lsseq_number_seq_%1").arg(_lsseqid));
   lotSave.exec();
 
+  emit saved(_lsseqid);
+
   done(_lsseqid);
 }
 
