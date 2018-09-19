@@ -31,6 +31,7 @@ expenseCategory::expenseCategory(QWidget* parent, const char* name, bool modal, 
   _purchasePrice->setType(GLCluster::cAsset | GLCluster::cExpense);
   _liability->setType(GLCluster::cLiability);
   _freight->setType(GLCluster::cExpense);
+  _tax->setType(GLCluster::cExpense | GLCluster::cAsset | GLCluster::cLiability);
 
 }
 
@@ -84,6 +85,7 @@ enum SetResponse expenseCategory::set(const ParameterList &pParams)
       _purchasePrice->setReadOnly(true);
       _liability->setReadOnly(true);
       _freight->setReadOnly(true);
+      _tax->setReadOnly(true);
       _buttonBox->clear();
       _buttonBox->addButton(QDialogButtonBox::Close);
     }
@@ -148,6 +150,8 @@ void expenseCategory::sSave()
                             tr("<p>You must select a P/O Liability Clearing Account Number for this Expense Category before you may save it."))
            << GuiErrorCheck(!_freight->isValid(), _freight,
                             tr("<p>You must select a Freight Receiving Account Number for this Expense Category before you may save it."))
+           << GuiErrorCheck(!_tax->isValid(), _tax,
+                            tr("<p>You must select a Sales Tax Expense Account Number for this Expense Category before you may save it."))
            ;
   }
 
@@ -163,11 +167,11 @@ void expenseCategory::sSave()
     expenseSave.prepare( "INSERT INTO expcat"
                "( expcat_id, expcat_code, expcat_active, expcat_descrip,"
                "  expcat_exp_accnt_id, expcat_purchprice_accnt_id,"
-               "  expcat_liability_accnt_id, expcat_freight_accnt_id ) "
+               "  expcat_liability_accnt_id, expcat_freight_accnt_id, expcat_tax_accnt_id ) "
                "VALUES "
                "( :expcat_id, :expcat_code, :expcat_active, :expcat_descrip,"
                "  :expcat_exp_accnt_id, :expcat_purchprice_accnt_id,"
-               "  :expcat_liability_accnt_id, :expcat_freight_accnt_id );" );
+               "  :expcat_liability_accnt_id, :expcat_freight_accnt_id, :expcat_tax_accnt_id );" );
   }
   else if (_mode == cEdit)
     expenseSave.prepare( "UPDATE expcat "
@@ -176,7 +180,8 @@ void expenseCategory::sSave()
                "    expcat_exp_accnt_id=:expcat_exp_accnt_id,"
                "    expcat_purchprice_accnt_id=:expcat_purchprice_accnt_id,"
                "    expcat_liability_accnt_id=:expcat_liability_accnt_id,"
-               "    expcat_freight_accnt_id=:expcat_freight_accnt_id "
+               "    expcat_freight_accnt_id=:expcat_freight_accnt_id,"
+               "    expcat_tax_accnt_id=:expcat_tax_accnt_id "
                "WHERE (expcat_id=:expcat_id);" );
 
   expenseSave.bindValue(":expcat_id", _expcatid);
@@ -187,6 +192,7 @@ void expenseCategory::sSave()
   expenseSave.bindValue(":expcat_purchprice_accnt_id", _purchasePrice->id());
   expenseSave.bindValue(":expcat_liability_accnt_id", _liability->id());
   expenseSave.bindValue(":expcat_freight_accnt_id", _freight->id());
+  expenseSave.bindValue(":expcat_tax_accnt_id", _tax->id());
   expenseSave.exec();
 
   done(_expcatid);
@@ -215,6 +221,7 @@ void expenseCategory::populate()
     _purchasePrice->setId(expensepopulate.value("expcat_purchprice_accnt_id").toInt());
     _liability->setId(expensepopulate.value("expcat_liability_accnt_id").toInt());
     _freight->setId(expensepopulate.value("expcat_freight_accnt_id").toInt());
+    _tax->setId(expensepopulate.value("expcat_tax_accnt_id").toInt());
   }
 }
  
