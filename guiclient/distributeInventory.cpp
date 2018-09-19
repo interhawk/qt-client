@@ -279,10 +279,12 @@ int distributeInventory::SeriesAdjust(int pItemlocSeries, QWidget *pParent,
           params.append("itemlocdist_id", itemloc.value("itemlocdist_id").toInt());
           
           // Auto assign lot/serial if applicable
+          QStringList exclTransact;
+          exclTransact << "TR" << "RR";
           if (itemloc.value("itemsite_lsseq_id").toInt() != -1 &&
               !itemloc.value("itemsite_perishable").toBool() &&
               !itemloc.value("itemsite_warrpurc").toBool() &&
-              itemloc.value("itemlocdist_transtype").toString() != "TR") {
+              !exclTransact.contains(itemloc.value("itemlocdist_transtype").toString())) {
             XSqlQuery autocreatels;
             autocreatels.prepare("SELECT autocreatels(:itemlocdist_id) AS itemlocseries;");
             autocreatels.bindValue(":itemlocdist_id", itemloc.value("itemlocdist_id").toInt());
