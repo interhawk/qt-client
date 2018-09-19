@@ -192,7 +192,10 @@ item::item(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(omfgThis, SIGNAL(itemsitesUpdated()), SLOT(sFillListItemSites()));
 
   _itemtax->addColumn(tr("Tax Type"),_itemColumn, Qt::AlignLeft,true,"taxtype_name");
-  _itemtax->addColumn(tr("Tax Zone"),    -1, Qt::AlignLeft,true,"taxzone");
+  if (_metrics->value("TaxService") == "N")
+    _itemtax->addColumn(tr("Tax Zone"),    -1, Qt::AlignLeft,true,"taxzone");
+  else
+    _itemtax->addColumn(tr("Default"),     -1, Qt::AlignLeft, true, "default");
 
   if (_privileges->check("MaintainItemSources"))
   {
@@ -1854,7 +1857,8 @@ void item::sFillListItemtax()
 {
   XSqlQuery itemFillListItemtax;
   itemFillListItemtax.prepare("SELECT itemtax_id, taxtype_name,"
-            "       COALESCE(taxzone_code,:any) AS taxzone"
+            "       COALESCE(taxzone_code,:any) AS taxzone,"
+            "       itemtax_default AS default"
             "  FROM itemtax JOIN taxtype ON (itemtax_taxtype_id=taxtype_id)"
             "       LEFT OUTER JOIN taxzone ON (itemtax_taxzone_id=taxzone_id)"
             " WHERE (itemtax_item_id=:item_id)"
@@ -2276,14 +2280,17 @@ void item::setId(int p)
 void item::sDefaultItemTaxes()
 {
   XSqlQuery itemDefaultTaxes;
-  itemDefaultTaxes.prepare("INSERT INTO itemtax (itemtax_item_id, itemtax_taxzone_id, itemtax_taxtype_id) "
-                           "SELECT :item_id, classcodetax_taxzone_id, classcodetax_taxtype_id "
+  itemDefaultTaxes.prepare("INSERT INTO itemtax (itemtax_item_id, itemtax_taxzone_id, itemtax_taxtype_id, itemtax_default) "
+                           "SELECT :item_id, classcodetax_taxzone_id, classcodetax_taxtype_id, classcodetax_default "
                            "FROM classcodetax "
                            "WHERE classcodetax_classcode_id = :classcode_id "
                            "AND NOT EXISTS(SELECT 1 FROM itemtax "
                            "               WHERE itemtax_item_id=:item_id "
                            "               AND COALESCE(itemtax_taxtype_id,-1)=COALESCE(classcodetax_taxtype_id, -1) "
-                           "               AND COALESCE(itemtax_taxzone_id, -1)=COALESCE(classcodetax_taxzone_id,-1));");
+                           "               AND CASE WHEN fetchMetricText('TaxService') = 'N' "
+                           "                        THEN COALESCE(itemtax_taxzone_id, -1)=COALESCE(classcodetax_taxzone_id,-1) "
+                           "                        ELSE FALSE "
+                           "                    END);");
   itemDefaultTaxes.bindValue(":item_id", _itemid);
   itemDefaultTaxes.bindValue(":classcode_id", _classcode->id());
   itemDefaultTaxes.exec();

@@ -87,6 +87,12 @@ creditMemo::creditMemo(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
    _freightTaxtype->setCode("Freight");
    _miscChargeTaxtype->setCode("Misc");
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
 }
 
 creditMemo::~creditMemo()

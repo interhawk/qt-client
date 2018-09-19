@@ -135,6 +135,12 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _miscChargeTaxtype->setCode("Misc");
 
   _postInvoice->setEnabled(_privileges->check("PostMiscInvoices"));
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
 }
 
 invoice::~invoice()

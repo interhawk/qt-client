@@ -1018,6 +1018,7 @@ const struct {
 				     "because it is already frozen."), 0, "" },
 
   { "getAssocLotSerialIds", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "pItemlocdistId is required."), 0, "" },
+  { "getItemTaxType", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "There are multiple Tax Types for this Item and none are set to Default."), 0, "" },
 
   { "insertGLTransaction", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "G/L Transaction can not be posted because "
              "the debit and credit accounts reference two different companies."), 0, "" },

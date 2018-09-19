@@ -24,23 +24,26 @@ taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::Wi
 
   _currency->setLabel(_currencyLit);
 
+  _service->append(0, "None",    "N");
+  _service->append(1, "Avalara", "A");
+
   _orderid	= -1;
   _ordertype	= "";
   _sense        = 1;
 
   _tax->addColumn(tr("Line"), -1, Qt::AlignLeft, true, "line");
   _tax->addColumn(tr("Item"), -1, Qt::AlignLeft, true, "item_number");
-  _tax->addColumn(tr("Amount"), -1, Qt::AlignLeft, true, "amount");
-  _tax->addColumn(tr("Qty"), -1, Qt::AlignLeft, true, "qty");
-  _tax->addColumn(tr("Extended"), -1, Qt::AlignLeft, true, "extended");
-  _tax->addColumn(tr("Taxable Amount"), -1, Qt::AlignLeft, true, "taxdetail_taxable");
+  _tax->addColumn(tr("Amount"), -1, Qt::AlignRight, true, "amount");
+  _tax->addColumn(tr("Qty"), -1, Qt::AlignRight, true, "qty");
+  _tax->addColumn(tr("Extended"), -1, Qt::AlignRight, true, "extended");
+  _tax->addColumn(tr("Taxable Amount"), -1, Qt::AlignRight, true, "taxdetail_taxable");
   _tax->addColumn(tr("Code"), -1, Qt::AlignLeft, true, "tax_code");
   _tax->addColumn(tr("Description"), -1, Qt::AlignLeft, true, "tax_descrip");
-  _tax->addColumn(tr("Sequence"), -1, Qt::AlignLeft, true, "taxdetail_sequence");
-  _tax->addColumn(tr("Flat Amount"), -1, Qt::AlignLeft, true, "taxdetail_amount");
-  _tax->addColumn(tr("Percent"), -1, Qt::AlignLeft, true, "taxdetail_percent");
-  _tax->addColumn(tr("Tax"), -1, Qt::AlignLeft, true, "taxdetail_tax");
-  _tax->addColumn(tr("Total"), -1, Qt::AlignLeft, true, "total");
+  _tax->addColumn(tr("Sequence"), -1, Qt::AlignRight, true, "taxdetail_sequence");
+  _tax->addColumn(tr("Flat Amount"), -1, Qt::AlignRight, true, "taxdetail_amount");
+  _tax->addColumn(tr("Percent"), -1, Qt::AlignRight, true, "taxdetail_percent");
+  _tax->addColumn(tr("Tax"), -1, Qt::AlignRight, true, "taxdetail_tax");
+  _tax->addColumn(tr("Total"), -1, Qt::AlignRight, true, "total");
 
   connect(_tax, SIGNAL(valid(bool)), this, SLOT(sHandleButtons(bool)));
   connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
@@ -108,8 +111,11 @@ void taxBreakdown::sPopulate()
     _delete->hide();
 
     taxPopulate.prepare("SELECT cohead_number AS number, cohead_taxzone_id AS taxzone_id, "
-                        "       cohead_curr_id AS curr_id, cohead_orderdate AS date "
+                        "       cohead_curr_id AS curr_id, cohead_orderdate AS date, "
+                        "       taxhead_service "
                         "  FROM cohead "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'S' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE cohead_id = :orderid ");
 
     params.append("headtype", "S");
@@ -125,9 +131,12 @@ void taxBreakdown::sPopulate()
     _delete->hide();
 
     taxPopulate.prepare("SELECT cohead_number AS number, cohead_taxzone_id AS taxzone_id, "
-                        "       cohead_curr_id AS curr_id, cohead_orderdate AS date "
+                        "       cohead_curr_id AS curr_id, cohead_orderdate AS date, "
+                        "       taxhead_service "
                         "  FROM coitem "
                         "  JOIN cohead ON coitem_cohead_id = cohead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'S' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE coitem_id = :orderid ");
 
     params.append("headtype", "S");
@@ -143,8 +152,11 @@ void taxBreakdown::sPopulate()
     _delete->hide();
 
     taxPopulate.prepare("SELECT quhead_number AS number, quhead_taxzone_id AS taxzone_id, "
-                        "       quhead_curr_id AS curr_id, quhead_quotedate AS date "
+                        "       quhead_curr_id AS curr_id, quhead_quotedate AS date, "
+                        "       taxhead_service "
                         "  FROM quhead "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'Q' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE quhead_id = :orderid ");
 
     params.append("headtype", "Q");
@@ -160,9 +172,12 @@ void taxBreakdown::sPopulate()
     _delete->hide();
 
     taxPopulate.prepare("SELECT quhead_number AS number, quhead_taxzone_id AS taxzone_id, "
-                        "       quhead_curr_id AS curr_id, quhead_quotedate AS date "
+                        "       quhead_curr_id AS curr_id, quhead_quotedate AS date, "
+                        "       taxhead_service "
                         "  FROM quitem "
                         "  JOIN quhead ON quitem_quhead_id = quhead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'Q' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE quitem_id = :orderid ");
 
     params.append("headtype", "Q");
@@ -175,9 +190,12 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Billing Order:"));
 
     taxPopulate.prepare("SELECT cohead_number AS number, cobmisc_taxzone_id AS taxzone_id, "
-                        "       cobmisc_curr_id AS curr_id, cobmisc_invcdate AS date "
+                        "       cobmisc_curr_id AS curr_id, cobmisc_invcdate AS date, "
+                        "       taxhead_service "
                         "  FROM cobmisc "
                         "  JOIN cohead ON cobmisc_cohead_id = cohead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'COB' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE cobmisc_id = :orderid ");
 
     params.append("headtype", "COB");
@@ -190,8 +208,11 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Invoice:"));
 
     taxPopulate.prepare("SELECT invchead_invcnumber AS number, invchead_taxzone_id AS taxzone_id, "
-                        "       invchead_curr_id AS curr_id, invchead_invcdate AS date "
+                        "       invchead_curr_id AS curr_id, invchead_invcdate AS date, "
+                        "       taxhead_service "
                         "  FROM invchead "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'INV' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE invchead_id = :orderid ");
 
     params.append("headtype", "INV");
@@ -204,9 +225,12 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Invoice:"));
 
     taxPopulate.prepare("SELECT invchead_invcnumber AS number, invchead_taxzone_id AS taxzone_id, "
-                        "       invchead_curr_id AS curr_id, invchead_invcdate AS date "
+                        "       invchead_curr_id AS curr_id, invchead_invcdate AS date, "
+                        "       taxhead_service "
                         "  FROM invcitem "
                         "  JOIN invchead ON invcitem_invchead_id = invchead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'INV' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE invcitem_id = :orderid ");
 
     params.append("headtype", "INV");
@@ -222,8 +246,11 @@ void taxBreakdown::sPopulate()
     _delete->hide();
 
     taxPopulate.prepare("SELECT rahead_number AS number, rahead_taxzone_id AS taxzone_id, "
-                        "       rahead_curr_id AS curr_id, rahead_authdate AS date "
+                        "       rahead_curr_id AS curr_id, rahead_authdate AS date, "
+                        "       taxhead_service "
                         "  FROM rahead "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'RA' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE rahead_id = :orderid ");
 
     params.append("headtype", "RA");
@@ -239,9 +266,12 @@ void taxBreakdown::sPopulate()
     _delete->hide();
 
     taxPopulate.prepare("SELECT rahead_number AS number, rahead_taxzone_id AS taxzone_id, "
-                        "       rahead_curr_id AS curr_id, rahead_authdate AS date "
+                        "       rahead_curr_id AS curr_id, rahead_authdate AS date, "
+                        "       taxhead_service "
                         "  FROM raitem "
                         "  JOIN rahead ON raitem_rahead_id = rahead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'RA' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE raitem_id = :orderid ");
 
     params.append("headtype", "RA");
@@ -254,8 +284,11 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Sales Credit:"));
 
     taxPopulate.prepare("SELECT cmhead_number AS number, cmhead_taxzone_id AS taxzone_id, "
-                        "       cmhead_curr_id AS curr_id, cmhead_docdate AS date "
+                        "       cmhead_curr_id AS curr_id, cmhead_docdate AS date, "
+                        "       taxhead_service "
                         "  FROM cmhead "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'CM' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE cmhead_id = :orderid ");
 
     params.append("headtype", "CM");
@@ -268,9 +301,12 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Sales Credit:"));
 
     taxPopulate.prepare("SELECT cmhead_number AS number, cmhead_taxzone_id AS taxzone_id, "
-                        "       cmhead_curr_id AS curr_id, cmhead_docdate AS date "
+                        "       cmhead_curr_id AS curr_id, cmhead_docdate AS date, "
+                        "       taxhead_service "
                         "  FROM cmitem "
                         "  JOIN cmhead ON cmitem_cmhead_id = cmhead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'CM' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE cmitem_id = :orderid ");
 
     params.append("headtype", "CM");
@@ -283,8 +319,11 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Transfer Order:"));
 
     taxPopulate.prepare("SELECT tohead_number AS number, tohead_taxzone_id AS taxzone_id, "
-                        "       tohead_freight_curr_id AS curr_id, tohead_orderdate AS date "
+                        "       tohead_freight_curr_id AS curr_id, tohead_orderdate AS date, "
+                        "       taxhead_service "
                         "  FROM tohead "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'TO' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE tohead_id = :orderid ");
 
     params.append("headtype", "TO");
@@ -297,9 +336,12 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Transfer Order:"));
 
     taxPopulate.prepare("SELECT tohead_number AS number, tohead_taxzone_id AS taxzone_id, "
-                        "       tohead_freight_curr_id AS curr_id, tohead_orderdate AS date "
+                        "       tohead_freight_curr_id AS curr_id, tohead_orderdate AS date, "
+                        "       taxhead_service "
                         "  FROM toitem "
                         "  JOIN tohead ON toitem_tohead_id = tohead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'TO' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE toitem_id = :orderid ");
 
     params.append("headtype", "TO");
@@ -312,8 +354,11 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Purchase Order:"));
 
     taxPopulate.prepare("SELECT pohead_number AS number, pohead_taxzone_id AS taxzone_id, "
-                        "       pohead_curr_id AS curr_id, pohead_orderdate AS date "
+                        "       pohead_curr_id AS curr_id, pohead_orderdate AS date, "
+                        "       taxhead_service "
                         "  FROM pohead "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'P' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE pohead_id = :orderid ");
 
     params.append("headtype", "P");
@@ -326,9 +371,12 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Purchase Order Item:"));
 
     taxPopulate.prepare("SELECT pohead_number AS number, pohead_taxzone_id AS taxzone_id, "
-                        "       pohead_curr_id AS curr_id, pohead_orderdate AS date "
+                        "       pohead_curr_id AS curr_id, pohead_orderdate AS date, "
+                        "       taxhead_service "
                         "  FROM poitem "
                         "  JOIN pohead ON poitem_pohead_id = pohead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'P' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE poitem_id = :orderid ");
 
     params.append("headtype", "P");
@@ -341,8 +389,11 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Voucher:"));
 
     taxPopulate.prepare("SELECT vohead_number AS number, vohead_taxzone_id AS taxzone_id, "
-                        "       vohead_curr_id AS curr_id, vohead_docdate AS date "
+                        "       vohead_curr_id AS curr_id, vohead_docdate AS date, "
+                        "       taxhead_service "
                         "  FROM vohead "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'VCH' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE vohead_id = :orderid ");
 
     params.append("headtype", "VCH");
@@ -355,9 +406,12 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for Voucher:"));
 
     taxPopulate.prepare("SELECT vohead_number AS number, vohead_taxzone_id AS taxzone_id, "
-                        "       vohead_curr_id AS curr_id, vohead_docdate AS date "
+                        "       vohead_curr_id AS curr_id, vohead_docdate AS date, "
+                        "       taxhead_service "
                         "  FROM voitem "
                         "  JOIN vohead ON voitem_vohead_id = vohead_id "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'VCH' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE voitem_id = :orderid ");
 
     params.append("headtype", "VCH");
@@ -370,8 +424,11 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for A/R Open:"));
 
     taxPopulate.prepare("SELECT aropen_docnumber AS number, aropen_taxzone_id AS taxzone_id, "
-                        "       aropen_curr_id AS curr_id, aropen_docdate AS date "
+                        "       aropen_curr_id AS curr_id, aropen_docdate AS date, "
+                        "       taxhead_service "
                         "  FROM aropen "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'AR' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE aropen_id = :orderid ");
 
     params.append("headtype", "AR");
@@ -384,8 +441,11 @@ void taxBreakdown::sPopulate()
     _header->setText(tr("Tax Breakdown for A/P Open:"));
 
     taxPopulate.prepare("SELECT apopen_docnumber AS number, apopen_taxzone_id AS taxzone_id, "
-                        "       apopen_curr_id AS curr_id, apopen_docdate AS date "
+                        "       apopen_curr_id AS curr_id, apopen_docdate AS date, "
+                        "       taxhead_service "
                         "  FROM apopen "
+                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'AP' "
+                        "                         AND cohead_id = taxhead_doc_id "
                         " WHERE apopen_id = :orderid ");
 
     params.append("headtype", "AP");
@@ -401,6 +461,13 @@ void taxBreakdown::sPopulate()
     _taxzone->setId(taxPopulate.value("taxzone_id").toInt());
     _currency->setId(taxPopulate.value("curr_id").toInt());
     _date = taxPopulate.value("date").toDate();
+    _service->setCode(taxPopulate.value("taxhead_service").toString());
+
+    if (_service->code() == "A")
+    {
+      _taxzoneLit->hide();
+      _taxzone->hide();
+    }
 
     if (_date.isNull())
       _date = QDate::currentDate();

@@ -40,6 +40,7 @@ taxType::taxType(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
     _extService = false;
     _externalCode->setVisible(false);
     _externalCodeLit->setVisible(false);
+    _externalDescription->setVisible(false);
     _externalCodeList->setVisible(false);
     _externalCodeListLit->setVisible(false);
     _searchLit->setVisible(false);
@@ -227,17 +228,6 @@ void taxType::populate()
     _description->setText(taxpopulate.value("taxtype_descrip").toString());
     _externalCode->setText(taxpopulate.value("taxtype_external_code").toString());
   }
-
-  if (_name->text() == "Adjustment")
-  {
-    _extService = false;
-    _externalCode->setVisible(false);
-    _externalCodeLit->setVisible(false);
-    _externalCodeList->setVisible(false);
-    _externalCodeListLit->setVisible(false);
-    _searchLit->setVisible(false);
-    _search->setVisible(false);
-  }
 }
 
 void taxType::populateServiceList()
@@ -290,8 +280,14 @@ void taxType::populateServiceList(QJsonObject taxCodes, QString error)
 
     qry = mql.toQuery(params);
     _externalCodeList->populate(qry);
-    ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Type Information"),
-                         qry, __FILE__, __LINE__);
+    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Type Information"),
+                             qry, __FILE__, __LINE__))
+      return;
+
+    QList<XTreeWidgetItem*> current;
+    current = _externalCodeList->findItems(_externalCode->text(), 0, 0);
+    if (current.size() > 0)
+      _externalDescription->setText(current[0]->rawValue("description").toString());
   }
   else
     QMessageBox::critical(this, tr("Avalara Error"), tr("Error retrieving Avalara Tax Codes\n%1").arg(error));
@@ -310,6 +306,7 @@ void taxType::sUpdateExtTaxCode()
   }
 
   _externalCode->setText(sel);
+  _externalDescription->setText(_externalCodeList->currentItem()->rawValue("description").toString());
 
 }
 

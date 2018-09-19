@@ -241,6 +241,12 @@ vendor::vendor(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _tax = TaxIntegration::getTaxIntegration();
   connect(_tax, SIGNAL(taxExemptCategoriesFetched(QJsonObject, QString)), this, SLOT(sPopulateTaxExempt(QJsonObject, QString)));
   _tax->getTaxExemptCategories();
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
 }
 
 vendor::~vendor()

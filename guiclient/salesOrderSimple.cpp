@@ -128,6 +128,12 @@ salesOrderSimple::salesOrderSimple(QWidget *parent, const char *name, Qt::Window
 
   _bankaccnt->setType(XComboBox::ARBankAccounts);
   _qty->setDouble(1.0);
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxZoneLit->hide();
+    _taxZone->hide();
+  }
 }
 
 salesOrderSimple::~salesOrderSimple()
