@@ -919,28 +919,24 @@ QStringList ExportHelper::parseDelim(QString delim)
   return delimItems;
 }
 
-
-int ExportHelper::validDelim(QString delim, QString &msg)
+enum ExportHelper::delimCheck ExportHelper::validDelim(QString delim, QString &msg)
 { 
-  QString disallowed = "(){}[]\"'`<>.{blank}";
-  QString discouraged = " @#$%&*_=-+/? ";
-  int valid = 0; // delim is valid
+  QString disallowedChars = "(){}[]\"'`<>.{blank}";
+  QString discouragedChars = " @#$%&*_=-+/? ";
   if (delim.length() > 1 && delim != "{tab}")
-  {
+  { 
     msg = tr("Avoid delimiters more than 1 char long.");
-    valid = tooLong; // delim is too long
+    return tooLong; // delim is too long
   }
-    
-  else if (disallowed.contains(delim))
+  else if (disallowedChars.contains(delim))
   {
-    msg = tr("%1 is not permitted as a delimiter. The following characters are not allowed: %2").arg(delim, disallowed);
-    valid = 2; // delim error
+    msg = tr("%1 is not permitted as a delimiter. The following characters are not allowed: %2").arg(delim, disallowedChars);
+    return disallowed; // delim error
   }
-  else if (discouraged.contains(delim))
+  else if (discouragedChars.contains(delim))
   {
-    msg = tr("%1 may cause problems. We suggest avoiding the following: %2").arg(delim, discouraged);
-    valid = 3; // delim warning
+    msg = tr("%1 may cause problems. We suggest avoiding the following: %2").arg(delim, discouragedChars);
+    return disencouraged; // delim warning
   }
-
   return valid;
 }

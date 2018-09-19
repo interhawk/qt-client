@@ -357,7 +357,7 @@ void userPreferences::sSave(bool close)
   
   //////// check delimiter /////////////////////////////////////////
   QString errMsg;
-  int delimiter = ExportHelper::validDelim(_delimiter->currentText(),errMsg); 
+  ExportHelper::delimCheck delimiter = ExportHelper::validDelim(_delimiter->currentText(),errMsg); 
   if(!errMsg.isEmpty())
   {
     QMessageBox msgBox;
@@ -370,7 +370,11 @@ void userPreferences::sSave(bool close)
     return;
   }
   else if(delimiter == ExportHelper::disallowed)
+  {
+    _delimiter->clearEditText();
     return;
+  }
+    
 
   // save to DB
   QString delim;

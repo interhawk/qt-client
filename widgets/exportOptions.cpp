@@ -74,7 +74,7 @@ void ExportOptions::populateDelim()
 void ExportOptions::sSave()
 {
   QString errMsg;
-  int delimiter = ExportHelper::validDelim(delimCB->currentText(),errMsg);
+  ExportHelper::delimCheck delimiter = ExportHelper::validDelim(delimCB->currentText(),errMsg);
   
   if(!errMsg.isEmpty())
   {
