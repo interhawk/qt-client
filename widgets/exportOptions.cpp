@@ -9,7 +9,7 @@
  */
 
 #include "exportOptions.h"
-#include "exportHelper.h"
+#include "exporthelper.h"
 #include <QMessageBox>
 
 ExportOptions::ExportOptions(QWidget* parent, Qt::WindowFlags fl): QDialog(parent, fl)
