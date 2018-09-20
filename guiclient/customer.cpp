@@ -798,6 +798,8 @@ void customer::sCheck()
                              _lock.lastError(), __FILE__, __LINE__);
 
       _number->setId(customerCheck.value("cust_id").toInt());
+      _number->setNewMode(false);
+      _number->setEditMode(false);
 
       if (_mode == cEdit && !_lock.acquire("custinfo", customerCheck.value("cust_id").toInt(), 
                                           AppLock::Interactive))
@@ -1881,6 +1883,7 @@ void customer::sClear()
     disconnect(_number, SIGNAL(newId(int)), this, SLOT(setId(int)));
     _number->clear();
     connect(_number, SIGNAL(newId(int)), this, SLOT(setId(int)));
+    _number->setNewMode(_mode == cNew);
 
     _cachedNumber="";
     _name->clear();

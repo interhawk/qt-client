@@ -61,6 +61,7 @@ class XTUPLEWIDGETS_EXPORT CLineEdit : public VirtualClusterLineEdit
     bool   editMode();
 
   public slots:
+    bool setNewMode(bool);
     bool setEditMode(bool);
     void sNew();
     void setId(const int);
@@ -85,6 +86,7 @@ class XTUPLEWIDGETS_EXPORT CLineEdit : public VirtualClusterLineEdit
     CRMAcctLineEdit::CRMAcctSubtype _subtype;
     int                 _crmacctId;
     bool                _canEdit;
+    bool                _newMode;
     bool                _editMode;
 };
 
@@ -106,6 +108,7 @@ class XTUPLEWIDGETS_EXPORT CustCluster : public VirtualCluster
     void setCanEdit(bool p) const { static_cast<CLineEdit*>(_number)->setCanEdit(p); }
 
     Q_INVOKABLE bool editMode() { return static_cast<CLineEdit*>(_number)->editMode(); }
+    Q_INVOKABLE bool setNewMode(bool p) const;
     Q_INVOKABLE bool setEditMode(bool p) const;
 
   private slots:
