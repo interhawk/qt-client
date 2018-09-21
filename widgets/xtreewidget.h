@@ -21,6 +21,7 @@
 #include "widgets.h"
 #include "guiclientinterface.h"
 #include "xt.h"
+#include "metrics.h"
 
 //  Table Column Widths
 #define _itemColumn     100
@@ -160,7 +161,7 @@ class XTUPLEWIDGETS_EXPORT XTreeWidgetItem : public QObject, public QTreeWidgetI
 
 class XTreeWidgetPopulateParams;
 
-class XTUPLEWIDGETS_EXPORT XTreeWidget : public QTreeWidget
+class XTUPLEWIDGETS_EXPORT XTreeWidget : public QTreeWidget 
 {
   Q_OBJECT Q_PROPERTY(QString dragString READ dragString WRITE setDragString)
   Q_PROPERTY( QString altDragString READ altDragString WRITE setAltDragString)
@@ -211,7 +212,8 @@ class XTUPLEWIDGETS_EXPORT XTreeWidget : public QTreeWidget
     Q_INVOKABLE XTreeWidgetItem         *findXTreeWidgetItemWithId(const XTreeWidgetItem *ptreeitem, const int pid);
 
     Q_INVOKABLE QString toTxt() const;
-    Q_INVOKABLE QString toCsv() const;
+    Q_INVOKABLE QString toSV(QString pSep) const;
+    Q_INVOKABLE QString toCsv();
     Q_INVOKABLE QString toVcf() const;
     Q_INVOKABLE QString toHtml() const;
 

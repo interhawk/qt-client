@@ -39,11 +39,14 @@
 #include <QTextTableFormat>
 #include <QtScript>
 #include <QMessageBox>
+#include <QInputDialog>
+#include <QDesktopServices>
 
 #include "xtreewidgetprogress.h"
 #include "xtsettings.h"
 #include "xsqlquery.h"
 #include "format.h"
+#include "exportOptions.h"
 
 #define DEBUG false
 
@@ -1627,27 +1630,27 @@ void XTreeWidget::sShowHeaderMenu(const QPoint &pntThis)
 void XTreeWidget::sExport()
 {
   QString   path = xtsettingsValue(_settingsName + "/exportPath").toString();
-  QString selectedFilter;
+
+  ExportOptions eo;
+  QString filetype, delimSelected;
+
+  if (!eo.exec())
+    return;
+  filetype = eo.getFiletype();
+  delimSelected = eo.getDelim();
+  
+  if(delimSelected == "{tab}")
+      delimSelected = "\t";
+   
   QFileInfo fi(QFileDialog::getSaveFileName(this, tr("Export Save Filename"), path,
-                                            tr("Text CSV (*.csv);;Text VCF (*.vcf);;Text (*.txt);;ODF Text Document (*.odt);;HTML Document (*.html)"), &selectedFilter));
-  QString defaultSuffix;
-  if(selectedFilter.contains("csv"))
-    defaultSuffix = ".csv";
-  else if(selectedFilter.contains("vcf"))
-    defaultSuffix = ".vcf";
-  else if(selectedFilter.contains("odt"))
-    defaultSuffix = ".odt";
-  else if(selectedFilter.contains("html"))
-    defaultSuffix = ".html";
-  else
-    defaultSuffix = ".txt";
+                                             filetype ));
 
   if (!fi.filePath().isEmpty())
   {
     QTextDocument       *doc = new QTextDocument();
     QTextDocumentWriter writer;
     if (fi.suffix().isEmpty())
-      fi.setFile(fi.filePath() += defaultSuffix);
+      fi.setFile(fi.filePath() += ".csv"); 
     xtsettingsSetValue(_settingsName + "/exportPath", fi.path());
     writer.setFileName(fi.filePath());
 
@@ -1658,7 +1661,7 @@ void XTreeWidget::sExport()
     }
     else if (fi.suffix() == "csv")
     {
-      doc->setPlainText(toCsv());
+      doc->setPlainText(toSV(delimSelected));
       writer.setFormat("plaintext");
     }
     else if (fi.suffix() == "vcf")
@@ -1676,8 +1679,14 @@ void XTreeWidget::sExport()
       doc->setHtml(toHtml());
       writer.setFormat("HTML");
     }
+    else 
+    {
+      doc->setPlainText(toSV(delimSelected));
+      writer.setFormat("plaintext");
+    }
     writer.write(doc);
   }
+  QDesktopServices::openUrl(fi.filePath());
 }
 
 void XTreeWidget::mousePressEvent(QMouseEvent *event)
@@ -2485,7 +2494,9 @@ QString XTreeWidget::toTxt() const
   return opText;
 }
 
-QString XTreeWidget::toCsv() const
+
+
+QString XTreeWidget::toSV(QString pSep) const
 {
   QString line;
   QString opText;
@@ -2498,7 +2509,7 @@ QString XTreeWidget::toCsv() const
     if (!QTreeWidget::isColumnHidden(counter))
     {
       if (colcount)
-        line = line + ",";
+        line = line + pSep;
       line = line + header->text(counter).replace("\"","\"\"").replace("\r\n"," ").replace("\n"," ");
       colcount++;
     }
@@ -2520,7 +2531,7 @@ QString XTreeWidget::toCsv() const
           if (!QTreeWidget::isColumnHidden(counter))
           {
             if (colcount)
-              line = line + ",";
+              line = line + pSep;
             if (item->data(counter,Qt::DisplayRole).type() == QVariant::String)
               line = line + "\"";
             line = line + item->text(counter).replace("\"","\"\"");
@@ -2534,6 +2545,11 @@ QString XTreeWidget::toCsv() const
     }
   }
   return opText;
+}
+
+QString XTreeWidget::toCsv()
+{
+  return toSV(QString(','));
 }
 
 QString XTreeWidget::toVcf() const
@@ -2883,3 +2899,6 @@ void XTreeWidget::keyPressEvent(QKeyEvent* e)
   else
     QTreeWidget::keyPressEvent(e);
 }
+
+
+
