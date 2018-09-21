@@ -281,14 +281,14 @@ void CLineEdit::setCanEdit(bool p)
   {
     if (_x_privileges && _subtype == CRMAcctLineEdit::Cust)
       _canEdit = _x_privileges->check("MaintainCustomerMasters") &&
-                 _x_privileges->check("MaintainCustomerNumbers");
+                 (_newMode ? true : _x_privileges->check("MaintainCustomerNumbers"));
     else if (_x_privileges && _subtype == CRMAcctLineEdit::Prospect)
       _canEdit = _x_privileges->check("MaintainProspectMasters") &&
-                 _x_privileges->check("MaintainCustomerNumbers");
+                 (_newMode ? true : _x_privileges->check("MaintainCustomerNumbers"));
     else if (_x_privileges)
       _canEdit = (_x_privileges->check("MaintainCustomerMasters") ||
                  _x_privileges->check("MaintainProspectMasters")) &&
-                 _x_privileges->check("MaintainCustomerNumbers");
+                 (_newMode ? true : _x_privileges->check("MaintainCustomerNumbers"));
   }
   else
     _canEdit=p;
@@ -297,6 +297,11 @@ void CLineEdit::setCanEdit(bool p)
     setEditMode(false);
 
   sUpdateMenu();
+}
+
+bool CLineEdit::setNewMode(bool p)
+{
+  return _newMode=p;
 }
 
 bool CLineEdit::editMode()
@@ -423,6 +428,11 @@ CustCluster::CustCluster(QWidget *pParent, const char *pName) :
 void CustCluster::setType(CLineEdit::CLineEditTypes pType)
 {
   static_cast<CLineEdit*>(_number)->setType(pType);
+}
+
+bool CustCluster::setNewMode(bool p) const
+{
+  return static_cast<CLineEdit*>(_number)->setNewMode(p);
 }
 
 bool CustCluster::setEditMode(bool p) const
