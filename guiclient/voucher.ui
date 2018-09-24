@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>1011</width>
-    <height>909</height>
+    <height>716</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -688,14 +688,28 @@ to be bound by its terms.</comment>
        <widget class="XLineEdit" name="_reference"/>
       </item>
       <item row="2" column="0">
-       <widget class="XLabel" name="_taxzoneLit">
-        <property name="text">
-         <string>Tax Zone:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout">
+        <item>
+         <widget class="XLabel" name="_taxzoneLit">
+          <property name="text">
+           <string>Tax Zone:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="XLabel" name="_taxExemptLit">
+          <property name="text">
+           <string>Tax Exempt Category:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item row="2" column="1">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -713,17 +727,24 @@ to be bound by its terms.</comment>
          </spacer>
         </item>
         <item row="0" column="0">
-         <widget class="XComboBox" name="_taxzone">
-          <property name="allowNull">
-           <bool>true</bool>
-          </property>
-          <property name="nullStr">
-           <string>None</string>
-          </property>
-          <property name="type">
-           <enum>XComboBox::TaxZones</enum>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout">
+          <item>
+           <widget class="XComboBox" name="_taxzone">
+            <property name="allowNull">
+             <bool>true</bool>
+            </property>
+            <property name="nullStr">
+             <string>None</string>
+            </property>
+            <property name="type">
+             <enum>XComboBox::TaxZones</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="TaxExemptCluster" name="_taxExempt"/>
+          </item>
+         </layout>
         </item>
         <item row="0" column="2">
          <widget class="QCheckBox" name="_flagFor1099">
@@ -738,11 +759,11 @@ to be bound by its terms.</comment>
        <widget class="QGroupBox" name="groupBox">
         <layout class="QGridLayout" name="gridLayout_12">
          <item row="0" column="1">
-          <widget class="TaxDisplay" name="_tax" native="true">
+          <widget class="TaxDisplay" name="_tax">
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="type" stdset="0">
+           <property name="type">
             <string>VCH</string>
            </property>
           </widget>
@@ -1144,6 +1165,11 @@ to be bound by its terms.</comment>
    <class>TaxDisplay</class>
    <extends>QWidget</extends>
    <header>taxdisplay.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

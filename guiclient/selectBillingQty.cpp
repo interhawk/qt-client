@@ -35,6 +35,12 @@ selectBillingQty::selectBillingQty(QWidget* parent, const char* name, bool modal
   _shipped->setPrecision(omfgThis->qtyVal());
   _balance->setPrecision(omfgThis->qtyVal());
   _uninvoiced->setPrecision(omfgThis->qtyVal());
+
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 selectBillingQty::~selectBillingQty()
@@ -71,7 +77,8 @@ enum SetResponse selectBillingQty::set(const ParameterList &pParams)
                     "       coitem_qtyord,"
                     "       coitem_qtyshipped,"
                     "       (coitem_qtyord - coitem_qtyshipped) AS qtybalance,"
-                    "       COALESCE(coitem_taxtype_id, -1) AS taxtype_id "
+                    "       COALESCE(coitem_taxtype_id, -1) AS taxtype_id, "
+                    "       coitem_tax_exemption "
                     "FROM coitem, itemsite, cohead, custinfo, uom "
                     "WHERE ( (coitem_itemsite_id=itemsite_id)"
                     " AND (coitem_cohead_id=cohead_id)"
@@ -92,6 +99,7 @@ enum SetResponse selectBillingQty::set(const ParameterList &pParams)
       _ordered->setDouble(soitem.value("coitem_qtyord").toDouble());
       _shipped->setDouble(soitem.value("coitem_qtyshipped").toDouble());
       _balance->setDouble(soitem.value("qtybalance").toDouble());
+      _taxExempt->setCode(soitem.value("coitem_tax_exemption").toString());
 
       _cachedPartialShip = soitem.value("cust_partialship").toBool();
       _closeLine->setChecked(!_cachedPartialShip);
@@ -123,7 +131,7 @@ enum SetResponse selectBillingQty::set(const ParameterList &pParams)
 
       XSqlQuery cobill;
       cobill.prepare( "SELECT cobill_qty, cobill_toclose,"
-		              "       cobill_taxtype_id "
+		              "       cobill_taxtype_id, cobill_tax_exemption "
                       "FROM cobill, cobmisc "
                       "WHERE ((cobill_cobmisc_id=cobmisc_id) "
 		              "      AND   (NOT cobmisc_posted)"
@@ -139,6 +147,7 @@ enum SetResponse selectBillingQty::set(const ParameterList &pParams)
 
 	// overwrite automatically-found values if user previously set them
 	_taxType->setId(cobill.value("cobill_taxtype_id").toInt());
+        _taxExempt->setCode(cobill.value("cobill_tax_exemption").toString());
    }
    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Billing Selection Information"),
                                  cobill, __FILE__, __LINE__))
@@ -177,13 +186,14 @@ void selectBillingQty::sSave()
   XSqlQuery select;
 
   select.prepare("SELECT selectForBilling(:soitem_id, :qty, :close, "
-		         "                        :taxtypeid ) AS result;");
+		         "                        :taxtypeid, :taxexempt ) AS result;");
 
   select.bindValue(":soitem_id", _soitemid);
   select.bindValue(":qty",	 _toBill->toDouble());
   select.bindValue(":close",	 QVariant(_closeLine->isChecked()));
   if(_taxType->isValid())
     select.bindValue(":taxtypeid", _taxType->id());
+  select.bindValue(":taxexempt", _taxExempt->code());
 
   select.exec();
 

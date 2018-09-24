@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>992</width>
-    <height>753</height>
+    <height>716</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,58 +123,79 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="1" column="2">
-              <widget class="QLabel" name="_taxZoneLite">
+              <layout class="QVBoxLayout">
+               <item>
+                <widget class="QLabel" name="_taxZoneLite">
+                 <property name="text">
+                  <string>Tax Zone:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="_taxExemptLit">
+                 <property name="text">
+                  <string>Tax Exempt Category:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="3">
+              <layout class="QVBoxLayout">
+               <item>
+                <widget class="XComboBox" name="_taxZone">
+                 <property name="allowNull">
+                  <bool>true</bool>
+                 </property>
+                 <property name="nullStr">
+                  <string>None</string>
+                 </property>
+                 <property name="type">
+                  <enum>XComboBox::TaxZones</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="TaxExemptCluster" name="_taxExempt"/>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="4">
+              <widget class="XLabel" name="_purchaseTypeLit">
                <property name="text">
-                <string>Tax Zone:</string>
+                <string>Purchase Type:</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
-             <item row="1" column="3">
-              <widget class="XComboBox" name="_taxZone">
-               <property name="allowNull">
-                <bool>true</bool>
-               </property>
-               <property name="nullStr">
-                <string>None</string>
-               </property>
-               <property name="type">
-                <enum>XComboBox::TaxZones</enum>
-               </property>
-              </widget>
+             <item row="1" column="5">
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="XComboBox" name="_purchaseType"/>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </item>
-                <item row="1" column="4">
-                 <widget class="XLabel" name="_purchaseTypeLit">
-                  <property name="text">
-                   <string>Purchase Type:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="5">
-                 <layout class="QHBoxLayout" name="horizontalLayout_5">
-                  <item>
-                   <widget class="XComboBox" name="_purchaseType"/>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_3">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
              <item row="3" column="1" colspan="3">
               <widget class="VendorCluster" name="_vendor">
                <property name="label">
@@ -321,7 +342,16 @@ to be bound by its terms.</comment>
                    <enum>QFrame::Raised</enum>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_9">
-                   <property name="margin">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
                     <number>0</number>
                    </property>
                    <item row="0" column="0">
@@ -422,7 +452,16 @@ to be bound by its terms.</comment>
                    <enum>QFrame::Raised</enum>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_10">
-                   <property name="margin">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
                     <number>0</number>
                    </property>
                    <item row="0" column="0">
@@ -769,11 +808,11 @@ to be bound by its terms.</comment>
            </item>
            <item row="3" column="3">
             <widget class="TaxDisplay" name="_tax">
-             <property name="type">
-              <string>P</string>
-             </property>
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="type">
+              <string>P</string>
              </property>
             </widget>
            </item>
@@ -1150,11 +1189,6 @@ to be bound by its terms.</comment>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>XURLLabel</class>
-   <extends>QLabel</extends>
-   <header>xurllabel.h</header>
-  </customwidget>
-  <customwidget>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
@@ -1164,6 +1198,16 @@ to be bound by its terms.</comment>
    <extends>QWidget</extends>
    <header>poitemTableView.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxDisplay</class>
+   <extends>QWidget</extends>
+   <header>taxdisplay.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

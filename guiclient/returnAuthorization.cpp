@@ -187,6 +187,11 @@ returnAuthorization::returnAuthorization(QWidget* parent, const char* name, Qt::
     _taxzoneLit->hide();
     _taxzone->hide();
   }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 returnAuthorization::~returnAuthorization()
@@ -469,7 +474,8 @@ bool returnAuthorization::sSave(bool partial)
              "       rahead_shipvia=:rahead_shipvia, "
              "       rahead_freight_taxtype_id=:rahead_freight_taxtype_id, "
              "       rahead_misc_taxtype_id=:rahead_misc_taxtype_id, "
-             "       rahead_misc_discount=:rahead_misc_discount "
+             "       rahead_misc_discount=:rahead_misc_discount, "
+             "       rahead_tax_exemption=:rahead_tax_exemption "
              " WHERE(rahead_id=:rahead_id);" );
 
   returnSave.bindValue(":rahead_id", _raheadid);
@@ -535,6 +541,7 @@ bool returnAuthorization::sSave(bool partial)
   returnSave.bindValue(":rahead_freight_taxtype_id", _freightTaxtype->id());
   returnSave.bindValue(":rahead_misc_taxtype_id", _miscChargeTaxtype->id());
   returnSave.bindValue(":rahead_misc_discount", _miscChargeDiscount->isChecked());
+  returnSave.bindValue(":rahead_tax_exemption", _taxExempt->code());
 
   returnSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving RA Information"),
@@ -656,6 +663,8 @@ void returnAuthorization::sOrigSoChanged()
                      "       cohead_shiptoaddress2, cohead_shiptoaddress3,"
                      "       cohead_shiptocity, cohead_shiptostate,"
                      "       cohead_shiptozipcode, cohead_shiptocountry, cohead_warehous_id,"
+                     "       cohead_freight_taxtype_id, cohead_misc_taxtype_id,"
+                     "       cohead_misc_discount, cohead_tax_exemption,"
                      "       cust_ffshipto, custtype_code, cohead_commission, "
                      "       shipto_num, "
                      "       warehous_code "
@@ -754,6 +763,11 @@ void returnAuthorization::sOrigSoChanged()
         _shippingZone->setId(sohead.value("cohead_shipzone_id").toInt());
         _saleType->setId(sohead.value("cohead_saletype_id").toInt());
 
+        _freightTaxtype->setId(sohead.value("cohead_freight_taxtype_id").toInt());
+        _miscChargeTaxtype->setId(sohead.value("cohead_misc_taxtype_id").toInt());
+        _miscChargeDiscount->setChecked(sohead.value("cohead_misc_discount").toBool());
+        _taxExempt->setCode(sohead.value("cohead_tax_exemption").toString());
+
         _cust->setEnabled(false);
 
         _cust->setId(sohead.value("cohead_cust_id").toInt());
@@ -851,6 +865,7 @@ void returnAuthorization::sPopulateCustomerInfo()
       query.prepare( "SELECT custtype_code, cust_salesrep_id,"
                      "       cust_commprcnt,"
                      "       cust_taxzone_id, cust_curr_id, "
+                     "       cust_tax_exemption, "
                      "       cust_name, cntct_addr_id, "
                      "       cust_ffshipto, cust_ffbillto, "
                      "       COALESCE(shipto_id, -1) AS shiptoid, "
@@ -873,6 +888,8 @@ void returnAuthorization::sPopulateCustomerInfo()
         _custtaxzoneid = query.value("cust_taxzone_id").toInt();
         _taxzone->setId(query.value("cust_taxzone_id").toInt());
         _currency->setId(query.value("cust_curr_id").toInt());
+        if (!query.value("cust_tax_exemption").toString().isEmpty())
+          _taxExempt->setCode(query.value("cust_tax_exemption").toString());
 
         _billToName->setText(query.value("cust_name"));
         _billToAddr->setId(query.value("cntct_addr_id").toInt());
@@ -1002,6 +1019,8 @@ void returnAuthorization::sNew()
       params.append("warehous_id", _warehouse->id());
     if (_shipWhs->isValid())
       params.append("shipwarehous_id", _shipWhs->id());
+    if (_metrics->value("TaxService") != "N")
+      params.append("taxExempt", _taxExempt->code());
 
     returnAuthorizationItem newdlg(this, "", true);
     newdlg.set(params);
@@ -1033,6 +1052,8 @@ void returnAuthorization::sEdit()
         params.append("mode", "view");
       else
         params.append("mode", "edit");
+      if (_metrics->value("TaxService") != "N")
+        params.append("taxExempt", _taxExempt->code());
 
       returnAuthorizationItem newdlg(this, "", true);
       newdlg.set(params);
@@ -1057,6 +1078,8 @@ void returnAuthorization::sView()
     params.append("rahead_id", _raheadid);
     params.append("orig_cohead_id", _origso->id());
     params.append("mode", "view");
+    if (_metrics->value("TaxService") != "N")
+      params.append("taxExempt", _taxExempt->code());
 
     returnAuthorizationItem newdlg(this, "", true);
     newdlg.set(params);
@@ -1361,6 +1384,8 @@ void returnAuthorization::populate()
     _miscChargeAccount->setId(rahead.value("rahead_misc_accnt_id").toInt());
     _miscChargeTaxtype->setId(rahead.value("rahead_misc_taxtype_id").toInt());
     _miscChargeDiscount->setChecked(rahead.value("rahead_misc_discount").toBool());
+
+    _taxExempt->setCode(rahead.value("rahead_tax_exemption").toString());
 
     _shippingZone->setId(rahead.value("rahead_shipzone_id").toInt());
     _saleType->setId(rahead.value("rahead_saletype_id").toInt());

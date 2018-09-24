@@ -93,6 +93,11 @@ creditMemo::creditMemo(QWidget* parent, const char* name, Qt::WindowFlags fl)
     _taxzoneLit->hide();
     _taxzone->hide();
   }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 creditMemo::~creditMemo()
@@ -377,7 +382,8 @@ bool creditMemo::save(bool partial)
              "    cmhead_warehous_id=:cmhead_warehous_id,"
              "    cmhead_freight_taxtype_id=:cmhead_freight_taxtype_id,"
              "    cmhead_misc_taxtype_id=:cmhead_misc_taxtype_id,"
-             "    cmhead_misc_discount=:cmhead_misc_discount "
+             "    cmhead_misc_discount=:cmhead_misc_discount,"
+             "    cmhead_tax_exemption=:cmhead_tax_exemption "
 	     "WHERE (cmhead_id=:cmhead_id);" );
 
   creditave.bindValue(":cmhead_id", _cmheadid);
@@ -429,6 +435,7 @@ bool creditMemo::save(bool partial)
   creditave.bindValue(":cmhead_freight_taxtype_id", _freightTaxtype->id());
   creditave.bindValue(":cmhead_misc_taxtype_id", _miscChargeTaxtype->id());
   creditave.bindValue(":cmhead_misc_discount", _miscChargeDiscount->isChecked());
+  creditave.bindValue(":cmhead_tax_exemption", _taxExempt->code());
 
   creditave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Credit Memo Information"),
@@ -505,6 +512,7 @@ void creditMemo::sInvoiceList()
       _freightTaxtype->setId(sohead.value("invchead_freight_taxtype_id").toInt());
       _miscChargeTaxtype->setId(sohead.value("invchead_misc_taxtype_id").toInt());
       _miscChargeDiscount->setChecked(sohead.value("invchead_misc_discount").toBool());
+      _taxExempt->setCode(sohead.value("invchead_tax_exemption").toString());
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Credit Memo Information"),
                                   sohead, __FILE__, __LINE__))
@@ -568,6 +576,7 @@ void creditMemo::sPopulateCustomerInfo()
       query.prepare( "SELECT cust_salesrep_id,"
                      "       cust_commprcnt,"
                      "       cust_taxzone_id, cust_curr_id, "
+                     "       cust_tax_exemption, "
                      "       cust_name, cntct_addr_id, "
                      "       cust_ffshipto, cust_ffbillto, "
                      "       COALESCE(shipto_id, -1) AS shiptoid "
@@ -591,6 +600,7 @@ void creditMemo::sPopulateCustomerInfo()
         _custtaxzoneid = query.value("cust_taxzone_id").toInt();
         _taxzone->setId(query.value("cust_taxzone_id").toInt());
         _currency->setId(query.value("cust_curr_id").toInt());
+        _taxExempt->setCode(query.value("cust_tax_exemption").toString());
 
         _billtoName->setText(query.value("cust_name"));
         _billToAddr->setId(query.value("cntct_addr_id").toInt());
@@ -737,6 +747,9 @@ void creditMemo::sNew()
   params.append("mode", "new");
   params.append("cmhead_id", _cmheadid);
 
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
+
   creditMemoItem newdlg(this, "", true);
   newdlg.set(params);
 
@@ -754,6 +767,9 @@ void creditMemo::sEdit()
   params.append("cmhead_id", _cmheadid);
   params.append("cmitem_id", _cmitem->id());
 
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
+
   creditMemoItem newdlg(this, "", true);
   newdlg.set(params);
 
@@ -767,6 +783,9 @@ void creditMemo::sView()
   params.append("mode", "view");
   params.append("cmhead_id", _cmheadid);
   params.append("cmitem_id", _cmitem->id());
+
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
 
   creditMemoItem newdlg(this, "", true);
   newdlg.set(params);
@@ -943,6 +962,8 @@ void creditMemo::populate()
     _miscChargeAccount->setId(cmhead.value("cmhead_misc_accnt_id").toInt());
     _miscChargeTaxtype->setId(cmhead.value("cmhead_misc_taxtype_id").toInt());
     _miscChargeDiscount->setChecked(cmhead.value("cmhead_misc_discount").toBool());
+
+    _taxExempt->setCode(cmhead.value("cmhead_tax_exemption").toString());
 
     _comments->setText(cmhead.value("cmhead_comments").toString());
 

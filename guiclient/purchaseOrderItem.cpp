@@ -106,6 +106,12 @@ purchaseOrderItem::purchaseOrderItem(QWidget* parent, const char* name, bool mod
   //If not Revision Control, hide controls
   if (!_metrics->boolean("RevControl"))
    _tab->removeTab(_tab->indexOf(_revision));
+
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
    
   adjustSize();
   
@@ -228,6 +234,12 @@ enum SetResponse purchaseOrderItem::set(const ParameterList &pParams)
                            purchaseet, __FILE__, __LINE__);
       return UndefinedError;
     }
+  }
+
+  param = pParams.value("taxExempt", &valid);
+  if (valid)
+  {
+    _taxExempt->setCode(param.toString());
   }
 
   param = pParams.value("poitem_id", &valid);
@@ -447,6 +459,7 @@ void purchaseOrderItem::populate()
     _taxRecoverable->setChecked(purchasepopulate.value("poitem_tax_recoverable").toBool());
     _notes->setText(purchasepopulate.value("poitem_comments").toString());
     _project->setId(purchasepopulate.value("poitem_prj_id").toInt());
+    _taxExempt->setCode(purchasepopulate.value("poitem_tax_exemption").toString());
     if(purchasepopulate.value("override_cost").toDouble() > 0)
       _overriddenUnitPrice = true;
 
@@ -713,7 +726,8 @@ void purchaseOrderItem::sSave()
                "  poitem_unitprice, poitem_freight, poitem_duedate, "
                "  poitem_bom_rev_id, poitem_boo_rev_id, "
                "  poitem_comments, poitem_prj_id, poitem_stdcost, poitem_manuf_name, "
-               "  poitem_manuf_item_number, poitem_manuf_item_descrip, poitem_rlsd_duedate ) "
+               "  poitem_manuf_item_number, poitem_manuf_item_descrip, poitem_rlsd_duedate, "
+               "  poitem_tax_exemption ) "
                "VALUES "
                "( :poitem_id, :poitem_pohead_id, :status, :poitem_linenumber,"
                "  :poitem_taxtype_id, :poitem_tax_recoverable,"
@@ -724,7 +738,8 @@ void purchaseOrderItem::sSave()
                "  :poitem_unitprice, :poitem_freight, :poitem_duedate, "
                "  :poitem_bom_rev_id, :poitem_boo_rev_id, "
                "  :poitem_comments, :poitem_prj_id, stdcost(:item_id), :poitem_manuf_name, "
-               "  :poitem_manuf_item_number, :poitem_manuf_item_descrip, :poitem_duedate) ;" );
+               "  :poitem_manuf_item_number, :poitem_manuf_item_descrip, :poitem_duedate, "
+               "  :poitem_tax_exemption) ;" );
 
     purchaseSave.bindValue(":status", _poStatus);
     purchaseSave.bindValue(":item_id", _item->id());
@@ -771,7 +786,8 @@ void purchaseOrderItem::sSave()
                "    poitem_boo_rev_id=:poitem_boo_rev_id, "
                "    poitem_manuf_name=:poitem_manuf_name, "
                "    poitem_manuf_item_number=:poitem_manuf_item_number, "
-               "    poitem_manuf_item_descrip=:poitem_manuf_item_descrip "
+               "    poitem_manuf_item_descrip=:poitem_manuf_item_descrip, "
+               "    poitem_tax_exemption=:poitem_tax_exemption "
                "WHERE (poitem_id=:poitem_id);" );
 
   purchaseSave.bindValue(":poitem_id", _poitemid);
@@ -801,6 +817,7 @@ void purchaseOrderItem::sSave()
     purchaseSave.bindValue(":poitem_bom_rev_id", _bomRevision->id());
     purchaseSave.bindValue(":poitem_boo_rev_id", _booRevision->id());
   }
+  purchaseSave.bindValue(":poitem_tax_exemption", _taxExempt->code());
   purchaseSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Purchase Order Item Information"),
                                          purchaseSave, __FILE__, __LINE__))

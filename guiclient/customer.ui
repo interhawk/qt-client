@@ -1614,7 +1614,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item>
-              <widget class="XComboBox" name="_taxExempt"/>
+              <widget class="TaxExemptCluster" name="_taxExempt"/>
              </item>
              <item>
               <spacer>
@@ -2371,6 +2371,11 @@ to be bound by its terms.</comment>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

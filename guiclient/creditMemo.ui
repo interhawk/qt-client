@@ -231,48 +231,84 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="2" column="3">
-              <widget class="QLabel" name="_taxzoneLit">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Tax Zone:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-               <property name="buddy">
-                <cstring>_billToAddr</cstring>
-               </property>
-              </widget>
+              <layout class="QVBoxLayout">
+               <item>
+                <widget class="QLabel" name="_taxzoneLit">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Tax Zone:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>_billToAddr</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="_taxExemptLit">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Tax Exempt Category:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buddy">
+                  <cstring>_taxExempt</cstring>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item row="2" column="4">
-              <widget class="XComboBox" name="_taxzone">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="allowNull">
-                <bool>true</bool>
-               </property>
-               <property name="nullStr">
-                <string>None</string>
-               </property>
-               <property name="type">
-                <enum>XComboBox::TaxZones</enum>
-               </property>
-              </widget>
+              <layout class="QVBoxLayout">
+               <item>
+                <widget class="XComboBox" name="_taxzone">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="allowNull">
+                  <bool>true</bool>
+                 </property>
+                 <property name="nullStr">
+                  <string>None</string>
+                 </property>
+                 <property name="type">
+                  <enum>XComboBox::TaxZones</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="TaxExemptCluster" name="_taxExempt"/>
+               </item>
+              </layout>
              </item>
              <item row="3" column="3">
               <widget class="QLabel" name="_rsnCodeLit">
@@ -900,11 +936,11 @@ to be bound by its terms.</comment>
            </item>
            <item row="3" column="5">
             <widget class="TaxDisplay" name="_tax">
-             <property name="type">
-              <string>CM</string>
-             </property>
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="type">
+              <string>CM</string>
              </property>
             </widget>
            </item>
@@ -1158,6 +1194,11 @@ to be bound by its terms.</comment>
    <header>xcombobox.h</header>
   </customwidget>
   <customwidget>
+   <class>XLabel</class>
+   <extends>QLabel</extends>
+   <header>xlabel.h</header>
+  </customwidget>
+  <customwidget>
    <class>XLineEdit</class>
    <extends>QLineEdit</extends>
    <header>xlineedit.h</header>
@@ -1170,14 +1211,19 @@ to be bound by its terms.</comment>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>XURLLabel</class>
-   <extends>QLabel</extends>
-   <header>xurllabel.h</header>
-  </customwidget>
-  <customwidget>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxDisplay</class>
+   <extends>QWidget</extends>
+   <header>taxdisplay.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -80,6 +80,12 @@ creditMemoItem::creditMemoItem(QWidget* parent, const char* name, bool modal, Qt
     _warehouse->hide();
   }
 
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
+
   _item->setFocus();
   adjustSize();
 }
@@ -133,6 +139,12 @@ enum SetResponse creditMemoItem::set(const ParameterList &pParams)
     {
       return UndefinedError;
     }
+  }
+
+  param = pParams.value("taxExempt", &valid);
+  if (valid)
+  {
+    _taxExempt->setCode(param.toString());
   }
 
   param = pParams.value("cmitem_id", &valid);
@@ -258,14 +270,16 @@ void creditMemoItem::sSave()
                "  cmitem_price_uom_id, cmitem_price_invuomratio,"
                "  cmitem_unitprice, cmitem_listprice, cmitem_taxtype_id,"
                "  cmitem_comments, cmitem_rsncode_id, "
-               "  cmitem_number, cmitem_descrip, cmitem_salescat_id, cmitem_rev_accnt_id ) "
+               "  cmitem_number, cmitem_descrip, cmitem_salescat_id, cmitem_rev_accnt_id,"
+               "  cmitem_tax_exemption  ) "
                "SELECT :cmitem_id, :cmhead_id, :cmitem_linenumber, :itemsite_id,"
                "       :cmitem_qtyreturned, :cmitem_qtycredit, :cmitem_updateinv,"
                "       :qty_uom_id, :qty_invuomratio,"
                "       :price_uom_id, :price_invuomratio,"
                "       :cmitem_unitprice, :cmitem_listprice, :cmitem_taxtype_id,"
                "       :cmitem_comments, :cmitem_rsncode_id, "
-               "       :cmitem_number, :cmitem_descrip, :cmitem_salescat_id, :cmitem_rev_accnt_id ;");
+               "       :cmitem_number, :cmitem_descrip, :cmitem_salescat_id, :cmitem_rev_accnt_id,"
+               "       :cmitem_tax_exemption ;");
   }
   else
     creditSave.prepare( "UPDATE cmitem "
@@ -283,7 +297,8 @@ void creditMemoItem::sSave()
                "    cmitem_number=:cmitem_number, "
                "    cmitem_descrip=:cmitem_descrip, "
                "    cmitem_salescat_id=:cmitem_salescat_id, "
-               "    cmitem_rev_accnt_id=:cmitem_rev_accnt_id "
+               "    cmitem_rev_accnt_id=:cmitem_rev_accnt_id, "
+               "    cmitem_tax_exemption=:cmitem_tax_exemption "
                "WHERE (cmitem_id=:cmitem_id);" );
 
   creditSave.bindValue(":cmitem_id", _cmitemid);
@@ -331,6 +346,7 @@ void creditMemoItem::sSave()
   }
   if (_revAccnt->id() > 0)
     creditSave.bindValue(":cmitem_rev_accnt_id", _revAccnt->id());
+  creditSave.bindValue(":cmitem_tax_exemption", _taxExempt->code());
   creditSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Credit Memo Item Information"),
                                 creditSave, __FILE__, __LINE__))
@@ -521,6 +537,7 @@ void creditMemoItem::populate()
     _priceinvuomratio = cmitem.value("cmitem_price_invuomratio").toDouble();
     _comments->setText(cmitem.value("cmitem_comments").toString());
     _taxType->setId(cmitem.value("cmitem_taxtype_id").toInt());
+    _taxExempt->setCode(cmitem.value("cmitem_tax_exemption").toString());
     _tax->setId(cmitem.value("cmhead_curr_id").toInt());
     _tax->setLocalValue(cmitem.value("tax").toDouble());
     sCalculateDiscountPrcnt();

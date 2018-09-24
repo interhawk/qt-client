@@ -841,7 +841,7 @@ and Purchase Order amounts</string>
               </widget>
              </item>
              <item>
-              <widget class="XComboBox" name="_taxExempt"/>
+              <widget class="TaxExemptCluster" name="_taxExempt"/>
              </item>
              <item>
               <spacer name="horizontalSpacer_10">
@@ -1971,6 +1971,11 @@ and Purchase Order amounts</string>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

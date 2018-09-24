@@ -16,7 +16,6 @@
 #include "xwidget.h"
 #include <parameter.h>
 #include "contactcluster.h"
-#include "taxIntegration.h"
 #include "ui_vendor.h"
 
 class ParameterList;
@@ -54,7 +53,6 @@ public slots:
     virtual void sViewAddress();
     virtual void sDeleteAddress();
     virtual void sFillAddressList();
-    virtual void sPopulateTaxExempt(QJsonObject, QString);
     virtual void sFillTaxregList();
     virtual void sNewTaxreg();
     virtual void sEditTaxreg();
@@ -107,7 +105,6 @@ private:
     bool _captive;
     bool _notice;
     QString _crmowner;
-    TaxIntegration* _tax;
 
 };
 
