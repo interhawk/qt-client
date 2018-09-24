@@ -169,6 +169,11 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
     _taxZoneLite->hide();
     _taxZone->hide();
   }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 void purchaseOrder::setPoheadid(const int pId)
@@ -435,6 +440,9 @@ enum SetResponse purchaseOrder::set(const ParameterList &pParams)
           newItemParams.append("prj_id", prjid);
 
         newItemParams.append("pr_releasenote", prnotes);
+
+        if (_metrics->value("TaxService") != "N")
+          newItemParams.append("taxExempt", _taxExempt->code());
 
         purchaseOrderItem poItem(this, "", true);
         poItem.set(newItemParams);
@@ -780,6 +788,7 @@ void purchaseOrder::populate()
     _poCurrency->setId(po.value("pohead_curr_id").toInt());
     _freight->setLocalValue(po.value("pohead_freight").toDouble());
     _freightTaxtype->setId(po.value("pohead_freight_taxtype_id").toInt());
+    _taxExempt->setCode(po.value("pohead_tax_exemption").toString());
 
    // must be after _vendor
     _purchaseType->setId(po.value("pohead_potype_id").toInt());
@@ -1002,7 +1011,8 @@ bool purchaseOrder::save(bool partial)
              "    pohead_shiptozipcode=:pohead_shiptozipcode,"
              "    pohead_shiptocountry=:pohead_shiptocountry,"
              "    pohead_dropship=:pohead_dropship,"
-             "    pohead_freight_taxtype_id=:pohead_freight_taxtype_id "
+             "    pohead_freight_taxtype_id=:pohead_freight_taxtype_id, "
+             "    pohead_tax_exemption=:pohead_tax_exemption "
              "WHERE (pohead_id=:pohead_id);" );
   purchaseSave.bindValue(":pohead_id", _poheadid);
   if (_warehouse->isValid())
@@ -1069,6 +1079,7 @@ bool purchaseOrder::save(bool partial)
     purchaseSave.bindValue(":pohead_potype_id", _purchaseType->id());
   purchaseSave.bindValue(":pohead_dropship", QVariant(_dropShip->isChecked()));
   purchaseSave.bindValue(":pohead_freight_taxtype_id", _freightTaxtype->id());
+  purchaseSave.bindValue(":pohead_tax_exemption", _taxExempt->code());
 
   purchaseSave.exec();
 
@@ -1093,6 +1104,9 @@ void purchaseOrder::sNew()
   if (_projectId != -1)
     params.append("prj_id", _projectId);
 
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
+
   purchaseOrderItem newdlg(this, "", true);
   newdlg.set(params);
   newdlg.exec();
@@ -1116,6 +1130,9 @@ void purchaseOrder::sEdit()
     params.append("mode", "edit");
   else if (_mode == cView)
     params.append("mode", "view");
+
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
 
   purchaseOrderItem newdlg(this, "", true);
   newdlg.set(params);
@@ -1278,6 +1295,7 @@ void purchaseOrder::sHandleVendor(int pVendid)
                "       COALESCE((SELECT potype_id FROM potype WHERE potype_default),-1) AS default_potype,"
                "       COALESCE(vend_addr_id, -1) AS vendaddrid,"
                "       COALESCE(vend_taxzone_id, -1) AS vendtaxzoneid,"
+               "       COALESCE(vend_tax_exemption, fetchMetricText('AvalaraUserExemptionCode')) AS taxexempt,"
                "       crmacct_id"
                "  FROM vendinfo"
                "  LEFT OUTER JOIN addr ON (vend_addr_id=addr_id)"
@@ -1294,6 +1312,8 @@ void purchaseOrder::sHandleVendor(int pVendid)
       _terms->setId(vq.value("vend_terms_id").toInt());
       _shipVia->setText(vq.value("vend_shipvia"));
       _notes->setText(vq.value("vend_pocomments").toString());
+      if (!vq.value("taxexempt").toString().isEmpty())
+        _taxExempt->setCode(vq.value("taxexempt").toString());
 
       if (vq.value("vend_fobsource").toString() == "V")
       {

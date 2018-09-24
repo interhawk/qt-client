@@ -145,6 +145,12 @@ returnAuthorizationItem::returnAuthorizationItem(QWidget* parent, const char* na
   _altcosAccntid->setType(GLCluster::cRevenue | GLCluster::cExpense);
   _tab->setTabEnabled(_tab->indexOf(_lotserial), false);
 
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
+
   returnreturnAuthorizationItem.exec("BEGIN;"); //In case problems or we cancel out
 }
 
@@ -212,6 +218,12 @@ enum SetResponse returnAuthorizationItem::set(const ParameterList &pParams)
   {
     _preferredShipWarehousid = param.toInt();
     _shipWhs->setId(_preferredShipWarehousid);
+  }
+
+  param = pParams.value("taxExempt", &valid);
+  if (valid)
+  {
+    _taxExempt->setCode(param.toString());
   }
 
   param = pParams.value("mode", &valid);
@@ -388,7 +400,7 @@ bool returnAuthorizationItem::sSave()
                "  raitem_unitprice, raitem_taxtype_id, "
                "  raitem_notes, raitem_rsncode_id, raitem_cos_accnt_id, "
                "  raitem_scheddate, raitem_warranty, raitem_coitem_itemsite_id, "
-               "  raitem_saleprice, raitem_unitcost, raitem_custpn ) "
+               "  raitem_saleprice, raitem_unitcost, raitem_custpn, raitem_tax_exemption ) "
                "SELECT :raitem_id, :rahead_id, :raitem_linenumber, rcv.itemsite_id,"
                "       :raitem_disposition, :raitem_qtyauthorized,"
                "       :qty_uom_id, :qty_invuomratio,"
@@ -396,7 +408,7 @@ bool returnAuthorizationItem::sSave()
                "       :raitem_unitprice, :raitem_taxtype_id, "
                "       :raitem_notes, :raitem_rsncode_id, :raitem_cos_accnt_id, "
                "       :raitem_scheddate, :raitem_warranty, shp.itemsite_id, "
-               "       :raitem_saleprice, :raitem_unitcost, :raitem_custpn "
+               "       :raitem_saleprice, :raitem_unitcost, :raitem_custpn, :raitem_tax_exemption "
                "FROM itemsite rcv "
                "  LEFT OUTER JOIN itemsite shp ON "
                "        (shp.itemsite_item_id=rcv.itemsite_item_id) "
@@ -423,7 +435,8 @@ bool returnAuthorizationItem::sSave()
                "    raitem_saleprice=:raitem_saleprice, "
                "    raitem_coitem_itemsite_id=:coitem_itemsite_id, "
                "    raitem_unitcost=:raitem_unitcost, "
-               "    raitem_custpn=:raitem_custpn "
+               "    raitem_custpn=:raitem_custpn, "
+               "    raitem_tax_exemption=:raitem_tax_exemption "
                "WHERE (raitem_id=:raitem_id);" );
 
      if (_disposition->code() == "P" ||
@@ -485,6 +498,7 @@ bool returnAuthorizationItem::sSave()
   if (_costmethod=="A")
     returnSave.bindValue(":raitem_unitcost", _unitCost->localValue());
   returnSave.bindValue(":raitem_custpn", _customerPN->text());
+  returnSave.bindValue(":raitem_tax_exemption", _taxExempt->code());
   returnSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving RA Information"),
                                 returnSave, __FILE__, __LINE__))
@@ -908,6 +922,7 @@ void returnAuthorizationItem::populate()
     _status = raitem.value("raitem_status").toString();
     _qtycredited = raitem.value("raitem_qtycredited").toDouble();
     _customerPN->setText(raitem.value("raitem_custpn").toString());
+    _taxExempt->setCode(raitem.value("raitem_tax_exemption").toString());
 
     _cQtyOrdered = _qtyAuth->toDouble();
     _cScheduledDate = _scheduledDate->date();

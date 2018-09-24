@@ -61,6 +61,12 @@ voucherItem::voucherItem(QWidget* parent, const char* name, bool modal, Qt::Wind
   _uninvoiced->addColumn(tr("Qty."),           _qtyColumn,  Qt::AlignRight,  true, "qty");
   _uninvoiced->addColumn(tr("Unit Price"),     _moneyColumn,Qt::AlignRight,  true, "unitprice");
   _uninvoiced->addColumn(tr("Tagged"),         _ynColumn,   Qt::AlignCenter, true, "f_tagged");
+
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 voucherItem::~voucherItem()
@@ -143,7 +149,7 @@ enum SetResponse voucherItem::set(const ParameterList &pParams)
     _poitemid = param.toInt();
 
     setVoucher.prepare( "SELECT pohead_number, poitem_linenumber, poitem_taxtype_id, "
-               "       COALESCE(itemsite_id, -1) AS itemsiteid,"
+               "       COALESCE(itemsite_id, -1) AS itemsiteid, poitem_tax_exemption, "
                "       poitem_vend_item_number, poitem_vend_uom, poitem_vend_item_descrip,"
                "       poitem_duedate,"
                "       poitem_qty_ordered,"
@@ -187,6 +193,7 @@ enum SetResponse voucherItem::set(const ParameterList &pParams)
       _extPrice->setText(setVoucher.value("f_extprice").toDouble());
       _lineFreight->setText(setVoucher.value("poitem_freight").toDouble());
 	  _taxtype->setId(setVoucher.value("poitem_taxtype_id").toInt());
+      _taxExempt->setCode(setVoucher.value("poitem_tax_exemption").toString());
       if (setVoucher.value("itemsiteid") != -1)
         _item->setItemsiteid(setVoucher.value("itemsiteid").toInt());
     }
@@ -202,7 +209,7 @@ enum SetResponse voucherItem::set(const ParameterList &pParams)
 
   if ( (_voheadid != -1) && (_poitemid != -1) )
   {
-    setVoucher.prepare( "SELECT voitem_id, voitem_close, voitem_taxtype_id, "
+    setVoucher.prepare( "SELECT voitem_id, voitem_close, voitem_taxtype_id, voitem_tax_exemption "
                "       voitem_qty,"
                "       voitem_freight,"
                "       ( SELECT SUM(vodist_amount) "
@@ -223,6 +230,7 @@ enum SetResponse voucherItem::set(const ParameterList &pParams)
       _amtToVoucher->setDouble(setVoucher.value("voitem_amt").toDouble());
       _freightToVoucher->setLocalValue(setVoucher.value("voitem_freight").toDouble());
       _taxtype->setId(setVoucher.value("voitem_taxtype_id").toInt());
+      _taxExempt->setCode(setVoucher.value("voitem_tax_exemption").toString());
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Voucher Information"),
                                   setVoucher, __FILE__, __LINE__))
@@ -356,7 +364,8 @@ void voucherItem::sSave()
                "SET voitem_close=:voitem_close,"
                "    voitem_qty=:voitem_qty, "
                "    voitem_freight=:voitem_freight, "
-	  		 "    voitem_taxtype_id=:voitem_taxtype_id "
+	  		 "    voitem_taxtype_id=:voitem_taxtype_id, "
+               "    voitem_tax_exemption=:voitem_tax_exemption "
                "WHERE (voitem_id=:voitem_id) "
                "RETURNING voitem_id;" );
     voucherSave.bindValue(":voitem_id", _voitemid);
@@ -365,10 +374,10 @@ void voucherItem::sSave()
   {
     voucherSave.prepare( "INSERT INTO voitem "
                "(voitem_vohead_id, voitem_poitem_id, voitem_close, voitem_qty, "
-               " voitem_freight, voitem_taxtype_id ) "
+               " voitem_freight, voitem_taxtype_id, voitem_tax_exemption ) "
                "VALUES "
                "(:vohead_id, :poitem_id, :voitem_close, :voitem_qty, "
-               " :voitem_freight, :voitem_taxtype_id) "
+               " :voitem_freight, :voitem_taxtype_id, :voitem_tax_exemption) "
                "RETURNING voitem_id;" );
   }
 
@@ -380,6 +389,7 @@ void voucherItem::sSave()
   voucherSave.bindValue(":voitem_freight", _freightToVoucher->localValue());
   if (_taxtype->id() != -1)
     voucherSave.bindValue(":voitem_taxtype_id", _taxtype->id());
+  voucherSave.bindValue(":voitem_tax_exemption", _taxExempt->code());
   voucherSave.exec();
   if (voucherSave.first())
     _voitemid = voucherSave.value("voitem_id").toInt();

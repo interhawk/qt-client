@@ -121,6 +121,11 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
     _taxzoneLit->hide();
     _taxzone->hide();
   }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 voucher::~voucher()
@@ -374,7 +379,8 @@ bool voucher::save(bool partial)
              "    vohead_freight_taxtype_id=:vohead_freight_taxtype_id,"
              "    vohead_1099=:vohead_1099, "
              "    vohead_curr_id=:vohead_curr_id, "
-             "    vohead_notes=:vohead_notes "
+             "    vohead_notes=:vohead_notes, "
+             "    vohead_tax_exemption=:vohead_tax_exemption "
              "WHERE (vohead_id=:vohead_id);" );
 
   updq.bindValue(":vohead_id", _voheadid);
@@ -398,6 +404,7 @@ bool voucher::save(bool partial)
   updq.bindValue(":vohead_1099", QVariant(_flagFor1099->isChecked()));
   updq.bindValue(":vohead_curr_id", _amountToDistribute->id());
   updq.bindValue(":vohead_notes", _notes->toPlainText());
+  updq.bindValue(":vohead_tax_exemption", _taxExempt->code());
   updq.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Saving Voucher"),
                            updq, __FILE__, __LINE__))
@@ -744,7 +751,9 @@ void voucher::sPopulatePoInfo()
 {
   XSqlQuery po;
   po.prepare("SELECT pohead_terms_id, pohead_taxzone_id, vend_1099, "
-             "       pohead_curr_id, pohead_freight, vend_id, vend_number, vend_name,"
+             "       pohead_curr_id, pohead_freight, "
+             "       pohead_freight_taxtype_id, pohead_tax_exemption, "
+             "       vend_id, vend_number, vend_name,"
              "       addr_line1, addr_line2"
              "  FROM pohead"
              "  JOIN vendinfo ON (pohead_vend_id=vend_id)"
@@ -762,6 +771,8 @@ void voucher::sPopulatePoInfo()
     _amountToDistribute->setId(po.value("pohead_curr_id").toInt());
     _freight->setLocalValue(po.value("pohead_freight").toDouble());
     _freight->setId(po.value("pohead_curr_id").toInt());
+    _freightTaxtype->setId(po.value("pohead_freight_taxtype_id").toInt());
+    _taxExempt->setCode(po.value("pohead_tax_exemption").toString());
     _vendid = po.value("vend_id").toInt();
     _vendor->setText(po.value("vend_number").toString());
     _vendName->setText(po.value("vend_name").toString());
@@ -843,7 +854,8 @@ void voucher::populate()
                   "       vohead_invcnumber, vohead_reference, vohead_freight, vohead_freight_expcat_id,"
                   "       vohead_freight_distributed, vohead_tax_charged, "
                   "       vohead_freight_taxtype_id, "
-                  "       vohead_1099, vohead_amount, vohead_curr_id, vohead_notes "
+                  "       vohead_1099, vohead_amount, vohead_curr_id, vohead_notes, "
+                  "       vohead_tax_exemption "
                   "FROM vohead "
                   "WHERE (vohead_id=:vohead_id);" );
   vohead.bindValue(":vohead_id", _voheadid);
@@ -869,6 +881,7 @@ void voucher::populate()
     _freightDistr->setChecked(_frghtdistr > 0);
     _freightExpcat->setId(vohead.value("vohead_freight_expcat_id").toInt());
     _freightTaxtype->setId(vohead.value("vohead_freight_taxtype_id").toInt());
+    _taxExempt->setCode(vohead.value("vohead_tax_exemption").toString());
 
     _distributionDate->setDate(vohead.value("vohead_distdate").toDate(), true);
     _invoiceDate->setDate(vohead.value("vohead_docdate").toDate());
@@ -1011,7 +1024,9 @@ bool voucher::saveDetail()
                "    vohead_freight_distributed=:frghtDistr,"
                "    vohead_1099=:vohead_1099, "
                "    vohead_curr_id=:vohead_curr_id, "
-               "    vohead_notes=:vohead_notes "
+               "    vohead_notes=:vohead_notes, "
+               "    vohead_freight_taxtype_id=:vohead_freight_taxtype_id, "
+               "    vohead_tax_exemption=:vohead_tax_exemption "
                "WHERE (vohead_id=:vohead_id);" );
 
     updq.bindValue(":vohead_id", _voheadid);
@@ -1033,6 +1048,8 @@ bool voucher::saveDetail()
     updq.bindValue(":vohead_1099", QVariant(_flagFor1099->isChecked()));
     updq.bindValue(":vohead_curr_id", _amountToDistribute->id());
     updq.bindValue(":vohead_notes", _notes->toPlainText());
+    updq.bindValue(":vohead_freight_taxtype_id", _freightTaxtype->id());
+    updq.bindValue(":vohead_tax_exemption", _taxExempt->code());
     updq.exec();
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Updating Voucher"),
                              updq, __FILE__, __LINE__))

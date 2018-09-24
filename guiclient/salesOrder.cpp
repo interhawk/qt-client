@@ -308,6 +308,12 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
     _taxZoneLit->hide();
     _taxZone->hide();
   }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
+
 }
 
 salesOrder::~salesOrder()
@@ -986,7 +992,8 @@ bool salesOrder::save(bool partial)
                "    cohead_saletype_id=:saletype_id, "
                "    cohead_freight_taxtype_id=:freight_taxtype_id, "
                "    cohead_misc_taxtype_id=:misc_taxtype_id, "
-               "    cohead_misc_discount=:misc_discount "
+               "    cohead_misc_discount=:misc_discount, "
+               "    cohead_tax_exemption=:tax_exemption "
                "WHERE (cohead_id=:id);" );
   else if (_mode == cNew)
   {
@@ -1034,7 +1041,8 @@ bool salesOrder::save(bool partial)
               "    cohead_billto_cntct_fax,"
               "    cohead_billto_cntct_email,"
               "    cohead_shipzone_id, cohead_saletype_id,"
-              "    cohead_freight_taxtype_id, cohead_misc_taxtype_id, cohead_misc_discount)"
+              "    cohead_freight_taxtype_id, cohead_misc_taxtype_id, cohead_misc_discount,"
+              "    cohead_tax_exemption)"
               "    VALUES (:id,:number, :cust_id,"
               "    :custponumber,:shipto_id,"
               "    :billtoname, :billtoaddress1,"
@@ -1078,7 +1086,8 @@ bool salesOrder::save(bool partial)
               "    :billto_cntct_fax,"
               "    :billto_cntct_email,"
               "    :shipzone_id, :saletype_id,"
-              "    :freight_taxtype_id, :misc_taxtype_id, :misc_discount) ");
+              "    :freight_taxtype_id, :misc_taxtype_id, :misc_discount,"
+              "    :tax_exemption) ");
   }
   else if ((_mode == cEditQuote) || ((_mode == cNewQuote) && _saved))
     saveSales.prepare( "UPDATE quhead "
@@ -1124,7 +1133,8 @@ bool salesOrder::save(bool partial)
                "    quhead_saletype_id=:saletype_id, "
                "    quhead_freight_taxtype_id=:freight_taxtype_id, "
                "    quhead_misc_taxtype_id=:misc_taxtype_id, "
-               "    quhead_misc_discount=:misc_discount "
+               "    quhead_misc_discount=:misc_discount,"
+               "    quhead_tax_exemption=:tax_exemption "
                "WHERE (quhead_id=:id);" );
   else if (_mode == cNewQuote)
     saveSales.prepare( "INSERT INTO quhead ("
@@ -1169,7 +1179,8 @@ bool salesOrder::save(bool partial)
                "    quhead_billto_cntct_email,"
                "    quhead_status,"
                "    quhead_shipzone_id, quhead_saletype_id,"
-               "    quhead_freight_taxtype_id, quhead_misc_taxtype_id, quhead_misc_discount)"
+               "    quhead_freight_taxtype_id, quhead_misc_taxtype_id, quhead_misc_discount,"
+               "    quhead_tax_exemption)"
                "    VALUES ("
                "    :id, :number, :cust_id,"
                "    :custponumber, :shipto_id,"
@@ -1212,7 +1223,8 @@ bool salesOrder::save(bool partial)
                "    :billto_cntct_email,"
                "    :quhead_status,"
                "    :shipzone_id, :saletype_id,"
-               "    :freight_taxtype_id, :misc_taxtype_id, :misc_discount) ");
+               "    :freight_taxtype_id, :misc_taxtype_id, :misc_discount,"
+               "    :tax_exemption) ");
   saveSales.bindValue(":id", _soheadid );
   saveSales.bindValue(":number", _orderNumber->text());
   saveSales.bindValue(":orderdate", _orderDate->date());
@@ -1310,6 +1322,7 @@ bool salesOrder::save(bool partial)
   saveSales.bindValue(":freight_taxtype_id", _freightTaxtype->id());
   saveSales.bindValue(":misc_taxtype_id", _miscChargeTaxtype->id());
   saveSales.bindValue(":misc_discount", _miscChargeDiscount->isChecked());
+  saveSales.bindValue(":tax_exemption", _taxExempt->code());
 
   saveSales.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Saving Order"),
@@ -1826,6 +1839,7 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
                 "       COALESCE(shipto_id, -1) AS shiptoid,"
                 "       cust_preferred_warehous_id, "
                 "       cust_curr_id, COALESCE(crmacct_id,-1) AS crmacct_id, "
+                "       cust_tax_exemption, "
                 "       true AS iscustomer "
                 "FROM custinfo "
                 "  LEFT OUTER JOIN cntct  ON (cust_cntct_id=cntct_id) "
@@ -1849,6 +1863,7 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
                 "       -1 AS shiptoid,"
                 "       prospect_warehous_id AS cust_preferred_warehous_id, "
                 "       NULL AS cust_curr_id, COALESCE(crmacct_id,-1) AS crmacct_id, "
+                "       NULL AS cust_tax_exemption, "
                 "       false AS iscustomer "
                 "FROM prospect "
                 "  LEFT OUTER JOIN crmacct ON (prospect_crmacct_id = crmacct_id) "
@@ -1937,6 +1952,8 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
       _shipVia->setText(cust.value("cust_shipvia"));
 
       _orderCurrency->setId(cust.value("cust_curr_id").toInt());
+      if (!cust.value("cust_tax_exemption").toString().isEmpty())
+        _taxExempt->setCode(cust.value("cust_tax_exemption").toString());
 
       if (cust.value("cust_preferred_warehous_id").toInt() > 0)
       {
@@ -2135,6 +2152,9 @@ void salesOrder::sNew()
   params.append("taxzone_id", _taxZone->id());
   params.append("shipzone_id", _shippingZone->id());
   params.append("saletype_id", _saleType->id());
+
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
   if (_warehouse->id() != -1)
     params.append("warehous_id", _warehouse->id());
   if (_shipDate->isValid())
@@ -2185,6 +2205,9 @@ void salesOrder::sEdit()
   params.append("taxzone_id", _taxZone->id());
   params.append("shipzone_id", _shippingZone->id());
   params.append("saletype_id", _saleType->id());
+
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
 
   if (_mode == cView)
     params.append("mode", "view");
@@ -2737,6 +2760,7 @@ void salesOrder::populate()
       _miscChargeTaxtype->setId(so.value("cohead_misc_taxtype_id").toInt());
       _miscChargeDiscount->setChecked(so.value("cohead_misc_discount").toBool());
       _freightTaxtype->setId(so.value("cohead_freight_taxtype_id").toInt());
+      _taxExempt->setCode(so.value("cohead_tax_exemption").toString());
 
       _orderComments->setText(so.value("cohead_ordercomments").toString());
       _shippingComments->setText(so.value("cohead_shipcomments").toString());
@@ -5168,8 +5192,8 @@ void salesOrder::sHandleMore()
   _commissionLit->setVisible(_more->isChecked());
   _commission->setVisible(_more->isChecked());
   _commissionPrcntLit->setVisible(_more->isChecked());
-  _taxZoneLit->setVisible(_more->isChecked());
-  _taxZone->setVisible(_more->isChecked());
+  _taxZoneLit->setVisible(_more->isChecked() && _metrics->value("TaxService") == "N");
+  _taxZone->setVisible(_more->isChecked() && _metrics->value("TaxService") == "N");
   _shipDateLit->setVisible(_more->isChecked());
   _shipDate->setVisible(_more->isChecked());
   _packDateLit->setVisible(_more->isChecked());

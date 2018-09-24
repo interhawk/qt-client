@@ -238,14 +238,15 @@ vendor::vendor(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _captive     = false;
   _NumberGen   = -1;
 
-  _tax = TaxIntegration::getTaxIntegration();
-  connect(_tax, SIGNAL(taxExemptCategoriesFetched(QJsonObject, QString)), this, SLOT(sPopulateTaxExempt(QJsonObject, QString)));
-  _tax->getTaxExemptCategories();
-
   if (_metrics->value("TaxService") != "N")
   {
     _taxzoneLit->hide();
     _taxzone->hide();
+  }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
   }
 }
 
@@ -903,7 +904,9 @@ bool vendor::sPopulate()
             "       CASE WHEN LENGTH(vend_ach_accntnumber) > 0 THEN"
             "       formatbytea(decrypt(setbytea(vend_ach_accntnumber),"
             "                           setbytea(<? value('key') ?>), 'bf'))"
-            "            ELSE '' END AS accntnum "
+            "            ELSE '' END AS accntnum, "
+            "       COALESCE(vend_tax_exemption, fetchMetricText('AvalaraUserExemptionCode')) "
+            "       AS tax_exemption "
             "<? else ?>"
             "       <? value('na') ?> AS routingnum,"
             "       <? value('na') ?> AS accntnum "
@@ -1011,8 +1014,8 @@ bool vendor::sPopulate()
       _taxCode->setId(vendorPopulate.value("vend_tax_id").toInt());
     }
 
-    if (!vendorPopulate.value("vend_tax_exemption").toString().isEmpty())
-      _taxExempt->setCode(vendorPopulate.value("vend_tax_exemption").toString());
+    if (!vendorPopulate.value("tax_exemption").toString().isEmpty())
+      _taxExempt->setCode(vendorPopulate.value("tax_exemption").toString());
 
     sFillAddressList();
     sFillTaxregList();
@@ -1197,24 +1200,6 @@ void vendor::sFillAddressList()
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting Vendor Addresses"),
                            addrq, __FILE__, __LINE__))
     return;
-}
-
-void vendor::sPopulateTaxExempt(QJsonObject result, QString error)
-{
-  if (error.isEmpty())
-  {
-    XSqlQuery qry;
-    qry.prepare("SELECT row_number() OVER (), value->>'name', value->>'code' "
-                "  FROM json_array_elements((:result)::JSON->'value');");
-    qry.bindValue(":result", QString::fromUtf8(QJsonDocument(result).toJson()));
-    _taxExempt->populate(qry);
-    _taxExempt->setCode(_metrics->value("AvalaraUserExemptionCode"));
-    ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Exempt Categories"),
-                         qry, __FILE__, __LINE__);
-  }
-  else
-    QMessageBox::critical(this, tr("Avalara Error"),
-                          tr("Error retrieving Avalara Tax Exempt Categories\n%1").arg(error));
 }
 
 void vendor::sFillTaxregList()

@@ -23,7 +23,6 @@
 #include "dspAROpenItems.h"
 #include "dspCashReceipts.h"
 #include "dspCreditCardTransactions.h"
-#include "taxIntegration.h"
 
 #include <QStandardItemModel>
 #include <parameter.h>
@@ -74,7 +73,6 @@ public slots:
     virtual void sPopulateCommission();
     virtual void sPopulateShiptoMenu( QMenu * menuThis );
     virtual void sPopulateSummary();
-    virtual void sPopulateTaxExempt(QJsonObject, QString);
     virtual void sPrint();
     virtual void sPrintShipto();
     virtual bool sSave();
@@ -126,7 +124,6 @@ private:
     bool _captive;
     bool _charfilled;
     QStandardItemModel * _custchar;
-    TaxIntegration* _tax;
 
 };
 

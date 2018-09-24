@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>948</width>
-    <height>980</height>
+    <height>716</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -203,7 +203,7 @@ to be bound by its terms.</comment>
             </layout>
            </item>
            <item row="0" column="0">
-            <widget class="ItemCluster" name="_item" native="true">
+            <widget class="ItemCluster" name="_item">
              <property name="focusPolicy">
               <enum>Qt::StrongFocus</enum>
              </property>
@@ -256,7 +256,7 @@ to be bound by its terms.</comment>
            </item>
            <item row="2" column="1">
             <widget class="XComboBox" name="_salescat">
-             <property name="allowNull" stdset="0">
+             <property name="allowNull">
               <bool>true</bool>
              </property>
              <property name="type">
@@ -342,7 +342,7 @@ to be bound by its terms.</comment>
         </item>
         <item row="0" column="1">
          <widget class="XComboBox" name="_rsnCode">
-          <property name="allowNull" stdset="0">
+          <property name="allowNull">
            <bool>true</bool>
           </property>
           <property name="type">
@@ -551,18 +551,18 @@ to be bound by its terms.</comment>
         <item row="1" column="1" colspan="2">
          <layout class="QHBoxLayout">
           <item>
-           <widget class="CurrCluster" name="_netUnitPrice" native="true">
+           <widget class="CurrCluster" name="_netUnitPrice">
             <property name="minimumSize">
              <size>
               <width>160</width>
               <height>0</height>
              </size>
             </property>
-            <property name="currencyEditable" stdset="0">
-             <bool>false</bool>
-            </property>
             <property name="format">
              <enum>CurrDisplay::SalesPrice</enum>
+            </property>
+            <property name="currencyEditable" stdset="0">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -640,17 +640,17 @@ to be bound by its terms.</comment>
          </widget>
         </item>
         <item row="3" column="1" colspan="2">
-         <widget class="CurrCluster" name="_extendedPrice" native="true">
+         <widget class="CurrCluster" name="_extendedPrice">
           <property name="format">
            <enum>CurrDisplay::ExtPrice</enum>
-          </property>
-          <property name="enabled">
-           <bool>false</bool>
           </property>
           <property name="currencyEditable" stdset="0">
            <bool>false</bool>
           </property>
-          <property name="currencyVisible" stdset="0">
+          <property name="currencyVisible">
+           <bool>false</bool>
+          </property>
+          <property name="enabled">
            <bool>false</bool>
           </property>
          </widget>
@@ -724,11 +724,11 @@ to be bound by its terms.</comment>
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="CurrDisplay" name="_salePrice" native="true">
+                 <widget class="CurrDisplay" name="_salePrice">
                   <property name="format">
                    <enum>CurrDisplay::SalesPrice</enum>
                   </property>
-                  <property name="localControl" stdset="0">
+                  <property name="localControl">
                    <bool>false</bool>
                   </property>
                  </widget>
@@ -750,8 +750,8 @@ to be bound by its terms.</comment>
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="CurrDisplay" name="_listPrice" native="true">
-                  <property name="localControl" stdset="0">
+                 <widget class="CurrDisplay" name="_listPrice">
+                  <property name="localControl">
                    <bool>false</bool>
                   </property>
                  </widget>
@@ -773,11 +773,11 @@ to be bound by its terms.</comment>
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="CurrDisplay" name="_unitCost" native="true">
+                 <widget class="CurrDisplay" name="_unitCost">
                   <property name="format">
                    <enum>CurrDisplay::Cost</enum>
                   </property>
-                  <property name="localControl" stdset="0">
+                  <property name="localControl">
                    <bool>false</bool>
                   </property>
                  </widget>
@@ -830,10 +830,10 @@ to be bound by its terms.</comment>
                   <property name="enabled">
                    <bool>false</bool>
                   </property>
-                  <property name="allowNull" stdset="0">
+                  <property name="allowNull">
                    <bool>true</bool>
                   </property>
-                  <property name="nullStr" stdset="0">
+                  <property name="nullStr">
                    <string>None</string>
                   </property>
                   <property name="type">
@@ -860,17 +860,7 @@ to be bound by its terms.</comment>
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="1">
-                 <widget class="CurrCluster" name="_tax" native="true">
-                  <property name="format">
-                   <enum>CurrDisplay::SalesPrice</enum>
-                  </property>
-                  <property name="enabled">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
+                <item row="2" column="0">
                  <widget class="XURLLabel" name="_taxLit">
                   <property name="minimumSize">
                    <size>
@@ -885,6 +875,26 @@ to be bound by its terms.</comment>
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="CurrCluster" name="_tax">
+                  <property name="format">
+                   <enum>CurrDisplay::SalesPrice</enum>
+                  </property>
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="_taxExemptLit">
+                  <property name="text">
+                   <string>Tax Exempt Category:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="TaxExemptCluster" name="_taxExempt"/>
                 </item>
                </layout>
               </item>
@@ -950,7 +960,7 @@ to be bound by its terms.</comment>
         </widget>
        </item>
        <item>
-        <widget class="GLCluster" name="_revAccnt" native="true"/>
+        <widget class="GLCluster" name="_revAccnt"/>
        </item>
        <item>
         <spacer name="horizontalSpacer_3">
@@ -974,6 +984,11 @@ to be bound by its terms.</comment>
  <layoutdefault spacing="5" margin="5"/>
  <customwidgets>
   <customwidget>
+   <class>CurrCluster</class>
+   <extends>CurrDisplay</extends>
+   <header>currcluster.h</header>
+  </customwidget>
+  <customwidget>
    <class>CurrDisplay</class>
    <extends>QWidget</extends>
    <header>currcluster.h</header>
@@ -987,6 +1002,11 @@ to be bound by its terms.</comment>
    <class>ItemCluster</class>
    <extends>QWidget</extends>
    <header>itemcluster.h</header>
+  </customwidget>
+  <customwidget>
+   <class>WComboBox</class>
+   <extends>XComboBox</extends>
+   <header>wcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>XComboBox</class>
@@ -1014,14 +1034,9 @@ to be bound by its terms.</comment>
    <header>xtextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>CurrCluster</class>
-   <extends>CurrDisplay</extends>
-   <header>currcluster.h</header>
-  </customwidget>
-  <customwidget>
-   <class>WComboBox</class>
-   <extends>XComboBox</extends>
-   <header>wcombobox.h</header>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

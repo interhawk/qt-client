@@ -749,6 +749,16 @@ to be bound by its terms.</comment>
              </item>
              <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout">
+               <item row="0" column="1">
+                <widget class="XLabel" name="_freightToVoucherLit">
+                 <property name="text">
+                  <string>Freight:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <spacer name="horizontalSpacer_5">
                  <property name="orientation">
@@ -811,29 +821,19 @@ to be bound by its terms.</comment>
                  </item>
                 </layout>
                </item>
-               <item row="0" column="2">
-                <widget class="CurrCluster" name="_freightToVoucher">
-                 <property name="format">
-                  <enum>CurrDisplay::Money</enum>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="XLabel" name="_freightToVoucherLit">
-                 <property name="text">
-                  <string>Freight:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="CurrDisplay" name="_totalDistributed">
-                 <property name="focusPolicy">
-                  <enum>Qt::StrongFocus</enum>
-                 </property>
-                </widget>
+               <item row="2" column="0">
+                <layout class="QHBoxLayout">
+                 <item>
+                  <widget class="QLabel" name="_taxExemptLit">
+                   <property name="text">
+                    <string>Tax Exempt Category:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="TaxExemptCluster" name="_taxExempt"/>
+                 </item>
+                </layout>
                </item>
                <item row="1" column="1">
                 <widget class="XLabel" name="_totalDistributedLit">
@@ -848,6 +848,20 @@ to be bound by its terms.</comment>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="CurrCluster" name="_freightToVoucher">
+                 <property name="format">
+                  <enum>CurrDisplay::Money</enum>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="CurrDisplay" name="_totalDistributed">
+                 <property name="focusPolicy">
+                  <enum>Qt::StrongFocus</enum>
                  </property>
                 </widget>
                </item>
@@ -1102,6 +1116,11 @@ to be bound by its terms.</comment>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

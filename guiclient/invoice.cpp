@@ -141,6 +141,11 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
     _taxzoneLit->hide();
     _taxzone->hide();
   }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 invoice::~invoice()
@@ -423,7 +428,8 @@ void invoice::sPopulateCustomerInfo(int pCustid)
                   "       COALESCE(cust_shipchrg_id, -1) AS cust_shipchrg_id,"
                   "       cust_ffshipto, cust_ffbillto, "
                   "       COALESCE(shipto_id, -1) AS shiptoid, "
-                  "       cust_curr_id "
+                  "       cust_curr_id, "
+                  "       cust_tax_exemption "
                   "FROM custinfo "
                   "  LEFT OUTER JOIN cntct ON (cust_cntct_id=cntct_id) "
                   "  LEFT OUTER JOIN shiptoinfo ON ( (shipto_cust_id=cust_id) "
@@ -444,6 +450,8 @@ void invoice::sPopulateCustomerInfo(int pCustid)
         _shipChrgs->setId(cust.value("cust_shipchrg_id").toInt());
         _shipVia->setText(cust.value("cust_shipvia").toString());
         _custShipVia = _shipVia->currentText();
+        if (!cust.value("cust_tax_exemption").toString().isEmpty())
+          _taxExempt->setCode(cust.value("cust_tax_exemption").toString());
 
 	bool ffBillTo = cust.value("cust_ffbillto").toBool();
         if (_mode != cView)
@@ -656,7 +664,8 @@ bool invoice::save(bool partial)
              "    invchead_warehous_id=:invchead_warehous_id, "
              "    invchead_freight_taxtype_id=:invchead_freight_taxtype_id, "
              "    invchead_misc_taxtype_id=:invchead_misc_taxtype_id, "
-             "    invchead_misc_discount=:invchead_misc_discount "
+             "    invchead_misc_discount=:invchead_misc_discount, "
+             "    invchead_tax_exemption=:invchead_tax_exemption "
 	     "WHERE (invchead_id=:invchead_id);" );
 
   invoiceave.bindValue(":invchead_id",			_invcheadid);
@@ -705,6 +714,7 @@ bool invoice::save(bool partial)
   invoiceave.bindValue(":invchead_freight_taxtype_id", _freightTaxtype->id());
   invoiceave.bindValue(":invchead_misc_taxtype_id", _miscChargeTaxtype->id());
   invoiceave.bindValue(":invchead_misc_discount", _miscChargeDiscount->isChecked());
+  invoiceave.bindValue(":invchead_tax_exemption", _taxExempt->code());
   if(_shippingZone->isValid())
     invoiceave.bindValue(":invchead_shipzone_id",	_shippingZone->id());
   if(_saleType->isValid())
@@ -964,6 +974,9 @@ void invoice::sNew()
   params.append("mode", "new");
   params.append("invchead_id", _invcheadid);
 
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
+
   invoiceItem newdlg(this);
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
@@ -982,6 +995,9 @@ void invoice::sEdit()
   params.append("invchead_id", _invcheadid);
   params.append("invcitem_id", _invcitem->id());
 
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
+
   invoiceItem newdlg(this);
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
@@ -996,6 +1012,9 @@ void invoice::sView()
   params.append("mode", "view");
   params.append("invchead_id", _invcheadid);
   params.append("invcitem_id", _invcitem->id());
+
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
 
   invoiceItem newdlg(this);
   newdlg.set(params);
@@ -1123,6 +1142,7 @@ void invoice::populate()
     _miscChargeTaxtype->setId(invoicepopulate.value("invchead_misc_taxtype_id").toInt());
     _miscChargeDiscount->setChecked(invoicepopulate.value("invchead_misc_discount").toBool());
     _freightTaxtype->setId(invoicepopulate.value("invchead_freight_taxtype_id").toInt());
+    _taxExempt->setCode(invoicepopulate.value("invchead_tax_exemption").toString());
 
     _notes->setText(invoicepopulate.value("invchead_notes").toString());
 

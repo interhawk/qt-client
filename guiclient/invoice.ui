@@ -234,36 +234,60 @@ to be bound by its terms.</comment>
             </layout>
            </item>
            <item row="2" column="4">
-            <widget class="QLabel" name="_taxzoneLit">
-             <property name="text">
-              <string>Tax Zone:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="buddy">
-              <cstring>_taxzone</cstring>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout">
+             <item>
+              <widget class="QLabel" name="_taxzoneLit">
+               <property name="text">
+                <string>Tax Zone:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>_taxzone</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_taxExemptLit">
+               <property name="text">
+                <string>Tax Exempt Category:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>_taxExempt</cstring>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item row="2" column="5">
-            <widget class="XComboBox" name="_taxzone">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="allowNull">
-              <bool>true</bool>
-             </property>
-             <property name="nullStr">
-              <string>None</string>
-             </property>
-             <property name="type">
-              <enum>XComboBox::TaxZones</enum>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout">
+             <item>
+              <widget class="XComboBox" name="_taxzone">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="allowNull">
+                <bool>true</bool>
+               </property>
+               <property name="nullStr">
+                <string>None</string>
+               </property>
+               <property name="type">
+                <enum>XComboBox::TaxZones</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="TaxExemptCluster" name="_taxExempt"/>
+             </item>
+            </layout>
            </item>
            <item row="0" column="6">
             <spacer>
@@ -404,7 +428,16 @@ to be bound by its terms.</comment>
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -522,7 +555,16 @@ to be bound by its terms.</comment>
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_2">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0">
@@ -1165,9 +1207,6 @@ to be bound by its terms.</comment>
          </item>
          <item row="4" column="4">
           <widget class="TaxDisplay" name="_tax">
-           <property name="type">
-            <string>INV</string>
-           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -1179,6 +1218,9 @@ to be bound by its terms.</comment>
              <width>200</width>
              <height>32767</height>
             </size>
+           </property>
+           <property name="type">
+            <string>INV</string>
            </property>
           </widget>
          </item>
@@ -1392,6 +1434,11 @@ to be bound by its terms.</comment>
    <header>characteristicswidget.h</header>
   </customwidget>
   <customwidget>
+   <class>Comments</class>
+   <extends>QWidget</extends>
+   <header>comments.h</header>
+  </customwidget>
+  <customwidget>
    <class>CurrCluster</class>
    <extends>CurrDisplay</extends>
    <header>currcluster.h</header>
@@ -1439,6 +1486,11 @@ to be bound by its terms.</comment>
    <header>shiptocluster.h</header>
   </customwidget>
   <customwidget>
+   <class>WComboBox</class>
+   <extends>XComboBox</extends>
+   <header>wcombobox.h</header>
+  </customwidget>
+  <customwidget>
    <class>XCheckBox</class>
    <extends>QCheckBox</extends>
    <header>xcheckbox.h</header>
@@ -1447,6 +1499,11 @@ to be bound by its terms.</comment>
    <class>XComboBox</class>
    <extends>QComboBox</extends>
    <header>xcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XLabel</class>
+   <extends>QLabel</extends>
+   <header>xlabel.h</header>
   </customwidget>
   <customwidget>
    <class>XLineEdit</class>
@@ -1469,6 +1526,16 @@ to be bound by its terms.</comment>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxDisplay</class>
+   <extends>QWidget</extends>
+   <header>taxdisplay.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

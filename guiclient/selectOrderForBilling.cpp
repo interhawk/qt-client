@@ -106,6 +106,11 @@ selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, 
     _taxzoneLit->hide();
     _taxZone->hide();
   }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 selectOrderForBilling::~selectOrderForBilling()
@@ -239,7 +244,8 @@ bool selectOrderForBilling::save(bool partial)
 	       "    cobmisc_curr_id=:cobmisc_curr_id, "
                "    cobmisc_freight_taxtype_id=:cobmisc_freight_taxtype_id, "
                "    cobmisc_misc_taxtype_id=:cobmisc_misc_taxtype_id, "
-               "    cobmisc_misc_discount=:cobmisc_misc_discount "
+               "    cobmisc_misc_discount=:cobmisc_misc_discount, "
+               "    cobmisc_tax_exemption=:cobmisc_tax_exemption "
                "WHERE (cobmisc_id=:cobmisc_id);" );
     selectSave.bindValue(":cobmisc_id", _cobmiscid);
     selectSave.bindValue(":cobmisc_freight", _freight->localValue());
@@ -260,6 +266,7 @@ bool selectOrderForBilling::save(bool partial)
     selectSave.bindValue(":cobmisc_freight_taxtype_id", _freightTaxtype->id());
     selectSave.bindValue(":cobmisc_misc_taxtype_id", _miscChargeTaxtype->id());
     selectSave.bindValue(":cobmisc_misc_discount", _miscChargeDiscount->isChecked());
+    selectSave.bindValue(":cobmisc_tax_exemption", _taxExempt->code());
     selectSave.exec();
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Selected Orders For Billing"),
                                   selectSave, __FILE__, __LINE__))
@@ -326,6 +333,7 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
                      "       cobmisc_curr_id,"
                      "       cobmisc_freight_taxtype_id, cobmisc_misc_taxtype_id,"
                      "       cobmisc_misc_discount,"
+                     "       cobmisc_tax_exemption,"
                      "       cohead_number, cohead_shipto_id,"
                      "       cohead_custponumber,"
                      "       cohead_billtoname, cohead_shiptoname,"
@@ -362,6 +370,7 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
       _miscChargeTaxtype->setId(cobmisc.value("cobmisc_misc_taxtype_id").toInt());
       _miscChargeDiscount->setChecked(cobmisc.value("cobmisc_misc_discount").toBool());
       _freightTaxtype->setId(cobmisc.value("cobmisc_freight_taxtype_id").toInt());
+      _taxExempt->setCode(cobmisc.value("cobmisc_tax_exemption").toString());
       _payment->set(cobmisc.value("payment").toDouble(),
 		    cobmisc.value("cobmisc_curr_id").toInt(),
 		    cobmisc.value("cohead_orderdate").toDate(), false);

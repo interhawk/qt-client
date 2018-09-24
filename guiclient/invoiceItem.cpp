@@ -82,6 +82,12 @@ invoiceItem::invoiceItem(QWidget* parent, const char * name, Qt::WindowFlags fl)
     _warehouseLit->hide();
     _warehouse->hide();
   }
+
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
   
   adjustSize();
 }
@@ -131,6 +137,12 @@ enum SetResponse invoiceItem::set(const ParameterList &pParams)
     {
       return UndefinedError;
     }
+  }
+
+  param = pParams.value("taxExempt", &valid);
+  if (valid)
+  {
+    _taxExempt->setCode(param.toString());
   }
 
   param = pParams.value("invcitem_id", &valid);
@@ -254,7 +266,7 @@ void invoiceItem::sSave()
                "  invcitem_custprice, invcitem_price, invcitem_listprice,"
                "  invcitem_price_uom_id, invcitem_price_invuomratio,"
                "  invcitem_notes, "
-               "  invcitem_taxtype_id, invcitem_rev_accnt_id) "
+               "  invcitem_taxtype_id, invcitem_rev_accnt_id, invcitem_tax_exemption) "
                "VALUES "
                "( :invcitem_id, :invchead_id, :invcitem_linenumber,"
                "  :item_id, :warehous_id,"
@@ -265,7 +277,7 @@ void invoiceItem::sSave()
                "  :invcitem_custprice, :invcitem_price, :invcitem_listprice,"
                "  :price_uom_id, :price_invuomratio,"
                "  :invcitem_notes, "
-               "  :invcitem_taxtype_id, :invcitem_rev_accnt_id);");
+               "  :invcitem_taxtype_id, :invcitem_rev_accnt_id, :invcitem_tax_exemption);");
 	       
     invoiceSave.bindValue(":invchead_id", _invcheadid);
     invoiceSave.bindValue(":invcitem_linenumber", _lineNumber->text());
@@ -282,7 +294,8 @@ void invoiceItem::sSave()
                "    invcitem_price_uom_id=:price_uom_id, invcitem_price_invuomratio=:price_invuomratio,"
                "    invcitem_notes=:invcitem_notes,"
                "    invcitem_taxtype_id=:invcitem_taxtype_id,"
-               "    invcitem_rev_accnt_id=:invcitem_rev_accnt_id "
+               "    invcitem_rev_accnt_id=:invcitem_rev_accnt_id,"
+               "    invcitem_tax_exemption=:invcitem_tax_exemption "
 	           "WHERE (invcitem_id=:invcitem_id);" );
 
   if (_itemSelected->isChecked())
@@ -318,6 +331,7 @@ void invoiceItem::sSave()
     invoiceSave.bindValue(":invcitem_taxtype_id",	_taxtype->id());
   if (_altRevAccnt->isValid())
     invoiceSave.bindValue(":invcitem_rev_accnt_id", _altRevAccnt->id());
+  invoiceSave.bindValue(":invcitem_tax_exemption", _taxExempt->code());
 
   invoiceSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Invoice Line Item Information"),
@@ -417,6 +431,7 @@ void invoiceItem::populate()
 
     _custPn->setText(invcitem.value("invcitem_custpn").toString());
     _notes->setText(invcitem.value("invcitem_notes").toString());
+    _taxExempt->setCode(invcitem.value("invcitem_tax_exemption").toString());
     
     // disable widgets if normal shipping cycle
     if (invcitem.value("cobill_id").toInt() > 0)

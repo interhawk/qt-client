@@ -351,6 +351,12 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
   _altCosAccnt->setType(GLCluster::cRevenue | GLCluster::cExpense);
   _altRevAccnt->setType(GLCluster::cRevenue);
 
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
+
   // TO DO **** Fix tab order issues and offer alternate means for "Express Tab Order"  ****
 }
 
@@ -429,6 +435,12 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
   if (valid)
   {
     _shiptoname = param.toString();
+  }
+
+  param = pParams.value("taxExempt", &valid);
+  if (valid)
+  {
+    _taxExempt->setCode(param.toString());
   }
 
   param = pParams.value("warehous_id", &valid);
@@ -1117,7 +1129,8 @@ void salesOrderItem::sSave(bool pPartial)
                "  coitem_listprice, coitem_order_type, coitem_order_id,"
                "  coitem_custpn, coitem_memo, coitem_substitute_item_id,"
                "  coitem_prcost, coitem_taxtype_id, coitem_warranty,"
-               "  coitem_cos_accnt_id, coitem_rev_accnt_id, coitem_dropship) "
+               "  coitem_cos_accnt_id, coitem_rev_accnt_id, coitem_dropship,"
+               "  coitem_tax_exemption) "
                "  SELECT :soitem_id, :soitem_sohead_id, :soitem_linenumber, itemsite_id,"
                "       'O', :soitem_scheddate, :soitem_promdate,"
                "       :soitem_qtyord, :qty_uom_id, :qty_invuomratio, 0, 0,"
@@ -1126,7 +1139,8 @@ void salesOrderItem::sSave(bool pPartial)
                "       :soitem_listprice, :soitem_order_type, :soitem_order_id,"
                "       :soitem_custpn, :soitem_memo, :soitem_substitute_item_id,"
                "       :soitem_prcost, :soitem_taxtype_id, :soitem_warranty, "
-               "       :soitem_cos_accnt_id, :soitem_rev_accnt_id, :soitem_dropship "
+               "       :soitem_cos_accnt_id, :soitem_rev_accnt_id, :soitem_dropship,"
+               "       :soitem_tax_exemption "
                "FROM itemsite "
                "WHERE ( (itemsite_item_id=:item_id)"
                " AND (itemsite_warehous_id=:warehous_id) ) "
@@ -1163,6 +1177,7 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":soitem_order_type", _supplyOrderType);
     salesSave.bindValue(":soitem_order_id", _supplyOrderId);
     salesSave.bindValue(":soitem_dropship", _supplyDropShip->isChecked());
+    salesSave.bindValue(":soitem_tax_exemption", _taxExempt->code());
     salesSave.exec();
 
     if (salesSave.lastError().type() != QSqlError::NoError)
@@ -1218,7 +1233,8 @@ void salesOrderItem::sSave(bool pPartial)
                       "    coitem_rev_accnt_id=:soitem_rev_accnt_id, "
                       "    coitem_warranty=:soitem_warranty, "
                       "    coitem_custpn=:custpn, "
-                      "    coitem_dropship=:soitem_dropship "
+                      "    coitem_dropship=:soitem_dropship, "
+                      "    coitem_tax_exemption=:soitem_tax_exemption "
                       "WHERE coitem_id=:soitem_id "
                       "RETURNING coitem_order_id ;" );
     salesSave.bindValue(":item_id", _item->id());
@@ -1255,6 +1271,7 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":soitem_warranty",QVariant(_warranty->isChecked()));
     salesSave.bindValue(":custpn", _customerPN->text());
     salesSave.bindValue(":soitem_dropship", _supplyDropShip->isChecked());
+    salesSave.bindValue(":soitem_tax_exemption", _taxExempt->code());
 
     salesSave.exec();
 
@@ -1301,7 +1318,7 @@ void salesOrderItem::sSave(bool pPartial)
                "  quitem_price_uom_id, quitem_price_invuomratio,"
                "  quitem_custpn, quitem_memo, quitem_createorder, "
                "  quitem_order_warehous_id, quitem_prcost, quitem_taxtype_id, "
-               "  quitem_dropship, quitem_itemsrc_id ) "
+               "  quitem_dropship, quitem_itemsrc_id, quitem_tax_exemption ) "
                "VALUES(:quitem_id, :quitem_quhead_id, :quitem_linenumber,"
                "       (SELECT itemsite_id FROM itemsite WHERE ((itemsite_item_id=:item_id) AND (itemsite_warehous_id=:warehous_id))),"
                "       :item_id, :quitem_scheddate, :quitem_promdate, :quitem_qtyord,"
@@ -1310,7 +1327,7 @@ void salesOrderItem::sSave(bool pPartial)
                "       :price_uom_id, :price_invuomratio,"
                "       :quitem_custpn, :quitem_memo, :quitem_createorder, "
                "       :quitem_order_warehous_id, :quitem_prcost, :quitem_taxtype_id, "
-               "       :quitem_dropship, :quitem_itemsrc_id);" );
+               "       :quitem_dropship, :quitem_itemsrc_id, :quitem_tax_exemption);" );
     salesSave.bindValue(":quitem_id", _soitemid);
     salesSave.bindValue(":quitem_quhead_id", _soheadid);
     salesSave.bindValue(":quitem_linenumber", _lineNumber->text().toInt());
@@ -1338,6 +1355,7 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.bindValue(":quitem_dropship", QVariant(_supplyDropShip->isChecked()));
     if (_itemsrc > 0)
       salesSave.bindValue(":quitem_itemsrc_id", _itemsrc);
+    salesSave.bindValue(":quitem_tax_exemption", _taxExempt->code());
     salesSave.exec();
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
@@ -1372,7 +1390,8 @@ void salesOrderItem::sSave(bool pPartial)
                       "    quitem_taxtype_id=:quitem_taxtype_id,"
                       "    quitem_dropship=:quitem_dropship,"
                       "    quitem_itemsrc_id=:quitem_itemsrc_id, "
-                      "    quitem_custpn=:custpn "
+                      "    quitem_custpn=:custpn, "
+                      "    quitem_tax_exemption=:quitem_tax_exemption "
                       "WHERE (quitem_id=:quitem_id);" );
     salesSave.bindValue(":item_id", _item->id());
     salesSave.bindValue(":warehous_id", _warehouse->id());
@@ -1398,6 +1417,7 @@ void salesOrderItem::sSave(bool pPartial)
     if (_itemsrc > 0)
       salesSave.bindValue(":quitem_itemsrc_id", _itemsrc);
     salesSave.bindValue(":custpn", _customerPN->text());
+    salesSave.bindValue(":quitem_tax_exemption", _taxExempt->code());
     salesSave.exec();
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
@@ -4118,7 +4138,8 @@ void salesOrderItem::populate()
           "       coitem_cos_accnt_id, coitem_rev_accnt_id, "
           "       coitem_warranty, coitem_qtyreserved, locale_qty_scale, "
           "       cohead_number AS ordnumber, "
-          "       coitem_dropship AS dropship "
+          "       coitem_dropship AS dropship, "
+          "       coitem_tax_exemption AS tax_exemption "
           "FROM coitem, whsinfo, itemsite, item, uom, cohead, locale "
           "LEFT OUTER JOIN usr ON (usr_username = getEffectiveXtUser()) "
           "WHERE ( (coitem_itemsite_id=itemsite_id)"
@@ -4152,7 +4173,7 @@ void salesOrderItem::populate()
             "       quitem_promdate AS promdate,"
             "       -1 AS coitem_substitute_item_id, quitem_prcost AS coitem_prcost,"
             "       0.0 AS qtyatshipping, 0.0 AS kitatshipping,"
-            "       quitem_taxtype_id AS coitem_taxtype_id, quitem_dropship AS dropship, quitem_itemsrc_id"
+            "       quitem_taxtype_id AS coitem_taxtype_id, quitem_dropship AS dropship, quitem_tax_exemption AS tax_exemption, quitem_itemsrc_id"
             "       locale_qty_scale, quhead_number AS ordnumber "
             "  FROM item, uom, quhead, locale "
             "    LEFT OUTER JOIN usr ON (usr_username = getEffectiveXtUser()), quitem "
@@ -4192,6 +4213,7 @@ void salesOrderItem::populate()
     _unitCost->setLocalValue(item.value("coitem_unitcost").toDouble());
     // do tax stuff before _qtyOrdered so signal cascade has data to work with
     _taxtype->setId(item.value("coitem_taxtype_id").toInt());
+    _taxExempt->setCode(item.value("tax_exemption").toString());
     _orderNumber->setText(item.value("ordnumber").toString());
     _qtyOrderedCache = item.value("qtyord").toDouble();
     _qtyOrdered->setDouble(_qtyOrderedCache);
