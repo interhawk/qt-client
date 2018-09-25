@@ -25,7 +25,7 @@ MOC_DIR     = tmp
 UI_DIR      = tmp
 
 QMAKE_LIBDIR += $${OPENRPT_LIBDIR}
-LIBS += -lopenrptcommon -lMetaSQL $${LIBDMTX} -lz
+LIBS += -lopenrptcommon -lMetaSQL -lz
 
 SOURCES = applock.cpp              \
           calendarcontrol.cpp      \
