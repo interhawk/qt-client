@@ -29,7 +29,7 @@
 #include "taxDetail.h"
 #include "woMaterialItem.h"
 
-#define DEBUG true
+#define DEBUG false
 
 #define cNewQuote   (0x20 | cNew)
 #define cEditQuote  (0x20 | cEdit)
