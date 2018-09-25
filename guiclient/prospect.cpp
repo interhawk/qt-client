@@ -182,6 +182,10 @@ enum SetResponse prospect::set(const ParameterList &pParams)
       setViewMode();
   }
 
+  param = pParams.value("company", &valid);
+  if (valid && _mode == cNew)
+    _name->setText(param.toString());
+
   if (_crmacctid >= 0 || _prospectid >= 0)
     if (! sPopulate())
       return UndefinedError;
