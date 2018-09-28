@@ -35,7 +35,6 @@ dspUnusedPurchasedItems::dspUnusedPurchasedItems(QWidget* parent, const char* na
 
 void dspUnusedPurchasedItems::languageChange()
 {
-  languageChange();
   retranslateUi(this);
 }
 

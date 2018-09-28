@@ -1,21 +1,18 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
  * to be bound by its terms.
  */
 
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QMenu>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QSqlError>
 #include <QSqlQueryModel>
-#include <QVBoxLayout>
 #include <QtScript>
 
 #include <metasql.h>
@@ -25,6 +22,10 @@
 #include "custcluster.h"
 #include "format.h"
 #include "storedProcErrorLookup.h"
+
+static const int CREDITSTATUS = 4;      // where do these come from?
+static const int CRMACCT_ID   = 5;
+static const int ISCUSTOMER   = 6;
 
 #define DEBUG false
 
@@ -40,17 +41,7 @@ CLineEdit::CLineEdit(QWidget *pParent, const char *pName) :
   setTitles(tr("Customer"), tr("Customers"));
 
   _query = "SELECT cust.*,"
-           "       addr_line1 AS description,"
-           "       addr_id, addr_active, addr_line1, addr_line2, addr_line3,"
-           "       addr_city, addr_state, addr_postalcode, addr_country,"
-           "       addr_notes, addr_number,"
-           "       cntct_id, cntct_addr_id, cntct_first_name,"
-           "       cntct_last_name, cntct_honorific, cntct_initials,"
-           "       cntct_active, cntct_phone, cntct_phone2, cntct_fax,"
-           "       cntct_email, cntct_webaddr, cntct_notes, cntct_title,"
-           "       cntct_number, cntct_middle, cntct_suffix,"
-           "       cntct_owner_username, cntct_name,"
-           "       formatAddr(addr_line1, addr_line2, addr_line3, '', '') AS street"
+           "       addr_line1 AS description"
            "  FROM ("
            "    SELECT cust_id AS id,"
            "           cust_number AS number,"
@@ -61,7 +52,7 @@ CLineEdit::CLineEdit(QWidget *pParent, const char *pName) :
            "           cust_cntct_id"
            "      FROM custinfo"
            "      JOIN crmacct ON crmacct_cust_id = cust_id"
-           "     WHERE :number IS NULL or cust_number ~* :number"
+           "     WHERE :number IS NULL or cust_number ~ UPPER(:number)"
            "    UNION ALL"
            "    SELECT prospect_id AS id,"
            "           prospect_number AS number,"
@@ -72,7 +63,7 @@ CLineEdit::CLineEdit(QWidget *pParent, const char *pName) :
            "           prospect_cntct_id AS cust_cntct_id"
            "      FROM prospect"
            "      LEFT OUTER JOIN crmacct ON crmacct_prospect_id = prospect_id"
-           "     WHERE :number IS NULL or prospect_number ~* :number"
+           "     WHERE :number IS NULL or prospect_number ~ UPPER(:number)"
            "  ) cust"
            "  LEFT OUTER JOIN cntct ON cust_cntct_id = cntct_id"
            "  LEFT OUTER JOIN addr  ON cntct_addr_id = addr_id"
