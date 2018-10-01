@@ -474,6 +474,9 @@ void dspAROpenItems::sDeleteCreditMemo()
 
     if (checkCreditMemoSitePrivs(list()->currentItem()->id("docnumber")))
     {
+      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+      tax->cancel("CM", list()->currentItem()->id("docnumber"));
+
       delq.bindValue(":cmhead_id", (list()->currentItem()->id("docnumber")));
       delq.exec();
       if (delq.first())
@@ -505,6 +508,9 @@ void dspAROpenItems::sDeleteInvoice()
 
     if (checkInvoiceSitePrivs(list()->currentItem()->id("docnumber")))
     {
+      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+      tax->cancel("INV", list()->currentItem()->id("docnumber"));
+
       dspDeleteInvoice.bindValue(":invchead_id", list()->currentItem()->id("docnumber"));
       dspDeleteInvoice.exec();
       if (dspDeleteInvoice.first())

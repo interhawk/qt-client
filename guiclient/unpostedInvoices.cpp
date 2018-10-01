@@ -114,6 +114,9 @@ void unpostedInvoices::sDelete()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
 	  {
+        TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+        tax->cancel("INV", ((XTreeWidgetItem*)(selected[i]))->id());
+
         unpostedDelete.bindValue(":invchead_id", ((XTreeWidgetItem*)(selected[i]))->id());
         unpostedDelete.exec();
         if (unpostedDelete.first())

@@ -392,6 +392,8 @@ void invoice::sClose()
         return;
       else
       {
+        _tax->cancel();
+
         invoiceClose.prepare( "SELECT deleteInvoice(:invchead_id) AS result;" );
         invoiceClose.bindValue(":invchead_id", _invcheadid);
         invoiceClose.exec();

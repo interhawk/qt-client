@@ -12,6 +12,7 @@
 #define RECALLORDERS_H
 
 #include "guiclient.h"
+#include "taxIntegration.h"
 #include "xwidget.h"
 #include "ui_recallOrders.h"
 
