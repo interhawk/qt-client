@@ -80,8 +80,7 @@ void postVouchers::sPost()
                    "  FROM apopen "
                    "  JOIN vohead ON apopen_doctype = 'V' "
                    "             AND apopen_docnumber = vohead_number "
-                   " WHERE apopen_journalnumber = :journalnumber "
-                   "   AND NOT vohead_misc;");
+                   " WHERE apopen_journalnumber = :journalnumber;");
     posted.bindValue(":journalnumber", result);
     posted.exec();
     while (posted.next())

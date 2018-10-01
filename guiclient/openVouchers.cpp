@@ -280,20 +280,8 @@ void openVouchers::sPost()
                                  __FILE__, __LINE__);
           else
           {
-            XSqlQuery misc;
-            misc.prepare("SELECT vohead_misc "
-                         "  FROM vohead "
-                         " WHERE vohead_id = :vohead_id;");
-            misc.bindValue(":vohead_id", id);
-            misc.exec();
-            if (misc.first() && !misc.value("vohead_misc").toBool())
-            {
-              TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-              tax->commit("VCH", id);
-            }
-            else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error checking voucher"),
-                                          misc, __FILE__, __LINE__))
-              return;
+            TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+            tax->commit("VCH", id);
           }
         }
       // contains() string is hard-coded in stored procedure

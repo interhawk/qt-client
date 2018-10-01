@@ -238,13 +238,13 @@ void dspVendorAPHistory::sVoidVoucher()
       else
       {
         XSqlQuery vohead;
-        vohead.prepare("SELECT vohead_id, vohead_misc "
+        vohead.prepare("SELECT vohead_id "
                        "  FROM apopen "
                        "  JOIN vohead ON apopen_docnumber = vohead_number "
                        " WHERE apopen_id = :apopen_id;");
         vohead.bindValue(":apopen_id", list()->id());
         vohead.exec();
-        if (vohead.first() && !vohead.value("vohead_misc").toBool())
+        if (vohead.first())
         {
           TaxIntegration* tax = TaxIntegration::getTaxIntegration();
           tax->cancel("VCH", vohead.value("vohead_id").toInt());

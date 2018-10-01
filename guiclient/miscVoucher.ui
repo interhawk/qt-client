@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>774</width>
-    <height>629</height>
+    <height>737</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -96,11 +96,11 @@ to be bound by its terms.</comment>
       </item>
       <item row="1" column="1">
        <widget class="VendorCluster" name="_vendor">
-        <property name="label">
-         <string/>
-        </property>
         <property name="focusPolicy">
          <enum>Qt::StrongFocus</enum>
+        </property>
+        <property name="label">
+         <string/>
         </property>
        </widget>
       </item>
@@ -290,6 +290,19 @@ to be bound by its terms.</comment>
         </property>
        </spacer>
       </item>
+      <item row="3" column="0">
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </widget>
    </item>
@@ -326,29 +339,50 @@ to be bound by its terms.</comment>
        <widget class="XLineEdit" name="_reference"/>
       </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="_taxzoneLit">
-        <property name="text">
-         <string>Tax Zone:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout">
+        <item>
+         <widget class="QLabel" name="_taxzoneLit">
+          <property name="text">
+           <string>Tax Zone:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="_taxExemptLit">
+          <property name="text">
+           <string>Tax Exempt Category:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item row="2" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="XComboBox" name="_taxzone">
-          <property name="allowNull">
-           <bool>true</bool>
-          </property>
-          <property name="nullStr">
-           <string>None</string>
-          </property>
-          <property name="type">
-           <enum>XComboBox::TaxZones</enum>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout">
+          <item>
+           <widget class="XComboBox" name="_taxzone">
+            <property name="allowNull">
+             <bool>true</bool>
+            </property>
+            <property name="nullStr">
+             <string>None</string>
+            </property>
+            <property name="type">
+             <enum>XComboBox::TaxZones</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="TaxExemptCluster" name="_taxExempt"/>
+          </item>
+         </layout>
         </item>
         <item>
          <spacer name="horizontalSpacer">
@@ -384,6 +418,69 @@ to be bound by its terms.</comment>
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QGroupBox" name="groupBox">
+        <layout class="QGridLayout" name="gridLayout_8">
+         <item row="0" column="0">
+          <widget class="XLabel" name="_taxLit">
+           <property name="text">
+            <string>Tax:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="TaxDisplay" name="_tax">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="type" stdset="0">
+            <string>VCH</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="XLabel" name="_taxChargedLit">
+           <property name="text">
+            <string>Vendor Charged Tax:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="CurrCluster" name="_taxCharged">
+           <property name="currencyVisible">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="XLabel" name="_taxOwedLit">
+           <property name="text">
+            <string>Use Tax Owed:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="CurrCluster" name="_taxOwed">
+           <property name="currencyVisible">
+            <bool>false</bool>
+           </property>
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -594,6 +691,11 @@ to be bound by its terms.</comment>
    <header>characteristicswidget.h</header>
   </customwidget>
   <customwidget>
+   <class>Comments</class>
+   <extends>QWidget</extends>
+   <header>comments.h</header>
+  </customwidget>
+  <customwidget>
    <class>CurrCluster</class>
    <extends>CurrDisplay</extends>
    <header>currcluster.h</header>
@@ -636,6 +738,11 @@ to be bound by its terms.</comment>
    <header>xcombobox.h</header>
   </customwidget>
   <customwidget>
+   <class>XLabel</class>
+   <extends>QLabel</extends>
+   <header>xlabel.h</header>
+  </customwidget>
+  <customwidget>
    <class>XLineEdit</class>
    <extends>QLineEdit</extends>
    <header>xlineedit.h</header>
@@ -651,6 +758,16 @@ to be bound by its terms.</comment>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>QWidget</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxDisplay</class>
+   <extends>QWidget</extends>
+   <header>taxdisplay.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
