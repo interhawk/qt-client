@@ -58,7 +58,8 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
 
     foreach(QString header, build.value("headers").toString().split(","))
     {
-      netrequest.setRawHeader(header.split(": ")[0].toUtf8(), header.split(": ")[1].toUtf8());
+      if (header.split(": ").size() > 1)
+        netrequest.setRawHeader(header.split(": ")[0].toUtf8(), header.split(": ")[1].toUtf8());
     }
 
     netrequest.setRawHeader("X-Avalara-UID", QByteArray("a0o0b000003PfVt"));
