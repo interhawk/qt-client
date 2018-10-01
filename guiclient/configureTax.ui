@@ -13,7 +13,7 @@ to be bound by its terms.</comment>
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>386</width>
+    <width>414</width>
     <height>394</height>
    </rect>
   </property>
@@ -155,7 +155,7 @@ to be bound by its terms.</comment>
        <item row="9" column="1">
         <widget class="QLabel" name="_taxExemptLit">
          <property name="text">
-          <string>Tax Exempt Category:</string>
+          <string>Purchase Tax Exempt Category:</string>
          </property>
         </widget>
        </item>
