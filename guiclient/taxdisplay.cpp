@@ -188,6 +188,11 @@ void TaxDisplay::post()
   _tax->commit(_type, _orderId);
 }
 
+void TaxDisplay::cancel()
+{
+  _tax->cancel(_type, _orderId);
+}
+
 void TaxDisplay::invalidate()
 {
   if (isEmpty())

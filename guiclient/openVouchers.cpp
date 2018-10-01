@@ -191,6 +191,9 @@ void openVouchers::sDelete()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
       {
+       TaxIntegration* tax = TaxIntegration::getTaxIntegration();
+       tax->cancel("VCH", ((XTreeWidgetItem*)(selected[i]))->id());
+
        int id = ((XTreeWidgetItem*)(selected[i]))->id();
        delq.bindValue(":vohead_id", id);
        delq.exec();
