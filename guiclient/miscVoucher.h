@@ -31,6 +31,7 @@ public:
 public slots:
     virtual SetResponse set( const ParameterList & pParams );
     virtual void sSave();
+    virtual bool save(bool);
     virtual void sHandleVoucherNumber();
     virtual void sPopulateVendorInfo( int pVendid );
     virtual void sNewMiscDistribution();
@@ -45,7 +46,7 @@ public slots:
     virtual void closeEvent( QCloseEvent * pEvent );
     virtual void sPopulateDistDate();
     virtual void sPopulateDueDate();
-    virtual void sUpdateVoucherTax();
+    virtual void sCalculateTaxOwed();
     virtual void sDistributionDateUpdated();
 
 protected:

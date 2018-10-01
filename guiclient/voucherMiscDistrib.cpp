@@ -38,6 +38,17 @@ voucherMiscDistrib::voucherMiscDistrib(QWidget* parent, const char* name, bool m
                                 " AND (costelem_po) ) "
                                 "ORDER BY costelem_type;");
 
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxSelected->hide();
+    _taxCode->hide();
+  }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
+
   adjustSize();
 }
 
@@ -87,6 +98,23 @@ enum SetResponse voucherMiscDistrib::set(const ParameterList &pParams)
     if (param.toString() == "new")
     {
       _mode = cNew;
+
+      if (!_miscvoucher)
+      {
+        XSqlQuery warehouse;
+        warehouse.prepare("SELECT pohead_warehous_id "
+                          "  FROM vohead "
+                          "  JOIN pohead ON vohead_pohead_id = pohead_id "
+                          " WHERE vohead_id = :vohead_id;");
+        warehouse.bindValue("vohead_id", _voheadid);
+        warehouse.exec();
+        if (warehouse.first())
+          _warehouse->setId(warehouse.value("pohead_warehous_id").toInt());
+        else
+          ErrorReporter::error(QtCriticalMsg, this, tr("Error Fetching Site"),
+                               warehouse, __FILE__, __LINE__);
+      }
+
       param = pParams.value("vend_id", &valid);
       if (valid)
         sPopulateVendorInfo(param.toInt());
@@ -148,6 +176,11 @@ void voucherMiscDistrib::populate()
     {
       _taxType->setId(vpopulateVoucher.value("vodist_taxtype_id").toInt());
     }
+    if (vpopulateVoucher.value("vodist_warehous_id").toInt() > 0)
+    {
+      _warehouse->setId(vpopulateVoucher.value("vodist_warehous_id").toInt());
+    }
+    _taxExempt->setCode(vpopulateVoucher.value("vodist_tax_exemption").toString());
   }
 }
 
@@ -191,12 +224,14 @@ void voucherMiscDistrib::sSave()
                "( vodist_id, vodist_vohead_id, vodist_poitem_id,"
                "  vodist_costelem_id, vodist_accnt_id, vodist_amount, vodist_discountable,"
                "  vodist_expcat_id, vodist_tax_id, vodist_notes, vodist_taxtype_id, "
-               "  vodist_freight_vohead_id, vodist_freight_dist_method ) "
+               "  vodist_freight_vohead_id, vodist_freight_dist_method, vodist_warehous_id, "
+               "  vodist_tax_exemption ) "
                "VALUES "
                "( :vodist_id, :vodist_vohead_id, -1,"
                "  :vodist_costelem_id, :vodist_accnt_id, :vodist_amount, :vodist_discountable,"
                "  :vodist_expcat_id, :vodist_tax_id, :vodist_notes, :vodist_taxtype_id, "
-               "  :vodist_voucher, :vodist_method );" );
+               "  :vodist_voucher, :vodist_method, :vodist_warehous_id, "
+               "  :vodist_tax_exemption );" );
   }
   else if (_mode == cEdit)
     saveVoucher.prepare( "UPDATE vodist "
@@ -209,7 +244,9 @@ void voucherMiscDistrib::sSave()
                "    vodist_taxtype_id=:vodist_taxtype_id, "
                "    vodist_costelem_id=:vodist_costelem_id, "
                "    vodist_freight_vohead_id=:vodist_voucher, "
-               "    vodist_freight_dist_method=:vodist_method "
+               "    vodist_freight_dist_method=:vodist_method, "
+               "    vodist_warehous_id=:vodist_warehous_id, "
+               "    vodist_tax_exemption=:vodist_tax_exemption "
                "WHERE (vodist_id=:vodist_id);" );
   
   saveVoucher.bindValue(":vodist_id", _vodistid);
@@ -219,6 +256,8 @@ void voucherMiscDistrib::sSave()
   saveVoucher.bindValue(":vodist_notes", _notes->toPlainText().trimmed());
   if(_taxType->isValid())
     saveVoucher.bindValue(":vodist_taxtype_id", _taxType->id());
+  saveVoucher.bindValue(":vodist_warehous_id", _warehouse->id());
+  saveVoucher.bindValue(":vodist_tax_exemption", _taxExempt->code());
 
   if(_accountSelected->isChecked())
   {
@@ -317,7 +356,9 @@ void voucherMiscDistrib::sPopulateVendorInfo(int pVendid)
   populateVoucher.prepare("SELECT COALESCE(vend_accnt_id, -1) AS vend_accnt_id,"
                           "       COALESCE(vend_expcat_id, -1) AS vend_expcat_id,"
                           "       COALESCE(vend_tax_id, -1) AS vend_tax_id, "
-                          "       COALESCE(vend_taxtype_id, -1) AS vend_taxtype_id "
+                          "       COALESCE(vend_taxtype_id, -1) AS vend_taxtype_id, "
+                          "       COALESCE(vend_tax_exemption, "
+                          "                fetchMetricText('AvalaraUserExemptionCode')) AS exempt "
                           "FROM vendinfo "
                           "WHERE (vend_id=:vend_id);" );
   populateVoucher.bindValue(":vend_id", pVendid);
@@ -343,7 +384,7 @@ void voucherMiscDistrib::sPopulateVendorInfo(int pVendid)
       _amount->setFocus();
     }
     _taxType->setId(populateVoucher.value("vend_taxtype_id").toInt());
-   
+    _taxExempt->setCode(populateVoucher.value("vend_tax_exemption").toString());
   }
 }
 

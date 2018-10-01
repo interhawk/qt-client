@@ -58,6 +58,7 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_freightTaxtype,           SIGNAL(newID(int)),                                this,          SLOT(sFreightTaxtypeChanged()));
   connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sFreightChanged()));
   connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
+  connect(_tax,                      SIGNAL(save(bool)),                                this,          SLOT(save(bool)));
   connect(_tax,                      SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTaxOwed()));
   connect(_taxCharged,               SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTaxOwed()));
   connect(_taxCharged,               SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
@@ -660,6 +661,8 @@ void voucher::sNewMiscDistribution()
   {
     sFillMiscList();
     sPopulateDistributed();
+
+    _tax->invalidate();
   }
 }
 
@@ -681,6 +684,8 @@ void voucher::sEditMiscDistribution()
   {
     sFillMiscList();
     sPopulateDistributed();
+
+    _tax->invalidate();
   }
 }
 
@@ -701,6 +706,8 @@ void voucher::sDeleteMiscDistribution()
   {
     sFillMiscList();
     sPopulateDistributed();
+
+    _tax->invalidate();
   }
 }
 
