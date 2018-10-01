@@ -13,6 +13,7 @@
 #include <QJsonDocument>
 #include <QMessageBox>
 
+#include "avalaraIntegration.h"
 #include "errorReporter.h"
 
 TaxExemptCluster::TaxExemptCluster(QWidget* parent, const char* name)
@@ -21,7 +22,7 @@ TaxExemptCluster::TaxExemptCluster(QWidget* parent, const char* name)
   _silent = false;
   _code = "";
 
-  _tax = TaxIntegration::getTaxIntegration();
+  _tax = new AvalaraIntegration();
   connect(_tax, SIGNAL(taxExemptCategoriesFetched(QJsonObject, QString)), this, SLOT(sPopulateTaxExempt(QJsonObject, QString)));
   _tax->getTaxExemptCategories();
 }
@@ -43,9 +44,9 @@ void TaxExemptCluster::setCode(const QString& code)
   XComboBox::setCode(code);
 }
 
-void TaxExemptCluster::populate()
+void TaxExemptCluster::populate(QStringList config)
 {
-  _tax->getTaxExemptCategories();
+  _tax->getTaxExemptCategories(config);
 }
 
 void TaxExemptCluster::sPopulateTaxExempt(QJsonObject result, QString error)

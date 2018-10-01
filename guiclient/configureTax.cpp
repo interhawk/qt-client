@@ -121,7 +121,7 @@ bool configureTax::sCheck()
   {
     QStringList configuration;
     configuration << _account->text() << _key->text() << _url->text() << _company->text();
-    _taxExempt->populate();
+    _taxExempt->populate(configuration);
   }
 
   return valid;
