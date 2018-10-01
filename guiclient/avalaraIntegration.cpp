@@ -69,15 +69,16 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
 
     foreach (QNetworkReply* other, replies)
     {
-      if ((other->property("type") == "test" &&
-           other->property("config") == config) ||
-          (other->property("type") == "taxcodes") ||
-          (other->property("type") == "taxexempt") ||
-          ((other->property("type") == "createtransaction" ||
-            other->property("type") == "committransaction" ||
-            other->property("type") == "voidtransaction") &&
-           other->property("orderType") == orderType &&
-           other->property("orderId") == orderId))
+      if (other->property("type") == type &&
+          ((other->property("type") == "test" &&
+            other->property("config") == config) ||
+           (other->property("type") == "taxcodes") ||
+           (other->property("type") == "taxexempt") ||
+           ((other->property("type") == "createtransaction" ||
+             other->property("type") == "committransaction" ||
+             other->property("type") == "voidtransaction") &&
+            other->property("orderType") == orderType &&
+            other->property("orderId") == orderId)))
       {
         other->abort();
         replies.removeOne(other);
