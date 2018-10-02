@@ -5494,7 +5494,7 @@ void salesOrder::sShipDateChanged()
             "  AND (itemsite_item_id=item_id) "
             "  AND (cohead_id=<? value('cohead_id') ?>) "
             "  AND (coitem_cohead_id=cohead_id) "
-            "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) );";
+            "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) ); ";
 
       // Ask about work orders if applicable
       XSqlQuery wo;
@@ -5507,7 +5507,7 @@ void salesOrder::sShipDateChanged()
                  "  AND (coitem_status NOT IN ('C','X')) "
                  "  AND (NOT coitem_firm)"
                  "  AND (wo_status<>'C')"
-                 "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) );");
+                 "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) ); ");
       MetaSQLQuery woMql(woSql);
       wo = woMql.toQuery(params);
       if(wo.first())
@@ -5529,7 +5529,7 @@ void salesOrder::sShipDateChanged()
                 "  AND (NOT coitem_firm)"
                 "  AND (wo_status <> 'C') "
                 "  AND (cohead_id=<? value('cohead_id') ?>)"
-                "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) )";
+                "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) ); ";
         }
       }
 
@@ -5544,7 +5544,7 @@ void salesOrder::sShipDateChanged()
                     "  AND (coitem_status NOT IN ('C','X')) "
                     "  AND (NOT coitem_firm)"
                     "  AND (poitem_status<>'C')"
-                    "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) );");
+                    "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) ); ");
       MetaSQLQuery poMql(poSql);
       po = poMql.toQuery(params);
       if(po.first())
@@ -5565,7 +5565,7 @@ void salesOrder::sShipDateChanged()
           "  AND (NOT coitem_firm)"
           "  AND (poitem_status <> 'C') "
           "  AND (cohead_id=<? value('cohead_id') ?>)"
-          "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) )";
+          "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) );";
         }
       }
     }
