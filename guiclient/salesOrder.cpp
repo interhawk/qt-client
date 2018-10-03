@@ -5495,6 +5495,14 @@ void salesOrder::sShipDateChanged()
             "  AND (cohead_id=<? value('cohead_id') ?>) "
             "  AND (coitem_cohead_id=cohead_id) "
             "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) ); ";
+      MetaSQLQuery mql(sql);
+      upd = mql.toQuery(params);
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Item Information"),
+                                    upd, __FILE__, __LINE__))
+      {
+        _shipDate->setDate(_shipDateCache);
+        return;
+      }
 
       // Ask about work orders if applicable
       XSqlQuery wo;
@@ -5518,8 +5526,7 @@ void salesOrder::sShipDateChanged()
                                 QMessageBox::Yes | QMessageBox::Default,
                                 QMessageBox::No | QMessageBox::Escape) == QMessageBox::Yes)
         {
-          sql = sql +
-                "SELECT changeWoDates(wo_id, "
+          sql = "SELECT changeWoDates(wo_id, "
                 "                     wo_startdate + (<? value('newDate') ?> - wo_duedate),"
                 "                     <? value('newDate') ?>, true) AS result "
                 "FROM cohead JOIN coitem ON (coitem_cohead_id=cohead_id AND coitem_order_type='W') "
@@ -5530,6 +5537,14 @@ void salesOrder::sShipDateChanged()
                 "  AND (wo_status <> 'C') "
                 "  AND (cohead_id=<? value('cohead_id') ?>)"
                 "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) ); ";
+          MetaSQLQuery mql(sql);
+          upd = mql.toQuery(params);
+          if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Item Information"),
+                                        upd, __FILE__, __LINE__))
+          {
+            _shipDate->setDate(_shipDateCache);
+            return;
+          }
         }
       }
 
@@ -5555,17 +5570,24 @@ void salesOrder::sShipDateChanged()
                                   QMessageBox::Yes | QMessageBox::Default,
                                   QMessageBox::No | QMessageBox::Escape) == QMessageBox::Yes)
         {
-          sql = sql +
-          "SELECT changePoitemDueDate(poitem_id, "
-          "                     <? value('newDate') ?>, true) AS result "
-          "FROM cohead JOIN coitem ON (coitem_cohead_id=cohead_id AND coitem_order_type='P') "
-          "            JOIN poitem ON (poitem_id=coitem_order_id) "
-          "            JOIN itemsite ON (itemsite_id=coitem_itemsite_id) "
-          "WHERE ( (coitem_status NOT IN ('C','X'))"
-          "  AND (NOT coitem_firm)"
-          "  AND (poitem_status <> 'C') "
-          "  AND (cohead_id=<? value('cohead_id') ?>)"
-          "  AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) );";
+          sql = "SELECT changePoitemDueDate(poitem_id, "
+                "       <? value('newDate') ?>, true) AS result "
+                "  FROM cohead JOIN coitem ON (coitem_cohead_id=cohead_id AND coitem_order_type='P') "
+                "  JOIN poitem ON (poitem_id=coitem_order_id) "
+                "  JOIN itemsite ON (itemsite_id=coitem_itemsite_id) "
+                " WHERE ( (coitem_status NOT IN ('C','X'))"
+                "   AND (NOT coitem_firm)"
+                "   AND (poitem_status <> 'C') "
+                "   AND (cohead_id=<? value('cohead_id') ?>)"
+                "   AND (customerCanPurchase(itemsite_item_id, cohead_cust_id, cohead_shipto_id, <? value('newDate') ?>) ) );";
+          MetaSQLQuery mql(sql);
+          upd = mql.toQuery(params);
+          if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Item Information"),
+                                        upd, __FILE__, __LINE__))
+          {
+            _shipDate->setDate(_shipDateCache);
+            return;
+          }
         }
       }
     }
@@ -5578,15 +5600,14 @@ void salesOrder::sShipDateChanged()
             "  AND (quhead_id=<? value('cohead_id') ?>) "
             "  AND (quitem_quhead_id=quhead_id) "
             "  AND (customerCanPurchase(itemsite_item_id, quhead_cust_id, quhead_shipto_id, <? value('newDate') ?>) ) );";
-    }
-
-    MetaSQLQuery mql(sql);
-    upd = mql.toQuery(params);
-    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Item Information"),
-                                  upd, __FILE__, __LINE__))
-    {
-      _shipDate->setDate(_shipDateCache);
-      return;
+      MetaSQLQuery mql(sql);
+      upd = mql.toQuery(params);
+      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Item Information"),
+                                    upd, __FILE__, __LINE__))
+      {
+        _shipDate->setDate(_shipDateCache);
+        return;
+      }
     }
   }
   else
