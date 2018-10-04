@@ -121,6 +121,8 @@
 #include "qsslsocketproto.h"
 #include "qstackedwidgetproto.h"
 #include "qtabwidgetproto.h"
+#include "qtablewidgetproto.h"
+#include "qtablewidgetitemproto.h"
 #include "qtcpserverproto.h"
 #include "qtcpsocketproto.h"
 #include "qtextdocumentproto.h"
@@ -277,6 +279,8 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQSslSocketProto(engine);
   setupQStackedWidgetProto(engine);
   setupQTabWidgetProto(engine);
+  setupQTableWidgetProto(engine);
+  setupQTableWidgetItemProto(engine);
   setupQTcpServerProto(engine);
   setupQTcpSocketProto(engine);
   setupQTextDocumentProto(engine);
