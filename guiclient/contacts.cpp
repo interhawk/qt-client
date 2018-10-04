@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -208,8 +208,10 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 
   // Create, Edit, View Prospect
   if (!_captive) {
-  foreach (XTreeWidgetItem *item, list()->selectedItems())
-  {
+    QStringList ids;
+    foreach (XTreeWidgetItem *item, list()->selectedItems())
+      ids << QString::number(item->id());
+
     XSqlQuery sql;
     sql.prepare("WITH crmaccts AS ( "
                 "SELECT crmaccttypes(crmacctcntctass_crmacct_id)#>>'{prospect}' AS prospectid"
@@ -223,9 +225,6 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
                 "       EXISTS(SELECT 1"
                 "                FROM crmaccts"
                 "               WHERE prospectid IS NULL) AS new;");
-    QStringList ids;
-    foreach (XTreeWidgetItem *item, list()->selectedItems())
-      ids << QString::number(item->id());
     sql.bindValue(":cntct_id", ids.join(","));
     sql.exec();
     if (sql.first())
@@ -251,7 +250,6 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Checking CRM Accounts"),
                                   sql, __FILE__, __LINE__))
       return;
-  }
   }
 }
 
@@ -296,7 +294,7 @@ void contacts::sReplace()
     }
   }
 
-  bool ok;
+  bool ok = false;
 
   if (col.contains("cntct"))
     replace = QInputDialog::getText(this, tr("Replace"), label, QLineEdit::Normal, "", &ok);
