@@ -36,7 +36,9 @@ class QTableWidgetProto : public QObject, public QScriptable
     Q_INVOKABLE void                              editItem(QTableWidgetItem *item);
     Q_INVOKABLE QList<QTableWidgetItem *>         findItems(const QString &text, Qt::MatchFlags flags) const;
     Q_INVOKABLE QTableWidgetItem *                horizontalHeaderItem(int column) const;
+    #if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
     Q_INVOKABLE bool                              isPersistentEditorOpen(QTableWidgetItem *item) const;
+    #endif
     Q_INVOKABLE QTableWidgetItem *                item(int row, int column) const;
     Q_INVOKABLE QTableWidgetItem *                itemAt(const QPoint &point) const;
     Q_INVOKABLE QTableWidgetItem *                itemAt(int ax, int ay) const;

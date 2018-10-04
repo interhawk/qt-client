@@ -116,6 +116,7 @@ QTableWidgetItem* QTableWidgetProto::horizontalHeaderItem(int column) const
   return new QTableWidgetItem();
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
 bool QTableWidgetProto::isPersistentEditorOpen(QTableWidgetItem *item) const
 {
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
@@ -123,6 +124,7 @@ bool QTableWidgetProto::isPersistentEditorOpen(QTableWidgetItem *item) const
     return item_proto->isPersistentEditorOpen(item);
   return false;
 }
+#endif
 
 QTableWidgetItem* QTableWidgetProto::item(int row, int column) const
 {
