@@ -15,6 +15,7 @@
 
 #include "avalaraIntegration.h"
 #include "errorReporter.h"
+#include "guiclient.h"
 
 TaxExemptCluster::TaxExemptCluster(QWidget* parent, const char* name)
   : XComboBox(parent, name)
@@ -24,7 +25,9 @@ TaxExemptCluster::TaxExemptCluster(QWidget* parent, const char* name)
 
   _tax = new AvalaraIntegration();
   connect(_tax, SIGNAL(taxExemptCategoriesFetched(QJsonObject, QString)), this, SLOT(sPopulateTaxExempt(QJsonObject, QString)));
-  _tax->getTaxExemptCategories();
+
+  if (_metrics->value("TaxService") == "A")
+    _tax->getTaxExemptCategories();
 }
 
 bool TaxExemptCluster::silent()
@@ -46,7 +49,8 @@ void TaxExemptCluster::setCode(const QString& code)
 
 void TaxExemptCluster::populate(QStringList config)
 {
-  _tax->getTaxExemptCategories(config);
+  if (_metrics->value("TaxService") == "A" || config.size())
+    _tax->getTaxExemptCategories(config);
 }
 
 void TaxExemptCluster::sPopulateTaxExempt(QJsonObject result, QString error)

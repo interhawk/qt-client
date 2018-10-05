@@ -195,11 +195,11 @@ void TaxDisplay::cancel()
 
 void TaxDisplay::invalidate()
 {
-  if (isEmpty())
-    return;
-
   if (_metrics->value("TaxService") == "A")
   {
+    if (isEmpty())
+      return;
+
     _menuLabel->setPixmap(QPixmap(":/widgets/images/warning.png"));
 
     XSqlQuery tax;
