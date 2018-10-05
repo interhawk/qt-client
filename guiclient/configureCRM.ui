@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>691</width>
-    <height>575</height>
+    <height>785</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="XComboBox" name="_acctGeneration" />
+              <widget class="XComboBox" name="_acctGeneration"/>
              </item>
              <item row="0" column="2">
               <widget class="QLabel" name="_nextAcctNumberLit">
@@ -139,7 +139,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="XComboBox" name="_projectGeneration" />
+              <widget class="XComboBox" name="_projectGeneration"/>
              </item>
              <item row="2" column="2">
               <widget class="QLabel" name="_nextProjectNumberLit">
@@ -184,7 +184,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="XComboBox" name="_taskGeneration" />
+              <widget class="XComboBox" name="_taskGeneration"/>
              </item>
              <item row="3" column="2">
               <widget class="QLabel" name="_nextTaskNumberLit">
@@ -582,16 +582,6 @@ to be bound by its terms.</comment>
            </item>
           </layout>
          </item>
-         <item>
-          <widget class="XCheckBox" name="_strictCountries">
-           <property name="text">
-            <string>Enforce Valid Country Names</string>
-           </property>
-           <property name="forgetful">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
@@ -627,11 +617,6 @@ to be bound by its terms.</comment>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>XCheckBox</class>
-   <extends>QCheckBox</extends>
-   <header>xcheckbox.h</header>
-  </customwidget>
   <customwidget>
    <class>XComboBox</class>
    <extends>QComboBox</extends>
@@ -677,7 +662,6 @@ to be bound by its terms.</comment>
   <tabstop>_resolved</tabstop>
   <tabstop>_closed</tabstop>
   <tabstop>_country</tabstop>
-  <tabstop>_strictCountries</tabstop>
  </tabstops>
  <resources/>
  <connections>

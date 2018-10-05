@@ -88,13 +88,6 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
   if (! _metrics->value("DefaultAddressCountry").isEmpty())
     _country->setText(_metrics->value("DefaultAddressCountry"));
 
-  _strictCountries->setChecked(_metrics->boolean("StrictAddressCountry"));
-  _strictCountries->setEnabled(! _strictCountries->isChecked());
-  if (! _strictCountries->isChecked())
-  {
-    connect(_strictCountries, SIGNAL(toggled(bool)), this, SLOT(sStrictCountryChanged(bool)));
-  }
-
   _incidentsPublicShow->setChecked(_metrics->boolean("IncidentsPublicPrivate"));
   _incidentsPublicDefault->setChecked(_metrics->boolean("IncidentPublicDefault"));
 
@@ -190,8 +183,6 @@ bool configureCRM::sSave()
   else
     _metrics->set("DefaultAddressCountry", QString(""));
 
-  _metrics->set("StrictAddressCountry", _strictCountries->isChecked());
-  
   _metrics->set("IncidentsPublicPrivate", _incidentsPublicShow->isChecked());
   _metrics->set("IncidentPublicDefault", _incidentsPublicDefault->isChecked());
 
@@ -249,87 +240,4 @@ bool configureCRM::sSave()
   configq.exec();
 
   return true;
-}
-
-/* TODO: introduced option in 3.4.0beta2.
-   deprecate it in the future with strict as the standard.
- */
-void configureCRM::sStrictCountryChanged(bool p)
-{
-  if (p)
-  {
-    bool mqlloaded;
-    MetaSQLQuery mql = mqlLoad("crm", "strictcountrycheck", &mqlloaded);
-    if (! mqlloaded)
-    {
-      QMessageBox::critical(this, tr("Query Not Found"),
-                            tr("<p>The application could not find the MetaSQL "
-                               "query crm-strictcountrycheck."));
-      _strictCountries->setChecked(false);
-      return;
-    }
-
-    ParameterList params;
-    params.append("count");
-    XSqlQuery activeq = mql.toQuery(params);
-
-    params.append("showAll");
-    XSqlQuery allq = mql.toQuery(params);
-
-    if (activeq.first())
-    {
-      int result = activeq.value("counter").toInt();
-      if (result > 0)
-      {
-        QMessageBox::warning(this, tr("Invalid Countries"),
-                             tr("<p>The database contains invalid countries in "
-                                "active records, such as addresses and open "
-                                "sales orders. Please correct these records "
-                                "before turning on strict country checking. "
-                                "You may download and install the "
-                                "fixCountry.gz package "
-                                "to help with this task."));
-        _strictCountries->setChecked(false);
-        return;
-      }
-    }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Confirming Country Information"),
-                                  activeq, __FILE__, __LINE__))
-    {
-      return;
-    }
-
-    if (allq.first())
-    {
-      int result = allq.value("counter").toInt();
-      if (result > 0)
-      {
-        QMessageBox::StandardButton answer =
-          QMessageBox::question(this, tr("Invalid Countries"),
-                                tr("<p>The database contains invalid countries "
-                                   "in historical records, such as closed "
-                                   "sales orders and posted invoices. If you "
-                                   "do not correct these countries before "
-                                   "turning on strict country checking, you "
-                                   "may lose country values if you open these "
-                                   "documents and save them again. You may "
-                                   "download and install the fixCountry.gz "
-                                   "package to help update your records."
-                                   "<p>Are you sure you want to turn on "
-                                   "strict country checking?"),
-                               QMessageBox::Yes | QMessageBox::No,
-                               QMessageBox::No);
-        if (answer == QMessageBox::No)
-        {
-          _strictCountries->setChecked(false);
-          return;
-        }
-      }
-    }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Confirming Country Information"),
-                                  allq, __FILE__, __LINE__))
-    {
-      return;
-    }
-  }
 }
