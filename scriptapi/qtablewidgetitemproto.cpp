@@ -74,6 +74,11 @@ QScriptValue constructQTableWidgetItem(QScriptContext *context, QScriptEngine *e
                                  context->argument(1).toString(),
                                  context->argument(2).toInt32());
   }
+  else
+  {
+    context->throwError(QScriptContext::UnknownError,
+                        "could not find appropriate QTableWidgetItem constructor");
+  }
   
   return engine->toScriptValue(obj);
 }
@@ -103,7 +108,7 @@ QTableWidgetItem * QTableWidgetItemProto::clone() const
   QTableWidgetItem *item_proto = qscriptvalue_cast<QTableWidgetItem*>(thisObject());
   if (item_proto)
     return item_proto->clone();
-  return new QTableWidgetItem();
+  return 0;
 }
  
 int QTableWidgetItemProto::column() const
@@ -296,7 +301,7 @@ QTableWidget * QTableWidgetItemProto::tableWidget() const
   QTableWidgetItem *item_proto = qscriptvalue_cast<QTableWidgetItem*>(thisObject());
   if (item_proto)
     return item_proto->tableWidget();
-  return new QTableWidget();
+  return 0;
 }
  
 QString QTableWidgetItemProto::text() const

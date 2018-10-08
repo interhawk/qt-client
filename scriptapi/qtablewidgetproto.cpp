@@ -42,7 +42,7 @@ QWidget* QTableWidgetProto::cellWidget(int row, int column) const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->cellWidget(row, column);
-  return new QWidget();
+  return 0;
 }
 
 void QTableWidgetProto::closePersistentEditor(QTableWidgetItem *item)
@@ -60,14 +60,6 @@ int QTableWidgetProto::column(const QTableWidgetItem *item) const
   return 0;
 }
 
-int QTableWidgetProto::columnCount() const
-{
-  QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
-  if (item_proto)
-    return item_proto->columnCount();
-  return 0;
-}
-
 int QTableWidgetProto::currentColumn() const
 {
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
@@ -81,7 +73,7 @@ QTableWidgetItem* QTableWidgetProto::currentItem() const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->currentItem();
-  return new QTableWidgetItem();
+  return 0;
 }
 
 int QTableWidgetProto::currentRow() const
@@ -113,7 +105,7 @@ QTableWidgetItem* QTableWidgetProto::horizontalHeaderItem(int column) const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->horizontalHeaderItem(column);
-  return new QTableWidgetItem();
+  return 0;
 }
 
 #if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
@@ -131,7 +123,7 @@ QTableWidgetItem* QTableWidgetProto::item(int row, int column) const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->item(row, column);
-  return new QTableWidgetItem();
+  return 0;
 }
 
 QTableWidgetItem* QTableWidgetProto::itemAt(const QPoint &point) const
@@ -139,7 +131,7 @@ QTableWidgetItem* QTableWidgetProto::itemAt(const QPoint &point) const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->itemAt(point);
-  return new QTableWidgetItem();
+  return 0;
 }
 
 QTableWidgetItem* QTableWidgetProto::itemAt(int ax, int ay) const
@@ -147,7 +139,7 @@ QTableWidgetItem* QTableWidgetProto::itemAt(int ax, int ay) const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->itemAt(ax, ay);
-  return new QTableWidgetItem();
+  return 0;
 }
 
 const QTableWidgetItem * QTableWidgetProto::itemPrototype() const
@@ -155,7 +147,7 @@ const QTableWidgetItem * QTableWidgetProto::itemPrototype() const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->itemPrototype();
-  return new QTableWidgetItem();
+  return 0;
 }
 
 void QTableWidgetProto::openPersistentEditor(QTableWidgetItem *item)
@@ -177,14 +169,6 @@ int QTableWidgetProto::row(const QTableWidgetItem *item) const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->row(item);
-  return 0;
-}
-
-int QTableWidgetProto::rowCount() const
-{
-  QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
-  if (item_proto)
-    return item_proto->rowCount();
   return 0;
 }
 
@@ -314,7 +298,7 @@ QTableWidgetItem* QTableWidgetProto::takeHorizontalHeaderItem(int column)
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->takeHorizontalHeaderItem(column);
-  return new QTableWidgetItem();
+  return 0;
 }
 
 QTableWidgetItem* QTableWidgetProto::takeItem(int row, int column)
@@ -322,7 +306,7 @@ QTableWidgetItem* QTableWidgetProto::takeItem(int row, int column)
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->takeItem(row, column);
-  return new QTableWidgetItem();
+  return 0;
 }
 
 QTableWidgetItem* QTableWidgetProto::takeVerticalHeaderItem(int row)
@@ -330,7 +314,7 @@ QTableWidgetItem* QTableWidgetProto::takeVerticalHeaderItem(int row)
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
    return item_proto->takeVerticalHeaderItem(row);
- return new QTableWidgetItem();
+ return 0;
 }
 
 QTableWidgetItem* QTableWidgetProto::verticalHeaderItem(int row) const
@@ -338,7 +322,7 @@ QTableWidgetItem* QTableWidgetProto::verticalHeaderItem(int row) const
   QTableWidget *item_proto = qscriptvalue_cast<QTableWidget*>(thisObject());
   if (item_proto)
     return item_proto->verticalHeaderItem(row);
-  return new QTableWidgetItem();
+  return 0;
 }
 
 int QTableWidgetProto::visualColumn(int logicalColumn) const

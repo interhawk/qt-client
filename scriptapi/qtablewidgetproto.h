@@ -29,7 +29,6 @@ class QTableWidgetProto : public QObject, public QScriptable
     Q_INVOKABLE QWidget *                         cellWidget(int row, int column) const;
     Q_INVOKABLE void                              closePersistentEditor(QTableWidgetItem *item);
     Q_INVOKABLE int                               column(const QTableWidgetItem *item) const;
-    Q_INVOKABLE int                               columnCount() const;
     Q_INVOKABLE int                               currentColumn() const;
     Q_INVOKABLE QTableWidgetItem *                currentItem() const;
     Q_INVOKABLE int                               currentRow() const;
@@ -46,7 +45,6 @@ class QTableWidgetProto : public QObject, public QScriptable
     Q_INVOKABLE void                              openPersistentEditor(QTableWidgetItem *item);
     Q_INVOKABLE void                              removeCellWidget(int row, int column);
     Q_INVOKABLE int                               row(const QTableWidgetItem *item) const;
-    Q_INVOKABLE int                               rowCount() const;
     Q_INVOKABLE QList<QTableWidgetItem *>         selectedItems() const;
     Q_INVOKABLE QList<QTableWidgetSelectionRange> selectedRanges() const;
     Q_INVOKABLE void                              setCellWidget(int row, int column, QWidget *widget);
