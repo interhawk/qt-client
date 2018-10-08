@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -148,9 +148,6 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_editCC, SIGNAL(clicked()), this, SLOT(sEditCreditCard()));
   connect(_deleteCC, SIGNAL(clicked()), this, SLOT(sDeleteCreditCard()));
   connect(_newCC, SIGNAL(clicked()), this, SLOT(sNewCreditCard()));
-  connect(_deleteCharacteristic, SIGNAL(clicked()), this, SLOT(sDeleteCharacteristic()));
-  connect(_editCharacteristic, SIGNAL(clicked()), this, SLOT(sEditCharacteristic()));
-  connect(_newCharacteristic, SIGNAL(clicked()), this, SLOT(sNewCharacteristic()));
   connect(_deleteTaxreg, SIGNAL(clicked()), this, SLOT(sDeleteTaxreg()));
   connect(_editTaxreg,   SIGNAL(clicked()), this, SLOT(sEditTaxreg()));
   connect(_newTaxreg,    SIGNAL(clicked()), this, SLOT(sNewTaxreg()));
@@ -212,8 +209,6 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _cc->addColumn(tr("Number"),          150, Qt::AlignRight,true, "f_number");
   _cc->addColumn(tr("Active"),           -1, Qt::AlignLeft, true, "ccard_active");
 
-  _charass->addColumn(tr("Characteristic"), _itemColumn*2, Qt::AlignLeft, true, "char_name");
-  _charass->addColumn(tr("Value"),          -1,            Qt::AlignLeft, true, "charass_value");
 
   _defaultCommissionPrcnt->setValidator(omfgThis->percentVal());
   _defaultDiscountPrcnt->setValidator(omfgThis->negPercentVal());
@@ -221,9 +216,7 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _custchar = new QStandardItemModel(0, 2, this);
   _custchar->setHeaderData( 0, Qt::Horizontal, tr("Characteristic"), Qt::DisplayRole);
   _custchar->setHeaderData( 1, Qt::Horizontal, tr("Value"), Qt::DisplayRole);
-  _chartempl->setModel(_custchar);
   CustCharacteristicDelegate * delegate = new CustCharacteristicDelegate(this);
-  _chartempl->setItemDelegate(delegate);
 
   key = omfgThis->_key;
   if(!_metrics->boolean("CCAccept") || !_privileges->check("ProcessCreditCards"))
@@ -263,7 +256,7 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _openBalance->setPrecision(omfgThis->moneyVal());
   _ytdSales->setPrecision(omfgThis->moneyVal());
 
-  _chartempl->setAlternatingRowColors(true);
+  _charass->setType("C");
 }
 
 customer::~customer()
@@ -292,6 +285,7 @@ enum SetResponse customer::set(const ParameterList &pParams)
   {
     _number->setEditMode(true);
     setId(param.toInt());
+    _charass->setId(_custid);
     _captive=true;
   }
 
@@ -311,8 +305,6 @@ enum SetResponse customer::set(const ParameterList &pParams)
       connect(_cc, SIGNAL(valid(bool)), _editCC, SLOT(setEnabled(bool)));
       connect(_cc, SIGNAL(valid(bool)), _deleteCC, SLOT(setEnabled(bool)));
       connect(_cc, SIGNAL(itemSelected(int)), _editCC, SLOT(animateClick()));
-      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)));
-      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)));
       connect(_backorders, SIGNAL(toggled(bool)), _partialShipments, SLOT(setEnabled(bool)));
       connect(_backorders, SIGNAL(toggled(bool)), _partialShipments, SLOT(setChecked(bool)));
 
@@ -329,8 +321,6 @@ enum SetResponse customer::set(const ParameterList &pParams)
       connect(_cc, SIGNAL(valid(bool)), _editCC, SLOT(setEnabled(bool)));
       connect(_cc, SIGNAL(valid(bool)), _deleteCC, SLOT(setEnabled(bool)));
       connect(_cc, SIGNAL(itemSelected(int)), _editCC, SLOT(animateClick()));
-      connect(_charass, SIGNAL(valid(bool)), _editCharacteristic, SLOT(setEnabled(bool)));
-      connect(_charass, SIGNAL(valid(bool)), _deleteCharacteristic, SLOT(setEnabled(bool)));
       connect(_backorders, SIGNAL(toggled(bool)), _partialShipments, SLOT(setEnabled(bool)));
       connect(_backorders, SIGNAL(toggled(bool)), _partialShipments, SLOT(setChecked(bool)));
 
@@ -407,7 +397,6 @@ void customer::setViewMode()
   _notes->setReadOnly(true);
   _comments->setReadOnly(true);
   _newShipto->setEnabled(false);
-  _newCharacteristic->setEnabled(false);
   _newTaxreg->setEnabled(false);
   _currency->setEnabled(false);
   _partialShipments->setEnabled(false);
@@ -418,8 +407,7 @@ void customer::setViewMode()
   _upCC->setEnabled(false);
   _downCC->setEnabled(false);
   _warnLate->setEnabled(false);
-  _charass->setEnabled(false);
-  _chartempl->setEnabled(false);
+  _charass->setReadOnly(true);
 
   connect(_shipto, SIGNAL(itemSelected(int)), _viewShipto, SLOT(animateClick()));
   connect(_cc, SIGNAL(itemSelected(int)), _viewCC, SLOT(animateClick()));
@@ -704,24 +692,6 @@ bool customer::sSave()
     deleteChar.bindValue(":cust_id", _custid);
     deleteChar.bindValue(":custtype_id", custtype_id);
     deleteChar.exec();
-  }
-
-  if (_widgetStack->currentIndex() == 1)
-  {
-    customerSave.prepare("SELECT updateCharAssignment('C', :target_id, :char_id, :char_value);");
-
-    QModelIndex idx1, idx2;
-    for(int i = 0; i < _custchar->rowCount(); i++)
-    {
-      idx1 = _custchar->index(i, 0);
-      idx2 = _custchar->index(i, 1);
-      customerSave.bindValue(":target_id", _custid);
-      customerSave.bindValue(":char_id", _custchar->data(idx1, Qt::UserRole));
-      customerSave.bindValue(":char_value", _custchar->data(idx2, Qt::DisplayRole));
-      customerSave.exec();
-      ErrorReporter::error(QtCriticalMsg, this, tr("Saving Characteristic"),
-                           customerSave, __FILE__, __LINE__);
-    }
   }
 
   setValid(true);
@@ -1026,132 +996,6 @@ void customer::sDeleteShipto()
     return;
 
   sFillShiptoList();
-}
-
-void customer::sNewCharacteristic()
-{
-  if (_mode == cNew)
-  {
-    if (!sSave())
-      return;
-  }
-
-  ParameterList params;
-  params.append("mode", "new");
-  params.append("cust_id", _custid);
-
-  characteristicAssignment newdlg(this, "", true);
-  newdlg.set(params);
-
-  if (newdlg.exec() != XDialog::Rejected)
-    sFillCharacteristicList();
-}
-
-void customer::sEditCharacteristic()
-{
-  ParameterList params;
-  params.append("mode", "edit");
-  params.append("charass_id", _charass->id());
-
-  characteristicAssignment newdlg(this, "", true);
-  newdlg.set(params);
-
-  if (newdlg.exec() != XDialog::Rejected)
-    sFillCharacteristicList();
-}
-
-void customer::sDeleteCharacteristic()
-{
-  XSqlQuery delq;
-  delq.prepare( "DELETE FROM charass WHERE (charass_id=:charass_id);" );
-  delq.bindValue(":charass_id", _charass->id());
-  delq.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Deleting Characteristic"),
-                           delq, __FILE__, __LINE__))
-    return;
-
-  sFillCharacteristicList();
-}
-
-void customer::sFillCharacteristicList()
-{
-  XSqlQuery customerFillCharacteristicList;
-  customerFillCharacteristicList.prepare( "SELECT custtype_char "
-             "FROM custtype "
-             "WHERE (custtype_id=:custtype_id);");
-  customerFillCharacteristicList.bindValue(":custtype_id",_custtype->id());
-  customerFillCharacteristicList.exec();
-
-  customerFillCharacteristicList.first();
-  if (customerFillCharacteristicList.value("custtype_char").toBool())
-  {
-    if (_charfilled)
-      return;
-    _widgetStack->setCurrentIndex(1);
-    _custchar->removeRows(0, _custchar->rowCount());
-    customerFillCharacteristicList.prepare( "SELECT char_id, char_name, "
-               " CASE WHEN char_type < 2 THEN "
-               "   charass_value "
-               " ELSE "
-               "   formatDate(charass_value::date) "
-               " END AS f_charass_value, "
-               "charass_value "
-               "FROM ( "
-               "SELECT DISTINCT char_id, char_name, char_type, char_order, "
-               "       COALESCE(b.charass_value, (SELECT c.charass_value FROM charass c WHERE ((c.charass_target_type='CT') AND (c.charass_target_id=:custtype_id) AND (c.charass_default) AND (c.charass_char_id=char_id)) LIMIT 1)) AS charass_value"
-               "  FROM charass a, char "
-               "    LEFT OUTER JOIN charass b"
-               "      ON (b.charass_target_type='C'"
-               "      AND b.charass_target_id=:cust_id"
-               "      AND b.charass_char_id=char_id) "
-               " WHERE ( (a.charass_char_id=char_id)"
-               "   AND   (a.charass_target_type='CT')"
-               "   AND   (a.charass_target_id=:custtype_id) ) "
-               " ORDER BY char_order, char_name) data;" );
-    customerFillCharacteristicList.bindValue(":custtype_id", _custtype->id());
-    customerFillCharacteristicList.bindValue(":cust_id", _custid);
-    customerFillCharacteristicList.exec();
-
-    int row = 0;
-    QModelIndex idx;
-    while(customerFillCharacteristicList.next())
-    {
-      _custchar->insertRow(_custchar->rowCount());
-      idx = _custchar->index(row, 0);
-      _custchar->setData(idx, customerFillCharacteristicList.value("char_name"), Qt::DisplayRole);
-      _custchar->setData(idx, customerFillCharacteristicList.value("char_id"), Qt::UserRole);
-      idx = _custchar->index(row, 1);
-      _custchar->setData(idx, customerFillCharacteristicList.value("f_charass_value"), Qt::DisplayRole);
-      _custchar->setData(idx, customerFillCharacteristicList.value("charass_value"), Qt::UserRole);
-      _custchar->setData(idx, _custtype->id(), Xt::IdRole);
-      row++;
-    }
-    _charfilled=true;
-  }
-  else
-  {
-    _widgetStack->setCurrentIndex(0);
-    XSqlQuery r;
-    r.prepare( "SELECT charass_id, char_name, "
-               " CASE WHEN char_type = 2 THEN "
-               "   formatDate(charass_value::date) "
-               " ELSE "
-               "   charass_value "
-               "END AS charass_value "
-               "FROM charass, char "
-               "WHERE ( (charass_target_type='C')"
-               " AND (charass_char_id=char_id)"
-               " AND (charass_target_id=:cust_id) ) "
-               "ORDER BY char_order, char_name;" );
-    r.bindValue(":custtype_id", _custtype->id());
-    r.bindValue(":cust_id", _custid);
-    r.exec();
-    _charass->populate(r);
-    if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting Characteristics"),
-                             r, __FILE__, __LINE__))
-      return;
-    _charfilled=false;
-  }
 }
 
 void customer::sPopulateShiptoMenu(QMenu *menuThis)
@@ -1638,8 +1482,6 @@ void customer::sFillList()
     else if (_creditcardsButton->isChecked())
       sFillCcardList();
   }
-  else if (_tab->currentIndex() == _tab->indexOf(_characteristicsTab))
-     sFillCharacteristicList();
   else if (_tab->currentIndex() == _tab->indexOf(_crmTab))
   {
     if (_contactsButton->isChecked())
@@ -1936,8 +1778,6 @@ void customer::sClear()
 
     _shipto->clear();
     _custchar->removeRows(0, _custchar->rowCount());
-    _charass->clear();
-    _widgetStack->setCurrentIndex(0);
 
     _todoList->parameterWidget()->setDefault(tr("Account"), -1, true);
     _contacts->setCrmacctid(_crmacctid);
