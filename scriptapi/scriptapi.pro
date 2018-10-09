@@ -128,6 +128,8 @@ HEADERS += setupscriptapi.h \
     qsslsocketproto.h \
     qstackedwidgetproto.h \
     qtabwidgetproto.h \
+    qtablewidgetproto.h \
+    qtablewidgetitemproto.h \
     qtcpserverproto.h \
     qtcpsocketproto.h \
     qtextdocumentproto.h \
@@ -265,6 +267,8 @@ SOURCES += setupscriptapi.cpp \
     qsslsocketproto.cpp \
     qstackedwidgetproto.cpp \
     qtabwidgetproto.cpp \
+    qtablewidgetproto.cpp \
+    qtablewidgetitemproto.cpp \
     qtcpserverproto.cpp \
     qtcpsocketproto.cpp \
     qtextdocumentproto.cpp \
