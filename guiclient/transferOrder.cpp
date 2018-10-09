@@ -28,7 +28,6 @@
 #include "issueLineToShipping.h"
 #include "transferOrderItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
 
 const char *_statusTypes[] = { "U", "O", "C" };
 
@@ -48,10 +47,8 @@ transferOrder::transferOrder(QWidget* parent, const char* name, Qt::WindowFlags 
       _orderNumberGen(0),
       _qeitem(0),
       _saved(false),
-      _taxzoneidCache(-1),
       _toheadid(-1),
-      _userEnteredOrderNumber(false),
-      _whstaxzoneid(-1)
+      _userEnteredOrderNumber(false)
 {
   setupUi(this);
 
@@ -80,7 +77,6 @@ transferOrder::transferOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   connect(_showCanceled,SIGNAL(toggled(bool)), this, SLOT(sFillItemList()));
   connect(_srcWhs,         SIGNAL(newID(int)), this, SLOT(sHandleSrcWhs(int)));
   connect(_tabs,  SIGNAL(currentChanged(int)), this, SLOT(sTabChanged(int)));
-  connect(_taxLit, SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
   connect(_toitem, SIGNAL(itemSelectionChanged()), this, SLOT(sHandleButtons()));
   connect(_toitem, SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateMenu(QMenu*)));
   connect(_trnsWhs,  SIGNAL(newID(int)), this, SLOT(sHandleTrnsWhs(int)));
@@ -120,12 +116,6 @@ transferOrder::transferOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   _freight->hide();
   _freightLit->hide();
   // end 5695
-
-  if (_metrics->value("TaxService") != "N")
-  {
-    _taxzoneLit->hide();
-    _taxzone->hide();
-  }
 }
 
 void transferOrder::setToheadid(const int pId)
@@ -280,7 +270,6 @@ enum SetResponse transferOrder::set(const ParameterList &pParams)
       newItemParams.append("srcwarehouse_id", _srcWhs->id());
       newItemParams.append("orderNumber",	_orderNumber->text());
       newItemParams.append("orderDate",	_orderDate->date());
-      newItemParams.append("taxzone_id",	_taxzone->id());
       newItemParams.append("curr_id",	_freightCurrency->id());
       newItemParams.append("item_id", itemid);
       newItemParams.append("captive", true);
@@ -581,7 +570,6 @@ bool transferOrder::save(bool partial)
 	    "    tohead_agent_username=:agent_username,"
 	    "    tohead_shipvia=:shipvia,"
 	    "    tohead_shipform_id=:shipform_id,"
-	    "    tohead_taxzone_id=:taxzone_id,"
 	    "    tohead_freight=:freight,"
 	    "    tohead_freight_curr_id=:freight_curr_id,"
 	    "    tohead_shipcomplete=:shipcomplete,"
@@ -630,9 +618,6 @@ bool transferOrder::save(bool partial)
 
   transferave.bindValue(":agent_username",	_agent->currentText());
   transferave.bindValue(":shipvia",		_shipVia->currentText());
-
-  if (_taxzone->isValid())
-    transferave.bindValue(":taxzone_id",		_taxzone->id());
 
   transferave.bindValue(":freight",		_freight->localValue());
   transferave.bindValue(":freight_curr_id",	_freight->id());
@@ -882,7 +867,6 @@ void transferOrder::sNew()
   params.append("srcwarehouse_id", _srcWhs->id());
   params.append("orderNumber",	_orderNumber->text());
   params.append("orderDate",	_orderDate->date());
-  params.append("taxzone_id",	_taxzone->id());
   params.append("curr_id",	_freightCurrency->id());
 
   if ((_mode == cNew) || (_mode == cEdit))
@@ -1202,8 +1186,6 @@ void transferOrder::populate()
       _agent->setText(to.value("tohead_agent_username").toString());
       _shipVia->setText(to.value("tohead_shipvia").toString());
       _shippingForm->setId(to.value("tohead_shipform_id").toInt());
-      _taxzoneidCache = to.value("tohead_taxzone_id").toInt();
-      _taxzone->setId(to.value("tohead_taxzone_id").toInt());
 
       _freight->setId(to.value("tohead_freight_curr_id").toInt());
       _freight->setLocalValue(to.value("tohead_freight").toDouble());
@@ -1370,7 +1352,7 @@ void transferOrder::sFillItemList()
 
 void transferOrder::sCalculateTotal()
 {
-  _total->setLocalValue(_tax->localValue() + _freight->localValue() +
+  _total->setLocalValue(_freight->localValue() +
 			_itemFreight->localValue());
 }
 
@@ -1459,16 +1441,12 @@ void transferOrder::clear()
   _dstWhs->setId(_preferences->value("PreferredWarehouse").toInt());
   _status->setCurrentIndex(0);
   _agent->setCurrentIndex(-1);
-  _taxzoneidCache = -1;
-  _taxzone->setId(-1);
-  _whstaxzoneid        = -1;
   _shipVia->setId(-1);
 //  cannot clear _shippingForm
 //  _shippingForm->setId(-1);
   _freight->clear();
   _orderComments->clear();
   _shippingComments->clear();
-  _tax->clear();
   _freight->clear();
   _total->clear();
   _weight->clear();
@@ -1563,39 +1541,6 @@ void transferOrder::sHandleTransferOrderEvent(int pToheadid)
     sFillItemList();
 }
 
-void transferOrder::sTaxDetail()
-{
-  XSqlQuery taxq;
-  if (cView != _mode)
-  {
-    taxq.prepare("UPDATE tohead SET tohead_taxzone_id=:taxzone, "
-		  "  tohead_freight=:freight,"
-		  "  tohead_orderdate=:date "
-		  "WHERE (tohead_id=:head_id);");
-    if (_taxzone->isValid())
-      taxq.bindValue(":taxzone", _taxzone->id());
-    taxq.bindValue(":freight", _freight->localValue());
-    taxq.bindValue(":date",    _orderDate->date());
-    taxq.bindValue(":head_id", _toheadid);
-    taxq.exec();
-    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Details"),
-                             taxq, __FILE__, __LINE__))
-      return;
-  }
-
-  ParameterList params;
-  params.append("order_id", _toheadid);
-  params.append("order_type", "TO");
-  params.append("mode", "view"); // because tohead has no fields to hold changes
-
-  taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError)
-  {
-    newdlg.exec();
-    populate();
-  }
-}
-
 void transferOrder::setViewMode()
 {
   if(cEdit == _mode)
@@ -1617,7 +1562,6 @@ void transferOrder::setViewMode()
   _dstWhs->setEnabled(false);
   _trnsWhs->setEnabled(false);
   _agent->setEnabled(false);
-  _taxzone->setEnabled(false);
   _shipVia->setEnabled(false);
   _shippingForm->setEnabled(false);
   _freight->setEnabled(false);
@@ -2078,7 +2022,6 @@ void transferOrder::getWhsInfo(const int pid, const QWidget* pwidget)
     {
       _dstContact->setId(whsq.value("warehous_cntct_id").toInt());
       _dstAddr->setId(whsq.value("warehous_addr_id").toInt());
-      _taxzone->setId(whsq.value("warehous_taxzone_id").toInt());
     }
     else if (pwidget == _trnsWhs)
     {

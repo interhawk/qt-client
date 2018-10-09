@@ -302,39 +302,6 @@ void taxBreakdown::sPopulate()
     params.append("doctype", "CM");
     params.append("docitem_id", _orderid);
   }
-  else if (_ordertype == "TO")
-  {
-    _currencyLit->setText(tr("Transfer Order Currency:"));
-    _header->setText(tr("Tax Breakdown for Transfer Order:"));
-
-    taxPopulate.prepare("SELECT tohead_number AS number, tohead_taxzone_id AS taxzone_id, "
-                        "       tohead_freight_curr_id AS curr_id, tohead_orderdate AS date, "
-                        "       taxhead_service "
-                        "  FROM tohead "
-                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'TO' "
-                        "                         AND tohead_id = taxhead_doc_id "
-                        " WHERE tohead_id = :orderid ");
-
-    params.append("doctype", "TO");
-    params.append("dochead_id", _orderid);
-  }
-  else if (_ordertype == "TI")
-  {
-    _currencyLit->setText(tr("Transfer Order Currency:"));
-    _header->setText(tr("Tax Breakdown for Transfer Order:"));
-
-    taxPopulate.prepare("SELECT tohead_number AS number, tohead_taxzone_id AS taxzone_id, "
-                        "       tohead_freight_curr_id AS curr_id, tohead_orderdate AS date, "
-                        "       taxhead_service "
-                        "  FROM toitem "
-                        "  JOIN tohead ON toitem_tohead_id = tohead_id "
-                        "  LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'TO' "
-                        "                         AND tohead_id = taxhead_doc_id "
-                        " WHERE toitem_id = :orderid ");
-
-    params.append("doctype", "TO");
-    params.append("dochead_id", _orderid);
-  }
   else if (_ordertype == "P")
   {
     _currencyLit->setText(tr("Purchase Order Currency:"));

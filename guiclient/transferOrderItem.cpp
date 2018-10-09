@@ -17,7 +17,6 @@
 #include "itemCharacteristicDelegate.h"
 #include "itemSite.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
 
 #include "errorReporter.h"
 
@@ -42,7 +41,6 @@ transferOrderItem::transferOrderItem(QWidget* parent, const char* name, bool mod
   connect(_showAvailability, SIGNAL(toggled(bool)), this, SLOT(sDetermineAvailability()));
   connect(_showAvailability, SIGNAL(toggled(bool)), this, SLOT(sDetermineAvailability()));
   connect(_showIndented,SIGNAL(toggled(bool)), this, SLOT(sDetermineAvailability()));
-  connect(_taxLit, SIGNAL(leftClickedURL(QString)), this, SLOT(sTaxDetail()));
   connect(_warehouse,	SIGNAL(newID(int)), this, SLOT(sChanged()));
   connect(_warehouse,	SIGNAL(newID(int)), this, SLOT(sDetermineAvailability()));
   connect(_inventoryButton, SIGNAL(toggled(bool)), this, SLOT(sHandleButton()));
@@ -102,7 +100,6 @@ transferOrderItem::transferOrderItem(QWidget* parent, const char* name, bool mod
   _itemsiteid	= -1;
   _transwhsid	= -1;
   _toheadid	= -1;
-  _taxzoneid	= -1;
   adjustSize();
   
   _inventoryButton->setEnabled(_showAvailability->isChecked());
@@ -139,10 +136,6 @@ enum SetResponse transferOrderItem::set(const ParameterList &pParams)
   param = pParams.value("srcwarehouse_id", &valid);
   if (valid)
     _warehouse->setId(param.toInt());
-
-  param = pParams.value("taxzone_id", &valid);
-  if (valid)
-    _taxzoneid = param.toInt();
 
   param = pParams.value("orderNumber", &valid);
   if (valid)
@@ -288,8 +281,6 @@ enum SetResponse transferOrderItem::set(const ParameterList &pParams)
   populate();	// TODO: should this go BEFORE pParams.value("item_id")?
 
   _modified = false;
-
-  sCalculateTax();
 
   return NoError;
 }
@@ -813,7 +804,7 @@ void transferOrderItem::populate()
     item.prepare("SELECT toitem_linenumber,toitem_status,toitem_qty_ordered, "
                  "       toitem_schedshipdate,toitem_notes,toitem_schedrecvdate,"
                  "       toitem_freight,toitem_item_id, toitem_status,"
-                 "       tohead_id,tohead_taxzone_id,tohead_trns_warehous_id,"
+                 "       tohead_id,tohead_trns_warehous_id,"
                  "       tohead_dest_warehous_id,tohead_number, "
 		 "       warehous_id, warehous_code,"
 		 "       stdCost(toitem_item_id) AS stdcost,"
@@ -822,13 +813,8 @@ void transferOrderItem::populate()
 		 "          FROM shipitem, shiphead"
 		 "         WHERE ((shipitem_shiphead_id=shiphead_id)"
 		 "           AND  (shiphead_order_type='TO')"
-		 "           AND  (shipitem_orderitem_id=toitem_id))) AS shipitem_qty, "
-                 "        SUM(taxdetail_tax) AS tax "
+		 "           AND  (shipitem_orderitem_id=toitem_id))) AS shipitem_qty "
 		 "FROM whsinfo, tohead, itemsite, toitem  "
-                 " LEFT OUTER JOIN taxhead ON taxhead_doc_type = 'TO' "
-                 " LEFT OUTER JOIN taxline ON taxhead_id = taxline_taxhead_id "
-                 "                        AND taxline_line_id = toitem_id "
-                 " LEFT OUTER JOIN taxdetail ON taxline_id = taxdetail_taxline_id "
 		 "WHERE ((toitem_tohead_id=tohead_id)"
 		 "  AND  (tohead_src_warehous_id=warehous_id)"
 		 "  AND  (itemsite_item_id=toitem_item_id)"
@@ -836,7 +822,7 @@ void transferOrderItem::populate()
 		 "  AND  (toitem_id=:id)) "
      "GROUP BY toitem_linenumber,toitem_status,toitem_qty_ordered, "
      "       toitem_schedshipdate,toitem_notes,toitem_schedrecvdate,"
-     "       tohead_id,tohead_taxzone_id,tohead_trns_warehous_id,"
+     "       tohead_id,tohead_trns_warehous_id,"
      "       tohead_dest_warehous_id,tohead_number,toitem_freight, "
 		 "       warehous_id, warehous_code,toitem_item_id,"
 		 "       toitem_status, stdcost, shipitem_qty, itemsite_id;");
@@ -847,7 +833,6 @@ void transferOrderItem::populate()
   if (item.first())
   {
     _toheadid	= item.value("tohead_id").toInt();
-    _taxzoneid	= item.value("tohead_taxzone_id").toInt();
     _transwhsid	= item.value("tohead_trns_warehous_id").toInt();
     _dstwhsid	= item.value("tohead_dest_warehous_id").toInt();
     _orderNumber->setText(item.value("tohead_number").toString());
@@ -864,7 +849,6 @@ void transferOrderItem::populate()
       _stdcost->setBaseValue(item.value("stdcost").toDouble());
       _shippedToDate->setDouble(item.value("shipitem_qty").toDouble());
 
-      // do tax stuff before _qtyOrdered so signal cascade has data to work with
       _qtyOrdered->setDouble(item.value("toitem_qty_ordered").toDouble());
       _scheduledDate->setDate(item.value("toitem_schedshipdate").toDate());
       _notes->setText(item.value("toitem_notes").toString());
@@ -875,7 +859,6 @@ void transferOrderItem::populate()
       //  Set the _item here to tickle signal cascade
       _item->setId(item.value("toitem_item_id").toInt());
       _freight->setLocalValue(item.value("toitem_freight").toDouble());
-      _tax->setLocalValue(item.value("tax").toDouble());
       sDetermineAvailability();
     }
   }
@@ -1088,36 +1071,6 @@ void transferOrderItem::sCancel()
   else
     close();
 
-}
-
-void transferOrderItem::sCalculateTax()
-{  
-  XSqlQuery calcq;
-  calcq.prepare( "SELECT SUM(taxdetail_tax) AS tax "
-                 "  FROM taxhead "     
-                 "  JOIN taxline ON taxhead_id = taxline_taxhead_id "     
-                 "  JOIN taxdetail ON taxline_id = taxdetail_taxline_id "     
-                 " WHERE taxhead_doc_type = 'TO' "
-                 "   AND taxline_line_id = :toitem_id;");
-  calcq.bindValue(":toitem_id", _toitemid);
-  calcq.exec();
-  if (calcq.first())
-    _tax->setLocalValue(calcq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Tax Calculation"),
-                                calcq, __FILE__, __LINE__))
-    return;
-}
-
-void transferOrderItem::sTaxDetail()
-{
-  taxBreakdown newdlg(this, "", true);
-  ParameterList params;
-  params.append("order_id", _toitemid);
-  params.append("order_type", "TI");
-  params.append("mode", "view");
-
-  newdlg.set(params);
-  newdlg.exec();
 }
 
 void transferOrderItem::sHandleButton()
