@@ -324,7 +324,7 @@ to be bound by its terms.</comment>
       </widget>
      </item>
      <item row="1" column="4">
-      <widget class="XComboBox" name="_holdType" />
+      <widget class="XComboBox" name="_holdType"/>
      </item>
      <item row="0" column="3">
       <widget class="QLabel" name="_customerPOLit">
@@ -360,7 +360,7 @@ to be bound by its terms.</comment>
    <item>
     <widget class="QTabWidget" name="_salesOrderInformation">
      <property name="currentIndex">
-      <number>0</number>
+      <number>9</number>
      </property>
      <widget class="QWidget" name="_headerPage">
       <attribute name="title">
@@ -738,7 +738,16 @@ to be bound by its terms.</comment>
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -865,7 +874,16 @@ to be bound by its terms.</comment>
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -2463,6 +2481,21 @@ to be bound by its terms.</comment>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_10"/>
      </widget>
+     <widget class="QWidget" name="_advancedPage">
+      <attribute name="title">
+       <string>Advanced</string>
+      </attribute>
+      <widget class="RecurrenceWidget" name="recurrenceWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>244</width>
+         <height>140</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -2525,6 +2558,11 @@ to be bound by its terms.</comment>
    <class>ProjectCluster</class>
    <extends>QWidget</extends>
    <header>projectcluster.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RecurrenceWidget</class>
+   <extends>QWidget</extends>
+   <header>recurrencewidget.h</header>
   </customwidget>
   <customwidget>
    <class>ShiptoCluster</class>
