@@ -107,6 +107,7 @@ HEADERS += setupscriptapi.h \
     qscrollarea.h \
     qserialportinfoproto.h \
     qserialportproto.h \
+    qsettings.h \
     qsizepolicyproto.h \
     qspaceritemproto.h \
     qsqldatabaseproto.h \
@@ -244,6 +245,7 @@ SOURCES += setupscriptapi.cpp \
     qscrollarea.cpp \
     qserialportinfoproto.cpp \
     qserialportproto.cpp \
+    qsettings.cpp \
     qsizepolicyproto.cpp \
     qspaceritemproto.cpp \
     qsqldatabaseproto.cpp \

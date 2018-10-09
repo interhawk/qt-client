@@ -100,6 +100,7 @@
 #include "qscrollarea.h"
 #include "qserialportinfoproto.h"
 #include "qserialportproto.h"
+#include "qsettings.h"
 #include "qsizepolicyproto.h"
 #include "qspaceritemproto.h"
 #include "qsqldatabaseproto.h"
@@ -256,6 +257,7 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQScrollAreaProto(engine);
   setupQSerialPortInfoProto(engine);
   setupQSerialPortProto(engine);
+  setupQSettingsProto(engine);
   setupQSizePolicy(engine);
   setupQSpacerItem(engine);
   setupQSqlDatabaseProto(engine);
