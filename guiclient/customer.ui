@@ -2317,10 +2317,6 @@ to be bound by its terms.</comment>
   <tabstop>_upCC</tabstop>
   <tabstop>_downCC</tabstop>
   <tabstop>_charass</tabstop>
-  <tabstop>_newCharacteristic</tabstop>
-  <tabstop>_editCharacteristic</tabstop>
-  <tabstop>_deleteCharacteristic</tabstop>
-  <tabstop>_chartempl</tabstop>
   <tabstop>_notesButton</tabstop>
   <tabstop>_notes</tabstop>
   <tabstop>_commentsButton</tabstop>
