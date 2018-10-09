@@ -66,7 +66,6 @@ public slots:
     virtual void sSave();
     virtual void sSaveAndAdd();
     virtual void sSetUserEnteredOrderNumber();
-    virtual void sTaxDetail();
     virtual void sReleaseNumber();
 
 protected:
@@ -97,10 +96,8 @@ private:
     int			_orderNumberGen;
     ToitemTableModel*	_qeitem;
     bool		_saved;
-    int			_taxzoneidCache;
     int			_toheadid;
     bool		_userEnteredOrderNumber;
-    int			_whstaxzoneid;
 
 
 };

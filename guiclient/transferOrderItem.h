@@ -38,8 +38,6 @@ public slots:
     virtual void sPrev();
     virtual void sChanged();
     virtual void sCancel();
-    virtual void sCalculateTax();
-    virtual void sTaxDetail();
     virtual void sHandleButton();
 
 protected slots:
@@ -63,7 +61,6 @@ private:
     int			_mode;
     bool		_modified;
     double	_originalQtyOrd;
-    int			_taxzoneid;
     int			_toheadid;
     int			_toitemid;
     int			_transwhsid;
