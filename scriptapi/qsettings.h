@@ -16,6 +16,9 @@
 #include <QtScript>
 
 Q_DECLARE_METATYPE(QSettings*)
+Q_DECLARE_METATYPE(enum QSettings::Format)
+Q_DECLARE_METATYPE(enum QSettings::Scope)
+Q_DECLARE_METATYPE(enum QSettings::Status)
 
 void setupQSettingsProto(QScriptEngine *engine);
 QScriptValue constructQSettings(QScriptContext *context, QScriptEngine *engine);
