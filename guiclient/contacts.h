@@ -33,10 +33,15 @@ public:
 public slots:
     virtual enum SetResponse set(const ParameterList&);
     virtual void sPopulateMenu(QMenu *, QTreeWidgetItem *, int);
+    virtual void sPopulateHeaderMenu(QMenu *, QTreeWidgetItem *, int);
+    virtual void sReplace();
     virtual void sNew();
     virtual void sEdit();
     virtual void sView();
     virtual void sDelete();
+    virtual void sMerge();
+    virtual void sMark();
+    virtual void sUnmark();
     virtual void sAttach();
     virtual void sDetach();
     virtual void sOpen();
@@ -51,6 +56,7 @@ signals:
 
 private:
     int _crmacctid;
+    int _replace;
 
     QAction * _attachAct;
     QAction * _detachAct;

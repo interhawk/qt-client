@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -359,23 +359,14 @@ void packingListBatch::sDelete()
 void packingListBatch::sPrintPackingList()
 {
   XSqlQuery packingPrintPackingList;
-  if (_pack->altId() == -1)
-  {
-    QMessageBox::critical(this, tr("Shipment Number Required"),
-			  tr("<p>Packing Lists may only be printed for "
-			     "existing Shipments and there is no Shipment for "
-			     "this Order. Issue Stock To Shipping to "
-			     "create a Shipment."));
-    return;
-  }
-
   ParameterList params;
+
   _warehouse->appendValue(params);
   if (_pack->currentItem()->rawValue("pack_head_type") == "TO")
   {
     params.append("head_id",     _pack->id());
     params.append("shiphead_id", _pack->altId());
-    params.append("head_type",   _pack->currentItem()->rawValue("pack_head_type"));
+    params.append("head_type",   "TO");
     params.append("print");
   }
   else

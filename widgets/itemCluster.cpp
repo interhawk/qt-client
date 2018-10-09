@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -547,12 +547,15 @@ void ItemLineEdit::sCopy()
   w = _guiClientInterface->openWindow(uiName, params, parentWidget()->window() , Qt::WindowModal, Qt::Dialog);
 
   QDialog* newdlg = qobject_cast<QDialog*>(w);
-  int id = newdlg->exec();
-  if (id != QDialog::Rejected)
+  if (newdlg)
   {
-    silentSetId(id);
-    emit newId(_id);
-    emit valid(_id != -1);
+    int id = newdlg->exec();
+    if (id != QDialog::Rejected)
+    {
+      silentSetId(id);
+      emit newId(_id);
+      emit valid(_id != -1);
+    }
   }
 
   return;
@@ -971,13 +974,7 @@ ItemCluster::ItemCluster(QWidget* pParent, const char* pName) :
 
 void ItemCluster::addNumberWidget(VirtualClusterLineEdit* pNumberWidget)
 {
-  VirtualClusterLineEdit *matchType = qobject_cast<VirtualClusterLineEdit *>(pNumberWidget);
-
-  if(matchType == 0)
-    return;
-
-  _number = matchType;
-
+  _number = qobject_cast<VirtualClusterLineEdit *>(pNumberWidget);
   if (! _number)
     return;
 

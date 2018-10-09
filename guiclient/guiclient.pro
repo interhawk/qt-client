@@ -50,7 +50,7 @@ win32-msvc* {
 
 QMAKE_LIBDIR = ../lib $${OPENRPT_LIBDIR} $$QMAKE_LIBDIR
 LIBS        += -lxtuplecommon -lxtuplewidgets -lwrtembed -lopenrptcommon
-LIBS        += -lrenderer -lxtuplescriptapi -lqzint $${DMTXLIB} -lMetaSQL
+LIBS        += -lrenderer -lxtuplescriptapi -lqzint -lMetaSQL
 
 lessThan(QT_MAJOR_VERSION, 5) {
 #not the best way to handle this, but it should do
@@ -653,6 +653,7 @@ FORMS =   absoluteCalendarItem.ui               \
           woMaterialItem.ui                     \
           workOrder.ui                          \
           workOrderMaterials.ui                 \
+          xclusterinputdialog.ui                \
           xdateinputdialog.ui                   \
           xdocumentwindow.ui                    \
           xsltMap.ui                            \
@@ -1270,6 +1271,7 @@ HEADERS = ../common/format.h                    \
           xTupleDesigner.h              \
           xTupleDesignerActions.h       \
           xabstractconfigure.h          \
+          xclusterinputdialog.h         \
           xdateinputdialog.h            \
           xdialog.h                     \
           xdocumentwindow.h             \
@@ -1889,6 +1891,7 @@ SOURCES = absoluteCalendarItem.cpp              \
           xTupleDesigner.cpp                    \
           xTupleDesignerActions.cpp             \
           xabstractconfigure.cpp                \
+          xclusterinputdialog.cpp               \
           xdateinputdialog.cpp                  \
           xdialog.cpp                           \
           xdocumentwindow.cpp                   \

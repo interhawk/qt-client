@@ -84,7 +84,7 @@ class QSerialPortProto : public QIODeviceProto
     Q_INVOKABLE bool                         canReadLine() const;
     Q_INVOKABLE void                         close();
     Q_INVOKABLE bool                         isSequential() const;
-    Q_INVOKABLE bool                         open(QIODevice::OpenModeFlag mode);
+    Q_INVOKABLE bool                         open(QIODevice::OpenMode mode);
     Q_INVOKABLE bool                         waitForBytesWritten(int msecs);
     Q_INVOKABLE bool                         waitForReadyRead(int msecs);
     // added custom

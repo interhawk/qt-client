@@ -43,7 +43,6 @@ HEADERS += setupscriptapi.h \
     qcoreapplicationproto.h \
     qcryptographichashproto.h \
     qdatawidgetmapperproto.h    \
-    qdateproto.h \
     qdialogbuttonboxproto.h \
     qdialogsetup.h \
     qdirproto.h \
@@ -105,6 +104,7 @@ HEADERS += setupscriptapi.h \
     qprocessenvironmentproto.h     \
     qprocessproto.h     \
     qpushbuttonproto.h \
+    qscrollarea.h \
     qserialportinfoproto.h \
     qserialportproto.h \
     qsizepolicyproto.h \
@@ -128,6 +128,8 @@ HEADERS += setupscriptapi.h \
     qsslsocketproto.h \
     qstackedwidgetproto.h \
     qtabwidgetproto.h \
+    qtablewidgetproto.h \
+    qtablewidgetitemproto.h \
     qtcpserverproto.h \
     qtcpsocketproto.h \
     qtextdocumentproto.h \
@@ -180,7 +182,6 @@ SOURCES += setupscriptapi.cpp \
     qcoreapplicationproto.cpp \
     qcryptographichashproto.cpp \
     qdatawidgetmapperproto.cpp  \
-    qdateproto.cpp \
     qdialogbuttonboxproto.cpp \
     qdialogsetup.cpp \
     qdirproto.cpp \
@@ -242,6 +243,7 @@ SOURCES += setupscriptapi.cpp \
     qprocessenvironmentproto.cpp \
     qprocessproto.cpp \
     qpushbuttonproto.cpp \
+    qscrollarea.cpp \
     qserialportinfoproto.cpp \
     qserialportproto.cpp \
     qsizepolicyproto.cpp \
@@ -265,6 +267,8 @@ SOURCES += setupscriptapi.cpp \
     qsslsocketproto.cpp \
     qstackedwidgetproto.cpp \
     qtabwidgetproto.cpp \
+    qtablewidgetproto.cpp \
+    qtablewidgetitemproto.cpp \
     qtcpserverproto.cpp \
     qtcpsocketproto.cpp \
     qtextdocumentproto.cpp \

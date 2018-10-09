@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -68,6 +68,7 @@ glSeries::glSeries(QWidget* parent, const char* name, bool modal, Qt::WindowFlag
   _documents->setType("JE");
 
   _submit = false;
+  _manualNotes = false;
   _journal = 0;
 }
 
@@ -180,6 +181,12 @@ enum SetResponse glSeries::set(const ParameterList &pParams)
       {
         return UndefinedError;
       }
+      if (glet.size() == 0)
+      {
+        _notes->setEnabled(true);
+        _manualNotes = true;
+      }
+
       while(glet.next())
         _notes->append(glet.value("glseries_docnumber").toString() + ": " + glet.value("stdjrnl_notes").toString() + "\n\n");
     }
@@ -288,8 +295,8 @@ bool glSeries::update()
     if (GuiErrorCheck::reportErrors(this, tr("Cannot Post G/L Series"), errors))
       return false;
 
-// Do not save notes when posting std journal
-  if (_mode == cPostStandardJournal)
+// Do not save notes when posting std journal unless manually entered
+  if (_mode == cPostStandardJournal && !_manualNotes)
     glupdate.prepare( "UPDATE glseries "
                "SET glseries_source=:source,"
                "    glseries_doctype=:doctype,"

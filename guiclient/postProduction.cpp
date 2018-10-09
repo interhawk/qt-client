@@ -415,8 +415,9 @@ int postProduction::handleSeriesAdjustBeforePost()
   }
 
   // Distribute detail
+  bool preDist = !_immediateTransfer->isChecked();
   if ((_controlled || hasControlledBackflushItems) && 
-      (distributeInventory::SeriesAdjust(itemlocSeries, this, QString(), QDate(), QDate(), true) ==
+      (distributeInventory::SeriesAdjust(itemlocSeries, this, QString(), QDate(), QDate(), preDist) ==
       XDialog::Rejected))
   {
     cleanup.exec();
@@ -482,7 +483,7 @@ int postProduction::handleTransferSeriesAdjustBeforePost()
   if (_controlled)
   {
     XSqlQuery fromWhItemlocdist;
-    fromWhItemlocdist.prepare("SELECT createItemlocdistParent(:itemsiteId, :qty * -1, 'W', :orderitemId, "
+    fromWhItemlocdist.prepare("SELECT createItemlocdistParent(:itemsiteId, :qty * -1, 'WO', :orderitemId, "
                               "   :itemlocSeries, NULL, NULL, 'TW') AS result;");
     fromWhItemlocdist.bindValue(":itemsiteId", _itemsiteId);
     fromWhItemlocdist.bindValue(":qty", _qty->toDouble());
@@ -503,12 +504,12 @@ int postProduction::handleTransferSeriesAdjustBeforePost()
   if (toWhControlled)
   {
     XSqlQuery toWhItemlocdist;
-    toWhItemlocdist.prepare("SELECT createItemlocdistParent(:itemsite_id, :qty, 'W', :orderitemId, "
+    toWhItemlocdist.prepare("SELECT createItemlocdistParent(:itemsiteid, :qty, 'WO', :orderitemId, "
                             "   :itemlocSeries, NULL, :itemlocdistId, 'TW') AS result;");
     toWhItemlocdist.bindValue(":qty", _qty->toDouble());
     toWhItemlocdist.bindValue(":orderitemId", _wo->id());
     toWhItemlocdist.bindValue(":itemlocSeries", twItemlocSeries);
-    toWhItemlocdist.bindValue(":itemsiteId", toWhItemsiteId);
+    toWhItemlocdist.bindValue(":itemsiteid", toWhItemsiteId);
     if (fromWhItemlocdistId > 0)
       toWhItemlocdist.bindValue(":itemlocdistId", fromWhItemlocdistId);
     toWhItemlocdist.exec();

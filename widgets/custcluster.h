@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -11,26 +11,16 @@
 #ifndef custCluster_h
 #define custCluster_h
 
-#include "parameter.h"
 #include "widgets.h"
 #include "virtualCluster.h"
 #include "crmacctcluster.h"
 
-class QDragEnterEvent;
-class QDropEvent;
-class QLabel;
-class QMouseEvent;
-class QPushButton;
 class QScriptEngine;
 
 class CustInfo;
 
 #define __allCustomers    0x01
 #define __activeCustomers 0x02
-
-#define CREDITSTATUS    4
-#define CRMACCT_ID      5
-#define ISCUSTOMER      6
 
 class XTUPLEWIDGETS_EXPORT CLineEdit : public VirtualClusterLineEdit
 {
@@ -61,6 +51,7 @@ class XTUPLEWIDGETS_EXPORT CLineEdit : public VirtualClusterLineEdit
     bool   editMode();
 
   public slots:
+    bool setNewMode(bool);
     bool setEditMode(bool);
     void sNew();
     void setId(const int);
@@ -85,6 +76,7 @@ class XTUPLEWIDGETS_EXPORT CLineEdit : public VirtualClusterLineEdit
     CRMAcctLineEdit::CRMAcctSubtype _subtype;
     int                 _crmacctId;
     bool                _canEdit;
+    bool                _newMode;
     bool                _editMode;
 };
 
@@ -106,6 +98,7 @@ class XTUPLEWIDGETS_EXPORT CustCluster : public VirtualCluster
     void setCanEdit(bool p) const { static_cast<CLineEdit*>(_number)->setCanEdit(p); }
 
     Q_INVOKABLE bool editMode() { return static_cast<CLineEdit*>(_number)->editMode(); }
+    Q_INVOKABLE bool setNewMode(bool p) const;
     Q_INVOKABLE bool setEditMode(bool p) const;
 
   private slots:

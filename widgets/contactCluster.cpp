@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -422,27 +422,22 @@ void ContactCluster::openUrl(QString url)
 
 void ContactCluster::addNumberWidget(VirtualClusterLineEdit* pNumberWidget)
 {
-	ContactClusterLineEdit *matchType = qobject_cast<ContactClusterLineEdit *>(pNumberWidget);
+  _number = qobject_cast<ContactClusterLineEdit *>(pNumberWidget);
+  if (! _number)
+    return;
 
-	if(matchType == 0)
-	  return;
+  _number->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  _number->setMinimumWidth(200);
+  QHBoxLayout *hbox = new QHBoxLayout;
+  QSpacerItem *item = new QSpacerItem(100, 20, QSizePolicy::Fixed, QSizePolicy::Fixed);
+  hbox->addWidget(_number);
+  hbox->addItem(item);
+  _grid->addLayout(hbox, 0, 1, 1, 3);
+  setFocusProxy(pNumberWidget);
 
-    _number = matchType;
-    if (! _number)
-      return;
-
-    _number->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    _number->setMinimumWidth(200);
-    QHBoxLayout* hbox = new QHBoxLayout;
-    QSpacerItem* item = new QSpacerItem(100, 20, QSizePolicy::Fixed, QSizePolicy::Fixed);
-    hbox->addWidget(_number);
-    hbox->addItem(item);
-    _grid->addLayout(hbox, 0, 1, 1, 3);
-    setFocusProxy(pNumberWidget);
-
-    connect(_number,    SIGNAL(newId(int)),     this,   SIGNAL(newId(int)));
-    connect(_number,    SIGNAL(parsed()),       this,   SLOT(sRefresh()));
-    connect(_number,    SIGNAL(valid(bool)),    this,   SIGNAL(valid(bool)));
+  connect(_number,    SIGNAL(newId(int)),     this,   SIGNAL(newId(int)));
+  connect(_number,    SIGNAL(parsed()),       this,   SLOT(sRefresh()));
+  connect(_number,    SIGNAL(valid(bool)),    this,   SIGNAL(valid(bool)));
 }
 
 void ContactCluster::setName(int segment, const QString& name)

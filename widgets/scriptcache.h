@@ -8,6 +8,9 @@
  * to be bound by its terms.
  */
 
+#ifndef scriptcache_h
+#define scriptcache_h
+
 #include <QDebug>
 #include <QWidget>
 #include <QScriptEngine>
@@ -39,3 +42,5 @@ class ScriptCache : public QObject
     virtual void sDbConnectionLost();
     virtual void sNotified(const QString &pNotification);
 };
+
+#endif

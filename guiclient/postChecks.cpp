@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -10,6 +10,7 @@
 
 #include "postChecks.h"
 
+#include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>
 
@@ -56,7 +57,10 @@ enum SetResponse postChecks::set(const ParameterList & pParams )
 
   param = pParams.value("bankaccnt_id", &valid);
   if (valid)
+  {
+    _bankaccnt->setEnabled(false);
     _bankaccnt->setId(param.toInt());
+  }
 
   return NoError;
 }
@@ -124,11 +128,20 @@ void postChecks::sHandleBankAccount(int pBankaccntid)
              "JOIN bankaccnt ON (bankaccnt_id=checkhead_bankaccnt_id) "
              "WHERE ( (NOT checkhead_void)"
              " AND (NOT checkhead_posted)"
+             " AND (CASE WHEN bankaccnt_prnt_check THEN checkhead_printed ELSE true END)"
              " AND (checkhead_bankaccnt_id=:bankaccnt_id) );" );
   postHandleBankAccount.bindValue(":bankaccnt_id", pBankaccntid);
   postHandleBankAccount.exec();
   if (postHandleBankAccount.first())
+  {
     _numberOfChecks->setDouble(postHandleBankAccount.value("numofchecks").toDouble());
+    if (postHandleBankAccount.value("numofchecks").toInt() == 0)
+    {
+      QMessageBox::information( this, tr("Post Payments"),
+                              tr( "There are no valid payments to post." ) );
+      _post->setEnabled(false);
+    }
+  }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Bank Account Information"),
                                 postHandleBankAccount, __FILE__, __LINE__))
   {

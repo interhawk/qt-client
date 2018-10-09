@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -22,6 +22,7 @@
 #include "purchaseOrder.h"
 #include "printPurchaseOrder.h"
 #include "printPoForm.h"
+#include "enterPoReceipt.h"
 #include "guiclient.h"
 #include "storedProcErrorLookup.h"
 #include "parameterwidget.h"
@@ -68,8 +69,6 @@ unpostedPurchaseOrders::unpostedPurchaseOrders(QWidget* parent, const char*, Qt:
 
   setupCharacteristics("PO");
   list()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-
-  _showUnreleased->setChecked(false);
 
   if (_privileges->check("MaintainPurchaseOrders"))
     connect(list(), SIGNAL(itemSelected(int)), this, SLOT(sEdit()));
@@ -247,6 +246,25 @@ void unpostedPurchaseOrders::sPrintForms()
   }
 }
 
+void unpostedPurchaseOrders::sReceipt()
+{
+  QList<XTreeWidgetItem*> selected = list()->selectedItems();
+  for (int i = 0; i < selected.size(); i++)
+  {
+    if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
+    {
+      ParameterList params;
+      params.append("mode", "new");
+      params.append("pohead_id", list()->id());
+
+      enterPoReceipt *newdlg = new enterPoReceipt();
+      newdlg->set(params);
+      omfgThis->handleNewWindow(newdlg);
+      break;
+    }
+  }
+}
+
 void unpostedPurchaseOrders::sRelease()
 {
   XSqlQuery unpostedRelease;
@@ -382,6 +400,15 @@ void unpostedPurchaseOrders::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem,
   menuItem = pMenu->addAction(tr("Unrelease"), this, SLOT(sUnrelease()));
   menuItem->setEnabled(_privileges->check("UnreleasePurchaseOrders") &&
                        item->rawValue("pohead_status").toString() == "O");
+
+  if (item->rawValue("pohead_status").toString() == "O")
+  {
+    pMenu->addSeparator();
+
+    menuItem = pMenu->addAction(tr("Receipt Order"), this, SLOT(sReceipt()));
+    menuItem->setEnabled(_privileges->check("EnterReceipts") &&
+                       item->rawValue("pohead_status").toString() == "O");
+  }
 }
 
 bool unpostedPurchaseOrders::setParams(ParameterList &params)

@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -36,16 +36,22 @@ addresses::addresses(QWidget* parent, const char*, Qt::WindowFlags fl)
   setNewVisible(true);
   setQueryOnStartEnabled(true);
   setParameterWidgetVisible(true);
+  setSearchVisible(true);
 
+  parameterWidget()->append(tr("Address"), "address", ParameterWidget::Text);
+  parameterWidget()->append(tr("City"), "city", ParameterWidget::Text);
+  parameterWidget()->append(tr("State"), "state", ParameterWidget::Text);
+  parameterWidget()->appendComboBox(tr("Country"), "country", XComboBox::LocaleCountries);
+  parameterWidget()->append(tr("Postal Code"), "postalcode", ParameterWidget::Text);
   parameterWidget()->append(tr("Show Inactive"), "showInactive", ParameterWidget::Exists);
 
-  list()->addColumn(tr("Line 1"),	 -1, Qt::AlignLeft, true, "addr_line1");
-  list()->addColumn(tr("Line 2"),	 75, Qt::AlignLeft, true, "addr_line2");
-  list()->addColumn(tr("Line 3"),	 75, Qt::AlignLeft, true, "addr_line3");
-  list()->addColumn(tr("City"),	 75, Qt::AlignLeft, true, "addr_city");
-  list()->addColumn(tr("State"),	 50, Qt::AlignLeft, true, "addr_state");
-  list()->addColumn(tr("Country"),	 50, Qt::AlignLeft, true, "addr_country");
-  list()->addColumn(tr("Postal Code"),50,Qt::AlignLeft, true, "addr_postalcode");
+  list()->addColumn(tr("Line 1"),	  -1, Qt::AlignLeft, true, "addr_line1");
+  list()->addColumn(tr("Line 2"),	 150, Qt::AlignLeft, true, "addr_line2");
+  list()->addColumn(tr("Line 3"),	 150, Qt::AlignLeft, true, "addr_line3");
+  list()->addColumn(tr("City"),	         150, Qt::AlignLeft, true, "addr_city");
+  list()->addColumn(tr("State"),	  75, Qt::AlignLeft, true, "addr_state");
+  list()->addColumn(tr("Country"),       150, Qt::AlignLeft, true, "addr_country");
+  list()->addColumn(tr("Postal Code"),    75,Qt::AlignLeft, true, "addr_postalcode");
 
   list()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 

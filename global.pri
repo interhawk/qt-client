@@ -52,13 +52,6 @@ isEmpty( CSVIMP_HEADERS ) {
   error("Could not set the CSVIMP_HEADERS qmake variable.")
 }
 
-DMTXLIB = -ldmtx
-
-exists($${OPENRPT_LIBDIR}/libdmtx.a)           { DMTXLIB = -ldmtx }
-exists($${OPENRPT_LIBDIR}/libDmtx_Library.a)   { DMTXLIB = -lDmtx_Library }
-exists($${OPENRPT_LIBDIR}/libdmtx.lib)         { DMTXLIB = -ldmtx }
-exists($${OPENRPT_LIBDIR}/libDmtx_Library.lib) { DMTXLIB = -lDmtx_Library }
-
 # global.pri is processed at the top level but the variables are used down 1 level
 ! isEmpty( OPENRPT_DIR_REL    ) { OPENRPT_DIR    = ../$${OPENRPT_DIR}
                                   OPENRPT_BLD    = ../$${OPENRPT_BLD}    }

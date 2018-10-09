@@ -1,54 +1,60 @@
+/*
+ * This file is part of the xTuple ERP: PostBooks Edition, a free and
+ * open source Enterprise Resource Planning software suite,
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * It is licensed to you under the Common Public Attribution License
+ * version 1.0, the full text of which (including xTuple-specific Exhibits)
+ * is available at www.xtuple.com/CPAL.  By using this software, you agree
+ * to be bound by its terms.
+ */
+
 #include <QDebug>
+#include <QMetaMethod>
 
-#define SIGTRACK false
-#define FUNTRACK false
+/** @file xtuplecommon.h
+ @addtogroup globals Global Variables and Functions
+ @{
+ */
+/** @def DEBUG
+  Many source files write tracing information to Qt's debug stream if the
+  @c DEBUG macro evaluates to true.
+*/
+/** @def ENTERED
+  Place @c ENTERED after the opening bracket of methods in files that include
+  @c guiclient.h or @c widgets.h and define the @c DEBUG macro. @ENTERED
+  writes information about the method being called. If the
+  method was invoked by a signal, information about the signal is included.
 
-/**	@addtogroup globals Global Variables and Functions
-	@{
-	*/
-/**
-	@def SIGTRACK
-	Add "#define SIGTRACK true" to any file that inherits @c guiclient.h or @c widgets.h to enable Signature tracking by the @c TATTLE macro.
-	Please note, this must be added below the @c include statements for @c guiclient.h or @c widgets.h , or the value will be reset to @c false.
-*/
-/**
-	@def FUNTRACK
-	Add "#define FUNTRACK true" to any file that inherits @c guiclient.h or @c widgets.h to enable Function tracking by the @c TATTLE macro.
-	Please note, this must be added below the @c include statements for @c guiclient.h or @c widgets.h , or the value will be reset to @c false.
-*/
-/**
-	@def TATTLE
-	Use in classes that inherit @c guiclient.h or @c widgets.h .
-	TATTLE may be written after the opening bracket of most member functions to allow signal and function call information to be written to the output stream.
-	If only @c SIGTRACK is defined true for a class, then only member functions that are called by a Qt Signal will be written to the output stream with information about the sender.
-	If only @c FUNTRACK is defined true for a class, then all member functions that are called will be written to the output stream.
-	If both @c SIGTRACK and @c FUNTRACK are defined true for a class, then all member functions that are called will be written to the output stream, but functions that
-	are called by a Qt Signal will include additional information about the sender of the Signal.
+  @c ENTERED generates a simple C++ statement and does not terminate that
+  statement, so a trailing semicolon ( @; ) is required. It uses @c qDebug()
+  to generate the output, so you can add to the output if you wish with the
+  @ << operator.
+
+  @code
+  void MyClass::method1()
+  {
+    ENTERED;
+    // do stuff
+  }
+
+  void MyClass::method2(Type1 arg1, Type2 arg2)
+  {
+    ENTERED << "with" << arg1 << arg2;
+    // do different stuff
+  }
+  @endcode
+
 */
 /** @} */
 
-#define TATTLE                                          \
-{                                                       \
-    if (SIGTRACK && sender())                           \
-    {                                                   \
-        qDebug() << "EZGREP..."                         \
-                 << "QObject:"  << sender()             \
-                 << "Index:"    << senderSignalIndex()  \
-                 << "calls "    << __FILE__ << "::"     \
-                                << __func__ << "()";    \
-    }                                                   \
-    else if (SIGTRACK && FUNTRACK)                      \
-    {                                                   \
-        qDebug() << "EZGREP..."                         \
-		 << QString().sprintf("%-8p", this)	\
-                 << __FILE__ << "::"                    \
-                 << __func__ << "()";                   \
-    }                                                   \
-    if (!SIGTRACK && FUNTRACK)                          \
-    {                                                   \
-        qDebug() << "EZGREP..."                         \
-		 << QString().sprintf("%-8p", this)	\
-                 << __FILE__ << "::"                    \
-                 << __func__ << "()";                   \
-    }                                                   \
-}
+#define ENTERED                                                              \
+  if (DEBUG)                                                                 \
+      qDebug() << (! this->objectName().isEmpty() ? this->objectName()       \
+                                                 : __FILE__)                 \
+               << "::" << __func__ << "() entered"                           \
+               << (sender() ? QString::asprintf("signaled by %s::%s",       \
+                                sender()->objectName().toLatin1().data(),    \
+                                sender()->metaObject()                       \
+                                        ->method(senderSignalIndex())        \
+                                        .methodSignature().data())           \
+                            : QString())

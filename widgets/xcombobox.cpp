@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -820,10 +820,11 @@ void XComboBoxPrivate::sEdit()
                                      _parent->parentWidget()->window(),
                                      Qt::ApplicationModal,
                                      Qt::Dialog);
-    if (qobject_cast<QDialog*>(w))
+    QDialog *dlg = qobject_cast<QDialog*>(w);
+    if (dlg)
     {
-      connect(w, SIGNAL(accepted()), _parent, SLOT(populate()));
-      (qobject_cast<QDialog*>(w))->exec();
+      connect(dlg, SIGNAL(accepted()), _parent, SLOT(populate()));
+      dlg->exec();
     }
     else
     {
@@ -1010,7 +1011,6 @@ void XComboBox::setListIdFieldName(QString p)
   _data->_listIdFieldName = p;
 }
 
-// exists only for script exposure
 void XComboBox::removeItem(int idx)
 {
   QComboBox::removeItem(idx);

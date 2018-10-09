@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -292,6 +292,7 @@ enum SetResponse itemSite::set(const ParameterList &pParams)
       _active->setEnabled(false);
       _poSupply->setEnabled(false);
       _woSupply->setEnabled(false);
+      _noAutoOrd->setEnabled(false);
       _createPr->setEnabled(false);
       _createSoPr->setEnabled(false);
       _createPo->setEnabled(false);
@@ -331,6 +332,13 @@ enum SetResponse itemSite::set(const ParameterList &pParams)
       _comments->setReadOnly(true);
     }
     emit newMode(_mode);
+  }
+
+  param = pParams.value("copying", &valid);
+  if (valid)
+  {
+    int wh = _warehouse->findText(param.toString());
+    _warehouse->removeItem(wh);
   }
 
   return NoError;
@@ -659,7 +667,7 @@ bool itemSite::sSave()
                          "  itemsite_ordertoqty, itemsite_minordqty, itemsite_maxordqty, itemsite_multordqty,"
                          "  itemsite_safetystock, itemsite_cyclecountfreq,"
                          "  itemsite_leadtime, itemsite_eventfence, itemsite_plancode_id, itemsite_costcat_id,"
-                         "  itemsite_poSupply, itemsite_woSupply, itemsite_createpr, itemsite_createwo,"
+                         "  itemsite_poSupply, itemsite_woSupply, itemsite_autoord, itemsite_createpr, itemsite_createwo,"
 						 "  itemsite_dropship, itemsite_createsopr, itemsite_createsopo,"
                          "  itemsite_sold, itemsite_soldranking,"
                          "  itemsite_stocked, itemsite_planning_type, itemsite_supply_itemsite_id,"
@@ -680,7 +688,7 @@ bool itemSite::sSave()
                          "  :itemsite_ordertoqty, :itemsite_minordqty, :itemsite_maxordqty, :itemsite_multordqty,"
                          "  :itemsite_safetystock, :itemsite_cyclecountfreq,"
                          "  :itemsite_leadtime, :itemsite_eventfence, :itemsite_plancode_id, :itemsite_costcat_id,"
-                         "  :itemsite_poSupply, :itemsite_woSupply, :itemsite_createpr, :itemsite_createwo,"
+                         "  :itemsite_poSupply, :itemsite_woSupply, :itemsite_autoord, :itemsite_createpr, :itemsite_createwo,"
 						 "  :itemsite_dropship, :itemsite_createsopr, :itemsite_createsopo,"
                          "  :itemsite_sold, :itemsite_soldranking,"
                          "  :itemsite_stocked, :itemsite_planning_type, :itemsite_supply_itemsite_id,"
@@ -759,7 +767,7 @@ bool itemSite::sSave()
                          "    itemsite_safetystock=:itemsite_safetystock, itemsite_cyclecountfreq=:itemsite_cyclecountfreq,"
                          "    itemsite_leadtime=:itemsite_leadtime, itemsite_eventfence=:itemsite_eventfence,"
                          "    itemsite_plancode_id=:itemsite_plancode_id, itemsite_costcat_id=:itemsite_costcat_id,"
-                         "    itemsite_poSupply=:itemsite_poSupply, itemsite_woSupply=:itemsite_woSupply,"
+                         "    itemsite_poSupply=:itemsite_poSupply, itemsite_woSupply=:itemsite_woSupply, itemsite_autoord=:itemsite_autoord,"
 						 "    itemsite_createsopr=:itemsite_createsopr, itemsite_createsopo=:itemsite_createsopo,"
 						 "    itemsite_dropship=:itemsite_dropship,"
                          "    itemsite_createpr=:itemsite_createpr, itemsite_createwo=:itemsite_createwo,"
@@ -809,6 +817,7 @@ bool itemSite::sSave()
     newItemSite.bindValue(":itemsite_supply_itemsite_id", _supplyItemsiteId);
   newItemSite.bindValue(":itemsite_poSupply", QVariant(_poSupply->isChecked()));
   newItemSite.bindValue(":itemsite_woSupply", QVariant(_woSupply->isChecked()));
+  newItemSite.bindValue(":itemsite_autoord", !_noAutoOrd->isChecked());
   newItemSite.bindValue(":itemsite_createsopr", QVariant(_createSoPr->isChecked()));
   newItemSite.bindValue(":itemsite_createsopo", QVariant(_createPo->isChecked()));
   newItemSite.bindValue(":itemsite_createpr", QVariant(_createPr->isChecked()));
@@ -1051,12 +1060,15 @@ void itemSite::sHandlePOSupplied(bool pSupplied)
   if ( (pSupplied) &&
        ( (_itemType == 'P') || (_itemType == 'O') ) )
   {
+    _noAutoOrd->setEnabled(true);
     _createPr->setEnabled(true);
 	_createSoPr->setEnabled(true);
 	_createPo->setEnabled(true);
   }
   else
   {
+    _noAutoOrd->setEnabled(false);
+    _noAutoOrd->setChecked(false);
     _createPr->setEnabled(false);
     _createPr->setChecked(false);
 	_createSoPr->setEnabled(false);
@@ -1282,6 +1294,8 @@ void itemSite::sCacheItemType(char pItemType)
     _poSupply->setEnabled(false);
     _woSupply->setChecked((_itemType!='L') && (_itemType!='K'));
     _woSupply->setEnabled(false);
+    _noAutoOrd->setChecked(false);
+    _noAutoOrd->setEnabled(false);
     _createPr->setChecked(false);
     _createPr->setEnabled(false);
     _createSoPr->setChecked(false);
@@ -1329,12 +1343,15 @@ void itemSite::sCacheItemType(char pItemType)
  
     if ( (_itemType == 'O') || (_itemType == 'P') )
     {
+      _noAutoOrd->setEnabled(_poSupply->isChecked());
       _createPr->setEnabled(_poSupply->isChecked());
       _createSoPr->setEnabled(_poSupply->isChecked());
       _createPo->setEnabled(_poSupply->isChecked());
     }
     else
     {
+      _noAutoOrd->setChecked(false);
+      _noAutoOrd->setEnabled(false);
       _createPr->setChecked(false);
       _createPr->setEnabled(false);
 	  _createSoPr->setChecked(false);
@@ -1496,6 +1513,7 @@ void itemSite::populate()
     if ( (itemsite.value("item_type").toString() == "P") ||
          (itemsite.value("item_type").toString() == "O")    )
     {
+      _noAutoOrd->setChecked(!itemsite.value("itemsite_autoord").toBool());
       _createPr->setChecked(itemsite.value("itemsite_createpr").toBool());
       _createSoPr->setChecked(itemsite.value("itemsite_createsopr").toBool());
       _createPo->setChecked(itemsite.value("itemsite_createsopo").toBool());
@@ -1503,6 +1521,7 @@ void itemSite::populate()
     }
     else
     {
+      _noAutoOrd->setEnabled(false);
       _createPr->setEnabled(false);
       _createSoPr->setEnabled(false);
       _createPo->setEnabled(false);

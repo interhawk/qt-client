@@ -330,7 +330,7 @@ bool QSerialPortProto::isRequestToSend()
   return false;
 }
 
-bool QSerialPortProto::open(QIODevice::OpenModeFlag mode)
+bool QSerialPortProto::open(QIODevice::OpenMode mode)
 {
   QSerialPort *item = qscriptvalue_cast<QSerialPort*>(thisObject());
   if (item)

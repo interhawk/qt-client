@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -12,6 +12,7 @@
 #include <parameter.h>
 
 #include <QtScript>
+#include <QMessageBox>
 
 #include "vendorgroup.h"
 
@@ -34,9 +35,7 @@ VendorGroup::VendorGroup(QWidget *pParent, const char *pName) : QWidget(pParent)
   connect(_vend,                SIGNAL(newId(int)), this, SIGNAL(newVendId(int)));
   connect(_vendorTypes,         SIGNAL(newID(int)), this, SIGNAL(updated()));
   connect(_vendorTypes,         SIGNAL(newID(int)), this, SIGNAL(newVendTypeId(int)));
-  connect(_vendorType,   SIGNAL(editingFinished()), this, SIGNAL(updated()));
   connect(_vendorType,   SIGNAL(editingFinished()), this, SLOT(sTypePatternFinished()));
-  connect(_vendorType,SIGNAL(textChanged(QString)), this, SIGNAL(newTypePattern(QString)));
 
   setFocusProxy(_select);
 }
@@ -135,6 +134,13 @@ void VendorGroup::setState(enum VendorGroupState p)
 
 void VendorGroup::sTypePatternFinished()
 {
+  QRegExp rx(_vendorType->text());
+  if (!rx.isValid())
+  {
+     QMessageBox::warning(this, tr("Invalid Pattern"), tr("You have entered an invalid expression"));
+     _vendorType->setFocus();
+     return;
+  }
   emit newTypePattern(_vendorType->text());
   emit updated();
 }

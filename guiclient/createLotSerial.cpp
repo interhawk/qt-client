@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -20,6 +20,8 @@
 #include <openreports.h>
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
+
+#define DEBUG false
 
 createLotSerial::createLotSerial(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl),
@@ -98,9 +100,48 @@ enum SetResponse createLotSerial::set(const ParameterList &pParams)
       _warranty->setEnabled(createet.value("itemsite_warrpurc").toBool() && createet.value("ordtype").toString() == "PO");
       _fractional = createet.value("item_fractional").toBool();
 
-      // Auto sequence
-      if (createet.value("itemsite_lsseq_id").toInt() != -1)
+
+      // First check for "pre-assigned/associated" lots. A couple example use cases:
+      // 1) Receiving TO - get lot(s) from issue to shipping trans. 2) Receiving RA - get lot(s) from original SO (if exists).
+      // Only display lots with qty remaining available so we dont double allocate
+      XSqlQuery origTransLots;
+      origTransLots.prepare("SELECT ls_id, ls_number, ls_number, qtys - "
+                            " COALESCE((SELECT itemlocdist_qty FROM itemlocdist "
+                            "            WHERE itemlocdist_source_id=:itemlocdist_id "
+                            "              AND ls_id=itemlocdist_ls_id), 0) AS qty "
+                            "  FROM ls "
+                            "  JOIN (SELECT * FROM getassoclotserialids(:itemlocdist_id)) foo "
+                            "  ON ls_id=foo.ids "
+                            " WHERE qtys - "
+                            "       COALESCE((SELECT itemlocdist_qty FROM itemlocdist "
+                            "                  WHERE itemlocdist_source_id=:itemlocdist_id "
+                            "                    AND ls_id=itemlocdist_ls_id), 0) > 0 "
+                            " ORDER BY ls_number;" );
+      origTransLots.bindValue(":itemlocdist_id", _itemlocdistid);
+      origTransLots.exec();
+      if (origTransLots.first())
       {
+        if (DEBUG)
+          qDebug() << "createLotSerial: found pre-assigned lots";
+        _lotSerial->setAllowNull(true);
+        _lotSerial->populate(origTransLots);
+        _preassigned = true;
+        _lotSerial->setEditable(_privileges->check("EnterUnassociatedLotSerialNumbers"));
+        connect(_lotSerial, SIGNAL(newID(int)), this, SLOT(sLotSerialSelected()));
+         // Populate _lsMap with ids and quantities
+        for ( origTransLots.seek(-1); origTransLots.next(); )
+          _lsMap.insert(origTransLots.value("ls_id").toInt(), origTransLots.value("qty").toDouble());
+      }
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Lot/Serial Information"),
+                                    origTransLots, __FILE__, __LINE__))
+      {
+        return UndefinedError;
+      }
+      // Auto sequence but only for new creations (PO/WO)
+      else if (createet.value("itemsite_lsseq_id").toInt() != -1)
+      {
+        if (DEBUG)
+          qDebug() << "createLotSerial: found auto-sequence lot/serial";
         XSqlQuery fetchlsnum;
         fetchlsnum.prepare("SELECT fetchlsnumber(:lsseq_id) AS lotserial;");
         fetchlsnum.bindValue(":lsseq_id", createet.value("itemsite_lsseq_id").toInt());
@@ -116,43 +157,27 @@ enum SetResponse createLotSerial::set(const ParameterList &pParams)
           return UndefinedError;
         }
       }
-      else
+      // No pre-assigned/associated transactions so check if there are lot's in stock to populate menu
+      else if (!_serial)
       {
-        // First check for "pre-assigned/associated" lots. A couple example use cases:
-        // 1) Receiving TO - get lot(s) from issue to shipping trans. 2) Receiving RA - get lot(s) from original SO (if exists).
-        XSqlQuery origTransLots;
-        origTransLots.prepare("SELECT ls_number, ls_number FROM ls WHERE ls_id = ANY(getAssocLotSerialIds(pItemlocdistId := :itemlocdist_id));");
-        origTransLots.bindValue(":itemlocdist_id", _itemlocdistid);
-        origTransLots.exec();
-        if (origTransLots.first())
-        {
-          _lotSerial->setAllowNull(true);
-          _lotSerial->populate(origTransLots);
-          _preassigned = true;
-          _lotSerial->setEditable(_privileges->check("EnterUnassociatedLotSerialNumbers"));
-          connect(_lotSerial, SIGNAL(newID(int)), this, SLOT(sLotSerialSelected()));
-        }
-        else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Lot/Serial Information"),
-                                      origTransLots, __FILE__, __LINE__))
+        if (DEBUG)
+          qDebug() << "createLotSerial: nothing pre-assigned so check existing lots";
+        XSqlQuery lots;
+        lots.prepare("SELECT DISTINCT ON (ls_number) ls_id, ls_number "
+                     "  FROM itemloc "
+                     "  JOIN ls on itemloc_ls_id=ls_id "
+                     " WHERE itemloc_itemsite_id=:itemsite_id "
+                     " ORDER BY ls_number;");
+        lots.bindValue(":itemsite_id", _itemsiteid);
+        lots.exec();
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Lot/Serial Information"),
+                                      lots, __FILE__, __LINE__))
         {
           return UndefinedError;
         }
-        // No pre-assigned/associated transactions so check if there are lot's in stock to populate menu
-        else if (!_serial)
-        {
-          XSqlQuery lots;
-          lots.prepare("SELECT itemloc_id, ls_number FROM itemloc JOIN ls on itemloc_ls_id=ls_id WHERE itemloc_itemsite_id=:itemsite_id;");
-          lots.bindValue(":itemsite_id", _itemsiteid);
-          lots.exec();
-          if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Lot/Serial Information"),
-                                        lots, __FILE__, __LINE__))
-          {
-            return UndefinedError;
-          }
-          _lotSerial->setAllowNull(true);
-          _lotSerial->populate(lots);
-          connect(_lotSerial, SIGNAL(newID(int)), this, SLOT(sLotSerialSelected()));
-        }
+        _lotSerial->setAllowNull(true);
+        _lotSerial->populate(lots);
+        connect(_lotSerial, SIGNAL(newID(int)), this, SLOT(sLotSerialSelected()));
       }
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Lot/Serial Information"),
@@ -293,7 +318,6 @@ void createLotSerial::sAssign()
     _lotSerial->setFocus();
     return;
   }
-
   QList<GuiErrorCheck>errors;
   float decimals = _qtyToAssign->toDouble() - floor(_qtyToAssign->toDouble());
   errors<<GuiErrorCheck(lsnum.isEmpty() && _lotSerial->isEditable(), _lotSerial,
@@ -303,9 +327,16 @@ void createLotSerial::sAssign()
         <<GuiErrorCheck(_qtyToAssign->toDouble() == 0.0, _qtyToAssign,
                         tr("<p>You must enter a positive value to assign to "
                            "this Lot/Serial number."))
+        <<GuiErrorCheck((_qtyToAssign->toDouble() > _qtyRemaining->toDouble()), _qtyToAssign,
+                        tr("You cannot assign a quantity more than is remaining."))
+        <<GuiErrorCheck((_lsMap[_lotSerial->id()] > 0 &&
+                        (_qtyToAssign->toDouble() > _lsMap[_lotSerial->id()])), _qtyToAssign,
+                        tr("You cannot assign a quantity more than was issued on the lot/serial."))
         <<GuiErrorCheck((_expiration->isEnabled()) && (!_expiration->isValid()), _expiration,
                         tr("<p>You must enter an expiration date to this "
                            "Perishable Lot/Serial number."))
+        <<GuiErrorCheck((_expiration->isValid() && _expiration->date() <= omfgThis->dbDate()), _warranty,
+                        tr("<p>Please enter an expiration date greater than today."))
         <<GuiErrorCheck((_warranty->isEnabled()) && (!_warranty->isValid()), _warranty,
                         tr("<p>You must enter a warranty expiration date for this "
                            "Lot/Serial number."))
@@ -428,6 +459,8 @@ void createLotSerial::sAssign()
 
 void createLotSerial::sLotSerialSelected()
 {
+    _qtyToAssign->setDouble(_lsMap[_lotSerial->id()]);
+
     if (!_expiration->isEnabled() &&
         !_warranty->isEnabled())
       return;
@@ -441,9 +474,9 @@ void createLotSerial::sLotSerialSelected()
 
     XSqlQuery itemloc;
     itemloc.prepare("SELECT itemloc_expiration, itemloc_warrpurc "
-                    "FROM itemloc "
-                    "WHERE itemloc_id=:itemloc_id; ");
-    itemloc.bindValue(":itemloc_id", _lotSerial->id());
+                    "  FROM itemloc "
+                    " WHERE itemloc_ls_id=:lotserial_id; ");
+    itemloc.bindValue(":lotserial_id", _lotSerial->id());
     itemloc.exec();
     if (itemloc.first()) {
       if (_expiration->isEnabled() &&
@@ -452,4 +485,5 @@ void createLotSerial::sLotSerialSelected()
       if (_warranty->isEnabled())
         _warranty->setDate(itemloc.value("itemloc_warrpurc").toDate());
     }
+
 }

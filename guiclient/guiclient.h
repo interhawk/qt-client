@@ -97,8 +97,6 @@ void audioReject();
 QString translationFile(const QString localestr, const QString component);
 QString translationFile(const QString localestr, const QString component, QString &version);
 
-extern bool _evaluation;
-
 extern QSplashScreen *_splash;
 
 #include "../common/metrics.h"
@@ -176,7 +174,6 @@ class GUIClient : public QMainWindow
 
     Q_INVOKABLE void setUpListener(const QString &);
 
-    Q_INVOKABLE void setCaption();
     Q_INVOKABLE void saveToolbarPositions();
 
     Q_INVOKABLE inline QMdiArea *workspace()           { return _workspace;    }

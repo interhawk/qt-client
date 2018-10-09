@@ -18,7 +18,7 @@ LANGUAGE     = C++
 INCLUDEPATH += ../common ../scriptapi .
 DEPENDPATH  += $${INCLUDEPATH} ../lib
 LIBS        += -lxtuplescriptapi -lxtuplecommon -lwrtembed \
-               -lrenderer -ldmtx -lqzint -lMetaSQL -lopenrptcommon
+               -lrenderer -lqzint -lMetaSQL -lopenrptcommon
 
 dynamic { 
     CONFIG      += dll # plugin implies dll but this fixes a cross-compile problem
@@ -56,6 +56,7 @@ HEADERS += plugins/addressclusterplugin.h \
     plugins/deptclusterplugin.h \
     plugins/dlineeditplugin.h \
     plugins/documentsplugin.h \
+    plugins/docclusterplugin.h \
     plugins/empclusterplugin.h \
     plugins/empgroupclusterplugin.h \
     plugins/expenseclusterplugin.h \
@@ -144,6 +145,7 @@ SOURCES += widgets.cpp \
     deptCluster.cpp \
     docAttach.cpp \
     documents.cpp \
+    docCluster.cpp \
     editwatermark.cpp   \
     empcluster.cpp \
     empgroupcluster.cpp \
@@ -244,6 +246,7 @@ HEADERS += widgets.h \
     deptcluster.h \
     docAttach.h \
     documents.h \
+    doccluster.h \
     editwatermark.h     \
     empcluster.h \
     empgroupcluster.h \

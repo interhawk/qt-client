@@ -36,7 +36,6 @@
 #include "qcoreapplicationproto.h"
 #include "qcryptographichashproto.h"
 #include "qdatawidgetmapperproto.h"
-#include "qdateproto.h"
 #include "qdialogbuttonboxproto.h"
 #include "qdialogsetup.h"
 #include "qdirproto.h"
@@ -98,6 +97,7 @@
 #include "qprocessenvironmentproto.h"
 #include "qprocessproto.h"
 #include "qpushbuttonproto.h"
+#include "qscrollarea.h"
 #include "qserialportinfoproto.h"
 #include "qserialportproto.h"
 #include "qsizepolicyproto.h"
@@ -121,6 +121,8 @@
 #include "qsslsocketproto.h"
 #include "qstackedwidgetproto.h"
 #include "qtabwidgetproto.h"
+#include "qtablewidgetproto.h"
+#include "qtablewidgetitemproto.h"
 #include "qtcpserverproto.h"
 #include "qtcpsocketproto.h"
 #include "qtextdocumentproto.h"
@@ -192,7 +194,6 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQCoreApplicationProto(engine);
   setupQCryptographicHashProto(engine);
   setupQDataWidgetMapperProto(engine);
-  setupQDateProto(engine);
   setupQDialog(engine);
   setupQDialogButtonBoxProto(engine);
   setupQDirProto(engine);
@@ -254,6 +255,7 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQProcessEnvironmentProto(engine);
   setupQProcessProto(engine);
   setupQPushButtonProto(engine);
+  setupQScrollAreaProto(engine);
   setupQSerialPortInfoProto(engine);
   setupQSerialPortProto(engine);
   setupQSizePolicy(engine);
@@ -277,6 +279,8 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQSslSocketProto(engine);
   setupQStackedWidgetProto(engine);
   setupQTabWidgetProto(engine);
+  setupQTableWidgetProto(engine);
+  setupQTableWidgetItemProto(engine);
   setupQTcpServerProto(engine);
   setupQTcpSocketProto(engine);
   setupQTextDocumentProto(engine);

@@ -105,23 +105,9 @@ void viewCheckRun::sDelete()
              "WHERE (checkhead_id=:checkhead_id);" );
   viewDelete.bindValue(":checkhead_id", _check->id());
   viewDelete.exec();
-  if (viewDelete.first())
-  {
-    int result = viewDelete.value("result").toInt();
-    if (result < 0)
-    {
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Check Information"),
-                             storedProcErrorLookup("deleteCheck", result),
-                             __FILE__, __LINE__);
-      return;
-    }
-    omfgThis->sChecksUpdated(viewDelete.value("checkhead_bankaccnt_id").toInt(), _check->id(), true);
-  }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Check Information"),
-                                viewDelete, __FILE__, __LINE__))
-  {
-    return;
-  }
+  ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Check Information"),
+                                viewDelete, __FILE__, __LINE__);
+  sFillList();
 }
 
 void viewCheckRun::sNewMiscCheck()
@@ -217,8 +203,8 @@ void viewCheckRun::sPost()
   params.append("check_id", _check->id());
 
   postCheck newdlg(this, "", true);
-  newdlg.set(params);
   newdlg.exec();
+  newdlg.set(params);
 }
 
 void viewCheckRun::sAltExchRate()

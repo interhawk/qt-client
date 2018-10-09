@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -133,6 +133,7 @@ void voucherMiscDistrib::populate()
     if (vpopulateVoucher.value("vodist_costelem_id").toInt() != -1)
     {
       _freightSelected->setChecked(true);
+      _freightCostElement->setId(vpopulateVoucher.value("vodist_costelem_id").toInt());
       _origVoucher->setId(vpopulateVoucher.value("vodist_freight_vohead_id").toInt());
       _freightDistQty->setChecked(vpopulateVoucher.value("vodist_freight_dist_method").toString() == "Q");
       _freightDistVal->setChecked(vpopulateVoucher.value("vodist_freight_dist_method").toString() == "V");

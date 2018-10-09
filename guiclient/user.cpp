@@ -80,13 +80,6 @@ user::user(QWidget* parent, const char * name, Qt::WindowFlags fl)
   for (int i = 0; modq.next(); i++)
     _module->append(i, modq.value("priv_module").toString());
 
-  if(_evaluation == true)
-  {
-    _enhancedAuth->setEnabled(false);
-    _passwd->setEnabled(false);
-    _verify->setEnabled(false);
-  }
-
   if (!_metrics->boolean("MultiWhs"))
   {
     _tab->removeTab(_tab->indexOf(_siteTab));

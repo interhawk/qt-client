@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -490,6 +490,7 @@ void projects::sCopy()
 bool projects::getPriv(int mode, XTreeWidgetItem* item)
 {
   if(item->altId() == PROJECT || item->altId() == TASK)
+  {
     if (mode==cEdit)
       return (omfgThis->username() == item->rawValue("prj_owner_username") &&
               _privileges->check("MaintainPersonalProjects")) ||
@@ -502,50 +503,65 @@ bool projects::getPriv(int mode, XTreeWidgetItem* item)
              (omfgThis->username() == item->rawValue("prj_username") &&
               _privileges->check("ViewPersonalProjects")) ||
              _privileges->check("ViewAllProjects");
+  }
 
 
   if(item->altId() == QUOTE || item->altId() == QUOTEITEM)
+  {
     if (mode==cEdit)
       return _privileges->check("MaintainQuotes");
     else
       return _privileges->check("MaintainQuotes ViewQuotes");
+  }
 
   if(item->altId() == SALESORDER || item->altId() == SALESORDERITEM)
+  {
     if (mode==cEdit)
       return _privileges->check("MaintainSalesOrders");
     else
       return _privileges->check("MaintainSalesOrders ViewSalesOrders");
+  }
 
   if(item->altId() == INVOICE || item->altId() == INVOICEITEM)
+  {
     if (mode==cEdit)
       return _privileges->check("MaintainMiscInvoices");
     else
       return _privileges->check("MaintainMiscInvoices ViewMiscInvoices");
+  }
 
   if(item->altId() == WORKORDER)
+  {
     if (mode==cEdit)
       return _privileges->check("MaintainWorkOrders");
     else
       return _privileges->check("MaintainWorkOrders ViewWorkOrders");
+  }
 
   if(item->altId() == PURCHASEREQUEST)
+  {
     if (mode==cEdit)
       return false;
     else
       return _privileges->check("MaintainPurchaseRequests ViewPurchaseRequests");
+  }
 
   if(item->altId() == PURCHASEORDER || item->altId() == PURCHASEORDERITEM)
+  {
     if (mode==cEdit)
       return _privileges->check("MaintainPurchaseOrders");
     else
       return _privileges->check("MaintainPurchaseOrders ViewPurchaseOrders");
+  }
 
   if(item->altId() == INCIDENT)
+  {
     if (mode==cEdit)
       return _privileges->check("MaintainPersonalIncidents MaintainAllIncidents");
     else
       return _privileges->check("ViewPersonalIncidents ViewAllIncidents MaintainPersonalIncidents "
                                 "MaintainAllIncidents");
+  }
 
   return false;
 }

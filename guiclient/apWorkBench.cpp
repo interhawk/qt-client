@@ -79,6 +79,8 @@ apWorkBench::apWorkBench(QWidget* parent, const char* name, Qt::WindowFlags fl)
     _history->findChild<DateCluster*>("_dates")->setEndNull(tr("Latest"),     omfgThis->endOfTime(),   true);
     _history->show();
     _vendorgroup->synchronize(_history->findChild<VendorGroup*>("_vend"));
+
+    connect(_query, SIGNAL(clicked()), _history,  SLOT(sFillList()));
   }
   else
     _apHistoryTab->setEnabled(false);
@@ -88,7 +90,6 @@ apWorkBench::apWorkBench(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_query, SIGNAL(clicked()), _credits, SLOT(sFillList()));
   connect(_query, SIGNAL(clicked()), _selectedPayments, SLOT(sFillList()));
   connect(_query, SIGNAL(clicked()), _checkRun, SLOT(sFillList()));
-  connect(_query, SIGNAL(clicked()), _history,  SLOT(sFillList()));
 
   _payables->sFillList();
 }
