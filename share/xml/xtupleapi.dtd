@@ -48,58 +48,151 @@
 
   -->
 
-<!ELEMENT xtupleimport (account			|
-			accountchar		|
-			accountcomment		|
-			address			|
-			addresschar		|
-			cashreceipt		|
-			cashreceiptapply	|
-			cashreceiptapplymisc	|
-			contact			|
-			contactchar		|
-			custchar		|
-			custcomment		|
-			custcreditcard		|
-			customer		|
-			custshipto		|
-			custtax			|
-			journalentry		|
-			quote			|
-			quotecomment		|
-			quoteline		|
-			quotelinechar		|
-			quotelinecomment	|
-			salesline		|
-			saleslinechar		|
-			saleslinecomment	|
-			salesorder		|
-			salesordercomment)+ >
+<!ELEMENT xtupleimport (account                 |
+                        accountchar             |
+                        accountcomment          |
+                        accountfile             |
+                        accountimage            |
+                        address                 |
+                        addresschar             |
+                        addresscomment          |
+                        apmemo                  |
+                        armemo                  |
+                        bom                     |
+                        bomitem                 |
+                        bomitemcomment          |
+                        bomitemsubstitute       |
+                        budget                  |
+                        budgetentry             |
+                        cashreceipt             |
+                        cashreceiptapply        |
+                        cashreceiptapplymisc    |
+                        contact                 |
+                        contactchar             |
+                        contactcomment          |
+                        creditmemo              |
+                        creditmemoline          |
+                        currencyrate            |
+                        custchar                |
+                        custcomment             |
+                        custcreditcard          |
+                        customer                |
+                        customertaxreg          |
+                        customertype            |
+                        customertypechar        |
+                        custshipto              |
+                        custtax                 |
+                        ediinfo                 |
+                        employee                |
+                        employeechar            |
+                        employeecomment         |
+                        extshipmaint            |
+                        freightpricingscheduleitem |
+                        glaccount               |
+                        incident                |
+                        incidentchar            |
+                        incidentcomment         |
+                        incidentfile            |
+                        incidentimage           |
+                        invoice                 |
+                        invoiceline             |
+                        item                    |
+                        itemalias               |
+                        itemchar                |
+                        itemcomment             |
+                        itemcost                |
+                        itemfile                |
+                        itemimage               |
+                        itemsite                |
+                        itemsitecomment         |
+                        itemsource              |
+                        itemsourceprice         |
+                        itemsubstitute          |
+                        itemtaxtype             |
+                        itemuomconversion       |
+                        journalentry            |
+                        location                |
+                        misccounttag            |
+                        physinvcount            |
+                        pricingschedule         |
+                        pricingscheduleassign   |
+                        pricingscheduleitem     |
+                        pricingscheduleitemchar |
+                        project                 |
+                        projectcomment          |
+                        prospect                |
+                        purchaseline            |
+                        purchaselinechar        |
+                        purchaselinecomment     |
+                        purchaseorder           |
+                        purchaseordercomment    |
+                        quote                   |
+                        quotecomment            |
+                        quoteline               |
+                        quotelinechar           |
+                        quotelinecomment        |
+                        salescredit             |
+                        saleshistory            |
+                        salesline               |
+                        saleslinechar           |
+                        saleslinecomment        |
+                        salesorder              |
+                        salesordercomment       |
+                        salesrep                |
+                        site                    |
+                        sitezone                |
+                        task                    |
+                        taskcomment             |
+                        todo                    |
+                        vendor                  |
+                        vendoraddress           |
+                        vendorchar              |
+                        vendorcomment           |
+                        vendortype
+                        )+ >
+
 <!ATTLIST xtupleimport version	CDATA	#FIXED "development" >
 
 <!ELEMENT account ( account_number,
-		    parent_account?,
-		    account_name,
-		    active?,
-		    type?,
-		    (primary_contact_number?,
+		      parent_account?,
+		      account_name,
+		      active?,
+		      type?,
+		      primary_contact_number?,
 		      primary_contact_honorific?,
 		      primary_contact_first?,
+		      primary_contact_middle?,
 		      primary_contact_last?,
 		      primary_contact_job_title?,
 		      primary_contact_voice?,
 		      primary_contact_fax?,
-		      primary_contact_email?)?,
-		    (secondary_contact_number?,
+		      primary_contact_email?,
+                primary_contact_address_number?,
+                primary_contact_address1?,
+                primary_contact_address2?,
+                primary_contact_address3?,
+                primary_contact_address_city?,
+                primary_contact_address_state?,
+                primary_contact_address_postalcode?,
+                primary_contact_address_country?,
+                secondary_contact_number?,
 		      secondary_contact_honorific?,
 		      secondary_contact_first?,
+		      secondary_contact_middle?,
 		      secondary_contact_last?,
 		      secondary_contact_job_title?,
 		      secondary_contact_voice?,
 		      secondary_contact_fax?,
 		      secondary_contact_email?,
-		      secondary_contact_web?)?,
-		    notes? ) >
+                secondary_contact_address_number?,
+                secondary_contact_address1?,
+                secondary_contact_address2?,
+                secondary_contact_address3?,
+                secondary_contact_address_city?,
+                secondary_contact_address_state?,
+                secondary_contact_address_postalcode?,
+                secondary_contact_address_country?,
+                notes? ) >
 <!ATTLIST account	mode	(insert|update)	'insert'
 			ignore 	(true|false)	'false'
 			key	CDATA	#FIXED	'account_number' >
@@ -109,6 +202,13 @@
 
 <!ELEMENT accountcomment (account_number, type, date?, username?, text) >
 <!ATTLIST accountcomment	ignore 	(true|false)	'false' >
+
+
+<!ELEMENT accountfile ( account_number, title, url ) >
+<!ATTLIST accountfile	ignore 	(true|false)	'false' >
+
+<!ELEMENT accountimage ( account_number, image_name ) >
+<!ATTLIST accountimage	ignore 	(true|false)	'false' >
 
 <!ELEMENT address ( address_number?,
 		    address1?,
@@ -131,7 +231,95 @@
 <!ELEMENT addresscomment (address_number, type, date?, username?, text) >
 <!ATTLIST addresscomment	ignore 	(true|false)	'false' >
 
+<!ELEMENT apmemo ( vendor_number,
+                   document_date,
+                   due_date,
+                   document_type,
+                   document_number,
+                   po_number,
+                   journal_number,
+                   terms,
+                   currency,
+                   amount,
+                   paid,
+                   notes,
+                   alternate_prepaid_account? )>
+<!ATTLIST apmemo   ignore       (true|false)    'false' >
+
+<!ELEMENT armemo ( customer_number,
+                   document_date,
+                   due_date,
+                   document_type,
+                   document_number,
+                   order_number,
+                   journal_number,
+                   reason_code,
+                   terms,
+                   sales_rep,
+                   currency,
+                   amount,
+                   paid,
+                   commission_due,
+                   commission_paid,
+                   notes,
+                   alternate_prepaid_sales_category?,
+                   alternate_prepaid_account? )>
+<!ATTLIST armemo   ignore       (true|false)    'false' >
+
+<!ELEMENT bom ( item_number,
+                revision?,
+                document_number?,
+                revision_date?,
+                batch_size,
+                total_qty_per )>
+<!ATTLIST bom   ignore       (true|false)    'false' >
+
+<!ELEMENT bomitem ( item_number,
+                    bom_item_number,
+                    bom_revision?,
+                    sequence_number,
+                    item_number,
+                    effective?,
+                    expires?,
+                    qty_fxd?,
+                    qty_per?,
+                    issue_uom,
+                    scrap?,
+                    create_child_wo,
+                    issue_method,
+                    used_at?,
+                    schedule_at_wo_operation?,
+                    ecn_number,
+                    notes,
+                    reference,
+                    substitutions,
+                    characteristic,
+                    value )>
+<!ATTLIST bomitem   ignore       (true|false)    'false' >
+
+<!ELEMENT bomitemcomment ( bomitem_id,
+                           type,
+                           date,
+                           username,
+                           text )>
+<!ATTLIST bomitemcomment   ignore       (true|false)    'false' >
+
+<!ELEMENT bomitemsubstitute (bom_item_number,
+                             bom_revision,
+                             sequence_number,
+                             substitute_item_number,
+                             sub_parent_uom_ratio,
+                             ranking )>
+<!ATTLIST bomitemsubstitute   ignore       (true|false)    'false' >
+
+<!ELEMENT budget ( name, description )>
+<!ATTLIST budget   ignore       (true|false)    'false' >
+
+<!ELEMENT budgetentry ( name, account, period_start, amount )>
+<!ATTLIST budgetentry   ignore       (true|false)    'false' >
+
 <!ELEMENT cashreceipt ( customer_number?,
+			cashreceipt_number?,
                         funds_type?,
                         check_document_number?,
                         customer_name?,
@@ -142,35 +330,35 @@
                         distribution_date?,
                         apply_balance_as?,
                         sales_category?,
-                        notes?) >
-<!ATTLIST cashreceipt ignore (true|false) 'false' >                        
-                        
-<!ELEMENT cashreceiptapply ( cashreceipt_number?,
-                             customer_number?, 
-                             funds_type?, 
-                             check_document_number?, 
+                        notes? ) >
+
+<!ATTLIST cashreceipt ignore (true|false) 'false' >
+
+<!ELEMENT cashreceiptapply ( customer_number?,
+                             funds_type?,
+                             check_document_number?,
                              doc_type?,
-                             doc_number?, 
-                             customer_name?, 
-                             customer_address?, 
-                             doc_date?, 
-                             due_date?, 
-                             currency?, 
-                             open_amount?, 
-                             amount_to_apply?, 
+                             doc_number?,
+                             customer_name?,
+                             customer_address?,
+                             doc_date?,
+                             due_date?,
+                             currency?,
+                             open_amount?,
+                             amount_to_apply?,
                              cashrcptitem_discount?) >
 
 <!ATTLIST cashreceiptapply ignore (true|false) 'false' >
 
-<!ELEMENT cashreceiptapplymisc (customer_number?, 
-                                funds_type?, 
-                                check_document_number?, 
-                                account?, 
-                                customer_name?, 
-                                customer_address?, 
-                                account_description?, 
-                                currency?, 
-                                amount_to_distribute?, 
+<!ELEMENT cashreceiptapplymisc (customer_number?,
+                                funds_type?,
+                                check_document_number?,
+                                account?,
+                                customer_name?,
+                                customer_address?,
+                                account_description?,
+                                currency?,
+                                amount_to_distribute?,
                                 notes?) >
 
 <!ATTLIST cashreceiptapplymisc ignore (true|false) 'false' >
@@ -244,7 +432,7 @@
 		      allow_free_form_shipto?,
 		      allow_free_form_billto?,
 		      preferred_selling_whs?,
-		      default_tax_authority,
+		      default_tax_zone,
 		      default_terms,
 		      balance_method?,
 		      default_discount?,
@@ -335,7 +523,7 @@
 		       sales_rep?,
 		       commission?,
 		       zone?,
-		       tax_authority?,
+		       tax_zone?,
 		       ship_via?,
 		       ship_form?,
 		       shipping_charges?,
@@ -350,6 +538,178 @@
 <!ELEMENT custtax (customer_number, tax_authority, registration_number) >
 <!ATTLIST custtax	ignore 	(true|false)	'false' >
 
+<!ELEMENT ediinfo (batchnumber, txnid, order_number, cust_po_number) >
+<!ATTLIST ediinfo ignore 	(true|false)	'false' >
+
+<!ELEMENT glaccount ( company,
+			     profit_center,
+			     account_number,
+			     sub_account,
+			     description,
+			     ext_reference,
+			     type,
+			     sub_type,
+			     allow_posting_to_closed_periods,
+			     forward_update_trial_balances,
+			     notes
+			   ) >
+<!ATTLIST glaccount	ignore 	(true|false)	'false' >
+
+<!ELEMENT invoice (
+                 invoice_number,
+                 order_number?,
+                 invoice_date?,
+                 ship_date?,
+                 order_date?,
+                 sale_type?,
+                 sales_rep?,
+                 commission?,
+                 tax_zone?,
+                 terms?,
+                 customer_number?,
+                 billto_name?,
+                 billto_address1?,
+                 billto_address2?,
+                 billto_address3?,
+                 billto_city?,
+                 billto_state?,
+                 billto_postal_code?,
+                 billto_country?,
+                 billto_phone?,
+                 shipto_number?,
+                 shipto_name?,
+                 shipto_address1?,
+                 shipto_address2?,
+                 shipto_address3?,
+                 shipto_city?,
+                 shipto_state?,
+                 shipto_postal_code?,
+                 shipto_country?,
+                 shipto_shipzone?,
+                 shipto_phone?,
+                 po_number?,
+                 ship_via?,
+                 project_number?,
+                 fob?,
+                 misc_charge_description?,
+                 misc_charge?,
+                 misc_charge_account_number?,
+                 freight?,
+                 currency?,
+                 payment?,
+                 notes?
+) >
+
+<!ATTLIST invoice ignore 	(true|false)	'false'
+          key	CDATA	#FIXED	'invoice_number' >
+
+<!ELEMENT invoiceline (
+       invoice_number,
+       line_number,
+       item_number?,
+       misc_item_number?,
+       site?,
+       misc_item_description?,
+       sales_category?,
+       customer_part_number?,
+       qty_ordered?,
+       qty_billed?,
+       update_inventory?,
+       net_unit_price?,
+       tax_type?,
+       qty_uom?,
+       price_uom?,
+       notes?,
+       alternate_rev_account?
+) >
+
+<!ATTLIST invoiceline ignore (true|false) 'false'
+          key CDATA #FIXED 'invoice_number,line_number' >
+
+
+<!ELEMENT item (item_number,
+			 active?,
+       description1?,
+       description2?,
+       item_type,
+       maximum_desired_cost?,
+       class_code,
+       inventory_uom,
+       pick_list_item?,
+       fractional?,
+       configured?,
+       item_is_sold?,
+       product_category?,
+       exclusive?,
+       list_price?,
+       list_cost?,
+       list_price_uom,
+       upc_code?,
+       product_weight?,
+       packaging_weight?,
+       notes?,
+       ext_description?
+) >
+<!ATTLIST item	mode	(insert|update)	'insert'
+			ignore	(true|false)	'false'
+			key	CDATA	#FIXED	'item_number' >
+
+
+<!ELEMENT itemsite (item_number,
+       site,
+       active,
+       wo_supplied_at_site,
+       create_wos,
+       po_supplied_at_site,
+       create_prs,
+       create_soprs,
+       create_sopos,
+       dropship,
+       sold_from_site,
+       ranking,
+       cost_method,
+       control_method,
+       planner_code,
+       cost_category,
+       stocked,
+       abc_class,
+       allow_automatic_updates,
+       cycl_cnt_freq,
+       event_fence,
+       multiple_location_control,
+       location,
+       receive_location,
+       issue_location,
+       auto_distr_location,
+       auto_distr_receive_location,
+       auto_distr_issue_location,
+       user_defined_location,
+       location_comment,
+       disallow_blank_wip_locations,
+       enforce_order_parameters,
+       reorder_level,
+       order_up_to,
+       minimum_order,
+       maximum_order,
+       order_multiple,
+       enforce_on_manual_orders,
+       planning_system,
+       group_mps_mrp_orders,
+       first_group,
+       mps_time_fence,
+       lead_time,
+       safety_stock,
+       supplied_from_site,
+       notes,
+       perishable,
+       require_warranty,
+       auto_register
+) >
+<!ATTLIST itemsite	mode	(insert|update)	'insert'
+			ignore	(true|false)	'false'
+			key	CDATA	#FIXED	'item_number,site' >
+
+
 <!ELEMENT journalentry ( currency,
 			 amount,
 			 dist_date,
@@ -360,13 +720,13 @@
 <!ATTLIST journalentry	ignore 	(true|false)	'false' >
 
 <!ELEMENT quote (  quote_number,
-		   warehouse?,
+		   site?,
 		   quote_date?,
 		   pack_date?,
 		   originated_by?,
 		   sales_rep?,
 		   commission?,
-		   tax_authority?,
+		   tax_zone?,
 		   terms?,
 		   project_number?,
 		   customer_number,
@@ -448,15 +808,17 @@
 			   ) >
 <!ATTLIST quotelinecomment	ignore 	(true|false)	'false' >
 
-<!ELEMENT salesline	( order_number,
+<!ELEMENT salesline
+( order_number,
 			  line_number?,
 			  ( item_number | customer_pn |
 			    (item_number, customer_pn)
 			  ),
 			  substitute_for?,
-			  sold_from_whs?,
+			  sold_from_site?,
 			  status?,
 			  qty_ordered,
+			  qty_uom?,
 			  net_unit_price?,
 			  scheduled_date?,
 			  tax_type?,
@@ -487,13 +849,13 @@
 <!ATTLIST saleslinecomment	ignore 	(true|false)	'false' >
 
 <!ELEMENT salesorder (	order_number,
-			warehouse?,
+			site?,
 			order_date?,
 			pack_date?,
-			originated_by?,
+			sale_type?,
 			sales_rep?,
 			commission?,
-			tax_authority?,
+			tax_zone?,
 			terms?,
 			project_number?,
 			customer_number,
@@ -528,6 +890,7 @@
 			  misc_charge
 			)?,
 			freight?,
+			calculate_freight?,
 			order_notes?,
 			shipping_notes?,
 			add_to_packing_list_batch?
@@ -544,365 +907,741 @@
 			    ) >
 <!ATTLIST salesordercomment	ignore 	(true|false)	'false' >
 
-<!ELEMENT account_name			(#PCDATA) >
-<!ELEMENT account_number		(#PCDATA) >
-<!ELEMENT address_number		(#PCDATA) >
-<!ELEMENT address1			(#PCDATA) >
-<!ELEMENT address2			(#PCDATA) >
-<!ELEMENT address3			(#PCDATA) >
-<!ELEMENT addressline			(#PCDATA) >
-<!ELEMENT alternate			(#PCDATA) > <!-- telephone number -->
-<!ELEMENT amount			(#PCDATA) > <!-- money -->
-<!ELEMENT billing_contact_address1	(#PCDATA) >
-<!ELEMENT billing_contact_address2	(#PCDATA) >
-<!ELEMENT billing_contact_address3	(#PCDATA) >
-<!ELEMENT billing_contact_alternate	(#PCDATA) > <!-- phone number -->
-<!ELEMENT billing_contact_city		(#PCDATA) >
-<!ELEMENT billing_contact_country	(#PCDATA) >
-<!ELEMENT billing_contact_email		(#PCDATA) > <!-- email address -->
-<!ELEMENT billing_contact_fax		(#PCDATA) > <!-- phone number -->
-<!ELEMENT billing_contact_first		(#PCDATA) >
-<!ELEMENT billing_contact_honorific	(#PCDATA) >
-<!ELEMENT billing_contact_id		(#PCDATA) > <!-- positive int -->
-<!ELEMENT billing_contact_job_title	(#PCDATA) >
-<!ELEMENT billing_contact_last		(#PCDATA) >
-<!ELEMENT billing_contact_postalcode	(#PCDATA) >
-<!ELEMENT billing_contact_state		(#PCDATA) >
-<!ELEMENT billing_contact_voice		(#PCDATA) > <!-- phone number -->
-<!ELEMENT billing_contact_web		(#PCDATA) > <!-- URL -->
-<!ELEMENT billto_address1		(#PCDATA) >
-<!ELEMENT billto_address2		(#PCDATA) >
-<!ELEMENT billto_address3		(#PCDATA) >
-<!ELEMENT billto_city			(#PCDATA) >
-<!ELEMENT billto_country		(#PCDATA) >
-<!ELEMENT billto_name			(#PCDATA) >
-<!ELEMENT billto_postal_code		(#PCDATA) >
-<!ELEMENT billto_state			(#PCDATA) >
-<!ELEMENT characteristic		(#PCDATA) >
-<!ELEMENT city				(#PCDATA) >
-<!ELEMENT commission			(#PCDATA) >
-<!ELEMENT contact_id			(#PCDATA) > <!-- positive int -->
-<!ELEMENT contact_number		(#PCDATA) > <!-- positive int -->
-<!ELEMENT correspond_contact_address1	(#PCDATA) >
-<!ELEMENT correspond_contact_address2	(#PCDATA) >
-<!ELEMENT correspond_contact_address3	(#PCDATA) >
-<!ELEMENT correspond_contact_alternate	(#PCDATA) > <!-- phone number -->
-<!ELEMENT correspond_contact_city	(#PCDATA) >
-<!ELEMENT correspond_contact_country	(#PCDATA) >
-<!ELEMENT correspond_contact_email	(#PCDATA) > <!-- email address -->
-<!ELEMENT correspond_contact_fax	(#PCDATA) > <!-- phone number -->
-<!ELEMENT correspond_contact_first	(#PCDATA) >
-<!ELEMENT correspond_contact_honorific	(#PCDATA) >
-<!ELEMENT correspond_contact_id		(#PCDATA) > <!-- positive int -->
-<!ELEMENT correspond_contact_job_title	(#PCDATA) >
-<!ELEMENT correspond_contact_last	(#PCDATA) >
-<!ELEMENT correspond_contact_postalcode	(#PCDATA) >
-<!ELEMENT correspond_contact_state	(#PCDATA) >
-<!ELEMENT correspond_contact_voice	(#PCDATA) > <!-- phone number -->
-<!ELEMENT correspond_contact_web	(#PCDATA) > <!-- URL -->
-<!ELEMENT country		(#PCDATA) >
-<!ELEMENT credit		(#PCDATA) > <!-- 00-00-00-00 -->
-<!ELEMENT credit_card_number	(#PCDATA) >
-<!ELEMENT credit_limit		(#PCDATA) >
-<!ELEMENT credit_limit_currency	(#PCDATA) >
-<!ELEMENT credit_rating		(#PCDATA) >
-<!ELEMENT crm_account		(#PCDATA) >
-<!ELEMENT currency		(#PCDATA) >
-<!ELEMENT cust_po_number	(#PCDATA) >
-<!ELEMENT customer_name		(#PCDATA) >
-<!ELEMENT customer_number	(#PCDATA) >
-<!ELEMENT customer_pn	 	(#PCDATA) >
-<!ELEMENT customer_type		(#PCDATA) >
-<!ELEMENT date			(#PCDATA) > <!-- PostgreSQL timestamp -->
-<!ELEMENT debit			(#PCDATA) > <!-- 00-00-00-00 -->
-<!ELEMENT default_currency	(#PCDATA) >
-<!ELEMENT default_discount	(#PCDATA) >
-<!ELEMENT default_tax_authority	(#PCDATA) >
-<!ELEMENT default_terms		(#PCDATA) >
-<!ELEMENT discount_pct_from_list (#PCDATA) > <!-- Numeric -->
-<!ELEMENT dist_date		(#PCDATA) > <!-- PostgreSQL timestamp -->
-<!ELEMENT doc_number		(#PCDATA) >
-<!ELEMENT edi_profile		(#PCDATA) >
-<!ELEMENT email			(#PCDATA) > <!-- email address -->
-<!ELEMENT expiration_month	(#PCDATA) >
-<!ELEMENT expiration_year	(#PCDATA) >
-<!ELEMENT fax			(#PCDATA) > <!-- phone number -->
-<!ELEMENT first			(#PCDATA) >
-<!ELEMENT fob			(#PCDATA) >
-<!ELEMENT freight		(#PCDATA) > <!-- Numeric -->
-<!ELEMENT general_notes		(#PCDATA) >
-<!ELEMENT honorific		(#PCDATA) >
-<!ELEMENT initials		(#PCDATA) >
-<!ELEMENT invc_edi_cc		(#PCDATA) > <!-- email address -->
-<!ELEMENT invc_edi_email	(#PCDATA) > <!-- email address -->
-<!ELEMENT invc_edi_emailbody	(#PCDATA) >
-<!ELEMENT invc_edi_filename	(#PCDATA) >
-<!ELEMENT invc_edi_profile	(#PCDATA) > <!-- Custom Email|No EDI|Use Customer Master|[profile name] -->
-<!ELEMENT invc_edi_subject	(#PCDATA) >
-<!ELEMENT item_number	 	(#PCDATA) >
-<!ELEMENT job_title		(#PCDATA) >
-<!ELEMENT key			(#PCDATA) >
-<!ELEMENT last			(#PCDATA) >
-<!ELEMENT line_number	 	(#PCDATA) > <!-- positive Integer -->
-<!ELEMENT misc_account_number	(#PCDATA) > <!-- 00-00-00-00 -->
-<!ELEMENT misc_charge		(#PCDATA) > <!-- Numeric -->
-<!ELEMENT misc_charge_description (#PCDATA) >
-<!ELEMENT name			(#PCDATA) >
-<!ELEMENT net_unit_price	(#PCDATA) > <!-- Numeric -->
-<!ELEMENT notes			(#PCDATA) >
-<!ELEMENT order_date		(#PCDATA) > <!-- PostgreSQL timestamp -->
-<!ELEMENT order_notes		(#PCDATA) >
-<!ELEMENT order_number		(#PCDATA) > <!-- positive Integer -->
-<!ELEMENT overwrite_po_price	(#PCDATA) > <!-- Numeric -->
-<!ELEMENT pack_date		(#PCDATA) > <!-- PostgreSQL timestamp -->
-<!ELEMENT parent_account	(#PCDATA) >
-<!ELEMENT phone			(#PCDATA) > <!-- phone number -->
-<!ELEMENT postal_code		(#PCDATA) >
-<!ELEMENT preferred_selling_whs	(#PCDATA) >
-<!ELEMENT primary_contact_number	(#PCDATA) > <!-- positive int -->
-<!ELEMENT primary_contact_email		(#PCDATA) > <!-- email address -->
-<!ELEMENT primary_contact_fax		(#PCDATA) > <!-- phone number -->
-<!ELEMENT primary_contact_first		(#PCDATA) >
-<!ELEMENT primary_contact_honorific	(#PCDATA) >
-<!ELEMENT primary_contact_job_title	(#PCDATA) >
-<!ELEMENT primary_contact_last		(#PCDATA) >
-<!ELEMENT primary_contact_voice		(#PCDATA) > <!-- phone number -->
-<!ELEMENT project_number		(#PCDATA) > <!-- positive Integer -->
-<!ELEMENT qty_ordered	 		(#PCDATA) > <!-- Numeric -->
-<!ELEMENT quote_date			(#PCDATA) > <!-- PostgreSQL timestamp -->
-<!ELEMENT quote_number			(#PCDATA) > <!-- positive Integer -->
-<!ELEMENT registration_number		(#PCDATA) >
-<!ELEMENT sales_rep			(#PCDATA) >
-<!ELEMENT scheduled_date		(#PCDATA) > <!-- PostgreSQL timestamp -->
-<!ELEMENT secondary_contact_number	(#PCDATA) > <!-- positive int -->
-<!ELEMENT secondary_contact_email	(#PCDATA) > <!-- email address -->
-<!ELEMENT secondary_contact_fax		(#PCDATA) > <!-- phone number -->
-<!ELEMENT secondary_contact_first	(#PCDATA) >
-<!ELEMENT secondary_contact_honorific	(#PCDATA) >
-<!ELEMENT secondary_contact_job_title	(#PCDATA) >
-<!ELEMENT secondary_contact_last	(#PCDATA) >
-<!ELEMENT secondary_contact_voice	(#PCDATA) > <!-- phone number -->
-<!ELEMENT secondary_contact_web		(#PCDATA) > <!-- URL -->
-<!ELEMENT ship_form		(#PCDATA) >
-<!ELEMENT ship_via		(#PCDATA) >
-<!ELEMENT shipping_charges	(#PCDATA) >
-<!ELEMENT shipping_chgs		(#PCDATA) >
-<!ELEMENT shipping_form		(#PCDATA) >
-<!ELEMENT shipping_notes	(#PCDATA) >
-<!ELEMENT shipto_address1	(#PCDATA) >
-<!ELEMENT shipto_address2	(#PCDATA) >
-<!ELEMENT shipto_address3	(#PCDATA) >
-<!ELEMENT shipto_city		(#PCDATA) >
-<!ELEMENT shipto_country	(#PCDATA) >
-<!ELEMENT shipto_name		(#PCDATA) >
-<!ELEMENT shipto_number		(#PCDATA) >
-<!ELEMENT shipto_phone		(#PCDATA) > <!-- telephone number -->
-<!ELEMENT shipto_postal_code	(#PCDATA) >
-<!ELEMENT shipto_state		(#PCDATA) >
-<!ELEMENT so_edi_cc		(#PCDATA) > <!-- email address -->
-<!ELEMENT so_edi_email		(#PCDATA) > <!-- email address -->
-<!ELEMENT so_edi_emailbody	(#PCDATA) >
-<!ELEMENT so_edi_filename	(#PCDATA) >
-<!ELEMENT so_edi_profile	(#PCDATA) > <!-- Custom Email|No EDI|Use Customer Master|[profile name] -->
-<!ELEMENT so_edi_subject	(#PCDATA) >
-<!ELEMENT sold_from_whs	 	(#PCDATA) >
-<!ELEMENT state			(#PCDATA) >
-<!ELEMENT street_address1	(#PCDATA) >
-<!ELEMENT street_address2	(#PCDATA) >
-<!ELEMENT substitute_for 	(#PCDATA) >
-<!ELEMENT supplying_whs 	(#PCDATA) >
-<!ELEMENT tax_authority		(#PCDATA) >
-<!ELEMENT tax_code		(#PCDATA) >
-<!ELEMENT tax_type		(#PCDATA) >
-<!ELEMENT terms			(#PCDATA) >
-<!ELEMENT text			(#PCDATA) >
-<!ELEMENT type			(#PCDATA) > <!-- used different ways. could be generic text, could be limited (in api.account) to Organization or Individual -->
-<!ELEMENT username		(#PCDATA) >
-<!ELEMENT value		   	(#PCDATA) >
-<!ELEMENT voice			(#PCDATA) > <!-- telephone number -->
-<!ELEMENT warehouse		(#PCDATA) >
-<!ELEMENT web			(#PCDATA) >
-<!ELEMENT zone			(#PCDATA) >
+<!-- TODO: expand these, as they're really views { -->
+<!ELEMENT creditmemo                            (#PCDATA) >
+<!ELEMENT creditmemoline                        (#PCDATA) >
+<!ELEMENT currencyrate                          (#PCDATA) >
+<!ELEMENT customertaxreg                        (#PCDATA) >
+<!ELEMENT customertype                          (#PCDATA) >
+<!ELEMENT customertypechar                      (#PCDATA) >
+<!ELEMENT employee                              (#PCDATA) >
+<!ELEMENT employeechar                          (#PCDATA) >
+<!ELEMENT employeecomment                       (#PCDATA) >
+<!ELEMENT extshipmaint                          (#PCDATA) >
+<!ELEMENT freightpricingscheduleitem            (#PCDATA) >
+<!ELEMENT incident                              (#PCDATA) >
+<!ELEMENT incidentchar                          (#PCDATA) >
+<!ELEMENT incidentcomment                       (#PCDATA) >
+<!ELEMENT incidentfile                          (#PCDATA) >
+<!ELEMENT incidentimage                         (#PCDATA) >
+<!ELEMENT itemalias                             (#PCDATA) >
+<!ELEMENT itemchar                              (#PCDATA) >
+<!ELEMENT itemcomment                           (#PCDATA) >
+<!ELEMENT itemcost                              (#PCDATA) >
+<!ELEMENT itemfile                              (#PCDATA) >
+<!ELEMENT itemimage                             (#PCDATA) >
+<!ELEMENT itemsitecomment                       (#PCDATA) >
+<!ELEMENT itemsource                            (#PCDATA) >
+<!ELEMENT itemsourceprice                       (#PCDATA) >
+<!ELEMENT itemsubstitute                        (#PCDATA) >
+<!ELEMENT itemtaxtype                           (#PCDATA) >
+<!ELEMENT itemuomconversion                     (#PCDATA) >
+<!ELEMENT location                              (#PCDATA) >
+<!ELEMENT misccounttag                          (#PCDATA) >
+<!ELEMENT physinvcount                          (#PCDATA) >
+<!ELEMENT pricingschedule                       (#PCDATA) >
+<!ELEMENT pricingscheduleassign                 (#PCDATA) >
+<!ELEMENT pricingscheduleitem                   (#PCDATA) >
+<!ELEMENT pricingscheduleitemchar               (#PCDATA) >
+<!ELEMENT project                               (#PCDATA) >
+<!ELEMENT projectcomment                        (#PCDATA) >
+<!ELEMENT prospect                              (#PCDATA) >
+<!ELEMENT purchaseline                          (#PCDATA) >
+<!ELEMENT purchaselinechar                      (#PCDATA) >
+<!ELEMENT purchaselinecomment                   (#PCDATA) >
+<!ELEMENT purchaseorder                         (#PCDATA) >
+<!ELEMENT purchaseordercomment                  (#PCDATA) >
+<!ELEMENT salescredit                           (#PCDATA) >
+<!ELEMENT saleshistory                          (#PCDATA) >
+<!ELEMENT salesrep                              (#PCDATA) >
+<!ELEMENT site                                  (#PCDATA) >
+<!ELEMENT sitezone                              (#PCDATA) >
+<!ELEMENT task                                  (#PCDATA) >
+<!ELEMENT taskcomment                           (#PCDATA) >
+<!ELEMENT todo                                  (#PCDATA) >
+<!ELEMENT vendor                                (#PCDATA) >
+<!ELEMENT vendoraddress                         (#PCDATA) >
+<!ELEMENT vendorchar                            (#PCDATA) >
+<!ELEMENT vendorcomment                         (#PCDATA) >
+<!ELEMENT vendortype                            (#PCDATA) >
+<!-- } -->
 
-<!ATTLIST account_name			quote	(true|false)	'true' >
-<!ATTLIST account_number		quote	(true|false)	'true' >
-<!ATTLIST address_number		quote	(true|false)	'true' >
-<!ATTLIST address1			quote	(true|false)	'true' >
-<!ATTLIST address2			quote	(true|false)	'true' >
-<!ATTLIST address3			quote	(true|false)	'true' >
-<!ATTLIST addressline			quote	(true|false)	'true' >
-<!ATTLIST alternate			quote	(true|false)	'true' >
-<!ATTLIST amount			quote	(true|false)	'true' >
-<!ATTLIST billing_contact_address1	quote	(true|false)	'true' >
-<!ATTLIST billing_contact_address2	quote	(true|false)	'true' >
-<!ATTLIST billing_contact_address3	quote	(true|false)	'true' >
-<!ATTLIST billing_contact_alternate	quote	(true|false)	'true' >
-<!ATTLIST billing_contact_city		quote	(true|false)	'true' >
-<!ATTLIST billing_contact_country	quote	(true|false)	'true' >
-<!ATTLIST billing_contact_email		quote	(true|false)	'true' >
-<!ATTLIST billing_contact_fax		quote	(true|false)	'true' >
-<!ATTLIST billing_contact_first		quote	(true|false)	'true' >
-<!ATTLIST billing_contact_honorific	quote	(true|false)	'true' >
-<!ATTLIST billing_contact_id		quote	(true|false)	'true' >
-<!ATTLIST billing_contact_job_title	quote	(true|false)	'true' >
-<!ATTLIST billing_contact_last		quote	(true|false)	'true' >
-<!ATTLIST billing_contact_postalcode	quote	(true|false)	'true' >
-<!ATTLIST billing_contact_state		quote	(true|false)	'true' >
-<!ATTLIST billing_contact_voice		quote	(true|false)	'true' >
-<!ATTLIST billing_contact_web		quote	(true|false)	'true' >
-<!ATTLIST billto_address1		quote	(true|false)	'true' >
-<!ATTLIST billto_address2		quote	(true|false)	'true' >
-<!ATTLIST billto_address3		quote	(true|false)	'true' >
-<!ATTLIST billto_city			quote	(true|false)	'true' >
-<!ATTLIST billto_country		quote	(true|false)	'true' >
-<!ATTLIST billto_name			quote	(true|false)	'true' >
-<!ATTLIST billto_postal_code		quote	(true|false)	'true' >
-<!ATTLIST billto_state			quote	(true|false)	'true' >
-<!ATTLIST characteristic		quote	(true|false)	'true' >
-<!ATTLIST city				quote	(true|false)	'true' >
-<!ATTLIST commission			quote	(true|false)	'true' >
-<!ATTLIST contact_id			quote	(true|false)	'true' >
-<!ATTLIST contact_number		quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_address1	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_address2	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_address3	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_alternate	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_city	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_country	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_email	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_fax	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_first	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_honorific	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_id		quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_job_title	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_last	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_postalcode	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_state	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_voice	quote	(true|false)	'true' >
-<!ATTLIST correspond_contact_web	quote	(true|false)	'true' >
-<!ATTLIST country		quote	(true|false)	'true' >
-<!ATTLIST credit		quote	(true|false)	'true' >
-<!ATTLIST credit_card_number	quote	(true|false)	'true' >
-<!ATTLIST credit_limit		quote	(true|false)	'true' >
-<!ATTLIST credit_limit_currency	quote	(true|false)	'true' >
-<!ATTLIST credit_rating		quote	(true|false)	'true' >
-<!ATTLIST crm_account		quote	(true|false)	'true' >
-<!ATTLIST currency		quote	(true|false)	'true' >
-<!ATTLIST cust_po_number	quote	(true|false)	'true' >
-<!ATTLIST customer_name		quote	(true|false)	'true' >
-<!ATTLIST customer_number	quote	(true|false)	'true' >
-<!ATTLIST customer_pn	 	quote	(true|false)	'true' >
-<!ATTLIST customer_type		quote	(true|false)	'true' >
-<!ATTLIST date			quote	(true|false)	'true' >
-<!ATTLIST debit			quote	(true|false)	'true' >
-<!ATTLIST default_currency	quote	(true|false)	'true' >
-<!ATTLIST default_discount	quote	(true|false)	'true' >
-<!ATTLIST default_tax_authority	quote	(true|false)	'true' >
-<!ATTLIST default_terms		quote	(true|false)	'true' >
-<!ATTLIST discount_pct_from_list quote	(true|false)	'true' >
-<!ATTLIST dist_date		quote	(true|false)	'true' >
-<!ATTLIST doc_number		quote	(true|false)	'true' >
-<!ATTLIST edi_profile		quote	(true|false)	'true' >
-<!ATTLIST email			quote	(true|false)	'true' >
-<!ATTLIST expiration_month	quote	(true|false)	'true' >
-<!ATTLIST expiration_year	quote	(true|false)	'true' >
-<!ATTLIST fax			quote	(true|false)	'true' >
-<!ATTLIST first			quote	(true|false)	'true' >
-<!ATTLIST fob			quote	(true|false)	'true' >
-<!ATTLIST freight		quote	(true|false)	'true' >
-<!ATTLIST general_notes		quote	(true|false)	'true' >
-<!ATTLIST honorific		quote	(true|false)	'true' >
-<!ATTLIST initials		quote	(true|false)	'true' >
-<!ATTLIST invc_edi_cc		quote	(true|false)	'true' >
-<!ATTLIST invc_edi_email	quote	(true|false)	'true' >
-<!ATTLIST invc_edi_emailbody	quote	(true|false)	'true' >
-<!ATTLIST invc_edi_filename	quote	(true|false)	'true' >
-<!ATTLIST invc_edi_profile	quote	(true|false)	'true' >
-<!ATTLIST invc_edi_subject	quote	(true|false)	'true' >
-<!ATTLIST item_number	 	quote	(true|false)	'true' >
-<!ATTLIST job_title		quote	(true|false)	'true' >
-<!ATTLIST key			quote	(true|false)	'true' >
-<!ATTLIST last			quote	(true|false)	'true' >
-<!ATTLIST line_number	 	quote	(true|false)	'true' >
-<!ATTLIST misc_account_number	quote	(true|false)	'true' >
-<!ATTLIST misc_charge		quote	(true|false)	'true' >
-<!ATTLIST misc_charge_description quote	(true|false)	'true' >
-<!ATTLIST name			quote	(true|false)	'true' >
-<!ATTLIST net_unit_price	quote	(true|false)	'true' >
-<!ATTLIST notes			quote	(true|false)	'true' >
-<!ATTLIST order_date		quote	(true|false)	'true' >
-<!ATTLIST order_notes		quote	(true|false)	'true' >
-<!ATTLIST order_number		quote	(true|false)	'true' >
-<!ATTLIST overwrite_po_price	quote	(true|false)	'true' >
-<!ATTLIST pack_date		quote	(true|false)	'true' >
-<!ATTLIST parent_account	quote	(true|false)	'true' >
-<!ATTLIST phone			quote	(true|false)	'true' >
-<!ATTLIST postal_code		quote	(true|false)	'true' >
-<!ATTLIST preferred_selling_whs	quote	(true|false)	'true' >
-<!ATTLIST primary_contact_number	quote	(true|false)	'true' >
-<!ATTLIST primary_contact_email		quote	(true|false)	'true' >
-<!ATTLIST primary_contact_fax		quote	(true|false)	'true' >
-<!ATTLIST primary_contact_first		quote	(true|false)	'true' >
-<!ATTLIST primary_contact_honorific	quote	(true|false)	'true' >
-<!ATTLIST primary_contact_job_title	quote	(true|false)	'true' >
-<!ATTLIST primary_contact_last		quote	(true|false)	'true' >
-<!ATTLIST primary_contact_voice		quote	(true|false)	'true' >
-<!ATTLIST project_number		quote	(true|false)	'true' >
-<!ATTLIST qty_ordered	 		quote	(true|false)	'true' >
-<!ATTLIST quote_date			quote	(true|false)	'true' >
-<!ATTLIST quote_number			quote	(true|false)	'true' >
-<!ATTLIST registration_number		quote	(true|false)	'true' >
-<!ATTLIST sales_rep			quote	(true|false)	'true' >
-<!ATTLIST scheduled_date		quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_number	quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_email	quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_fax		quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_first	quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_honorific	quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_job_title	quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_last	quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_voice	quote	(true|false)	'true' >
-<!ATTLIST secondary_contact_web		quote	(true|false)	'true' >
-<!ATTLIST ship_form		quote	(true|false)	'true' >
-<!ATTLIST ship_via		quote	(true|false)	'true' >
-<!ATTLIST shipping_charges	quote	(true|false)	'true' >
-<!ATTLIST shipping_chgs		quote	(true|false)	'true' >
-<!ATTLIST shipping_form		quote	(true|false)	'true' >
-<!ATTLIST shipping_notes	quote	(true|false)	'true' >
-<!ATTLIST shipto_address1	quote	(true|false)	'true' >
-<!ATTLIST shipto_address2	quote	(true|false)	'true' >
-<!ATTLIST shipto_address3	quote	(true|false)	'true' >
-<!ATTLIST shipto_city		quote	(true|false)	'true' >
-<!ATTLIST shipto_country	quote	(true|false)	'true' >
-<!ATTLIST shipto_name		quote	(true|false)	'true' >
-<!ATTLIST shipto_number		quote	(true|false)	'true' >
-<!ATTLIST shipto_phone		quote	(true|false)	'true' >
-<!ATTLIST shipto_postal_code	quote	(true|false)	'true' >
-<!ATTLIST shipto_state		quote	(true|false)	'true' >
-<!ATTLIST so_edi_cc		quote	(true|false)	'true' >
-<!ATTLIST so_edi_email		quote	(true|false)	'true' >
-<!ATTLIST so_edi_emailbody	quote	(true|false)	'true' >
-<!ATTLIST so_edi_filename	quote	(true|false)	'true' >
-<!ATTLIST so_edi_profile	quote	(true|false)	'true' >
-<!ATTLIST so_edi_subject	quote	(true|false)	'true' >
-<!ATTLIST sold_from_whs	 	quote	(true|false)	'true' >
-<!ATTLIST state			quote	(true|false)	'true' >
-<!ATTLIST street_address1	quote	(true|false)	'true' >
-<!ATTLIST street_address2	quote	(true|false)	'true' >
-<!ATTLIST substitute_for 	quote	(true|false)	'true' >
-<!ATTLIST supplying_whs 	quote	(true|false)	'true' >
-<!ATTLIST tax_authority		quote	(true|false)	'true' >
-<!ATTLIST tax_code		quote	(true|false)	'true' >
-<!ATTLIST tax_type		quote	(true|false)	'true' >
-<!ATTLIST terms			quote	(true|false)	'true' >
-<!ATTLIST text			quote	(true|false)	'true' >
-<!ATTLIST type			quote	(true|false)	'true' >
-<!ATTLIST username		quote	(true|false)	'true' >
-<!ATTLIST value		   	quote	(true|false)	'true' >
-<!ATTLIST voice			quote	(true|false)	'true' >
-<!ATTLIST warehouse		quote	(true|false)	'true' >
-<!ATTLIST web			quote	(true|false)	'true' >
-<!ATTLIST zone			quote	(true|false)	'true' >
+<!ELEMENT abc_class                             (#PCDATA) >
+<!ELEMENT account_description                   (#PCDATA) >
+<!ELEMENT account_name                          (#PCDATA) >
+<!ELEMENT account_number                        (#PCDATA) >
+<!ELEMENT address1                              (#PCDATA) >
+<!ELEMENT address2                              (#PCDATA) >
+<!ELEMENT address3                              (#PCDATA) >
+<!ELEMENT address_number                        (#PCDATA) >
+<!ELEMENT addressline                           (#PCDATA) >
+<!ELEMENT allow_automatic_updates               (#PCDATA)> <!-- boolean -->
+<!ELEMENT allow_posting_to_closed_periods       (#PCDATA) >
+<!ELEMENT alternate                             (#PCDATA) > <!-- telephone number -->
+<!ELEMENT alternate_prepaid_account             (#PCDATA) >
+<!ELEMENT alternate_prepaid_sales_category      (#PCDATA) >
+<!ELEMENT alternate_rev_account                 (#PCDATA) >
+<!ELEMENT amount                                (#PCDATA) > <!-- money -->
+<!ELEMENT amount_received                       (#PCDATA) >
+<!ELEMENT amount_to_apply                       (#PCDATA) >
+<!ELEMENT amount_to_distribute                  (#PCDATA) >
+<!ELEMENT apply_balance_as                      (#PCDATA) >
+<!ELEMENT auto_distr_issue_location             (#PCDATA) >
+<!ELEMENT auto_distr_location                   (#PCDATA) >
+<!ELEMENT auto_distr_receive_location           (#PCDATA) >
+<!ELEMENT auto_register                         (#PCDATA) >
+<!ELEMENT batch_size                            (#PCDATA) >
+<!ELEMENT batchnumber                           (#PCDATA) >
+<!ELEMENT billing_contact_address1              (#PCDATA) >
+<!ELEMENT billing_contact_address2              (#PCDATA) >
+<!ELEMENT billing_contact_address3              (#PCDATA) >
+<!ELEMENT billing_contact_alternate             (#PCDATA) > <!-- phone number -->
+<!ELEMENT billing_contact_city                  (#PCDATA) >
+<!ELEMENT billing_contact_country               (#PCDATA) >
+<!ELEMENT billing_contact_email                 (#PCDATA) > <!-- email address -->
+<!ELEMENT billing_contact_fax                   (#PCDATA) > <!-- phone number -->
+<!ELEMENT billing_contact_first                 (#PCDATA) >
+<!ELEMENT billing_contact_honorific             (#PCDATA) >
+<!ELEMENT billing_contact_id                    (#PCDATA) > <!-- positive int -->
+<!ELEMENT billing_contact_job_title             (#PCDATA) >
+<!ELEMENT billing_contact_last                  (#PCDATA) >
+<!ELEMENT billing_contact_postalcode            (#PCDATA) >
+<!ELEMENT billing_contact_state                 (#PCDATA) >
+<!ELEMENT billing_contact_voice                 (#PCDATA) > <!-- phone number -->
+<!ELEMENT billing_contact_web                   (#PCDATA) > <!-- URL -->
+<!ELEMENT billto_address1                       (#PCDATA) >
+<!ELEMENT billto_address2                       (#PCDATA) >
+<!ELEMENT billto_address3                       (#PCDATA) >
+<!ELEMENT billto_city                           (#PCDATA) >
+<!ELEMENT billto_country                        (#PCDATA) >
+<!ELEMENT billto_name                           (#PCDATA) >
+<!ELEMENT billto_phone                          (#PCDATA) >
+<!ELEMENT billto_postal_code                    (#PCDATA) >
+<!ELEMENT billto_state                          (#PCDATA) >
+<!ELEMENT bom_item_number                       (#PCDATA) >
+<!ELEMENT bom_revision                          (#PCDATA) >
+<!ELEMENT bomitem_id                            (#PCDATA) >
+<!ELEMENT calculate_freight                     (#PCDATA) > <!-- boolean -->
+<!ELEMENT cashrcptitem_discount                 (#PCDATA) >
+<!ELEMENT cashreceipt_number                    (#PCDATA) >
+<!ELEMENT characteristic                        (#PCDATA) >
+<!ELEMENT check_document_number                 (#PCDATA) >
+<!ELEMENT city                                  (#PCDATA) >
+<!ELEMENT class_code                            (#PCDATA) >
+<!ELEMENT commission                            (#PCDATA) >
+<!ELEMENT commission_due                        (#PCDATA) >
+<!ELEMENT commission_paid                       (#PCDATA) >
+<!ELEMENT company                               (#PCDATA) >
+<!ELEMENT configured                            (#PCDATA) >
+<!ELEMENT contact_id                            (#PCDATA) > <!-- positive int -->
+<!ELEMENT contact_number                        (#PCDATA) > <!-- positive int -->
+<!ELEMENT control_method                        (#PCDATA) >
+<!ELEMENT correspond_contact_address1           (#PCDATA) >
+<!ELEMENT correspond_contact_address2           (#PCDATA) >
+<!ELEMENT correspond_contact_address3           (#PCDATA) >
+<!ELEMENT correspond_contact_alternate          (#PCDATA) > <!-- phone number -->
+<!ELEMENT correspond_contact_city               (#PCDATA) >
+<!ELEMENT correspond_contact_country            (#PCDATA) >
+<!ELEMENT correspond_contact_email              (#PCDATA) > <!-- email address -->
+<!ELEMENT correspond_contact_fax                (#PCDATA) > <!-- phone number -->
+<!ELEMENT correspond_contact_first              (#PCDATA) >
+<!ELEMENT correspond_contact_honorific          (#PCDATA) >
+<!ELEMENT correspond_contact_id                 (#PCDATA) > <!-- positive int -->
+<!ELEMENT correspond_contact_job_title          (#PCDATA) >
+<!ELEMENT correspond_contact_last               (#PCDATA) >
+<!ELEMENT correspond_contact_postalcode         (#PCDATA) >
+<!ELEMENT correspond_contact_state              (#PCDATA) >
+<!ELEMENT correspond_contact_voice              (#PCDATA) > <!-- phone number -->
+<!ELEMENT correspond_contact_web                (#PCDATA) > <!-- URL -->
+<!ELEMENT cost_category                         (#PCDATA) >
+<!ELEMENT cost_method                           (#PCDATA) >
+<!ELEMENT country                               (#PCDATA) >
+<!ELEMENT create_child_wo                       (#PCDATA) >
+<!ELEMENT create_prs                            (#PCDATA) >
+<!ELEMENT create_sopos                          (#PCDATA) >
+<!ELEMENT create_soprs                          (#PCDATA) >
+<!ELEMENT create_wos                            (#PCDATA) >
+<!ELEMENT credit                                (#PCDATA) > <!-- 00-00-00-00 -->
+<!ELEMENT credit_card_number                    (#PCDATA) >
+<!ELEMENT credit_limit                          (#PCDATA) >
+<!ELEMENT credit_limit_currency                 (#PCDATA) >
+<!ELEMENT credit_rating                         (#PCDATA) >
+<!ELEMENT crm_account                           (#PCDATA) >
+<!ELEMENT currency                              (#PCDATA) >
+<!ELEMENT cust_po_number                        (#PCDATA) >
+<!ELEMENT customer_address                      (#PCDATA) >
+<!ELEMENT customer_name                         (#PCDATA) >
+<!ELEMENT customer_number                       (#PCDATA) >
+<!ELEMENT customer_part_number                  (#PCDATA) >
+<!ELEMENT customer_pn                           (#PCDATA) >
+<!ELEMENT customer_type                         (#PCDATA) >
+<!ELEMENT cycl_cnt_freq                         (#PCDATA) >
+<!ELEMENT date                                  (#PCDATA) > <!-- PostgreSQL timestamp -->
+<!ELEMENT debit                                 (#PCDATA) > <!-- 00-00-00-00 -->
+<!ELEMENT default_currency                      (#PCDATA) >
+<!ELEMENT default_discount                      (#PCDATA) >
+<!ELEMENT default_tax_zone                      (#PCDATA) >
+<!ELEMENT default_terms                         (#PCDATA) >
+<!ELEMENT description                           (#PCDATA) >
+<!ELEMENT description1                          (#PCDATA) >
+<!ELEMENT description2                          (#PCDATA) >
+<!ELEMENT disallow_blank_wip_locations          (#PCDATA) >
+<!ELEMENT discount_pct_from_list                (#PCDATA) > <!-- Numeric -->
+<!ELEMENT dist_date                             (#PCDATA) > <!-- PostgreSQL timestamp -->
+<!ELEMENT distribution_date                     (#PCDATA) >
+<!ELEMENT doc_date                              (#PCDATA) >
+<!ELEMENT doc_number                            (#PCDATA) >
+<!ELEMENT doc_type                              (#PCDATA) >
+<!ELEMENT document_date                         (#PCDATA) >
+<!ELEMENT document_number                       (#PCDATA) >
+<!ELEMENT dropship                              (#PCDATA) >
+<!ELEMENT due_date                              (#PCDATA) >
+<!ELEMENT ecn_number                            (#PCDATA) >
+<!ELEMENT edi_profile                           (#PCDATA) >
+<!ELEMENT effective                             (#PCDATA) >
+<!ELEMENT email                                 (#PCDATA) > <!-- email address -->
+<!ELEMENT enforce_on_manual_orders              (#PCDATA) >
+<!ELEMENT enforce_order_parameters              (#PCDATA) >
+<!ELEMENT event_fence                           (#PCDATA) >
+<!ELEMENT exclusive                             (#PCDATA) >
+<!ELEMENT expiration_month                      (#PCDATA) >
+<!ELEMENT expiration_year                       (#PCDATA) >
+<!ELEMENT expires                               (#PCDATA) >
+<!ELEMENT ext_description                       (#PCDATA) >
+<!ELEMENT ext_reference                         (#PCDATA) >
+<!ELEMENT fax                                   (#PCDATA) > <!-- phone number -->
+<!ELEMENT first                                 (#PCDATA) >
+<!ELEMENT first_group                           (#PCDATA) >
+<!ELEMENT fob                                   (#PCDATA) >
+<!ELEMENT forward_update_trial_balances         (#PCDATA) >
+<!ELEMENT fractional                            (#PCDATA) >
+<!ELEMENT freight                               (#PCDATA) > <!-- Numeric -->
+<!ELEMENT funds_type                            (#PCDATA) >
+<!ELEMENT general_notes                         (#PCDATA) >
+<!ELEMENT group_mps_mrp_orders                  (#PCDATA) >
+<!ELEMENT honorific                             (#PCDATA) >
+<!ELEMENT image_name                            (#PCDATA) >
+<!ELEMENT initials                              (#PCDATA) >
+<!ELEMENT invc_edi_cc                           (#PCDATA) > <!-- email address -->
+<!ELEMENT invc_edi_email                        (#PCDATA) > <!-- email address -->
+<!ELEMENT invc_edi_emailbody                    (#PCDATA) >
+<!ELEMENT invc_edi_filename                     (#PCDATA) >
+<!ELEMENT invc_edi_profile                      (#PCDATA) > <!-- Custom Email|No EDI|Use Customer Master|[profile name] -->
+<!ELEMENT invc_edi_subject                      (#PCDATA) >
+<!ELEMENT inventory_uom                         (#PCDATA) >
+<!ELEMENT invoice_date                          (#PCDATA) >
+<!ELEMENT invoice_number                        (#PCDATA) >
+<!ELEMENT issue_location                        (#PCDATA) >
+<!ELEMENT issue_uom                             (#PCDATA) >
+<!ELEMENT item_is_sold                          (#PCDATA) >
+<!ELEMENT item_number                           (#PCDATA) >
+<!ELEMENT item_type                             (#PCDATA) >
+<!ELEMENT job_title                             (#PCDATA) >
+<!ELEMENT journal_number                        (#PCDATA) >
+<!ELEMENT key                                   (#PCDATA) >
+<!ELEMENT last                                  (#PCDATA) >
+<!ELEMENT lead_time                             (#PCDATA) >
+<!ELEMENT line_number                           (#PCDATA) > <!-- positive Integer -->
+<!ELEMENT list_cost                             (#PCDATA) >
+<!ELEMENT list_price                            (#PCDATA) >
+<!ELEMENT list_price_uom                        (#PCDATA) >
+<!ELEMENT location_comment                      (#PCDATA) >
+<!ELEMENT maximum_desired_cost                  (#PCDATA) >
+<!ELEMENT maximum_order                         (#PCDATA) >
+<!ELEMENT minimum_order                         (#PCDATA) >
+<!ELEMENT misc_account_number                   (#PCDATA) > <!-- 00-00-00-00 -->
+<!ELEMENT misc_charge                           (#PCDATA) > <!-- Numeric -->
+<!ELEMENT misc_charge_account_number            (#PCDATA) >
+<!ELEMENT misc_charge_description               (#PCDATA) >
+<!ELEMENT misc_item_description                 (#PCDATA) >
+<!ELEMENT misc_item_number                      (#PCDATA) >
+<!ELEMENT mps_time_fence                        (#PCDATA) >
+<!ELEMENT multiple_location_control             (#PCDATA) >
+<!ELEMENT name                                  (#PCDATA) >
+<!ELEMENT net_unit_price                        (#PCDATA) > <!-- Numeric -->
+<!ELEMENT notes                                 (#PCDATA) >
+<!ELEMENT open_amount                           (#PCDATA) >
+<!ELEMENT order_date                            (#PCDATA) > <!-- PostgreSQL timestamp -->
+<!ELEMENT order_multiple                        (#PCDATA) >
+<!ELEMENT order_notes                           (#PCDATA) >
+<!ELEMENT order_number                          (#PCDATA) > <!-- positive Integer -->
+<!ELEMENT order_up_to                           (#PCDATA) >
+<!ELEMENT originated_by                         (#PCDATA) >
+<!ELEMENT overwrite_po_price                    (#PCDATA) > <!-- Numeric -->
+<!ELEMENT pack_date                             (#PCDATA) > <!-- PostgreSQL timestamp -->
+<!ELEMENT packaging_weight                      (#PCDATA) >
+<!ELEMENT paid                                  (#PCDATA) >
+<!ELEMENT parent_account                        (#PCDATA) >
+<!ELEMENT payment                               (#PCDATA) >
+<!ELEMENT period_start                          (#PCDATA) >
+<!ELEMENT perishable                            (#PCDATA) >
+<!ELEMENT phone                                 (#PCDATA) > <!-- phone number -->
+<!ELEMENT pick_list_item                        (#PCDATA) >
+<!ELEMENT planner_code                          (#PCDATA) >
+<!ELEMENT planning_system                       (#PCDATA) >
+<!ELEMENT po_number                             (#PCDATA) >
+<!ELEMENT po_supplied_at_site                   (#PCDATA) >
+<!ELEMENT post_to                               (#PCDATA) >
+<!ELEMENT postal_code                           (#PCDATA) >
+<!ELEMENT preferred_selling_whs                 (#PCDATA) >
+<!ELEMENT price_uom                             (#PCDATA) >
+<!ELEMENT primary_contact_address1              (#PCDATA) >
+<!ELEMENT primary_contact_address2              (#PCDATA) >
+<!ELEMENT primary_contact_address3              (#PCDATA) >
+<!ELEMENT primary_contact_address_city          (#PCDATA) >
+<!ELEMENT primary_contact_address_country       (#PCDATA) >
+<!ELEMENT primary_contact_address_number        (#PCDATA) >
+<!ELEMENT primary_contact_address_postalcode    (#PCDATA) >
+<!ELEMENT primary_contact_address_state         (#PCDATA) >
+<!ELEMENT primary_contact_email                 (#PCDATA) > <!-- email address -->
+<!ELEMENT primary_contact_fax                   (#PCDATA) > <!-- phone number -->
+<!ELEMENT primary_contact_first                 (#PCDATA) >
+<!ELEMENT primary_contact_honorific             (#PCDATA) >
+<!ELEMENT primary_contact_job_title             (#PCDATA) >
+<!ELEMENT primary_contact_last                  (#PCDATA) >
+<!ELEMENT primary_contact_middle                (#PCDATA) >
+<!ELEMENT primary_contact_number                (#PCDATA) > <!-- positive int -->
+<!ELEMENT primary_contact_voice                 (#PCDATA) > <!-- phone number -->
+<!ELEMENT product_category                      (#PCDATA) >
+<!ELEMENT product_weight                        (#PCDATA) >
+<!ELEMENT profit_center                         (#PCDATA) >
+<!ELEMENT project_number                        (#PCDATA) > <!-- positive Integer -->
+<!ELEMENT qty_billed                            (#PCDATA) >
+<!ELEMENT qty_fxd                               (#PCDATA) >
+<!ELEMENT qty_ordered                           (#PCDATA) > <!-- Numeric -->
+<!ELEMENT qty_per                               (#PCDATA) >
+<!ELEMENT qty_uom                               (#PCDATA) >
+<!ELEMENT quote_date                            (#PCDATA) > <!-- PostgreSQL timestamp -->
+<!ELEMENT quote_number                          (#PCDATA) > <!-- positive Integer -->
+<!ELEMENT ranking                               (#PCDATA) >
+<!ELEMENT reason_code                           (#PCDATA) >
+<!ELEMENT receive_location                      (#PCDATA) >
+<!ELEMENT reference                             (#PCDATA) >
+<!ELEMENT registration_number                   (#PCDATA) >
+<!ELEMENT reorder_level                         (#PCDATA) >
+<!ELEMENT require_warranty                      (#PCDATA) >
+<!ELEMENT revision                              (#PCDATA) >
+<!ELEMENT revision_date                         (#PCDATA) >
+<!ELEMENT safety_stock                          (#PCDATA) >
+<!ELEMENT sales_category                        (#PCDATA) >
+<!ELEMENT sales_rep                             (#PCDATA) >
+<!ELEMENT schedule_at_wo_operation              (#PCDATA) >
+<!ELEMENT scheduled_date                        (#PCDATA) > <!-- PostgreSQL timestamp -->
+<!ELEMENT scrap                                 (#PCDATA) >
+<!ELEMENT secondary_contact_address1            (#PCDATA) >
+<!ELEMENT secondary_contact_address2            (#PCDATA) >
+<!ELEMENT secondary_contact_address3            (#PCDATA) >
+<!ELEMENT secondary_contact_address_city        (#PCDATA) >
+<!ELEMENT secondary_contact_address_country     (#PCDATA) >
+<!ELEMENT secondary_contact_address_number      (#PCDATA) >
+<!ELEMENT secondary_contact_address_postalcode  (#PCDATA) >
+<!ELEMENT secondary_contact_address_state       (#PCDATA) >
+<!ELEMENT secondary_contact_email               (#PCDATA) > <!-- email address -->
+<!ELEMENT secondary_contact_fax                 (#PCDATA) > <!-- phone number -->
+<!ELEMENT secondary_contact_first               (#PCDATA) >
+<!ELEMENT secondary_contact_honorific           (#PCDATA) >
+<!ELEMENT secondary_contact_job_title           (#PCDATA) >
+<!ELEMENT secondary_contact_last                (#PCDATA) >
+<!ELEMENT secondary_contact_middle              (#PCDATA) >
+<!ELEMENT secondary_contact_number              (#PCDATA) > <!-- positive int -->
+<!ELEMENT secondary_contact_voice               (#PCDATA) > <!-- phone number -->
+<!ELEMENT secondary_contact_web                 (#PCDATA) > <!-- URL -->
+<!ELEMENT sequence_number                       (#PCDATA) >
+<!ELEMENT ship_date                             (#PCDATA) >
+<!ELEMENT ship_form                             (#PCDATA) >
+<!ELEMENT ship_via                              (#PCDATA) >
+<!ELEMENT shipping_charges                      (#PCDATA) >
+<!ELEMENT shipping_chgs                         (#PCDATA) >
+<!ELEMENT shipping_form                         (#PCDATA) >
+<!ELEMENT shipping_notes                        (#PCDATA) >
+<!ELEMENT shipto_address1                       (#PCDATA) >
+<!ELEMENT shipto_address2                       (#PCDATA) >
+<!ELEMENT shipto_address3                       (#PCDATA) >
+<!ELEMENT shipto_city                           (#PCDATA) >
+<!ELEMENT shipto_country                        (#PCDATA) >
+<!ELEMENT shipto_name                           (#PCDATA) >
+<!ELEMENT shipto_number                         (#PCDATA) >
+<!ELEMENT shipto_phone                          (#PCDATA) > <!-- telephone number -->
+<!ELEMENT shipto_postal_code                    (#PCDATA) >
+<!ELEMENT shipto_shipzone                       (#PCDATA) >
+<!ELEMENT shipto_state                          (#PCDATA) >
+<!ELEMENT so_edi_cc                             (#PCDATA) > <!-- email address -->
+<!ELEMENT so_edi_email                          (#PCDATA) > <!-- email address -->
+<!ELEMENT so_edi_emailbody                      (#PCDATA) >
+<!ELEMENT so_edi_filename                       (#PCDATA) >
+<!ELEMENT so_edi_profile                        (#PCDATA) > <!-- Custom Email|No EDI|Use Customer Master|[profile name] -->
+<!ELEMENT so_edi_subject                        (#PCDATA) >
+<!ELEMENT sold_from_site                        (#PCDATA) >
+<!ELEMENT sold_from_whs                         (#PCDATA) >
+<!ELEMENT state                                 (#PCDATA) >
+<!ELEMENT stocked                               (#PCDATA) >
+<!ELEMENT street_address1                       (#PCDATA) >
+<!ELEMENT street_address2                       (#PCDATA) >
+<!ELEMENT sub_account                           (#PCDATA) >
+<!ELEMENT sub_parent_uom_ratio                  (#PCDATA) >
+<!ELEMENT sub_type                              (#PCDATA) >
+<!ELEMENT substitute_for                        (#PCDATA) >
+<!ELEMENT substitute_item_number                (#PCDATA) >
+<!ELEMENT supplied_from_site                    (#PCDATA) >
+<!ELEMENT supplying_whs                         (#PCDATA) >
+<!ELEMENT tax_authority                         (#PCDATA) >
+<!ELEMENT tax_code                              (#PCDATA) >
+<!ELEMENT tax_type                              (#PCDATA) >
+<!ELEMENT tax_zone                              (#PCDATA) >
+<!ELEMENT terms                                 (#PCDATA) >
+<!ELEMENT text                                  (#PCDATA) >
+<!ELEMENT title                                 (#PCDATA) >
+<!ELEMENT total_qty_per                         (#PCDATA) >
+<!ELEMENT txnid                                 (#PCDATA) >
+<!ELEMENT type                                  (#PCDATA) > <!-- used different ways. could be generic text, could be limited (in api.account) to Organization or Individual -->
+<!ELEMENT upc_code                              (#PCDATA) >
+<!ELEMENT update_inventory                      (#PCDATA) >
+<!ELEMENT url                                   (#PCDATA) >
+<!ELEMENT used_at                               (#PCDATA) >
+<!ELEMENT user_defined_location                 (#PCDATA) >
+<!ELEMENT username                              (#PCDATA) >
+<!ELEMENT value                                 (#PCDATA) >
+<!ELEMENT vendor_number                         (#PCDATA) >
+<!ELEMENT voice                                 (#PCDATA) > <!-- telephone number -->
+<!ELEMENT web                                   (#PCDATA) >
+<!ELEMENT wo_supplied_at_site                   (#PCDATA) >
+<!ELEMENT zone                                  (#PCDATA) >
+
+
+<!ATTLIST account_name                          quote (true|false) 'true' >
+<!ATTLIST account_number                        quote (true|false) 'true' >
+<!ATTLIST address1                              quote (true|false) 'true' >
+<!ATTLIST address2                              quote (true|false) 'true' >
+<!ATTLIST address3                              quote (true|false) 'true' >
+<!ATTLIST address_number                        quote (true|false) 'true' >
+<!ATTLIST addressline                           quote (true|false) 'true' >
+<!ATTLIST allow_posting_to_closed_periods       quote (true|false) 'true' >
+<!ATTLIST alternate                             quote (true|false) 'true' >
+<!ATTLIST alternate_prepaid_account             quote (true|false) 'true' >
+<!ATTLIST alternate_prepaid_sales_category      quote (true|false) 'true' >
+<!ATTLIST alternate_rev_account                 quote (true|false) 'true' >
+<!ATTLIST amount                                quote (true|false) 'true' >
+<!ATTLIST amount_received                       quote (true|false) 'true' >
+<!ATTLIST amount_to_apply                       quote (true|false) 'true' >
+<!ATTLIST amount_to_distribute                  quote (true|false) 'true' >
+<!ATTLIST apply_balance_as                      quote (true|false) 'true' >
+<!ATTLIST auto_distr_issue_location             quote (true|false) 'true' >
+<!ATTLIST auto_distr_location                   quote (true|false) 'true' >
+<!ATTLIST auto_distr_receive_location           quote (true|false) 'true' >
+<!ATTLIST auto_register                         quote (true|false) 'true' >
+<!ATTLIST batch_size                            quote (true|false) 'true' >
+<!ATTLIST billing_contact_address1              quote (true|false) 'true' >
+<!ATTLIST billing_contact_address2              quote (true|false) 'true' >
+<!ATTLIST billing_contact_address3              quote (true|false) 'true' >
+<!ATTLIST billing_contact_alternate             quote (true|false) 'true' >
+<!ATTLIST billing_contact_city                  quote (true|false) 'true' >
+<!ATTLIST billing_contact_country               quote (true|false) 'true' >
+<!ATTLIST billing_contact_email                 quote (true|false) 'true' >
+<!ATTLIST billing_contact_fax                   quote (true|false) 'true' >
+<!ATTLIST billing_contact_first                 quote (true|false) 'true' >
+<!ATTLIST billing_contact_honorific             quote (true|false) 'true' >
+<!ATTLIST billing_contact_id                    quote (true|false) 'true' >
+<!ATTLIST billing_contact_job_title             quote (true|false) 'true' >
+<!ATTLIST billing_contact_last                  quote (true|false) 'true' >
+<!ATTLIST billing_contact_postalcode            quote (true|false) 'true' >
+<!ATTLIST billing_contact_state                 quote (true|false) 'true' >
+<!ATTLIST billing_contact_voice                 quote (true|false) 'true' >
+<!ATTLIST billing_contact_web                   quote (true|false) 'true' >
+<!ATTLIST billto_address1                       quote (true|false) 'true' >
+<!ATTLIST billto_address2                       quote (true|false) 'true' >
+<!ATTLIST billto_address3                       quote (true|false) 'true' >
+<!ATTLIST billto_city                           quote (true|false) 'true' >
+<!ATTLIST billto_country                        quote (true|false) 'true' >
+<!ATTLIST billto_name                           quote (true|false) 'true' >
+<!ATTLIST billto_phone                          quote (true|false) 'true' >
+<!ATTLIST billto_postal_code                    quote (true|false) 'true' >
+<!ATTLIST billto_state                          quote (true|false) 'true' >
+<!ATTLIST bom_item_number                       quote (true|false) 'true' >
+<!ATTLIST bom_revision                          quote (true|false) 'true' >
+<!ATTLIST bomitem_id                            quote (true|false) 'true' >
+<!ATTLIST calculate_freight                     quote (true|false) 'true' >
+<!ATTLIST cashrcptitem_discount                 quote (true|false) 'true' >
+<!ATTLIST cashreceipt_number                    quote (true|false) 'true' >
+<!ATTLIST characteristic                        quote (true|false) 'true' >
+<!ATTLIST check_document_number                 quote (true|false) 'true' >
+<!ATTLIST city                                  quote (true|false) 'true' >
+<!ATTLIST class_code                            quote (true|false) 'true' >
+<!ATTLIST commission                            quote (true|false) 'true' >
+<!ATTLIST commission_due                        quote (true|false) 'true' >
+<!ATTLIST commission_paid                       quote (true|false) 'true' >
+<!ATTLIST company                               quote (true|false) 'true' >
+<!ATTLIST configured                            quote (true|false) 'true' >
+<!ATTLIST contact_id                            quote (true|false) 'true' >
+<!ATTLIST contact_number                        quote (true|false) 'true' >
+<!ATTLIST control_method                        quote (true|false) 'true' >
+<!ATTLIST correspond_contact_address1           quote (true|false) 'true' >
+<!ATTLIST correspond_contact_address2           quote (true|false) 'true' >
+<!ATTLIST correspond_contact_address3           quote (true|false) 'true' >
+<!ATTLIST correspond_contact_alternate          quote (true|false) 'true' >
+<!ATTLIST correspond_contact_city               quote (true|false) 'true' >
+<!ATTLIST correspond_contact_country            quote (true|false) 'true' >
+<!ATTLIST correspond_contact_email              quote (true|false) 'true' >
+<!ATTLIST correspond_contact_fax                quote (true|false) 'true' >
+<!ATTLIST correspond_contact_first              quote (true|false) 'true' >
+<!ATTLIST correspond_contact_honorific          quote (true|false) 'true' >
+<!ATTLIST correspond_contact_id                 quote (true|false) 'true' >
+<!ATTLIST correspond_contact_job_title          quote (true|false) 'true' >
+<!ATTLIST correspond_contact_last               quote (true|false) 'true' >
+<!ATTLIST correspond_contact_postalcode         quote (true|false) 'true' >
+<!ATTLIST correspond_contact_state              quote (true|false) 'true' >
+<!ATTLIST correspond_contact_voice              quote (true|false) 'true' >
+<!ATTLIST correspond_contact_web                quote (true|false) 'true' >
+<!ATTLIST cost_category                         quote (true|false) 'true' >
+<!ATTLIST cost_method                           quote (true|false) 'true' >
+<!ATTLIST country                               quote (true|false) 'true' >
+<!ATTLIST create_child_wo                       quote (true|false) 'true' >
+<!ATTLIST create_prs                            quote (true|false) 'true' >
+<!ATTLIST create_sopos                          quote (true|false) 'true' >
+<!ATTLIST create_soprs                          quote (true|false) 'true' >
+<!ATTLIST create_wos                            quote (true|false) 'true' >
+<!ATTLIST credit                                quote (true|false) 'true' >
+<!ATTLIST credit_card_number                    quote (true|false) 'true' >
+<!ATTLIST credit_limit                          quote (true|false) 'true' >
+<!ATTLIST credit_limit_currency                 quote (true|false) 'true' >
+<!ATTLIST credit_rating                         quote (true|false) 'true' >
+<!ATTLIST crm_account                           quote (true|false) 'true' >
+<!ATTLIST currency                              quote (true|false) 'true' >
+<!ATTLIST cust_po_number                        quote (true|false) 'true' >
+<!ATTLIST customer_address                      quote (true|false) 'true' >
+<!ATTLIST customer_name                         quote (true|false) 'true' >
+<!ATTLIST customer_number                       quote (true|false) 'true' >
+<!ATTLIST customer_part_number                  quote (true|false) 'true' >
+<!ATTLIST customer_pn                           quote (true|false) 'true' >
+<!ATTLIST customer_type                         quote (true|false) 'true' >
+<!ATTLIST cycl_cnt_freq                         quote (true|false) 'true' >
+<!ATTLIST date                                  quote (true|false) 'true' >
+<!ATTLIST debit                                 quote (true|false) 'true' >
+<!ATTLIST default_currency                      quote (true|false) 'true' >
+<!ATTLIST default_discount                      quote (true|false) 'true' >
+<!ATTLIST default_tax_zone                      quote (true|false) 'true' >
+<!ATTLIST default_terms                         quote (true|false) 'true' >
+<!ATTLIST description                           quote (true|false) 'true' >
+<!ATTLIST description1                          quote (true|false) 'true' >
+<!ATTLIST description2                          quote (true|false) 'true' >
+<!ATTLIST disallow_blank_wip_locations          quote (true|false) 'true' >
+<!ATTLIST discount_pct_from_list                quote (true|false) 'true' >
+<!ATTLIST dist_date                             quote (true|false) 'true' >
+<!ATTLIST distribution_date                     quote (true|false) 'true' >
+<!ATTLIST doc_date                              quote (true|false) 'true' >
+<!ATTLIST doc_number                            quote (true|false) 'true' >
+<!ATTLIST doc_type                              quote (true|false) 'true' >
+<!ATTLIST document_date                         quote (true|false) 'true' >
+<!ATTLIST document_number                       quote (true|false) 'true' >
+<!ATTLIST dropship                              quote (true|false) 'true' >
+<!ATTLIST due_date                              quote (true|false) 'true' >
+<!ATTLIST ecn_number                            quote (true|false) 'true' >
+<!ATTLIST edi_profile                           quote (true|false) 'true' >
+<!ATTLIST effective                             quote (true|false) 'true' >
+<!ATTLIST email                                 quote (true|false) 'true' >
+<!ATTLIST enforce_on_manual_orders              quote (true|false) 'true' >
+<!ATTLIST enforce_order_parameters              quote (true|false) 'true' >
+<!ATTLIST event_fence                           quote (true|false) 'true' >
+<!ATTLIST exclusive                             quote (true|false) 'true' >
+<!ATTLIST expiration_month                      quote (true|false) 'true' >
+<!ATTLIST expiration_year                       quote (true|false) 'true' >
+<!ATTLIST expires                               quote (true|false) 'true' >
+<!ATTLIST ext_description                       quote (true|false) 'true' >
+<!ATTLIST ext_reference                         quote (true|false) 'true' >
+<!ATTLIST fax                                   quote (true|false) 'true' >
+<!ATTLIST first                                 quote (true|false) 'true' >
+<!ATTLIST first_group                           quote (true|false) 'true' >
+<!ATTLIST fob                                   quote (true|false) 'true' >
+<!ATTLIST forward_update_trial_balances         quote (true|false) 'true' >
+<!ATTLIST fractional                            quote (true|false) 'true' >
+<!ATTLIST freight                               quote (true|false) 'true' >
+<!ATTLIST funds_type                            quote (true|false) 'true' >
+<!ATTLIST general_notes                         quote (true|false) 'true' >
+<!ATTLIST group_mps_mrp_orders                  quote (true|false) 'true' >
+<!ATTLIST honorific                             quote (true|false) 'true' >
+<!ATTLIST image_name                            quote (true|false) 'true' >
+<!ATTLIST initials                              quote (true|false) 'true' >
+<!ATTLIST invc_edi_cc                           quote (true|false) 'true' >
+<!ATTLIST invc_edi_email                        quote (true|false) 'true' >
+<!ATTLIST invc_edi_emailbody                    quote (true|false) 'true' >
+<!ATTLIST invc_edi_filename                     quote (true|false) 'true' >
+<!ATTLIST invc_edi_profile                      quote (true|false) 'true' >
+<!ATTLIST invc_edi_subject                      quote (true|false) 'true' >
+<!ATTLIST inventory_uom                         quote (true|false) 'true' >
+<!ATTLIST invoice_date                          quote (true|false) 'true' >
+<!ATTLIST invoice_number                        quote (true|false) 'true' >
+<!ATTLIST issue_location                        quote (true|false) 'true' >
+<!ATTLIST issue_uom                             quote (true|false) 'true' >
+<!ATTLIST item_is_sold                          quote (true|false) 'true' >
+<!ATTLIST item_number                           quote (true|false) 'true' >
+<!ATTLIST item_type                             quote (true|false) 'true' >
+<!ATTLIST job_title                             quote (true|false) 'true' >
+<!ATTLIST journal_number                        quote (true|false) 'true' >
+<!ATTLIST key                                   quote (true|false) 'true' >
+<!ATTLIST last                                  quote (true|false) 'true' >
+<!ATTLIST lead_time                             quote (true|false) 'true' >
+<!ATTLIST line_number                           quote (true|false) 'true' >
+<!ATTLIST list_cost                             quote (true|false) 'true' >
+<!ATTLIST list_price                            quote (true|false) 'true' >
+<!ATTLIST list_price_uom                        quote (true|false) 'true' >
+<!ATTLIST location_comment                      quote (true|false) 'true' >
+<!ATTLIST maximum_desired_cost                  quote (true|false) 'true' >
+<!ATTLIST maximum_order                         quote (true|false) 'true' >
+<!ATTLIST minimum_order                         quote (true|false) 'true' >
+<!ATTLIST misc_account_number                   quote (true|false) 'true' >
+<!ATTLIST misc_charge                           quote (true|false) 'true' >
+<!ATTLIST misc_charge_account_number            quote (true|false) 'true' >
+<!ATTLIST misc_charge_description               quote (true|false) 'true' >
+<!ATTLIST misc_item_description                 quote (true|false) 'true' >
+<!ATTLIST misc_item_number                      quote (true|false) 'true' >
+<!ATTLIST mps_time_fence                        quote (true|false) 'true' >
+<!ATTLIST multiple_location_control             quote (true|false) 'true' >
+<!ATTLIST name                                  quote (true|false) 'true' >
+<!ATTLIST net_unit_price                        quote (true|false) 'true' >
+<!ATTLIST notes                                 quote (true|false) 'true' >
+<!ATTLIST open_amount                           quote (true|false) 'true' >
+<!ATTLIST order_date                            quote (true|false) 'true' >
+<!ATTLIST order_multiple                        quote (true|false) 'true' >
+<!ATTLIST order_notes                           quote (true|false) 'true' >
+<!ATTLIST order_number                          quote (true|false) 'true' >
+<!ATTLIST order_up_to                           quote (true|false) 'true' >
+<!ATTLIST originated_by                         quote (true|false) 'true' >
+<!ATTLIST overwrite_po_price                    quote (true|false) 'true' >
+<!ATTLIST pack_date                             quote (true|false) 'true' >
+<!ATTLIST packaging_weight                      quote (true|false) 'true' >
+<!ATTLIST paid                                  quote (true|false) 'true' >
+<!ATTLIST parent_account                        quote (true|false) 'true' >
+<!ATTLIST payment                               quote (true|false) 'true' >
+<!ATTLIST period_start                          quote (true|false) 'true' >
+<!ATTLIST perishable                            quote (true|false) 'true' >
+<!ATTLIST phone                                 quote (true|false) 'true' >
+<!ATTLIST pick_list_item                        quote (true|false) 'true' >
+<!ATTLIST planner_code                          quote (true|false) 'true' >
+<!ATTLIST planning_system                       quote (true|false) 'true' >
+<!ATTLIST po_number                             quote (true|false) 'true' >
+<!ATTLIST po_supplied_at_site                   quote (true|false) 'true' >
+<!ATTLIST post_to                               quote (true|false) 'true' >
+<!ATTLIST postal_code                           quote (true|false) 'true' >
+<!ATTLIST preferred_selling_whs                 quote (true|false) 'true' >
+<!ATTLIST price_uom                             quote (true|false) 'true' >
+<!ATTLIST primary_contact_address1              quote (true|false) 'true' >
+<!ATTLIST primary_contact_address2              quote (true|false) 'true' >
+<!ATTLIST primary_contact_address3              quote (true|false) 'true' >
+<!ATTLIST primary_contact_address_city          quote (true|false) 'true' >
+<!ATTLIST primary_contact_address_country       quote (true|false) 'true' >
+<!ATTLIST primary_contact_address_number        quote (true|false) 'true' >
+<!ATTLIST primary_contact_address_postalcode    quote (true|false) 'true' >
+<!ATTLIST primary_contact_address_state         quote (true|false) 'true' >
+<!ATTLIST primary_contact_email                 quote (true|false) 'true' >
+<!ATTLIST primary_contact_fax                   quote (true|false) 'true' >
+<!ATTLIST primary_contact_first                 quote (true|false) 'true' >
+<!ATTLIST primary_contact_honorific             quote (true|false) 'true' >
+<!ATTLIST primary_contact_job_title             quote (true|false) 'true' >
+<!ATTLIST primary_contact_last                  quote (true|false) 'true' >
+<!ATTLIST primary_contact_middle                quote (true|false) 'true' >
+<!ATTLIST primary_contact_number                quote (true|false) 'true' >
+<!ATTLIST primary_contact_voice                 quote (true|false) 'true' >
+<!ATTLIST product_category                      quote (true|false) 'true' >
+<!ATTLIST product_weight                        quote (true|false) 'true' >
+<!ATTLIST profit_center                         quote (true|false) 'true' >
+<!ATTLIST project_number                        quote (true|false) 'true' >
+<!ATTLIST qty_billed                            quote (true|false) 'true' >
+<!ATTLIST qty_fxd                               quote (true|false) 'true' >
+<!ATTLIST qty_ordered                           quote (true|false) 'true' >
+<!ATTLIST qty_per                               quote (true|false) 'true' >
+<!ATTLIST quote_date                            quote (true|false) 'true' >
+<!ATTLIST quote_number                          quote (true|false) 'true' >
+<!ATTLIST ranking                               quote (true|false) 'true' >
+<!ATTLIST reason_code                           quote (true|false) 'true' >
+<!ATTLIST receive_location                      quote (true|false) 'true' >
+<!ATTLIST reference                             quote (true|false) 'true' >
+<!ATTLIST registration_number                   quote (true|false) 'true' >
+<!ATTLIST reorder_level                         quote (true|false) 'true' >
+<!ATTLIST require_warranty                      quote (true|false) 'true' >
+<!ATTLIST revision                              quote (true|false) 'true' >
+<!ATTLIST revision_date                         quote (true|false) 'true' >
+<!ATTLIST safety_stock                          quote (true|false) 'true' >
+<!ATTLIST sales_category                        quote (true|false) 'true' >
+<!ATTLIST sales_rep                             quote (true|false) 'true' >
+<!ATTLIST schedule_at_wo_operation              quote (true|false) 'true' >
+<!ATTLIST scheduled_date                        quote (true|false) 'true' >
+<!ATTLIST scrap                                 quote (true|false) 'true' >
+<!ATTLIST secondary_contact_address1            quote (true|false) 'true' >
+<!ATTLIST secondary_contact_address2            quote (true|false) 'true' >
+<!ATTLIST secondary_contact_address3            quote (true|false) 'true' >
+<!ATTLIST secondary_contact_address_city        quote (true|false) 'true' >
+<!ATTLIST secondary_contact_address_country     quote (true|false) 'true' >
+<!ATTLIST secondary_contact_address_number      quote (true|false) 'true' >
+<!ATTLIST secondary_contact_address_postalcode  quote (true|false) 'true' >
+<!ATTLIST secondary_contact_address_state       quote (true|false) 'true' >
+<!ATTLIST secondary_contact_email               quote (true|false) 'true' >
+<!ATTLIST secondary_contact_fax                 quote (true|false) 'true' >
+<!ATTLIST secondary_contact_first               quote (true|false) 'true' >
+<!ATTLIST secondary_contact_honorific           quote (true|false) 'true' >
+<!ATTLIST secondary_contact_job_title           quote (true|false) 'true' >
+<!ATTLIST secondary_contact_last                quote (true|false) 'true' >
+<!ATTLIST secondary_contact_middle              quote (true|false) 'true' >
+<!ATTLIST secondary_contact_number              quote (true|false) 'true' >
+<!ATTLIST secondary_contact_voice               quote (true|false) 'true' >
+<!ATTLIST secondary_contact_web                 quote (true|false) 'true' >
+<!ATTLIST sequence_number                       quote (true|false) 'true' >
+<!ATTLIST ship_date                             quote (true|false) 'true' >
+<!ATTLIST ship_form                             quote (true|false) 'true' >
+<!ATTLIST ship_via                              quote (true|false) 'true' >
+<!ATTLIST shipping_charges                      quote (true|false) 'true' >
+<!ATTLIST shipping_chgs                         quote (true|false) 'true' >
+<!ATTLIST shipping_form                         quote (true|false) 'true' >
+<!ATTLIST shipping_notes                        quote (true|false) 'true' >
+<!ATTLIST shipto_address1                       quote (true|false) 'true' >
+<!ATTLIST shipto_address2                       quote (true|false) 'true' >
+<!ATTLIST shipto_address3                       quote (true|false) 'true' >
+<!ATTLIST shipto_city                           quote (true|false) 'true' >
+<!ATTLIST shipto_country                        quote (true|false) 'true' >
+<!ATTLIST shipto_name                           quote (true|false) 'true' >
+<!ATTLIST shipto_number                         quote (true|false) 'true' >
+<!ATTLIST shipto_phone                          quote (true|false) 'true' >
+<!ATTLIST shipto_postal_code                    quote (true|false) 'true' >
+<!ATTLIST shipto_shipzone                       quote (true|false) 'true' >
+<!ATTLIST shipto_state                          quote (true|false) 'true' >
+<!ATTLIST so_edi_cc                             quote (true|false) 'true' >
+<!ATTLIST so_edi_email                          quote (true|false) 'true' >
+<!ATTLIST so_edi_emailbody                      quote (true|false) 'true' >
+<!ATTLIST so_edi_filename                       quote (true|false) 'true' >
+<!ATTLIST so_edi_profile                        quote (true|false) 'true' >
+<!ATTLIST so_edi_subject                        quote (true|false) 'true' >
+<!ATTLIST sold_from_site                        quote (true|false) 'true' >
+<!ATTLIST sold_from_whs                         quote (true|false) 'true' >
+<!ATTLIST state                                 quote (true|false) 'true' >
+<!ATTLIST stocked                               quote (true|false) 'true' >
+<!ATTLIST street_address1                       quote (true|false) 'true' >
+<!ATTLIST street_address2                       quote (true|false) 'true' >
+<!ATTLIST sub_account                           quote (true|false) 'true' >
+<!ATTLIST sub_parent_uom_ratio                  quote (true|false) 'true' >
+<!ATTLIST sub_type                              quote (true|false) 'true' >
+<!ATTLIST substitute_for                        quote (true|false) 'true' >
+<!ATTLIST substitute_item_number                quote (true|false) 'true' >
+<!ATTLIST supplied_from_site                    quote (true|false) 'true' >
+<!ATTLIST supplying_whs                         quote (true|false) 'true' >
+<!ATTLIST tax_authority                         quote (true|false) 'true' >
+<!ATTLIST tax_code                              quote (true|false) 'true' >
+<!ATTLIST tax_type                              quote (true|false) 'true' >
+<!ATTLIST tax_zone                              quote (true|false) 'true' >
+<!ATTLIST terms                                 quote (true|false) 'true' >
+<!ATTLIST text                                  quote (true|false) 'true' >
+<!ATTLIST title                                 quote (true|false) 'true' >
+<!ATTLIST total_qty_per                         quote (true|false) 'true' >
+<!ATTLIST type                                  quote (true|false) 'true' >
+<!ATTLIST upc_code                              quote (true|false) 'true' >
+<!ATTLIST update_inventory                      quote (true|false) 'true' >
+<!ATTLIST url                                   quote (true|false) 'true' >
+<!ATTLIST used_at                               quote (true|false) 'true' >
+<!ATTLIST user_defined_location                 quote (true|false) 'true' >
+<!ATTLIST username                              quote (true|false) 'true' >
+<!ATTLIST value                                 quote (true|false) 'true' >
+<!ATTLIST vendor_number                         quote (true|false) 'true' >
+<!ATTLIST voice                                 quote (true|false) 'true' >
+<!ATTLIST web                                   quote (true|false) 'true' >
+<!ATTLIST wo_supplied_at_site                   quote (true|false) 'true' >
+<!ATTLIST zone                                  quote (true|false) 'true' >
 
 <!ELEMENT add_to_packing_list_batch	EMPTY	>
 <!ATTLIST add_to_packing_list_batch	value (true|false)	'true' >
@@ -956,20 +1695,32 @@
 <!ELEMENT credit_status_exceed_warn EMPTY >
 <!ATTLIST credit_status_exceed_warn value (true|false) 'true' >
 
+<!-- this is an unfortunate feature of the api view definitions. the views were not
+     designed and their columns were not named to form a consistent, coherent whole.
+     -->
+<!ELEMENT document_type EMPTY >
+<!ATTLIST document_type value (Credit_Memo | Debit_Memo | Invoice) #REQUIRED >
+
 <!ELEMENT default_flag EMPTY >
 <!ATTLIST default_flag value (true|false) 'true' >
 
 <!ELEMENT hold_type	EMPTY	 >
 <!ATTLIST hold_type	value (None|Credit|Shipping|Packing)	'None' >
 
-<!ELEMENT originated_by	EMPTY >
-<!ATTLIST originated_by	value	(Customer|Internet|Sales_Rep.) #REQUIRED >
+<!ELEMENT issue_method	EMPTY	 >
+<!ATTLIST issue_method	value (Mixed|Pull|Push)	'Mixed' >
+
+<!ELEMENT sale_type	EMPTY	 >
+<!ATTLIST sale_type	value (CUST|INT|REP) 'INT' >
 
 <!ELEMENT ship_complete	EMPTY	 >
 <!ATTLIST ship_complete	value	(true|false)	'true' >
 
 <!ELEMENT status	EMPTY >
 <!ATTLIST status	value	(O|C|X)		'O' >
+
+<!ELEMENT substitutions	EMPTY >
+<!ATTLIST substitutions	value	(No|Item-Defined|BOM-Defined)	'No' >
 
 <!ELEMENT uses_blanket_pos EMPTY >
 <!ATTLIST uses_blanket_pos	value	(true|false)	'true' >

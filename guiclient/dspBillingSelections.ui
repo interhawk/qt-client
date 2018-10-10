@@ -110,6 +110,9 @@ to be bound by its terms.</comment>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::MultiSelection</enum>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -144,7 +147,7 @@ to be bound by its terms.</comment>
              <item>
               <widget class="QPushButton" name="_post">
                <property name="text">
-                <string>Create &amp;Invoice</string>
+                <string>Create &amp;Invoice(s)</string>
                </property>
               </widget>
              </item>

@@ -26,6 +26,8 @@ class ExportHelper : public QObject
   Q_OBJECT
 
   public:
+    enum delimCheck{valid=0, tooLong=1, disallowed=2, disencouraged=3};
+
     static bool exportHTML(const int qryheadid, ParameterList &params, QString &filename, QString &errmsg);
     static bool exportXML(const int qryheadid, ParameterList &params, QString &filename, QString &errmsg, const int xsltmapid = -1);
     static QString generateDelimited(const int qryheadid, ParameterList &params, QString &errmsg);
@@ -37,6 +39,10 @@ class ExportHelper : public QObject
     static bool    XSLTConvertFile(QString inputfilename, QString outputfilename, QString xsltfilename, QString &errmsg);
     static bool    XSLTConvertFile(QString inputfilename, QString outputfilename, int xsltmapid, QString &errmsg);
     static QString XSLTConvertString(QString input, int xsltmapid, QString &errmsg);
+    static QStringList parseDelim(QString delim);
+    static enum delimCheck validDelim(QString delim, QString &errMsg);
+
+    
 };
 
 void setupExportHelper(QScriptEngine *engine);

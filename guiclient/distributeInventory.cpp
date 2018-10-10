@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -162,7 +162,7 @@ int distributeInventory::SeriesAdjust(int pItemlocSeries, QWidget *pParent,
   if (pItemlocSeries != 0)
   {
     XSqlQuery itemloc;
-    itemloc.prepare( "SELECT itemlocdist_id, itemlocdist_reqlotserial," 
+    itemloc.prepare( "SELECT itemlocdist_id, itemlocdist_reqlotserial, itemlocdist_transtype, " 
                      "       itemlocdist_distlotserial, itemlocdist_qty,"
                      "       itemsite_id, itemsite_loccntrl, itemsite_controlmethod,"
                      "       itemsite_perishable, itemsite_warrpurc,"
@@ -279,9 +279,12 @@ int distributeInventory::SeriesAdjust(int pItemlocSeries, QWidget *pParent,
           params.append("itemlocdist_id", itemloc.value("itemlocdist_id").toInt());
           
           // Auto assign lot/serial if applicable
+          QStringList exclTransact;
+          exclTransact << "TR" << "RR";
           if (itemloc.value("itemsite_lsseq_id").toInt() != -1 &&
               !itemloc.value("itemsite_perishable").toBool() &&
-              !itemloc.value("itemsite_warrpurc").toBool()) {
+              !itemloc.value("itemsite_warrpurc").toBool() &&
+              !exclTransact.contains(itemloc.value("itemlocdist_transtype").toString())) {
             XSqlQuery autocreatels;
             autocreatels.prepare("SELECT autocreatels(:itemlocdist_id) AS itemlocseries;");
             autocreatels.bindValue(":itemlocdist_id", itemloc.value("itemlocdist_id").toInt());
@@ -544,7 +547,6 @@ void distributeInventory::sSelectLocation()
     params.append("itemlocdist_id", _itemloc->id());
 
   params.append("itemsite_controlmethod", _controlMethod);
-
   distributeToLocation newdlg(this, "", true);
   newdlg.set(params);
 

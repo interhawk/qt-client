@@ -17,6 +17,11 @@
 
 #include "guiclient.h"
 
+#include "project.h"
+#include "projects.h"
+#include "dspOrderActivityByProject.h"
+#include "dspDocuments.h"
+
 #include "contact.h"
 #include "contacts.h"
 #include "contactMerge.h"
@@ -67,6 +72,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
   contactsMenu      = new QMenu(parent);
   addressMenu       = new QMenu(parent);
   prospectCRMMenu   = new QMenu(parent);
+  documentsMenu     = new QMenu(parent);
   utilitiesMenu     = new QMenu(parent);
   opportunityMenu   = new QMenu(parent);
 
@@ -79,6 +85,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
   contactsMenu->setObjectName("menu.crm.contacts");
   addressMenu->setObjectName("menu.crm.address");
   prospectCRMMenu->setObjectName("menu.crm.prospect");
+  documentsMenu->setObjectName("menu.crm.documents");
   utilitiesMenu->setObjectName("menu.crm.utilities");
   opportunityMenu->setObjectName("menu.crm.opportunity");
 
@@ -139,6 +146,10 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     { "so.prospects", tr("&List..."),	      SLOT(sProspects()), prospectCRMMenu, "MaintainProspectMasters ViewProspectMasters",	NULL, NULL, true, NULL },
     { "separator",		NULL,				NULL,  prospectCRMMenu,	"true", NULL, NULL, true	, NULL },
     { "so.prospectGroups", tr("&Groups..."),  SLOT(sProspectGroups()), prospectCRMMenu, "MaintainProspectGroups ViewProspectGroups",	NULL, NULL, true, NULL },
+
+    // CRM | Documents
+    { "menu",		tr("Documents"),        (char*)documentsMenu,	crmMenu,	"true", NULL, NULL, true	, NULL },
+    { "crm.documents",	tr("&List..."),	        SLOT(sDocuments()),	documentsMenu,	"ViewDocuments", NULL, NULL, true , NULL },
 
     { "separator",		NULL,				NULL,			crmMenu,	"true", NULL, NULL, true	, NULL },
 
@@ -345,6 +356,11 @@ void menuCRM::sAddressGroups()
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
   omfgThis->handleNewWindow(newdlg);
+}
+
+void menuCRM::sDocuments()
+{
+  omfgThis->handleNewWindow(new dspDocuments());
 }
 
 void menuCRM::sIncidentWorkbench()

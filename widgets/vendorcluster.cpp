@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -20,7 +20,8 @@
 
 #include "vendorcluster.h"
 #include "format.h"
-#include "storedProcErrorLookup.h"
+
+static const int CRMACCT_ID = 6; // Where does 6 come from????
 
 #define DEBUG false
 
@@ -80,7 +81,7 @@ void VendorLineEdit::setId(int pId)
     _idColName="vend_id";
     sUpdateMenu();
 
-    _crmacctId = model()->data(model()->index(0,CRMACCT_ID)).toInt();
+    _crmacctId = model()->data(model()->index(0, CRMACCT_ID)).toInt();
 
     emit newCrmacctId(_crmacctId);
 

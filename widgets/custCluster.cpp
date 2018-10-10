@@ -1,21 +1,18 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
  * to be bound by its terms.
  */
 
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QMenu>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QSqlError>
 #include <QSqlQueryModel>
-#include <QVBoxLayout>
 #include <QtScript>
 
 #include <metasql.h>
@@ -25,6 +22,10 @@
 #include "custcluster.h"
 #include "format.h"
 #include "storedProcErrorLookup.h"
+
+static const int CREDITSTATUS = 4;      // where do these come from?
+static const int CRMACCT_ID   = 5;
+static const int ISCUSTOMER   = 6;
 
 #define DEBUG false
 
@@ -63,7 +64,7 @@ CLineEdit::CLineEdit(QWidget *pParent, const char *pName) :
            "           cust_cntct_id"
            "      FROM custinfo"
            "      JOIN crmacct ON cust_crmacct_id = crmacct_id"
-           "     WHERE :number IS NULL or cust_number ~* :number"
+           "     WHERE :number IS NULL or cust_number ~* UPPER(:number)"
            "    UNION ALL"
            "    SELECT prospect_id AS id,"
            "           prospect_number AS number,"
@@ -74,7 +75,7 @@ CLineEdit::CLineEdit(QWidget *pParent, const char *pName) :
            "           getcrmaccountcontact(prospect_crmacct_id) AS cust_cntct_id"
            "      FROM prospect"
            "      LEFT OUTER JOIN crmacct ON prospect_crmacct_id = crmacct_id"
-           "     WHERE :number IS NULL or prospect_number ~* :number"
+           "     WHERE :number IS NULL or prospect_number ~* UPPER(:number)"
            "  ) cust"
            "  LEFT OUTER JOIN cntct ON cust_cntct_id = cntct_id"
            "  LEFT OUTER JOIN addr  ON cntct_addr_id = addr_id"
@@ -283,14 +284,14 @@ void CLineEdit::setCanEdit(bool p)
   {
     if (_x_privileges && _subtype == CRMAcctLineEdit::Cust)
       _canEdit = _x_privileges->check("MaintainCustomerMasters") &&
-                 _x_privileges->check("MaintainCustomerNumbers");
+                 (_newMode ? true : _x_privileges->check("MaintainCustomerNumbers"));
     else if (_x_privileges && _subtype == CRMAcctLineEdit::Prospect)
       _canEdit = _x_privileges->check("MaintainProspectMasters") &&
-                 _x_privileges->check("MaintainCustomerNumbers");
+                 (_newMode ? true : _x_privileges->check("MaintainCustomerNumbers"));
     else if (_x_privileges)
       _canEdit = (_x_privileges->check("MaintainCustomerMasters") ||
                  _x_privileges->check("MaintainProspectMasters")) &&
-                 _x_privileges->check("MaintainCustomerNumbers");
+                 (_newMode ? true : _x_privileges->check("MaintainCustomerNumbers"));
   }
   else
     _canEdit=p;
@@ -299,6 +300,11 @@ void CLineEdit::setCanEdit(bool p)
     setEditMode(false);
 
   sUpdateMenu();
+}
+
+bool CLineEdit::setNewMode(bool p)
+{
+  return _newMode=p;
 }
 
 bool CLineEdit::editMode()
@@ -425,6 +431,11 @@ CustCluster::CustCluster(QWidget *pParent, const char *pName) :
 void CustCluster::setType(CLineEdit::CLineEditTypes pType)
 {
   static_cast<CLineEdit*>(_number)->setType(pType);
+}
+
+bool CustCluster::setNewMode(bool p) const
+{
+  return static_cast<CLineEdit*>(_number)->setNewMode(p);
 }
 
 bool CustCluster::setEditMode(bool p) const

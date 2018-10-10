@@ -242,12 +242,12 @@ to be bound by its terms.</comment>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="_autoCreate">
-             <property name="enabled">
-              <bool>false</bool>
+            <widget class="QCheckBox" name="_documentPrivileges">
+             <property name="toolTip">
+              <string>If checked, an unprivileged user can still view the document in a document listing</string>
              </property>
              <property name="text">
-              <string>Automatically create Projects for Sales Orders</string>
+              <string>View Documents in list(s) if unprivileged</string>
              </property>
             </widget>
            </item>
@@ -282,6 +282,24 @@ to be bound by its terms.</comment>
              </property>
              <property name="text">
               <string>Require Unique Contact Email Addresses</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="_autoCreate">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Automatically create Projects for Sales Orders</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="_requireProjectAssignment">
+             <property name="toolTip">
+               <string>Require assignment of a Project # to Sales Order/Purchase Order/Work Order</string>
+             </property>
+             <property name="text">
+               <string>Require SO/PO/WO assignment to Project</string>
              </property>
             </widget>
            </item>

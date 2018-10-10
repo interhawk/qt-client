@@ -646,7 +646,8 @@ void returnAuthorization::sOrigSoChanged()
           if (_warehouse->id() != sohead.value("cohead_warehous_id").toInt() &&
               _shipWhs->id() != sohead.value("cohead_warehous_id").toInt())
           {
-            if (QMessageBox::question(this, tr("Sites Do Not Match"),
+            if ((!_warehouse->isValid() && !_shipWhs->isValid()) ||
+                QMessageBox::question(this, tr("Sites Do Not Match"),
                 tr("The Orig. Sales Order Site (%1) does not match the Receiving Site (%2) nor Shipping Site (%3). <p>"
                    "Do you want to update both of them to match the Sales Order?")
                 .arg(sohead.value("warehous_code").toString())

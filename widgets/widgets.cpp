@@ -35,6 +35,7 @@
 #include "plugins/deptclusterplugin.h"
 #include "plugins/dlineeditplugin.h"
 #include "plugins/documentsplugin.h"
+#include "plugins/docclusterplugin.h"
 #include "plugins/empclusterplugin.h"
 #include "plugins/expenseclusterplugin.h"
 #include "plugins/expenselineeditplugin.h"
@@ -118,6 +119,7 @@ xTuplePlugin::xTuplePlugin(QObject * parent) : QObject(parent)
   m_plugins.append(new DeptClusterPlugin(this));
   m_plugins.append(new DLineEditPlugin(this));
   m_plugins.append(new DocumentsPlugin(this));
+  m_plugins.append(new DocClusterPlugin(this));
   m_plugins.append(new EmpClusterPlugin(this));
   m_plugins.append(new ExpenseClusterPlugin(this));
   m_plugins.append(new ExpenseLineEditPlugin(this));
