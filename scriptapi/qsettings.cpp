@@ -24,63 +24,131 @@ QScriptValue constructQSettings(QScriptContext *context, QScriptEngine *engine)
 {
   QSettings *obj = 0;
 
-  if (context->argumentCount() == 0)
-  {
-    obj = new QSettings();
-  }
-  else if (context->argumentCount() == 1)
-  {
-    obj = new QSettings(qobject_cast<QObject*>(context->argument(0).toQObject()));
-  }
-  else if (context->argumentCount() == 3 &&
-             context->argument(0).isString() &&
-             context->argument(1).isString() &&
-             context->argument(2).isObject())
-  {
-    obj = new QSettings(context->argument(0).toString(),
-                        context->argument(1).toString(),
-                        qobject_cast<QObject*>(context->argument(2).toQObject()));
-  }
-  else if (context->argumentCount() == 3 &&
-             context->argument(0).isString() &&
-             context->argument(1).isNumber() &&
-             context->argument(2).isObject())
-  {
-    obj = new QSettings(context->argument(0).toString(),
-                        qscriptvalue_cast<QSettings::Format>(context->argument(1).toInt32()),
-                        qobject_cast<QObject*>(context->argument(2).toQObject()));
-  }
-  else if (context->argumentCount() == 4 &&
-             context->argument(0).isNumber() &&
-             context->argument(1).isString() &&
-             context->argument(2).isString() &&
-             context->argument(3).isObject())
-  {
-    obj = new QSettings(qscriptvalue_cast<QSettings::Scope>(context->argument(0).toInt32()),
-                        context->argument(1).toString(),
-                        context->argument(2).toString(),
-                        qobject_cast<QObject*>(context->argument(3).toQObject()));
-  }
-  else if (context->argumentCount() == 5 &&
-             context->argument(0).isNumber() &&
-             context->argument(1).isNumber() &&
-             context->argument(2).isString() &&
-             context->argument(3).isString() &&
-             context->argument(4).isObject())
-  {
-    obj = new QSettings(qscriptvalue_cast<QSettings::Format>(context->argument(0).toInt32()),
-                        qscriptvalue_cast<QSettings::Scope>(context->argument(1).toInt32()),
-                        context->argument(2).toString(),
-                        context->argument(3).toString(),
-                        qobject_cast<QObject*>(context->argument(4).toQObject()));
-  }
-  else
-  {
-    context->throwError(QScriptContext::UnknownError,
-                        "Could not find an appropriate QSettings constructor.");
+  switch (context->argumentCount()) {
+    case 0:
+      // QSettings(QObject *parent = nullptr)
+      obj = new QSettings();
+      break;
+    case 1:
+      // QSettings(const QString &organization, const QString &application = QString(), QObject *parent = nullptr)
+      if (context->argument(0).isString())
+        obj = new QSettings(context->argument(0).toString());
+      // QSettings(QObject *parent = nullptr)
+      else if (context->argument(0).isObject())
+        obj = new QSettings(qobject_cast<QObject*>(context->argument(0).toQObject()));
+      break;
+    case 2:
+      // QSettings(const QString &fileName, QSettings::Format format, QObject *parent = nullptr)
+      if (context->argument(0).isString() && context->argument(1).isNumber())
+      {
+        obj = new QSettings(context->argument(0).toString(),
+                            qscriptvalue_cast<QSettings::Format>(context->argument(1).toInt32()));
+      }
+      // QSettings(QSettings::Scope scope, const QString &organization, const QString &application = QString(),
+      //           QObject *parent = nullptr)
+      else if (context->argument(0).isNumber() && context->argument(1).isString())
+      {
+        obj = new QSettings(qscriptvalue_cast<QSettings::Scope>(context->argument(1).toInt32()),
+                           context->argument(0).toString());
+      }
+      // QSettings(const QString &organization, const QString &application = QString(), QObject *parent = nullptr)
+      else if (context->argument(0).isString() && context->argument(1).isString())
+      {
+        obj = new QSettings(context->argument(0).toString(),
+                            context->argument(1).toString());
+      }
+      break;
+    case 3:
+      //  QSettings(const QString &organization, const QString &application = QString(), QObject *parent = nullptr)
+      if (context->argument(0).isString() &&
+          context->argument(1).isString() &&
+          context->argument(2).isObject())
+      {
+        obj = new QSettings(context->argument(0).toString(),
+                            context->argument(1).toString(),
+                            qobject_cast<QObject*>(context->argument(2).toQObject()));
+      }
+      // QSettings(const QString &fileName, QSettings::Format format, QObject *parent = nullptr)
+      else if (context->argument(0).isString() &&
+               context->argument(1).isNumber() &&
+               context->argument(2).isObject())
+      {
+        obj = new QSettings(context->argument(0).toString(),
+                            qscriptvalue_cast<QSettings::Format>(context->argument(1).toInt32()),
+                            qobject_cast<QObject*>(context->argument(2).toQObject()));
+      }
+      // QSettings(QSettings::Scope scope, const QString &organization, const QString &application = QString(),
+      //           QObject *parent = nullptr)
+      else if (context->argument(0).isNumber() &&
+               context->argument(1).isString() &&
+               context->argument(2).isString())
+      {
+        obj = new QSettings(qscriptvalue_cast<QSettings::Scope>(context->argument(0).toInt32()),
+                            context->argument(1).toString(),
+                            context->argument(2).toString());
+      }
+      // QSettings(QSettings::Format format, QSettings::Scope scope, const QString &organization,
+      //           const QString &application = QString(), QObject *parent = nullptr)
+      else if (context->argument(0).isNumber() &&
+               context->argument(1).isNumber() &&
+               context->argument(2).isString())
+      {
+        obj = new QSettings(qscriptvalue_cast<QSettings::Format>(context->argument(0).toInt32()),
+                            qscriptvalue_cast<QSettings::Scope>(context->argument(1).toInt32()),
+                            context->argument(2).toString());
+      }
+      break;
+    case 4:
+      // QSettings(QSettings::Scope scope, const QString &organization, const QString &application = QString(),
+      //           QObject *parent = nullptr)
+      if (context->argument(0).isNumber() &&
+          context->argument(1).isString() &&
+          context->argument(2).isString() &&
+          context->argument(3).isObject())
+      {
+        obj = new QSettings(qscriptvalue_cast<QSettings::Scope>(context->argument(0).toInt32()),
+                            context->argument(1).toString(),
+                            context->argument(2).toString(),
+                            qobject_cast<QObject*>(context->argument(3).toQObject()));
+      }
+      // QSettings(QSettings::Format format, QSettings::Scope scope, const QString &organization,
+      //           const QString &application = QString(), QObject *parent = nullptr)
+      else if (context->argument(0).isNumber() &&
+               context->argument(1).isNumber() &&
+               context->argument(2).isString() &&
+               context->argument(3).isString())
+       {
+         obj = new QSettings(qscriptvalue_cast<QSettings::Format>(context->argument(0).toInt32()),
+                             qscriptvalue_cast<QSettings::Scope>(context->argument(1).toInt32()),
+                             context->argument(2).toString(),
+                             context->argument(3).toString());
+      }
+      break;
+    case 5:
+      // QSettings(QSettings::Format format, QSettings::Scope scope, const QString &organization,
+      //           const QString &application = QString(), QObject *parent = nullptr)
+      if (             context->argument(0).isNumber() &&
+                       context->argument(1).isNumber() &&
+                       context->argument(2).isString() &&
+                       context->argument(3).isString() &&
+                       context->argument(4).isObject())
+      {
+        obj = new QSettings(qscriptvalue_cast<QSettings::Format>(context->argument(0).toInt32()),
+                            qscriptvalue_cast<QSettings::Scope>(context->argument(1).toInt32()),
+                            context->argument(2).toString(),
+                            context->argument(3).toString(),
+                            qobject_cast<QObject*>(context->argument(4).toQObject()));
+      }
+      break;
+    default:
+      break;
   }
 
+  if (!obj)
+    context->throwError(QScriptContext::UnknownError, "Could not find an appropriate QSettings constructor.");
+
   return engine->newQObject(obj);
+
 }
 
 QSettingsProto::QSettingsProto(QObject *parent) : QObject(parent)
