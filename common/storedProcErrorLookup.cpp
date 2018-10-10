@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -38,6 +38,16 @@ const struct {
   QString	proxyName;	// look up (proxyName, retVal)
 } errors[] = {
 
+  { "_aropenTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "You do not have privileges to maintain A/R Memos. "),                     0, "" },
+  { "_aropenTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "You must enter a valid Document # for this A/R Memo. "),                     0, "" },
+  { "_aropenTrigger", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "This Document Type/Number already exists. You may not enter a duplicate A/R Memo. "),                     0, "" },
+  { "_aropenTrigger", -4, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "Currency exchange rate not found "),                     0, "" },
+  { "_aropenTrigger", -5, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "Invalid amount for paid column "),                     0, "" },
   { "attachQuoteToOpportunity", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Quote cannot be attached because "
                             "the Quote cannot be found."),                     0, "" },
   { "attachQuoteToOpportunity", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Quote cannot be attached because "
@@ -531,9 +541,9 @@ const struct {
                                "you may delete the selected Characteristic."),
 			       					 0, "" },
 
-  { "deleteCheck",     -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot delete this Payment because either it has not "
-                          "been voided, it has already been posted or replaced, "
-                          "or it has been transmitted electronically and printed."),
+  { "deleteCheck", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot delete this Payment because either it has not "
+                          "been voided, it has already been posted or replaced,"
+                          " or it has been transmitted electronically."),
 			           					0, "" },
 
   { "deleteClassCode", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup",  "The selected Class Code cannot be deleted "
@@ -978,8 +988,6 @@ const struct {
 			       "Transfer Order Item then either the Transfer "
 			       "Order does not exist or there is no Item Site "
 			       "for this line item."),		0, "" },
-  { "enterReceipt",  -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An Item Site is marked inactive and cannot be receipted against. "
-                          "Please correct this before proceeding."),		0, "" },
 
   { "explodeWo",  -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Work Order %1 cannot be Exploded as there is no "
 			 "valid Bill of Materials on file for the Work Order "
@@ -1109,10 +1117,6 @@ const struct {
   { "issueWoMaterial", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Missing Item Site or Cost Category."),0, ""},
   { "issueWoMaterial", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Expected Count of Distribution Detail Records Posted for Controlled Item."),0, ""},
   { "issueWoMaterial", -4, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Qty to Issue Must be Positive"),0, ""},
-
-  { "_itemsrcTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to maintain Item Sources."), 0, "" },
-  { "_itemsrcTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An Item Source already exists for this Vendor/Item/Vendor Number combination "
-                      "with an overlapping effective date range. "),    0, "" },
 
   { "login",  -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The specified Username does not exist in the specified "
                      "Database. Contact your Systems Administrator to report "
@@ -1252,8 +1256,7 @@ const struct {
   { "postCCcredit",  -4, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot post this Credit Card refund because the "
                             "credit card payment records is not for a refund."),
                                                                         0, "" },
-  { "postCheck",   -9, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Bank settings require this payment to be printed before posting."),
-                                                                        0, "" },
+
   { "postCheck",  -10, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot post this Payment because it has already "
 			 "been posted."),				0, "" },
   { "postCheck",  -11, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot post this Payment because the recipient "
@@ -1386,8 +1389,7 @@ const struct {
              "Transaction series must be provided."), 0, "" },
   { "postInvTrans", -8, QT_TRANSLATE_NOOP("storedProcErrorLookup",
              "Could not find the itemlocSeries for the pInvhistId provided."), 0, "" },
-  { "postInvTrans", -9, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Could not post this inventory transaction because"
-             " the transaction will cause inventory to be reduced below current Sales Reservation requirements."), 0, "" },
+
   { "postPoReceipt",	-1, "",	 -1, "postReceipt" },
   { "postPoReceipt",	-2, "",	 -2, "postReceipt" },
   { "postPoReceipt",	-3, "",	 -3, "postReceipt" },
@@ -1615,10 +1617,6 @@ const struct {
 			      "was not found."),			0, "" },
   { "reverseCashReceipt", -8, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot reverse this Cash Receipt because the "
                             "credit card records could not be found."),  0, "" },
-  { "_soitemBeforeDeleteTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to delete a Sales Order."), 0, "" },
-  { "_soitemBeforeDeleteTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You can not delete this Sales Order Line as it has several "
-                              "sub components that have already been shipped."), 0, "" },
-  { "_soitemBeforeDeleteTrigger", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Error deleting kit components."), 0, "" },
 
   { "saveAlarm", -10, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An alarm for this item already exists."), 0, "" },
 

@@ -2,7 +2,7 @@
 <ui version="4.0">
  <comment>This file is part of the xTuple ERP: PostBooks Edition, a free and
 open source Enterprise Resource Planning software suite,
-Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
 It is licensed to you under the Common Public Attribution License
 version 1.0, the full text of which (including xTuple-specific Exhibits)
 is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1682,7 +1682,89 @@ to be bound by its terms.</comment>
       </attribute>
       <layout class="QGridLayout">
        <item row="0" column="0">
-        <widget class="CharacteristicsWidget" name="_charass"/>
+        <widget class="QStackedWidget" name="_widgetStack">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="_charassPage">
+          <layout class="QGridLayout">
+           <item row="0" column="0">
+            <widget class="XTreeWidget" name="_charass"/>
+           </item>
+           <item row="0" column="1">
+            <layout class="QVBoxLayout">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="_newCharacteristic">
+               <property name="text">
+                <string>&amp;New</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="_editCharacteristic">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>&amp;Edit</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="_deleteCharacteristic">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>&amp;Delete</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="_charTemplatePage">
+          <widget class="QTreeView" name="_chartempl">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>661</width>
+             <height>463</height>
+            </rect>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::AllEditTriggers</set>
+           </property>
+           <property name="rootIsDecorated">
+            <bool>false</bool>
+           </property>
+           <property name="itemsExpandable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -2317,6 +2399,10 @@ to be bound by its terms.</comment>
   <tabstop>_upCC</tabstop>
   <tabstop>_downCC</tabstop>
   <tabstop>_charass</tabstop>
+  <tabstop>_newCharacteristic</tabstop>
+  <tabstop>_editCharacteristic</tabstop>
+  <tabstop>_deleteCharacteristic</tabstop>
+  <tabstop>_chartempl</tabstop>
   <tabstop>_notesButton</tabstop>
   <tabstop>_notes</tabstop>
   <tabstop>_commentsButton</tabstop>
