@@ -127,11 +127,11 @@ QScriptValue constructQSettings(QScriptContext *context, QScriptEngine *engine)
     case 5:
       // QSettings(QSettings::Format format, QSettings::Scope scope, const QString &organization,
       //           const QString &application = QString(), QObject *parent = nullptr)
-      if (             context->argument(0).isNumber() &&
-                       context->argument(1).isNumber() &&
-                       context->argument(2).isString() &&
-                       context->argument(3).isString() &&
-                       context->argument(4).isObject())
+      if (context->argument(0).isNumber() &&
+          context->argument(1).isNumber() &&
+          context->argument(2).isString() &&
+          context->argument(3).isString() &&
+          context->argument(4).isObject())
       {
         obj = new QSettings(qscriptvalue_cast<QSettings::Format>(context->argument(0).toInt32()),
                             qscriptvalue_cast<QSettings::Scope>(context->argument(1).toInt32()),
