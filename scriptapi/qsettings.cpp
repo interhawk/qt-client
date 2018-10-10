@@ -8,16 +8,66 @@
  * to be bound by its terms.
  */
 
+#include "scriptapi_internal.h"
 #include "qsettings.h"
+
+QScriptValue FormattoScriptValue(QScriptEngine *engine, const enum QSettings::Format &p)
+{
+  return QScriptValue(engine, (int)p);
+}
+
+void FormatfromScriptValue(const QScriptValue &obj, enum QSettings::Format &p)
+{
+  p = (enum QSettings::Format)obj.toInt32();
+}
+
+QScriptValue ScopetoScriptValue(QScriptEngine *engine, const enum QSettings::Scope &p)
+{
+  return QScriptValue(engine, (int)p);
+}
+
+void ScopefromScriptValue(const QScriptValue &obj, enum QSettings::Scope &p)
+{
+  p = (enum QSettings::Scope)obj.toInt32();
+}
+
+QScriptValue StatustoScriptValue(QScriptEngine *engine, const enum QSettings::Status &p)
+{
+  return QScriptValue(engine, (int)p);
+}
+
+void StatusfromScriptValue(const QScriptValue &obj, enum QSettings::Status &p)
+{
+  p = (enum QSettings::Status)obj.toInt32();
+}
 
 void setupQSettingsProto(QScriptEngine *engine)
 {
-  QScriptValue constructor = engine->newFunction(constructQSettings);
-  QScriptValue metaObject = engine->newQMetaObject(&QSettings::staticMetaObject, constructor);
-  engine->globalObject().setProperty("QSettings", metaObject);
-
   QScriptValue proto = engine->newQObject(new QSettingsProto(engine));
   engine->setDefaultPrototype(qMetaTypeId<QSettings*>(), proto);
+
+  QScriptValue constructor = engine->newFunction(constructQSettings, proto);
+  engine->globalObject().setProperty("QSettings", constructor);
+
+  qScriptRegisterMetaType(engine, FormattoScriptValue, FormatfromScriptValue);
+  constructor.setProperty("NativeFormat",     QScriptValue(engine, QSettings::NativeFormat),      ENUMPROPFLAGS);
+#if QT_VERSION >= QT_VERSION_CHECK(5,7,0) && defined(Q_OS_WIN)
+  constructor.setProperty("Registry32Format", QScriptValue(engine, QSettings::Registry32Format),  ENUMPROPFLAGS);
+  constructor.setProperty("Registry64Format", QScriptValue(engine, QSettings::Registry64Format),  ENUMPROPFLAGS);
+#endif
+  constructor.setProperty("IniFormat",        QScriptValue(engine, QSettings::IniFormat),         ENUMPROPFLAGS);
+  constructor.setProperty("NativeFormat",     QScriptValue(engine, QSettings::NativeFormat),      ENUMPROPFLAGS);
+  constructor.setProperty("InvalidFormat",    QScriptValue(engine, QSettings::InvalidFormat),     ENUMPROPFLAGS);
+
+  qScriptRegisterMetaType(engine, ScopetoScriptValue, ScopefromScriptValue);
+  constructor.setProperty("UserScope",   QScriptValue(engine, QSettings::UserScope),   ENUMPROPFLAGS);
+  constructor.setProperty("SystemScope", QScriptValue(engine, QSettings::SystemScope), ENUMPROPFLAGS);
+
+  qScriptRegisterMetaType(engine, StatustoScriptValue, StatusfromScriptValue);
+  constructor.setProperty("NoError",     QScriptValue(engine, QSettings::NoError),     ENUMPROPFLAGS);
+  constructor.setProperty("AccessError", QScriptValue(engine, QSettings::AccessError), ENUMPROPFLAGS);
+  constructor.setProperty("FormatError", QScriptValue(engine, QSettings::FormatError), ENUMPROPFLAGS);
+
 }
 
 QScriptValue constructQSettings(QScriptContext *context, QScriptEngine *engine)
