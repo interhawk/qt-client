@@ -2485,7 +2485,7 @@ to be bound by its terms.</comment>
       <attribute name="title">
        <string>Advanced</string>
       </attribute>
-      <widget class="RecurrenceWidget" name="recurrenceWidget">
+      <widget class="RecurrenceWidget" name="_recur">
        <property name="geometry">
         <rect>
          <x>10</x>
