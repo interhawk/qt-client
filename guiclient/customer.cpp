@@ -617,7 +617,7 @@ bool customer::sSave()
                "  :cust_commprcnt, :cust_partialship,"
                "  :cust_shipvia,"
                "  :cust_shipchrg_id, :cust_shipform_id, :cust_terms_id,"
-               "  :cust_discntprcnt, :cust_taxzone_id, :cust_tax_exemption"
+               "  :cust_discntprcnt, :cust_taxzone_id, :cust_tax_exemption,"
                "  :cust_active, :cust_usespos, :cust_blanketpos, :cust_comments,"
                "  :cust_preferred_warehous_id, "
                "  :cust_gracedays, :cust_curr_id, :cust_financecharge ) " );
