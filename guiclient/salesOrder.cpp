@@ -290,7 +290,7 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   _bankaccnt->setType(XComboBox::ARBankAccounts);
   _salescat->setType(XComboBox::SalesCategoriesActive);
 
-  _recur->setParent(-1, "SALESORDER")
+  _recur->setParent(-1, "SALESORDER");
 
   sHandleMore();
 }
