@@ -418,15 +418,10 @@ void customer::setViewMode()
   _upCC->setEnabled(false);
   _downCC->setEnabled(false);
   _warnLate->setEnabled(false);
-  _charass->setEnabled(true);
   _chartempl->setEnabled(false);
 
   connect(_shipto, SIGNAL(itemSelected(int)), _viewShipto, SLOT(animateClick()));
   connect(_cc, SIGNAL(itemSelected(int)), _viewCC, SLOT(animateClick()));
-
-  connect(_deleteCharacteristic, SIGNAL(clicked()), this, SLOT(sDeleteCharacteristic()));
-  connect(_editCharacteristic, SIGNAL(clicked()), this, SLOT(sEditCharacteristic()));
-  connect(_newCharacteristic, SIGNAL(clicked()), this, SLOT(sNewCharacteristic()));
 
   disconnect(_taxreg, SIGNAL(valid(bool)), _deleteTaxreg, SLOT(setEnabled(bool)));
   disconnect(_taxreg, SIGNAL(valid(bool)), _editTaxreg, SLOT(setEnabled(bool)));
