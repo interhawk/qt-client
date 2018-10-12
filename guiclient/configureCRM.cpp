@@ -11,18 +11,16 @@
 #include "configureCRM.h"
 
 #include <QMessageBox>
-#include <QSqlError>
 #include <QVariant>
-
-#include <metasql.h>
 
 #include "guiclient.h"
 #include "mqlutil.h"
 #include "errorReporter.h"
 
-configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt::WindowFlags fl)
+configureCRM::configureCRM(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XAbstractConfigure(parent, fl)
 {
+  Q_UNUSED(modal);
   XSqlQuery configureconfigureCRM;
   setupUi(this);
 

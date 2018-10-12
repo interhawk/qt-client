@@ -357,7 +357,6 @@ enum SetResponse salesOrderItem::set(const ParameterList &pParams)
     {
       if (setSales.value("preferredwarehousid").toInt() != -1)
         _preferredWarehouseid = setSales.value("preferredwarehousid").toInt();
-      _custName = setSales.value("f_name").toString();
       _item->setCRMAcctId(setSales.value("cust_crmacct_id").toInt());
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Customer Information"),
