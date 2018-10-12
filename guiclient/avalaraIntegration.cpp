@@ -32,7 +32,7 @@ AvalaraIntegration::AvalaraIntegration() : TaxIntegration()
 void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderId, QString payload, QStringList config)
 {
   if (_metrics->boolean("NoAvaTaxCommit") &&
-      (type == "committransaction" || type == "voidtransaction"))
+      (type == "committransaction" || type == "voidtransaction" || type == "refundtransaction"))
     return;
 
   XSqlQuery build;
@@ -77,7 +77,8 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
            (other->property("type") == "taxexempt") ||
            ((other->property("type") == "createtransaction" ||
              other->property("type") == "committransaction" ||
-             other->property("type") == "voidtransaction") &&
+             other->property("type") == "voidtransaction" ||
+             other->property("type") == "refundtransaction") &&
             other->property("orderType") == orderType &&
             other->property("orderId") == orderId)))
       {
@@ -141,6 +142,8 @@ void AvalaraIntegration::handleResponse(QNetworkReply* reply)
         txt += "CommitTransaction";
       else if (type == "voidtransaction")
         txt += "VoidTransaction";
+      else if (type == "refundtransaction")
+        txt += "RefundTransaction";
       else
         txt += "Error";
       txt += "\n";
