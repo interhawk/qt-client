@@ -90,6 +90,20 @@ void TaxIntegration::cancel(QString orderType, int orderId)
                          qry, __FILE__, __LINE__);
 }
 
+void TaxIntegration::refund(int invcheadId, QDate refundDate)
+{
+  XSqlQuery qry;
+  qry.prepare("SELECT refundTax(:invcheadId, :refundDate) AS request;");
+  qry.bindValue(":invcheadId", invcheadId);
+  qry.bindValue(":refundDate", refundDate);
+  qry.exec();
+  if (qry.first() && !qry.value("request").isNull())
+    sendRequest("refundtransaction", "INV", invcheadId, qry.value("request").toString());
+  else
+    ErrorReporter::error(QtCriticalMsg, 0, tr("Error refunding tax"),
+                         qry, __FILE__, __LINE__);
+}
+
 void TaxIntegration::handleResponse(QString type, QString orderType, int orderId, QString response, QString error)
 {
   if (type == "test")

@@ -13,6 +13,7 @@
 
 #include <QElapsedTimer>
 #include <QObject>
+#include <QDate>
 #include <QJsonObject>
 
 #include "xsqlquery.h"
@@ -29,6 +30,7 @@ class TaxIntegration : public QObject
     Q_INVOKABLE virtual void calculateTax(QString, int, bool = false);
     Q_INVOKABLE virtual void commit(QString, int);
     Q_INVOKABLE virtual void cancel(QString, int);
+    Q_INVOKABLE virtual void refund(int, QDate);
     Q_INVOKABLE virtual void wait();
 
   signals:
