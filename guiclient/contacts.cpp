@@ -807,6 +807,8 @@ void contacts::sNewProspect()
       QString company = list()->currentItem()->rawValue("company").toString();
       if (company.size() > 0)
         params.append("company", company);
+
+      params.append("cntct_id", item->id());
     }
     else if (crmaccts.size() == 1)
       crmacctsel = crmaccts[0];
