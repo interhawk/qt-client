@@ -144,7 +144,8 @@ enum SetResponse prospect::set(const ParameterList &pParams)
     getq.exec();
     if (getq.first())
     {
-      _number->setText(getq.value("prospect_name").toString());
+      if (_metrics->value("CRMAccountNumberGeneration") == "M")
+        _number->setText(getq.value("prospect_name").toString());
       _name->setText(getq.value("prospect_name").toString());
       _notes->setText(getq.value("prospect_comments").toString());
       _active->setChecked(getq.value("prospect_active").toBool());
@@ -161,7 +162,8 @@ enum SetResponse prospect::set(const ParameterList &pParams)
   if (valid && _mode == cNew)
   {
     _name->setText(param.toString());
-    _number->setText(param.toString());
+    if (_metrics->value("CRMAccountNumberGeneration") == "M")
+      _number->setText(param.toString());
   }
 
   param = pParams.value("prospect_id", &valid);
