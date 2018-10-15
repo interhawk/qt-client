@@ -63,7 +63,8 @@ dspTaxHistory::dspTaxHistory(QWidget* parent, const char* name, Qt::WindowFlags 
   _taxdet->addColumn(tr("Tax Type"),            _itemColumn,     Qt::AlignLeft,  false, "taxtype"  );
   _taxdet->addColumn(tr("Tax Type Descrip."),   -1,              Qt::AlignLeft,  false, "taxtype_descrip"  );
   _taxdet->addColumn(tr("Qty"),                 _qtyColumn,      Qt::AlignRight, false, "qty"  );
-  _taxdet->addColumn(tr("Unit Price"),          _moneyColumn,    Qt::AlignRight, false, "amount"  );
+  _taxdet->addColumn(tr("Unit Price"),          _moneyColumn,    Qt::AlignRight, false, "amountlocal"  );
+  _taxdet->addColumn(tr("Unit Price %1").arg(base), _moneyColumn,Qt::AlignRight, false, "amountbase"  );
   _taxdet->addColumn(tr("Extension"),           _moneyColumn,    Qt::AlignRight, false, "extendedlocal"  );
   _taxdet->addColumn(tr("Extension %1").arg(base), _moneyColumn, Qt::AlignRight, false, "extendedbase"  );
   _taxdet->addColumn(tr("Dist. Date"),          _dateColumn,     Qt::AlignCenter,false, "distdate"  );   
