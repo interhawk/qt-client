@@ -418,7 +418,6 @@ void customer::setViewMode()
   _upCC->setEnabled(false);
   _downCC->setEnabled(false);
   _warnLate->setEnabled(false);
-  _charass->setEnabled(false);
   _chartempl->setEnabled(false);
 
   connect(_shipto, SIGNAL(itemSelected(int)), _viewShipto, SLOT(animateClick()));
