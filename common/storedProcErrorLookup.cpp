@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -38,6 +38,16 @@ const struct {
   QString	proxyName;	// look up (proxyName, retVal)
 } errors[] = {
 
+  { "_aropenTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "You do not have privileges to maintain A/R Memos. "),                     0, "" },
+  { "_aropenTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "You must enter a valid Document # for this A/R Memo. "),                     0, "" },
+  { "_aropenTrigger", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "This Document Type/Number already exists. You may not enter a duplicate A/R Memo. "),                     0, "" },
+  { "_aropenTrigger", -4, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "Currency exchange rate not found "),                     0, "" },
+  { "_aropenTrigger", -5, QT_TRANSLATE_NOOP("storedProcErrorLookup", 
+                            "Invalid amount for paid column "),                     0, "" },
   { "attachQuoteToOpportunity", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Quote cannot be attached because "
                             "the Quote cannot be found."),                     0, "" },
   { "attachQuoteToOpportunity", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The selected Quote cannot be attached because "
