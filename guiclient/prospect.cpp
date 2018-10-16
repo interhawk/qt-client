@@ -128,6 +128,44 @@ enum SetResponse prospect::set(const ParameterList &pParams)
     _fromCRM = true;
   }
 
+  param = pParams.value("cntct_id", &valid);
+  if (valid)
+  {
+    _cntctid = param.toInt();
+    _fromContact = true;
+
+    getq.prepare("SELECT cntct_active AS prospect_active,"
+                 "       cntct_first_name || ' ' || cntct_last_name AS prospect_name,"
+                 "       geteffectivextuser() AS owner_username,"
+                 "       'Prospect generated from Contact' AS prospect_comments "
+                 "  FROM cntct"
+                 " WHERE (cntct_id=:id);");
+    getq.bindValue(":id", _cntctid);
+    getq.exec();
+    if (getq.first())
+    {
+      if (_metrics->value("CRMAccountNumberGeneration") == "M")
+        _number->setText(getq.value("prospect_name").toString());
+      _name->setText(getq.value("prospect_name").toString());
+      _notes->setText(getq.value("prospect_comments").toString());
+      _active->setChecked(getq.value("prospect_active").toBool());
+      _crmowner = getq.value("owner_username").toString();
+      _owner->setUsername(getq.value("owner_username").toString());
+      _created->setDate(QDate::currentDate());
+    }
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Retrieve Contact Details"),
+                                getq, __FILE__, __LINE__))
+      return UndefinedError;
+  }
+
+  param = pParams.value("company", &valid);
+  if (valid && _mode == cNew)
+  {
+    _name->setText(param.toString());
+    if (_metrics->value("CRMAccountNumberGeneration") == "M")
+      _number->setText(param.toString());
+  }
+
   param = pParams.value("prospect_id", &valid);
   if (valid)
     _prospectid = param.toInt();
@@ -181,14 +219,6 @@ enum SetResponse prospect::set(const ParameterList &pParams)
     else if (param.toString() == "view")
       setViewMode();
   }
-
-  param = pParams.value("company", &valid);
-  if (valid && _mode == cNew)
-    _name->setText(param.toString());
-
-  if (_crmacctid >= 0 || _prospectid >= 0)
-    if (! sPopulate())
-      return UndefinedError;
 
   bool canEdit = (cEdit == _mode || cNew == _mode);
   _number->setEnabled(canEdit &&
@@ -362,6 +392,20 @@ bool prospect::sSave(bool pPartial)
   {
     omfgThis->sCrmAccountsUpdated(_crmacctid);
     emit newId(_prospectid);   // cluster listeners couldn't handle set()'s emit
+
+    if (_fromContact)
+      {
+        upsq.prepare("INSERT INTO crmacctcntctass (crmacctcntctass_crmacct_id, crmacctcntctass_cntct_id, "
+                     "                             crmacctcntctass_crmrole_id) "
+                     " VALUES (:crmacct, :cntct, getcrmroleid())"
+                     " ON CONFLICT DO NOTHING;" );
+        upsq.bindValue(":crmacct", _crmacctid);
+        upsq.bindValue(":cntct", _cntctid);
+        upsq.exec();
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Saving Prospect"),
+                                 upsq, __FILE__, __LINE__))
+           return false;
+      }
   }
   _saved = true;
 
@@ -505,7 +549,6 @@ void prospect::sPopulateQuotesMenu(QMenu *menuThis)
 bool prospect::sPopulate()
 {
   XSqlQuery getq;
-
   if (_prospectid >= 0)
   {
     if (_mode == cEdit && !_lock.acquire("prospect", _prospectid, AppLock::Interactive))
