@@ -27,6 +27,7 @@
 #include "mqlutil.h"
 #include "xsqlquery.h"
 
+
 #define DEBUG false
 
 bool ExportHelper::exportHTML(const int qryheadid, ParameterList &params, QString &filename, QString &errmsg)
@@ -903,4 +904,39 @@ void setupExportHelper(QScriptEngine *engine)
   obj.setProperty("XSLTConvertString", engine->newFunction(XSLTConvertString), QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
   engine->globalObject().setProperty("ExportHelper", obj, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+}
+
+QStringList ExportHelper::parseDelim(QString delim)
+{ 
+  QStringList delimItems; 
+  int i = delim.indexOf('{') ;
+  if ( i >=0)
+    delim.remove("{tab}");  
+  foreach(QChar c, delim)
+    delimItems.append(c);  
+  if(i>=0)
+    delimItems.insert(i,"{tab}");
+  return delimItems;
+}
+
+enum ExportHelper::delimCheck ExportHelper::validDelim(QString delim, QString &msg)
+{ 
+  QString disallowedChars = "(){}[]\"'`<>.{blank}";
+  QString discouragedChars = " @#$%&*_=-+/? ";
+  if (delim.length() > 1 && delim != "{tab}")
+  { 
+    msg = tr("Avoid delimiters more than 1 char long.");
+    return tooLong; // delim is too long
+  }
+  else if (disallowedChars.contains(delim))
+  {
+    msg = tr("%1 is not permitted as a delimiter. The following characters are not allowed: %2").arg(delim, disallowedChars);
+    return disallowed; // delim error
+  }
+  else if (discouragedChars.contains(delim))
+  {
+    msg = tr("%1 may cause problems. We suggest avoiding the following: %2").arg(delim, discouragedChars);
+    return disencouraged; // delim warning
+  }
+  return valid;
 }

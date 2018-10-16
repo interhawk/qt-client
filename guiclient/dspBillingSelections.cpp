@@ -48,7 +48,7 @@ dspBillingSelections::dspBillingSelections(QWidget* parent, const char* name, Qt
   _cobill->addColumn(tr("Cust. #"),       _itemColumn,   Qt::AlignLeft,   true,  "cust_number"   );
   _cobill->addColumn(tr("Name"),          -1,            Qt::AlignLeft,   true,  "cust_name"   );
   _cobill->addColumn(tr("Subtotal"),      _moneyColumn,  Qt::AlignLeft,   false, "subtotal" );
-  _cobill->addColumn(tr("Misc."),         _moneyColumn,  Qt::AlignLeft,   true, "cobmisc_misc" ); 
+  _cobill->addColumn(tr("Misc."),         _moneyColumn,  Qt::AlignLeft,   true, "cobmisc_misc" );
   _cobill->addColumn(tr("Freight"),       _moneyColumn,  Qt::AlignLeft,   true, "cobmisc_freight" );
   _cobill->addColumn(tr("Tax"),           _moneyColumn,  Qt::AlignLeft,   true, "cobmisc_tax" );
   _cobill->addColumn(tr("Total"),         _moneyColumn,  Qt::AlignLeft,   true, "total" );
@@ -102,45 +102,43 @@ void dspBillingSelections::sPost()
 {
   XSqlQuery dspPost;
   int soheadid = -1;
-  dspPost.prepare("SELECT cobmisc_cohead_id AS sohead_id "
-            "FROM cobmisc "
-            "WHERE (cobmisc_id = :cobmisc_id)");
-  dspPost.bindValue(":cobmisc_id", _cobill->id());
-  dspPost.exec();
-  if (dspPost.first())
+  int result = 0;
+
+  dspPost.prepare("SELECT"
+                  "  cobmisc_cohead_id AS sohead_id,"
+                  "  createInvoice(cobmisc_id) AS result"
+                  "  FROM cobmisc"
+                  " WHERE cobmisc_id = :cobmisc_id");
+
+  foreach (XTreeWidgetItem *item, _cobill->selectedItems())
   {
-    soheadid = dspPost.value("sohead_id").toInt();
+    dspPost.bindValue(":cobmisc_id", item->id());
+    dspPost.exec();
+    if (dspPost.first())
+    {
+      soheadid = dspPost.value("sohead_id").toInt();
+      result = dspPost.value("result").toInt();
+
+      if (result < 0) {
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
+                                 storedProcErrorLookup("createInvoice", result),
+                                 __FILE__, __LINE__);
+        return;
+      }
+
+      omfgThis->sInvoicesUpdated(result, true);
+      omfgThis->sSalesOrdersUpdated(soheadid);
+    }
   }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
+
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
                                 dspPost, __FILE__, __LINE__))
   {
     return;
   }
 
-  dspPost.prepare("SELECT createInvoice(:cobmisc_id) AS result;");
-  dspPost.bindValue(":cobmisc_id", _cobill->id());
-  dspPost.exec();
-  if (dspPost.first())
-  {
-    int result = dspPost.value("result").toInt();
-    if (result < 0) {
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
-                               storedProcErrorLookup("createInvoice", result),
-                               __FILE__, __LINE__);
-      return;
-     }
-
-    omfgThis->sInvoicesUpdated(result, true);
-    omfgThis->sSalesOrdersUpdated(soheadid);
-    omfgThis->sBillingSelectionUpdated(soheadid, true);
-
-    sFillList();
-  }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Billing Selection(s)"),
-                                dspPost, __FILE__, __LINE__))
-  {
-    return;
-  }
+  omfgThis->sBillingSelectionUpdated(-1, -1);
+  sFillList();
 }
 
 void dspBillingSelections::sNew()

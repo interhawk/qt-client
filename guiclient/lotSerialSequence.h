@@ -39,6 +39,9 @@ private:
     int _mode;
     int _lsseqid;
 
+signals:
+    void saved(int);
+
 };
 
 #endif // LOTSERIALSEQUENCE_H

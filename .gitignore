@@ -21,6 +21,7 @@
 *.pro.user.*
 moc_*.cpp
 **/moc/
+**/mocinclude.tmp
 qrc_*.cpp
 ui_*.h
 Makefile

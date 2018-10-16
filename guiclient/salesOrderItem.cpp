@@ -13,7 +13,6 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QSqlError>
-#include <QValidator>
 #include <QVariant>
 
 #include <metasql.h>
@@ -23,14 +22,12 @@
 #include "guiErrorCheck.h"
 #include "itemCharacteristicDelegate.h"
 #include "itemSourceList.h"
-#include "maintainItemCosts.h"
 #include "openPurchaseOrder.h"
 #include "priceList.h"
 #include "reserveSalesOrderItem.h"
 #include "storedProcErrorLookup.h"
 #include "taxDetail.h"
 #include "woMaterialItem.h"
-#include "xdoublevalidator.h"
 
 #define DEBUG false
 
@@ -46,94 +43,74 @@
 #define iJustUpdate   3
 
 salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlags fl)
-  : XDialog(parent, name, fl),
-  _soitemid(-1)
+  : XDialog(parent, name, fl)
 {
   setupUi(this);
 
-  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sPopulateItemInfo(int)));
-  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sPopulateItemSources(int)));
-  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sPopulateItemSubs(int)));
-  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sPopulateHistory()));
-  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sDetermineAvailability()));
-  connect(_listPrices,        SIGNAL(clicked()),                    this, SLOT(sListPrices()));
-  connect(_netUnitPrice,      SIGNAL(idChanged(int)),               this, SLOT(sPriceGroup()));
-  connect(_netUnitPrice,      SIGNAL(valueChanged()),               this, SLOT(sCalculateExtendedPrice()));
-  connect(_qtyOrdered,        SIGNAL(editingFinished()),            this, SLOT(sDetermineAvailability()));
-  connect(_qtyOrdered,        SIGNAL(editingFinished()),            this, SLOT(sDeterminePrice()));
-  connect(_qtyOrdered,        SIGNAL(editingFinished()),            this, SLOT(sCalcUnitCost()));
-  connect(_save,              SIGNAL(clicked()),                    this, SLOT(sSaveClicked()));
-  connect(_scheduledDate,     SIGNAL(newDate(const QDate &)),       this, SLOT(sHandleScheduleDate()));
-  connect(_showAvailability,  SIGNAL(toggled(bool)),                this, SLOT(sDetermineAvailability()));
-  connect(_asOfScheddate,     SIGNAL(toggled(bool)),                this, SLOT(sDetermineAvailability()));
-  connect(_showIndented,      SIGNAL(toggled(bool)),                this, SLOT(sDetermineAvailability()));
-  connect(_warehouse,         SIGNAL(newID(int)),                   this, SLOT(sPopulateItemsiteInfo()));
-  connect(_warehouse,         SIGNAL(newID(int)),                   this, SLOT(sDetermineAvailability()));
-  connect(_warehouse,         SIGNAL(newID(int)),                   this, SLOT(sPopulateItemSubs(int)));
-  connect(_subs,              SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateSubMenu(QMenu*,QTreeWidgetItem*,int)));
-  connect(_next,              SIGNAL(clicked()),                    this, SLOT(sNext()));
-  connect(_prev,              SIGNAL(clicked()),                    this, SLOT(sPrev()));
-  connect(_notes,             SIGNAL(textChanged()),                this, SLOT(sChanged()));
-  connect(_promisedDate,      SIGNAL(newDate(const QDate &)),       this, SLOT(sChanged()));
-  connect(_scheduledDate,     SIGNAL(newDate(const QDate &)),       this, SLOT(sChanged()));
-  connect(_netUnitPrice,      SIGNAL(valueChanged()),               this, SLOT(sChanged()));
-  connect(_qtyOrdered,        SIGNAL(editingFinished()),            this, SLOT(sChanged()));
-  connect(_warehouse,         SIGNAL(newID(int)),                   this, SLOT(sChanged()));
-  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sChanged()));
-  connect(_qtyUOM,            SIGNAL(newID(int)),                   this, SLOT(sChanged()));
-  connect(_cancel,            SIGNAL(clicked()),                    this, SLOT(sCancel()));
-  connect(_extendedPrice,     SIGNAL(valueChanged()),               this, SLOT(sLookupTax()));
-  connect(_taxLit,            SIGNAL(leftClickedURL(QString)),      this, SLOT(sTaxDetail()));
-  connect(_taxtype,           SIGNAL(newID(int)),                   this, SLOT(sLookupTax()));
-  connect(_qtyUOM,            SIGNAL(newID(int)),                   this, SLOT(sQtyUOMChanged()));
-  connect(_priceUOM,          SIGNAL(newID(int)),                   this, SLOT(sPriceUOMChanged()));
-  connect(_inventoryButton,   SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()));
-  connect(_itemSourcesButton, SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()));
-  connect(_supplyOrderButton, SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()));
-  connect(_substitutesButton, SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()));
-  connect(_historyCostsButton,SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()));
-  connect(_historyCostsButton,SIGNAL(toggled(bool)),                this, SLOT(sPopulateHistory()));
-  connect(_historyDates,      SIGNAL(updated()),                    this, SLOT(sPopulateHistory()));
+  // _itemchar needs to be initialized before calling clear()
+  _itemchar = new QStandardItemModel(0, 3, this);
+  _itemchar->setHeaderData( CHAR_ID, Qt::Horizontal, tr("Name"), Qt::DisplayRole);
+  _itemchar->setHeaderData( CHAR_VALUE, Qt::Horizontal, tr("Value"), Qt::DisplayRole);
+  _itemchar->setHeaderData( CHAR_PRICE, Qt::Horizontal, tr("Price"), Qt::DisplayRole);
+
+  clear();
+
+  _historyDates->setStartNull(tr("Earliest"), omfgThis->startOfTime(), true);
+  _historyDates->setEndNull(tr("Latest"), omfgThis->endOfTime(), true);
+
+  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sPopulateItemInfo(int)), Qt::UniqueConnection);
+  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sPopulateItemSources(int)), Qt::UniqueConnection);
+  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sPopulateItemSubs(int)), Qt::UniqueConnection);
+  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sPopulateHistory()), Qt::UniqueConnection);
+  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sDetermineAvailability()), Qt::UniqueConnection);
+  connect(_listPrices,        SIGNAL(clicked()),                    this, SLOT(sListPrices()), Qt::UniqueConnection);
+  connect(_netUnitPrice,      SIGNAL(idChanged(int)),               this, SLOT(sPriceGroup()), Qt::UniqueConnection);
+  connect(_netUnitPrice,      SIGNAL(valueChanged()),               this, SLOT(sCalculateExtendedPrice()), Qt::UniqueConnection);
+  connect(_qtyOrdered,        SIGNAL(editingFinished()),            this, SLOT(sDetermineAvailability()), Qt::UniqueConnection);
+  connect(_qtyOrdered,        SIGNAL(editingFinished()),            this, SLOT(sDeterminePrice()), Qt::UniqueConnection);
+  connect(_qtyOrdered,        SIGNAL(editingFinished()),            this, SLOT(sCalcUnitCost()), Qt::UniqueConnection);
+  connect(_save,              SIGNAL(clicked()),                    this, SLOT(sSaveClicked()), Qt::UniqueConnection);
+  connect(_scheduledDate,     SIGNAL(newDate(const QDate &)),       this, SLOT(sHandleScheduleDate()), Qt::UniqueConnection);
+  connect(_showAvailability,  SIGNAL(toggled(bool)),                this, SLOT(sDetermineAvailability()), Qt::UniqueConnection);
+  connect(_asOfScheddate,     SIGNAL(toggled(bool)),                this, SLOT(sDetermineAvailability()), Qt::UniqueConnection);
+  connect(_showIndented,      SIGNAL(toggled(bool)),                this, SLOT(sDetermineAvailability()), Qt::UniqueConnection);
+  connect(_warehouse,         SIGNAL(newID(int)),                   this, SLOT(sPopulateItemsiteInfo()), Qt::UniqueConnection);
+  connect(_warehouse,         SIGNAL(newID(int)),                   this, SLOT(sDetermineAvailability()), Qt::UniqueConnection);
+  connect(_warehouse,         SIGNAL(newID(int)),                   this, SLOT(sPopulateItemSubs(int)), Qt::UniqueConnection);
+  connect(_subs,              SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateSubMenu(QMenu*,QTreeWidgetItem*,int)), Qt::UniqueConnection);
+  connect(_next,              SIGNAL(clicked()),                    this, SLOT(sNext()), Qt::UniqueConnection);
+  connect(_prev,              SIGNAL(clicked()),                    this, SLOT(sPrev()), Qt::UniqueConnection);
+  connect(_notes,             SIGNAL(textChanged()),                this, SLOT(sChanged()), Qt::UniqueConnection);
+  connect(_promisedDate,      SIGNAL(newDate(const QDate &)),       this, SLOT(sChanged()), Qt::UniqueConnection);
+  connect(_scheduledDate,     SIGNAL(newDate(const QDate &)),       this, SLOT(sChanged()), Qt::UniqueConnection);
+  connect(_netUnitPrice,      SIGNAL(valueChanged()),               this, SLOT(sChanged()), Qt::UniqueConnection);
+  connect(_qtyOrdered,        SIGNAL(editingFinished()),            this, SLOT(sChanged()), Qt::UniqueConnection);
+  connect(_warehouse,         SIGNAL(newID(int)),                   this, SLOT(sChanged()), Qt::UniqueConnection);
+  connect(_item,              SIGNAL(newId(int)),                   this, SLOT(sChanged()), Qt::UniqueConnection);
+  connect(_qtyUOM,            SIGNAL(newID(int)),                   this, SLOT(sChanged()), Qt::UniqueConnection);
+  connect(_cancel,            SIGNAL(clicked()),                    this, SLOT(sCancel()), Qt::UniqueConnection);
+  connect(_extendedPrice,     SIGNAL(valueChanged()),               this, SLOT(sLookupTax()), Qt::UniqueConnection);
+  connect(_taxLit,            SIGNAL(leftClickedURL(QString)),      this, SLOT(sTaxDetail()), Qt::UniqueConnection);
+  connect(_taxtype,           SIGNAL(newID(int)),                   this, SLOT(sLookupTax()), Qt::UniqueConnection);
+  connect(_qtyUOM,            SIGNAL(newID(int)),                   this, SLOT(sQtyUOMChanged()), Qt::UniqueConnection);
+  connect(_priceUOM,          SIGNAL(newID(int)),                   this, SLOT(sPriceUOMChanged()), Qt::UniqueConnection);
+  connect(_inventoryButton,   SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()), Qt::UniqueConnection);
+  connect(_itemSourcesButton, SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()), Qt::UniqueConnection);
+  connect(_supplyOrderButton, SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()), Qt::UniqueConnection);
+  connect(_substitutesButton, SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()), Qt::UniqueConnection);
+  connect(_historyCostsButton,SIGNAL(toggled(bool)),                this, SLOT(sHandleButton()), Qt::UniqueConnection);
+  connect(_historyCostsButton,SIGNAL(toggled(bool)),                this, SLOT(sPopulateHistory()), Qt::UniqueConnection);
+  connect(_historyDates,      SIGNAL(updated()),                    this, SLOT(sPopulateHistory()), Qt::UniqueConnection);
 
 #ifndef Q_OS_MAC
   _listPrices->setMaximumWidth(25);
   _subItemList->setMaximumWidth(25);
 #endif
 
-  _leadTime              = 999;
-  _saletypeid            = -1;
-  _shiptoid              = -1;
-  _shiptoname            = "";
-  _shipzoneid            = -1;
-  _preferredWarehouseid  = -1;
-  _modified              = false;
-  _canceling             = false;
-  _partialsaved          = false;
-  _error                 = false;
-  _autoord               = true;
-  _originalQtyOrd        = 0.0;
-  _updateItemsite        = false;
-  _updatePrice           = true;
-  _qtyinvuomratio        = 1.0;
-  _priceinvuomratio      = 1.0;
-  _priceRatio            = 1.0;
-  _invuomid              = -1;
-  _invIsFractional       = false;
-  _qtyreserved           = 0.0;
-  _qtyatshipping         = 0.0;
-  _priceMode             = "D";  // default to discount
-
   _authNumber->hide();
   _authNumberLit->hide();
   _authLineNumber->hide();
   _authLineNumberLit->hide();
-
-  _availabilityLastItemid      = -1;
-  _availabilityLastWarehousid  = -1;
-  _availabilityLastSchedDate   = QDate();
-  _availabilityLastShow        = false;
-  _availabilityLastAsOf        = true;
-  _availabilityQtyOrdered      = 0.0;
 
   _charVars << -1 << -1 << -1 << 0 << -1 << omfgThis->dbDate();
 
@@ -172,9 +149,6 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
   _subs->addColumn(tr("On Order"),         _qtyColumn,  Qt::AlignRight,  true,  "ordered"  );
   _subs->addColumn(tr("Reorder Lvl."),     _qtyColumn,  Qt::AlignRight,  true,  "reorderlevel"  );
   _subs->addColumn(tr("Available"),        _qtyColumn,  Qt::AlignRight,  true,  "available"  );
-
-  _historyDates->setStartNull(tr("Earliest"), omfgThis->startOfTime(), true);
-  _historyDates->setEndNull(tr("Latest"), omfgThis->endOfTime(), true);
 
   _historyCosts->addColumn(tr("P/O #"),        _orderColumn, Qt::AlignRight, true, "ponumber");
   _historyCosts->addColumn(tr("Vendor"),       120,          Qt::AlignLeft,  true, "vend_name");
@@ -228,11 +202,6 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
   }
   _woIndentedList->addColumn(tr("Start Date"),      _dateColumn,    Qt::AlignCenter    , false,  "wodata_startdate");
   _woIndentedList->addColumn(tr("Due Date"),        _dateColumn,    Qt::AlignCenter    , true,   "wodata_duedate");
-
-  _itemchar = new QStandardItemModel(0, 3, this);
-  _itemchar->setHeaderData( CHAR_ID, Qt::Horizontal, tr("Name"), Qt::DisplayRole);
-  _itemchar->setHeaderData( CHAR_VALUE, Qt::Horizontal, tr("Value"), Qt::DisplayRole);
-  _itemchar->setHeaderData( CHAR_PRICE, Qt::Horizontal, tr("Price"), Qt::DisplayRole);
 
   _itemcharView->hideColumn(CHAR_PRICE);
   _baseUnitPriceLit->hide();
@@ -312,24 +281,6 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
     _netUnitPrice->setEnabled(false);
   }
 
-  _supplyOrderType = "";
-  _supplyOrderId = -1;
-  _supplyOrderQtyCache = 0.0;
-  _supplyOrderQtyOrderedCache = 0.0;
-  _supplyOrderQtyOrderedInvCache = 0.0;
-  _supplyOrderDueDateCache = QDate();
-  _supplyOrderScheduledDateCache = QDate();
-  _supplyOrderDropShipCache = false;
-  _supplyOverridePriceCache = 0.0;
-  _supplyConnectionsCache = false;
-  _itemsrc = -1;
-  _taxzoneid   = -1;
-  _initialMode = -1;
-  _itemsiteLastItemid = -1;
-  _itemsiteLastWarehousid = -1;
-  _itemsubsLastItemid = -1;
-  _itemsubsLastWarehousid = -1;
-
   sPriceGroup();
 
   if (!_metrics->boolean("EnableReturnAuth"))
@@ -337,11 +288,11 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
 
   if (_metrics->value("soPriceEffective") == "ScheduleDate")
   {
-    connect(_scheduledDate, SIGNAL(newDate(QDate)), this, SLOT(sHandleScheduleDate()));
-    connect(_item,          SIGNAL(newId(int)),     this, SLOT(sHandleScheduleDate()));
+    connect(_scheduledDate, SIGNAL(newDate(QDate)), this, SLOT(sHandleScheduleDate()), Qt::UniqueConnection);
+    connect(_item,          SIGNAL(newId(int)),     this, SLOT(sHandleScheduleDate()), Qt::UniqueConnection);
   }
 
-    adjustSize();
+  adjustSize();
 
   _inventoryButton->setEnabled(_showAvailability->isChecked());
   _itemSourcesButton->setEnabled(_showAvailability->isChecked());
@@ -352,8 +303,6 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
 
   _altCosAccnt->setType(GLCluster::cRevenue | GLCluster::cExpense);
   _altRevAccnt->setType(GLCluster::cRevenue);
-
-  // TO DO **** Fix tab order issues and offer alternate means for "Express Tab Order"  ****
 }
 
 salesOrderItem::~salesOrderItem()
@@ -366,8 +315,9 @@ void salesOrderItem::languageChange()
   retranslateUi(this);
 }
 
-enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
+enum SetResponse salesOrderItem::set(const ParameterList &pParams)
 {
+  ENTERED;
   XSqlQuery setSales;
   XDialog::set(pParams);
   QVariant  param;
@@ -380,8 +330,6 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
   param = pParams.value("sohead_id", &valid);
   if (valid)
     _soheadid = param.toInt();
-  else
-    _soheadid = -1;
 
   param = pParams.value("taxzone_id", &valid);
   if (valid)
@@ -409,7 +357,6 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
     {
       if (setSales.value("preferredwarehousid").toInt() != -1)
         _preferredWarehouseid = setSales.value("preferredwarehousid").toInt();
-      _custName = setSales.value("f_name").toString();
       _item->setCRMAcctId(setSales.value("cust_crmacct_id").toInt());
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Customer Information"),
@@ -504,21 +451,21 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
 
       prepare();
 
-      connect(_netUnitPrice,           SIGNAL(editingFinished()),    this,         SLOT(sCalculateDiscountPrcnt()));
+      connect(_netUnitPrice,           SIGNAL(editingFinished()),    this,         SLOT(sCalculateDiscountPrcnt()), Qt::UniqueConnection);
       if (_metrics->boolean("AllowListPriceSchedules"))
       {
         _discountFromListPrice->setEnabled(true);
-        connect(_discountFromListPrice,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()));
+        connect(_discountFromListPrice,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()), Qt::UniqueConnection);
       }
       else
       {
         _discountFromCust->setEnabled(true);
-        connect(_discountFromCust,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()));
+        connect(_discountFromCust,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()), Qt::UniqueConnection);
       }
-      connect(_unitCost,               SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromMarkup()));
-      connect(_markupFromUnitCost,     SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromMarkup()));
-      connect(_item,                   SIGNAL(valid(bool)),          _listPrices,  SLOT(setEnabled(bool)));
-      connect(_createSupplyOrder,      SIGNAL(toggled(bool)),        this,         SLOT(sHandleSupplyOrder()));
+      connect(_unitCost,               SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromMarkup()), Qt::UniqueConnection);
+      connect(_markupFromUnitCost,     SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromMarkup()), Qt::UniqueConnection);
+      connect(_item,                   SIGNAL(valid(bool)),          _listPrices,  SLOT(setEnabled(bool)), Qt::UniqueConnection);
+      connect(_createSupplyOrder,      SIGNAL(toggled(bool)),        this,         SLOT(sHandleSupplyOrder()), Qt::UniqueConnection);
 
       setSales.prepare("SELECT count(*) AS cnt"
                 "  FROM coitem"
@@ -539,9 +486,6 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
     else if (param.toString() == "newQuote")
     {
       _mode = cNewQuote;
-      //  TODO - quotes different from sales orders?
-      //      _item->setType(ItemLineEdit::cSold | ItemLineEdit::cItemActive);
-      //      _item->clearExtraClauseList();
 
       setWindowTitle(tr("Quote Item"));
 
@@ -564,20 +508,20 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
 
       prepare();
 
-      connect(_netUnitPrice,           SIGNAL(editingFinished()),    this,         SLOT(sCalculateDiscountPrcnt()));
+      connect(_netUnitPrice,           SIGNAL(editingFinished()),    this,         SLOT(sCalculateDiscountPrcnt()), Qt::UniqueConnection);
       if (_metrics->boolean("AllowListPriceSchedules"))
       {
         _discountFromListPrice->setEnabled(true);
-        connect(_discountFromListPrice,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()));
+        connect(_discountFromListPrice,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()), Qt::UniqueConnection);
       }
       else
       {
         _discountFromCust->setEnabled(true);
-        connect(_discountFromCust,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()));
+        connect(_discountFromCust,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()), Qt::UniqueConnection);
       }
-      connect(_unitCost,               SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromMarkup()));
-      connect(_markupFromUnitCost,     SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromMarkup()));
-      connect(_item,                   SIGNAL(valid(bool)),          _listPrices,  SLOT(setEnabled(bool)));
+      connect(_unitCost,               SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromMarkup()), Qt::UniqueConnection);
+      connect(_markupFromUnitCost,     SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromMarkup()), Qt::UniqueConnection);
+      connect(_item,                   SIGNAL(valid(bool)),          _listPrices,  SLOT(setEnabled(bool)), Qt::UniqueConnection);
 
       setSales.prepare("SELECT count(*) AS cnt"
                 "  FROM quitem"
@@ -600,21 +544,21 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
       _listPrices->setEnabled(true);
       _comments->setType(Comments::SalesOrderItem);
 
-      connect(_qtyOrdered,             SIGNAL(editingFinished()),    this, SLOT(sCalculateExtendedPrice()));
-      connect(_netUnitPrice,           SIGNAL(editingFinished()),    this, SLOT(sCalculateDiscountPrcnt()));
+      connect(_qtyOrdered,             SIGNAL(editingFinished()),    this, SLOT(sCalculateExtendedPrice()), Qt::UniqueConnection);
+      connect(_netUnitPrice,           SIGNAL(editingFinished()),    this, SLOT(sCalculateDiscountPrcnt()), Qt::UniqueConnection);
       if (_metrics->boolean("AllowListPriceSchedules"))
       {
         _discountFromListPrice->setEnabled(true);
-        connect(_discountFromListPrice,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()));
+        connect(_discountFromListPrice,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()), Qt::UniqueConnection);
       }
       else
       {
         _discountFromCust->setEnabled(true);
-        connect(_discountFromCust,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()));
+        connect(_discountFromCust,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()), Qt::UniqueConnection);
       }
-      connect(_unitCost,               SIGNAL(editingFinished()),    this, SLOT(sCalculateFromMarkup()));
-      connect(_markupFromUnitCost,     SIGNAL(editingFinished()),    this, SLOT(sCalculateFromMarkup()));
-      connect(_createSupplyOrder,      SIGNAL(toggled(bool)),        this, SLOT(sHandleSupplyOrder()));
+      connect(_unitCost,               SIGNAL(editingFinished()),    this, SLOT(sCalculateFromMarkup()), Qt::UniqueConnection);
+      connect(_markupFromUnitCost,     SIGNAL(editingFinished()),    this, SLOT(sCalculateFromMarkup()), Qt::UniqueConnection);
+      connect(_createSupplyOrder,      SIGNAL(toggled(bool)),        this, SLOT(sHandleSupplyOrder()), Qt::UniqueConnection);
 
       if (_metrics->boolean("EnableSOReservations"))
         _reserveOnSave->show();
@@ -637,20 +581,20 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
       _warranty->hide();
       _tabs->removeTab(_tabs->indexOf(_costofsalesTab));
 
-      connect(_qtyOrdered,             SIGNAL(editingFinished()),  this, SLOT(sCalculateExtendedPrice()));
-      connect(_netUnitPrice,           SIGNAL(editingFinished()),  this, SLOT(sCalculateDiscountPrcnt()));
+      connect(_qtyOrdered,             SIGNAL(editingFinished()),  this, SLOT(sCalculateExtendedPrice()), Qt::UniqueConnection);
+      connect(_netUnitPrice,           SIGNAL(editingFinished()),  this, SLOT(sCalculateDiscountPrcnt()), Qt::UniqueConnection);
       if (_metrics->boolean("AllowListPriceSchedules"))
       {
         _discountFromListPrice->setEnabled(true);
-        connect(_discountFromListPrice,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()));
+        connect(_discountFromListPrice,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()), Qt::UniqueConnection);
       }
       else
       {
         _discountFromCust->setEnabled(true);
-        connect(_discountFromCust,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()));
+        connect(_discountFromCust,  SIGNAL(editingFinished()),    this,         SLOT(sCalculateFromDiscount()), Qt::UniqueConnection);
       }
-      connect(_unitCost,               SIGNAL(editingFinished()),  this, SLOT(sCalculateFromMarkup()));
-      connect(_markupFromUnitCost,     SIGNAL(editingFinished()),  this, SLOT(sCalculateFromMarkup()));
+      connect(_unitCost,               SIGNAL(editingFinished()),  this, SLOT(sCalculateFromMarkup()), Qt::UniqueConnection);
+      connect(_markupFromUnitCost,     SIGNAL(editingFinished()),  this, SLOT(sCalculateFromMarkup()), Qt::UniqueConnection);
     }
     else if (param.toString() == "view")
     {
@@ -811,7 +755,6 @@ enum SetResponse salesOrderItem:: set(const ParameterList &pParams)
     _item->setReadOnly(true);
   }
 
-  // If not multi-warehouse and a sales order hide whs control
   // Leave the warehouse controls available on Quotes as it is
   // possible to create quote line items without an itemsite
   // and the user needs a means to come back and specify the
@@ -846,7 +789,6 @@ void salesOrderItem::prepare()
   XSqlQuery salesprepare;
   if (_mode == cNew)
   {
-    //  Grab the next coitem_id
     salesprepare.exec("SELECT NEXTVAL('coitem_coitem_id_seq') AS _coitem_id");
     if (salesprepare.first())
     {
@@ -892,7 +834,6 @@ void salesOrderItem::prepare()
   }
   else if (_mode == cNewQuote)
   {
-    //  Grab the next quitem_id
     salesprepare.exec("SELECT NEXTVAL('quitem_quitem_id_seq') AS _quitem_id");
     if (salesprepare.first())
     {
@@ -954,76 +895,115 @@ void salesOrderItem::clear()
     disconnect(_supplyDropShip,    SIGNAL(toggled(bool)),                this, SLOT(sHandleSupplyOrder()));
   }
 
-  _soitemid = -1;
-  _socharView->setId(-1);
-  _modified = false;
-  _partialsaved = false;
-  _supplyOrderType = "";
-  _supplyOrderId = -1;
-  _supplyConnectionsCache = false;
-  _createSupplyOrder->setChecked(false);
-  _item->setReadOnly(false);
-  _warehouse->setEnabled(true);
-  _item->setId(-1);
-  _customerPN->clear();
-  _qtyOrdered->clear();
-  _qtyUOM->clear();
-  _priceUOM->clear();
-  _netUnitPrice->clear();
-  _extendedPrice->clear();
-  _promisedDate->clear();
-  _unitCost->clear();
-  _invCost->clear();
-  _listPrice->clear();
-  _customerPrice->clear();
-  _discountFromListPrice->clear();
-  _markupFromUnitCost->clear();
-  _discountFromCust->clear();
-  _margin->clear();
-  _shippedToDate->clear();
-  _onHand->clear();
+  _soheadid                      = -1;
+  _soitemid                      = -1;
+
+  _autoord                       = true;
+  _availabilityLastAsOf          = true;
+  _availabilityLastItemid        = -1;
+  _availabilityLastShow          = false;
+  _availabilityLastShowIndent    = false;
+  _availabilityLastWarehousid    = -1;
+  _availabilityQtyOrdered        = 0.0;
+  _canceling                     = false;
+  _custid                        = -1;
+  _error                         = false;
+  _initialMode                   = -1;
+  _invIsFractional               = false;
+  _invuomid                      = -1;
+  _itemsiteLastItemid            = -1;
+  _itemsiteLastWarehousid        = -1;
+  _itemsrc                       = -1;
+  _itemsubsLastItemid            = -1;
+  _itemsubsLastWarehousid        = -1;
+  _leadTime                      = 999;
+  _mode                          = cView;
+  _modified                      = false;
+  _originalQtyOrd                = 0.0;
+  _partialsaved                  = false;
+  _preferredWarehouseid          = -1;
+  _priceMode                     = "D";  // default to discount
+  _priceRatio                    = 1.0;
+  _priceUOMCache                 = -1;
+  _priceinvuomratio              = 1.0;
+  _qtyOrderedCache               = 0.0;
+  _qtyatshipping                 = 0.0;
+  _qtyinvuomratio                = 1.0;
+  _qtyreserved                   = 0.0;
+  _saletypeid                    = -1;
+  _shiptoid                      = -1;
+  _shiptoname                    = "";
+  _shipzoneid                    = -1;
+  _supplyConnectionsCache        = false;
+  _supplyOrderDropShipCache      = false;
+  _supplyOrderId                 = -1;
+  _supplyOrderQtyCache           = 0.0;
+  _supplyOrderQtyOrderedCache    = 0.0;
+  _supplyOrderQtyOrderedInvCache = 0.0;
+  _supplyOrderType               = "";
+  _supplyOverridePriceCache      = 0.0;
+  _taxzoneid                     = -1;
+  _updateItemsite                = false;
+  _updatePrice                   = true;
+
   _allocated->clear();
-  _unallocated->clear();
-  _onOrder->clear();
+  _altRevAccnt->clear();
   _available->clear();
-  _reserved->clear();
-  _reservable->clear();
-  _itemsrcp->clear();
-  _subs->clear();
+  _baseUnitPrice->clear();
+  _customerPN->clear();
+  _customerPrice->clear();
+  _discountFromCust->clear();
+  _discountFromListPrice->clear();
+  _extendedPrice->clear();
   _historyCosts->clear();
   _historySales->clear();
+  _invCost->clear();
+  _itemchar->clear();
+  _itemsrcp->clear();
   _leadtime->clear();
-  _itemchar->removeRows(0, _itemchar->rowCount());
+  _listPrice->clear();
+  _margin->clear();
+  _markupFromUnitCost->clear();
+  _netUnitPrice->clear();
   _notes->clear();
-  _sub->setChecked(false);
+  _onHand->clear();
+  _onOrder->clear();
+  _priceUOM->clear();
+  _promisedDate->clear();
+  _qtyOrdered->clear();
+  _qtyUOM->clear();
+  _reservable->clear();
+  _reserved->clear();
+  _shippedToDate->clear();
   _subItem->clear();
+  _subs->clear();
+  _unallocated->clear();
+  _unitCost->clear();
+
+  _sub->setChecked(false);
+  _createSupplyOrder->setChecked(false);
+
+  _comments->setId(_soitemid);
+  _item->setId(_soitemid);
+  _socharView->setId(_soitemid);
+
+  _item->setReadOnly(false);
+  _itemcharView->setEnabled(true);
   _subItem->setEnabled(false);
   _subItemList->setEnabled(false);
-  _comments->setId(-1);
-  _originalQtyOrd  = 0.0;
-  _qtyOrderedCache   = 0.0;
-  _priceUOMCache   = -1;
-  _itemsiteLastItemid = -1;
-  _itemsiteLastWarehousid = -1;
-  _itemsubsLastItemid = -1;
-  _itemsubsLastWarehousid = -1;
-  _modified        = false;
-  _partialsaved    = false;
-  _updateItemsite  = false;
-  _baseUnitPrice->clear();
-  _itemcharView->setEnabled(true);
-  _itemsrc = -1;
-  _altRevAccnt->clear();
+  _warehouse->setEnabled(true);
+
 }
 
 void salesOrderItem::sSaveClicked()
 {
+  ENTERED;
   sSave(false);
 }
 
 void salesOrderItem::sSave(bool pPartial)
 {
-  if (DEBUG) qDebug() << "sSave(pPartial) entered with" << pPartial;
+  ENTERED << "with" << pPartial;
   if (_soitemid < 0)
     return;
   XSqlQuery salesSave;
@@ -1252,7 +1232,7 @@ void salesOrderItem::sSave(bool pPartial)
       return;
     }
 
-    //  Check to see if a Reservations need changes
+    //  Check to see if a Reservation's need changes
     if (_qtyOrdered->toDouble() < _qtyreserved)
     {
       salesSave.prepare("SELECT unreserveSoLineQty(:soitem_id) AS result;");
@@ -1447,7 +1427,6 @@ void salesOrderItem::sSave(bool pPartial)
   {
     if (_supplyOrderId != -1)
     {
-      // Update Supply Order Characteristics
       if (_itemchar->rowCount() > 0)
       {
         bool changed = false;
@@ -1654,6 +1633,7 @@ void salesOrderItem::sSave(bool pPartial)
 
 void salesOrderItem::sPopulateItemsiteInfo()
 {
+  ENTERED;
   if (_item->isValid() && _warehouse->isValid())
   {
     if (_item->id() == _itemsiteLastItemid && _warehouse->id() == _itemsiteLastWarehousid)
@@ -1773,6 +1753,7 @@ void salesOrderItem::sPopulateItemsiteInfo()
 
 void salesOrderItem::sListPrices()
 {
+  ENTERED;
   ParameterList params;
   params.append("cust_id", _custid);
   params.append("shipto_id", _shiptoid);
@@ -1874,17 +1855,13 @@ void salesOrderItem::sListPrices()
 
 void salesOrderItem::sRecalcPrice()
 {
+  ENTERED;
   sDeterminePrice(true);
-}
-
-void salesOrderItem::sDeterminePrice()
-{
-  if (DEBUG) qDebug() << "sDeterminePrice() entered";
-  sDeterminePrice(false);
 }
 
 void salesOrderItem::sDeterminePrice(bool force)
 {
+  ENTERED << "with" << force;
   if (DEBUG) qDebug() << "sDeterminePrice(force) entered with" << force;
   XSqlQuery salesDeterminePrice;
   // Determine if we can or should update the price
@@ -1979,7 +1956,7 @@ void salesOrderItem::sDeterminePrice(bool force)
         return;
       }
     }
-    connect(_itemchar, SIGNAL(itemChanged(QStandardItem *)), this, SLOT(sRecalcPrice()));
+    connect(_itemchar, SIGNAL(itemChanged(QStandardItem *)), this, SLOT(sRecalcPrice()), Qt::UniqueConnection);
 
     // Total up price for configured item characteristics
     QModelIndex idx;
@@ -1998,6 +1975,7 @@ void salesOrderItem::sDeterminePrice(bool force)
 
 void salesOrderItem::sPopulatePrices(bool update, bool allPrices, double charTotal)
 {
+  ENTERED << "with" << update << allPrices << charTotal;
   QDate asOf;
 
   if (_metrics->value("soPriceEffective") == "ScheduleDate")
@@ -2134,6 +2112,7 @@ void salesOrderItem::sPopulatePrices(bool update, bool allPrices, double charTot
 
 void salesOrderItem::sPopulateItemInfo(int pItemid)
 {
+  ENTERED << "with" << pItemid;
   XSqlQuery salesPopulateItemInfo;
   _itemchar->removeRows(0, _itemchar->rowCount());
   if (pItemid != -1)
@@ -2191,7 +2170,7 @@ void salesOrderItem::sPopulateItemInfo(int pItemid)
       _priceRatio        = salesPopulateItemInfo.value("invpricerat").toDouble(); // Always ratio from default price uom
       _invuomid          = salesPopulateItemInfo.value("item_price_uom_id").toInt();
       _invIsFractional   = salesPopulateItemInfo.value("item_fractional").toBool();
-      _priceinvuomratio  = _priceRatio; // the ration from the currently selected price uom
+      _priceinvuomratio  = _priceRatio;
       _qtyinvuomratio    = _priceRatio;
 
       _qtyUOM->setId(salesPopulateItemInfo.value("item_price_uom_id").toInt());
@@ -2212,7 +2191,6 @@ void salesOrderItem::sPopulateItemInfo(int pItemid)
     disconnect( _itemchar,  SIGNAL(itemChanged(QStandardItem *)), this, SLOT(sRecalcPrice()));
     disconnect( _itemchar,  SIGNAL(itemChanged(QStandardItem *)), this, SLOT(sRecalcAvailability()));
 
-    // Populate customer part number if any
     if (_customerPN->text().trimmed().length() == 0)
     {
       salesPopulateItemInfo.prepare("SELECT itemalias_number,"
@@ -2233,7 +2211,6 @@ void salesOrderItem::sPopulateItemInfo(int pItemid)
       }
     }
 
-    // Populate Characteristics
     salesPopulateItemInfo.prepare("SELECT char_id, char_name, "
               " CASE WHEN char_type < 2 THEN "
               "   charass_value "
@@ -2315,11 +2292,11 @@ void salesOrderItem::sPopulateItemInfo(int pItemid)
     _itemcharView->resizeColumnToContents(CHAR_ID);
     _itemcharView->resizeColumnToContents(CHAR_VALUE);
 
-    // Setup widgets and signals needed to handle configuration
+    // Set up widgets and signals needed to handle configuration
     if (_item->isConfigured())
     {
-      connect(_itemchar,  SIGNAL(itemChanged(QStandardItem *)), this, SLOT(sRecalcPrice()));
-      connect(_itemchar,  SIGNAL(itemChanged(QStandardItem *)), this, SLOT(sRecalcAvailability()));
+      connect(_itemchar,  SIGNAL(itemChanged(QStandardItem *)), this, SLOT(sRecalcPrice()), Qt::UniqueConnection);
+      connect(_itemchar,  SIGNAL(itemChanged(QStandardItem *)), this, SLOT(sRecalcAvailability()), Qt::UniqueConnection);
       _itemcharView->showColumn(CHAR_PRICE);
       _baseUnitPriceLit->show();
       _baseUnitPrice->setVisible(true);
@@ -2337,18 +2314,13 @@ void salesOrderItem::sPopulateItemInfo(int pItemid)
 
 void salesOrderItem::sRecalcAvailability()
 {
+  ENTERED;
   sDetermineAvailability(true);
 }
 
-void salesOrderItem::sDetermineAvailability()
+void salesOrderItem::sDetermineAvailability(bool p)
 {
-  if (DEBUG) qDebug() << "sDetermineAvailability() entered";
-  sDetermineAvailability(false);
-}
-
-void salesOrderItem::sDetermineAvailability( bool p )
-{
-  if (DEBUG) qDebug() << "sDetermineAvailability(p) entered with" << p;
+  ENTERED << "with" << p;
   if (  (_item->id()==_availabilityLastItemid) &&
         (_warehouse->id()==_availabilityLastWarehousid) &&
         (_scheduledDate->date()==_availabilityLastSchedDate) &&
@@ -2517,6 +2489,7 @@ void salesOrderItem::sDetermineAvailability( bool p )
 
 void salesOrderItem::sPopulateItemSources(int pItemid)
 {
+  ENTERED << "with" << pItemid;
   if (pItemid < 0)
     _itemsrcp->clear();
   else
@@ -2539,6 +2512,7 @@ void salesOrderItem::sPopulateItemSources(int pItemid)
 
 void salesOrderItem::sPopulateItemSubs(int pItemid)
 {
+  ENTERED << "with" << pItemid;
   if (_item->isValid() && _warehouse->isValid())
   {
     if (_item->id() == _itemsubsLastItemid && _warehouse->id() == _itemsubsLastWarehousid)
@@ -2562,14 +2536,16 @@ void salesOrderItem::sPopulateItemSubs(int pItemid)
   }
 }
 
-void salesOrderItem::sPopulateSubMenu(QMenu *menu, QTreeWidgetItem*, int)
+void salesOrderItem::sPopulateSubMenu(QMenu *menu, QTreeWidgetItem *item, int col)
 {
+  ENTERED << "with" << menu << item << col;
   if ( !_partialsaved && ((_mode == cNew) || (_mode == cNewQuote)) )
   menu->addAction(tr("Substitute..."), this, SLOT(sSubstitute()));
 }
 
 void salesOrderItem::sSubstitute()
 {
+  ENTERED;
   int _itemsiteid = _subs->id();
   _sub->setChecked(true);
   _subItem->setId(_item->id());
@@ -2578,6 +2554,7 @@ void salesOrderItem::sSubstitute()
 
 void salesOrderItem::sReserveStock()
 {
+  ENTERED;
   if (_metrics->boolean("SOManualReservations"))
   {
     ParameterList params;
@@ -2614,6 +2591,7 @@ void salesOrderItem::sReserveStock()
 
 void salesOrderItem::sPopulateHistory()
 {
+  ENTERED;
   if (_item->id() < 0)
   {
     _historyCosts->clear();
@@ -2653,6 +2631,7 @@ void salesOrderItem::sPopulateHistory()
 
 void salesOrderItem::sCalculateDiscountPrcnt()
 {
+  ENTERED;
   double  netUnitPrice = _netUnitPrice->baseValue();
   double  charTotal    = 0;
 
@@ -2701,12 +2680,13 @@ void salesOrderItem::sCalculateDiscountPrcnt()
 
 void salesOrderItem::sCalculateExtendedPrice()
 {
+  ENTERED;
   _extendedPrice->setLocalValue(((_qtyOrdered->toDouble() * _qtyinvuomratio) / _priceinvuomratio) * _netUnitPrice->localValue());
 }
 
 void salesOrderItem::sCheckSupplyOrder()
 {
-  if (DEBUG) qDebug() << "entered sCheckSupplyOrder()";
+  ENTERED;
 
   if ( (_item->isValid()) &&
       (_warehouse->isValid()) &&
@@ -2724,6 +2704,7 @@ void salesOrderItem::sCheckSupplyOrder()
 
 void salesOrderItem::sHandleSupplyOrder()
 {
+  ENTERED;
   if (ISQUOTE(_mode) || ! _item->isValid())
     return;
 
@@ -3538,9 +3519,7 @@ void salesOrderItem::sHandleSupplyOrder()
 
 void salesOrderItem::sPopulateOrderInfo()
 {
-  if (DEBUG)
-    qDebug() << "sPopulateOrderInfo() entered with supply order"
-             << _supplyOrderType << _supplyOrderId;
+  ENTERED << "with supply order" << _supplyOrderType << _supplyOrderId;
 
   if (ISQUOTE(_mode))
     return;
@@ -3561,7 +3540,6 @@ void salesOrderItem::sPopulateOrderInfo()
 
   XSqlQuery ordq;
 
-  // Populate Supply Order
   if (_supplyOrderType == "W")
   {
     ordq.prepare( "SELECT wo.*,"
@@ -3728,17 +3706,17 @@ void salesOrderItem::sPopulateOrderInfo()
   if (_mode == cNew || _mode == cEdit)
   {
     _supplyWoNewMatl->setEnabled(true);
-    connect(_woIndentedList,    SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateWoMenu(QMenu*, QTreeWidgetItem*)));
-    connect(_woIndentedList,    SIGNAL(itemSelected(int)),            _supplyWoEdit, SLOT(animateClick()));
-    connect(_woIndentedList,    SIGNAL(valid(bool)),                  _supplyWoEdit, SLOT(setEnabled(bool)));
-    connect(_woIndentedList,    SIGNAL(valid(bool)),                  _supplyWoDelete, SLOT(setEnabled(bool)));
-    connect(_supplyWoNewMatl,   SIGNAL(clicked()),                    this, SLOT(sNewWoMatl()));
-    connect(_supplyWoEdit,      SIGNAL(clicked()),                    this, SLOT(sEditWoMatl()));
-    connect(_supplyWoDelete,    SIGNAL(clicked()),                    this, SLOT(sDeleteWoMatl()));
-    connect(_supplyRollupPrices,SIGNAL(toggled(bool)),                this, SLOT(sRollupPrices()));
-    connect(_supplyOrderQty,    SIGNAL(editingFinished()),            this, SLOT(sHandleSupplyOrder()));
-    connect(_supplyOverridePrice,SIGNAL(editingFinished()),           this, SLOT(sHandleSupplyOrder()));
-    connect(_supplyDropShip,    SIGNAL(toggled(bool)),                this, SLOT(sHandleSupplyOrder()));
+    connect(_woIndentedList,    SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this, SLOT(sPopulateWoMenu(QMenu*, QTreeWidgetItem*)), Qt::UniqueConnection);
+    connect(_woIndentedList,    SIGNAL(itemSelected(int)),            _supplyWoEdit, SLOT(animateClick()), Qt::UniqueConnection);
+    connect(_woIndentedList,    SIGNAL(valid(bool)),                  _supplyWoEdit, SLOT(setEnabled(bool)), Qt::UniqueConnection);
+    connect(_woIndentedList,    SIGNAL(valid(bool)),                  _supplyWoDelete, SLOT(setEnabled(bool)), Qt::UniqueConnection);
+    connect(_supplyWoNewMatl,   SIGNAL(clicked()),                    this, SLOT(sNewWoMatl()), Qt::UniqueConnection);
+    connect(_supplyWoEdit,      SIGNAL(clicked()),                    this, SLOT(sEditWoMatl()), Qt::UniqueConnection);
+    connect(_supplyWoDelete,    SIGNAL(clicked()),                    this, SLOT(sDeleteWoMatl()), Qt::UniqueConnection);
+    connect(_supplyRollupPrices,SIGNAL(toggled(bool)),                this, SLOT(sRollupPrices()), Qt::UniqueConnection);
+    connect(_supplyOrderQty,    SIGNAL(editingFinished()),            this, SLOT(sHandleSupplyOrder()), Qt::UniqueConnection);
+    connect(_supplyOverridePrice,SIGNAL(editingFinished()),           this, SLOT(sHandleSupplyOrder()), Qt::UniqueConnection);
+    connect(_supplyDropShip,    SIGNAL(toggled(bool)),                this, SLOT(sHandleSupplyOrder()), Qt::UniqueConnection);
     _supplyConnectionsCache = true;
   }
   else
@@ -3749,6 +3727,7 @@ void salesOrderItem::sPopulateOrderInfo()
 
 void salesOrderItem::sRollupPrices()
 {
+  ENTERED;
   if (ISQUOTE(_mode))
     return;
 
@@ -3794,6 +3773,7 @@ void salesOrderItem::sRollupPrices()
 
 void salesOrderItem::sFillWoIndentedList()
 {
+  ENTERED;
   XSqlQuery workFillList;
   _woIndentedList->clear();
   //The wodata_id_type column indicates the source of the wodata_id
@@ -3879,6 +3859,7 @@ void salesOrderItem::sFillWoIndentedList()
 
 void salesOrderItem::sPopulateWoMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
 {
+  ENTERED << "with" << pMenu << selected;
   QString  status(selected->text(3));
   QAction *menuItem;
 
@@ -3896,7 +3877,7 @@ void salesOrderItem::sPopulateWoMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
     }
   }
 
-  //Check a womatl row is selected and the id is vaild
+  //Check a womatl row is selected and the id is valid
   if(_woIndentedList->altId() == 2 && _woIndentedList->id() > -1)
   {
     if (_mode != cView)
@@ -3925,6 +3906,7 @@ void salesOrderItem::sPopulateWoMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
 
 void salesOrderItem::sNewWoMatl()
 {
+  ENTERED;
   ParameterList params;
   params.append("mode", "new");
   params.append("showPrice", true);
@@ -3941,6 +3923,7 @@ void salesOrderItem::sNewWoMatl()
 
 void salesOrderItem::sEditWoMatl()
 {
+  ENTERED;
   if(_woIndentedList->altId() == 2 && _woIndentedList->id() > -1)
   {
     ParameterList params;
@@ -3960,6 +3943,7 @@ void salesOrderItem::sEditWoMatl()
 
 void salesOrderItem::sViewWoMatl()
 {
+  ENTERED;
   if(_woIndentedList->altId() == 2 && _woIndentedList->id() > -1)
   {
     ParameterList params;
@@ -3974,6 +3958,7 @@ void salesOrderItem::sViewWoMatl()
 
 void salesOrderItem::sDeleteWoMatl()
 {
+  ENTERED;
   if(_woIndentedList->altId() == 2 && _woIndentedList->id() > -1)
   {
     XSqlQuery workDeleteMatl;
@@ -4024,6 +4009,7 @@ void salesOrderItem::sDeleteWoMatl()
 
 void salesOrderItem::sCalculateFromDiscount()
 {
+  ENTERED;
   if (_metrics->boolean("AllowListPriceSchedules"))
   {
     // do not allow discount > 100 which results in negative price
@@ -4064,6 +4050,7 @@ void salesOrderItem::sCalculateFromDiscount()
 
 void salesOrderItem::sCalculateFromMarkup()
 {
+  ENTERED;
     if (_unitCost->isZero())
       _markupFromUnitCost->setText(tr("N/A"));
     else
@@ -4083,6 +4070,7 @@ void salesOrderItem::sCalculateFromMarkup()
 
 void salesOrderItem::populate()
 {
+  ENTERED;
   if (_mode == cNew || _mode == cNewQuote)
     return;
 
@@ -4298,6 +4286,7 @@ void salesOrderItem::populate()
 
 void salesOrderItem::sFindSellingWarehouseItemsites( int id )
 {
+  ENTERED << "with" << id;
   _warehouse->findItemsites(id);
   _supplyWarehouse->findItemsites(id);
   if (_preferredWarehouseid > 0)
@@ -4309,12 +4298,14 @@ void salesOrderItem::sFindSellingWarehouseItemsites( int id )
 
 void salesOrderItem::sPriceGroup()
 {
+  ENTERED;
   if (!omfgThis->singleCurrency())
     _priceGroup->setTitle(tr("Prices in %1:").arg(_netUnitPrice->currAbbr()));
 }
 
 void salesOrderItem::sNext()
 {
+  ENTERED;
   XSqlQuery salesNext;
   if (_modified)
   {
@@ -4416,6 +4407,7 @@ void salesOrderItem::sNext()
 
 void salesOrderItem::sPrev()
 {
+  ENTERED;
   XSqlQuery salesPrev;
   if (_modified)
   {
@@ -4515,12 +4507,13 @@ void salesOrderItem::sPrev()
 
 void salesOrderItem::sChanged()
 {
+  ENTERED;
   _modified = true;
-
 }
 
 void salesOrderItem::reject()
 {
+  ENTERED;
   XSqlQuery salesreject;
   bool saved = false;
   if (_modified)
@@ -4578,6 +4571,7 @@ void salesOrderItem::reject()
 
 void salesOrderItem::sCancel()
 {
+  ENTERED;
   XSqlQuery salesCancel;
   _canceling = true;
 
@@ -4658,6 +4652,7 @@ void salesOrderItem::sCancel()
 
 void salesOrderItem::sLookupTax()
 {
+  ENTERED;
   XSqlQuery calcq;
   calcq.prepare("SELECT calculateTax(:taxzone_id, :taxtype_id, :date, :curr_id, :ext ) AS val");
 
@@ -4670,8 +4665,7 @@ void salesOrderItem::sLookupTax()
   calcq.exec();
   if (calcq.first())
   {
-    _cachedRate= calcq.value("val").toDouble();
-    _tax->setLocalValue(_cachedRate );
+    _tax->setLocalValue(calcq.value("val").toDouble());
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
                                 calcq, __FILE__, __LINE__))
@@ -4682,6 +4676,7 @@ void salesOrderItem::sLookupTax()
 
 void salesOrderItem::sTaxDetail()
 {
+  ENTERED;
   taxDetail     newdlg(this, "", true);
   ParameterList params;
   params.append("taxzone_id",   _taxzoneid);
@@ -4702,6 +4697,7 @@ void salesOrderItem::sTaxDetail()
 
 void salesOrderItem::sPopulateUOM()
 {
+  ENTERED;
   if (_item->id() != -1)
   {
     // Get list of active, valid Selling UOMs
@@ -4711,7 +4707,6 @@ void salesOrderItem::sPopulateUOM()
     params.append("uomtype", "Selling");
     params.append("item_id", _item->id());
 
-    // Include Global UOMs
     if (_privileges->check("MaintainUOMs"))
     {
       params.append("includeGlobal", true);
@@ -4757,14 +4752,14 @@ void salesOrderItem::sPopulateUOM()
     _priceUOM->populate(uom);
     _qtyUOM->setId(saveqtyuomid);
     _priceUOM->setId(savepriceuomid);
-    connect(_qtyUOM,   SIGNAL(newID(int)), this, SLOT(sQtyUOMChanged()));
-    connect(_priceUOM, SIGNAL(newID(int)), this, SLOT(sPriceUOMChanged()));
+    connect(_qtyUOM,   SIGNAL(newID(int)), this, SLOT(sQtyUOMChanged()), Qt::UniqueConnection);
+    connect(_priceUOM, SIGNAL(newID(int)), this, SLOT(sPriceUOMChanged()), Qt::UniqueConnection);
   }
 }
 
 void salesOrderItem::sQtyUOMChanged()
 {
-  // Check for Global UOM Conversion that must be setup for Item
+  ENTERED;
   if (_qtyUOM->code() == "G")
   {
     if (QMessageBox::question(this, tr("Use Global UOM?"),
@@ -4773,7 +4768,6 @@ void salesOrderItem::sQtyUOMChanged()
                               QMessageBox::Yes | QMessageBox::Default,
                               QMessageBox::No  | QMessageBox::Escape) == QMessageBox::Yes)
     {
-      // create itemuomconv and itemuom
       XSqlQuery adduom;
       adduom.prepare("SELECT createItemUomConv(:item_id, :uom_id, :uom_type) AS result;");
       adduom.bindValue(":item_id", _item->id());
@@ -4784,7 +4778,6 @@ void salesOrderItem::sQtyUOMChanged()
                                adduom, __FILE__, __LINE__))
         return;
 
-      // repopulate uom comboboxes
       sPopulateUOM();
     }
     else
@@ -4845,10 +4838,10 @@ void salesOrderItem::sQtyUOMChanged()
 
 void salesOrderItem::sPriceUOMChanged()
 {
+  ENTERED;
   if (_priceUOM->id() == -1 || _qtyUOM->id() == -1)
     return;
 
-  // Check for Global UOM Conversion that must be setup for Item
   if (_priceUOM->code() == "G")
   {
     if (QMessageBox::question(this, tr("Use Global UOM?"),
@@ -4867,7 +4860,6 @@ void salesOrderItem::sPriceUOMChanged()
                                adduom, __FILE__, __LINE__))
         return;
 
-      // repopulate uom comboboxes
       sPopulateUOM();
     }
     else
@@ -4923,6 +4915,7 @@ void salesOrderItem::sPriceUOMChanged()
 
 void salesOrderItem::sCalcUnitCost()
 {
+  ENTERED;
   XSqlQuery salesCalcUnitCost;
   if (_costmethod == "J" && _supplyOrderId > -1 && _qtyOrdered->toDouble() != 0)
   {
@@ -4964,6 +4957,7 @@ void salesOrderItem::sCalcUnitCost()
 
 void salesOrderItem::sHandleButton()
 {
+  ENTERED;
   if (_inventoryButton->isChecked())
     _availabilityStack->setCurrentWidget(_inventoryPage);
   else if (_itemSourcesButton->isChecked())
@@ -5034,6 +5028,7 @@ void salesOrderItem::sHandleButton()
 
 void salesOrderItem::setItemExtraClause()
 {
+  ENTERED;
   if (_mode != cNew)
     return;
 
@@ -5045,6 +5040,7 @@ void salesOrderItem::setItemExtraClause()
 
 void salesOrderItem::sHandleScheduleDate()
 {
+  ENTERED;
   XSqlQuery salesHandleScheduleDate;
   if ((!_scheduledDate->isValid() ||
       (_scheduledDate->date() == _scheduledDateCache)))
@@ -5075,7 +5071,6 @@ void salesOrderItem::sHandleScheduleDate()
     }
   }
 
-  // Check effectivity
   setItemExtraClause();
   if (_item->isValid() && _metrics->value("soPriceEffective") == "ScheduleDate")
   {

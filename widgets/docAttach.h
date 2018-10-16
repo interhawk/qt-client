@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -39,12 +39,12 @@ public:
     QPushButton* _save;
 
 signals:
-    virtual void saveBeforeBegin();
-    virtual void saveAfterBegin();
-    virtual void saveBeforeCommit();
-    virtual void saveAfterCommit();
-    virtual void saveBeforeRollback(QSqlQuery*);
-    virtual void saveAfterRollback(QSqlQuery*);
+    void saveBeforeBegin();
+    void saveAfterBegin();
+    void saveBeforeCommit();
+    void saveAfterCommit();
+    void saveBeforeRollback(QSqlQuery*);
+    void saveAfterRollback(QSqlQuery*);
 
 public slots:
     virtual void set( const ParameterList & pParams );
@@ -53,6 +53,11 @@ public slots:
     virtual void sSave();
     virtual void sHandleNewId(int);
     inline virtual void setSaveStatus(SaveStatus status) { _saveStatus = status; };
+    virtual void sAddFilePriv();
+    virtual void sRemFilePriv();
+    virtual void sAddUrlPriv();
+    virtual void sRemUrlPriv();
+    virtual void sPopulateDocPrivs();
 
 protected slots:
     virtual void languageChange();
@@ -63,6 +68,7 @@ private:
     int _sourceid;
     QString _sourcetype;
     int _targetid;
+    int _charid;
     QString _targettype;
     QString _purpose;
     QString _mode;

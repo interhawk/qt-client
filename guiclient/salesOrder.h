@@ -66,7 +66,7 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
     virtual void        closeEvent( QCloseEvent *pEvent );
     virtual void        sFreightChanged();
     virtual void        sHandleShipchrg( int pShipchrgid );
-    virtual void        sHandleSalesOrderEvent( int pSoheadid, bool );
+    virtual void        sHandleSalesOrderEvent(int pSoheadid, bool pLocal);
     virtual void        sTaxZoneChanged();
     virtual void        sTaxDetail();
     virtual void        sFreightDetail();

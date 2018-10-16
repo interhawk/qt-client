@@ -74,9 +74,9 @@ login2::login2(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl
 
   connect(_buttonBox, SIGNAL(accepted()), this, SLOT(sLogin()));
   connect(_buttonBox, SIGNAL(helpRequested()), this, SLOT(sOpenHelp()));
-  connect(_server, SIGNAL(textChanged(const QString &)), this, SLOT(sChangeURL()));
+  connect(_server,               SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
   connect(_database->lineEdit(), SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
-  connect(_port, SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
+  connect(_port,                 SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
 
   GuiMessageHandler *g = new GuiMessageHandler(this);
   g->setDestination(QtWarningMsg, this);
@@ -283,7 +283,7 @@ void login2::sLogin()
                     << "";
   password << QMd5(QString(_d->_cPassword + salt  + _d->_cUsername))
            << _d->_cPassword
-           << QMd5(QString(_d->_cPassword + "OpenMFG" + _d->_cUsername)) ;
+           << QMd5(QString(_d->_cPassword + "OpenMFG" + _d->_cUsername)) ;      // this must be last
   int passwordidx = 0; // not declared in for () because we need it later
   foreach (QString p, password)
   {
@@ -292,7 +292,7 @@ void login2::sLogin()
       if (DEBUG)
         qDebug() << options << passwordidx;
       db.setConnectOptions(options);
-      db.setPassword(p);
+      db.setPassword(password.at(passwordidx));
       if (db.open())
         goto connected;
     }
@@ -350,9 +350,9 @@ connected:
   }
 
    // if connected using OpenMFG enhanced auth, remangle the password
-  if (db.isOpen() && passwordidx == 2)
-      XSqlQuery chgpass(QString("ALTER USER \"%1\" WITH PASSWORD '%2'")
-                      .arg(_d->_cUsername, QMd5(QString(_d->_cPassword + salt + _d->_cUsername))));
+  if (db.isOpen() && passwordidx >= (password.size() - 1))
+    XSqlQuery chgpass(QString("ALTER USER \"%1\" WITH PASSWORD '%2'")
+                      .arg(_d->_cUsername, password.at(0)));
 
   if (! db.isOpen())
   {

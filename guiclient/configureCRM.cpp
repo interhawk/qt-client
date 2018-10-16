@@ -11,18 +11,16 @@
 #include "configureCRM.h"
 
 #include <QMessageBox>
-#include <QSqlError>
 #include <QVariant>
-
-#include <metasql.h>
 
 #include "guiclient.h"
 #include "mqlutil.h"
 #include "errorReporter.h"
 
-configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt::WindowFlags fl)
+configureCRM::configureCRM(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XAbstractConfigure(parent, fl)
 {
+  Q_UNUSED(modal);
   XSqlQuery configureconfigureCRM;
   setupUi(this);
 
@@ -84,6 +82,7 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool /*modal*/, Qt
   _requireUniqueEmails->setChecked(_metrics->boolean("EnforceUniqueContactEmails"));
   _defaultEmailopt->setChecked(_metrics->boolean("DefaultEmailOptIn"));
   _defaultAddropt->setChecked(_metrics->boolean("DefaultAddressOptIn"));
+  _documentPrivileges->setChecked(_metrics->boolean("UnprivilegedViewDocInList"));
 
   if (! _metrics->value("DefaultAddressCountry").isEmpty())
     _country->setText(_metrics->value("DefaultAddressCountry"));
@@ -184,6 +183,7 @@ bool configureCRM::sSave()
   _metrics->set("OpportunityChangeLog", _opportunityChangeLog->isChecked());
   _metrics->set("RequireProjectAssignment", _requireProjectAssignment->isChecked());
   _metrics->set("ProjectDueDateWarning", _projectWarningDays->value());
+  _metrics->set("UnprivilegedViewDocInList", _documentPrivileges->isChecked());
 
   if (_country->isValid())
     _metrics->set("DefaultAddressCountry", _country->currentText());

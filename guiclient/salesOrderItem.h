@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -40,17 +40,15 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
     virtual void        sSave(bool pPartial);
     virtual void        sPopulateItemsiteInfo();
     virtual void        sListPrices();
-    virtual void        sDeterminePrice();
-    virtual void        sDeterminePrice( bool force );
+    virtual void        sDeterminePrice(bool force = false);
     virtual void        sPopulatePrices( bool update, bool allPrices, double charTotal );
     virtual void        sRecalcPrice();
     virtual void        sPopulateItemInfo( int pItemid );
     virtual void        sRecalcAvailability();
-    virtual void        sDetermineAvailability();
-    virtual void        sDetermineAvailability( bool p );
+    virtual void        sDetermineAvailability(bool p = false);
     virtual void        sPopulateItemSources( int pItemid );
     virtual void        sPopulateItemSubs( int pItemid );
-    virtual void        sPopulateSubMenu(QMenu *, QTreeWidgetItem *, int);
+    virtual void        sPopulateSubMenu(QMenu *menu, QTreeWidgetItem *item, int col);
     virtual void        sSubstitute();
     virtual void        sReserveStock();
     virtual void        sPopulateHistory();
@@ -90,7 +88,6 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
     virtual void  reject();
 
   private:
-    QString _custName;
     double  _priceRatio;
     int     _preferredWarehouseid;
     int     _saletypeid;
@@ -131,8 +128,6 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
     bool    _supplyOrderDropShipCache;
     double  _supplyOverridePriceCache;
     bool    _supplyConnectionsCache;
-    double  _cachedPct;
-    double  _cachedRate;
     int     _taxzoneid;
     QStandardItemModel *_itemchar;
     int     _invuomid;
