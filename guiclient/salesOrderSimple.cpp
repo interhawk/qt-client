@@ -38,7 +38,6 @@
 #include "printSoForm.h"
 #include "printInvoice.h"
 #include "itemAvailabilityWorkbench.h"
-#include "taxIntegration.h"
 
 #define ISNEW(mode)   (((mode) & 0x0F) == cNew)
 
@@ -1850,9 +1849,6 @@ bool salesOrderSimple::sShipInvoice()
                                __FILE__, __LINE__);
       return false;
     }
-
-    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-    tax->commit("INV", invcheadid);
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Invoice"),
                                 shipq, __FILE__, __LINE__))

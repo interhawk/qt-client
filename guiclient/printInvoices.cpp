@@ -18,7 +18,6 @@
 #include <mqlutil.h>
 
 #include "errorReporter.h"
-#include "taxIntegration.h"
 
 printInvoices::printInvoices(QWidget *parent, const char *name, bool modal, Qt::WindowFlags fl)
     : printMulticopyDocument("InvoiceCopies",     "InvoiceWatermark",
@@ -75,7 +74,6 @@ printInvoices::printInvoices(QWidget *parent, const char *name, bool modal, Qt::
 
   connect(this, SIGNAL(aboutToStart(XSqlQuery*)), this, SLOT(sHandleAboutToStart(XSqlQuery*)));
   connect(this, SIGNAL(finishedWithAll()),        this, SLOT(sHandleFinishedWithAll()));
-  connect(this, SIGNAL(posted(int)),           this, SLOT(sHandlePosted(int)));
 }
 
 printInvoices::~printInvoices()
@@ -129,12 +127,6 @@ void printInvoices::sHandleAboutToStart(XSqlQuery *qry)
 void printInvoices::sHandleFinishedWithAll()
 {
   omfgThis->sInvoicesUpdated(-1, true);
-}
-
-void printInvoices::sHandlePosted(int docid)
-{
-  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-  tax->commit("INV", docid);
 }
 
 int printInvoices::distributeInventory(XSqlQuery *qry)

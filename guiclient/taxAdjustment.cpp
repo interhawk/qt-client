@@ -16,7 +16,6 @@
 
 #include "storedProcErrorLookup.h"
 #include "errorReporter.h"
-#include "taxIntegration.h"
 
 taxAdjustment::taxAdjustment(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl)

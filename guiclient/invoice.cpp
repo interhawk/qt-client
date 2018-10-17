@@ -24,7 +24,6 @@
 #include "distributeInventory.h"
 #include "invoiceItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 #include "allocateARCreditMemo.h"
 #include "guiErrorCheck.h"
 
@@ -392,8 +391,6 @@ void invoice::sClose()
         return;
       else
       {
-        _tax->cancel();
-
         invoiceClose.prepare( "SELECT deleteInvoice(:invchead_id) AS result;" );
         invoiceClose.bindValue(":invchead_id", _invcheadid);
         invoiceClose.exec();
@@ -963,8 +960,6 @@ void invoice::postInvoice()
     return;
   }
   post.exec("COMMIT;");
-
-  _tax->post();
 }
 
 void invoice::sNew()

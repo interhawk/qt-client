@@ -45,7 +45,6 @@
 #include "printStatementByCustomer.h"
 #include "salesOrder.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 #include "xdateinputdialog.h"
 
 #include "errorReporter.h"
@@ -478,9 +477,6 @@ void dspAROpenItems::sDeleteCreditMemo()
 
     if (checkCreditMemoSitePrivs(list()->currentItem()->id("docnumber")))
     {
-      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-      tax->cancel("CM", list()->currentItem()->id("docnumber"));
-
       delq.bindValue(":cmhead_id", (list()->currentItem()->id("docnumber")));
       delq.exec();
       if (delq.first())
@@ -512,9 +508,6 @@ void dspAROpenItems::sDeleteInvoice()
 
     if (checkInvoiceSitePrivs(list()->currentItem()->id("docnumber")))
     {
-      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-      tax->cancel("INV", list()->currentItem()->id("docnumber"));
-
       dspDeleteInvoice.bindValue(":invchead_id", list()->currentItem()->id("docnumber"));
       dspDeleteInvoice.exec();
       if (dspDeleteInvoice.first())
@@ -727,10 +720,6 @@ void dspAROpenItems::sVoidCreditMemo()
     }
 
     dspVoidCreditMemo.exec("COMMIT;");
-
-    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-    tax->cancel("CM", list()->currentItem()->id("docnumber"));
-
     sFillList();
   }
   else if (post.lastError().type() != QSqlError::NoError)
@@ -970,8 +959,6 @@ void dspAROpenItems::sVoidInvoiceDetails()
     }
 
     dspVoidInvoiceDetails.exec("COMMIT;");
-    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-    tax->cancel("INV", list()->currentItem()->id("docnumber"));
     sFillList();
   }
   else if (post.lastError().type() != QSqlError::NoError)
@@ -988,13 +975,11 @@ void dspAROpenItems::sRefundTax()
 {
   ParameterList params;
   params.append("label", tr("Tax Refund Date:"));
-
   XDateInputDialog newdlg(this, "", true);
   newdlg.set(params);
   if (newdlg.exec() == XDialog::Accepted)
   {
-    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-    tax->refund(list()->currentItem()->id("docnumber"), newdlg.getDate());
+    _taxIntegration->refund(list()->currentItem()->id("docnumber"), newdlg.getDate());
   }
 }
 
@@ -1325,12 +1310,7 @@ void dspAROpenItems::sPostCreditMemo()
       return;
     }
     else
-    {
       dspPostCreditMemo.exec("COMMIT;");
-
-      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-      tax->commit("CM", id);
-    }
   }
   else if (postq.lastError().type() != QSqlError::NoError)
   {
@@ -1551,11 +1531,7 @@ void dspAROpenItems::sPostInvoice()
                            __FILE__, __LINE__);
     }
     else
-    {
       dspPostInvoice.exec("COMMIT;");
-      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-      tax->commit("INV", list()->currentItem()->id("docnumber"));
-    }
   }
   else if (post.lastError().type() != QSqlError::NoError)
   {

@@ -107,6 +107,8 @@ extern Preferences *_preferences;
 extern Privileges  *_privileges;
 #include "../common/metricsenc.h"
 extern Metricsenc  *_metricsenc;
+#include "../common/taxIntegration.h"
+extern TaxIntegration *_taxIntegration;
 
 
 enum SetResponse

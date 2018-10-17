@@ -713,7 +713,6 @@ HEADERS = ../common/format.h                    \
           assignItemToPlannerCode.h             \
           assignLotSerial.h                     \
           atlasMap.h                            \
-          avalaraIntegration.h                  \
           authorizedotnetprocessor.h            \
           bankAccount.h                         \
           bankAccounts.h                        \
@@ -997,7 +996,6 @@ HEADERS = ../common/format.h                    \
           menuWindow.h                  \
           miscCheck.h                   \
           miscVoucher.h                 \
-          noIntegration.h               \
           openPurchaseOrder.h           \
           openReturnAuthorizations.h    \
           openSalesOrders.h             \
@@ -1213,7 +1211,6 @@ HEADERS = ../common/format.h                    \
           taxCode.h                     \
           taxCodeRate.h                 \
           taxCodes.h                    \
-          taxIntegration.h              \
           taxRegistration.h             \
           taxRegistrations.h            \
           taxType.h                     \
@@ -1345,7 +1342,6 @@ SOURCES = absoluteCalendarItem.cpp              \
           assignItemToPlannerCode.cpp           \
           assignLotSerial.cpp                   \
           atlasMap.cpp                          \
-          avalaraIntegration.cpp                \
           authorizedotnetprocessor.cpp          \
           bankAccount.cpp                       \
           bankAccounts.cpp                      \
@@ -1626,7 +1622,6 @@ SOURCES = absoluteCalendarItem.cpp              \
           menuWindow.cpp                \
           miscCheck.cpp                 \
           miscVoucher.cpp               \
-          noIntegration.cpp             \
           openPurchaseOrder.cpp         \
           openReturnAuthorizations.cpp  \
           openSalesOrders.cpp           \
@@ -1842,7 +1837,6 @@ SOURCES = absoluteCalendarItem.cpp              \
           taxCode.cpp                           \
           taxCodeRate.cpp                       \
           taxCodes.cpp                          \
-          taxIntegration.cpp                    \
           taxRegistration.cpp                   \
           taxRegistrations.cpp                  \
           taxType.cpp                           \

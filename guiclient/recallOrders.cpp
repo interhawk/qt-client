@@ -53,7 +53,6 @@ void recallOrders::languageChange()
 void recallOrders::sRecall()
 {
   XSqlQuery recallRecall;
-  XSqlQuery invoices;
   if (!checkSitePrivs(_ship->id()))
     return;
 
@@ -68,20 +67,6 @@ void recallOrders::sRecall()
                               QMessageBox::No);
     if (answer == QMessageBox::No)
       return;
-  }
-
-  invoices.prepare("SELECT DISTINCT invchead_id "
-                   "  FROM shipitem "
-                   "  JOIN invcitem ON shipitem_invcitem_id = invcitem_id "
-                   "  JOIN invchead ON invcitem_invchead_id = invchead_id "
-                   " WHERE shipitem_shiphead_id = :shiphead_id "
-                   "   AND NOT invchead_posted;");
-  invoices.bindValue(":shiphead_id", _ship->id());
-  invoices.exec();
-  while (invoices.next())
-  {
-    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-    tax->cancel("INV", invoices.value("invchead_id").toInt());
   }
 
   recallRecall.prepare("SELECT recallShipment(:shiphead_id) AS result;");

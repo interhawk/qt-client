@@ -22,7 +22,6 @@
 #include "creditMemoItem.h"
 #include "invoiceList.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 #include "guiErrorCheck.h"
 
 creditMemo::creditMemo(QWidget* parent, const char* name, Qt::WindowFlags fl)
