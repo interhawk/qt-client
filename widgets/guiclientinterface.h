@@ -12,6 +12,7 @@
 #define guiclientinterface_h
 
 #include "parameter.h"
+#include "taxIntegration.h"
 #include "mqlhash.h"
 
 #include <QString>
@@ -21,6 +22,7 @@ class Metrics;
 class Metricsenc;
 class Preferences;
 class Privileges;
+class TaxIntegration;
 
 class GuiClientInterface : public QObject
 {
@@ -46,6 +48,7 @@ class GuiClientInterface : public QObject
     virtual Metricsenc  *getMetricsenc()            = 0;
     virtual Preferences *getPreferences()           = 0;
     virtual Privileges  *getPrivileges()            = 0;
+    virtual TaxIntegration *getTaxIntegration()     = 0;
     virtual MqlHash     *getMqlHash()               = 0;
     virtual void         setMqlHash(MqlHash *pHash) = 0;
 

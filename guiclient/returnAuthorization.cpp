@@ -25,7 +25,6 @@
 #include "mqlutil.h"
 #include "returnAuthorizationItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 #include "freightBreakdown.h"
 #include "printRaForm.h"
 
@@ -1794,12 +1793,6 @@ void returnAuthorization::sRefund()
   if (cmq.first())
   {
     int cmheadid = cmq.value("result").toInt();
-
-    if (_post)
-    {
-      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-      tax->commit("CM", cmheadid);
-    }
 
     ParameterList ccp;
     ccp.append("cmhead_id", cmheadid);

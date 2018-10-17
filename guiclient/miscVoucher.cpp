@@ -20,7 +20,6 @@
 
 #include "guiErrorCheck.h"
 #include "errorReporter.h"
-#include "taxIntegration.h"
 #include "voucherMiscDistrib.h"
 
 miscVoucher::miscVoucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -398,8 +397,6 @@ void miscVoucher::postVoucher()
     if (result < 0)
       ErrorReporter::error(QtCriticalMsg, this, tr("Posting Voucher"),
                          post, __FILE__, __LINE__);
-    else
-      _tax->post();
   }
   else
     ErrorReporter::error(QtCriticalMsg, this, tr("Posting Voucher"),

@@ -29,7 +29,6 @@ class printInvoice : public printMulticopyDocument,
     virtual void languageChange();
     virtual void sHandlePopulated(XSqlQuery *qry);
     virtual void sHandleDocUpdated(int docid);
-    virtual void sHandlePosted(int);
 
   protected:
 

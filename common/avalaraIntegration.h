@@ -25,7 +25,7 @@ class AvalaraIntegration : public TaxIntegration
     void wait();
 
   protected:
-    virtual void        sendRequest(QString, QString, int, QString, QStringList);
+    virtual void        sendRequest(QString, QString, int, QString, QStringList, QString);
     virtual QString     error(QString, QNetworkReply*, QJsonObject);
     virtual void        done();
 
@@ -36,6 +36,12 @@ class AvalaraIntegration : public TaxIntegration
     QNetworkAccessManager * restclient;
     QList<QNetworkReply*> replies;
     QEventLoop eventLoop;
+    QString _ServerVersion;
+    bool _NoAvaTaxCommit;
+    bool _LogTaxService;
+    QString _TaxServiceLogFile;
+
+  
 };
 
 #endif

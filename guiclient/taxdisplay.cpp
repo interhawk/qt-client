@@ -24,9 +24,7 @@ TaxDisplay::TaxDisplay(QWidget* parent, const char* name)
   _orderId = -1;
   _mode = cNew;
 
-  _tax = TaxIntegration::getTaxIntegration();
-
-  connect(_tax, SIGNAL(taxCalculated(double, QString)), this, SLOT(sUpdate(double, QString)));
+  connect(_taxIntegration, SIGNAL(taxCalculated(double, QString)), this, SLOT(sUpdate(double, QString)));
 
   _recalculateAct = new QAction(tr("Recalculate Tax"), this);
   _recalculateAct->setObjectName("_recalculateAct");
@@ -104,7 +102,7 @@ void TaxDisplay::setMode(int mode)
 void TaxDisplay::sRecalculate()
 {
   emit save(true);
-  _tax->calculateTax(_type, _orderId);
+  _taxIntegration->calculateTax(_type, _orderId);
 }
 
 void TaxDisplay::sOpen()
@@ -121,7 +119,7 @@ void TaxDisplay::sOpen()
   params.append("order_id", _orderId);
   params.append("mode", "mode");
 
-  _tax->wait();
+  _taxIntegration->wait();
 
   taxBreakdown newdlg(0, "", true);
   newdlg.set(params);
@@ -180,17 +178,7 @@ void TaxDisplay::sRefresh()
 
 void TaxDisplay::save()
 {
-  _tax->calculateTax(_type, _orderId, true);
-}
-
-void TaxDisplay::post()
-{
-  _tax->commit(_type, _orderId);
-}
-
-void TaxDisplay::cancel()
-{
-  _tax->cancel(_type, _orderId);
+  _taxIntegration->calculateTax(_type, _orderId, true);
 }
 
 void TaxDisplay::invalidate()

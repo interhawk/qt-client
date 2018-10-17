@@ -137,6 +137,10 @@ Privileges    *_privileges=0;
 /** @brief A cache of the @c metricsenc table for encrypted metrics. */
 Metricsenc    *_metricsenc=0;
 
+
+
+TaxIntegration *_taxIntegration=0;
+
 /** @brief A list of the hot keys currently mapped for use.
 
     Values beginning with @c C are mapped to control keys while those

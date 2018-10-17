@@ -12,7 +12,6 @@
 #define TAXTYPE_H
 
 #include "guiclient.h"
-#include "taxIntegration.h"
 #include "xdialog.h"
 #include <parameter.h>
 #include "ui_taxType.h"
@@ -41,7 +40,6 @@ private:
     int _mode;
     int _taxtypeid;
     bool _extService;
-    TaxIntegration* _tax;
 
 };
 

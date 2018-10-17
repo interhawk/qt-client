@@ -19,7 +19,6 @@
 #include <openreports.h>
 #include "errorReporter.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 
 postInvoices::postInvoices(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl)
@@ -290,9 +289,6 @@ void postInvoices::sPost()
     }
     succeeded++;
     post.exec("COMMIT;");
-
-    TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-    tax->commit("INV", invoiceIds.at(i));
   }
 
   if (errors.size() > 0)

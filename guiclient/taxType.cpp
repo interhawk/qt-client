@@ -47,9 +47,7 @@ taxType::taxType(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
     _search->setVisible(false);
   }
 
-  _tax = TaxIntegration::getTaxIntegration();
-
-  connect(_tax, SIGNAL(taxCodesFetched(QJsonObject, QString)), this, SLOT(populateServiceList(QJsonObject, QString)));
+  connect(_taxIntegration, SIGNAL(taxCodesFetched(QJsonObject, QString)), this, SLOT(populateServiceList(QJsonObject, QString)));
 }
 
 taxType::~taxType()
@@ -232,7 +230,7 @@ void taxType::populate()
 
 void taxType::populateServiceList()
 {
-  _tax->getTaxCodes();
+  _taxIntegration->getTaxCodes();
 }
 
 void taxType::populateServiceList(QJsonObject taxCodes, QString error)

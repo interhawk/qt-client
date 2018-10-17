@@ -12,7 +12,6 @@
 #define TAXDISPLAY_H
 
 #include "currcluster.h"
-#include "taxIntegration.h"
 
 class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
 {
@@ -28,8 +27,6 @@ class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
     Q_INVOKABLE int     orderId();
     Q_INVOKABLE int     mode();
     Q_INVOKABLE void    save();
-    Q_INVOKABLE void    post();
-    Q_INVOKABLE void    cancel();
     Q_INVOKABLE void    invalidate();
 
   public slots:
@@ -58,7 +55,6 @@ class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay
     QMenu*          _menu;
     QAction*        _recalculateAct;
     QAction*        _openAct;
-    TaxIntegration* _tax;
 };
 
 #endif

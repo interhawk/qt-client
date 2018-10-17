@@ -109,6 +109,9 @@ bool configureTax::sSave()
     _metrics->set("AvalaraUserExemptionCode", _taxExempt->code());
   }
 
+  _taxIntegration->wait();
+  _taxIntegration = TaxIntegration::getTaxIntegration();
+
   return true;
 }
 

@@ -16,7 +16,6 @@
 #include <QMessageBox>
 
 #include "errorReporter.h"
-#include "taxIntegration.h"
 
 printCreditMemo::printCreditMemo(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : printMulticopyDocument("CreditMemoCopies",     "CreditMemoWatermark",
@@ -72,12 +71,6 @@ void printCreditMemo::sHandleDocUpdated(int docid)
 {
   Q_UNUSED(docid);
   omfgThis->sCreditMemosUpdated();
-}
-
-void printCreditMemo::sHandlePosted(int docid)
-{
-  TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-  tax->commit("CM", docid);
 }
 
 int printCreditMemo::distributeInventory(XSqlQuery *qry)

@@ -26,7 +26,6 @@
 #include "getGLDistDate.h"
 #include "miscVoucher.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 #include "voucher.h"
 
 openVouchers::openVouchers(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -191,9 +190,6 @@ void openVouchers::sDelete()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
       {
-       TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-       tax->cancel("VCH", ((XTreeWidgetItem*)(selected[i]))->id());
-
        int id = ((XTreeWidgetItem*)(selected[i]))->id();
        delq.bindValue(":vohead_id", id);
        delq.exec();
@@ -281,11 +277,6 @@ void openVouchers::sPost()
             ErrorReporter::error(QtCriticalMsg, this, tr("Posting Voucher"),
                                  storedProcErrorLookup("postVoucher", result),
                                  __FILE__, __LINE__);
-          else
-          {
-            TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-            tax->commit("VCH", id);
-          }
         }
       // contains() string is hard-coded in stored procedure
         else if (post.lastError().databaseText().contains("post to closed period"))

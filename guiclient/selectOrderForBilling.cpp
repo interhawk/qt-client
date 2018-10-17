@@ -22,7 +22,6 @@
 #include "salesOrderList.h"
 #include "selectBillingQty.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 #include "errorReporter.h"
 
 selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, Qt::WindowFlags fl)

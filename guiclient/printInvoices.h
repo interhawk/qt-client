@@ -31,7 +31,6 @@ class printInvoices : public printMulticopyDocument,
     virtual void languageChange();
     virtual void sHandleAboutToStart(XSqlQuery*);
     virtual void sHandleFinishedWithAll();
-    virtual void sHandlePosted(int);
 
 };
 

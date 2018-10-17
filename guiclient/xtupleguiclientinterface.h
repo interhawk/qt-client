@@ -31,6 +31,7 @@ class xTupleGuiClientInterface : public GuiClientInterface
     virtual Metricsenc  *getMetricsenc();
     virtual Preferences *getPreferences();
     virtual Privileges  *getPrivileges();
+    virtual TaxIntegration *getTaxIntegration();
     virtual MqlHash     *getMqlHash();
     virtual void         setMqlHash(MqlHash *pHash);
 

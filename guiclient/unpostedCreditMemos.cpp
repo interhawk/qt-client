@@ -26,7 +26,6 @@
 #include "printCreditMemo.h"
 #include "storedProcErrorLookup.h"
 #include "errorReporter.h"
-#include "taxIntegration.h"
 
 unpostedCreditMemos::unpostedCreditMemos(QWidget* parent, const char* name, Qt::WindowFlags fl)
     : XWidget(parent, name, fl)
@@ -377,10 +376,6 @@ void unpostedCreditMemos::sPost()
         }
 
         postPost.exec("COMMIT;");
-
-        TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-        tax->commit("CM", memoId);
-
         succeeded++;
       }
       else if (postPost.lastError().databaseText().contains("post to closed period"))
@@ -449,9 +444,6 @@ void unpostedCreditMemos::sDelete()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
       {
-        TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-        tax->cancel("CM", ((XTreeWidgetItem*)(selected[i]))->id());
-
         delq.bindValue(":cmhead_id", ((XTreeWidgetItem*)(selected[i]))->id());
         delq.exec();
         if (delq.first())

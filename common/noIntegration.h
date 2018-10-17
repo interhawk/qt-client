@@ -8,19 +8,20 @@
  * to be bound by its terms.
  */
 
-#include "noIntegration.h"
+#ifndef NOINTEGRATION_H
+#define NOINTEGRATION_H
 
-#include <QJsonDocument>
-#include <QJsonObject>
+#include "taxIntegration.h"
 
-NoIntegration::NoIntegration() : TaxIntegration()
+class NoIntegration : public TaxIntegration
 {
-}
+  Q_OBJECT
 
-void NoIntegration::sendRequest(QString type, QString orderType, int orderId, QString request, QStringList config)
-{
-  if (type == "taxcodes" || type == "taxexempt")
-    handleResponse(type, QString(), 0, QString(), "");
-  else
-    handleResponse(type, orderType, orderId, request, "");
-}
+  public:
+    NoIntegration();
+
+  protected:
+    virtual void sendRequest(QString, QString, int, QString, QStringList, QString);
+};
+
+#endif

@@ -124,6 +124,7 @@
 #include "xmainwindow.h"
 #include "checkForUpdates.h"
 #include "salesOrderSimple.h"
+#include "taxIntegration.h"
 #include "userPreferences.h"
 #include "xtNetworkRequestManager.h"
 
@@ -640,7 +641,9 @@ int main(int argc, char *argv[])
 	_metricsenc = new Metricsenc(key);
   }
 
-  initializePlugin(_preferences, _metrics, _privileges, omfgThis->username(), omfgThis->workspace());
+  _taxIntegration = TaxIntegration::getTaxIntegration();
+
+  initializePlugin(_preferences, _metrics, _privileges, _taxIntegration, omfgThis->username(), omfgThis->workspace());
 
 // START code for updating the locale settings if they haven't been already
   XSqlQuery lc;
@@ -817,6 +820,7 @@ int main(int argc, char *argv[])
   delete _privileges;
   if (0 != _metricsenc)
     delete _metricsenc;
+  delete _taxIntegration;
 
   return 0;
 }

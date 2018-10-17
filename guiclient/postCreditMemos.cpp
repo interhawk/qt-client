@@ -16,7 +16,6 @@
 #include "distributeInventory.h"
 #include "errorReporter.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 
 postCreditMemos::postCreditMemos(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl)
@@ -213,10 +212,6 @@ void postCreditMemos::sPost()
       }
 
       postPost.exec("COMMIT;");
-
-      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-      tax->commit("CM", creditMemoId);
-
       succeeded++;
     }
     else

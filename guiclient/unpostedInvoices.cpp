@@ -27,7 +27,6 @@
 #include "storedProcErrorLookup.h"
 #include "distributeInventory.h"
 #include "errorReporter.h"
-#include "taxIntegration.h"
 
 unpostedInvoices::unpostedInvoices(QWidget* parent, const char* name, Qt::WindowFlags fl)
     : display(parent, "unpostedInvoices", fl)
@@ -114,9 +113,6 @@ void unpostedInvoices::sDelete()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
 	  {
-        TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-        tax->cancel("INV", ((XTreeWidgetItem*)(selected[i]))->id());
-
         unpostedDelete.bindValue(":invchead_id", ((XTreeWidgetItem*)(selected[i]))->id());
         unpostedDelete.exec();
         if (unpostedDelete.first())
@@ -445,8 +441,6 @@ void unpostedInvoices::sPost()
         }
 
         unpostedPost.exec("COMMIT;");
-        TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-        tax->commit("INV", invoiceId);
       }
       else 
       {

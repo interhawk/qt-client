@@ -28,7 +28,6 @@ class printCreditMemos : public printMulticopyDocument,
   protected slots:
     virtual void languageChange();
     virtual void sHandleFinishedWithAll();
-    virtual void sHandlePosted(int);
 
 };
 

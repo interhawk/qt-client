@@ -21,22 +21,41 @@
 #include <QJsonObject>
 
 #include "errorReporter.h"
-#include "guiclient.h"
 
 AvalaraIntegration::AvalaraIntegration() : TaxIntegration()
 {
   restclient = new QNetworkAccessManager;
   connect(restclient, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleResponse(QNetworkReply*)));
+
+  // Can't access metrics from here, but only queries once at startup and in setup
+  XSqlQuery service("SELECT fetchMetricText('ServerVersion') AS ServerVersion, "
+                    "       fetchMetricBool('NoAvaTaxCommit') AS NoAvaTaxCommit, "
+                    "       fetchMetricBool('LogTaxService') AS LogTaxService, "
+                    "       fetchMetricText('TaxServiceLogFile') AS TaxServiceLogFile;");
+  if (service.first())
+  {
+    _ServerVersion = service.value("ServerVersion").toString();
+    _NoAvaTaxCommit = service.value("NoAvaTaxCommit").toBool();
+    _LogTaxService = service.value("LogTaxService").toBool();
+    _TaxServiceLogFile = service.value("TaxServiceLogFile").toString();
+  }
+  else
+  {
+    _ServerVersion = "";
+    _NoAvaTaxCommit = false;
+    _LogTaxService = false;
+    _TaxServiceLogFile = "";
+  }
 }
 
-void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderId, QString payload, QStringList config)
+void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderId, QString payload, QStringList config, QString orderNumber)
 {
-  if (_metrics->boolean("NoAvaTaxCommit") &&
+  if (_NoAvaTaxCommit &&
       (type == "committransaction" || type == "voidtransaction" || type == "refundtransaction"))
     return;
 
   XSqlQuery build;
-  build.prepare("SELECT buildAvalaraUrl(:type, :orderType, :orderId, :url) AS url, "
+  build.prepare("SELECT buildAvalaraUrl(:type, :orderType, :orderId, :url, :orderNumber) AS url, "
                 "       buildAvalaraHeaders(:account, :key) AS headers;");
   build.bindValue(":type", type);
   build.bindValue(":orderType", orderType);
@@ -47,6 +66,8 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
     build.bindValue(":key", config[1]);
     build.bindValue(":url", config[2]);
   }
+  if (!orderNumber.isEmpty())
+    build.bindValue(":orderNumber", orderNumber);
   build.exec();
 
   if (build.first())
@@ -65,7 +86,7 @@ void AvalaraIntegration::sendRequest(QString type, QString orderType, int orderI
     netrequest.setRawHeader("X-Avalara-UID", QByteArray("a0o0b000003PfVt"));
     netrequest.setRawHeader("X-Avalara-Client",
                             (QString("xTuple; %1; REST; V2; %2")
-                             .arg(_metrics->value("ServerVersion"))
+                             .arg(_ServerVersion)
                              .arg(QHostInfo::localHostName())).toUtf8());
 
     foreach (QNetworkReply* other, replies)
@@ -123,9 +144,9 @@ void AvalaraIntegration::handleResponse(QNetworkReply* reply)
   QByteArray request = reply->property("request").toByteArray();
   QByteArray response = reply->readAll();
 
-  if (_metrics->boolean("LogTaxService"))
+  if (_LogTaxService)
   {
-    QFile log(_metrics->value("TaxServiceLogFile"));
+    QFile log(_TaxServiceLogFile);
     if (log.open(QIODevice::Append))
     {
       QString txt = reply->property("time").toString() + ":\n";

@@ -25,7 +25,6 @@
 #include "returnAuthorization.h"
 #include "returnAuthCheck.h"
 #include "storedProcErrorLookup.h"
-#include "taxIntegration.h"
 #include "errorReporter.h"
 
 returnAuthorizationWorkbench::returnAuthorizationWorkbench(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -256,13 +255,6 @@ void returnAuthorizationWorkbench::sProcess()
                              __FILE__, __LINE__);
       return;
     }
-
-    if (_post)
-    {
-      TaxIntegration* tax = TaxIntegration::getTaxIntegration();
-      tax->commit("CM", cmheadid);
-    }
-
     returnProcess.prepare( "SELECT cmhead_number "
                "FROM cmhead "
                "WHERE (cmhead_id=:cmhead_id);" );

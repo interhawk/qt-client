@@ -197,14 +197,16 @@ Metrics     *_x_metrics = 0;
 QMdiArea    *_x_workspace = 0;
 Privileges  *_x_privileges = 0;
 QString     _x_username;
+TaxIntegration * _x_taxIntegration = 0;
 
-void initializePlugin(Preferences *pPreferences, Metrics *pMetrics, Privileges *pPrivileges, QString pUsername, QMdiArea *pWorkspace)
+void initializePlugin(Preferences *pPreferences, Metrics *pMetrics, Privileges *pPrivileges, TaxIntegration* pTaxIntegration, QString pUsername, QMdiArea *pWorkspace)
 {
   _x_preferences = pPreferences;
   _x_metrics = pMetrics;
   _x_workspace = pWorkspace;
   _x_privileges = pPrivileges;
   _x_username = pUsername;
+  _x_taxIntegration = pTaxIntegration;
 }
 
 void setupWidgetsScriptApi(QScriptEngine *engine, GuiClientInterface *client)
