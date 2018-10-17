@@ -30,8 +30,8 @@ TaxIntegration* TaxIntegration::getTaxIntegration()
 
 TaxIntegration::TaxIntegration()
 {
-  if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("calculateTax"))
-    QSqlDatabase::database().driver()->subscribeToNotification("calculateTax");
+  if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("calculatetax"))
+    QSqlDatabase::database().driver()->subscribeToNotification("calculatetax");
   if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("commit"))
     QSqlDatabase::database().driver()->subscribeToNotification("commit");
   if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("cancel"))
@@ -168,7 +168,7 @@ void TaxIntegration::sNotified(const QString& name, QSqlDriver::NotificationSour
 {
   QStringList args = payload.toString().split(",");
 
-  if (name == "calculateTax" && args.size() >= 2)
+  if (name == "calculatetax" && args.size() >= 2)
   {
     if (args.size() == 2)
       calculateTax(args[0], args[1].toInt());
