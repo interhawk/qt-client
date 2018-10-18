@@ -24,10 +24,16 @@ TaxExemptCluster::TaxExemptCluster(QWidget* parent, const char* name)
   _code = "";
 
   _tax = new AvalaraIntegration();
+
   connect(_tax, SIGNAL(taxExemptCategoriesFetched(QJsonObject, QString)), this, SLOT(sPopulateTaxExempt(QJsonObject, QString)));
 
   if (_metrics->value("TaxService") == "A")
     _tax->getTaxExemptCategories();
+}
+
+TaxExemptCluster::~TaxExemptCluster()
+{
+  delete _tax;
 }
 
 bool TaxExemptCluster::silent()
