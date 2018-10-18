@@ -22,6 +22,7 @@ class XTUPLEWIDGETS_EXPORT TaxExemptCluster : public XComboBox
 
   public:
     TaxExemptCluster(QWidget* = 0, const char* = 0);
+    ~TaxExemptCluster();
 
     Q_INVOKABLE bool silent();
     Q_INVOKABLE void populate(QStringList = QStringList());

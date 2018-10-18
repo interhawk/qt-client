@@ -61,6 +61,8 @@ configureTax::configureTax(QWidget* parent, const char* name, bool /*modal*/, Qt
 configureTax::~configureTax()
 {
   // no need to delete child widgets, Qt does it all for us
+
+  delete _tax;
 }
 
 void configureTax::languageChange()
@@ -110,6 +112,7 @@ bool configureTax::sSave()
   }
 
   _taxIntegration->wait();
+  delete _taxIntegration;
   _taxIntegration = TaxIntegration::getTaxIntegration();
 
   return true;

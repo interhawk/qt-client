@@ -166,6 +166,9 @@ void TaxIntegration::handleResponse(QString type, QString orderType, int orderId
 
 void TaxIntegration::sNotified(const QString& name, QSqlDriver::NotificationSource source, const QVariant& payload)
 {
+  if (source != QSqlDriver::SelfSource)
+    return;
+
   QStringList args = payload.toString().split(",");
 
   if (name == "calculatetax" && args.size() >= 2)
