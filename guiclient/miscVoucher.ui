@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>774</width>
-    <height>737</height>
+    <height>716</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -437,7 +437,7 @@ to be bound by its terms.</comment>
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="type" stdset="0">
+           <property name="type">
             <string>VCH</string>
            </property>
           </widget>
@@ -723,6 +723,16 @@ to be bound by its terms.</comment>
    <header>recurrencewidget.h</header>
   </customwidget>
   <customwidget>
+   <class>TaxDisplay</class>
+   <extends>CurrDisplay</extends>
+   <header>taxdisplay.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>XComboBox</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
    <class>VendorCluster</class>
    <extends>QWidget</extends>
    <header>vendorcluster.h</header>
@@ -758,16 +768,6 @@ to be bound by its terms.</comment>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>TaxExemptCluster</class>
-   <extends>QWidget</extends>
-   <header>taxexemptcluster.h</header>
-  </customwidget>
-  <customwidget>
-   <class>TaxDisplay</class>
-   <extends>QWidget</extends>
-   <header>taxdisplay.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

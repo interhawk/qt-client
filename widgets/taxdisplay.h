@@ -11,6 +11,8 @@
 #ifndef TAXDISPLAY_H
 #define TAXDISPLAY_H
 
+#include <QLabel>
+
 #include "currcluster.h"
 
 class XTUPLEWIDGETS_EXPORT TaxDisplay : public CurrDisplay

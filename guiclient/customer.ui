@@ -2341,6 +2341,11 @@ to be bound by its terms.</comment>
    <header>documents.h</header>
   </customwidget>
   <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>XComboBox</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
    <class>WComboBox</class>
    <extends>XComboBox</extends>
    <header>wcombobox.h</header>
@@ -2371,11 +2376,6 @@ to be bound by its terms.</comment>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>TaxExemptCluster</class>
-   <extends>QWidget</extends>
-   <header>taxexemptcluster.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -2589,7 +2589,7 @@ to be bound by its terms.</comment>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="accountingButtonGroup"/>
   <buttongroup name="settingsButtonGroup"/>
+  <buttongroup name="accountingButtonGroup"/>
  </buttongroups>
 </ui>

@@ -18,7 +18,7 @@
 #include "errorReporter.h"
 
 taxAdjustment::taxAdjustment(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
-    : XDialog(parent, name, modal, fl)
+    : QDialog(parent, fl)
 {
   setupUi(this);
 
@@ -38,9 +38,8 @@ void taxAdjustment::languageChange()
   retranslateUi(this);
 }
 
-enum SetResponse taxAdjustment::set(const ParameterList &pParams)
+void taxAdjustment::set(const ParameterList &pParams)
 {
-  XDialog::set(pParams);
   QVariant param;
   bool     valid;
 
@@ -68,8 +67,6 @@ enum SetResponse taxAdjustment::set(const ParameterList &pParams)
   param = pParams.value("curr_id", &valid);
    if (valid)
      _amount->setId(param.toInt());
-
-  return NoError;
 }
 
 void taxAdjustment::sSave()

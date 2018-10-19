@@ -11,12 +11,10 @@
 #ifndef TAXADJUSTMENT_H
 #define TAXADJUSTMENT_H
 
-#include "guiclient.h"
-#include "xdialog.h"
 #include <parameter.h>
 #include "ui_taxAdjustment.h"
 
-class taxAdjustment : public XDialog, public Ui::taxAdjustment
+class XTUPLEWIDGETS_EXPORT taxAdjustment : public QDialog, public Ui::taxAdjustment
 {
     Q_OBJECT
 
@@ -25,7 +23,7 @@ public:
     ~taxAdjustment();
 
 public slots:
-    virtual enum SetResponse set( const ParameterList & pParams );
+    virtual void set( const ParameterList & pParams );
     virtual void sSave();
     virtual void sCheck();
 

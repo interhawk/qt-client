@@ -14,7 +14,6 @@
 #include <QMessageBox>
 
 #include "errorReporter.h"
-#include "guiclient.h"
 #include "taxBreakdown.h"
 
 TaxDisplay::TaxDisplay(QWidget* parent, const char* name)
@@ -24,7 +23,8 @@ TaxDisplay::TaxDisplay(QWidget* parent, const char* name)
   _orderId = -1;
   _mode = cNew;
 
-  connect(_taxIntegration, SIGNAL(taxCalculated(double, QString)), this, SLOT(sUpdate(double, QString)));
+  if (_x_taxIntegration)
+    connect(_x_taxIntegration, SIGNAL(taxCalculated(double, QString)), this, SLOT(sUpdate(double, QString)));
 
   _recalculateAct = new QAction(tr("Recalculate Tax"), this);
   _recalculateAct->setObjectName("_recalculateAct");
@@ -102,7 +102,8 @@ void TaxDisplay::setMode(int mode)
 void TaxDisplay::sRecalculate()
 {
   emit save(true);
-  _taxIntegration->calculateTax(_type, _orderId);
+  if (_x_taxIntegration)
+    _x_taxIntegration->calculateTax(_type, _orderId);
 }
 
 void TaxDisplay::sOpen()
@@ -119,7 +120,8 @@ void TaxDisplay::sOpen()
   params.append("order_id", _orderId);
   params.append("mode", "mode");
 
-  _taxIntegration->wait();
+  if (_x_taxIntegration)
+    _x_taxIntegration->wait();
 
   taxBreakdown newdlg(0, "", true);
   newdlg.set(params);
@@ -160,7 +162,7 @@ void TaxDisplay::sRefresh()
                            tax, __FILE__, __LINE__))
     return;
 
-  if (_metrics->value("TaxService") == "A")
+  if (_x_metrics && _x_metrics->value("TaxService") == "A")
   {
     tax.prepare("SELECT taxhead_valid AS valid "
                 "  FROM taxhead "
@@ -178,12 +180,13 @@ void TaxDisplay::sRefresh()
 
 void TaxDisplay::save()
 {
-  _taxIntegration->calculateTax(_type, _orderId, true);
+  if (_x_taxIntegration)
+    _x_taxIntegration->calculateTax(_type, _orderId, true);
 }
 
 void TaxDisplay::invalidate()
 {
-  if (_metrics->value("TaxService") == "A")
+  if (_x_metrics && _x_metrics->value("TaxService") == "A")
   {
     if (isEmpty())
       return;
@@ -248,6 +251,6 @@ void TaxDisplay::sUpdateMenu()
     _openAct->setEnabled(true);
   }
 
-  _recalculateAct->setVisible(_metrics->value("TaxService") == "A");
+  _recalculateAct->setVisible(_x_metrics ? _x_metrics->value("TaxService") == "A" : false);
   _recalculateAct->setEnabled(_mode != cView);
 }

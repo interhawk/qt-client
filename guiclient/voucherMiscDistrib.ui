@@ -288,7 +288,7 @@ to be bound by its terms.</comment>
            </widget>
           </item>
           <item>
-           <widget class="TaxExemptCluster" name="_taxExempt" native="true">
+           <widget class="TaxExemptCluster" name="_taxExempt">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -430,6 +430,11 @@ to be bound by its terms.</comment>
    <header>glcluster.h</header>
   </customwidget>
   <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>XComboBox</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
    <class>VoucherCluster</class>
    <extends>QWidget</extends>
    <header>voucherCluster.h</header>
@@ -458,11 +463,6 @@ to be bound by its terms.</comment>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>TaxExemptCluster</class>
-   <extends>QWidget</extends>
-   <header>taxexemptcluster.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
