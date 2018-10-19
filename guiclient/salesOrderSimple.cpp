@@ -1236,7 +1236,8 @@ void salesOrderSimple::sTaxDetail()
   params.append("mode", "view");
 
   taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError && newdlg.exec() == XDialog::Accepted)
+  newdlg.set(params);
+  if (newdlg.exec() == QDialog::Accepted)
   {
     populate();
   }

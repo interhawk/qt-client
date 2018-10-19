@@ -98,6 +98,8 @@ HEADERS += plugins/addressclusterplugin.h \
     plugins/shipmentclusterplugin.h \
     plugins/shiptoclusterplugin.h \
     plugins/shiptoeditplugin.h \
+    plugins/taxdisplayplugin.h \
+    plugins/taxexemptclusterplugin.h \
     plugins/usernameclusterplugin.h \
     plugins/usernamelineeditplugin.h \
     plugins/vendorclusterplugin.h \
@@ -191,6 +193,10 @@ SOURCES += widgets.cpp \
     shiftCluster.cpp \
     shipmentCluster.cpp \
     shiptoCluster.cpp \
+    taxAdjustment.cpp \
+    taxBreakdown.cpp \
+    taxdisplay.cpp \
+    taxexemptcluster.cpp \
     transferOrderList.cpp \
     usernameCluster.cpp \
     vendorcluster.cpp \
@@ -290,6 +296,10 @@ HEADERS += widgets.h \
     shiftcluster.h \
     shipmentcluster.h \
     shiptocluster.h \
+    taxAdjustment.h \
+    taxBreakdown.h \
+    taxdisplay.h \
+    taxexemptcluster.h \
     transferOrderList.h \
     usernamecluster.h \
     vendorcluster.h \
@@ -340,6 +350,8 @@ FORMS += alarmMaint.ui \
     queryitem.ui \
     queryset.ui \
     recurrencewidget.ui \
+    taxAdjustment.ui \
+    taxBreakdown.ui \
     vendorgroup.ui \
     womatlcluster.ui \
     xdoccopysetter.ui

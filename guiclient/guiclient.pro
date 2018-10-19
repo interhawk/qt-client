@@ -587,11 +587,9 @@ FORMS =   absoluteCalendarItem.ui               \
           taskAssignment.ui                     \
           taskTemplate.ui                       \
           taskTemplates.ui                      \
-          taxAdjustment.ui                      \
           taxAssignment.ui                      \
           taxAssignments.ui                     \
           taxAuthority.ui                       \
-          taxBreakdown.ui                       \
           taxClass.ui                           \
           taxClasses.ui                         \
           taxCode.ui                            \
@@ -1198,14 +1196,10 @@ HEADERS = ../common/format.h                    \
           taskAssignment.h              \
           taskTemplate.h                \
           taskTemplates.h               \
-          taxdisplay.h                  \
-          taxexemptcluster.h            \
-          taxAdjustment.h               \
           taxAssignment.h               \
           taxAssignments.h              \
           taxAuthorities.h              \
           taxAuthority.h                \
-          taxBreakdown.h                \
           taxClass.h                    \
           taxClasses.h                  \
           taxCode.h                     \
@@ -1824,14 +1818,10 @@ SOURCES = absoluteCalendarItem.cpp              \
           taskAssignment.cpp                    \
           taskTemplate.cpp                      \
           taskTemplates.cpp                     \
-          taxdisplay.cpp                        \
-          taxexemptcluster.cpp                  \
-          taxAdjustment.cpp                     \
           taxAssignment.cpp                     \
           taxAssignments.cpp                    \
           taxAuthorities.cpp                    \
           taxAuthority.cpp                      \
-          taxBreakdown.cpp                      \
           taxClass.cpp                          \
           taxClasses.cpp                        \
           taxCode.cpp                           \

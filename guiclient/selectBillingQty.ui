@@ -583,7 +583,7 @@ to be bound by its terms.</comment>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="TaxExemptCluster" name="_taxExempt" native="true"/>
+          <widget class="TaxExemptCluster" name="_taxExempt"/>
          </item>
         </layout>
        </item>
@@ -705,6 +705,11 @@ to be bound by its terms.</comment>
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>XComboBox</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
    <class>XComboBox</class>
    <extends>QComboBox</extends>
    <header>xcombobox.h</header>
@@ -719,11 +724,6 @@ to be bound by its terms.</comment>
    <extends>QLineEdit</extends>
    <header>xlineedit.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>TaxExemptCluster</class>
-   <extends>QWidget</extends>
-   <header>taxexemptcluster.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

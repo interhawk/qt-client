@@ -18,7 +18,7 @@
 #include "taxAdjustment.h"
 
 taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
-  : XDialog(parent, name, modal, fl)
+  : QDialog(parent, fl)
 {
   setupUi(this);
 
@@ -49,7 +49,7 @@ taxBreakdown::taxBreakdown(QWidget* parent, const char* name, bool modal, Qt::Wi
   connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
   connect(_delete, SIGNAL(clicked()), this, SLOT(sDelete()));
 
-  if (_metrics->value("TaxService") != "N")
+  if (_x_metrics && _x_metrics->value("TaxService") != "N")
   {
     _new->hide();
     _delete->hide();
@@ -66,9 +66,8 @@ void taxBreakdown::languageChange()
   retranslateUi(this);
 }
 
-SetResponse taxBreakdown::set(const ParameterList& pParams)
+void taxBreakdown::set(const ParameterList& pParams)
 {
-  XDialog::set(pParams);
   QVariant param;
   bool	   valid;
 
@@ -94,8 +93,6 @@ SetResponse taxBreakdown::set(const ParameterList& pParams)
   _sense = param.toInt();
 
   sPopulate();
-
-  return NoError;
 }
 
 void taxBreakdown::sPopulate()
@@ -460,7 +457,7 @@ void taxBreakdown::sNew()
   params.append("mode", "new");
   newdlg.set(params);
 
-  if (newdlg.exec() == XDialog::Accepted)
+  if (newdlg.exec() == QDialog::Accepted)
     sPopulate(); 
 }
 
