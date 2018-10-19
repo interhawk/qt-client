@@ -2488,10 +2488,10 @@ to be bound by its terms.</comment>
       <widget class="RecurrenceWidget" name="_recur">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>244</width>
-         <height>140</height>
+         <x>9</x>
+         <y>9</y>
+         <width>357</width>
+         <height>132</height>
         </rect>
        </property>
       </widget>
