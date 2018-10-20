@@ -149,7 +149,7 @@ to be bound by its terms.</comment>
     </widget>
    </item>
    <item row="6" column="0">
-    <widget class="XCheckBox" name="_salesOrders">
+    <widget class="XCheckBox" name="_salesOrder">
      <property name="text">
       <string>Sales Orders</string>
      </property>
