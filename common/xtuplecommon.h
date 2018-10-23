@@ -52,9 +52,15 @@
       qDebug() << (! this->objectName().isEmpty() ? this->objectName()       \
                                                  : __FILE__)                 \
                << "::" << __func__ << "() entered"                           \
-               << (sender() ? QString::asprintf("signaled by %s::%s",       \
+               << (sender() ? QString::asprintf("signaled by %s::%s",        \
                                 sender()->objectName().toLatin1().data(),    \
                                 sender()->metaObject()                       \
                                         ->method(senderSignalIndex())        \
                                         .methodSignature().data())           \
                             : QString())
+#define RETURNING                                                            \
+  if (DEBUG)                                                                 \
+      qDebug() << (! this->objectName().isEmpty() ? this->objectName()       \
+                                                 : __FILE__)                 \
+               << "::" << __func__ << "() returning"
+
