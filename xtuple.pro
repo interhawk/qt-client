@@ -18,6 +18,7 @@ SUBDIRS = common \
 CONFIG += ordered
 
 TRANSLATIONS = share/dict/xTuple.ar_eg.ts \
+               share/dict/xTuple.base.ts \
                share/dict/xTuple.bg.ts \
                share/dict/xTuple.cs.ts \
                share/dict/xTuple.de_at.ts \
