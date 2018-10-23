@@ -1788,7 +1788,7 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
                 "       cust_curr_id, COALESCE(crmacct_id,-1) AS crmacct_id, "
                 "       true AS iscustomer "
                 "FROM custinfo "
-                "  JOIN crmacct           ON crmacct_cust_id = cust_id"
+                "  JOIN crmacct           ON cust_crmacct_id = crmacct_id"
                 "  LEFT OUTER JOIN cntct  ON (cust_cntct_id=cntct_id) "
                 "  LEFT OUTER JOIN addr   ON (cntct_addr_id=addr_id) "
                 "  LEFT OUTER JOIN shiptoinfo ON ((shipto_cust_id=cust_id)"
