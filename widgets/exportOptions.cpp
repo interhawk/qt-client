@@ -100,5 +100,21 @@ void ExportOptions::sSave()
   _x_preferences->set("Delimiter",delim);
 
   _delim = delimCB->currentText();
+  _open = openCB->isChecked();
   accept();
+}
+
+QString ExportOptions::getFiletype()
+{
+  return _filetype;
+}
+
+QString ExportOptions::getDelim()
+{
+  return _delim;
+}
+
+bool ExportOptions::getOpen()
+{
+  return _open;
 }
