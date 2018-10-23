@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2015 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -24,8 +24,6 @@
 #include "splitReceipt.h"
 #include "taxBreakdown.h"
 
-
-
 voucherItem::voucherItem(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl)
 {
@@ -36,7 +34,6 @@ voucherItem::voucherItem(QWidget* parent, const char* name, bool modal, Qt::Wind
   connect(_edit,             SIGNAL(clicked()),        this, SLOT(sEdit()));
   connect(_delete,           SIGNAL(clicked()),        this, SLOT(sDelete()));
   connect(_save,             SIGNAL(clicked()),        this, SLOT(sSave()));
-  connect(_close,             SIGNAL(clicked()),        this, SLOT(sClose()));
   connect(_uninvoiced,       SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(sToggleReceiving(QTreeWidgetItem*)));
   connect(_uninvoiced,       SIGNAL(populateMenu(QMenu*,XTreeWidgetItem*)), this, SLOT(sPopulateMenu(QMenu*, XTreeWidgetItem*)));
   connect(_freightToVoucher, SIGNAL(editingFinished()), this, SLOT(sCalculateTax()));
@@ -287,39 +284,6 @@ enum SetResponse voucherItem::set(const ParameterList &pParams)
     return UndefinedError;
   }
 
-  XSqlQuery voucherDist;
-  voucherDist.prepare( "SELECT vodist_id,"
-                       "    vodist_costelem_id,"
-                       "    vodist_amount,"
-                       "    vodist_discountable,"
-                       "    vodist_notes "
-                       "FROM vodist "
-                       "WHERE (vodist_vohead_id=:vohead_id);" );
-  voucherDist.bindValue(":vohead_id", _voheadid);
-  voucherDist.exec();
-#pragma comment(linker,"/SUBSYSTEM:CONSOLE")
-qDebug() << "\n\n BEFORE: ";
-
-  while(voucherDist.next())
-  {
-    voDist vod;
-    vod.setId(voucherDist.value("vodist_id").toInt());
-    vod.setVoheadid(_voheadid);
-    vod.setPoitemid(_poitemid);
-    vod.setAmount(voucherDist.value("vodist_amount").toDouble());
-    vod.setCostelem(voucherDist.value("vodist_costelem_id").toInt());
-    vod.setDiscountable(voucherDist.value("vodist_discountable").toBool());
-    vod.setNotes(voucherDist.value("vodist_notes").toString());
-    
-    _voOld.push_back(vod);
-  
-    qDebug() << "_vodist_id" << vod.getId();
-    qDebug() << "_vodist_amount" << vod.getAmount();
-    qDebug() << "_vodist_costelem_id" << vod.getCostelem();
-    qDebug() << "_vodist_discountable" << vod.getDiscountable();
-    qDebug() << "_vodist_notes" << vod.getNotes();
-  }
-  
   sFillList();
   _saved = true;
   return NoError;
@@ -472,58 +436,6 @@ void voucherItem::sSave()
   }
 
   accept();
-}
-
-void voucherItem::sClose()
-{ 
-  std::vector<int> voNew;
-  XSqlQuery voucherDist;
-  voucherDist.prepare( "SELECT vodist_id,"
-                       "    vodist_costelem_id,"
-                       "    vodist_amount,"
-                       "    vodist_discountable,"
-                       "    vodist_notes "
-                       "FROM vodist "
-                       "WHERE (vodist_vohead_id=:vohead_id);" );
-  voucherDist.bindValue(":vohead_id", _voheadid);
-  voucherDist.exec();
-
-  qDebug() << "\n\n AFTER: ";
-  while(voucherDist.next())
-  {   
-    int id = voucherDist.value("vodist_id").toInt();
-    voNew.push_back(id); 
-    qDebug() << "_vodist_id" << id;
-  }
-
-  // find which rows were added to vodist table and remove them
-  for(int i=0; i<voNew.size(); i++)
-  {
-    bool added=true;
-    for(int j=0; j<_voOld.size(); j++)
-    {
-      if(voNew[i]==_voOld[j].getId())
-        added = false;
-    }
-    if(added)
-      deleteRow(voNew[i]);
-  }
-
-  // find which rows were removed from vodist table and add them back.
-  // Also update the rows that were not deleted
-  for(int i=0; i<_voOld.size(); i++)
-  {
-    bool removed=true;
-    for(int j=0; j<voNew.size(); j++)
-    {
-      if(_voOld[i].getId()==voNew[j])
-        removed = false;
-    }
-    if(removed)
-      _voOld[i].insertRow();
-    else
-      _voOld[i].updateRow();
-  }
 }
 
 void voucherItem::sNew()
@@ -858,70 +770,4 @@ void voucherItem::sTaxDetail()
   taxBreakdown newdlg(this, "", true);
   newdlg.set(params);
   newdlg.exec();
-}
-
-void voucherItem::deleteRow(int id)
-{
-  XSqlQuery voucherDelete;
-  voucherDelete.prepare( "DELETE FROM vodist "
-                      " WHERE(vodist_id=:vodist_id);" );
-  voucherDelete.bindValue(":vodist_id",id);
-  voucherDelete.exec();
-}
-
-//
-// VoDist class
-//
-int voDist::getId(){return _vodist_id;}
-int voDist::getVoheadid(){return _voheadid;}
-int voDist::getPoitemid(){return _poitemid;}
-int voDist::getCostelem(){return _vodist_costelem_id;}
-double voDist::getAmount(){return _vodist_amount;}
-bool voDist::getDiscountable(){return _vodist_discountable;}
-QString voDist::getNotes(){return _vodist_notes;}
-
-void voDist::setId(int id){_vodist_id = id; }
-void voDist::setVoheadid(int id){_voheadid = id; }
-void voDist::setPoitemid(int id){_poitemid = id; }
-void voDist::setCostelem(int c){_vodist_costelem_id = c; }
-void voDist::setAmount(double amount){_vodist_amount = amount; }
-void voDist::setDiscountable(bool disc){_vodist_discountable = disc; }
-void voDist::setNotes(QString notes){_vodist_notes = notes; }
-
-void voDist::insertRow()
-{
-  XSqlQuery voucherSave;
-  voucherSave.prepare( "INSERT INTO vodist "
-               "( vodist_id, vodist_vohead_id, vodist_poitem_id,"
-               "  vodist_costelem_id, vodist_amount, vodist_discountable,"
-			         "  vodist_notes ) "
-               "VALUES "
-               "( :vodist_id, :vodist_vohead_id, :vodist_poitem_id,"
-               "  :vodist_costelem_id, :vodist_amount, :vodist_discountable,"
-			   "  :vodist_notes );" );
-  voucherSave.bindValue(":vodist_id",this->_vodist_id);
-  voucherSave.bindValue(":vodist_vohead_id",this->_voheadid);
-  voucherSave.bindValue(":vodist_poitem_id",this->_poitemid);
-  voucherSave.bindValue(":vodist_costelem_id",this->_vodist_costelem_id);
-  voucherSave.bindValue(":vodist_amount",this->_vodist_amount);
-  voucherSave.bindValue(":vodist_discountable",this->_vodist_discountable);
-  voucherSave.bindValue(":vodist_notes",this->_vodist_notes);
-  voucherSave.exec();
-}
-
-void voDist::updateRow()
-{
-  XSqlQuery voucherSave;
-  voucherSave.prepare( "UPDATE vodist "
-               "SET vodist_costelem_id=:vodist_costelem_id,"
-               "    vodist_amount=:vodist_amount,"
-               "    vodist_discountable=:vodist_discountable,"
-			         "    vodist_notes=:vodist_notes "
-               "WHERE (vodist_id=:vodist_id);" );
-  voucherSave.bindValue(":vodist_id",this->_vodist_id);
-  voucherSave.bindValue(":vodist_costelem_id",this->_vodist_costelem_id);
-  voucherSave.bindValue(":vodist_amount",this->_vodist_amount);
-  voucherSave.bindValue(":vodist_discountable",this->_vodist_discountable);
-  voucherSave.bindValue(":vodist_notes",this->_vodist_notes);
-  voucherSave.exec();
 }
