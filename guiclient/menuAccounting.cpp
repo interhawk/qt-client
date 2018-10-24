@@ -391,58 +391,58 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     
     // Accounting | Statements
     { "menu",			  tr("Financial &Statements"),		(char*)financialReportsMenu,		mainMenu,			"true",					       NULL, NULL, true, NULL },
-    { "gl.createFinancialReports",tr("&New Financial Report..."),	SLOT(sNewFinancialReport()),		financialReportsMenu,		"MaintainFinancialLayouts", NULL, NULL, true, NULL },
-    { "gl.editFinancialReports",  tr("&List Financial Reports..."),	SLOT(sFinancialReports()),		financialReportsMenu,		"MaintainFinancialLayouts", NULL, NULL, true, NULL },
+    { "gl.createFinancialReports",tr("&New Financial Report"),	SLOT(sNewFinancialReport()),		financialReportsMenu,		"MaintainFinancialLayouts", NULL, NULL, true, NULL },
+    { "gl.editFinancialReports",  tr("&List Financial Reports"),	SLOT(sFinancialReports()),		financialReportsMenu,		"MaintainFinancialLayouts", NULL, NULL, true, NULL },
     { "separator",		  NULL,					NULL,					financialReportsMenu,		"true",					       NULL, NULL, true, NULL },
-    { "gl.dspTrialBalances",	  tr("View &Trial Balances..."),		SLOT(sDspTrialBalances()),		financialReportsMenu,		"ViewTrialBalances",	   new QPixmap(":/images/viewTrialBalance.png"), toolBar,  true, NULL },
-    { "gl.viewFinancialReport",	  tr("View &Financial Report..."),	SLOT(sViewFinancialReport()),		financialReportsMenu,		"ViewFinancialReports",   new QPixmap(":/images/viewFinancialReport.png"), toolBar, true, NULL },
+    { "gl.dspTrialBalances",	  tr("View &Trial Balances"),		SLOT(sDspTrialBalances()),		financialReportsMenu,		"ViewTrialBalances",	   new QPixmap(":/images/viewTrialBalance.png"), toolBar,  true, NULL },
+    { "gl.viewFinancialReport",	  tr("View &Financial Report"),	SLOT(sViewFinancialReport()),		financialReportsMenu,		"ViewFinancialReports",   new QPixmap(":/images/viewFinancialReport.png"), toolBar, true, NULL },
 
     { "separator",		  NULL,					NULL,					mainMenu,		"true",					       NULL, NULL, true, NULL },
     
     // Accounting | Fiscal Calendar
     { "menu", tr("&Fiscal Calendar"), (char*)calendarMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "gl.accountingYearPeriods",	tr("Fiscal &Years..."),	SLOT(sAccountingYearPeriods()),	calendarMenu,	"MaintainAccountingPeriods",	NULL, NULL, true, NULL },
-    { "gl.accountingPeriods",	tr("Accounting &Periods..."),	SLOT(sAccountingPeriods()),	calendarMenu,	"MaintainAccountingPeriods",	NULL, NULL, true, NULL },
+    { "gl.accountingYearPeriods",	tr("Fiscal &Years"),	SLOT(sAccountingYearPeriods()),	calendarMenu,	"MaintainAccountingPeriods",	NULL, NULL, true, NULL },
+    { "gl.accountingPeriods",	tr("Accounting &Periods"),	SLOT(sAccountingPeriods()),	calendarMenu,	"MaintainAccountingPeriods",	NULL, NULL, true, NULL },
     
     // Accounting | Account
     { "menu", tr("&Ledger Accounts"), (char*)coaMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "gl.accountNumbers",	tr("&Chart of Accounts..."),	SLOT(sAccountNumbers()), coaMenu,	"MaintainChartOfAccounts",	NULL, NULL, true, NULL },
-    { "gl.companies",		tr("C&ompanies..."),		SLOT(sCompanies()),		coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLCompanySize").toInt() > 0), NULL },
-    { "gl.profitCenterNumber",	tr("&Profit Center Numbers..."),	SLOT(sProfitCenters()),	coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLProfitSize").toInt() > 0), NULL },
-    { "gl.subaccountNumbers",	tr("&Subaccount Numbers..."),	SLOT(sSubaccounts()), coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLSubaccountSize").toInt() > 0), NULL },
-    { "gl.subAccntTypes",	tr("Su&baccount Types..."),	SLOT(sSubAccntTypes()),	coaMenu,	"MaintainChartOfAccounts",	NULL, NULL, true, NULL },
+    { "gl.accountNumbers",	tr("&Chart of Accounts"),	SLOT(sAccountNumbers()), coaMenu,	"MaintainChartOfAccounts",	NULL, NULL, true, NULL },
+    { "gl.companies",		tr("C&ompanies"),		SLOT(sCompanies()),		coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLCompanySize").toInt() > 0), NULL },
+    { "gl.profitCenterNumber",	tr("&Profit Center Numbers"),	SLOT(sProfitCenters()),	coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLProfitSize").toInt() > 0), NULL },
+    { "gl.subaccountNumbers",	tr("&Subaccount Numbers"),	SLOT(sSubaccounts()), coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLSubaccountSize").toInt() > 0), NULL },
+    { "gl.subAccntTypes",	tr("Su&baccount Types"),	SLOT(sSubAccntTypes()),	coaMenu,	"MaintainChartOfAccounts",	NULL, NULL, true, NULL },
 
     // Accounting | Budget
     { "menu", tr("Bu&dget"), (char*)budgetMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "gl.maintainBudget",	tr("&New Budget..."),	SLOT(sMaintainBudget()), budgetMenu,	"MaintainBudgets",	NULL, NULL, true, NULL },
-    { "gl.maintainBudgets",	tr("&List Budgets..."),	SLOT(sBudgets()),	 budgetMenu,	"MaintainBudgets ViewBudgets",	NULL, NULL, true, NULL },
+    { "gl.maintainBudget",	tr("&New Budget"),	SLOT(sMaintainBudget()), budgetMenu,	"MaintainBudgets",	NULL, NULL, true, NULL },
+    { "gl.maintainBudgets",	tr("&List Budgets"),	SLOT(sBudgets()),	 budgetMenu,	"MaintainBudgets ViewBudgets",	NULL, NULL, true, NULL },
 
     // Accounting | Tax
     { "menu", tr("&Tax"), (char*)taxMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "gl.taxAuthorities",	tr("Tax &Authorities..."),	SLOT(sTaxAuthorities()),	taxMenu,	"MaintainTaxAuthorities ViewTaxAuthorities", NULL, NULL, true, NULL },
-    { "gl.taxZones",		tr("Tax &Zones..."),		SLOT(sTaxZones()),		taxMenu,	"MaintainTaxZones ViewTaxZones",             NULL, NULL, true, NULL }, 
-    { "gl.taxClasses",		tr("Tax &Classes..."),		SLOT(sTaxClasses()),		taxMenu,	"MaintainTaxClasses ViewTaxClasses",         NULL, NULL, true, NULL }, 
-    { "gl.taxCodes",		tr("Tax &Codes..."),		SLOT(sTaxCodes()),		taxMenu,	"MaintainTaxCodes ViewTaxCodes",             NULL, NULL, true, NULL },
-    { "gl.taxTypes",		tr("Tax &Types..."),		SLOT(sTaxTypes()),		taxMenu,	"MaintainTaxTypes ViewTaxTypes",             NULL, NULL, true, NULL },
-    { "gl.taxAssignments",	tr("Tax Assi&gnments..."),	SLOT(sTaxAssignments()),	taxMenu,	"MaintainTaxAssignments ViewTaxAssignments", NULL, NULL, true, NULL },
-    { "gl.taxRegistatrions",	tr("Tax &Registrations..."),	SLOT(sTaxRegistrations()),	taxMenu,	"MaintainTaxRegistrations ViewTaxRegistrations", NULL, NULL, true, NULL },
+    { "gl.taxAuthorities",	tr("Tax &Authorities"),	SLOT(sTaxAuthorities()),	taxMenu,	"MaintainTaxAuthorities ViewTaxAuthorities", NULL, NULL, true, NULL },
+    { "gl.taxZones",		tr("Tax &Zones"),		SLOT(sTaxZones()),		taxMenu,	"MaintainTaxZones ViewTaxZones",             NULL, NULL, true, NULL }, 
+    { "gl.taxClasses",		tr("Tax &Classes"),		SLOT(sTaxClasses()),		taxMenu,	"MaintainTaxClasses ViewTaxClasses",         NULL, NULL, true, NULL }, 
+    { "gl.taxCodes",		tr("Tax &Codes"),		SLOT(sTaxCodes()),		taxMenu,	"MaintainTaxCodes ViewTaxCodes",             NULL, NULL, true, NULL },
+    { "gl.taxTypes",		tr("Tax &Types"),		SLOT(sTaxTypes()),		taxMenu,	"MaintainTaxTypes ViewTaxTypes",             NULL, NULL, true, NULL },
+    { "gl.taxAssignments",	tr("Tax Assi&gnments"),	SLOT(sTaxAssignments()),	taxMenu,	"MaintainTaxAssignments ViewTaxAssignments", NULL, NULL, true, NULL },
+    { "gl.taxRegistatrions",	tr("Tax &Registrations"),	SLOT(sTaxRegistrations()),	taxMenu,	"MaintainTaxRegistrations ViewTaxRegistrations", NULL, NULL, true, NULL },
     { "separator",		NULL,			        NULL,			        taxMenu,	"true",	                                     NULL, NULL, true, NULL },
  
     // Accounting | Tax | Reports
     { "menu",			tr("&Reports"),	                (char*)taxReportsMenu,		taxMenu,	"true",			    NULL, NULL, true, NULL },
-    { "gl.dspTaxHistory",	tr("&Tax History..."),           SLOT(sDspTaxHistory()),        taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
-    { "gl.dspTaxReturn",	tr("&Tax Return..."),            SLOT(sDspTaxReturn()),         taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
-    { "gl.dspTax1099",	tr("&Info for 1099..."),                 SLOT(sDspTax1099()),           taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
+    { "gl.dspTaxHistory",	tr("&Tax History"),           SLOT(sDspTaxHistory()),        taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
+    { "gl.dspTaxReturn",	tr("&Tax Return"),            SLOT(sDspTaxReturn()),         taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
+    { "gl.dspTax1099",	tr("&Info for 1099"),                 SLOT(sDspTax1099()),           taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
     
     { "separator",		  NULL,					NULL,					mainMenu,		"true",					       NULL, NULL, true, NULL },
 
     // Accounting | Utilities
     { "menu",				tr("&Utilities"),			(char*)utilitiesMenu,		mainMenu,	"true",	NULL, NULL, true, NULL },
     { "gl.forwardUpdateAccounts",	tr("&Forward Update Accounts..."),	SLOT(sForwardUpdateAccounts()),	utilitiesMenu,	"ViewTrialBalances",	NULL, NULL, _metrics->boolean("ManualForwardUpdate"), NULL },
-    { "gl.duplicateAccountNumbers",      tr("&Duplicate Account Numbers..."),  SLOT(sDuplicateAccountNumbers()), utilitiesMenu,  "MaintainChartOfAccounts", NULL, NULL, true, NULL },
+    { "gl.duplicateAccountNumbers",      tr("&Duplicate Account Numbers"),  SLOT(sDuplicateAccountNumbers()), utilitiesMenu,  "MaintainChartOfAccounts", NULL, NULL, true, NULL },
     { "separator",		  NULL,					NULL,					utilitiesMenu,		"true",					       NULL, NULL, true, NULL },
     { "so.purgeInvoices", tr("Purge &Invoices..."), SLOT(sPurgeInvoices()), utilitiesMenu, "PurgeInvoices", NULL, NULL, true , NULL },
-    { "ar.updateLateCustCreditStatus", tr("&Update Late Customer Credit Status..."), SLOT(sUpdateLateCustCreditStatus()), utilitiesMenu, "UpdateCustomerCreditStatus", NULL, NULL, _metrics->boolean("AutoCreditWarnLateCustomers"), NULL },
+    { "ar.updateLateCustCreditStatus", tr("&Update Late Customer Credit Status"), SLOT(sUpdateLateCustCreditStatus()), utilitiesMenu, "UpdateCustomerCreditStatus", NULL, NULL, _metrics->boolean("AutoCreditWarnLateCustomers"), NULL },
 //    { "ar.createRecurringInvoices", tr("&Create Recurring Invoices..."), SLOT(sCreateRecurringInvoices()), utilitiesMenu, "MaintainMiscInvoices", NULL, NULL, true, NULL },
     { "separator",		  NULL,					NULL,					utilitiesMenu,		"true",					       NULL, NULL, _metrics->boolean("MultiCompanyFinancialConsolidation"), NULL },
     { "gl.syncCompanies",           tr("&Synchronize Companies"),        SLOT(sSyncCompanies()),           utilitiesMenu, "SynchronizeCompanies", NULL, NULL, _metrics->boolean("MultiCompanyFinancialConsolidation"), NULL },

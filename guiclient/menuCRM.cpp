@@ -138,7 +138,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     { "crm.contactMerge",                tr("&Merge Contacts..."), SLOT(sContactMerge()),        utilitiesMenu, "MergeContacts",          NULL, NULL, true, NULL },
     { "crm.crmaccountMerge",         tr("Merge &Accounts..."), SLOT(sCrmaccountMerge()),     utilitiesMenu, "MaintainAllCRMAccounts", NULL, NULL, true, NULL },
 
-    { "crm.setup",	tr("&Setup..."),	SLOT(sSetup()),	crmMenu,	NULL,	NULL,	NULL,	true, NULL}
+    { "crm.setup",	tr("&Setup"),	SLOT(sSetup()),	crmMenu,	NULL,	NULL,	NULL,	true, NULL}
 
   };
 
