@@ -65,5 +65,9 @@ dictionaries.files = hunspell/*.aff hunspell/*.dic
 
 translations.path = $$absolute_path($${EXTRASDIR})/dict
 translations.files = $$replace(TRANSLATIONS, ts, qm)
-translations.extra = cd share/dict && $$dirname(QMAKE_QMAKE)/lrelease xTuple*.ts
+win32-msvc {
+  translations.extra = FOR %%f IN ( $${TRANSLATIONS} ) DO $$dirname(QMAKE_QMAKE)/lrelease %%f
+} else {
+  translations.extra = $$dirname(QMAKE_QMAKE)/lrelease $${TRANSLATIONS}
+}
 translations.CONFIG = no_check_exist
