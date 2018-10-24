@@ -67,12 +67,12 @@ void createRecurringItems::sCreate()
     XCheckBox *widget;
     QString    arg;        // to createRecurringItems()
   } list[] = {
-    { _invoices,   "I"         },
-    { _vouchers,   "V"         },
-    { _incidents,  "INCDT"     },
-    { _projects,   "J"         },
-    { _todoItems,  "TODO"      },
-    { _salesOrder, "SALESORDER"}
+    { _invoices,   "I"     },
+    { _vouchers,   "V"     },
+    { _incidents,  "INCDT" },
+    { _projects,   "J"     },
+    { _todoItems,  "TODO"  },
+    { _salesOrder, "S"     }
   };
 
   QStringList errors;
@@ -121,12 +121,12 @@ void createRecurringItems::sSubmit()
     XCheckBox *widget;
     QString    arg;        // to createRecurringItems()
   } list[] = {
-    { _invoices,   "I"          },
-    { _vouchers,   "V"          },
-    { _incidents,  "INCDT"      },
-    { _projects,   "J"          },
-    { _todoItems,  "TODO"       },
-    { _salesOrder, "SALESORDER" }
+    { _invoices,   "I"     },
+    { _vouchers,   "V"     },
+    { _incidents,  "INCDT" },
+    { _projects,   "J"     },
+    { _todoItems,  "TODO"  },
+    { _salesOrder, "S"     }
   };
 
   QStringList errors;
@@ -148,7 +148,7 @@ void createRecurringItems::sSubmit()
         params.append("action_name", "CreateRecurringProjects");
       else if (list[i].arg == "TODO")
         params.append("action_name", "CreateRecurringTodos");
-      else if (list[i].arg == "SALESORDER")
+      else if (list[i].arg == "S")
         params.append("action_name", "CreateRecurringSalesOrders");
       params.append("type", list[i].arg);
 

@@ -290,7 +290,7 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   _bankaccnt->setType(XComboBox::ARBankAccounts);
   _salescat->setType(XComboBox::SalesCategoriesActive);
 
-  _recur->setParent(-1, "SALESORDER");
+  _recur->setParent(-1, "S");
 
   sHandleMore();
 }
@@ -519,7 +519,7 @@ enum SetResponse salesOrder::set(const ParameterList &pParams)
       populateCMInfo();
       populateCCInfo();
       sFillCcardList();
-      _recur->setParent(_soheadid, "SALESORDER");
+      _recur->setParent(_soheadid, "S");
     }
 
     _captive = false;
@@ -748,28 +748,24 @@ void salesOrder::sSave()
         // Update Recurring Sales Order with latest saved detail
         XSqlQuery recurUpd;
         recurUpd.prepare("UPDATE recur SET recur_parent_id=:newso "
-          "WHERE ((recur_parent_type = 'SALESORDER') "
+          "WHERE ((recur_parent_type = 'S') "
           " AND   (recur_parent_id = :oldso));");
         recurUpd.bindValue(":newso", _soheadid);
         recurUpd.bindValue(":oldso", _recur->parentId());
         recurUpd.exec();
-        if (recurUpd.lastError().type() != QSqlError::NoError)
-        {
-          ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
-            recurUpd, __FILE__, __LINE__);
+
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
+            recurUpd, __FILE__, __LINE__))
           return;
-        }
+
         // Also update this Sales Order
         recurUpd.prepare("UPDATE cohead SET cohead_recurring_cohead_id=:salesorder "
           "WHERE (cohead_id = :salesorder); ");
         recurUpd.bindValue(":salesorder", _soheadid);
         recurUpd.exec();
-        if (recurUpd.lastError().type() != QSqlError::NoError)
-        {
-          ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
-            recurUpd, __FILE__, __LINE__);
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
+            recurUpd, __FILE__, __LINE__))
           return;
-        }
       }
     }
     if (_captive)
@@ -830,28 +826,25 @@ void salesOrder::sSaveAndAdd()
         // Update Recurring Sales Order with latest saved detail
         XSqlQuery recurUpd;
         recurUpd.prepare("UPDATE recur SET recur_parent_id=:newso "
-          "WHERE ((recur_parent_type = 'SALESORDER') "
+          "WHERE ((recur_parent_type = 'S') "
           " AND   (recur_parent_id = :oldso));");
         recurUpd.bindValue(":newso", _soheadid);
         recurUpd.bindValue(":oldso", _recur->parentId());
         recurUpd.exec();
-        if (recurUpd.lastError().type() != QSqlError::NoError)
-        {
-          ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
-            recurUpd, __FILE__, __LINE__);
+
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
+            recurUpd, __FILE__, __LINE__))
           return;
-        }
+
         // Also update this Sales Order
         recurUpd.prepare("UPDATE cohead SET cohead_recurring_cohead_id=:salesorder "
           "WHERE (cohead_id = :salesorder); ");
         recurUpd.bindValue(":salesorder", _soheadid);
         recurUpd.exec();
-        if (recurUpd.lastError().type() != QSqlError::NoError)
-        {
-          ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
-            recurUpd, __FILE__, __LINE__);
+
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
+            recurUpd, __FILE__, __LINE__))
           return;
-        }
       }
     }
     if (_captive)
@@ -2849,9 +2842,9 @@ void salesOrder::populate()
         }
       }
       if (so.value("cohead_recurring_cohead_id").toInt() != 0)
-        _recur->setParent(so.value("cohead_recurring_cohead_id").toInt(), "SALESORDER");
+        _recur->setParent(so.value("cohead_recurring_cohead_id").toInt(), "S");
       else
-        _recur->setParent(_soheadid, "SALESORDER");
+        _recur->setParent(_soheadid, "S");
       sPopulateShipments();
       sFillCharacteristic();
       emit populated();
@@ -3458,7 +3451,7 @@ void salesOrder::clear()
     emit newId(_soheadid);
     _comments->setId(_soheadid);
     _documents->setId(_soheadid);
-    _recur->setParent(_soheadid, "SALESORDER");
+    _recur->setParent(_soheadid, "S");
     if (ISORDER(_mode))
     {
       populateCMInfo();
