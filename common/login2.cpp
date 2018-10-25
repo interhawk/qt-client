@@ -12,6 +12,7 @@
 
 #include <QAction>
 #include <QCursor>
+#include <QDebug>
 #include <QMenu>
 #include <QMessageBox>
 #include <QPushButton>
@@ -34,6 +35,8 @@
 #include "splashconst.h"
 #include "cmdlinemessagehandler.h"
 #include "guimessagehandler.h"
+
+#define DEBUG false
 
 class login2Private {
   public:
@@ -281,18 +284,22 @@ void login2::sLogin()
   password << QMd5(QString(_d->_cPassword + salt  + _d->_cUsername))
            << _d->_cPassword
            << QMd5(QString(_d->_cPassword + "OpenMFG" + _d->_cUsername)) ;      // this must be last
-  int passwordidx; // not declared in for () because we need it later
-  for (passwordidx = 0; passwordidx < password.size() && ! db.isOpen(); passwordidx++)
+  int passwordidx = 0; // not declared in for () because we need it later
+  foreach (QString p, password)
   {
     foreach (QString options, connectionOptions)
     {
+      if (DEBUG)
+        qDebug() << options << passwordidx;
       db.setConnectOptions(options);
       db.setPassword(password.at(passwordidx));
       if (db.open())
-        break;
+        goto connected;
     }
+    passwordidx++;
   }
 
+connected:
   if (db.isOpen())
   {
     QString earliest = "9.3.0",
