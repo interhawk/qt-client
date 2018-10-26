@@ -22,13 +22,14 @@ createRecurringItems::createRecurringItems(QWidget* parent, const char* name, Qt
 {
   setupUi(this);
 
-  connect(_create,    SIGNAL(clicked()),     this, SLOT(sCreate()));
-  connect(_submit,    SIGNAL(clicked()),     this, SLOT(sSubmit()));
-  connect(_invoices,  SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
-  connect(_vouchers,  SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
-  connect(_incidents, SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
-  connect(_projects,  SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
-  connect(_todoItems, SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
+  connect(_create,     SIGNAL(clicked()),     this, SLOT(sCreate()));
+  connect(_submit,     SIGNAL(clicked()),     this, SLOT(sSubmit()));
+  connect(_invoices,   SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
+  connect(_vouchers,   SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
+  connect(_incidents,  SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
+  connect(_projects,   SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
+  connect(_todoItems,  SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
+  connect(_salesOrder, SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
 
   sHandleButtons();
   _submit->setVisible(_metrics->boolean("EnableBatchManager"));
@@ -47,15 +48,17 @@ void createRecurringItems::languageChange()
 void createRecurringItems::sHandleButtons()
 {
   _create->setEnabled(_invoices->isChecked()  ||
-                      _vouchers->isChecked() ||
+                      _vouchers->isChecked()  ||
                       _incidents->isChecked() ||
                       _projects->isChecked()  ||
-                      _todoItems->isChecked());
+                      _todoItems->isChecked() ||
+                      _salesOrder->isChecked());
   _submit->setEnabled(_invoices->isChecked()  ||
-                      _vouchers->isChecked() ||
+                      _vouchers->isChecked()  ||
                       _incidents->isChecked() ||
                       _projects->isChecked()  ||
-                      _todoItems->isChecked());
+                      _todoItems->isChecked() ||
+                      _salesOrder->isChecked());
 }
 
 void createRecurringItems::sCreate()
@@ -68,7 +71,8 @@ void createRecurringItems::sCreate()
     { _vouchers,   "V"     },
     { _incidents,  "INCDT" },
     { _projects,   "J"     },
-    { _todoItems,  "TODO"  }
+    { _todoItems,  "TODO"  },
+    { _salesOrder, "S"     }
   };
 
   QStringList errors;
@@ -121,7 +125,8 @@ void createRecurringItems::sSubmit()
     { _vouchers,   "V"     },
     { _incidents,  "INCDT" },
     { _projects,   "J"     },
-    { _todoItems,  "TODO"  }
+    { _todoItems,  "TODO"  },
+    { _salesOrder, "S"     }
   };
 
   QStringList errors;
@@ -143,6 +148,8 @@ void createRecurringItems::sSubmit()
         params.append("action_name", "CreateRecurringProjects");
       else if (list[i].arg == "TODO")
         params.append("action_name", "CreateRecurringTodos");
+      else if (list[i].arg == "S")
+        params.append("action_name", "CreateRecurringSalesOrders");
       params.append("type", list[i].arg);
 
       submitAction newdlg(this, "", true);
