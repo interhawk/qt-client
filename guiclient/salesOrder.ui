@@ -360,7 +360,7 @@ to be bound by its terms.</comment>
    <item>
     <widget class="QTabWidget" name="_salesOrderInformation">
      <property name="currentIndex">
-      <number>9</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="_headerPage">
       <attribute name="title">
