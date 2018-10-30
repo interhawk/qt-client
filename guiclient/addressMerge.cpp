@@ -233,7 +233,7 @@ void addressMerge::sPopulateSrcMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int pC
 
   QTreeWidgetItem* header = _srcaddr->headerItem();
 
-  if (pCol > 1)
+  if (pCol > 0)
     col = header->text(pCol); 
 
   menuStr = tr("Merge %1 to target").arg(col);
