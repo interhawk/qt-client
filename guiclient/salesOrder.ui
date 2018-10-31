@@ -562,7 +562,7 @@ to be bound by its terms.</comment>
            <item>
             <widget class="QLabel" name="_taxExemptLit">
              <property name="text">
-              <string>Tax Exempt Catgeory:</string>
+              <string>Tax Exempt Category:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
