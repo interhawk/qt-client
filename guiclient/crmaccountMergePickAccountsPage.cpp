@@ -203,8 +203,6 @@ bool CrmaccountMergePickAccountsPage::validatePage()
                     "         <? value('istarget') ?>,"
                     "         <? value('istarget') ?>,"
                     "         <? value('istarget') ?>,"
-                    "         <? value('istarget') ?>,"
-                    "         <? value('istarget') ?>,"
                     "         <? value('istarget') ?>"
                     "   WHERE <? value('srcid') ?> NOT IN"
                     "         (SELECT crmacctsel_src_crmacct_id"
