@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -129,8 +129,8 @@ menuPurchase::menuPurchase(GUIClient *Pparent) :
 
     //  Purchase | Purchase Order
     { "menu", tr("&Purchase Order"), (char*)ordersMenu, mainMenu, "true", NULL, NULL, true , NULL },
-    { "po.newPurchaseOrder", tr("&New..."), SLOT(sNewPurchaseOrder()), ordersMenu, "MaintainPurchaseOrders", NULL, NULL, true , NULL },
-    { "po.listUnpostedPurchaseOrders", tr("&List Open..."), SLOT(sPurchaseOrderEditList()), ordersMenu, "MaintainPurchaseOrders ViewPurchaseOrders", new QPixmap(":/images/listUnpostedPo.png"), toolBar, true , tr("List Open Purchase Orders") },
+    { "po.newPurchaseOrder", tr("&New"), SLOT(sNewPurchaseOrder()), ordersMenu, "MaintainPurchaseOrders", NULL, NULL, true , NULL },
+    { "po.listUnpostedPurchaseOrders", tr("&List Open"), SLOT(sPurchaseOrderEditList()), ordersMenu, "MaintainPurchaseOrders ViewPurchaseOrders", new QPixmap(":/images/listUnpostedPo.png"), toolBar, true , tr("List Open Purchase Orders") },
     { "separator", NULL, NULL, ordersMenu, "true", NULL, NULL, true , NULL },
     { "po.postPurchaseOrder", tr("&Release..."), SLOT(sPostPurchaseOrder()), ordersMenu, "ReleasePurchaseOrders", NULL, NULL, true , NULL },
     { "po.postPurchaseOrdersByAgent", tr("Release by A&gent..."), SLOT(sPostPurchaseOrdersByAgent()), ordersMenu, "ReleasePurchaseOrders", NULL, NULL, true , NULL },
@@ -142,9 +142,9 @@ menuPurchase::menuPurchase(GUIClient *Pparent) :
 
     //  Purchasing | Voucher
     { "menu", tr("&Voucher"), (char*)vouchersMenu, mainMenu, "true", NULL, NULL, true , NULL },
-    { "po.enterNewVoucher", tr("&New..."), SLOT(sEnterVoucher()), vouchersMenu, "MaintainVouchers", NULL, NULL, true , NULL },
-    { "po.enterNewMiscVoucher", tr("New &Miscellaneous..."), SLOT(sEnterMiscVoucher()), vouchersMenu, "MaintainVouchers", NULL, NULL, true , NULL },
-    { "po.listUnpostedVouchers", tr("&List Unposted..."), SLOT(sUnpostedVouchers()), vouchersMenu, "MaintainVouchers ViewVouchers", NULL, NULL, true , NULL },
+    { "po.enterNewVoucher", tr("&New"), SLOT(sEnterVoucher()), vouchersMenu, "MaintainVouchers", NULL, NULL, true , NULL },
+    { "po.enterNewMiscVoucher", tr("New &Miscellaneous"), SLOT(sEnterMiscVoucher()), vouchersMenu, "MaintainVouchers", NULL, NULL, true , NULL },
+    { "po.listUnpostedVouchers", tr("&List Unposted"), SLOT(sUnpostedVouchers()), vouchersMenu, "MaintainVouchers ViewVouchers", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, vouchersMenu, "true", NULL, NULL, true , NULL },
     { "po.postVouchers", tr("&Post..."), SLOT(sPostVouchers()), vouchersMenu, "PostVouchers", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, mainMenu, "true", NULL, NULL, true , NULL },
@@ -178,10 +178,10 @@ menuPurchase::menuPurchase(GUIClient *Pparent) :
     //  Purchasing | Reports
     { "menu", tr("&Reports"), (char*)reportsMenu, mainMenu, "true", NULL, NULL, true , NULL },
     
-    { "po.itemSites", tr("Item &Sites..."), SLOT(sItemSites()), reportsMenu, "ViewItemSites", NULL, NULL, true , NULL },
+    { "po.itemSites", tr("Item &Sites"), SLOT(sItemSites()), reportsMenu, "ViewItemSites", NULL, NULL, true , NULL },
     
     // Purchasing | Reports | Item Sources
-    { "po.dspItemSourcePrices", tr("&Item Source Prices..."), SLOT(sDspItemSourcePrices()), reportsMenu, "ViewItemSources", NULL, NULL, true , NULL },
+    { "po.dspItemSourcePrices", tr("&Item Source Prices"), SLOT(sDspItemSourcePrices()), reportsMenu, "ViewItemSources", NULL, NULL, true , NULL },
     { "po.dspBuyCard", tr("&Buy Card..."), SLOT(sDspBuyCard()), reportsMenu, "ViewItemSources", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, reportsMenu, "true", NULL, NULL, true , NULL },
  
@@ -195,7 +195,7 @@ menuPurchase::menuPurchase(GUIClient *Pparent) :
     { "po.dspReceiptsAndReturnsByDate", tr("by &Date..."), SLOT(sDspReceiptsReturnsByDate()), reportsRcptRtrnMenu, "ViewReceiptsReturns", NULL, NULL, true , NULL },
     { "po.dspReceiptsAndReturnsByItem", tr("by &Item..."), SLOT(sDspReceiptsReturnsByItem()), reportsRcptRtrnMenu, "ViewReceiptsReturns", NULL, NULL, true , NULL },
 
-    { "po.uninvoicedReceipts", tr("&Uninvoiced Receipts and Returns..."), SLOT(sDspUninvoicedReceipts()), reportsMenu, "ViewUninvoicedReceipts MaintainUninvoicedReceipts", NULL, NULL, true , NULL },
+    { "po.uninvoicedReceipts", tr("&Uninvoiced Receipts and Returns"), SLOT(sDspUninvoicedReceipts()), reportsMenu, "ViewUninvoicedReceipts MaintainUninvoicedReceipts", NULL, NULL, true , NULL },
     
     { "separator", NULL, NULL, reportsMenu, "true", NULL, NULL, true , NULL },
     
@@ -215,8 +215,8 @@ menuPurchase::menuPurchase(GUIClient *Pparent) :
 
     //  Purchasing | Vendor
     { "menu", tr("V&endor"), (char*)vendorMenu, mainMenu, "true", NULL, NULL, true , NULL },
-    { "po.newVendor", tr("&New..."), SLOT(sNewVendor()), vendorMenu, "MaintainVendors", NULL, NULL, true , NULL },
-    { "po.vendors", tr("&List..."), SLOT(sVendors()), vendorMenu, "MaintainVendors ViewVendors", NULL, NULL, true , NULL },
+    { "po.newVendor", tr("&New"), SLOT(sNewVendor()), vendorMenu, "MaintainVendors", NULL, NULL, true , NULL },
+    { "po.vendors", tr("&List"), SLOT(sVendors()), vendorMenu, "MaintainVendors ViewVendors", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, vendorMenu, "true", NULL, NULL, true , NULL },
     { "po.vendorWorkBench", tr("&Workbench..."), SLOT(sVendorWorkBench()), vendorMenu, "MaintainVendors", NULL, NULL, true , NULL },
 
@@ -224,24 +224,24 @@ menuPurchase::menuPurchase(GUIClient *Pparent) :
 
     //  P/O | Contract
     { "menu", tr("&Contract"), (char*)contractsMenu, mainMenu, "true", NULL, NULL, true , NULL },
-    { "po.enterNewContract", tr("&New..."), SLOT(sNewContract()), contractsMenu, "MaintainItemSources", NULL, NULL, true , NULL },
-    { "po.listContracts", tr("&List..."), SLOT(sContracts()), contractsMenu, "MaintainItemSources ViewItemSources", NULL, NULL, true , NULL },
+    { "po.enterNewContract", tr("&New"), SLOT(sNewContract()), contractsMenu, "MaintainItemSources", NULL, NULL, true , NULL },
+    { "po.listContracts", tr("&List"), SLOT(sContracts()), contractsMenu, "MaintainItemSources ViewItemSources", NULL, NULL, true , NULL },
 
     //  P/O | Item Source
     { "menu", tr("&Item Source"), (char*)itemSourcesMenu, mainMenu, "true", NULL, NULL, true , NULL },
-    { "po.enterNewItemSource", tr("&New..."), SLOT(sNewItemSource()), itemSourcesMenu, "MaintainItemSources", NULL, NULL, true , NULL },
-    { "po.listItemSources", tr("&List..."), SLOT(sDspItemSources()), itemSourcesMenu, "MaintainItemSources ViewItemSources", NULL, NULL, true , NULL },
+    { "po.enterNewItemSource", tr("&New"), SLOT(sNewItemSource()), itemSourcesMenu, "MaintainItemSources", NULL, NULL, true , NULL },
+    { "po.listItemSources", tr("&List"), SLOT(sDspItemSources()), itemSourcesMenu, "MaintainItemSources ViewItemSources", NULL, NULL, true , NULL },
 
     { "separator", NULL, NULL, mainMenu, "true", NULL, NULL, true , NULL },
 
     // Purchasing | Utilities
     { "menu", tr("&Utilities"), (char*)utilitiesMenu, mainMenu, "true", NULL, NULL, true , NULL },
-    { "po.itemsWithoutItemSources", tr("&Items without Item Sources..."), SLOT(sItemsWithoutItemSources()), utilitiesMenu, "ViewItemMasters", NULL, NULL, true , NULL },
+    { "po.itemsWithoutItemSources", tr("&Items without Item Sources"), SLOT(sItemsWithoutItemSources()), utilitiesMenu, "ViewItemMasters", NULL, NULL, true , NULL },
     { "po.assignItemToPlannerCode", tr("&Assign Item to Planner Code..."), SLOT(sAssignItemToPlannerCode()), utilitiesMenu, "AssignItemsToPlannerCode", NULL, NULL, true , NULL },
     { "po.assignItemsToPlannerCodeByClassCode", tr("Assign Item&s to Planner Code..."), SLOT(sAssignClassCodeToPlannerCode()), utilitiesMenu, "AssignItemsToPlannerCode", NULL, NULL, true , NULL },
 
     // Setup
-    { "po.setup",	tr("&Setup..."),	SLOT(sSetup()),	mainMenu,	NULL,	NULL,	NULL,	true, NULL}
+    { "po.setup",	tr("&Setup"),	SLOT(sSetup()),	mainMenu,	NULL,	NULL,	NULL,	true, NULL}
   };
 
   addActionsToMenu(acts, sizeof(acts) / sizeof(acts[0]));

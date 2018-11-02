@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -101,11 +101,11 @@ menuSystem::menuSystem(GUIClient *Pparent) :
 
   actionProperties acts[] = {
 
-    { "sys.eventManager",             tr("E&vent Manager..."),              SLOT(sEventManager()),             systemMenu, "true",                                      NULL, NULL, true },
-    { "sys.viewDatabaseLog",          tr("View Database &Log..."),          SLOT(sErrorLog()),                 systemMenu, "true",                                      NULL, NULL, true },
+    { "sys.eventManager",             tr("E&vent Manager"),                 SLOT(sEventManager()),             systemMenu, "true",                                      NULL, NULL, true },
+    { "sys.viewDatabaseLog",          tr("View Database &Log"),          SLOT(sErrorLog()),                 systemMenu, "true",                                      NULL, NULL, true },
     { "separator",                    NULL,                                 NULL,                              systemMenu, "true",                                      NULL, NULL, true },
-    { "sys.preferences",              tr("&Preferences..."),                SLOT(sPreferences()),              systemMenu, "MaintainPreferencesSelf MaintainPreferencesOthers",  NULL,   NULL,   true },
-    { "sys.hotkeys",                  tr("&Hot Keys..."),                   SLOT(sHotKeys()),                  systemMenu, "true",  NULL,   NULL,   !(_privileges->check("MaintainPreferencesSelf") || _privileges->check("MaintainPreferencesOthers")) },
+    { "sys.preferences",              tr("&Preferences"),                SLOT(sPreferences()),              systemMenu, "MaintainPreferencesSelf MaintainPreferencesOthers",  NULL,   NULL,   true },
+    { "sys.hotkeys",                  tr("&Hot Keys"),                   SLOT(sHotKeys()),                  systemMenu, "true",  NULL,   NULL,   !(_privileges->check("MaintainPreferencesSelf") || _privileges->check("MaintainPreferencesOthers")) },
     { "sys.rescanPrivileges",         tr("Rescan &Privileges"),             SLOT(sRescanPrivileges()),         systemMenu, "true",                                      NULL, NULL, true },
     { "separator",                    NULL,                                 NULL,                              systemMenu, "true",                                      NULL, NULL, true },
     { "sys.maintainUsers",            tr("Maintain &User Accounts..."),     SLOT(sMaintainUsers()),            systemMenu, "MaintainUsers",                             NULL, NULL, true },
@@ -113,25 +113,25 @@ menuSystem::menuSystem(GUIClient *Pparent) :
     { "sys.userPrivileges",           tr("User Privilege Audit..."),        SLOT(sUserPrivileges()),           systemMenu, "MaintainUsers MaintainGroups",              NULL, NULL, true },
 
     { "menu",                         tr("&Employees"),                     (char*)employeeMenu,               systemMenu, "true",                                      NULL, NULL, true },
-    { "sys.employee",                 tr("&New..."),               	    SLOT(sNewEmployee()),            employeeMenu, "MaintainEmployees",                         NULL, NULL, true },
-    { "sys.listEmployees",            tr("&List..."),             	    SLOT(sListEmployees()),          employeeMenu, "ViewEmployees MaintainEmployees",           NULL, NULL, true },
-    { "sys.searchEmployees",          tr("&Search..."),       		    SLOT(sSearchEmployees()),        employeeMenu, "ViewEmployees MaintainEmployees",           NULL, NULL, true },
+    { "sys.employee",                 tr("&New"),               	    SLOT(sNewEmployee()),            employeeMenu, "MaintainEmployees",                         NULL, NULL, true },
+    { "sys.listEmployees",            tr("&List"),             	    SLOT(sListEmployees()),          employeeMenu, "ViewEmployees MaintainEmployees",           NULL, NULL, true },
+    { "sys.searchEmployees",          tr("&Search"),       		    SLOT(sSearchEmployees()),        employeeMenu, "ViewEmployees MaintainEmployees",           NULL, NULL, true },
     { "separator",                    NULL,                                 NULL,                            employeeMenu, "true",                                      NULL, NULL, true },
-    { "sys.employeeGroups",           tr("Employee &Groups..."),            SLOT(sEmployeeGroups()),         employeeMenu, "ViewEmployeeGroups MaintainEmployeeGroups", NULL, NULL, true },
+    { "sys.employeeGroups",           tr("Employee &Groups"),            SLOT(sEmployeeGroups()),         employeeMenu, "ViewEmployeeGroups MaintainEmployeeGroups", NULL, NULL, true },
 
     { "separator",                    NULL,                                 NULL,                              systemMenu, "true",                                      NULL, NULL, true },
 
   //  Design
     { "menu",           tr("&Design"),                (char*)designMenu,      systemMenu, "true",                        NULL, NULL, true },
-    { "sys.reports",    tr("&Reports..."),            SLOT(sReports()),       designMenu, "MaintainReports",             NULL, NULL, true },
-    { "sys.metasqls",   tr("&MetaSQL Statements..."), SLOT(sMetasqls()),      designMenu, "MaintainMetaSQL ViewMetaSQL", NULL, NULL, true },
+    { "sys.reports",    tr("&Reports"),            SLOT(sReports()),       designMenu, "MaintainReports",             NULL, NULL, true },
+    { "sys.metasqls",   tr("&MetaSQL Statements"), SLOT(sMetasqls()),      designMenu, "MaintainMetaSQL ViewMetaSQL", NULL, NULL, true },
     { "separator",      NULL,                         NULL,                   designMenu, "true",                        NULL, NULL, true },
-    { "sys.uiforms",    tr("S&creens..."),            SLOT(sUIForms()),       designMenu, "MaintainScreens",             NULL, NULL, true },
-    { "sys.scripts",    tr("Scr&ipts..."),            SLOT(sScripts()),       designMenu, "MaintainScripts",             NULL, NULL, true },
+    { "sys.uiforms",    tr("S&creens"),            SLOT(sUIForms()),       designMenu, "MaintainScreens",             NULL, NULL, true },
+    { "sys.scripts",    tr("Scr&ipts"),            SLOT(sScripts()),       designMenu, "MaintainScripts",             NULL, NULL, true },
     { "separator",      NULL,                         NULL,                   designMenu, "true",                        NULL, NULL, true },
-    { "sys.customCommands",tr("Custom Command&s..."), SLOT(sCustomCommands()),designMenu, "MaintainCustomCommands",      NULL, NULL, true },
+    { "sys.customCommands",tr("Custom Command&s"), SLOT(sCustomCommands()),designMenu, "MaintainCustomCommands",      NULL, NULL, true },
     { "separator",      NULL,                         NULL,                   designMenu, "true",                        NULL, NULL, true },
-    { "sys.packages",   tr("&Packages..."),           SLOT(sPackages()),      designMenu, "ViewPackages",                NULL, NULL, true },
+    { "sys.packages",   tr("&Packages"),           SLOT(sPackages()),      designMenu, "ViewPackages",                NULL, NULL, true },
 
   // Utilities
     { "menu",              tr("&Utilities"),(char*)sysUtilsMenu, systemMenu,    "true",                            NULL, NULL, true },
@@ -146,9 +146,9 @@ menuSystem::menuSystem(GUIClient *Pparent) :
     { "sys.printAlignmentPage",	tr("Print &Alignment Page..."),	SLOT(sPrintAlignment()),	sysUtilsMenu,	"true",	NULL,	NULL,	true	},
 
     // Setup
-    { "sys.setup",	tr("&Setup..."),	SLOT(sSetup()),	systemMenu,	"true",	NULL,	NULL,	true	},
+    { "sys.setup",	tr("&Setup"),	SLOT(sSetup()),	systemMenu,	"true",	NULL,	NULL,	true	},
     { "separator",		NULL,				NULL,				systemMenu,	"true",	NULL,	NULL,	true	},
-    { "sys.exit",	tr("E&xit xTuple ERP..."), SLOT(sExit()),				systemMenu,	"true",	NULL,	NULL,	true	},
+    { "sys.exit",	tr("E&xit xTuple ERP"), SLOT(sExit()),				systemMenu,	"true",	NULL,	NULL,	true	},
 
   };
 
