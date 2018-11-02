@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -122,10 +122,9 @@ configureIM::configureIM(QWidget* parent, const char* name, bool /*modal*/, Qt::
     _shipmentNumGeneration->setCurrentIndex(0);
 
   _nextShipmentNum->setValidator(omfgThis->orderVal());
-  configureconfigureIM.exec("SELECT setval('shipment_number_seq', nextval('shipment_number_seq') -1); "
-         "SELECT currval('shipment_number_seq') AS shipment_number;");
+  configureconfigureIM.exec("SELECT last_value AS shipment_number FROM shipment_number_seq;");
   if (configureconfigureIM.first())
-    _nextShipmentNum->setText(configureconfigureIM.value("shipment_number"));
+    _nextShipmentNum->setText(configureconfigureIM.value("shipment_number").toInt());
   else
     ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Inventory Settings"),
                        configureconfigureIM, __FILE__, __LINE__);
@@ -286,7 +285,7 @@ bool configureIM::sSave()
   _metrics->set("ReceiptQtyTolerancePct", _tolerance->text());
   _metrics->set("RecordPPVonReceipt", _recordPpvOnReceipt->isChecked());
 
-  configureSave.prepare("SELECT setval('shipment_number_seq', :shipmentnumber);");
+  configureSave.prepare("SELECT setval('shipment_number_seq', GREATEST(1, :shipmentnumber));");
   configureSave.bindValue(":shipmentnumber", _nextShipmentNum->text().toInt());
   configureSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Inventory Settings"),
