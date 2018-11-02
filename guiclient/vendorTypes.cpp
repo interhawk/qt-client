@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -53,6 +53,7 @@ vendorTypes::vendorTypes(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   _vendtype->addColumn(tr("Code"),        70, Qt::AlignLeft,   true,  "vendtype_code" );
   _vendtype->addColumn(tr("Description"), -1, Qt::AlignLeft,   true,  "vendtype_descrip" );
+  _vendtype->addColumn(tr("Default"),     -1, Qt::AlignLeft,   true,  "vendtype_default" );
 
   sFillList();
 }
@@ -76,7 +77,7 @@ void vendorTypes::languageChange()
 
 void vendorTypes::sFillList()
 {
-  _vendtype->populate( "SELECT vendtype_id, vendtype_code, vendtype_descrip "
+  _vendtype->populate( "SELECT vendtype_id, vendtype_code, vendtype_descrip, vendtype_default "
                        "FROM vendtype "
                        "ORDER BY vendtype_code;" );
 }
