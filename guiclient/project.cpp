@@ -34,7 +34,7 @@
 #include "purchaseOrder.h"
 #include "purchaseOrderItem.h"
 
-const char *_projectStatuses[] = { "P", "O", "C" };
+const char *_projectStatuses[] = { "N", "P", "O", "C" };
 
 bool project::userHasPriv(const int pMode, const int pId)
 {
