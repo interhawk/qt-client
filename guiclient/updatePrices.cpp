@@ -90,13 +90,14 @@ enum SetResponse updatePrices::set(const ParameterList &pParams)
   param = pParams.value("listpricesched", &valid);
   if (valid)
   {
-    _listpricesched = true;
-    setWindowTitle(tr("List Pricing Schedule Assignments"));
+    if (param.toBool())
+    {
+      _listpricesched = true;
+      setWindowTitle(tr("List Pricing Schedule Assignments"));
+    }
+    else
+      _showCurrent->setChecked(true);
   }
-
-  param = pParams.value("updatepricesched", &valid);
-  if (valid)
-    _showCurrent->setChecked(true);
 
   populate();
   

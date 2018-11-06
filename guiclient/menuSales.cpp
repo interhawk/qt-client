@@ -636,7 +636,7 @@ void menuSales::sSales()
 void menuSales::sUpdatePrices()
 {
   ParameterList params;
-  params.append("updatepricesched", true);
+  params.append("listpricesched", false);
 
   updatePrices newdlg(parent, "updatePrices", true);
   newdlg.set(params);
