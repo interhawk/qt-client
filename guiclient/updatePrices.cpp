@@ -95,8 +95,6 @@ enum SetResponse updatePrices::set(const ParameterList &pParams)
       _listpricesched = true;
       setWindowTitle(tr("List Pricing Schedule Assignments"));
     }
-    else
-      _showCurrent->setChecked(true);
   }
 
   populate();
