@@ -495,7 +495,7 @@ void voucherItem::sDelete()
 {
   XSqlQuery voucherDelete;
   voucherDelete.prepare( "DELETE FROM vodist "
-                         "WHERE (vodist_id=:vodist_id);" );
+                         " WHERE (vodist_id=:vodist_id);" );
   voucherDelete.bindValue(":vodist_id", _vodist->id());
   voucherDelete.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Voucher Item Information"),
@@ -693,12 +693,12 @@ void voucherItem::rollback()
   //Undo 'tagged' status stored in rev_vohead_id to initial state stored in recv_voitem_id
 
   rollback.prepare( "UPDATE recv "
-                      "SET recv_vohead_id=CASE WHEN (recv_voitem_id IS NULL) THEN NULL ELSE :vohead_id END "
-                      "WHERE ( (NOT recv_invoiced) "
-                      "AND     (recv_posted) "
-                      "AND     ((recv_vohead_id IS NULL) OR (recv_vohead_id=:vohead_id)) "
-                      "AND     (recv_order_type='PO') "
-                      "AND     (recv_orderitem_id=:poitem_id) );" );
+                    "  SET recv_vohead_id=CASE WHEN (recv_voitem_id IS NULL) THEN NULL ELSE :vohead_id END "
+                    " WHERE ( (NOT recv_invoiced) "
+                    "   AND     (recv_posted) "
+                    "   AND     ((recv_vohead_id IS NULL) OR (recv_vohead_id=:vohead_id)) "
+                    "   AND     (recv_order_type='PO') "
+                    "   AND     (recv_orderitem_id=:poitem_id) );" );
   rollback.bindValue(":vohead_id", _voheadid);
   rollback.bindValue(":poitem_id", _poitemid);
   rollback.exec();
@@ -729,10 +729,10 @@ void voucherItem::reject()
 
     // Check to make sure there is at least 1 distribution for this Voucher Item
     voucherSave.prepare( "SELECT vodist_id "
-              "FROM vodist "
-              "WHERE ( (vodist_vohead_id=:vohead_id)"
-              " AND (vodist_poitem_id=:poitem_id) ) "
-              "LIMIT 1;" );
+                         "  FROM vodist "
+                         " WHERE ( (vodist_vohead_id=:vohead_id)"
+                         "   AND (vodist_poitem_id=:poitem_id) ) "
+                         " LIMIT 1;" );
     voucherSave.bindValue(":vohead_id", _voheadid);
     voucherSave.bindValue(":poitem_id", _poitemid);
     voucherSave.exec();
