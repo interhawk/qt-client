@@ -495,7 +495,7 @@ void voucherItem::sDelete()
 {
   XSqlQuery voucherDelete;
   voucherDelete.prepare( "DELETE FROM vodist "
-             "WHERE (vodist_id=:vodist_id);" );
+                         "WHERE (vodist_id=:vodist_id);" );
   voucherDelete.bindValue(":vodist_id", _vodist->id());
   voucherDelete.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Voucher Item Information"),
@@ -702,13 +702,57 @@ void voucherItem::rollback()
   rollback.bindValue(":vohead_id", _voheadid);
   rollback.bindValue(":poitem_id", _poitemid);
   rollback.exec();
+
+  // Delete all distributions
+  XSqlQuery voucherDelete;
+  voucherDelete.prepare( "DELETE FROM vodist "
+                         " WHERE (vodist_vohead_id=:vohead_id)"
+                         "   AND (vodist_poitem_id=:poitem_id );" );
+  voucherDelete.bindValue(":vohead_id", _voheadid);
+  voucherDelete.bindValue(":poitem_id", _poitemid);
+  voucherDelete.exec();
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Voucher Item Information"),
+                                voucherDelete, __FILE__, __LINE__))
+  {
+    reject();
+    return;
+  }
 }
 
 void voucherItem::reject()
 {
-  rollback();
+  if(_voitemid==-1)
+    rollback();
+  else
+  {
+    XSqlQuery voucherSave;
 
-  XDialog::reject();
+    // Check to make sure there is at least 1 distribution for this Voucher Item
+    voucherSave.prepare( "SELECT vodist_id "
+              "FROM vodist "
+              "WHERE ( (vodist_vohead_id=:vohead_id)"
+              " AND (vodist_poitem_id=:poitem_id) ) "
+              "LIMIT 1;" );
+    voucherSave.bindValue(":vohead_id", _voheadid);
+    voucherSave.bindValue(":poitem_id", _poitemid);
+    voucherSave.exec();
+
+    QList<GuiErrorCheck> errors;
+    errors<< GuiErrorCheck(_qtyToVoucher->toDouble() <= 0.0, _qtyToVoucher,
+                          tr("You must enter a postive Quantity to Voucher."))
+          << GuiErrorCheck(!voucherSave.first(), _qtyToVoucher,
+                          tr("You must make at least one distribution for this Voucher Item."))
+    ;
+    if (GuiErrorCheck::reportErrors(this, tr("Cannot Cancel Voucher Item"), errors))
+    {
+      int ret =  QMessageBox::question(this, tr("Cancel Anyway?"),
+                                          tr("Would you like to cancel anyway?"),
+                                          QMessageBox::Yes | QMessageBox::No);
+      if(ret == 65536) // 16384 = 0x00010000  = "No"
+        return;
+    }
+  } 
+  XDialog::reject(); 
 }
 
 void voucherItem::closeEvent(QCloseEvent * event)
