@@ -3093,7 +3093,7 @@ What would you like to do?</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>Error Creating Document</source>
@@ -39738,7 +39738,7 @@ Rate</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>Financial</source>
@@ -54691,7 +54691,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>New</source>
@@ -56431,7 +56431,7 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>The following packages depend on this package:</source>
@@ -61917,7 +61917,7 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
 </context>
 <context>
@@ -70152,7 +70152,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>Amount:</source>
@@ -77376,7 +77376,7 @@ You first need to Revoke those Tax Codes.</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>Close</source>
@@ -77938,7 +77938,7 @@ You first need to Revoke those Tax Codes.</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -78353,7 +78353,7 @@ You first need to Revoke those Tax Codes.</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -79133,7 +79133,7 @@ You must first re-assign these items before deleting the selected Tax Type.</sou
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visualiser</translation>
     </message>
     <message>
         <source>Delete</source>
