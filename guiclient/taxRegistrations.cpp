@@ -85,7 +85,7 @@ void taxRegistrations::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, i
   menuItem->setEnabled(_privileges->check("ViewTaxRegistrations"));
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
-  menuItem->setEnabled(_privileges->check("DeletePlannedOrders"));
+  menuItem->setEnabled(_privileges->check("MaintainTaxRegistrations"));
 }
 
 void taxRegistrations::setCustid(int custId)
