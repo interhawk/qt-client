@@ -25,9 +25,9 @@
 #include "dspVendorAPHistory.h"
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
+#include "parameterwidget.h"
 #include "selectPayments.h"
 #include "storedProcErrorLookup.h"
-#include "taxRegistration.h"
 #include "unappliedAPCreditMemos.h"
 #include "vendorAddress.h"
 
@@ -141,10 +141,6 @@ vendor::vendor(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_editAddress,           SIGNAL(clicked()),                       this,         SLOT(sEditAddress()));
   connect(_viewAddress,           SIGNAL(clicked()),                       this,         SLOT(sViewAddress()));
   connect(_deleteAddress,         SIGNAL(clicked()),                       this,         SLOT(sDeleteAddress()));
-  connect(_deleteTaxreg,          SIGNAL(clicked()),                       this,         SLOT(sDeleteTaxreg()));
-  connect(_editTaxreg,            SIGNAL(clicked()),                       this,         SLOT(sEditTaxreg()));
-  connect(_newTaxreg,             SIGNAL(clicked()),                       this,         SLOT(sNewTaxreg()));
-  connect(_viewTaxreg,            SIGNAL(clicked()),                       this,         SLOT(sViewTaxreg()));
   connect(_next,                  SIGNAL(clicked()),                       this,         SLOT(sNext()));
   connect(_previous,              SIGNAL(clicked()),                       this,         SLOT(sPrevious()));
   connect(_generalButton,         SIGNAL(clicked()),                       this,         SLOT(sHandleButtons()));
@@ -198,9 +194,13 @@ vendor::vendor(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _vendaddr->addColumn(tr("Country"),       -1,              Qt::AlignLeft,   true,  "addr_country");
   _vendaddr->addColumn(tr("Postal Code"),   -1,              Qt::AlignLeft,   true,  "addr_postalcode");
 
-  _taxreg->addColumn(tr("Tax Authority"),   100,             Qt::AlignLeft,   true,  "taxauth_code");
-  _taxreg->addColumn(tr("Tax Zone"),        100,             Qt::AlignLeft,   true,  "taxzone_code");
-  _taxreg->addColumn(tr("Registration #"),  -1,              Qt::AlignLeft,   true,  "taxreg_number");
+  _taxreg = new taxRegistrations(this, "taxRegistrations", Qt::Widget);
+  _taxPage->layout()->addWidget(_taxreg);
+  _taxreg->setCloseVisible(false);
+  _taxreg->parameterWidget()->setDefault(tr("Vendor"), QVariant(), true);
+  _taxreg->parameterWidget()->append("", "hasContext", ParameterWidget::Exists, true);
+  _taxreg->setParameterWidgetVisible(false);
+  _taxreg->setQueryOnStartEnabled(false);
 
   _transmitStack->setCurrentIndex(0);
   if (_metrics->boolean("EnableBatchManager") &&
@@ -396,7 +396,6 @@ void vendor::setViewMode()
   _defaultFOBGroup->setEnabled(false);
   _taxzone->setEnabled(false);
   _match->setEnabled(false);
-  _newTaxreg->setEnabled(false);
   _comments->setReadOnly(true);
   _documents->setReadOnly(true);
   _charass->setReadOnly(true);
@@ -412,10 +411,9 @@ void vendor::setViewMode()
   _save->hide();
   _close->setText(tr("&Close"));
 
-  disconnect(_taxreg, SIGNAL(valid(bool)), _deleteTaxreg, SLOT(setEnabled(bool)));
-  disconnect(_taxreg, SIGNAL(valid(bool)), _editTaxreg, SLOT(setEnabled(bool)));
-  disconnect(_taxreg, SIGNAL(itemSelected(int)), _editTaxreg, SLOT(animateClick()));
-  connect(_taxreg, SIGNAL(itemSelected(int)), _viewTaxreg, SLOT(animateClick()));
+  ParameterList params;
+  params.append("mode", "view");
+  _taxreg->set(params);
 
 }
 
@@ -1005,7 +1003,8 @@ bool vendor::sPopulate()
     }
 
     sFillAddressList();
-    sFillTaxregList();
+    _taxreg->setVendid(_vendid);
+    _taxreg->sFillList();
 
     _comments->setId(_crmacctid);
     _documents->setId(_vendid);
@@ -1189,74 +1188,6 @@ void vendor::sFillAddressList()
     return;
 }
 
-void vendor::sFillTaxregList()
-{
-  XSqlQuery taxreg;
-  taxreg.prepare("SELECT taxreg_id, taxreg_taxauth_id,"
-                 "       taxauth_code, taxzone_code, taxreg_number"
-                 "  FROM taxreg"
-                 "  JOIN taxauth ON (taxreg_taxauth_id=taxauth_id)"
-                 "  LEFT OUTER JOIN taxzone ON (taxreg_taxzone_id=taxzone_id)"
-                 " WHERE ((taxreg_rel_type='V') "
-                 "    AND (taxreg_rel_id=:vend_id));");
-  taxreg.bindValue(":vend_id", _vendid);
-  taxreg.exec();
-  _taxreg->clear();
-  _taxreg->populate(taxreg, true);
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting Tax Registrations"),
-                           taxreg, __FILE__, __LINE__))
-    return;
-}
-
-void vendor::sNewTaxreg()
-{
-  ParameterList params;
-  params.append("mode", "new");
-  params.append("taxreg_rel_id", _vendid);
-  params.append("taxreg_rel_type", "V");
-
-  taxRegistration newdlg(this, "", true);
-  if (newdlg.set(params) == NoError && newdlg.exec() != XDialog::Rejected)
-    sFillTaxregList();
-}
-
-void vendor::sEditTaxreg()
-{
-  ParameterList params;
-  params.append("mode", "edit");
-  params.append("taxreg_id", _taxreg->id());
-
-  taxRegistration newdlg(this, "", true);
-  newdlg.set(params);
-
-  if (newdlg.set(params) == NoError && newdlg.exec() != XDialog::Rejected)
-    sFillTaxregList();
-}
-
-void vendor::sViewTaxreg()
-{
-  ParameterList params;
-  params.append("mode", "view");
-  params.append("taxreg_id", _taxreg->id());
-
-  taxRegistration newdlg(this, "", true);
-  if (newdlg.set(params) == NoError)
-    newdlg.exec();
-}
-
-void vendor::sDeleteTaxreg()
-{
-  XSqlQuery delq;
-  delq.prepare("DELETE FROM taxreg WHERE (taxreg_id=:taxreg_id);");
-  delq.bindValue(":taxreg_id", _taxreg->id());
-  delq.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Deleting Tax Registration"),
-                           delq, __FILE__, __LINE__))
-    return;
-
-  sFillTaxregList();
-}
-
 void vendor::sNext()
 {
   XSqlQuery vendorNext;
@@ -1355,6 +1286,7 @@ void vendor::clear()
   _defaultTerms->setId(-1);
   _defaultCurr->setCurrentIndex(0);
   _taxzone->setId(-1);
+  _taxreg->setVendid(-1);
 
   _useWarehouseFOB->setChecked(true);
 
@@ -1374,7 +1306,7 @@ void vendor::clear()
   _contact2->clear();
 
   _vendaddr->clear();
-  _taxreg->clear();
+  _taxreg->list()->clear();
 
   _achGroup->setChecked(false);
   _routingNumber->clear();
@@ -1416,6 +1348,7 @@ void vendor::sPrepare()
     
     _charass->setId(_vendid);
     _documents->setId(_vendid);
+    _taxreg->setVendid(_vendid);
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting new id"),
                                 idq, __FILE__, __LINE__))
