@@ -745,10 +745,9 @@ void voucherItem::reject()
     ;
     if (GuiErrorCheck::reportErrors(this, tr("Cannot Cancel Voucher Item"), errors))
     {
-      int ret =  QMessageBox::question(this, tr("Cancel Anyway?"),
+      if(QMessageBox::question(this, tr("Cancel Anyway?"),
                                           tr("Would you like to cancel anyway?"),
-                                          QMessageBox::Yes | QMessageBox::No);
-      if(ret == 65536) // 16384 = 0x00010000  = "No"
+                                          QMessageBox::Yes | QMessageBox::No)) == QMessageBox::No;
         return;
     }
   } 
