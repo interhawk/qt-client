@@ -53861,7 +53861,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Workbench...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Arbeitsleistung...</translation>
     </message>
     <message>
         <source>&amp;Purchase Order</source>
