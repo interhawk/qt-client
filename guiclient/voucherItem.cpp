@@ -747,7 +747,7 @@ void voucherItem::reject()
     {
       if(QMessageBox::question(this, tr("Cancel Anyway?"),
                                           tr("Would you like to cancel anyway?"),
-                                          QMessageBox::Yes | QMessageBox::No)) == QMessageBox::No;
+                                          QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
         return;
     }
   } 
