@@ -1351,6 +1351,16 @@ void itemSearch::sFillList()
   }
   else
   {
+    if ( (!_searchNumber->isChecked()) &&
+         (!_searchName->isChecked()) &&
+         (!_searchDescrip->isChecked()) &&
+         (!_searchUpc->isChecked()) &&
+         (!_searchAlias->isChecked()) )
+    {
+      _listTab->clear();
+      return;
+    }
+
     QString pre;
     QString post;
     if(_x_preferences && _x_preferences->boolean("ListNumericItemNumbersFirst"))
