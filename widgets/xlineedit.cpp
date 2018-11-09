@@ -41,14 +41,14 @@ XLineEdit::XLineEdit(QWidget *parent, const char *name) :
   _id = -1;
   connect(this, SIGNAL(editingFinished()), this, SLOT(sParse()));
 
-  _listAct = new QAction(tr("List..."), this);
+  _listAct = new QAction(tr("List"), this);
   _listAct->setShortcut(QKeySequence(tr("Ctrl+Shift+L")));
   _listAct->setShortcutContext(Qt::WidgetShortcut);
   _listAct->setToolTip(tr("List all records"));
   connect(_listAct, SIGNAL(triggered()), this, SIGNAL(requestList()));
   addAction(_listAct);
 
-  _searchAct = new QAction(tr("Search..."), this);
+  _searchAct = new QAction(tr("Search"), this);
   _searchAct->setShortcut(QKeySequence(tr("Ctrl+Shift+Space")));
   _searchAct->setShortcutContext(Qt::WidgetShortcut);
   _searchAct->setToolTip(tr("Search on specific criteria"));
