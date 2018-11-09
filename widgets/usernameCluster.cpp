@@ -19,6 +19,7 @@ UsernameLineEdit::UsernameLineEdit(QWidget* pParent, const char* pName) :
 {
   setTitles(tr("User Name"), tr("User Names"));
   setUiName("user");
+  setEditPriv("EditOwner");
   setShowInactive(true);
   if (_x_preferences && !_x_preferences->boolean("ClusterButtons"))
   {
