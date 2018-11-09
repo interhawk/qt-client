@@ -582,6 +582,7 @@ void ItemLineEdit::sHandleCompleter()
     numQ.prepare(QString("SELECT *"
                          "  FROM (%1) data"
                          " WHERE (POSITION(:number IN item_number)=1)"
+                         "   AND item_active"
                          " ORDER BY item_number LIMIT 10")
                  .arg(QString(_sql)).remove(";"));
     numQ.bindValue(":number", stripped);
@@ -594,6 +595,7 @@ void ItemLineEdit::sHandleCompleter()
 
     QStringList clauses;
     clauses = _extraClauses;
+    clauses << " (AND item_active) ";
     clauses << "((POSITION(:searchString IN item_number) = 1)"
             " OR (POSITION(:searchString IN item_upccode) = 1))";
     if (_crmacct > 0)
@@ -1144,10 +1146,30 @@ void itemList::sSearch(const QString &pTarget)
 
 void itemList::sFillList()
 {
+  QStringList clauses;
+  clauses = _extraClauses;
+  if(!(_itemType & ItemLineEdit::cActive) && !_showInactive->isChecked())
+    clauses << "(item_active)"; 
+
+  if (_showMake->isChecked())
+        _itemType = (_itemType | ItemLineEdit::cGeneralManufactured);
+  else if (_itemType & ItemLineEdit::cGeneralManufactured)
+        _itemType = (_itemType ^ ItemLineEdit::cGeneralManufactured);
+
+  if (_showBuy->isChecked())
+        _itemType = (_itemType | ItemLineEdit::cGeneralPurchased);
+  else if (_itemType & ItemLineEdit::cGeneralPurchased)
+        _itemType = (_itemType ^ ItemLineEdit::cGeneralPurchased);
+
   _listTab->clear();
+  
   if (_useQuery)
-  {
-    _listTab->populate(_sql, _itemid);
+  { 
+    QString whereClause = "";
+    if(clauses.size()>0)
+      whereClause = " WHERE" + clauses.join(" AND ");
+    QString sql = "SELECT * FROM (" + _sql + ") AS dummy " + whereClause + ";" ; 
+    _listTab->populate(sql, _itemid);
   }
   else
   {
@@ -1166,23 +1188,7 @@ void itemList::sFillList()
         post = "ORDER BY item_number;";
       }
 
-      QStringList clauses;
-      clauses = _extraClauses;
-      if(!(_itemType & ItemLineEdit::cActive) && !_showInactive->isChecked())
-        clauses << "(item_active)";
-
-      if (_showMake->isChecked())
-            _itemType = (_itemType | ItemLineEdit::cGeneralManufactured);
-      else if (_itemType & ItemLineEdit::cGeneralManufactured)
-            _itemType = (_itemType ^ ItemLineEdit::cGeneralManufactured);
-
-      if (_showBuy->isChecked())
-            _itemType = (_itemType | ItemLineEdit::cGeneralPurchased);
-      else if (_itemType & ItemLineEdit::cGeneralPurchased)
-            _itemType = (_itemType ^ ItemLineEdit::cGeneralPurchased);
-
       setWindowTitle(buildItemLineEditTitle(_itemType, tr("Items")));
-
       _listTab->populate(buildItemLineEditQuery(pre, clauses, post, _itemType, false), _itemid);
   }
 }
@@ -1311,47 +1317,40 @@ void itemSearch::sFillList()
     return;
 
   QString sql;
+  QStringList clauses;
+  clauses = _extraClauses;
+  if(!(_itemType & ItemLineEdit::cActive) && !_showInactive->isChecked())
+    clauses << "(item_active)";
+
+  QStringList subClauses;
+  if (_searchNumber->isChecked())
+    subClauses << "(item_number ~* :searchString)";
+
+  if (_searchName->isChecked())
+    subClauses << "(item_descrip1 ~* :searchString)";
+
+  if (_searchDescrip->isChecked())
+    subClauses << "(item_descrip2 ~* :searchString)";
+
+  if (_searchUpc->isChecked())
+    subClauses << "(item_upccode ~* :searchString)";
+
+  if (_searchAlias->isChecked())
+    subClauses << "(itemalias_number ~* :searchString)";
+
+  if(!subClauses.isEmpty())
+    clauses << QString("( " + subClauses.join(" OR ") + " )");
 
   if (_useQuery)
   {
-    QStringList clauses;
-    if (!_showInactive->isChecked())
-      clauses << "(item_active)";
+    QString whereClauses;
+    if(clauses.size()>0 )
+      whereClauses = " WHERE " + clauses.join(" AND ");
 
-    QStringList subClauses;
-    if (_searchNumber->isChecked())
-      subClauses << "(item_number ~* :searchString)";
-
-    if (_searchName->isChecked())
-      subClauses << "(item_descrip1 ~* :searchString)";
-
-    if (_searchDescrip->isChecked())
-      subClauses << "(item_descrip2 ~* :searchString)";
-
-    if (_searchUpc->isChecked())
-      subClauses << "(item_upccode ~* :searchString)";
-
-    if (_searchAlias->isChecked())
-      subClauses << "(itemalias_number ~* :searchString)";
-
-    if(!subClauses.isEmpty())
-      clauses << QString("( " + subClauses.join(" OR ") + " )");
-
-    sql = "SELECT * FROM (" + _sql + ") AS dummy WHERE (" +
-          clauses.join(" AND ") + ");" ;
+    sql = "SELECT * FROM (" + _sql + ") AS dummy  " + whereClauses  + ";" ;   
   }
   else
   {
-    if ( (!_searchNumber->isChecked()) &&
-         (!_searchName->isChecked()) &&
-         (!_searchDescrip->isChecked()) &&
-         (!_searchUpc->isChecked()) &&
-         (!_searchAlias->isChecked()) )
-    {
-      _listTab->clear();
-      return;
-    }
-
     QString pre;
     QString post;
     if(_x_preferences && _x_preferences->boolean("ListNumericItemNumbersFirst"))
@@ -1368,30 +1367,6 @@ void itemSearch::sFillList()
              "       item_active, itemalias_number, crmacct_name";
       post = "ORDER BY item_number";
     }
-
-    QStringList clauses;
-    clauses = _extraClauses;
-    if(!(_itemType & ItemLineEdit::cActive) && !_showInactive->isChecked())
-      clauses << "(item_active)";
-
-    QStringList subClauses;
-    if (_searchNumber->isChecked())
-      subClauses << "(item_number ~* :searchString)";
-
-    if (_searchName->isChecked())
-      subClauses << "(item_descrip1 ~* :searchString)";
-
-    if (_searchDescrip->isChecked())
-      subClauses << "(item_descrip2 ~* :searchString)";
-
-    if (_searchUpc->isChecked())
-      subClauses << "(item_upccode ~* :searchString)";
-
-    if (_searchAlias->isChecked())
-      subClauses << "(itemalias_number ~* :searchString)";
-
-    if(!subClauses.isEmpty())
-      clauses << QString("( " + subClauses.join(" OR ") + " )");
 
     sql = buildItemLineEditQuery(pre, clauses, post, _itemType, false);
   }
