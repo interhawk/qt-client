@@ -559,9 +559,10 @@ void docAttach::sSave()
         return;
       }
       bytarr = sourceFile.readAll();
-      url.setPath(fi.filePath().remove(" "));
+      url.setUrl(fi.fileName().remove(" "));
       url.setScheme("");
     }
+
     if (_mode == "new" && bytarr.isNull())
     {
       newDocass.prepare( "INSERT INTO docass ("
@@ -603,7 +604,7 @@ void docAttach::sSave()
 
     newDocass.bindValue(":url_id", _id);
     newDocass.bindValue(":title", title);
-    newDocass.bindValue(":url", url.toString());
+    newDocass.bindValue(":url", url.url());
   }
   else
   {
