@@ -604,7 +604,7 @@ void docAttach::sSave()
 
     newDocass.bindValue(":url_id", _id);
     newDocass.bindValue(":title", title);
-    newDocass.bindValue(":url", url.url());
+    newDocass.bindValue(":url", url.toString());
   }
   else
   {
