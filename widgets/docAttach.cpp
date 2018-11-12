@@ -559,10 +559,9 @@ void docAttach::sSave()
         return;
       }
       bytarr = sourceFile.readAll();
-      url.setPath(fi.fileName().remove(" "));
+      url.setPath(fi.filePath().remove(" "));
       url.setScheme("");
     }
-
     if (_mode == "new" && bytarr.isNull())
     {
       newDocass.prepare( "INSERT INTO docass ("
