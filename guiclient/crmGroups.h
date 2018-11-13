@@ -11,6 +11,8 @@
 #ifndef CRMGROUPS_H
 #define CRMGROUPS_H
 
+#include "guiclient.h"
+#include "xdialog.h"
 #include "xwidget.h"
 #include "ui_crmGroups.h"
 #include "crmacctcluster.h"
@@ -44,12 +46,12 @@ struct GroupMap
   }
 };  
 
-class crmGroups : public XWidget, public Ui::crmGroups
+class crmGroups : public XDialog, public Ui::crmGroups
 {
     Q_OBJECT
 
 public:
-    crmGroups(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::Window);
+    crmGroups(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
     ~crmGroups();
 
 //  if you add to this then add to the GroupMap[] in the .cpp
@@ -65,6 +67,7 @@ public slots:
     virtual void sEdit();
     virtual void sView();
     virtual void sFillList();
+    virtual void sClose();
 
 protected slots:
     virtual void languageChange();

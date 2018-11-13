@@ -19,6 +19,7 @@
 
 #include "contactcluster.h"
 #include "crmaccount.h"
+#include "contactAccountAssign.h"
 #include "customer.h"
 #include "employee.h"
 #include "errorReporter.h"
@@ -202,6 +203,7 @@ class contactPrivate
 
       return privs;
     };
+
 };
 
 contact::contact(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
@@ -210,13 +212,9 @@ contact::contact(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   setupUi(this);
   _data = new contactPrivate(this);
 
-  // Legacy compatibility removed
-  // For legacy compatibility
-  //_save = _buttonBox->button(QDialogButtonBox::Save);
-  //_save->setObjectName("_save");
-
   connect(_buttonBox,      SIGNAL(accepted()), this, SLOT(sSave()));
   connect(_buttonBox,      SIGNAL(rejected()), this, SLOT(sClose()));
+  connect(_attachUse,      SIGNAL(clicked()), this, SLOT(sAttachUse()));
   connect(_detachUse,      SIGNAL(clicked()), this, SLOT(sDetachUse()));
   connect(_editUse,        SIGNAL(clicked()), this, SLOT(sEditUse()));
   connect(_showOrders,     SIGNAL(toggled(bool)), this, SLOT(sFillList()));
@@ -242,8 +240,9 @@ contact::contact(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   _uses->addColumn(tr("Used by"),         100, Qt::AlignLeft, true, "type");
   _uses->addColumn(tr("Number"), _orderColumn, Qt::AlignLeft, true, "number");
   _uses->addColumn(tr("Name"),             -1, Qt::AlignLeft, true, "name");
-  _uses->addColumn(tr("Role"),             -1, Qt::AlignLeft, true, "role");
   _uses->addColumn(tr("Active"),    _ynColumn, Qt::AlignCenter,true, "active");
+  _uses->addColumn(tr("Role"),             -1, Qt::AlignLeft, true, "role");
+  _uses->addColumn(tr("Active Role"),      -1, Qt::AlignCenter,true, "active_role");
   _uses->addColumn(tr("Owner"),   _userColumn, Qt::AlignLeft,  false,"owner");
 
   _contact->setMinimalLayout(false);
@@ -307,9 +306,7 @@ enum SetResponse contact::set(const ParameterList &pParams)
       _tabWidget->setTabEnabled(_tabWidget->indexOf(_usesTab), false);
     }
     else if (param.toString() == "edit")
-    {
       _data->_mode = cEdit;
-    }
     else if (param.toString() == "view")
       setViewMode();
   }
@@ -357,6 +354,8 @@ enum SetResponse contact::set(const ParameterList &pParams)
   if (valid)
     _contact->addressWidget()->setCountry(param.toString());
 
+  _attachUse->setEnabled(_privileges->check("MaintainAllCRMAccounts MaintainPersonalCRMAccounts") && _data->_mode != cView);
+
   return NoError;
 }
 
@@ -377,13 +376,14 @@ void contact::sPopulateUsesMenu(QMenu* pMenu)
 {
   QAction *editAction = 0;
   QAction *viewAction = 0;
+  QAction *editAssignAction = 0;
   QString editStr = tr("Edit...");
   QString viewStr = tr("View...");
 
   switch (_uses->altId())
   {
     case 1:
-    case 2:
+      editAssignAction = pMenu->addAction(tr("Edit Assignment..."), this, SLOT(sEditAssignment()));
       editAction = pMenu->addAction(editStr, this, SLOT(sEditCRMAccount()));
       viewAction = pMenu->addAction(viewStr, this, SLOT(sViewCRMAccount()));
       break;
@@ -693,6 +693,18 @@ void contact::sFillList()
     return;
 }
 
+void contact::sAttachUse()
+{
+  ParameterList params;
+  params.append("mode", "new");
+  params.append("contact", _cntctid);
+
+  contactAccountAssign newdlg(0, "", false);
+  newdlg.set(params);
+  if (newdlg.exec() != XDialog::Rejected)
+    sFillList();
+}
+
 void contact::sDetachUse()
 {
   QString question;
@@ -700,20 +712,15 @@ void contact::sDetachUse()
   switch (_uses->altId())
   {
     case 1:
-      question = tr("Are you sure that you want to remove this Contact as "
-                    "the Primary Contact for this Account?");
-      detachq.prepare("DELETE FROM crmacctcntctass "
-                      "WHERE crmacctcntctass_crmacct_id=:id"
-                      " AND crmacctcntctass_crmrole_id=getcrmroleid('Primary');");
+      question = tr("Are you sure that you want to remove this Contact from this Account?");
+      detachq.prepare("SELECT detachcontact(crmacctcntctass_id) "
+                      "  FROM crmacctcntctass "
+                      " WHERE crmacctcntctass_crmacct_id=:id "
+                      "   AND crmacctcntctass_cntct_id=:cntct "
+                      "   AND crmacctcntctass_crmrole_id = getcrmroleid(:role);");
+      detachq.bindValue(":cntct", _contact->id());
+      detachq.bindValue(":role", _uses->currentItem()->rawValue("role").toString());
       break;
-    case 2:
-      question = tr("Are you sure that you want to remove this Contact as "
-                    "the Secondary Contact for this Account?");
-      detachq.prepare("DELETE FROM crmacctcntctass "
-                      "WHERE crmacctcntctass_crmacct_id=:id"
-                      " AND crmacctcntctass_crmrole_id=getcrmroleid('Secondary');");
-      break;
-
     case 3:
       question = tr("Are you sure that you want to remove this Contact as "
                     "the Billing Contact for this Customer?");
@@ -967,6 +974,36 @@ void contact::sHandleValidUse(bool valid)
     connect(_uses, SIGNAL(itemSelected(int)), _editUse, SLOT(animateClick()));
   else if (_viewUse->isEnabled())
     connect(_uses, SIGNAL(itemSelected(int)), _viewUse, SLOT(animateClick()));
+}
+
+void contact::sEditAssignment()
+{
+  XSqlQuery getq;
+  ParameterList params;
+  int _assign;
+
+  getq.prepare("SELECT crmacctcntctass_id AS id "
+               "  FROM crmacctcntctass "
+               " WHERE crmacctcntctass_crmacct_id=:crmacct "
+               "   AND crmacctcntctass_cntct_id=:cntct "
+               "   AND crmacctcntctass_crmrole_id = getcrmroleid(:role);");
+  getq.bindValue(":crmacct", _uses->id());
+  getq.bindValue(":cntct", _contact->id());
+  getq.bindValue(":role", _uses->currentItem()->rawValue("role").toString());
+  getq.exec();
+  if (getq.first())
+    _assign = getq.value("id").toInt();
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting Assignment Id"),
+                           getq, __FILE__, __LINE__))
+    return;
+
+  params.append("mode", "edit");
+  params.append("assign_id", _assign);
+
+  contactAccountAssign newdlg(0, "", false);
+  newdlg.set(params);
+  if (newdlg.exec() != XDialog::Rejected)
+    sFillList();
 }
 
 void contact::sEditCRMAccount()

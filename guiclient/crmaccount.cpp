@@ -106,7 +106,6 @@ crmaccount::crmaccount(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   connect(_addrAdd,             SIGNAL(clicked()), this, SLOT(sAddAddress()));
   connect(_close,               SIGNAL(clicked()), this, SLOT(sClose()));
-  connect(_cntctAdd,            SIGNAL(clicked()), this, SLOT(sAddContact()));
   connect(_customerButton,      SIGNAL(clicked()), this, SLOT(sCustomer()));
   connect(_deleteReg,           SIGNAL(clicked()), this, SLOT(sDeleteReg()));
   connect(_editReg,             SIGNAL(clicked()), this, SLOT(sEditReg()));
@@ -352,7 +351,6 @@ void crmaccount::setViewMode()
   _parentCrmacct->setEnabled(canEdit);
   _typeBox->setEnabled(canEdit);
   _contactPage->setEnabled(canEdit);
-  _contactGroupBox->setVisible(canEdit);
   _addressPage->setEnabled(canEdit);
 
   if (_mode == cView)
@@ -1376,34 +1374,6 @@ void crmaccount::sAddAddress()
                            adda, __FILE__, __LINE__))
       return;
   _addresses->sFillList();
-}
-
-void crmaccount::sAddContact()
-{
-  XSqlQuery addc;
-  QList<GuiErrorCheck> errors;
-
-  errors<< GuiErrorCheck(!_cntctRole->isValid(), _cntctRole,
-                         tr("Please first select a Role."))
-        <<  GuiErrorCheck(!_contact->isValid(), _contact,
-                         tr("Please first select a Contact."))
-  ;
-  if (GuiErrorCheck::reportErrors(this, tr("Cannot Add Contact"), errors))
-    return;
-
-  addc.prepare("INSERT INTO crmacctcntctass (crmacctcntctass_crmacct_id, crmacctcntctass_cntct_id, "
-               "                             crmacctcntctass_crmrole_id, crmacctcntctass_default)  "
-               " SELECT :crmacct_id, :cntct_id, :crmrole_id, :default "
-               " ON CONFLICT DO NOTHING; ");
-  addc.bindValue(":crmacct_id", _crmacctId);
-  addc.bindValue(":cntct_id",   _contact->id());
-  addc.bindValue(":crmrole_id", _cntctRole->id());
-  addc.bindValue(":default",   _cntctDefault->isChecked());
-  addc.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error assigning Contact"),
-                           addc, __FILE__, __LINE__))
-      return;
-  _contacts->sFillList();
 }
 
 void crmaccount::sEmployee()

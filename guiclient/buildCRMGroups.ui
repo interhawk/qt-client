@@ -99,6 +99,16 @@ to be bound by its terms.</comment>
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="_addGroup">
+           <property name="text">
+            <string>New</string>
+           </property>
+           <property name="toolTip">
+            <string>Create a new CRM Group</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
