@@ -266,23 +266,32 @@ void displayPrivate::setupCharacteristics(QStringList uses)
     _list->addColumn(name, -1, Qt::AlignLeft , false, column );
     if (chartype == characteristic::Text)
     {
-      _charidstext.append(chars.value("char_id").toInt());
-      _parameterWidget->append(name, column, ParameterWidget::Text);
+      if (!_charidstext.contains(chars.value("char_id").toInt()))
+      {
+        _charidstext.append(chars.value("char_id").toInt());
+        _parameterWidget->append(name, column, ParameterWidget::Text);
+      }
     }
     if (chartype == characteristic::Number)
     {
-      _charidstext.append(chars.value("char_id").toInt());
-      _parameterWidget->append(name, column, ParameterWidget::Numeric);
+      if (!_charidstext.contains(chars.value("char_id").toInt()))
+      {
+        _charidstext.append(chars.value("char_id").toInt());
+        _parameterWidget->append(name, column, ParameterWidget::Numeric);
+      }
     }
     else if (chartype == characteristic::List)
     {
-      _charidslist.append(chars.value("char_id").toInt());
-      QString sql = QString("SELECT charopt_value, charopt_value"
-                            "  FROM charopt"
-                            " WHERE charopt_char_id = %1"
-                            " ORDER BY charopt_order, charopt_value;")
-          .arg(chars.value("char_id").toInt());
-      _parameterWidget->append(name, column, ParameterWidget::Multiselect, QVariant(), false, sql);
+      if (!_charidslist.contains(chars.value("char_id").toInt()))
+      {
+        _charidslist.append(chars.value("char_id").toInt());
+        QString sql = QString("SELECT charopt_value, charopt_value"
+                              "  FROM charopt"
+                              " WHERE charopt_char_id = %1"
+                              " ORDER BY charopt_order, charopt_value;")
+            .arg(chars.value("char_id").toInt());
+        _parameterWidget->append(name, column, ParameterWidget::Multiselect, QVariant(), false, sql);
+      }
     }
     else if (chartype == characteristic::Date)
     {
