@@ -70,6 +70,17 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("Updated Before"), "updateEndDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Updated After"), "updateStartDate", ParameterWidget::Date);
 
+  QString psql = QString("SELECT 0 AS id, '%1' AS code "
+                         "UNION SELECT 1, '%2' "
+                         "UNION SELECT 2, '%3' "
+                         "UNION SELECT 3, '%4' "
+                         "ORDER BY id;")
+                        .arg(tr("No Campaign"))
+                        .arg(tr("Email Campaign"))
+                        .arg(tr("Postal Campaign"))
+                        .arg(tr("Phone Campaign"));
+  parameterWidget()->appendComboBox(tr("Marketing Campaign"), "campaign", psql, 0, true);
+
   list()->addColumn(tr("First Name"),          80, Qt::AlignLeft,  true, "cntct_first_name");
   list()->addColumn(tr("Last Name"),          100, Qt::AlignLeft,  true, "cntct_last_name");
   list()->addColumn(tr("Active Contact"),      50, Qt::AlignLeft,  true, "cntct_active");
