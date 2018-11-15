@@ -192,54 +192,5 @@ to be bound by its terms.</comment>
   <tabstop>_notes</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>_uses</sender>
-   <signal>itemSelected(int)</signal>
-   <receiver>_editAddrUse</receiver>
-   <slot>animateClick()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_uses</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_editAddrUse</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_uses</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_viewAddrUse</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

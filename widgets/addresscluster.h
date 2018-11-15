@@ -98,7 +98,7 @@ class XTUPLEWIDGETS_EXPORT AddressCluster : public VirtualCluster
     friend class AddressSearch;
 
     public:
-	enum SaveFlags { CHECK = 0, CHANGEONE = 1, CHANGEALL = 2 }; 
+        enum SaveFlags { CHECK = 0, CHANGEONE = 1, CHANGEALL = 2, PRIV = 99 };
         Q_ENUM(SaveFlags)
         enum Mode      { Edit, View, Select };
         Q_ENUM(Mode)

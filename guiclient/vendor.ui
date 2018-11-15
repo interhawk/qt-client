@@ -1947,22 +1947,6 @@ and Purchase Order amounts</string>
    </hints>
   </connection>
   <connection>
-   <sender>_vendaddr</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_viewAddress</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>54</x>
-     <y>467</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>126</x>
-     <y>467</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>_accountSelected</sender>
    <signal>toggled(bool)</signal>
    <receiver>_account</receiver>

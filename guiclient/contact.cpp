@@ -558,10 +558,13 @@ void contact::sSave()
   }
   if (saveResult < 0)   // check from errors for CHECK and CHANGE* saves
   {
-    ErrorReporter::error(QtCriticalMsg, this, tr("Saving Address"),
-                         tr("<p>There was an error saving this Address (%1). "
-                            "Check the database server log for errors.")
-                         .arg(saveResult), __FILE__, __LINE__);
+    if (saveResult == -99)
+      return; // Privilege fail, message already presented.
+    else
+      ErrorReporter::error(QtCriticalMsg, this, tr("Saving Address"),
+                           tr("<p>There was an error saving this Address (%1). "
+                              "Check the database server log for errors.")
+                           .arg(saveResult), __FILE__, __LINE__);
     return;
   }
 

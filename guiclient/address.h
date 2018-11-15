@@ -42,6 +42,7 @@ protected slots:
     virtual void sEditVendor();
     virtual void sEditVendorAddress();
     virtual void sEditWarehouse();
+    virtual void sHandleSelection();
     virtual void sPopulate();
     virtual void sPopulateMenu(QMenu *);
     virtual void sSave();
@@ -56,8 +57,9 @@ protected slots:
     virtual void setVisible(bool);
 
 private:
-    int _mode;
-    int _addrid;
+    int  _mode;
+    int  _editableMode;
+    int  _addrid;
     bool _captive;
     bool _close;
     AppLock _lock;
