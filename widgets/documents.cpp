@@ -262,7 +262,7 @@ void Documents::sOpenDoc(QString mode)
   QString docType = _doc->currentItem()->rawValue("target_type").toString();
   int targetid;
 
-  targetid = isFile.contains(docType) ? _doc->currentItem()->rawValue("target_number").toInt()
+  targetid = isFile.contains(docType) ? _doc->currentItem()->id()
                                       : _doc->currentItem()->id("target_number");
 
   ParameterList params;
