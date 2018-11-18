@@ -30,6 +30,8 @@ dspItemsWithoutItemSources::dspItemsWithoutItemSources(QWidget* parent, const ch
   list()->addColumn(tr("Type"),        _itemColumn,  Qt::AlignCenter,true, "type");
 
   connect(omfgThis, SIGNAL(itemsUpdated(int, bool)), this, SLOT(sFillList()));
+  if (_privileges->check("MaintainItemMasters"))
+    connect(list(), SIGNAL(itemSelected(int)), this, SLOT(sEditItem()));
 }
 
 void dspItemsWithoutItemSources::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
