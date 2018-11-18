@@ -217,9 +217,7 @@ void dspDocuments::sOpenAssignment()
   else
     params.append("mode", "view");
 
-// Have to fudge for inconsistent salesOrder.cpp parameter
-  doc.prepare("SELECT REPLACE(source_key_field, 'cohead_id', 'sohead_id') AS source_key_field, "
-              "       source_uiform_name, docass_source_id "
+  doc.prepare("SELECT source_key_field, source_uiform_name, docass_source_id "
               "  FROM source "
               "  JOIN docass on source_name = docass_source_type "
               " WHERE docass_id = :docid;" );
