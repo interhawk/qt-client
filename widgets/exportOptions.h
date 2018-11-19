@@ -28,8 +28,9 @@ class ExportOptions: public QDialog , public Ui::ExportOptions
     ~ExportOptions();
    
     void populateDelim();
-    QString getFiletype(){return _filetype;}
-    QString getDelim(){return _delim;} 
+    QString getFiletype();
+    QString getDelim();
+    bool getOpen();
 
   public slots:
     void sEnableCB();  
@@ -38,7 +39,7 @@ class ExportOptions: public QDialog , public Ui::ExportOptions
   private:
     QString _filetype;
     QString _delim;
-
+    bool _open;
 };
 
 QT_END_NAMESPACE

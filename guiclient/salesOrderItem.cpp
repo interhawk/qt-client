@@ -4516,7 +4516,7 @@ void salesOrderItem::reject()
   ENTERED;
   XSqlQuery salesreject;
   bool saved = false;
-  if (_modified)
+  if (_modified && _item->id() > 0)
   {
     switch ( QMessageBox::question( this, tr("Unsaved Changed"),
                                     tr("<p>You have made some changes which have not yet been saved!\n"

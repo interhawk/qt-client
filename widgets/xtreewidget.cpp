@@ -1637,11 +1637,13 @@ void XTreeWidget::sExport()
 
   ExportOptions eo;
   QString filetype, delimSelected;
+  bool openAutomatically;
 
   if (!eo.exec())
     return;
   filetype = eo.getFiletype();
   delimSelected = eo.getDelim();
+  openAutomatically = eo.getOpen();
   
   if(delimSelected == "{tab}")
       delimSelected = "\t";
@@ -1690,7 +1692,9 @@ void XTreeWidget::sExport()
     }
     writer.write(doc);
   }
-  QDesktopServices::openUrl(fi.filePath());
+
+  if(openAutomatically)
+    QDesktopServices::openUrl(fi.filePath());
 }
 
 void XTreeWidget::mousePressEvent(QMouseEvent *event)
