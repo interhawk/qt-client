@@ -71,7 +71,7 @@ void createRecurringItems::sCreate()
     { _vouchers,   "V"     },
     { _incidents,  "INCDT" },
     { _projects,   "J"     },
-    { _todoItems,  "TASK"  }
+    { _todoItems,  "TASK"  },
     { _salesOrder, "S"     }
   };
 
