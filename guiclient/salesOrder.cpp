@@ -290,6 +290,8 @@ salesOrder::salesOrder(QWidget *parent, const char *name, Qt::WindowFlags fl)
   _bankaccnt->setType(XComboBox::ARBankAccounts);
   _salescat->setType(XComboBox::SalesCategoriesActive);
 
+  _recur->setParent(-1, "S");
+
   sHandleMore();
 }
 
@@ -353,6 +355,7 @@ enum SetResponse salesOrder::set(const ParameterList &pParams)
       _downCC->hide();
       _authorize->hide();
       _charge->hide();
+      _salesOrderInformation->removeTab(_salesOrderInformation->indexOf(_advancedPage));
       _paymentInformation->removeTab(_paymentInformation->indexOf(_cashPage));
       _quotestatusLit->show();
       _quotestaus->show();
@@ -399,6 +402,7 @@ enum SetResponse salesOrder::set(const ParameterList &pParams)
       _downCC->hide();
       _authorize->hide();
       _charge->hide();
+      _salesOrderInformation->removeTab(_salesOrderInformation->indexOf(_advancedPage));
       _paymentInformation->removeTab(_paymentInformation->indexOf(_cashPage));
       _quotestatusLit->show();
       _quotestaus->show();
@@ -456,6 +460,7 @@ enum SetResponse salesOrder::set(const ParameterList &pParams)
       _copyToShipto->setEnabled(false);
       _orderCurrency->setEnabled(false);
       _newCharacteristic->setEnabled(false);
+      _salesOrderInformation->removeTab(_salesOrderInformation->indexOf(_advancedPage));
       _paymentInformation->removeTab(_paymentInformation->indexOf(_cashPage));
       _save->hide();
       _clear->hide();
@@ -514,6 +519,7 @@ enum SetResponse salesOrder::set(const ParameterList &pParams)
       populateCMInfo();
       populateCCInfo();
       sFillCcardList();
+      _recur->setParent(_soheadid, "S");
     }
 
     _captive = false;
@@ -574,7 +580,7 @@ enum SetResponse salesOrder::set(const ParameterList &pParams)
     _shippingChargesLit->hide();
     _shippingForm->hide();
     _shippingFormLit->hide();
-
+    _salesOrderInformation->removeTab(_salesOrderInformation->indexOf(_advancedPage));
     _salesOrderInformation->removeTab(_salesOrderInformation->indexOf(_paymentPage));
     _salesOrderInformation->removeTab(_salesOrderInformation->indexOf(_shipmentsPage));
     _showCanceled->hide();
@@ -729,6 +735,39 @@ void salesOrder::sSave()
       }
     }
 
+    // If this is a recurring sales order, check whether the newly saved sales order
+    // should supercede the original recurring sales order settings
+    if (ISORDER(_mode) && _recur->isRecurring() && 
+        ISEDIT(_mode) && _recur->parentId() != _soheadid)
+    {
+      if (QMessageBox::question(this, tr("Recurring Sales Order"),
+        tr("You have edited a recurring Sales Order.\n"
+          "Do you wish to change all future Sales Order recurrences?"),
+        QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+      {
+        // Update Recurring Sales Order with latest saved detail
+        XSqlQuery recurUpd;
+        recurUpd.prepare("UPDATE recur SET recur_parent_id=:newso "
+          "WHERE ((recur_parent_type = 'S') "
+          " AND   (recur_parent_id = :oldso));");
+        recurUpd.bindValue(":newso", _soheadid);
+        recurUpd.bindValue(":oldso", _recur->parentId());
+        recurUpd.exec();
+
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
+            recurUpd, __FILE__, __LINE__))
+          return;
+
+        // Also update this Sales Order
+        recurUpd.prepare("UPDATE cohead SET cohead_recurring_cohead_id=:salesorder "
+          "WHERE (cohead_id = :salesorder); ");
+        recurUpd.bindValue(":salesorder", _soheadid);
+        recurUpd.exec();
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
+            recurUpd, __FILE__, __LINE__))
+          return;
+      }
+    }
     if (_captive)
       close();
     else
@@ -774,6 +813,40 @@ void salesOrder::sSaveAndAdd()
       }
     }
 
+    // If this is a recurring sales order, check whether the newly saved sales order
+    // should supercede the original recurring sales order settings
+    if (ISORDER(_mode) && _recur->isRecurring() &&
+      ISEDIT(_mode) && _recur->parentId() != _soheadid)
+    {
+      if (QMessageBox::question(this, tr("Recurring Sales Order"),
+        tr("You have edited a recurring Sales Order.\n"
+          "Do you wish to change all future Sales Order recurrences?"),
+        QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+      {
+        // Update Recurring Sales Order with latest saved detail
+        XSqlQuery recurUpd;
+        recurUpd.prepare("UPDATE recur SET recur_parent_id=:newso "
+          "WHERE ((recur_parent_type = 'S') "
+          " AND   (recur_parent_id = :oldso));");
+        recurUpd.bindValue(":newso", _soheadid);
+        recurUpd.bindValue(":oldso", _recur->parentId());
+        recurUpd.exec();
+
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
+            recurUpd, __FILE__, __LINE__))
+          return;
+
+        // Also update this Sales Order
+        recurUpd.prepare("UPDATE cohead SET cohead_recurring_cohead_id=:salesorder "
+          "WHERE (cohead_id = :salesorder); ");
+        recurUpd.bindValue(":salesorder", _soheadid);
+        recurUpd.exec();
+
+        if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Sales Order Recurrence"),
+            recurUpd, __FILE__, __LINE__))
+          return;
+      }
+    }
     if (_captive)
       close();
     else
@@ -841,8 +914,13 @@ bool salesOrder::save(bool partial)
     }
   }
 
+  RecurrenceWidget::RecurrenceChangePolicy cp;
   if (ISORDER(_mode))
   {
+    cp = _recur->getChangePolicy();
+    if (cp == RecurrenceWidget::NoPolicy)
+      return false;
+
     if (_usesPos && !partial)
     {
       if (_custPONumber->text().trimmed().length() == 0)
@@ -907,6 +985,10 @@ bool salesOrder::save(bool partial)
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Sales Order"), errors))
       return false;
 
+  XSqlQuery rollbackq;
+  rollbackq.prepare("ROLLBACK;");
+  XSqlQuery begin("BEGIN;");
+
   if ((_mode == cEdit) || ((_mode == cNew) && _saved))
     saveSales.prepare( "UPDATE cohead "
                "SET cohead_custponumber=:custponumber, cohead_shipto_id=:shipto_id, cohead_cust_id=:cust_id,"
@@ -952,7 +1034,8 @@ bool salesOrder::save(bool partial)
                "    cohead_billto_cntct_fax=:billto_cntct_fax,"
                "    cohead_billto_cntct_email=:billto_cntct_email, "
                "    cohead_shipzone_id=:shipzone_id,"
-               "    cohead_saletype_id=:saletype_id "
+               "    cohead_saletype_id=:saletype_id, "
+               "    cohead_recurring_cohead_id=:recurring_cohead_id "
                "WHERE (cohead_id=:id);" );
   else if (_mode == cNew)
   {
@@ -999,7 +1082,8 @@ bool salesOrder::save(bool partial)
               "    cohead_billto_cntct_title,"
               "    cohead_billto_cntct_fax,"
               "    cohead_billto_cntct_email,"
-              "    cohead_shipzone_id, cohead_saletype_id)"
+              "    cohead_shipzone_id, cohead_saletype_id, "
+              "    cohead_recurring_cohead_id) "
               "    VALUES (:id,:number, :cust_id,"
               "    :custponumber,:shipto_id,"
               "    :billtoname, :billtoaddress1,"
@@ -1042,7 +1126,8 @@ bool salesOrder::save(bool partial)
               "    :billto_cntct_title,"
               "    :billto_cntct_fax,"
               "    :billto_cntct_email,"
-              "    :shipzone_id, :saletype_id) ");
+              "    :shipzone_id, :saletype_id, "
+              "    :recurring_cohead_id) ");
   }
   else if ((_mode == cEditQuote) || ((_mode == cNewQuote) && _saved))
     saveSales.prepare( "UPDATE quhead "
@@ -1267,10 +1352,15 @@ bool salesOrder::save(bool partial)
     saveSales.bindValue(":saletype_id", _saleType->id());
   saveSales.bindValue(":quhead_status", "O");
 
+  if (ISORDER(_mode) && _recur->isRecurring())
+    saveSales.bindValue(":recurring_cohead_id", _recur->parentId());
+
   saveSales.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Saving Order"),
-                           saveSales, __FILE__, __LINE__))
+  if (saveSales.lastError().type() != QSqlError::NoError)
   {
+    rollbackq.exec();
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Order"),
+      saveSales, __FILE__, __LINE__);
     return false;
   }
 
@@ -1282,6 +1372,15 @@ bool salesOrder::save(bool partial)
     return false;
   }
 
+  QString errmsg;
+  if (ISORDER(_mode) && !_recur->save(true, cp, &errmsg))
+  {
+    rollbackq.exec();
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error occurred saving recurrence"),
+      errmsg.arg(windowTitle()), __FILE__, __LINE__);
+    return false;
+  }
+  XSqlQuery commitq("COMMIT;");
   _saved = true;
 
   if (!partial)
@@ -1788,6 +1887,7 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
                 "       cust_curr_id, COALESCE(crmacct_id,-1) AS crmacct_id, "
                 "       true AS iscustomer "
                 "FROM custinfo "
+                "  JOIN crmacct           ON crmacct_cust_id = cust_id"
                 "  LEFT OUTER JOIN cntct  ON (cust_cntct_id=cntct_id) "
                 "  LEFT OUTER JOIN addr   ON (cntct_addr_id=addr_id) "
                 "  LEFT OUTER JOIN shiptoinfo ON ((shipto_cust_id=cust_id)"
@@ -2744,6 +2844,10 @@ void salesOrder::populate()
           _fromQuote->setText(so.value("rahead_number").toString());
         }
       }
+      if (so.value("cohead_recurring_cohead_id").toInt() != 0)
+        _recur->setParent(so.value("cohead_recurring_cohead_id").toInt(), "S");
+      else
+        _recur->setParent(_soheadid, "S");
       sPopulateShipments();
       sFillCharacteristic();
       emit populated();
@@ -3314,6 +3418,7 @@ void salesOrder::clear()
   _fromQuote->setText(tr("No"));
 
   _shipComplete->setChecked(false);
+  _recur->clear();
 
   if ( (_mode == cEdit) || (_mode == cNew) )
   {
@@ -3349,6 +3454,7 @@ void salesOrder::clear()
     emit newId(_soheadid);
     _comments->setId(_soheadid);
     _documents->setId(_soheadid);
+    _recur->setParent(_soheadid, "S");
     if (ISORDER(_mode))
     {
       populateCMInfo();

@@ -23,6 +23,7 @@
 #include "dspAROpenItems.h"
 #include "dspCashReceipts.h"
 #include "dspCreditCardTransactions.h"
+#include "taxRegistrations.h"
 
 #include <QStandardItemModel>
 #include <parameter.h>
@@ -54,22 +55,18 @@ public slots:
     virtual void sDeleteCharacteristic();
     virtual void sDeleteCreditCard();
     virtual void sDeleteShipto();
-    virtual void sDeleteTaxreg();
     virtual void sEditCharacteristic();
     virtual void sEditCreditCard();
     virtual void sEditShipto();
-    virtual void sEditTaxreg();
     virtual void sFillList();
     virtual void sFillCcardList();
     virtual void sFillCharacteristicList();
     virtual void sFillShiptoList();
-    virtual void sFillTaxregList();
     virtual void sMoveDown();
     virtual void sMoveUp();
     virtual void sNewCharacteristic();
     virtual void sNewCreditCard();
     virtual void sNewShipto();
-    virtual void sNewTaxreg();
     virtual void sPopulateCommission();
     virtual void sPopulateShiptoMenu( QMenu * menuThis );
     virtual void sPopulateSummary();
@@ -80,7 +77,6 @@ public slots:
     virtual void setViewMode();
     virtual void sViewCreditCard();
     virtual void sViewShipto();
-    virtual void sViewTaxreg();
     virtual void sLoadCrmAcct(int);
     virtual void sHandleButtons();
     virtual void sClear();
@@ -103,6 +99,7 @@ protected:
     virtual void setValid(bool valid);
     taskList *_taskList;
     contacts *_contacts;
+    taxRegistrations *_taxreg;
     quotes *_quotes;
     openSalesOrders *_orders;
     returnAuthorizationWorkbench *_returns;

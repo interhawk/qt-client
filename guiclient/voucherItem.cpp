@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2015 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -495,7 +495,7 @@ void voucherItem::sDelete()
 {
   XSqlQuery voucherDelete;
   voucherDelete.prepare( "DELETE FROM vodist "
-             "WHERE (vodist_id=:vodist_id);" );
+                         " WHERE (vodist_id=:vodist_id);" );
   voucherDelete.bindValue(":vodist_id", _vodist->id());
   voucherDelete.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Voucher Item Information"),
@@ -693,22 +693,65 @@ void voucherItem::rollback()
   //Undo 'tagged' status stored in rev_vohead_id to initial state stored in recv_voitem_id
 
   rollback.prepare( "UPDATE recv "
-                      "SET recv_vohead_id=CASE WHEN (recv_voitem_id IS NULL) THEN NULL ELSE :vohead_id END "
-                      "WHERE ( (NOT recv_invoiced) "
-                      "AND     (recv_posted) "
-                      "AND     ((recv_vohead_id IS NULL) OR (recv_vohead_id=:vohead_id)) "
-                      "AND     (recv_order_type='PO') "
-                      "AND     (recv_orderitem_id=:poitem_id) );" );
+                    "  SET recv_vohead_id=CASE WHEN (recv_voitem_id IS NULL) THEN NULL ELSE :vohead_id END "
+                    " WHERE ( (NOT recv_invoiced) "
+                    "   AND     (recv_posted) "
+                    "   AND     ((recv_vohead_id IS NULL) OR (recv_vohead_id=:vohead_id)) "
+                    "   AND     (recv_order_type='PO') "
+                    "   AND     (recv_orderitem_id=:poitem_id) );" );
   rollback.bindValue(":vohead_id", _voheadid);
   rollback.bindValue(":poitem_id", _poitemid);
   rollback.exec();
+
+  // Delete all distributions
+  XSqlQuery voucherDelete;
+  voucherDelete.prepare( "DELETE FROM vodist "
+                         " WHERE (vodist_vohead_id=:vohead_id)"
+                         "   AND (vodist_poitem_id=:poitem_id );" );
+  voucherDelete.bindValue(":vohead_id", _voheadid);
+  voucherDelete.bindValue(":poitem_id", _poitemid);
+  voucherDelete.exec();
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Voucher Item Information"),
+                                voucherDelete, __FILE__, __LINE__))
+  {
+    reject();
+    return;
+  }
 }
 
 void voucherItem::reject()
 {
-  rollback();
+  if(_voitemid==-1)
+    rollback();
+  else
+  {
+    XSqlQuery voucherSave;
 
-  XDialog::reject();
+    // Check to make sure there is at least 1 distribution for this Voucher Item
+    voucherSave.prepare( "SELECT vodist_id "
+                         "  FROM vodist "
+                         " WHERE ( (vodist_vohead_id=:vohead_id)"
+                         "   AND (vodist_poitem_id=:poitem_id) ) "
+                         " LIMIT 1;" );
+    voucherSave.bindValue(":vohead_id", _voheadid);
+    voucherSave.bindValue(":poitem_id", _poitemid);
+    voucherSave.exec();
+
+    QList<GuiErrorCheck> errors;
+    errors<< GuiErrorCheck(_qtyToVoucher->toDouble() <= 0.0, _qtyToVoucher,
+                          tr("You must enter a postive Quantity to Voucher."))
+          << GuiErrorCheck(!voucherSave.first(), _qtyToVoucher,
+                          tr("You must make at least one distribution for this Voucher Item."))
+    ;
+    if (GuiErrorCheck::reportErrors(this, tr("Cannot Cancel Voucher Item"), errors))
+    {
+      if(QMessageBox::question(this, tr("Cancel Anyway?"),
+                                          tr("Would you like to cancel anyway?"),
+                                          QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+        return;
+    }
+  } 
+  XDialog::reject(); 
 }
 
 void voucherItem::closeEvent(QCloseEvent * event)

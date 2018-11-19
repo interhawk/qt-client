@@ -29,7 +29,6 @@
 #include "mqlhash.h"
 #include "shipTo.h"
 #include "storedProcErrorLookup.h"
-#include "taxRegistration.h"
 #include "xcombobox.h"
 #include "parameterwidget.h"
 
@@ -68,6 +67,14 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _contacts->parameterWidget()->append("", "hasContext", ParameterWidget::Exists, true);
   _contacts->setParameterWidgetVisible(false);
   _contacts->setQueryOnStartEnabled(false);
+
+  _taxreg = new taxRegistrations(this, "taxRegistrations", Qt::Widget);
+  _taxPage->layout()->addWidget(_taxreg);
+  _taxreg->setCloseVisible(false);
+  _taxreg->parameterWidget()->setDefault(tr("Customer"), QVariant(), true);
+  _taxreg->parameterWidget()->append("", "hasContext", ParameterWidget::Exists, true);
+  _taxreg->setParameterWidgetVisible(false);
+  _taxreg->setQueryOnStartEnabled(false);
 
   _quotes = new quotes(this, "quotes", Qt::Widget);
   _quotesPage->layout()->addWidget(_quotes);
@@ -150,10 +157,6 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_deleteCharacteristic, SIGNAL(clicked()), this, SLOT(sDeleteCharacteristic()));
   connect(_editCharacteristic, SIGNAL(clicked()), this, SLOT(sEditCharacteristic()));
   connect(_newCharacteristic, SIGNAL(clicked()), this, SLOT(sNewCharacteristic()));
-  connect(_deleteTaxreg, SIGNAL(clicked()), this, SLOT(sDeleteTaxreg()));
-  connect(_editTaxreg,   SIGNAL(clicked()), this, SLOT(sEditTaxreg()));
-  connect(_newTaxreg,    SIGNAL(clicked()), this, SLOT(sNewTaxreg()));
-  connect(_viewTaxreg,   SIGNAL(clicked()), this, SLOT(sViewTaxreg()));
   connect(_custtype, SIGNAL(currentIndexChanged(int)), this, SLOT(sFillCharacteristicList()));
   connect(_billingButton, SIGNAL(clicked()), this, SLOT(sHandleButtons()));
   connect(_correspButton, SIGNAL(clicked()), this, SLOT(sHandleButtons()));
@@ -195,9 +198,6 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   _balanceMethod->append(0, tr("Balance Forward"), "B");
   _balanceMethod->append(1, tr("Open Items"),      "O");
-
-  _taxreg->addColumn(tr("Tax Authority"), 100, Qt::AlignLeft, true, "taxauth_code");
-  _taxreg->addColumn(tr("Registration #"), -1, Qt::AlignLeft, true, "taxreg_number");
 
   _shipto->addColumn(tr("Default"), _itemColumn, Qt::AlignLeft, true, "shipto_default");
   _shipto->addColumn(tr("Active"),  _itemColumn, Qt::AlignLeft, true, "shipto_active");  
@@ -407,7 +407,6 @@ void customer::setViewMode()
   _comments->setReadOnly(true);
   _newShipto->setEnabled(false);
   _newCharacteristic->setEnabled(false);
-  _newTaxreg->setEnabled(false);
   _currency->setEnabled(false);
   _partialShipments->setEnabled(false);
   _save->hide();
@@ -417,20 +416,15 @@ void customer::setViewMode()
   _upCC->setEnabled(false);
   _downCC->setEnabled(false);
   _warnLate->setEnabled(false);
-  _charass->setEnabled(false);
   _chartempl->setEnabled(false);
 
   connect(_shipto, SIGNAL(itemSelected(int)), _viewShipto, SLOT(animateClick()));
   connect(_cc, SIGNAL(itemSelected(int)), _viewCC, SLOT(animateClick()));
 
-  disconnect(_taxreg, SIGNAL(valid(bool)), _deleteTaxreg, SLOT(setEnabled(bool)));
-  disconnect(_taxreg, SIGNAL(valid(bool)), _editTaxreg, SLOT(setEnabled(bool)));
-  disconnect(_taxreg, SIGNAL(itemSelected(int)), _editTaxreg, SLOT(animateClick()));
-  connect(_taxreg, SIGNAL(itemSelected(int)), _viewTaxreg, SLOT(animateClick()));
-
   ParameterList params;
   params.append("mode", "view");
   _contacts->set(params);
+  _taxreg->set(params);
 
   emit newMode(_mode);
 }
@@ -475,11 +469,16 @@ void customer::setValid(bool valid)
     }
   }
 
+  if (!_privileges->check("MaintainTaxRegistrations") && !_privileges->check("ViewTaxRegistrations")
+      && !valid)
+    _taxButton->setEnabled(false);
+
   if (!valid)
   {
     _documents->setId(-1);
     _taskList->list()->clear();
     _contacts->list()->clear();
+    _taxreg->list()->clear();
     _quotes->list()->clear();
     _orders->list()->clear();
     _returns->findChild<XTreeWidget*>("_ra")->clear();
@@ -1181,77 +1180,6 @@ void customer::sFillShiptoList()
     return;
 }
 
-void customer::sNewTaxreg()
-{
-  if (_mode == cNew)
-  {
-    if (!sSave())
-      return;
-  }
-
-  ParameterList params;
-  params.append("mode", "new");
-  params.append("taxreg_rel_id", _custid);
-  params.append("taxreg_rel_type", "C");
-
-  taxRegistration newdlg(this, "", true);
-  if (newdlg.set(params) == NoError && newdlg.exec() != XDialog::Rejected)
-    sFillTaxregList();
-}
-
-void customer::sEditTaxreg()
-{
-  ParameterList params;
-  params.append("mode", "edit");
-  params.append("taxreg_id", _taxreg->id());
-
-  taxRegistration newdlg(this, "", true);
-  newdlg.set(params);
-
-  if (newdlg.set(params) == NoError && newdlg.exec() != XDialog::Rejected)
-    sFillTaxregList();
-}
-
-void customer::sViewTaxreg()
-{
-  ParameterList params;
-  params.append("mode", "view");
-  params.append("taxreg_id", _taxreg->id());
-
-  taxRegistration newdlg(this, "", true);
-  if (newdlg.set(params) == NoError)
-    newdlg.exec();
-}
-
-void customer::sDeleteTaxreg()
-{
-  XSqlQuery delq;
-  delq.prepare("DELETE FROM taxreg WHERE (taxreg_id=:taxreg_id);");
-  delq.bindValue(":taxreg_id", _taxreg->id());
-  delq.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Deleting Tax Registrations"),
-                           delq, __FILE__, __LINE__))
-    return;
-  sFillTaxregList();
-}
-
-void customer::sFillTaxregList()
-{
-  XSqlQuery taxreg;
-  taxreg.prepare("SELECT taxreg_id, taxreg_taxauth_id, "
-                 "       taxauth_code, taxreg_number "
-                 "FROM taxreg, taxauth "
-                 "WHERE ((taxreg_rel_type='C') "
-                 "  AND  (taxreg_rel_id=:cust_id) "
-                 "  AND  (taxreg_taxauth_id=taxauth_id));");
-  taxreg.bindValue(":cust_id", _custid);
-  taxreg.exec();
-  _taxreg->populate(taxreg, true);
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting Tax Registrations"),
-                           taxreg, __FILE__, __LINE__))
-    return;
-}
-
 void customer::sPopulateCommission()
 {
   if (_mode != cView)
@@ -1384,6 +1312,7 @@ void customer::populate()
 
     _taskList->parameterWidget()->setDefault(tr("Account"), _crmacctid, true);
     _contacts->setCrmacctid(_crmacctid);
+    _taxreg->setCustid(_custid);
 
     _quotes->parameterWidget()->setDefault(tr("Customer"), _custid, true);
     _orders->setCustId(_custid);
@@ -1635,7 +1564,7 @@ void customer::sFillList()
   else if (_tab->currentIndex() == _tab->indexOf(_settingsTab))
   {
     if (_taxButton->isChecked())
-      sFillTaxregList();
+      _taxreg->sFillList();
     else if (_creditcardsButton->isChecked())
       sFillCcardList();
   }
@@ -1869,8 +1798,9 @@ void customer::sIdChanged(int id)
 
   if(qry.first())
   {
-    _contacts->parameterWidget()->setDefault(tr("Account"), qry.value("cust_crmacct_id").toInt(), true);
+    _contacts->setCrmacctid(qry.value("crmacct_id").toInt());
     _taskList->parameterWidget()->setDefault(tr("Account"), qry.value("cust_crmacct_id").toInt(), true);
+    _taxreg->setCustid(id);
     _billCntct->setSearchAcct(qry.value("cust_crmacct_id").toInt());
     _corrCntct->setSearchAcct(qry.value("cust_crmacct_id").toInt());
   }
@@ -1949,7 +1879,8 @@ void customer::sClear()
     _widgetStack->setCurrentIndex(0);
 
     _taskList->parameterWidget()->setDefault(tr("Account"), -1, true);
-    _contacts->setCrmacctid(_crmacctid);
+    _contacts->setCrmacctid(-1);
+    _taxreg->setCustid(-1);
 
     _quotes->parameterWidget()->setDefault(tr("Customer"), -1, true);
     _orders->setCustId(-1);

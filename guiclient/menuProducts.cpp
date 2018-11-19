@@ -145,18 +145,18 @@ menuProducts::menuProducts(GUIClient *Pparent) :
 
   // Product | Items
   { "menu",	tr("&Item"), (char*)itemsMenu,	mainMenu, "true", NULL, NULL, true , NULL },
-  { "pd.enterNewItem", tr("&New..."), SLOT(sNewItem()), itemsMenu, "MaintainItemMasters", NULL, NULL, true , NULL },
-  { "pd.listItems", tr("&List..."), SLOT(sItems()), itemsMenu, "MaintainItemMasters ViewItemMasters", new QPixmap(":/images/items.png"), toolBar, true , tr("List Items") },
+  { "pd.enterNewItem", tr("&New"), SLOT(sNewItem()), itemsMenu, "MaintainItemMasters", NULL, NULL, true , NULL },
+  { "pd.listItems", tr("&List"), SLOT(sItems()), itemsMenu, "MaintainItemMasters ViewItemMasters", new QPixmap(":/images/items.png"), toolBar, true , tr("List Items") },
   { "pd.copyItem", tr("&Copy..."), SLOT(sCopyItem()), itemsMenu, "MaintainItemMasters" , NULL, NULL, true, NULL },
   { "separator", NULL, NULL, itemsMenu,	"true", NULL, NULL, true , NULL },
   { "pd.itemAvailabilityWorkbench", tr("&Workbench..."), SLOT(sDspItemAvailabilityWorkbench()), itemsMenu, "ViewItemAvailabilityWorkbench", NULL, NULL, true , NULL },
   { "separator", NULL, NULL, itemsMenu,	"true", NULL, NULL, true , NULL },
-  { "pd.itemGroups", tr("&Groups..."), SLOT(sItemGroups()), itemsMenu, "MaintainItemGroups ViewItemGroups", NULL, NULL, true , NULL },
+  { "pd.itemGroups", tr("&Groups"), SLOT(sItemGroups()), itemsMenu, "MaintainItemGroups ViewItemGroups", NULL, NULL, true , NULL },
   { "pd.itemImages", tr("&Images..."), SLOT(sItemImages()), itemsMenu, "MaintainItemMasters ViewItemMasters", NULL, NULL, true , NULL },
 
   // Product | Bill of Materials
   { "menu",	tr("Bill Of Ma&terials"), (char*)bomMenu,	mainMenu, "true", NULL, NULL, true , NULL },
-  { "pd.enterNewBOM", tr("&New..."), SLOT(sNewBOM()), bomMenu, "MaintainBOMs", NULL, NULL, true , NULL },
+  { "pd.enterNewBOM", tr("&New"), SLOT(sNewBOM()), bomMenu, "MaintainBOMs", NULL, NULL, true , NULL },
   { "pd.listBOMs", tr("&List..."), SLOT(sBOMs()), bomMenu, "MaintainBOMs ViewBOMs", new QPixmap(":/images/boms.png"), toolBar, true , tr("List Bill of Materials") },
   { "pd.copyBOM", tr("&Copy..."), SLOT(sCopyBOM()), bomMenu, "MaintainBOMs", NULL, NULL, true , NULL },
   { "separator", NULL, NULL, bomMenu,	"true", NULL, NULL, true , NULL },
@@ -212,14 +212,14 @@ menuProducts::menuProducts(GUIClient *Pparent) :
   //  Produt | Utilies
   { "menu",	tr("&Utilities"), (char*)utilitiesMenu, mainMenu, "true", NULL, NULL, true , NULL },
   { "pd.dspUnusedPurchasedItems", tr("Unused &Purchased Items..."), SLOT(sDspUnusedPurchasedItems()), utilitiesMenu, "ViewBOMs", NULL, NULL, true , NULL },
-  { "pd.dspUndefinedManufacturedItems", tr("Undefined &Manufactured Items..."), SLOT(sDspUndefinedManufacturedItems()), utilitiesMenu, "ViewBOMs ViewBOOs", NULL, NULL, true , NULL },
-  { "pd.dspBillsOfMaterialsWithoutComponentItemSites", tr("Bills of Ma&terials without Component Item Sites..."), SLOT(sDspInvalidBillsOfMaterials()), utilitiesMenu, "ViewBOMs", NULL, NULL, true , NULL },
+  { "pd.dspUndefinedManufacturedItems", tr("Undefined &Manufactured Items"), SLOT(sDspUndefinedManufacturedItems()), utilitiesMenu, "ViewBOMs ViewBOOs", NULL, NULL, true , NULL },
+  { "pd.dspBillsOfMaterialsWithoutComponentItemSites", tr("Bills of Ma&terials without Component Item Sites"), SLOT(sDspInvalidBillsOfMaterials()), utilitiesMenu, "ViewBOMs", NULL, NULL, true , NULL },
   { "separator", NULL, NULL, utilitiesMenu,	"true", NULL, NULL, true , NULL },
   { "pd.reassignClassCodeByClassCode", tr("Reassign &Class Codes..."), SLOT(sReassignClassCodeByClassCode()), utilitiesMenu, "MaintainItemMasters", NULL, NULL, true , NULL },
   { "pd.reassignProductCategoryByProductCategory", tr("&Reassign Product Categories..."), SLOT(sReassignProductCategoryByProductCategory()), utilitiesMenu, "MaintainItemMasters", NULL, NULL, true , NULL },
 
   // Setup
-  { "pd.setup",	    tr("&Setup..."),	  SLOT(sSetup()),     mainMenu,	"true",	NULL, NULL,  true, NULL}
+  { "pd.setup",	    tr("&Setup"),	  SLOT(sSetup()),     mainMenu,	"true",	NULL, NULL,  true, NULL}
 
   };
 
