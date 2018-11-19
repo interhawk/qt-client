@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -53,6 +53,7 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   }
   parameterWidget()->appendComboBox(tr("Contact Group"), "cntctgrp", XComboBox::ContactGroups);
   parameterWidget()->append(tr("Account"), "crmacct_id", ParameterWidget::Crmacct);
+  parameterWidget()->append(tr("Company Pattern"), "company_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Name Pattern"), "cntct_name_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Phone Pattern"), "cntct_phone_pattern", ParameterWidget::Text);
   parameterWidget()->append(tr("Email Pattern"), "cntct_email_pattern", ParameterWidget::Text);
@@ -71,7 +72,8 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   list()->addColumn(tr("Last Name"),          100, Qt::AlignLeft,  true, "cntct_last_name");
   list()->addColumn(tr("Active"),              50, Qt::AlignLeft,  true, "cntct_active");
   list()->addColumn(tr("Owner"),      _userColumn, Qt::AlignLeft, false, "cntct_owner_username");
-  list()->addColumn(tr("CRM Accounts"),        -1, Qt::AlignLeft,  true, "crmacct");
+  list()->addColumn(tr("CRM Account(s)"),      -1, Qt::AlignLeft,  true, "crmacct");
+  list()->addColumn(tr("Company"),             -1, Qt::AlignLeft, false, "company");
   list()->addColumn(tr("Title"),               -1, Qt::AlignLeft,  true, "cntct_title");
   list()->addColumn(tr("Office #"),	      100, Qt::AlignLeft,  true, "contact_phone");
   list()->addColumn(tr("Mobile #"),           100, Qt::AlignLeft,  true, "contact_phone2");
@@ -91,6 +93,7 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
 
   list()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
+  _captive = false;
   setupCharacteristics("CNTCT");
 
   QToolButton * attachBtn = new QToolButton(this);
@@ -107,7 +110,6 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
 
   connect(attachBtn, SIGNAL(clicked()),      this, SLOT(sAttach()));
   connect(detachBtn, SIGNAL(clicked()),      this, SLOT(sDetach()));
-
   connect(list(), SIGNAL(itemSelected(int)), this, SLOT(sOpen()));
 
   if (_privileges->check("MaintainAllContacts") || _privileges->check("MaintainPersonalContacts"))
@@ -205,20 +207,16 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
   }
 
   // Create, Edit, View Prospect
-
-  bool editProspectPriv = false;
-  bool viewProspectPriv = false;
-  bool foundNewable = false;
-  bool foundEditable = false;
-
   if (!_captive) {
-  foreach (XTreeWidgetItem *item, list()->selectedItems())
-  {
+    QStringList ids;
+    foreach (XTreeWidgetItem *item, list()->selectedItems())
+      ids << QString::number(item->id());
+
     XSqlQuery sql;
     sql.prepare("WITH crmaccts AS ( "
                 "SELECT crmaccttypes(crmacctcntctass_crmacct_id)#>>'{prospect}' AS prospectid"
                 "  FROM cntct"
-                "  JOIN crmacctcntctass ON cntct_id=crmacctcntctass_cntct_id"
+                "  LEFT OUTER JOIN crmacctcntctass ON cntct_id=crmacctcntctass_cntct_id"
                 " WHERE cntct_id::TEXT IN (SELECT regexp_split_to_table(:cntct_id, ','))"
                 "   AND crmaccttypes(crmacctcntctass_crmacct_id)#>>'{customer}' IS NULL) "
                 "SELECT EXISTS(SELECT 1"
@@ -227,12 +225,8 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
                 "       EXISTS(SELECT 1"
                 "                FROM crmaccts"
                 "               WHERE prospectid IS NULL) AS new;");
-    QStringList ids;
-    foreach (XTreeWidgetItem *item, list()->selectedItems())
-      ids << QString::number(item->id());
     sql.bindValue(":cntct_id", ids.join(","));
     sql.exec();
-  
     if (sql.first())
     {
       bool editProspectPriv = _privileges->check("MaintainProspectMasters");
@@ -256,7 +250,6 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Checking CRM Accounts"),
                                   sql, __FILE__, __LINE__))
       return;
-  }
   }
 }
 
@@ -301,7 +294,7 @@ void contacts::sReplace()
     }
   }
 
-  bool ok;
+  bool ok = false;
 
   if (col.contains("cntct"))
     replace = QInputDialog::getText(this, tr("Replace"), label, QLineEdit::Normal, "", &ok);
@@ -808,11 +801,16 @@ void contacts::sNewProspect()
                              sql, __FILE__, __LINE__))
       return;
 
-    if (crmaccts.size() == 0)
-      continue;
-
     QString crmacctsel;
-    if (crmaccts.size() == 1)
+    if (crmaccts.size() == 0)
+    {
+      QString company = list()->currentItem()->rawValue("company").toString();
+      if (company.size() > 0)
+        params.append("company", company);
+
+      params.append("cntct_id", item->id());
+    }
+    else if (crmaccts.size() == 1)
       crmacctsel = crmaccts[0];
     else
     {
@@ -825,14 +823,16 @@ void contacts::sNewProspect()
         continue;
     }
 
-
-    crmsql.bindValue(":crmacct_number", crmacctsel);
-    crmsql.exec();
-    if (crmsql.first())
-      params.append("crmacct_id", crmsql.value("crmacct_id").toInt());
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Fetching CRM Accounts"),
-                                  crmsql, __FILE__, __LINE__))
-      return;
+    if (crmaccts.size() > 0)
+    {
+      crmsql.bindValue(":crmacct_number", crmacctsel);
+      crmsql.exec();
+      if (crmsql.first())
+        params.append("crmacct_id", crmsql.value("crmacct_id").toInt());
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Fetching CRM Accounts"),
+                                    crmsql, __FILE__, __LINE__))
+        return;
+    }
 
     prospect *newdlg = new prospect();
     newdlg->set(params);

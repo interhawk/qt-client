@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -11,8 +11,8 @@
 #include "login2.h"
 
 #include <QAction>
-#include <QApplication>
 #include <QCursor>
+#include <QDebug>
 #include <QMenu>
 #include <QMessageBox>
 #include <QPushButton>
@@ -36,59 +36,56 @@
 #include "cmdlinemessagehandler.h"
 #include "guimessagehandler.h"
 
-/* TODO: rename _nonxTupleDB to _isxTupleDB internally and
-         set it based on db contents, not command line parameter input
- */
+#define DEBUG false
+
+class login2Private {
+  public:
+    bool _captive;
+    bool _multipleConnections;
+    bool _setSearchPath;
+    QSplashScreen *_splash;
+    QString _cUsername;
+    QString _cPassword;
+    QString _connAppName;
+    XAbstractMessageHandler* _handler;
+
+    login2Private() :
+      _captive(false),
+      _multipleConnections(false),
+      _setSearchPath(false),
+      _splash(0),
+      _handler(0)
+    {
+      _connAppName = "xTuple ERP (unknown)";
+    };
+};
+
 login2::login2(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : QDialog(parent, modal ? (fl | Qt::Dialog) : fl)
 {
   setObjectName(name);
   Q_INIT_RESOURCE(xTupleCommon);
   setupUi(this);
+  _d = new login2Private();
 
-  //_options = _buttonBox->addButton(tr("Options..."), QDialogButtonBox::ActionRole);
   _recent = _buttonBox->addButton(tr("Recent"), QDialogButtonBox::ActionRole);
-  //_options->setEnabled(false);
   _recent->setEnabled(false);
   _buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Login"));
 
   connect(_buttonBox, SIGNAL(accepted()), this, SLOT(sLogin()));
   connect(_buttonBox, SIGNAL(helpRequested()), this, SLOT(sOpenHelp()));
-  connect(_server, SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
+  connect(_server,               SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
   connect(_database->lineEdit(), SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
-  connect(_port, SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
-  //connect(_otherOption, SIGNAL(toggled(bool)), _options, SLOT(setEnabled(bool)));
-  //connect(_otherOption, SIGNAL(toggled(bool)), _recent, SLOT(setEnabled(bool)));
-  //connect(_otherOption, SIGNAL(toggled(bool)), this, SLOT(sHandleButton()));
-
-  _splash = 0;
+  connect(_port,                 SIGNAL(editingFinished()), this, SLOT(sChangeURL()));
 
   GuiMessageHandler *g = new GuiMessageHandler(this);
   g->setDestination(QtWarningMsg, this);
   g->setDestination(QtCriticalMsg, this);
-  _handler = g;
-
-  _captive = false; _nonxTupleDB = false;
-  _multipleConnections = false;
-  _setSearchPath = false;
-  _cloudDatabaseURL= "pgsql://%1.xtuplecloud.com:5432/%1_%2";
+  _d->_handler = g;
 
   _password->setEchoMode(QLineEdit::Password);
 
-  //updateRecentOptionsActions();
   _databaseURL = xtsettingsValue("/xTuple/_databaseURL", "pgsql://:5432/demo").toString();
-  /*
-  if(xtsettingsValue("/xTuple/_demoOption", false).toBool())
-    _demoOption->setChecked(true);
-  else
-    _prodOption->setChecked(true);
-
-  if(xtsettingsValue("/xTuple/_cloudOption", false).toBool())
-    _cloudOption->setChecked(true);
-  else
-    _otherOption->setChecked(true);
-  _company->setText(xtsettingsValue("/xTuple/cloud_company", "").toString());
-  */
 
   adjustSize();
 }
@@ -103,12 +100,10 @@ void login2::languageChange()
   retranslateUi(this);
 }
 
-int login2::set(const ParameterList &pParams) { return set(pParams, 0); }
-
 int login2::set(const ParameterList &pParams, QSplashScreen *pSplash)
 {
-  _splash = pSplash;
-  
+  _d->_splash = pSplash;
+
   QVariant param;
   bool     valid;
 
@@ -117,19 +112,18 @@ int login2::set(const ParameterList &pParams, QSplashScreen *pSplash)
   {
     _username->setText(param.toString());
     _password->setFocus();
-    _captive = true;
+    _d->_captive = true;
   }
   else
   {
     _username->setFocus();
-    _captive = false;
   }
 
   param = pParams.value("password", &valid);
   if (valid)
   {
     _password->setText(param.toString());
-    _captive = true;
+    _d->_captive = true;
   }
 
   param = pParams.value("copyright", &valid);
@@ -144,18 +138,6 @@ int login2::set(const ParameterList &pParams, QSplashScreen *pSplash)
   if (valid)
     _build->setText(param.toString());
 
-  /*
-  param = pParams.value("cloud", &valid);
-  if (valid)
-    _cloudOption->setChecked(true);
-  */
-
-  /*
-  param = pParams.value("company", &valid);
-  if (valid)
-    _company->setText(param.toString());
-  */
-
   param = pParams.value("name", &valid);
   if (valid)
     _nameLit->setText(param.toString());
@@ -166,29 +148,23 @@ int login2::set(const ParameterList &pParams, QSplashScreen *pSplash)
 
   populateDatabaseInfo();
 
-  param = pParams.value("nonxTupleDB", &valid);
-  if (valid)
-    _nonxTupleDB = true;
-
   param = pParams.value("multipleConnections", &valid);
   if (valid)
-    _multipleConnections = true;
+    _d->_multipleConnections = true;
 
   param = pParams.value("setSearchPath", &valid);
   if (valid)
-    _setSearchPath = true;
+    _d->_setSearchPath = true;
 
   param = pParams.value("applicationName", &valid);
   if (valid) {
-    _connAppName = param.toString().trimmed();
-  } else {
-    _connAppName = "xTuple ERP (unknown)";
+    _d->_connAppName = param.toString().trimmed();
   }
 
   if(pParams.inList("cmd"))
   {
-    delete _handler;
-    _handler = new CmdLineMessageHandler(this);
+    delete _d->_handler;
+    _d->_handler = new CmdLineMessageHandler(this);
   }
 
   if(pParams.inList("login"))
@@ -210,77 +186,53 @@ void login2::sChangeURL()
   populateDatabaseInfo();
 }
 
-void login2::sHandleButton()
-{
-  /*
-  if (_otherOption->isChecked())
-    _loginModeStack->setCurrentWidget(_serverPage);
-  else
-    _loginModeStack->setCurrentWidget(_cloudPage);
-  */
-}
-
 void login2::sOpenHelp()
 {
-    QString helpurl = "http://www.xtuple.com/how-do-I-login-to-xTuple-PostBooks";
-    QUrl url(helpurl);
-    QDesktopServices::openUrl(url);
+  QUrl url("http://www.xtuple.com/how-do-I-login-to-xTuple-PostBooks");
+  QDesktopServices::openUrl(url);
 }
 
 void login2::sLogin()
 {
   QSqlDatabase db;
 
-  QString databaseURL;
-  databaseURL = _databaseURL;
-  /*
-  if(_cloudOption->isChecked())
-  {
-    if(_demoOption->isChecked())
-      databaseURL = _cloudDatabaseURL.arg(_company->text().trimmed(), "demo");
-    else
-      databaseURL = _cloudDatabaseURL.arg(_company->text().trimmed(), "quickstart");
-  }
-  */
+  sChangeURL();
 
-  QString protocol;
-  QString hostName;
-  QString dbName;
-  QString port;
-  parseDatabaseURL(databaseURL, protocol, hostName, dbName, port);
+  QString hostName = _server->text();
+  QString dbName   = _database->lineEdit()->text();
+  QString port     = _port->text();
 
-  if (_splash)
+  if (_d->_splash)
   {
-    _splash->show();
-    _splash->raise();
-    _splash->showMessage(tr("Initializing the Database Connector"), SplashTextAlignment, SplashTextColor);
+    _d->_splash->show();
+    _d->_splash->raise();
+    _d->_splash->showMessage(tr("Initializing the Database Connector"), SplashTextAlignment, SplashTextColor);
     qApp->processEvents();
   }
 
-  // Open the Database Driver
-  if (_multipleConnections)
+  if (_d->_multipleConnections)
     db = QSqlDatabase::addDatabase("QPSQL7", dbName);
   else
     db = QSqlDatabase::addDatabase("QPSQL7");
   if (!db.isValid())
   {
-    if (_splash)
-      _splash->hide();
-    
-    _handler->message(QtWarningMsg, tr("<p>A connection could not be established with "
+    if (_d->_splash)
+      _d->_splash->hide();
+
+    _d->_handler->message(QtWarningMsg, tr("<p>A connection could not be established with "
                                        "the specified Database as the Proper Database "
                                        "Drivers have not been installed. Contact your "
                                        "Systems Administator."));
-    
+
     return;
   }
 
   if(hostName.isEmpty() || dbName.isEmpty())
   {
-    if (_splash)
-      _splash->hide();
-    
-    _handler->message(QtWarningMsg, tr("<p>One or more connection options are missing. "
+    if (_d->_splash)
+      _d->_splash->hide();
+
+    _d->_handler->message(QtWarningMsg, tr("<p>One or more connection options are missing. "
                                            "Please check that you have specified the host "
                                            "name, database name, and any other required "
                                            "options.") );
@@ -292,32 +244,19 @@ void login2::sLogin()
   db.setHostName(hostName);
   db.setPort(port.toInt());
 
-  _cUsername = _username->text().trimmed();
-  _cPassword = _password->text().trimmed();
-  //_cCompany  = _company->text().trimmed();
+  _d->_cUsername = _username->text().trimmed();
+  _d->_cPassword = _password->text().trimmed();
 
   setCursor(QCursor(Qt::WaitCursor));
   qApp->processEvents();
 
-  if (_splash)
+  if (_d->_splash)
   {
-    _splash->showMessage(tr("Connecting to the Database"), SplashTextAlignment, SplashTextColor);
+    _d->_splash->showMessage(tr("Connecting to the Database"), SplashTextAlignment, SplashTextColor);
     qApp->processEvents();
   }
 
-  /*
-  if(_cloudOption->isChecked())
-  {
-    if(_cCompany.isEmpty())
-    {
-      QMessageBox::warning(this, tr("Incomplete Connection Options"),
-        tr("<p>You must specify the Cloud ID name to connect to the cloud."));
-      return;
-    }
-  }
-  */
-
-  db.setUserName(_cUsername);
+  db.setUserName(_d->_cUsername);
 
   QRegExp xtuplecloud(".*\\.xtuplecloud\\.com");
   QRegExp xtuple(".*\\.xtuple\\.com");
@@ -335,24 +274,32 @@ void login2::sLogin()
     salt = "xTuple";
   }
 
-  // try connecting to the database in each of the following ways in this order
-  QList<QPair<QString, QString> > method;
-  method << QPair<QString, QString>("requiressl=1", QMd5(QString(_cPassword + salt  + _cUsername)))
-         << QPair<QString, QString>("requiressl=1", _cPassword)
-         << QPair<QString, QString>("requiressl=1", QMd5(QString(_cPassword + "OpenMFG" + _cUsername)))
-         << QPair<QString, QString>("",             QMd5(QString(_cPassword + salt  + _cUsername)))
-         << QPair<QString, QString>("",             _cPassword)
-         << QPair<QString, QString>("",             QMd5(QString(_cPassword + "OpenMFG" + _cUsername)))
-      ;
-  int methodidx; // not declared in for () because we'll need it later
-  for (methodidx = 0; methodidx < method.size(); methodidx++)
+  QStringList connectionOptions;
+  QStringList password;
+
+  connectionOptions << QString("requiressl=1;application_name='%1'").arg(_d->_connAppName)
+                    << "requiressl=1"
+                    << QString("application_name='%1'").arg(_d->_connAppName)
+                    << "";
+  password << QMd5(QString(_d->_cPassword + salt  + _d->_cUsername))
+           << _d->_cPassword
+           << QMd5(QString(_d->_cPassword + "OpenMFG" + _d->_cUsername)) ;      // this must be last
+  int passwordidx = 0; // not declared in for () because we need it later
+  foreach (QString p, password)
   {
-    db.setConnectOptions(QString("application_name='%1';%2").arg(_connAppName).arg(method.at(methodidx).first));
-    db.setPassword(method.at(methodidx).second);
-    if (db.open())
-      break;  // break instead of for-loop condition to preserve methodidx
+    foreach (QString options, connectionOptions)
+    {
+      if (DEBUG)
+        qDebug() << options << passwordidx;
+      db.setConnectOptions(options);
+      db.setPassword(password.at(passwordidx));
+      if (db.open())
+        goto connected;
+    }
+    passwordidx++;
   }
 
+connected:
   if (db.isOpen())
   {
     QString earliest = "9.3.0",
@@ -365,19 +312,19 @@ void login2::sLogin()
     checkVersion.bindValue(":latest",   latest);
     checkVersion.exec();
     if (checkVersion.first() && ! checkVersion.value("ok").toBool() &&
-        _handler->question(tr("<p>The database server is at version %1 but "
+        _d->_handler->question(tr("<p>The database server is at version %1 but "
                                 "xTuple ERP only supports from %2 up to but "
                                 "not including %3.</p><p>Continue anyway?</p>")
                                .arg(checkVersion.value("version").toString(),
                                     earliest, latest),
                            QMessageBox::Yes | QMessageBox::No,
                            QMessageBox::No) == QMessageBox::No) {
-      if (_splash) {
-        _splash->hide();
+      if (_d->_splash) {
+        _d->_splash->hide();
       }
       setCursor(QCursor(Qt::ArrowCursor));
       db.close();
-      if (! _captive) {
+      if (! _d->_captive) {
         _username->setText("");
         _username->setFocus();
       } else
@@ -386,12 +333,12 @@ void login2::sLogin()
       _password->setText("");
       return;
     } else if (checkVersion.lastError().type() != QSqlError::NoError) {
-      _handler->message(QtCriticalMsg, checkVersion.lastError().text());
+      _d->_handler->message(QtCriticalMsg, checkVersion.lastError().text());
 
-      if (_splash)
-        _splash->hide();
+      if (_d->_splash)
+        _d->_splash->hide();
       db.close();
-      if (! _captive) {
+      if (! _d->_captive) {
         _username->setText("");
         _username->setFocus();
       } else
@@ -403,149 +350,94 @@ void login2::sLogin()
   }
 
    // if connected using OpenMFG enhanced auth, remangle the password
-
-  if (db.isOpen() && (methodidx == 2 || methodidx == 5))
-      XSqlQuery chgpass(QString("ALTER USER \"%1\" WITH PASSWORD '%2'")
-                      .arg(_cUsername, QMd5(QString(_cPassword + salt + _cUsername))));
-  else if (db.isOpen() && method.at(methodidx).first.isEmpty())
-  {
-    XSqlQuery sslq("SHOW ssl;");
-    //TODO: Add SSL to installer and require it by default for all xTuple users
-    /*if (sslq.first() && sslq.value("ssl").toString() != "on")
-      QMessageBox::warning(this, tr("Could Not Enforce Security"),
-                           tr("The connection to the xTuple ERP Server is not "
-                              "secure. Please ask your administrator to set "
-                              "the 'ssl' configuration option to 'on'."));*/
-  }
+  if (db.isOpen() && passwordidx >= (password.size() - 1))
+    XSqlQuery chgpass(QString("ALTER USER \"%1\" WITH PASSWORD '%2'")
+                      .arg(_d->_cUsername, password.at(0)));
 
   if (! db.isOpen())
   {
-    if (_splash)
-      _splash->hide();
-    
+    if (_d->_splash)
+      _d->_splash->hide();
+
     setCursor(QCursor(Qt::ArrowCursor));
 
-    _handler->message(QtCriticalMsg, tr("<p>Sorry, can't connect to the specified xTuple ERP server. "
-                                        "<p>This may be due to a problem with your user name, password, or server connection information. "
-                                        "<p>Below is more detail on the connection problem: "
-                                        "<p>%1" ).arg(db.lastError().text()));
+    _d->_handler->message(QtCriticalMsg, tr("<p>Sorry, can't connect to the specified xTuple ERP server:</p>"
+                                            "<pre>%1</pre>" ).arg(db.lastError().text()));
     _password->setFocus();
     _password->setText("");
     return;
   }
 
-  /*
-  xtsettingsSetValue("/xTuple/_demoOption", (bool)_demoOption->isChecked());
-  xtsettingsSetValue("/xTuple/_cloudOption", (bool)_cloudOption->isChecked());
-  xtsettingsSetValue("/xTuple/cloud_company", _company->text());
-  */
-
-  if (_splash)
+  if (_d->_splash)
   {
-    _splash->showMessage(tr("Logging into the Database"), SplashTextAlignment, SplashTextColor);
+    _d->_splash->showMessage(tr("Logging into the Database"), SplashTextAlignment, SplashTextColor);
     qApp->processEvents();
   }
-  
-  if(!_nonxTupleDB)
+
+  QString errormsg;
+  XSqlQuery checkSchema("SELECT COUNT(*) AS tablecount"
+                        "  FROM pg_class AS c"
+                        "  JOIN pg_namespace AS n ON n.oid = c.relnamespace"
+                        "  WHERE n.nspname = 'public'"
+                        "    AND c.relname IN ('metric', 'cohead', 'bankaccnt');"
+                      );
+  if (! checkSchema.first() || checkSchema.value("tablecount").toInt() != 3)
   {
-    // check that the connected database at least looks like a valid xTuple database.
-    XSqlQuery checkSchema(
-                "SELECT EXISTS ("
-                "   SELECT 1"
-                "   FROM pg_catalog.pg_class AS c"
-                "   JOIN  pg_catalog.pg_namespace AS n ON n.oid = c.relnamespace"
-                "   WHERE n.nspname = 'public'"
-                "   AND c.relname = 'metric'"
-                ") AS has_metric"
-              );
-
-    if (!(checkSchema.first() ? checkSchema.value("has_metric").toBool() : false))
-    {
-        setCursor(QCursor(Qt::ArrowCursor));
-
-        if (_splash) {
-          _splash->hide();
-        }
-
-        _handler->message(QtCriticalMsg, tr("<p>The database \"%1\" does not appear to be a valid xTuple database.</p>"
-                                            "<p>Please check the database name and try again.</p>"
-                                           ).arg(dbName));
-
-        return;
-    }
-
-
-    QString loginqry = "";
-    if (_setSearchPath)
-      loginqry="SELECT login(true) AS result, CURRENT_USER AS user;";
-    else
-      loginqry="SELECT login() AS result, CURRENT_USER AS user;";
-    XSqlQuery login( loginqry );
-    setCursor(QCursor(Qt::ArrowCursor));
-    if (login.first())
-    {
-      int result = login.value("result").toInt();
-      if (result < 0)
-      {
-        if (_splash)
-          _splash->hide();
-        _handler->message(QtCriticalMsg, storedProcErrorLookup("login", result));
-        return;
-      }
-
-      XSqlQuery time;
-      time.prepare("SET TIME ZONE :timezone;");
-      time.bindValue(":timezone", QString(QTimeZone::systemTimeZoneId()));
-      time.exec();
-
-      if (time.lastError().type() != QSqlError::NoError)
-      {
-        if (_splash)
-          _splash->hide();
-        _handler->message(QtCriticalMsg, tr("A System Error occurred at %1::%2:\n%3")
-                            .arg(__FILE__).arg(__LINE__)
-                            .arg(time.lastError().databaseText()));
-        return;
-      }
-
-      _user = login.value("user").toString();
-      _databaseURL = databaseURL;
-      updateRecentOptions();
-
-      if (login.exec("SELECT getEffectiveXtUser() AS user;") &&
-          login.first() &&
-          ! login.value("user").toString().isEmpty())
-        _user = login.value("user").toString();
-      // no error check - older databases don't have getEffectiveXtUser
-
-      accept();
-    }
-    else if (login.lastError().type() != QSqlError::NoError)
-    {
-      if (_splash)
-        _splash->hide();
-      _handler->message(QtCriticalMsg, tr("A System Error occurred at %1::%2:\n%3")
-                          .arg(__FILE__).arg(__LINE__)
-                          .arg(login.lastError().databaseText()));
-    }
-    else
-    {
-      if (_splash)
-        _splash->hide();
-      
-      _handler->message(QtCriticalMsg, tr("<p>An unknown error occurred at %1::%2. You may"
-                                         " not log in to the specified xTuple ERP Server "
-                                         "at this time.")
-                                        .arg(__FILE__).arg(__LINE__));
-    }
+    errormsg = tr("<p>'%1' does not appear to be a valid xTuple database.</p>"
+                  "<p>Please check the database name and try again.</p>"
+                 ).arg(dbName);
   }
   else
   {
-    setCursor(QCursor(Qt::ArrowCursor));
-    _databaseURL = databaseURL;
-    updateRecentOptions();
-    accept();
+    XSqlQuery login;
+    login.prepare("SELECT login(:setpath) AS result, CURRENT_USER AS user;");
+    login.bindValue(":setpath", _d->_setSearchPath);
+
+    if (login.exec() && login.first())
+    {
+      _user = login.value("user").toString();
+      int result = login.value("result").toInt();
+      if (result < 0)
+      {
+        errormsg = storedProcErrorLookup("login", result);
+      }
+      else
+      {
+        XSqlQuery time;
+        time.prepare("SET TIME ZONE :timezone;");
+        time.bindValue(":timezone", QString(QTimeZone::systemTimeZoneId()));
+        time.exec();
+        if (time.lastError().type() != QSqlError::NoError)
+        {
+          errormsg = tr("Could not set the time zone: %1")
+                       .arg(time.lastError().databaseText());
+        }
+        else if (login.exec("SELECT getEffectiveXtUser() AS user;") &&
+                 login.first() &&
+                 ! login.value("user").toString().isEmpty())
+        {
+          _user = login.value("user").toString();
+        } // no error check - older databases don't have getEffectiveXtUser
+      }
+    }
+    else if (login.lastError().type() != QSqlError::NoError)
+    {
+      errormsg = tr("Could not set up database session properly: %1")
+                   .arg(login.lastError().databaseText());
+    }
   }
+
+  if (! errormsg.isEmpty())
+  {
+    setCursor(QCursor(Qt::ArrowCursor));
+    if (_d->_splash)
+      _d->_splash->hide();
+    _d->_handler->message(QtCriticalMsg, errormsg);
+    return;
+  }
+
+  updateRecentOptions();
+  accept();
 }
 
 void login2::populateDatabaseInfo()
@@ -563,23 +455,12 @@ void login2::populateDatabaseInfo()
 
 QString login2::username()
 {
-  return _cUsername;
+  return _d->_cUsername;
 }
 
 QString login2::password()
 {
-  return _cPassword;
-}
-
-QString login2::company()
-{
-  return _cCompany;
-}
-
-bool login2::useCloud() const
-{
-  //return _cloudOption->isChecked();
-  return false;
+  return _d->_cPassword;
 }
 
 void login2::setLogo(const QImage & img)
@@ -592,63 +473,48 @@ void login2::setLogo(const QImage & img)
 
 void login2::updateRecentOptions()
 {
-  //if (_cloudOption->isChecked())
-  //  return;
   QStringList list = xtsettingsValue("/xTuple/_recentOptionsList").toStringList();
   _recent->setEnabled(list.size());
   list.removeAll(_databaseURL);
   list.prepend(_databaseURL);
-      
+
   xtsettingsSetValue("/xTuple/_recentOptionsList", list);
   xtsettingsSetValue("/xTuple/_databaseURL", _databaseURL);
 }
 
 void login2::updateRecentOptionsActions()
-{ 
+{
   QMenu * recentMenu = new QMenu;
   QStringList list = xtsettingsValue("/xTuple/_recentOptionsList").toStringList();
-  if (list.size())
+  if (! list.isEmpty())
   {
     list.takeFirst();
-    int size = list.size();
-    if (size > 10)
-      size = 10;
 
     QString protocol;
     QString hostName;
     QString dbName;
     QString port;
-    int alreadyExists;
-  
-    if (size)
-    {
-      //if (_otherOption->isChecked())
-      _recent->setEnabled(true);
-      QAction *act;
-      for (int i = 0; i < size; ++i) 
-      {
-        act = new QAction(list.value(i).remove("psql://"),this);
-        connect(act, SIGNAL(triggered()), this, SLOT(selectRecentOptions()));
-        recentMenu->addAction(act);
-        parseDatabaseURL(list.value(i), protocol, hostName, dbName, port);
-        alreadyExists = _database->findText(dbName);
-        if (alreadyExists == -1)
-          _database->addItem(dbName);
-      }
-  
-      recentMenu->addSeparator();
 
-      act = new QAction(tr("Clear &Menu"), this);
-      act->setObjectName(QLatin1String("__xt_action_clear_menu_"));
-      connect(act, SIGNAL(triggered()), this, SLOT(clearRecentOptions()));
+    _recent->setEnabled(true);
+    QAction *act;
+    for (int i = 0; i < list.size() && i < 10; ++i)
+    {
+      act = new QAction(list.value(i).remove("psql://"), this);
+      connect(act, SIGNAL(triggered()), this, SLOT(selectRecentOptions()));
       recentMenu->addAction(act);
+      parseDatabaseURL(list.value(i), protocol, hostName, dbName, port);
+      if (_database->findText(dbName) == -1)
+        _database->addItem(dbName);
     }
-    else
-      _recent->setEnabled(false);
+
+    recentMenu->addSeparator();
+
+    act = new QAction(tr("Clear &Menu"), this);
+    act->setObjectName(QLatin1String("__xt_action_clear_menu_"));
+    connect(act, SIGNAL(triggered()), this, SLOT(clearRecentOptions()));
+    recentMenu->addAction(act);
   }
-  else
-    _recent->setEnabled(false);
-  
+  _recent->setEnabled(! list.isEmpty());
   _recent->setMenu(recentMenu);
 }
 

@@ -220,7 +220,6 @@ class XTUPLEWIDGETS_EXPORT AddressCluster : public VirtualCluster
 
     private:
 	virtual void	init();
-	virtual void	populateCountryComboBox();
 	virtual void	silentSetId(const int);
 	int		_id;
 	QString		_notes;

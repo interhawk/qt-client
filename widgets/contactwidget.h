@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -73,6 +73,7 @@ protected:
   XCheckBox* _searchFirst;
   XCheckBox* _searchLast;
   XCheckBox* _searchTitle;
+  XCheckBox* _searchCompany;
   XCheckBox* _searchCRMAcct;
   XCheckBox* _searchPhones;
   XCheckBox* _searchEmail;
@@ -107,6 +108,7 @@ class XTUPLEWIDGETS_EXPORT ContactWidget : public VirtualCluster
   Q_PROPERTY(QString  fieldNameSuffix       READ fieldNameSuffix       	WRITE setFieldNameSuffix);
   Q_PROPERTY(QString  fieldNameInitials     READ fieldNameInitials    	WRITE setFieldNameInitials);
   Q_PROPERTY(QString  fieldNameTitle        READ fieldNameTitle       	WRITE setFieldNameTitle);
+  Q_PROPERTY(QString  fieldNameCompany      READ fieldNameCompany      	WRITE setFieldNameCompany);
   Q_PROPERTY(QString  fieldNamePhone        READ fieldNamePhone       	WRITE setFieldNamePhone);
   Q_PROPERTY(QString  fieldNamePhone2       READ fieldNamePhone2      	WRITE setFieldNamePhone2);
   Q_PROPERTY(QString  fieldNameFax          READ fieldNameFax         	WRITE setFieldNameFax);
@@ -168,6 +170,7 @@ public:
   Q_INVOKABLE virtual QString number()          const { return _number->text(); }
   Q_INVOKABLE virtual QString ownerUsername()   const { return _owner->username(); }
   Q_INVOKABLE virtual QString title()           const { return _title->text(); }
+  Q_INVOKABLE virtual QString company()         const { return _company->text(); }
   Q_INVOKABLE virtual QString webAddress()	const { return _webaddr->text(); }
   Q_INVOKABLE virtual QString suffix()		const { return _suffix->text(); }
   Q_INVOKABLE virtual QString middle()		const { return _middle->text(); }
@@ -192,6 +195,7 @@ public:
   virtual QString  fieldNameSuffix()        const { return _fieldNameSuffix; }
   virtual QString  fieldNameInitials()      const { return _fieldNameInitials; }
   virtual QString  fieldNameTitle()         const { return _fieldNameTitle; }
+  virtual QString  fieldNameCompany()       const { return _fieldNameCompany; }
   virtual QString  fieldNamePhone()         const { return _fieldNamePhone; }
   virtual QString  fieldNamePhone2()        const { return _fieldNamePhone2; }
   virtual QString  fieldNameFax()           const { return _fieldNameFax; }
@@ -231,6 +235,7 @@ public slots:
   inline virtual void setPhone2(const QString& p)	{ _phone2->setText(p); }
   inline virtual void setSuffix(const QString& p)	{ _suffix->setText(p); }
   inline virtual void setTitle(const QString& p)	{ _title->setText(p); }
+  inline virtual void setCompany(const QString& p)	{ _company->setText(p); }
   inline virtual void setWebAddress(const QString& p)   { _webaddr->setText(p); }
   inline virtual void setOwnerUsername(const QString& p){ _owner->setUsername(p); }
   inline virtual void setOwnerId(const int p) { _owner->setId(p); }
@@ -280,6 +285,7 @@ public slots:
   virtual void setFieldNameSuffix(QString p)        { _fieldNameSuffix = p ; }
   virtual void setFieldNameInitials(QString p)      { _fieldNameInitials = p ; }
   virtual void setFieldNameTitle(QString p)         { _fieldNameTitle = p ; }
+  virtual void setFieldNameCompany(QString p)       { _fieldNameCompany = p ; }
   virtual void setFieldNamePhone(QString p)         { _fieldNamePhone = p ; }
   virtual void setFieldNamePhone2(QString p)        { _fieldNamePhone2 = p ; }
   virtual void setFieldNameFax(QString p)           { _fieldNameFax = p ; }
@@ -326,6 +332,8 @@ protected:
   CRMAcctCluster* _crmAcct;
   QLabel* _titleLit;
   XLineEdit* _title;
+  QLabel* _companyLit;
+  XLineEdit* _company;
   QLabel* _phoneLit;
   XLineEdit* _phone;
   QLabel* _phone2Lit;
@@ -386,6 +394,7 @@ private:
   QString  _fieldNameSuffix;
   QString  _fieldNameInitials;
   QString  _fieldNameTitle;
+  QString  _fieldNameCompany;
   QString  _fieldNamePhone;
   QString  _fieldNamePhone2;
   QString  _fieldNameFax;

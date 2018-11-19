@@ -17,6 +17,11 @@
 
 #include "guiclient.h"
 
+#include "project.h"
+#include "projects.h"
+#include "dspOrderActivityByProject.h"
+#include "dspDocuments.h"
+
 #include "contact.h"
 #include "contacts.h"
 #include "contactMerge.h"
@@ -67,6 +72,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
   contactsMenu      = new QMenu(parent);
   addressMenu       = new QMenu(parent);
   prospectCRMMenu   = new QMenu(parent);
+  documentsMenu     = new QMenu(parent);
   utilitiesMenu     = new QMenu(parent);
   opportunityMenu   = new QMenu(parent);
 
@@ -79,30 +85,31 @@ menuCRM::menuCRM(GUIClient *Pparent) :
   contactsMenu->setObjectName("menu.crm.contacts");
   addressMenu->setObjectName("menu.crm.address");
   prospectCRMMenu->setObjectName("menu.crm.prospect");
+  documentsMenu->setObjectName("menu.crm.documents");
   utilitiesMenu->setObjectName("menu.crm.utilities");
   opportunityMenu->setObjectName("menu.crm.opportunity");
 
   actionProperties acts[] = {
     // CRM | Incident
     { "menu",			tr("&Incident"),	(char*)incidentMenu,		crmMenu,	"true", NULL, NULL, true	, NULL },
-    { "crm.incident",		tr("&New..."),		SLOT(sIncident()),		incidentMenu,	"MaintainPersonalIncidents MaintainAllIncidents", NULL, NULL, true , NULL },
-    { "crm.incidentList",	tr("&List..."),	SLOT(sIncidentWorkbench()),	incidentMenu,	"ViewPersonalIncidents MaintainPersonalIncidents ViewAllIncidents MaintainAllIncidents", new QPixmap(":/images/incidents.png"), toolBar, true , tr("Incident List") },
+    { "crm.incident",		tr("&New"),		SLOT(sIncident()),		incidentMenu,	"MaintainPersonalIncidents MaintainAllIncidents", NULL, NULL, true , NULL },
+    { "crm.incidentList",	tr("&List"),	SLOT(sIncidentWorkbench()),	incidentMenu,	"ViewPersonalIncidents MaintainPersonalIncidents ViewAllIncidents MaintainAllIncidents", new QPixmap(":/images/incidents.png"), toolBar, true , tr("Incident List") },
 
     // CRM / Tasks
     { "menu",			tr("&Tasks"),            (char*)taskMenu,        crmMenu,	"true", NULL, NULL, true	, NULL },
-    { "crm.task",		tr("&New..."),	         SLOT(sTask()),	        taskMenu,	"MaintainPersonalTaskItems MaintainAllTaskItems", NULL, NULL, true	, NULL },
-    { "crm.taskList",		tr("&List..."),		 SLOT(sTaskList()),	taskMenu,	"MaintainPersonalTaskItems ViewPersonalTaskItems MaintainAllTaskItems ViewAllTaskItems", new QPixmap(":/images/toDoList.png"), toolBar, true	, tr("To-Do List") },
+    { "crm.task",		tr("&New"),	         SLOT(sTask()),	        taskMenu,	"MaintainPersonalTaskItems MaintainAllTaskItems", NULL, NULL, true	, NULL },
+    { "crm.taskList",		tr("&List"),		 SLOT(sTaskList()),	taskMenu,	"MaintainPersonalTaskItems ViewPersonalTaskItems MaintainAllTaskItems ViewAllTaskItems", new QPixmap(":/images/toDoList.png"), toolBar, true	, tr("To-Do List") },
     { "crm.taskListCalendar",	tr("&Calendar List..."), SLOT(sTaskListCalendar()),	taskMenu,	"MaintainPersonalTaskItems ViewPersonalTaskItems MaintainAllTaskItems ViewAllTaskItems", NULL, NULL, true, NULL},
 
     //  Project
     { "menu", tr("Pro&ject"), (char*)projectsMenu, crmMenu, "true", NULL, NULL, true	, NULL },
     { "pm.newProject", tr("&New..."), SLOT(sNewProject()), projectsMenu, "MaintainPersonalProjects MaintainAllProjects", NULL, NULL, true , NULL },
-    { "pm.projects", tr("&List..."), SLOT(sProjects()), projectsMenu, "ViewPersonalProjects MaintainPersonalProjects ViewAllProjects MaintainAllProjects", new QPixmap(":/images/projects.png"), toolBar, true , tr("List Projects") },
+    { "pm.projects", tr("&List"), SLOT(sProjects()), projectsMenu, "ViewPersonalProjects MaintainPersonalProjects ViewAllProjects MaintainAllProjects", new QPixmap(":/images/projects.png"), toolBar, true , tr("List Projects") },
     
     // Opportunity
     { "menu",		tr("&Opportunity"),	(char*)opportunityMenu,	crmMenu,		"true", NULL, NULL, true	, NULL },
-    { "crm.newOpportunity", tr("&New..."), SLOT(sNewOpportunity()), opportunityMenu, "MaintainPersonalOpportunities MaintainAllOpportunities", NULL, NULL, true , NULL },
-    { "crm.listOpportunity", tr("&List..."), SLOT(sOpportunities()), opportunityMenu, "MaintainPersonalOpportunities ViewPersonalOpportunities MaintainAllOpportunities ViewAllOpportunities", NULL, NULL, true , NULL },
+    { "crm.newOpportunity", tr("&New"), SLOT(sNewOpportunity()), opportunityMenu, "MaintainPersonalOpportunities MaintainAllOpportunities", NULL, NULL, true , NULL },
+    { "crm.listOpportunity", tr("&List"), SLOT(sOpportunities()), opportunityMenu, "MaintainPersonalOpportunities ViewPersonalOpportunities MaintainAllOpportunities ViewAllOpportunities", NULL, NULL, true , NULL },
 
     { "separator",		NULL,				NULL,			crmMenu,	"true", NULL, NULL, true	, NULL },
 
@@ -114,22 +121,22 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     
     // CRM | Account
     { "menu",		tr("&Account"),		(char*)accountsMenu,	crmMenu,		"true", NULL, NULL, true	, NULL },
-    { "crm.crmaccount",		tr("&New..."),	SLOT(sCRMAccount()),	accountsMenu,	"MaintainPersonalCRMAccounts MaintainAllCRMAccounts", NULL, NULL, true , NULL },
-    { "crm.crmaccounts",	tr("&List..."),	SLOT(sCRMAccounts()),	accountsMenu,	"MaintainPersonalCRMAccounts ViewPersonalCRMAccounts MaintainAllCRMAccounts ViewAllCRMAccounts", new QPixmap(":/images/accounts.png"), toolBar, true , tr("List Accounts") },
+    { "crm.crmaccount",		tr("&New"),	SLOT(sCRMAccount()),	accountsMenu,	"MaintainPersonalCRMAccounts MaintainAllCRMAccounts", NULL, NULL, true , NULL },
+    { "crm.crmaccounts",	tr("&List"),	SLOT(sCRMAccounts()),	accountsMenu,	"MaintainPersonalCRMAccounts ViewPersonalCRMAccounts MaintainAllCRMAccounts ViewAllCRMAccounts", new QPixmap(":/images/accounts.png"), toolBar, true , tr("List Accounts") },
     { "separator",		NULL,				NULL,	accountsMenu,	"true", NULL, NULL, true	, NULL },
     { "crm.crmaccountGroups",   tr("&Groups..."),  SLOT(sCRMAccountGroups()),   accountsMenu,   "MaintainAccountGroups ViewAccountGroups",	NULL, NULL, true, NULL },
       
     // CRM | Contact
     { "menu",		tr("&Contact"),		(char*)contactsMenu,	crmMenu,		"true", NULL, NULL, true	, NULL },
-    { "crm.contact",	tr("&New..."),		SLOT(sContact()),	contactsMenu,	"MaintainPersonalContacts MaintainAllContacts", NULL, NULL, true	, NULL },
-    { "crm.contacts",	tr("&List..."),		SLOT(sContacts()),	contactsMenu,	"MaintainPersonalContacts ViewPersonalContacts MaintainAllContacts ViewAllContacts", new QPixmap(":/images/contacts.png"), toolBar, true , tr("List Contacts") },
+    { "crm.contact",	tr("&New"),		SLOT(sContact()),	contactsMenu,	"MaintainPersonalContacts MaintainAllContacts", NULL, NULL, true	, NULL },
+    { "crm.contacts",	tr("&List"),		SLOT(sContacts()),	contactsMenu,	"MaintainPersonalContacts ViewPersonalContacts MaintainAllContacts ViewAllContacts", new QPixmap(":/images/contacts.png"), toolBar, true , tr("List Contacts") },
     { "separator",		NULL,				NULL,	contactsMenu,	"true", NULL, NULL, true	, NULL },
     { "crm.contactGroups", tr("&Groups..."),  SLOT(sContactGroups()),   contactsMenu,   "MaintainContactGroups ViewContactGroups",	NULL, NULL, true, NULL },
     
     // CRM | Address
     { "menu",		tr("A&ddress"),		(char*)addressMenu,	crmMenu,		"true", NULL, NULL, true	, NULL },
-    { "crm.address",	tr("&New..."),		SLOT(sAddress()),	addressMenu,	"MaintainAddresses", NULL, NULL, true	, NULL },
-    { "crm.addresses",	tr("&List..."),	        SLOT(sAddresses()),	addressMenu,	"MaintainAddresses ViewAddresses", NULL, NULL, true , NULL },
+    { "crm.address",	tr("&New"),		SLOT(sAddress()),	addressMenu,	"MaintainAddresses", NULL, NULL, true	, NULL },
+    { "crm.addresses",	tr("&List"),	        SLOT(sAddresses()),	addressMenu,	"MaintainAddresses ViewAddresses", NULL, NULL, true , NULL },
     { "separator",		NULL,				NULL,	addressMenu,	"true", NULL, NULL, true	, NULL },
     { "crm.addressGroups", tr("&Groups..."),  SLOT(sAddressGroups()),   addressMenu,   "MaintainAddressGroups ViewAddressGroups",	NULL, NULL, true, NULL },
 
@@ -139,6 +146,10 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     { "so.prospects", tr("&List..."),	      SLOT(sProspects()), prospectCRMMenu, "MaintainProspectMasters ViewProspectMasters",	NULL, NULL, true, NULL },
     { "separator",		NULL,				NULL,  prospectCRMMenu,	"true", NULL, NULL, true	, NULL },
     { "so.prospectGroups", tr("&Groups..."),  SLOT(sProspectGroups()), prospectCRMMenu, "MaintainProspectGroups ViewProspectGroups",	NULL, NULL, true, NULL },
+
+    // CRM | Documents
+    { "menu",		tr("Documents"),        (char*)documentsMenu,	crmMenu,	"true", NULL, NULL, true	, NULL },
+    { "crm.documents",	tr("&List"),	        SLOT(sDocuments()),	documentsMenu,	"ViewDocuments", NULL, NULL, true , NULL },
 
     { "separator",		NULL,				NULL,			crmMenu,	"true", NULL, NULL, true	, NULL },
 
@@ -153,7 +164,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     { "separator",		NULL,				NULL,		     utilitiesMenu,	"true", NULL, NULL, true	, NULL },
     { "crm.buildCRMGroups",      tr("&Build CRM Groups"), SLOT(sBuildCRMGroups()),   utilitiesMenu, "MaintainCustomerGroups MaintainEmployeeGroups MaintainProspectGroups MaintainContactGroups", NULL, NULL, true, NULL },
 
-    { "crm.setup",	tr("&Setup..."),	SLOT(sSetup()),	crmMenu,	NULL,	NULL,	NULL,	true, NULL}
+    { "crm.setup",	tr("&Setup"),	SLOT(sSetup()),	crmMenu,	NULL,	NULL,	NULL,	true, NULL}
 
   };
 
@@ -345,6 +356,11 @@ void menuCRM::sAddressGroups()
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
   omfgThis->handleNewWindow(newdlg);
+}
+
+void menuCRM::sDocuments()
+{
+  omfgThis->handleNewWindow(new dspDocuments());
 }
 
 void menuCRM::sIncidentWorkbench()

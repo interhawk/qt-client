@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -12,6 +12,8 @@
 #include <parameter.h>
 #include <metasql.h>
 #include <errorReporter.h>
+
+#include <QMessageBox>
 
 #include "customerselector.h"
 
@@ -44,9 +46,7 @@ CustomerSelector::CustomerSelector(QWidget *pParent, const char *pName) : QWidge
   connect(_cust,           SIGNAL(valid(bool)), this, SIGNAL(validCust(bool)));
   connect(_customerTypes,  SIGNAL(newID(int)), this, SIGNAL(updated()));
   connect(_customerTypes,  SIGNAL(newID(int)), this, SIGNAL(newCustTypeId(int)));
-  connect(_customerType,   SIGNAL(editingFinished()), this, SIGNAL(updated()));
   connect(_customerType,   SIGNAL(editingFinished()), this, SLOT(sTypePatternFinished()));
-  connect(_customerType,   SIGNAL(textChanged(QString)), this, SIGNAL(newTypePattern(QString)));
   connect(_customerGroup,  SIGNAL(newID(int)), this, SIGNAL(updated()));
   connect(_customerGroup,  SIGNAL(newID(int)), this, SIGNAL(newCustGroupId(int)));
   connect(_customerGroup,  SIGNAL(valid(bool)), this, SIGNAL(validCustGroup(bool)));
@@ -147,6 +147,13 @@ void CustomerSelector::setState(enum CustomerSelectorState p)
 
 void CustomerSelector::sTypePatternFinished()
 {
+  QRegExp rx(_customerType->text());
+  if (!rx.isValid())
+  {
+     QMessageBox::warning(this, tr("Invalid Pattern"), tr("You have entered an invalid expression"));
+     _customerType->setFocus();
+     return;
+  }
   emit newTypePattern(_customerType->text());
   emit updated();
 }

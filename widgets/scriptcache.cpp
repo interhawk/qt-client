@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -27,6 +27,9 @@ ScriptCache::ScriptCache(QObject *parent)
   QObject::connect(db.driver(), SIGNAL(notification(const QString&)), this, SLOT(sNotified(const QString &)));
   if (parent)
     connect(parent, SIGNAL(dbConnectionLost()), this, SLOT(sDbConnectionLost()));
+  GuiClientInterface *g = dynamic_cast<GuiClientInterface*>(parent);
+  if (g)
+    g->setScriptCache(this);
 }
 
 ScriptCache::~ScriptCache()

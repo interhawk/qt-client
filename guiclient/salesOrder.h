@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -68,7 +68,7 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
     virtual void        sMiscChargeChanged();
     virtual void        sFreightChanged();
     virtual void        sHandleShipchrg( int pShipchrgid );
-    virtual void        sHandleSalesOrderEvent( int pSoheadid, bool );
+    virtual void        sHandleSalesOrderEvent(int pSoheadid, bool pLocal);
     virtual void        sTaxZoneChanged();
     virtual void        sFreightDetail();
     virtual void        setFreeFormShipto( bool pFreeForm );

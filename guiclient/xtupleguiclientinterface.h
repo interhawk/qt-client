@@ -34,7 +34,10 @@ class xTupleGuiClientInterface : public GuiClientInterface
     virtual TaxIntegration *getTaxIntegration();
     virtual MqlHash     *getMqlHash();
     virtual void         setMqlHash(MqlHash *pHash);
+    virtual ScriptCache *getScriptCache();
+    virtual void         setScriptCache(ScriptCache *pCache);
 
   protected:
-    MqlHash *_mqlhash;
+    MqlHash     *_mqlhash;
+    ScriptCache *_scriptCache;
 };

@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -41,7 +41,8 @@ dspUninvoicedReceivings::dspUninvoicedReceivings(QWidget* parent, const char*, Q
   list()->addColumn(tr("Item Number"), _itemColumn,  Qt::AlignLeft,   true, "itemnumber");
   list()->addColumn(tr("Uninvoiced"),  _qtyColumn,   Qt::AlignRight,  true, "qty");
   list()->addColumn(tr("Type"),        _itemColumn,  Qt::AlignLeft,   true, "type"); 
-  list()->addColumn(tr("Value"),       _moneyColumn, Qt::AlignRight,  true, "value");
+  list()->addColumn(tr("Cost Value"),       _moneyColumn, Qt::AlignRight,  true, "stdvalue");
+  list()->addColumn(tr("P/O Value"),       _moneyColumn, Qt::AlignRight,  true, "purchvalue");
 
   sFillList();
 }

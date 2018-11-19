@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -11,8 +11,10 @@
 #include "include.h"
 #include <xsqlquery.h>
 #include "metasql.h"
-#include "mqlutil.h"
+#include "mqlhash.h"
 #include "parameter.h"
+
+static MqlHash includeMqlHash(0);
 
 /*! \file include.cpp
 
@@ -65,7 +67,7 @@ QScriptValue includeScript(QScriptContext *context, QScriptEngine *engine)
     QString scriptname = context->argument(count).toString();
     ParameterList params;
     params.append("jsonlist", QString("{\"1\": \"%1\"}").arg(scriptname));
-    MetaSQLQuery mql = mqlLoad("scripts", "fetch");
+    MetaSQLQuery mql(includeMqlHash.value("scripts", "fetch"));
     XSqlQuery scriptq = mql.toQuery(params);
 
     while (scriptq.next())

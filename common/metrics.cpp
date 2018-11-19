@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -236,15 +236,20 @@ bool Privileges::check(const QString &pName)
 
 bool Privileges::isDba()
 {
-  XSqlQuery su("SELECT isDBA() AS issuper;");
-  su.exec();
-  if (su.first())
-    return su.value("issuper").toBool();
-  else if (su.lastError().type() != QSqlError::NoError)
-    qWarning("SQL error in Privileges::isDba(): %s",
-             qPrintable(su.lastError().text()));
-
-  return false;
+  static QVariant isDBA;
+  if (isDBA.isNull()) {
+    XSqlQuery su("SELECT isDBA() AS issuper;");
+    su.exec();
+    if (su.first())
+      isDBA = su.value("issuper");
+    else if (su.lastError().type() != QSqlError::NoError)
+    {
+      qWarning("SQL error in Privileges::isDba(): %s",
+               qPrintable(su.lastError().text()));
+      return false;
+    }
+  }
+  return isDBA.toBool();
 }
 
 void setupParameters(QScriptEngine *engine, QString name, Parameters *params)
