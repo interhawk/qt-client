@@ -168,37 +168,37 @@ menuSales::menuSales(GUIClient *pParent) :
   actionProperties acts[] = {
     // Sales | Quotes
     { "menu",	tr("&Quote"),	(char*)quotesMenu,	mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "so.newQuote", tr("&New..."),	SLOT(sNewQuote()), quotesMenu, "MaintainQuotes",	NULL, NULL, true, NULL },
-    { "so.listQuotes", tr("&List..."),	SLOT(sQuotes()), quotesMenu, "MaintainQuotes ViewQuotes",	NULL, NULL, true, NULL },
+    { "so.newQuote", tr("&New"),	SLOT(sNewQuote()), quotesMenu, "MaintainQuotes",	NULL, NULL, true, NULL },
+    { "so.listQuotes", tr("&List"),	SLOT(sQuotes()), quotesMenu, "MaintainQuotes ViewQuotes",	NULL, NULL, true, NULL },
     
     // Sales | Sales Order
     { "menu",	tr("&Sales Order"),	(char*)ordersMenu,	mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "so.newSalesOrderSimple",  tr("&New Simple..."),		SLOT(sNewSalesOrderSimple()),   ordersMenu, "MaintainSimpleSalesOrders", NULL, NULL, _metrics->boolean("SSOSEnabled"), NULL },
-    { "so.newSalesOrder", 	     tr("&New..."),		SLOT(sNewSalesOrder()),   ordersMenu, "MaintainSalesOrders", NULL, NULL,	 true, NULL },
-    { "so.listOpenSalesOrders",  tr("&List Open..."),	SLOT(sOpenSalesOrders()), ordersMenu, "MaintainSalesOrders ViewSalesOrders", new QPixmap(":/images/listOpenSalesOrders.png"), toolBar,  true, tr("List Open Sales Orders") },
-    { "so.listSalesOrders",      tr("&Search Orders..."),	SLOT(sSalesOrders()), ordersMenu, "MaintainSalesOrders ViewSalesOrders", NULL, NULL, true, NULL },
+    { "so.newSalesOrderSimple",  tr("&New Simple"),		SLOT(sNewSalesOrderSimple()),   ordersMenu, "MaintainSimpleSalesOrders", NULL, NULL, _metrics->boolean("SSOSEnabled"), NULL },
+    { "so.newSalesOrder", 	     tr("&New"),		SLOT(sNewSalesOrder()),   ordersMenu, "MaintainSalesOrders", NULL, NULL,	 true, NULL },
+    { "so.listOpenSalesOrders",  tr("&List Open"),	SLOT(sOpenSalesOrders()), ordersMenu, "MaintainSalesOrders ViewSalesOrders", new QPixmap(":/images/listOpenSalesOrders.png"), toolBar,  true, tr("List Open Sales Orders") },
+    { "so.listSalesOrders",      tr("&Search Orders"),	SLOT(sSalesOrders()), ordersMenu, "MaintainSalesOrders ViewSalesOrders", NULL, NULL, true, NULL },
 
     // Sales | Billing
     { "menu",	tr("&Billing"),     (char*)billingMenu,		mainMenu,	"true",	NULL, NULL, true, NULL },
     
     // Sales | Billing | Invoice
     { "menu",	tr("&Invoice"),   (char*)billingInvoicesMenu,	billingMenu,	"true",	NULL, NULL, true, NULL },
-    { "so.uninvoicedShipments",		     tr("&Uninvoiced Shipments..."),			SLOT(sUninvoicedShipments()), 		billingInvoicesMenu, "SelectBilling",	 new QPixmap(":/images/uninvoicedShipments"), toolBar, true, tr("Uninvoiced Shipments") },
+    { "so.uninvoicedShipments",		     tr("&Uninvoiced Shipment."),			SLOT(sUninvoicedShipments()), 		billingInvoicesMenu, "SelectBilling",	 new QPixmap(":/images/uninvoicedShipments"), toolBar, true, tr("Uninvoiced Shipments") },
     { "so.selectAllShippedOrdersForBilling", tr("Approve &All Shipped Orders for Billing..."),	SLOT(sSelectShippedOrdersForBilling()), billingInvoicesMenu, "SelectBilling",	NULL, NULL, true, NULL },
     { "so.selectOrderForBilling",	     tr("Approve &Order for Billing..."),			SLOT(sSelectOrderForBilling()),		billingInvoicesMenu, "SelectBilling",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	billingInvoicesMenu,	"true",		NULL, NULL, true, NULL },
-    { "so.dspBillingSelections",	     tr("Billing &Approvals..."),	SLOT(sDspBillingSelections()), billingInvoicesMenu, "SelectBilling", new QPixmap(":/images/billingSelections"), toolBar, true, tr("Billing Approvals") },
+    { "so.dspBillingSelections",	     tr("Billing &Approvals"),	SLOT(sDspBillingSelections()), billingInvoicesMenu, "SelectBilling", new QPixmap(":/images/billingSelections"), toolBar, true, tr("Billing Approvals") },
     { "so.createInvoices",	     tr("&Create Invoices..."),	SLOT(sCreateInvoices()), billingInvoicesMenu, "SelectBilling",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	billingInvoicesMenu,	"true",		NULL, NULL, true, NULL },
-    { "so.createInvoice", tr("&New Invoice..."), SLOT(sCreateInvoice()), billingInvoicesMenu, "MaintainMiscInvoices", NULL, NULL, true , NULL },
-    { "so.listUnpostedInvoices",	     tr("&List Unposted Invoices..."),	SLOT(sUnpostedInvoices()), billingInvoicesMenu, "SelectBilling",	NULL, NULL,  true, NULL },
+    { "so.createInvoice", tr("&New Invoice"), SLOT(sCreateInvoice()), billingInvoicesMenu, "MaintainMiscInvoices", NULL, NULL, true , NULL },
+    { "so.listUnpostedInvoices",	     tr("&List Unposted Invoices"),	SLOT(sUnpostedInvoices()), billingInvoicesMenu, "SelectBilling",	NULL, NULL,  true, NULL },
     { "so.postInvoices",		     tr("Post &Invoices..."),		SLOT(sPostInvoices()), billingInvoicesMenu, "PostMiscInvoices",	NULL, NULL, true, NULL },
 
     // Sales | Billing | Credit Memos
     { "menu",	tr("&Sales Credit"), (char*)billingCreditMemosMenu,	billingMenu,	"true",	NULL, NULL, true, NULL },
-    { "so.newCreditMemo",		     tr("&New..."),		SLOT(sNewCreditMemo()), billingCreditMemosMenu, "MaintainCreditMemos",	NULL, NULL, true, NULL },
-    { "so.listUnpostedCreditMemos",	     tr("&List Unposted..."),	SLOT(sUnpostedCreditMemos()), billingCreditMemosMenu, "MaintainCreditMemos ViewCreditMemos",	NULL, NULL, true, NULL },
-    { "so.creditMemoEditList",		     tr("&Edit List..."),	SLOT(sCreditMemoEditList()), billingCreditMemosMenu, "MaintainCreditMemos ViewCreditMemos",	NULL, NULL, true, NULL },
+    { "so.newCreditMemo",		     tr("&New"),		SLOT(sNewCreditMemo()), billingCreditMemosMenu, "MaintainCreditMemos",	NULL, NULL, true, NULL },
+    { "so.listUnpostedCreditMemos",	     tr("&List Unposted"),	SLOT(sUnpostedCreditMemos()), billingCreditMemosMenu, "MaintainCreditMemos ViewCreditMemos",	NULL, NULL, true, NULL },
+    { "so.creditMemoEditList",		     tr("&Edit List"),	SLOT(sCreditMemoEditList()), billingCreditMemosMenu, "MaintainCreditMemos ViewCreditMemos",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	billingCreditMemosMenu,	"true",		NULL, NULL, true, NULL },
     { "so.postCreditMemos",		     tr("&Post..."),	SLOT(sPostCreditMemos()), billingCreditMemosMenu, "PostARDocuments",	NULL, NULL, true, NULL },
 
@@ -214,8 +214,8 @@ menuSales::menuSales(GUIClient *pParent) :
 
     // Sales | Return Authorizations
     { "menu",	tr("&Return Auth."),	(char*)returnsMenu,	mainMenu, "true",	NULL, NULL,  _metrics->boolean("EnableReturnAuth"), NULL },
-    { "so.newReturn", tr("&New..."),	SLOT(sNewReturn()), returnsMenu, "MaintainReturns",	NULL, NULL, true, NULL },
-    { "so.openReturns", tr("&List Open..."),	SLOT(sOpenReturns()), returnsMenu, "MaintainReturns ViewReturns",	NULL, NULL, true, NULL },
+    { "so.newReturn", tr("&New"),	SLOT(sNewReturn()), returnsMenu, "MaintainReturns",	NULL, NULL, true, NULL },
+    { "so.openReturns", tr("&List Open"),	SLOT(sOpenReturns()), returnsMenu, "MaintainReturns ViewReturns",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	returnsMenu,	"true",		NULL, NULL, true , NULL },
     { "so.returnsWorkbench", tr("&Workbench..."),	SLOT(sReturnsWorkbench()), returnsMenu, "MaintainReturns ViewReturns",	NULL, NULL, true, NULL },
 
@@ -231,12 +231,12 @@ menuSales::menuSales(GUIClient *pParent) :
     
     // Sales | Lookup | Sales Order Lookup
     { "menu",	tr("&Sales Order"),           (char*)lookupSoMenu,	lookupMenu,	"true",	NULL, NULL, true, NULL },
-    { "so.listSalesOrders",      tr("&Search Orders..."),	SLOT(sSalesOrders()), lookupSoMenu, "MaintainSalesOrders ViewSalesOrders", NULL, NULL, true, NULL },
+    { "so.listSalesOrders",      tr("&Search Orders"),	SLOT(sSalesOrders()), lookupSoMenu, "MaintainSalesOrders ViewSalesOrders", NULL, NULL, true, NULL },
     { "so.dspSalesOrderLookupByItem", tr("by &Item..."),	SLOT(sDspOrderLookupByItem()), lookupSoMenu, "MaintainSalesOrders ViewSalesOrders",	NULL, NULL, true, NULL },
     
     // Sales | Lookup | Return Auth. Lookup
     { "menu",	tr("&Return Auth."),           (char*)lookupRaMenu,	lookupMenu,	"true",	NULL, NULL, _metrics->boolean("EnableReturnAuth"), NULL },
-    { "so.dspReturnAuthLookup",       tr("&Search RAs..."),	SLOT(sDspReturnAuthLookup())      , lookupRaMenu, "ViewReturns",	NULL, NULL, true, NULL },
+    { "so.dspReturnAuthLookup",       tr("&Search RAs"),	SLOT(sDspReturnAuthLookup())      , lookupRaMenu, "ViewReturns",	NULL, NULL, true, NULL },
     { "so.dspReturnAuthLookupByItem", tr("by &Item..."),	SLOT(sDspReturnAuthLookupByItem()), lookupRaMenu, "ViewReturns",	NULL, NULL, true, NULL },
     
     { "separator",	NULL,	NULL,	lookupMenu,	"true",		NULL, NULL, true, NULL },
@@ -253,68 +253,68 @@ menuSales::menuSales(GUIClient *pParent) :
 
     // Sales | Reports
     { "menu",	tr("&Reports"),           (char*)reportsMenu,	mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "so.dspSummarizedBacklogByWarehouse", tr("Su&mmarized Backlog..."),	SLOT(sDspSummarizedBacklogByWarehouse()), reportsMenu, "ViewSalesOrders",	new QPixmap(":/images/dspSummarizedBacklogByWhse.png"), toolBar,  true, tr("Summarized Backlog") },
+    { "so.dspSummarizedBacklogByWarehouse", tr("Su&mmarized Backlog"),	SLOT(sDspSummarizedBacklogByWarehouse()), reportsMenu, "ViewSalesOrders",	new QPixmap(":/images/dspSummarizedBacklogByWhse.png"), toolBar,  true, tr("Summarized Backlog") },
 
     // Sales | Reports | Backlog
-    { "so.dspBacklog", tr("&Backlog..."),	SLOT(sDspBacklog()), reportsMenu, "ViewSalesOrders",	NULL, NULL, true, NULL },
-    { "so.dspPartiallyShippedOrders", tr("&Partially Shipped Orders..."),	SLOT(sDspPartiallyShippedOrders()), reportsMenu, "ViewSalesOrders",	NULL, NULL, true, NULL },
+    { "so.dspBacklog", tr("&Backlog"),	SLOT(sDspBacklog()), reportsMenu, "ViewSalesOrders",	NULL, NULL, true, NULL },
+    { "so.dspPartiallyShippedOrders", tr("&Partially Shipped Orders"),	SLOT(sDspPartiallyShippedOrders()), reportsMenu, "ViewSalesOrders",	NULL, NULL, true, NULL },
     { "so.dspReservations", tr("Reservations by Item..."),	SLOT(sDspReservations()), reportsMenu, "ViewInventoryAvailability",	NULL, NULL, _metrics->boolean("EnableSOReservations"), NULL },    
     { "separator",	NULL,	NULL,	reportsMenu,	"true",		NULL, NULL, true, NULL },   
     
     // Sales | Reports | Inventory Availability
-    { "so.dspInventoryAvailability", tr("Inventory &Availability..."),	SLOT(sDspInventoryAvailability()), reportsMenu, "ViewInventoryAvailability",	NULL, NULL, true, NULL },
+    { "so.dspInventoryAvailability", tr("Inventory &Availability"),	SLOT(sDspInventoryAvailability()), reportsMenu, "ViewInventoryAvailability",	NULL, NULL, true, NULL },
     { "so.dspInventoryAvailabilityBySalesOrder", tr("Availability by &Sales Order..."),	SLOT(sDspInventoryAvailabilityBySalesOrder()), reportsMenu, "ViewInventoryAvailability",	NULL, NULL, true, NULL },
     { "so.dspInventoryAvailabilityByCustomerType", tr("Availability by &Customer Type..."),	SLOT(sDspInventoryAvailabilityByCustomerType()), reportsMenu, "ViewInventoryAvailability",	NULL, NULL, true, NULL },
 
     { "separator",	NULL,	NULL,	reportsMenu,	"true",		NULL, NULL, true, NULL },
-    { "so.dspEarnedCommissions", tr("&Earned Commissions..."),	SLOT(sDspEarnedCommissions()), reportsMenu, "ViewCommissions",	NULL, NULL, true, NULL },
-    { "so.dspBriefEarnedCommissions", tr("B&rief Earned Commissions..."),	SLOT(sDspBriefEarnedCommissions()), reportsMenu, "ViewCommissions",	NULL, NULL, true, NULL },
-    { "so.dspTaxHistory", tr("Tax History..."),	SLOT(sDspTaxHistory()), reportsMenu, "ViewTaxReconciliations",	NULL, NULL, true, NULL },
+    { "so.dspEarnedCommissions", tr("&Earned Commissions"),	SLOT(sDspEarnedCommissions()), reportsMenu, "ViewCommissions",	NULL, NULL, true, NULL },
+    { "so.dspBriefEarnedCommissions", tr("B&rief Earned Commissions"),	SLOT(sDspBriefEarnedCommissions()), reportsMenu, "ViewCommissions",	NULL, NULL, true, NULL },
+    { "so.dspTaxHistory", tr("Tax History"),	SLOT(sDspTaxHistory()), reportsMenu, "ViewTaxReconciliations",	NULL, NULL, true, NULL },
 
     { "separator",	NULL,	NULL,	reportsMenu,	"true",		NULL, NULL, true, NULL },
     
     // Sales | Analysis
     { "menu",	tr("&Analysis"),           (char*)analysisMenu,	mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "sa.dspBookings", tr("&Bookings..."), SLOT(sDspBookings()), analysisMenu, "ViewSalesOrders", NULL, NULL, true , NULL },
-    { "sa.dspTimePhasedBookings", tr("T&ime Phased Bookings..."), SLOT(sDspTimePhasedBookings()), analysisMenu, "ViewSalesOrders", NULL, NULL, true , NULL },
+    { "sa.dspBookings", tr("&Bookings"), SLOT(sDspBookings()), analysisMenu, "ViewSalesOrders", NULL, NULL, true , NULL },
+    { "sa.dspTimePhasedBookings", tr("T&ime Phased Bookings"), SLOT(sDspTimePhasedBookings()), analysisMenu, "ViewSalesOrders", NULL, NULL, true , NULL },
     { "separator",	NULL,	NULL,	analysisMenu,	"true",		NULL, NULL, true, NULL },
-    { "sa.dspSalesHistory", tr("Sales &History..."), SLOT(sDspSalesHistory()), analysisMenu, "ViewSalesHistory", NULL, NULL, true , NULL },
-    { "sa.dspBriefSalesHistory", tr("Brie&f Sales History..."), SLOT(sDspBriefSalesHistory()), analysisMenu, "ViewSalesHistory", NULL, NULL, true , NULL },
-    { "sa.dspSummarizedSalesHistory", tr("Summari&zed Sales History..."), SLOT(sDspSummarizedSales()), analysisMenu, "ViewSalesHistory", NULL, NULL, true , NULL },
-    { "sa.dspTimePhasedSalesHistory", tr("Time &Phased Sales History..."), SLOT(sDspTimePhasedSales()), analysisMenu, "ViewSalesHistory", NULL, NULL, true , NULL },
+    { "sa.dspSalesHistory", tr("Sales &History"), SLOT(sDspSalesHistory()), analysisMenu, "ViewSalesHistory", NULL, NULL, true , NULL },
+    { "sa.dspBriefSalesHistory", tr("Brie&f Sales History"), SLOT(sDspBriefSalesHistory()), analysisMenu, "ViewSalesHistory", NULL, NULL, true , NULL },
+    { "sa.dspSummarizedSalesHistory", tr("Summari&zed Sales History"), SLOT(sDspSummarizedSales()), analysisMenu, "ViewSalesHistory", NULL, NULL, true , NULL },
+    { "sa.dspTimePhasedSalesHistory", tr("Time &Phased Sales History"), SLOT(sDspTimePhasedSales()), analysisMenu, "ViewSalesHistory", NULL, NULL, true , NULL },
 
     { "separator",	NULL,	NULL,	mainMenu,	"true",		NULL, NULL, true, NULL },
 
     // Sales | Prospect
     { "menu",	tr("&Prospect"),       (char*)prospectMenu,	mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "so.enterNewProspect", tr("&New..."),	SLOT(sNewProspect()), prospectMenu, "MaintainProspectMasters",	NULL, NULL, true, NULL },
-    { "so.prospects", tr("&List..."),	SLOT(sProspects()), prospectMenu, "MaintainProspectMasters ViewProspectMasters",	NULL, NULL, true, NULL },
+    { "so.enterNewProspect", tr("&New"),	SLOT(sNewProspect()), prospectMenu, "MaintainProspectMasters",	NULL, NULL, true, NULL },
+    { "so.prospects", tr("&List"),	SLOT(sProspects()), prospectMenu, "MaintainProspectMasters ViewProspectMasters",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	prospectMenu,	"true",		NULL, NULL, true, NULL },
     { "so.prospectGroups", tr("&Groups..."),	SLOT(sProspectGroups()), prospectMenu, "MaintainProspectGroups ViewProspectGroups",	NULL, NULL, true, NULL },
 
     // Sales | Customer
     { "menu",	tr("&Customer"),       (char*)customerMenu,	mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "so.enterNewCustomer", tr("&New..."),	SLOT(sNewCustomer()), customerMenu, "MaintainCustomerMasters",	NULL, NULL, true, NULL },
-    { "so.customers", tr("&List..."),	SLOT(sCustomers()), customerMenu, "MaintainCustomerMasters ViewCustomerMasters",	NULL, NULL, true, NULL },
+    { "so.enterNewCustomer", tr("&New"),	SLOT(sNewCustomer()), customerMenu, "MaintainCustomerMasters",	NULL, NULL, true, NULL },
+    { "so.customers", tr("&List"),	SLOT(sCustomers()), customerMenu, "MaintainCustomerMasters ViewCustomerMasters",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	customerMenu,	"true",		NULL, NULL, true, NULL },
     { "so.customerWorkbench", tr("&Workbench..."),	SLOT(sCustomerWorkbench()), customerMenu, "MaintainCustomerMasters ViewCustomerMasters",	new QPixmap(":/images/customerInformationWorkbench.png"), toolBar,  true, tr("Customer Workbench") },
     { "separator",	NULL,	NULL,	customerMenu,	"true",		NULL, NULL, true, NULL },
-    { "so.customerGroups", tr("&Groups..."),	SLOT(sCustomerGroups()), customerMenu, "MaintainCustomerGroups ViewCustomerGroups",	NULL, NULL, true, NULL },
+    { "so.customerGroups", tr("&Groups"),	SLOT(sCustomerGroups()), customerMenu, "MaintainCustomerGroups ViewCustomerGroups",	NULL, NULL, true, NULL },
    
     // Sales | Pricing
     { "menu",	tr("Pricing"),       (char*)pricingMenu,	mainMenu,	"true",	NULL, NULL, true, NULL },
     { "so.itemListPrice", tr("Item &List Price..."),	SLOT(sItemListPrice()), pricingMenu, "MaintainListPrices ViewListPrices",	NULL, NULL, true, NULL },
     { "so.updateListPricesByProductCategory", tr("&Update List Prices..."),	SLOT(sUpdateListPricesByProductCategory()), pricingMenu, "MaintainListPrices",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	pricingMenu,	"true",		NULL, NULL, true, NULL },
-    { "so.listPricingSchedules", tr("List Pricing &Schedules..."),	SLOT(sListPricingSchedules()), pricingMenu, "MaintainListPrices ViewListPrices",	NULL, NULL, _metrics->boolean("AllowListPriceSchedules"), NULL },
+    { "so.listPricingSchedules", tr("List Pricing &Schedules"),	SLOT(sListPricingSchedules()), pricingMenu, "MaintainListPrices ViewListPrices",	NULL, NULL, _metrics->boolean("AllowListPriceSchedules"), NULL },
     { "so.updateListPricingSchedules", tr("Update List Pricing Schedules..."),	SLOT(sUpdateListPrices()), pricingMenu, "UpdatePricingSchedules",	NULL, NULL, _metrics->boolean("AllowListPriceSchedules"), NULL },
-    { "so.listPricingScheduleAssignments", tr("List Pricing Schedule Assi&gnments..."),	SLOT(sListPricingScheduleAssignments()), pricingMenu, "AssignPricingSchedules",	NULL, NULL, _metrics->boolean("AllowListPriceSchedules"), NULL },
+    { "so.listPricingScheduleAssignments", tr("List Pricing Schedule Assi&gnments"),	SLOT(sListPricingScheduleAssignments()), pricingMenu, "AssignPricingSchedules",	NULL, NULL, _metrics->boolean("AllowListPriceSchedules"), NULL },
     { "separator",	NULL,	NULL,	pricingMenu,	"true",		NULL, NULL, _metrics->boolean("AllowListPriceSchedules"), NULL },
-    { "so.pricingSchedules", tr("Pricing &Schedules..."),	SLOT(sPricingSchedules()), pricingMenu, "MaintainListPrices ViewListPrices",	NULL, NULL, true, NULL },
+    { "so.pricingSchedules", tr("Pricing &Schedules"),	SLOT(sPricingSchedules()), pricingMenu, "MaintainListPrices ViewListPrices",	NULL, NULL, true, NULL },
     { "so.updatePricingSchedules", tr("Update Pricing Schedules..."),	SLOT(sUpdatePrices()), pricingMenu, "UpdatePricingSchedules",	NULL, NULL, true, NULL },
-    { "so.pricingScheduleAssignments", tr("Pricing Schedule Assi&gnments..."),	SLOT(sPricingScheduleAssignments()), pricingMenu, "AssignPricingSchedules",	NULL, NULL, true, NULL },
+    { "so.pricingScheduleAssignments", tr("Pricing Schedule Assi&gnments"),	SLOT(sPricingScheduleAssignments()), pricingMenu, "AssignPricingSchedules",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	pricingMenu,	"true",		NULL, NULL, true, NULL },
-    { "so.sales", tr("S&ales..."),	SLOT(sSales()), pricingMenu, "CreateSales",	NULL, NULL, true, NULL },
+    { "so.sales", tr("S&ales"),	SLOT(sSales()), pricingMenu, "CreateSales",	NULL, NULL, true, NULL },
     { "separator",	NULL,	NULL,	pricingMenu,	"true",		NULL, NULL, true, NULL },
 
     // Sales | Pricing | Reports
@@ -340,7 +340,7 @@ menuSales::menuSales(GUIClient *pParent) :
     { "sa.archieveSalesHistory", tr("&Archive Sales History..."), SLOT(sArchiveSalesHistory()), utilitiesMenu, "ArchiveSalesHistory", NULL, NULL, true , NULL },
     { "sa.restoreSalesHistory", tr("Restore &Sales History..."), SLOT(sRestoreSalesHistory()), utilitiesMenu, "RestoreSalesHistory", NULL, NULL, true , NULL },
 
-    { "so.setup",	tr("&Setup..."),	SLOT(sSetup()),	mainMenu,	NULL,	NULL,	NULL,	true, NULL	},
+    { "so.setup",	tr("&Setup"),	SLOT(sSetup()),	mainMenu,	NULL,	NULL,	NULL,	true, NULL	},
 
   };
 
@@ -637,7 +637,11 @@ void menuSales::sSales()
 
 void menuSales::sUpdatePrices()
 {
+  ParameterList params;
+  params.append("listpricesched", false);
+
   updatePrices newdlg(parent, "updatePrices", true);
+  newdlg.set(params);
   newdlg.exec();
 }
 

@@ -69,6 +69,7 @@ protected:
 
 private:
     int  _crmacctid;
+    int  _cntctid;
     int  _mode;
     int  _prospectid;
     int  _NumberGen;
@@ -76,6 +77,7 @@ private:
     bool _isSaved;
     bool _saved;
     bool _fromCRM;
+    bool _fromContact;
     QMap<QString, int> cmap;
     QString _cachedNumber;
     QString _crmowner;

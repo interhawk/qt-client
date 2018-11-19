@@ -58,6 +58,7 @@ class menuCRM : public QObject
     void sBuildCRMGroups();
 
     void sCreateRecurringItems();
+    void sDocuments();
     void sIncident();
     void sIncidentWorkbench();
     void sTask();
@@ -84,6 +85,7 @@ class menuCRM : public QObject
     QMenu *contactsMenu;
     QMenu *addressMenu;
     QMenu *prospectCRMMenu;
+    QMenu *documentsMenu;
     QMenu *utilitiesMenu;
     QMenu *opportunityMenu;
     

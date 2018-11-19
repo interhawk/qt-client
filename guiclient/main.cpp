@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -219,13 +219,11 @@ int main(int argc, char *argv[])
   _splash = new QSplashScreen();
   _splash->setPixmap(QPixmap(":/images/splashEmpty.png"));
 
-  _evaluation = false;
-
   QTranslator *translatorSys = new QTranslator(&app);
 
   QStringList lang;
   QLocale sysl = QLocale::system();
-  qDebug()<<sysl.name().toLower();
+  qDebug()<<sysl.name().toLower(); 
   if (sysl.language() != QLocale::C && sysl.language() != QLocale::English)
   {
     lang.append(sysl.name().toLower());
@@ -254,9 +252,6 @@ int main(int argc, char *argv[])
 
     if (haveEnhancedAuth)
       params.append("enhancedAuth", _enhancedAuth);
-
-    if (_evaluation)
-      params.append("evaluation");
 
     if ( (haveDatabaseURL) && (haveUsername) && (havePasswd) )
       params.append("login");

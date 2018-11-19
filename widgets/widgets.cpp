@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -35,6 +35,7 @@
 #include "plugins/deptclusterplugin.h"
 #include "plugins/dlineeditplugin.h"
 #include "plugins/documentsplugin.h"
+#include "plugins/docclusterplugin.h"
 #include "plugins/empclusterplugin.h"
 #include "plugins/expenseclusterplugin.h"
 #include "plugins/expenselineeditplugin.h"
@@ -120,6 +121,7 @@ xTuplePlugin::xTuplePlugin(QObject * parent) : QObject(parent)
   m_plugins.append(new DeptClusterPlugin(this));
   m_plugins.append(new DLineEditPlugin(this));
   m_plugins.append(new DocumentsPlugin(this));
+  m_plugins.append(new DocClusterPlugin(this));
   m_plugins.append(new EmpClusterPlugin(this));
   m_plugins.append(new ExpenseClusterPlugin(this));
   m_plugins.append(new ExpenseLineEditPlugin(this));

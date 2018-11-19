@@ -1,7 +1,7 @@
 #
 # This file is part of the xTuple ERP: PostBooks Edition, a free and
 # open source Enterprise Resource Planning software suite,
-# Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+# Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
 # It is licensed to you under the Common Public Attribution License
 # version 1.0, the full text of which (including xTuple-specific Exhibits)
 # is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -65,5 +65,9 @@ dictionaries.files = hunspell/*.aff hunspell/*.dic
 
 translations.path = $$absolute_path($${EXTRASDIR})/dict
 translations.files = $$replace(TRANSLATIONS, ts, qm)
-translations.extra = cd share/dict && $$dirname(QMAKE_QMAKE)/lrelease xTuple*.ts
+win32-msvc {
+  translations.extra = FOR %%f IN ( $${TRANSLATIONS} ) DO $$dirname(QMAKE_QMAKE)/lrelease %%f
+} else {
+  translations.extra = $$dirname(QMAKE_QMAKE)/lrelease $${TRANSLATIONS}
+}
 translations.CONFIG = no_check_exist

@@ -4,27 +4,17 @@ TARGET   = xtuplewidgets
 TEMPLATE = lib
 CONFIG  += qt warn_on plugin
 
-lessThan (QT_MINOR_VERSION, 6) : isEqual(QT_MAJOR_VERSION, 5) {
-  QT += webkit webkitwidgets
-} else {
-  QT += webengine webenginewidgets
-}
-
-QT      += core network printsupport script scripttools sql widgets xml
-QT      += designer serialport uitools webchannel websockets
-
-equals(QT_MAJOR_VERSION, 5) {
-  lessThan (QT_MINOR_VERSION, 9) {
-    QT += webkit webkitwidgets
-  }
-}
+QT      += core network printsupport script scripttools sql \
+           webengine webenginewidgets widgets xml
+QT      += designer printsupport serialport uitools \
+           webchannel websockets
 
 DBFILE       = widgets.db
 LANGUAGE     = C++
 INCLUDEPATH += ../common ../scriptapi .
 DEPENDPATH  += $${INCLUDEPATH} ../lib
 LIBS        += -lxtuplescriptapi -lxtuplecommon -lwrtembed \
-               -lrenderer -ldmtx -lqzint -lMetaSQL -lopenrptcommon
+               -lrenderer -lqzint -lMetaSQL -lopenrptcommon
 
 dynamic {
     CONFIG      += dll # plugin implies dll but this fixes a cross-compile problem
@@ -62,6 +52,7 @@ HEADERS += plugins/addressclusterplugin.h \
     plugins/deptclusterplugin.h \
     plugins/dlineeditplugin.h \
     plugins/documentsplugin.h \
+    plugins/docclusterplugin.h \
     plugins/empclusterplugin.h \
     plugins/empgroupclusterplugin.h \
     plugins/expenseclusterplugin.h \
@@ -151,11 +142,13 @@ SOURCES += widgets.cpp \
     datecluster.cpp \
     deptCluster.cpp \
     docAttach.cpp \
+    docCluster.cpp \
     documents.cpp \
     editwatermark.cpp \
     empcluster.cpp \
     empgroupcluster.cpp \
     expensecluster.cpp \
+    exportOptions.cpp \
     filecluster.cpp \
     filemoveselector.cpp \
     filterManager.cpp \
@@ -254,11 +247,13 @@ HEADERS += widgets.h \
     dcalendarpopup.h \
     deptcluster.h \
     docAttach.h \
+    doccluster.h \
     documents.h \
     editwatermark.h \
     empcluster.h \
     empgroupcluster.h \
     expensecluster.h \
+    exportOptions.h \
     filecluster.h \
     filemoveselector.h \
     filterManager.h \
@@ -340,6 +335,7 @@ FORMS += alarmMaint.ui \
     docAttach.ui \
     documents.ui \
     editwatermark.ui \
+    exportOptions.ui    \
     filemoveselector.ui \
     filterManager.ui \
     filterSave.ui \

@@ -159,7 +159,7 @@ to be bound by its terms.</comment>
    </hints>
   </connection>
   <connection>
-   <sender>_custgrp</sender>
+   <sender>_grp</sender>
    <signal>valid(bool)</signal>
    <receiver>_view</receiver>
    <slot>setEnabled(bool)</slot>

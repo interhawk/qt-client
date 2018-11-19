@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -26,6 +26,7 @@
 #include "metasql.h"
 #include "mqlutil.h"
 #include "xsqlquery.h"
+
 
 #define DEBUG false
 
@@ -903,4 +904,39 @@ void setupExportHelper(QScriptEngine *engine)
   obj.setProperty("XSLTConvertString", engine->newFunction(XSLTConvertString), QScriptValue::ReadOnly | QScriptValue::Undeletable);
 
   engine->globalObject().setProperty("ExportHelper", obj, QScriptValue::ReadOnly | QScriptValue::Undeletable);
+}
+
+QStringList ExportHelper::parseDelim(QString delim)
+{ 
+  QStringList delimItems; 
+  int i = delim.indexOf('{') ;
+  if ( i >=0)
+    delim.remove("{tab}");  
+  foreach(QChar c, delim)
+    delimItems.append(c);  
+  if(i>=0)
+    delimItems.insert(i,"{tab}");
+  return delimItems;
+}
+
+enum ExportHelper::delimCheck ExportHelper::validDelim(QString delim, QString &msg)
+{ 
+  QString disallowedChars = "(){}[]\"'`<>.{blank}";
+  QString discouragedChars = " @#$%&*_=-+/? ";
+  if (delim.length() > 1 && delim != "{tab}")
+  { 
+    msg = tr("Avoid delimiters more than 1 char long.");
+    return tooLong; // delim is too long
+  }
+  else if (disallowedChars.contains(delim))
+  {
+    msg = tr("%1 is not permitted as a delimiter. The following characters are not allowed: %2").arg(delim, disallowedChars);
+    return disallowed; // delim error
+  }
+  else if (discouragedChars.contains(delim))
+  {
+    msg = tr("%1 may cause problems. We suggest avoiding the following: %2").arg(delim, discouragedChars);
+    return disencouraged; // delim warning
+  }
+  return valid;
 }

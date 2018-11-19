@@ -2778,6 +2778,14 @@ Was möchten Sie tun?</translation>
         <source>Invalid type</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invalid Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have entered an invalid expression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CyberSourceProcessor</name>
@@ -2957,6 +2965,17 @@ Was möchten Sie tun?</translation>
     </message>
 </context>
 <context>
+    <name>DocClusterLineEdit</name>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished">Dokument</translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Dokumente</translation>
+    </message>
+</context>
+<context>
     <name>Documents</name>
     <message>
         <source>Engineering Reference</source>
@@ -3106,6 +3125,14 @@ Möchten Sie wirklich fortfahren?</translation>
     </message>
     <message>
         <source>Error Getting Document Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Url Open Error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3336,6 +3363,49 @@ zurückgegeben %2
         <translation>Der XSLT Prozessor meldete einen Fehler: %1
 %2</translation>
     </message>
+    <message>
+        <source>Avoid delimiters more than 1 char long.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is not permitted as a delimiter. The following characters are not allowed: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 may cause problems. We suggest avoiding the following: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExportOptions</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text, Other Separator (*.csv)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text VCF (*.vcf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text  (*.txt)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTML (*.html)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ODF Text Document (*.odt)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open on Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ExternalCCProcessor</name>
@@ -3487,10 +3557,6 @@ zurückgegeben %2
         <translation>/xTuple</translation>
     </message>
     <message>
-        <source>Unnamed Database</source>
-        <translation>Unbenannte Datenbank</translation>
-    </message>
-    <message>
         <source>Loading the Background Image</source>
         <translation>Laden das Hintergrundbild</translation>
     </message>
@@ -3579,10 +3645,6 @@ zurückgegeben %2
         <translation>Schnellhilfe</translation>
     </message>
     <message>
-        <source>%1 Evaluation %2 - Logged on as %3</source>
-        <translation>%1 Auswertung %2 - Angemeldet als %3</translation>
-    </message>
-    <message>
         <source>%1 %2 - %3 on %4:%5/%6 AS %7</source>
         <translation type="unfinished">%1 %2 - %3 auf %4/%5 als %7 {1 %2 ?} {3 ?} {4:%5/%6 ?}</translation>
     </message>
@@ -3616,6 +3678,14 @@ zurückgegeben %2
     </message>
     <message>
         <source>&lt;p&gt;Could not find spell checking files named&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt; in &lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[ unknown edition ]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not get user and edition</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5547,6 +5617,14 @@ zurückgegeben %2
         <source>Vendor Type Pattern</source>
         <translation>Anbieterart Schema</translation>
     </message>
+    <message>
+        <source>Invalid Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have entered an invalid expression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VendorLineEdit</name>
@@ -5882,6 +5960,17 @@ zurückgegeben %2
     </message>
 </context>
 <context>
+    <name>XClusterInputDialog</name>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Abbrechen</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+</context>
+<context>
     <name>XComboBoxPrivate</name>
     <message>
         <source>Edit List</source>
@@ -6208,10 +6297,6 @@ zurückgegeben %2
     <message>
         <source>Export Save Filename</source>
         <translation>Sicheren Dateinamen exportieren</translation>
-    </message>
-    <message>
-        <source>Text CSV (*.csv);;Text VCF (*.vcf);;Text (*.txt);;ODF Text Document (*.odt);;HTML Document (*.html)</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Column</source>
@@ -7273,6 +7358,10 @@ as an Address. Please select a CRM Account to use for the new Prospect:</source>
 %1
 as an Address. Please select a Prospect to edit:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Adresse</translation>
     </message>
 </context>
 <context>
@@ -10419,6 +10508,10 @@ Wollen Sie diese Änderung wirklich speichern?</translation>
         <source>Error Deleting BOM Cost Component</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> #</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>bomList</name>
@@ -13452,6 +13545,14 @@ Möchten Sie dies nun beheben?</translation>
         <source>Error Confirming Country Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>If checked, an unprivileged user can still view the document in a document listing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Documents in list(s) if unprivileged</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>configureEncryption</name>
@@ -13472,19 +13573,8 @@ Möchten Sie dies nun beheben?</translation>
         <translation>Schlüsseldatei Name:</translation>
     </message>
     <message>
-        <source>keyfile.txt</source>
-        <translation>keyfile.txt</translation>
-    </message>
-    <message>
         <source>Encryption Configuration</source>
         <translation>Verschlüsselungskonfiguration</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Lucida Grande&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;whatsthis for a label with a buddy that&apos;s an empty text field&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mac Location:</source>
@@ -13497,6 +13587,46 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Linux Location:</source>
         <translation>Linux Pfad</translation>
+    </message>
+    <message>
+        <source>&amp;Create Key File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encryption Key Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not create key file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encryption Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A key has been generated for your file. Please select this key or enter one of your own.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encryption Key Required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The file must have valid Encryption Key text entered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>xTuple Key File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The xTuple key file was generated. You will need to distribute the file to all users who need access to encrypted information (such as credit card or EFT information). The file must be located on each desktop in the directory specified on this screen. Once the key file has been used you cannot change the file without risking loss of data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The xTuple key file name has changed. Once the key file has been used you cannot change the file without risking loss of data. Do you wish to proceed?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14695,6 +14825,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Manual</source>
         <translation>Manuell</translation>
+    </message>
+    <message>
+        <source>Copy S/O Shipping notes to Purchase Orders</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16294,6 +16428,94 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Error Fetching CRM Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created Before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created After</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Updated Before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Updated After</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished">Erstellt</translation>
+    </message>
+    <message>
+        <source>Updated</source>
+        <translation type="unfinished">Aktualisiert</translation>
+    </message>
+    <message>
+        <source>Merge Contacts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Characteristic lookup failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace</source>
+        <translation type="unfinished">Ersetzen</translation>
+    </message>
+    <message>
+        <source>Characteristic option lookup failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bulk Replace?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected value will be replaced for all %1 selected items. Are you sure you want to do this?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact in Use</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact is used on an incident and cannot be deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marking failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unmarking failed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18663,6 +18885,18 @@ Bitte die Zählmarken-Menge überprüfen und erneut versuchen, zu verbuchen.</tr
         <source>&lt;p&gt;You must select a preassigned Lot/Serial number.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You cannot assign a quantity more than is remaining.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot assign a quantity more than was issued on the lot/serial.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Please enter an expiration date greater than today.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>createPlannedOrdersByItem</name>
@@ -18837,6 +19071,10 @@ Item: %2 - %3</source>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
+    </message>
+    <message>
+        <source>Sales Orders</source>
+        <translation type="unfinished">Verkaufsaufträge</translation>
     </message>
 </context>
 <context>
@@ -20888,10 +21126,6 @@ Bitte die Termine prüfen.</translation>
         <translation>Auf Kreditwarnung</translation>
     </message>
     <message>
-        <source>Registration #</source>
-        <translation>Registrierungsnr.</translation>
-    </message>
-    <message>
         <source>View</source>
         <translation>Ansehen</translation>
     </message>
@@ -20914,10 +21148,6 @@ Bitte die Termine prüfen.</translation>
     <message>
         <source>&amp;New</source>
         <translation>&amp;Neu</translation>
-    </message>
-    <message>
-        <source>Tax Authority</source>
-        <translation>Finanzbehörde</translation>
     </message>
     <message>
         <source>Are you sure that you want to delete this Ship To?</source>
@@ -20976,16 +21206,8 @@ Bitte die Termine prüfen.</translation>
         <translation>Hole Lieferanschriften</translation>
     </message>
     <message>
-        <source>Deleting Tax Registrations</source>
-        <translation>Lösche Steueranmeldungen</translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>Drucken</translation>
-    </message>
-    <message>
-        <source>Getting Tax Registrations</source>
-        <translation>Hole Steueranmeldungen</translation>
     </message>
     <message>
         <source>Getting Commission</source>
@@ -22966,6 +23188,50 @@ zu dem sie gelöscht werden sollen.</translation>
         <source>Ignore</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished">Hinweise:</translation>
+    </message>
+    <message>
+        <source>Characteristics</source>
+        <translation type="unfinished">Eigenschaften</translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add -&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;- Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Document:</source>
+        <translation type="unfinished">Dokument:</translation>
+    </message>
+    <message>
+        <source>Available Roles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned Roles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Adding Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Removing Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>documents</name>
@@ -24398,10 +24664,6 @@ Möchten Sie die Rechnung trotzdem verbuchen?</translation>
         <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
-        <source>Create &amp;Invoice</source>
-        <translation>&amp;Rechnung erstellen</translation>
-    </message>
-    <message>
         <source>Order #</source>
         <translation>Auftrag Nr.</translation>
     </message>
@@ -24471,6 +24733,10 @@ Möchten Sie die Rechnung trotzdem verbuchen?</translation>
     </message>
     <message>
         <source>Error Retrieving Billing Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create &amp;Invoice(s)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -26647,6 +26913,113 @@ Möchten Sie die Rechnung trotzdem verbuchen?</translation>
     </message>
 </context>
 <context>
+    <name>dspDocuments</name>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Dokumente</translation>
+    </message>
+    <message>
+        <source>Assigned To</source>
+        <translation type="unfinished">Zugewiesen an</translation>
+    </message>
+    <message>
+        <source>Created Start Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created By</source>
+        <translation type="unfinished">Erstellt von</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Art</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Nummer</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished">Titel</translation>
+    </message>
+    <message>
+        <source>Description/Notes</source>
+        <translation type="unfinished">Bezeichnung/Hinweise</translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished">Erstellt</translation>
+    </message>
+    <message>
+        <source>Can View</source>
+        <translation type="unfinished">Anzeigbar</translation>
+    </message>
+    <message>
+        <source>Can Edit</source>
+        <translation type="unfinished">Bearbeitbar</translation>
+    </message>
+    <message>
+        <source>File Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detach Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Open Error</source>
+        <translation type="unfinished">Fehler beim Öffnen der Datei</translation>
+    </message>
+    <message>
+        <source>Could Not Create File %1.</source>
+        <translation type="unfinished">Datei %1 konnte nicht erstellt werden.</translation>
+    </message>
+    <message>
+        <source>Could not open %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Getting Assignment</source>
+        <translation type="unfinished">Fehler beim Ermitteln der Zuweisung</translation>
+    </message>
+    <message>
+        <source>Url Open Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Determining Target Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not determine the ui form to open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>dspEarnedCommissions</name>
     <message>
         <source>Include Misc. Charges and Items</source>
@@ -28131,10 +28504,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Available QOH</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A Class</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28153,6 +28522,10 @@ Total</source>
     <message>
         <source>Reserved</source>
         <translation type="unfinished">Reserviert</translation>
+    </message>
+    <message>
+        <source>Current QOH Avail.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37701,10 +38074,6 @@ Rate</source>
         <translation>Nr.</translation>
     </message>
     <message>
-        <source>Value</source>
-        <translation>Wert</translation>
-    </message>
-    <message>
         <source>Mark as Invoiced...</source>
         <translation>Als in Rng. gestellt markieren...</translation>
     </message>
@@ -37750,6 +38119,14 @@ Rate</source>
     </message>
     <message>
         <source>Error Retrieving Receiving Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cost Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P/O Value</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -40221,6 +40598,14 @@ Möchten Sie automatisch eine Gutschrift erstellen gegen diese Rückgabe?</trans
     </message>
     <message>
         <source>Error Saving PO Receipt Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inactive Item Site</source>
+        <translation type="unfinished">Inaktiver Artikelstandort</translation>
+    </message>
+    <message>
+        <source>The Item Site is marked inactive and cannot be receipted against. Please correct this before proceeding.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -47055,16 +47440,6 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
         <translation></translation>
     </message>
     <message>
-        <source>Item Number %1 in Site %2 is a Multiple Location or
-Lot/Serial controlled Item which is short on Inventory.
-This transaction cannot be completed as is. Please make
-sure there is sufficient Quantity on Hand before proceeding.</source>
-        <translation>Artikelnummer %1 in Standort %1 ist ein Mehrfach-Lagerort- oder
-Chargen-/Serien-kontrollierter Artikel, der zu kurz im Warenbestand ist.
-Diese Transaktion kann nicht abgeschlossen werden, solange dies so ist.
-Vor dem Fortfahren bitte sicherstellen, daß der Ist-Vorrat ausreicht.</translation>
-    </message>
-    <message>
         <source>Material Issue</source>
         <translation>Materialausgabe</translation>
     </message>
@@ -47121,10 +47496,6 @@ Vor dem Fortfahren bitte sicherstellen, daß der Ist-Vorrat ausreicht.</translat
         <translation>Knapp</translation>
     </message>
     <message>
-        <source>Insufficient Inventory</source>
-        <translation>Ungenügender Warenbestand</translation>
-    </message>
-    <message>
         <source>Push</source>
         <translation>Anstoßen</translation>
     </message>
@@ -47157,10 +47528,6 @@ Vor dem Fortfahren bitte sicherstellen, daß der Ist-Vorrat ausreicht.</translat
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>One or more items cannot be issued due to insufficient inventory. Issue all other items?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Posting distribution detail for item number %1 was cancelled but there are more items to issue. Continue issuing the remaining materials?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47189,6 +47556,10 @@ Vor dem Fortfahren bitte sicherstellen, daß der Ist-Vorrat ausreicht.</translat
     </message>
     <message>
         <source>There is no Qty to Issue.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The following items cannot be issued due to insufficient inventory:&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;. Issue all other items?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -47895,6 +48266,14 @@ Vor dem Fortfahren bitte sicherstellen, daß der Ist-Vorrat ausreicht.</translat
         <source>Error Fetching BOM</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Loc. Cntrl.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You have changed the Item Type of this Item. To ensure Item Sites do not have invalid settings, all Item Sites for it are inactivated before this change may occur.  However open orders exist for one or more of the Item Sites so inactivating the Site will fail.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>itemAlias</name>
@@ -48235,6 +48614,14 @@ You may not create duplicate Item Aliases.</source>
     <message>
         <source>The selected Group is already a child of this Item Group</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Characteristics</source>
+        <translation type="unfinished">Eigenschaften</translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Dokumente</translation>
     </message>
 </context>
 <context>
@@ -49180,10 +49567,6 @@ Sie müssen erst diese Zuweisungen löschen, bevor Sie den gewählten Preisbildu
         <translation>S&amp;chliessen</translation>
     </message>
     <message>
-        <source>Stocked</source>
-        <translation>Auf Vorrat</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
@@ -49590,6 +49973,14 @@ Sie müssen erst diese Zuweisungen löschen, bevor Sie den gewählten Preisbildu
     </message>
     <message>
         <source>&lt;p&gt;You cannot change the Control Method to None when inventory exists at this Site.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suppress Automatic Order Creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculate Inventory Buffer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -50054,12 +50445,6 @@ bevor Sie diese Artikelquelle sichern können.</translation>
     </message>
     <message>
         <source>Contracted Qty:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>An Item Source already exists for the Item Number, Vendor,
-Contract, Effective Date, Expires Date,
-Vendor Item, Manfacturer Name and Manufacturer Item Number you have specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -51163,18 +51548,8 @@ Sie müssen die Sprachumgebungen dieser Benutzer erneut zuweisen, bevor Sie die 
         <translation>Version</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Sorry, can&apos;t connect to the specified xTuple ERP server. &lt;p&gt;This may be due to a problem with your user name, password, or server connection information. &lt;p&gt;Below is more detail on the connection problem: &lt;p&gt;%1</source>
-        <translation>&lt;p&gt;Konnte die Verbindung zu dem festgelegten xTuple ERP-Server nicht herstellen.&lt;p&gt;Dies könnte an einem Problem mit Ihrem Benutzernamen, Passwort oder der Serververbindungs-Information liegen.&lt;p&gt;Hier weitere Details zum Verbindungsproblem: &lt;p&gt;%1</translation>
-    </message>
-    <message>
         <source>Log In</source>
         <translation>Anmelden</translation>
-    </message>
-    <message>
-        <source>A System Error occurred at %1::%2:
-%3</source>
-        <translation>Ein Systemfehler ist aufgetreten bei %1::%2:
-%3</translation>
     </message>
     <message>
         <source>Build: </source>
@@ -51209,10 +51584,6 @@ Sie müssen die Sprachumgebungen dieser Benutzer erneut zuweisen, bevor Sie die 
         <translation>&lt;p&gt;Eine oder mehr Verbindungsoptionen fehlen. Bitte prüfen Sie, ob Sie Hostname, Datenbankname und alle weiteren benötigten Optionen festgelegt haben.</translation>
     </message>
     <message>
-        <source>&lt;p&gt;An unknown error occurred at %1::%2. You may not log in to the specified xTuple ERP Server at this time.</source>
-        <translation>&lt;p&gt;Ein Unbekannter Fehler ist aufgetreten bei %1::%2. Sie können sich zur festgelegten Zeit womöglich nicht am gewählten xTuple ERP Server anmelden.</translation>
-    </message>
-    <message>
         <source>Password:</source>
         <translation type="unfinished">Passwort:</translation>
     </message>
@@ -51245,7 +51616,19 @@ Sie müssen die Sprachumgebungen dieser Benutzer erneut zuweisen, bevor Sie die 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;The database &quot;%1&quot; does not appear to be a valid xTuple database.&lt;/p&gt;&lt;p&gt;Please check the database name and try again.&lt;/p&gt;</source>
+        <source>&lt;p&gt;Sorry, can&apos;t connect to the specified xTuple ERP server:&lt;/p&gt;&lt;pre&gt;%1&lt;/pre&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&apos;%1&apos; does not appear to be a valid xTuple database.&lt;/p&gt;&lt;p&gt;Please check the database name and try again.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not set the time zone: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not set up database session properly: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -52156,18 +52539,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
 <context>
     <name>menuAccounting</name>
     <message>
-        <source>Su&amp;mmarized Transactions...</source>
-        <translation type="unfinished">Zusammen&amp;gefaßte Transaktionen...</translation>
-    </message>
-    <message>
-        <source>&amp;List Open...</source>
-        <translation>&amp;Offene auflisten...</translation>
-    </message>
-    <message>
-        <source>Open &amp;Payables...</source>
-        <translation>Offene &amp;Verbindlichkeiten...</translation>
-    </message>
-    <message>
         <source>Reconcile Bank Account</source>
         <translation>Bankkonto abgleichen</translation>
     </message>
@@ -52178,10 +52549,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>&amp;Release...</source>
         <translation>&amp;Freigeben...</translation>
-    </message>
-    <message>
-        <source>&amp;Open Receivables...</source>
-        <translation>&amp;Offene Forderungen...</translation>
     </message>
     <message>
         <source>Receivables Aging</source>
@@ -52200,52 +52567,20 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>Buchführung Werkzeuge</translation>
     </message>
     <message>
-        <source>Tax &amp;Zones...</source>
-        <translation>Steuer&amp;gebiete...</translation>
-    </message>
-    <message>
         <source>Accounts &amp;Payable</source>
         <translation>Verb&amp;indlichkeiten</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Classes...</source>
-        <translation>Steuer&amp;klassen...</translation>
     </message>
     <message>
         <source>Purchase &amp;Order</source>
         <translation>&amp;Einkaufsauftrag</translation>
     </message>
     <message>
-        <source>&amp;Customers...</source>
-        <translation>&amp;Kunden...</translation>
-    </message>
-    <message>
         <source>List Unposted Journal Entries</source>
         <translation>Unverbuchte Journaleinträge auflisten</translation>
     </message>
     <message>
-        <source>&amp;Tax History...</source>
-        <translation>Steuer &amp;Rückschau...</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Neu...</translation>
-    </message>
-    <message>
-        <source>Tax Assi&amp;gnments...</source>
-        <translation>Steuer&amp;zuweisungen...</translation>
-    </message>
-    <message>
-        <source>&amp;List Unposted...</source>
-        <translation>&amp;Unverbuchte auflisten...</translation>
-    </message>
-    <message>
         <source>&amp;Post...</source>
         <translation>&amp;Verbuchen...</translation>
-    </message>
-    <message>
-        <source>&amp;List Recurring Invoices...</source>
-        <translation>&amp;Wiederkehrende Rechnungen auflisten...</translation>
     </message>
     <message>
         <source>&amp;Voucher</source>
@@ -52256,28 +52591,8 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>Bareinnahme Bearbeitungsliste</translation>
     </message>
     <message>
-        <source>New &amp;Miscellaneous...</source>
-        <translation>Neu &amp;Sonstiges...</translation>
-    </message>
-    <message>
         <source>&amp;Memos</source>
         <translation>&amp;Gut-/Lastschriften</translation>
-    </message>
-    <message>
-        <source>&amp;New Misc. Credit Memo...</source>
-        <translation>&amp;Neue Sonst. Gutschrift...</translation>
-    </message>
-    <message>
-        <source>&amp;List Unapplied Credit Memos...</source>
-        <translation>Nichtau&amp;fgetragene Gutschriften auflisten...</translation>
-    </message>
-    <message>
-        <source>&amp;Transactions...</source>
-        <translation>&amp;Transaktionen...</translation>
-    </message>
-    <message>
-        <source>New &amp;Misc. Debit Memo...</source>
-        <translation>Neue &amp;Sonst. Lastschrift...</translation>
     </message>
     <message>
         <source>List Unposted Invoices</source>
@@ -52316,18 +52631,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Berichte</translation>
     </message>
     <message>
-        <source>&amp;Uninvoiced Receipts and Returns...</source>
-        <translation>&amp;Nicht in Rng. gestellte Eingänge und Rückgaben...</translation>
-    </message>
-    <message>
-        <source>&amp;Voucher Register...</source>
-        <translation>Bezugsbeleg&amp;register...</translation>
-    </message>
-    <message>
-        <source>Ve&amp;ndors...</source>
-        <translation>&amp;Anbieter...</translation>
-    </message>
-    <message>
         <source>Accounts Recei&amp;vable</source>
         <translation>Forderun&amp;gen</translation>
     </message>
@@ -52344,27 +52647,11 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>Liste &amp;bearbeiten...</translation>
     </message>
     <message>
-        <source>Cash &amp;Receipts...</source>
-        <translation>Bar&amp;einnahmen...</translation>
-    </message>
-    <message>
-        <source>&amp;Deposits Register...</source>
-        <translation>&amp;&amp;Anzahlungen Register...</translation>
-    </message>
-    <message>
-        <source>Customer &amp;History...</source>
-        <translation>Kunden &amp;Rückschau...</translation>
-    </message>
-    <message>
         <source>General &amp;Ledger</source>
         <translation>&amp;Hauptbuch</translation>
     </message>
     <message>
         <source>&amp;Post Journals to Ledger...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Journals...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -52376,148 +52663,36 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>S&amp;imple...</source>
-        <translation>E&amp;infach...</translation>
-    </message>
-    <message>
-        <source>&amp;Series...</source>
-        <translation>&amp;Serie...</translation>
-    </message>
-    <message>
         <source>&amp;Standard Journals</source>
         <translation>&amp;Standardjournale</translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>Auf&amp;listen...</translation>
-    </message>
-    <message>
-        <source>List &amp;Groups...</source>
-        <translation>&amp;Gruppen auflisten...</translation>
     </message>
     <message>
         <source>Post G&amp;roup...</source>
         <translation>G&amp;ruppe verbuchen...</translation>
     </message>
     <message>
-        <source>Adjustment Edit &amp;List...</source>
-        <translation>Be&amp;reinigung Bearbeitungsliste...</translation>
-    </message>
-    <message>
-        <source>Standard &amp;Journal History...</source>
-        <translation>Rückschau Standard&amp;journal...</translation>
-    </message>
-    <message>
         <source>Financial &amp;Statements</source>
         <translation>Jahresabschl&amp;üsse</translation>
-    </message>
-    <message>
-        <source>&amp;New Financial Report...</source>
-        <translation>&amp;Neuer Geschäftsbericht...</translation>
-    </message>
-    <message>
-        <source>&amp;List Financial Reports...</source>
-        <translation>Gesch&amp;äftsberichte auflisten...</translation>
-    </message>
-    <message>
-        <source>View &amp;Trial Balances...</source>
-        <translation>&amp;Rohbilanz ansehen...</translation>
-    </message>
-    <message>
-        <source>View &amp;Financial Report...</source>
-        <translation>&amp;Geschäftsbericht ansehen...</translation>
     </message>
     <message>
         <source>&amp;Fiscal Calendar</source>
         <translation>&amp;Geschäftsjahr</translation>
     </message>
     <message>
-        <source>Fiscal &amp;Years...</source>
-        <translation>Geschäfts&amp;jahre...</translation>
-    </message>
-    <message>
-        <source>Accounting &amp;Periods...</source>
-        <translation>Buchungs&amp;perioden...</translation>
-    </message>
-    <message>
-        <source>C&amp;ompanies...</source>
-        <translation>&amp;Firmen...</translation>
-    </message>
-    <message>
-        <source>&amp;Profit Center Numbers...</source>
-        <translation>&amp;Profit-Center Nummern...</translation>
-    </message>
-    <message>
-        <source>&amp;Subaccount Numbers...</source>
-        <translation>&amp;Unterkonto-Nummern...</translation>
-    </message>
-    <message>
-        <source>&amp;Chart of Accounts...</source>
-        <translation>&amp;Kontenplan...</translation>
-    </message>
-    <message>
-        <source>Su&amp;baccount Types...</source>
-        <translation>Unter&amp;konto-Arten...</translation>
-    </message>
-    <message>
         <source>Bu&amp;dget</source>
         <translation>Bu&amp;dget</translation>
-    </message>
-    <message>
-        <source>&amp;List Budgets...</source>
-        <translation>B&amp;udgets auflisten...</translation>
     </message>
     <message>
         <source>&amp;Tax</source>
         <translation>&amp;Steuer</translation>
     </message>
     <message>
-        <source>Tax &amp;Authorities...</source>
-        <translation>&amp;Finanzbehörden...</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Codes...</source>
-        <translation>Steuer&amp;schlüssel...</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Types...</source>
-        <translation>Steuerar&amp;ten...</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Registrations...</source>
-        <translation>Steuer&amp;anmeldungen...</translation>
-    </message>
-    <message>
-        <source>&amp;Duplicate Account Numbers...</source>
-        <translation>&amp;Doppelte Kontonummern...</translation>
-    </message>
-    <message>
-        <source>&amp;Update Late Customer Credit Status...</source>
-        <translation>Letzten Status Kundenkreditstatus akt&amp;ualisieren...</translation>
-    </message>
-    <message>
         <source>&amp;Aging...</source>
         <translation>Ausla&amp;gerung...</translation>
     </message>
     <message>
-        <source>&amp;Workbench...</source>
-        <translation>&amp;Workbench...</translation>
-    </message>
-    <message>
-        <source>A&amp;ging...</source>
-        <translation>Auslage&amp;rung...</translation>
-    </message>
-    <message>
-        <source>&amp;Applications...</source>
-        <translation>Au&amp;ftragungen...</translation>
-    </message>
-    <message>
         <source>&amp;Synchronize Companies</source>
         <translation>Firmen s&amp;ynchronisieren</translation>
-    </message>
-    <message>
-        <source>Vendor &amp;History...</source>
-        <translation>Anbieter &amp;Rückschau...</translation>
     </message>
     <message>
         <source>Print &amp;Invoices...</source>
@@ -52530,10 +52705,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>&amp;Re-Print Invoices...</source>
         <translation>Rechnungen &amp;erneut drucken...</translation>
-    </message>
-    <message>
-        <source>In&amp;voice Register...</source>
-        <translation>Rechnungsreg&amp;ister...</translation>
     </message>
     <message>
         <source>Print State&amp;ments by Customer Type...</source>
@@ -52550,14 +52721,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>&amp;Bank Reconciliation</source>
         <translation>&amp;Bankabgleich</translation>
-    </message>
-    <message>
-        <source>&amp;New Adjustment...</source>
-        <translation>&amp;Neue Bereinigung...</translation>
-    </message>
-    <message>
-        <source>&amp;New Budget...</source>
-        <translation>&amp;Neues Budget...</translation>
     </message>
     <message>
         <source>&amp;Forward Update Accounts...</source>
@@ -52580,15 +52743,7 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;List Approved...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Prepare Payment Run...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create &amp;Miscellaneous Payment...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -52616,10 +52771,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Payment Register...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Assess Finance Charges...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -52632,15 +52783,251 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Tax Return...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Info for 1099...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ledger Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;List Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New &amp;Miscellaneous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Misc. Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unapplied Credit Memos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New &amp;Misc. Debit Memoz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Approved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create &amp;Miscellaneous Payment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Workbench</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Uninvoiced Receipts and Returns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open &amp;Payables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Payment Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Voucher Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vendor &amp;History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ve&amp;ndors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Recurring Invoices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New &amp;Misc. Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open Receivables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A&amp;ging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In&amp;voice Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cash &amp;Receipts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Deposits Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer &amp;History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Customers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;imple</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List &amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Transactions</source>
+        <translation type="unfinished">&amp;Transaktionen</translation>
+    </message>
+    <message>
+        <source>Su&amp;mmarized Transactions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard &amp;Journal History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Journals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Adjustment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjustment Edit &amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Financial Report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Financial Reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;Trial Balances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;Financial Report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fiscal &amp;Years</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accounting &amp;Periods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Chart of Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C&amp;ompanies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Profit Center Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Subaccount Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Su&amp;baccount Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Budget</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Budgets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Authorities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Zones</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Classes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Codes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Assi&amp;gnments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Registrations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tax History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tax Return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Info for 1099</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Duplicate Account Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Update Late Customer Credit Status</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -52673,14 +53060,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>&amp;To-Do</source>
         <translation>&amp;Zu erledigen</translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>Auf&amp;listen...</translation>
-    </message>
-    <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pro&amp;ject</source>
@@ -52746,13 +53125,25 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <source>Merge &amp;Accounts...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Dokumente</translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>menuInventory</name>
-    <message>
-        <source>&amp;List Open...</source>
-        <translation type="unfinished">&amp;Offene auflisten...</translation>
-    </message>
     <message>
         <source>&amp;Print Receiving Labels...</source>
         <translation>Eingangs&amp;etiketten drucken...</translation>
@@ -52842,10 +53233,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished">&amp;Rückschau...</translation>
     </message>
     <message>
-        <source>&amp;Backlog...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>History by Lo&amp;cation...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -52883,10 +53270,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     </message>
     <message>
         <source>by &amp;Transfer Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Setup...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -52938,10 +53321,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>Transfer-&amp;Auftrag</translation>
     </message>
     <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Neu...</translation>
-    </message>
-    <message>
         <source>&amp;Physical Inventory</source>
         <translation>&amp;Realer Warenbestand</translation>
     </message>
@@ -52966,28 +53345,8 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>nach &amp;Artikel...</translation>
     </message>
     <message>
-        <source>Create C&amp;ycle Count Tags...</source>
-        <translation>Zählmarken-Z&amp;yklus erstellen...</translation>
-    </message>
-    <message>
         <source>&amp;Valid Locations by Item...</source>
         <translation>&amp;Gültige Lagerorte nach Artikel...</translation>
-    </message>
-    <message>
-        <source>Enter Count &amp;Slip...</source>
-        <translation>&amp;Zählbeleg eingeben...</translation>
-    </message>
-    <message>
-        <source>Enter Count &amp;Tag...</source>
-        <translation>Zähl&amp;marke eingeben...</translation>
-    </message>
-    <message>
-        <source>Enter &amp;Misc. Inventory Count...</source>
-        <translation>&amp;Sonst. Warenbestandszähler eingeben...</translation>
-    </message>
-    <message>
-        <source>&amp;Zero Uncounted Count Tags...</source>
-        <translation>Ungezählte Zählmarken auf &amp;Null setzen...</translation>
     </message>
     <message>
         <source>Tha&amp;w Item Sites...</source>
@@ -52996,14 +53355,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>Print &amp;Item Labels...</source>
         <translation>&amp;Artikeletiketten drucken...</translation>
-    </message>
-    <message>
-        <source>Post Count S&amp;lips...</source>
-        <translation>&amp;Zählbelege verbuchen...</translation>
-    </message>
-    <message>
-        <source>Post Count T&amp;ags...</source>
-        <translation>Zähl&amp;marken verbuchen...</translation>
     </message>
     <message>
         <source>&amp;Purge Posted Count Slips...</source>
@@ -53016,10 +53367,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>&amp;Reports</source>
         <translation>&amp;Berichte</translation>
-    </message>
-    <message>
-        <source>&amp;Frozen Item Sites...</source>
-        <translation>Ein&amp;gefrorene Standorte...</translation>
     </message>
     <message>
         <source>Count S&amp;lip Edit List...</source>
@@ -53042,14 +53389,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Wareneingang</translation>
     </message>
     <message>
-        <source>&amp;New Receipt...</source>
-        <translation>&amp;Neuer Wareneingang...</translation>
-    </message>
-    <message>
-        <source>&amp;List Unposted Receipts...</source>
-        <translation>&amp;Unverbuchte Wareneingänge auflisten...</translation>
-    </message>
-    <message>
         <source>&amp;Expired Inventory...</source>
         <translation>&amp;Erloschener Warenbestand...</translation>
     </message>
@@ -53060,10 +53399,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>Time &amp;Phased Usage Statistics...</source>
         <translation>Zeit&amp;gesteuerte Benutzerstatistik...</translation>
-    </message>
-    <message>
-        <source>L&amp;ocations...</source>
-        <translation>Lager&amp;orte...</translation>
     </message>
     <message>
         <source>&amp;Item Site</source>
@@ -53114,10 +53449,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Dienstprogramme</translation>
     </message>
     <message>
-        <source>&amp;Maintain Shipping Contents...</source>
-        <translation>Versandinhalt &amp;pflegen...</translation>
-    </message>
-    <message>
         <source>&amp;Ship Order...</source>
         <translation>Auftrag aus&amp;liefern...</translation>
     </message>
@@ -53154,10 +53485,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Bestellen bis zum Level von</translation>
     </message>
     <message>
-        <source>&amp;Create Item Sites...</source>
-        <translation>&amp;Artikelstandorte erstellen...</translation>
-    </message>
-    <message>
         <source>&amp;Inventory</source>
         <translation>&amp;Warenbestand</translation>
     </message>
@@ -53185,13 +53512,81 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <source>&amp;Quantities On Hand By &amp;Zone...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;List Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create C&amp;ycle Count Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Count &amp;Slip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Count &amp;Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter &amp;Misc. Inventory Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Zero Uncounted Count Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Count S&amp;lips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Count T&amp;ags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Frozen Item Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted Receipts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Maintain Shipping Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Backlog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>L&amp;ocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Create Item Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>menuManufacture</name>
-    <message>
-        <source>&amp;Setup...</source>
-        <translation></translation>
-    </message>
     <message>
         <source>C&amp;orrect Production Posting...</source>
         <translation>&amp;Produktionverbuchung korrigieren...</translation>
@@ -53211,10 +53606,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>Work Order Schedule by Planner Code</source>
         <translation>Fertigungsauftrag Zeitplan nach Planungsschlüssel</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Neu...</translation>
     </message>
     <message>
         <source>E&amp;xplode...</source>
@@ -53372,20 +53763,20 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <source>Material &amp;Usage Variance</source>
         <translation>Mater&amp;ialverwendungsabweichung</translation>
     </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>menuProducts</name>
     <message>
-        <source>&amp;Setup...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&amp;Utilities</source>
         <translation>&amp;Dienstprogramme</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Neu...</translation>
     </message>
     <message>
         <source>&amp;Indented...</source>
@@ -53448,14 +53839,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Klassenschlüssel neu zuweisen...</translation>
     </message>
     <message>
-        <source>Undefined &amp;Manufactured Items...</source>
-        <translation>Nicht definierte a&amp;ngefertigte Artikel...</translation>
-    </message>
-    <message>
-        <source>Bills of Ma&amp;terials without Component Item Sites...</source>
-        <translation>S&amp;tücklisten ohne Standorte Bestandteilartikel...</translation>
-    </message>
-    <message>
         <source>&amp;Pending BOM Changes...</source>
         <translation>Anh&amp;ängige Stücklisten-Änderungen...</translation>
     </message>
@@ -53482,10 +53865,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>&amp;Single Level...</source>
         <translation>Einst&amp;ufig...</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation>&amp;Gruppen...</translation>
     </message>
     <message>
         <source>&amp;Bills of Materials</source>
@@ -53547,6 +53926,30 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <source>&amp;User-Defined Costing Elements...</source>
         <translation>&amp;Benutzerdef. Kostenermittlungsbestandteile...</translation>
     </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undefined &amp;Manufactured Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bills of Ma&amp;terials without Component Item Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>menuPurchase</name>
@@ -53607,10 +54010,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>Offene Einkaufsaufträge auflisten</translation>
     </message>
     <message>
-        <source>&amp;List Open...</source>
-        <translation>&amp;Offene auflisten...</translation>
-    </message>
-    <message>
         <source>&amp;Purchase Orders</source>
         <translation>&amp;Einkaufsaufträge</translation>
     </message>
@@ -53627,24 +54026,12 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Freigeben...</translation>
     </message>
     <message>
-        <source>Item &amp;Sites...</source>
-        <translation>Artikelstand&amp;orte...</translation>
-    </message>
-    <message>
-        <source>New &amp;Miscellaneous...</source>
-        <translation>Neu &amp;Sonstiges...</translation>
-    </message>
-    <message>
         <source>&amp;Voucher</source>
         <translation>&amp;Bezugsbeleg</translation>
     </message>
     <message>
         <source>&amp;Add Comment...</source>
         <translation>&amp;Bemerkung hinzufügen...</translation>
-    </message>
-    <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>P&amp;urchase</source>
@@ -53675,10 +54062,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Neu...</translation>
-    </message>
-    <message>
         <source>&amp;Close...</source>
         <translation>S&amp;chliessen...</translation>
     </message>
@@ -53699,16 +54082,8 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>Einkaufs&amp;anfragen</translation>
     </message>
     <message>
-        <source>&amp;List Unposted...</source>
-        <translation>&amp;Unverbuchte auflisten...</translation>
-    </message>
-    <message>
         <source>&amp;Reschedule...</source>
         <translation>Um&amp;terminieren...</translation>
-    </message>
-    <message>
-        <source>&amp;Uninvoiced Receipts and Returns...</source>
-        <translation>&amp;Nicht in Rng. gestellte Eingänge und Rückgaben...</translation>
     </message>
     <message>
         <source>Price &amp;Variances</source>
@@ -53721,14 +54096,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>&amp;Item Source</source>
         <translation>Artikel&amp;quelle</translation>
-    </message>
-    <message>
-        <source>&amp;Items without Item Sources...</source>
-        <translation>Artikel o&amp;hne Artikelquellen...</translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>Auf&amp;listen...</translation>
     </message>
     <message>
         <source>&amp;Utilities</source>
@@ -53747,7 +54114,43 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished">&amp;Suchlauf</translation>
     </message>
     <message>
-        <source>&amp;Item Source Prices...</source>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;List Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New &amp;Miscellaneous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Item &amp;Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Item Source Prices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Uninvoiced Receipts and Returns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Items without Item Sources</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -53758,48 +54161,16 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation></translation>
     </message>
     <message>
-        <source>&amp;Edit List...</source>
-        <translation>Liste &amp;bearbeiten...</translation>
-    </message>
-    <message>
-        <source>Time &amp;Phased Sales History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Post &amp;Invoices...</source>
         <translation>&amp;Rechnungen verbuchen...</translation>
-    </message>
-    <message>
-        <source>Inventory &amp;Availability...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Invoice</source>
         <translation>R&amp;echnung</translation>
     </message>
     <message>
-        <source>Sales &amp;History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Sales Order</source>
         <translation>&amp;Verkaufsauftrag</translation>
-    </message>
-    <message>
-        <source>&amp;Backlog...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Summari&amp;zed Sales History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;List Unposted...</source>
-        <translation>&amp;Unverbuchte auflisten...</translation>
     </message>
     <message>
         <source>Availability by &amp;Sales Order...</source>
@@ -53810,44 +54181,16 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Formulare</translation>
     </message>
     <message>
-        <source>&amp;Bookings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;List Unposted Invoices...</source>
-        <translation>&amp;Unverbuchte Rechnungen auflisten...</translation>
-    </message>
-    <message>
-        <source>Brie&amp;f Sales History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Post...</source>
         <translation>&amp;Verbuchen...</translation>
-    </message>
-    <message>
-        <source>T&amp;ime Phased Bookings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B&amp;rief Earned Commissions...</source>
-        <translation>Kurzbericht: &amp;Erworbene Provisionen...</translation>
     </message>
     <message>
         <source>Purge &amp;Invoices...</source>
         <translation>&amp;Rechnungen eleminieren...</translation>
     </message>
     <message>
-        <source>&amp;Earned Commissions...</source>
-        <translation>&amp;Erworbene Provisionen...</translation>
-    </message>
-    <message>
         <source>&amp;Print Invoices...</source>
         <translation>&amp;Rechnungen drucken...</translation>
-    </message>
-    <message>
-        <source>Su&amp;mmarized Backlog...</source>
-        <translation>Zusa&amp;mmengefaßter Auftragsrückstand...</translation>
     </message>
     <message>
         <source>Sales Tools</source>
@@ -53894,10 +54237,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>Nicht in Rng. gestellte Auslieferungen</translation>
     </message>
     <message>
-        <source>&amp;List Open...</source>
-        <translation>&amp;Offene auflisten...</translation>
-    </message>
-    <message>
         <source>Packing &amp;List Batch...</source>
         <translation>Pack&amp;listenstapel...</translation>
     </message>
@@ -53918,10 +54257,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Packliste drucken...</translation>
     </message>
     <message>
-        <source>Tax History...</source>
-        <translation>Steuer Rückschau...</translation>
-    </message>
-    <message>
         <source>Summarized Backlog</source>
         <translation>Zusammengefaßter Auftragsrückstand</translation>
     </message>
@@ -53934,14 +54269,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Kreditstatus nach Kunde aktualisieren...</translation>
     </message>
     <message>
-        <source>&amp;Uninvoiced Shipments...</source>
-        <translation>&amp;Nicht in Rng. gestellte Auslieferungen...</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation>&amp;Gruppen...</translation>
-    </message>
-    <message>
         <source>&amp;Prospect</source>
         <translation>&amp;Interessent</translation>
     </message>
@@ -53952,10 +54279,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     <message>
         <source>Customer Workbench</source>
         <translation>Kunden Workbench</translation>
-    </message>
-    <message>
-        <source>Pricing &amp;Schedules...</source>
-        <translation>Preisbildungs&amp;zeitpläne...</translation>
     </message>
     <message>
         <source>&amp;Workbench...</source>
@@ -53982,14 +54305,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Listenpreise aktualisieren...</translation>
     </message>
     <message>
-        <source>Pricing Schedule Assi&amp;gnments...</source>
-        <translation>Zu&amp;weisungen Preisbildungszeitplan...</translation>
-    </message>
-    <message>
-        <source>S&amp;ales...</source>
-        <translation>U&amp;msatz...</translation>
-    </message>
-    <message>
         <source>&amp;Utilities</source>
         <translation>&amp;Dienstprogramme</translation>
     </message>
@@ -54014,14 +54329,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>nach &amp;Artikel...</translation>
     </message>
     <message>
-        <source>&amp;Partially Shipped Orders...</source>
-        <translation>&amp;Teilw. ausgelieferte Aufträge...</translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>Auf&amp;listen...</translation>
-    </message>
-    <message>
         <source>by &amp;Customer...</source>
         <translation>nach &amp;Kunde...</translation>
     </message>
@@ -54034,20 +54341,12 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Angebot</translation>
     </message>
     <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Neu...</translation>
-    </message>
-    <message>
         <source>Sales Order S&amp;tatus...</source>
         <translation>Verkaufsauftrag &amp;Status...</translation>
     </message>
     <message>
         <source>Print Sales &amp;Order Form...</source>
         <translation>Verkaufs&amp;auftrag Formular drucken...</translation>
-    </message>
-    <message>
-        <source>&amp;Search Orders...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Approve &amp;All Shipped Orders for Billing...</source>
@@ -54058,23 +54357,11 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Billing &amp;Approvals...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Billing Approvals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Return Auth.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New Simple...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New Invoice...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -54090,15 +54377,7 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>List Pricing &amp;Schedules...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Update List Pricing Schedules...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>List Pricing Schedule Assi&amp;gnments...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -54106,7 +54385,127 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Search RAs...</source>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Simple</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Uninvoiced Shipment.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Billing &amp;Approvals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted Invoices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search RAs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Su&amp;mmarized Backlog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Backlog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Partially Shipped Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory &amp;Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Earned Commissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B&amp;rief Earned Commissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax History</source>
+        <translation type="unfinished">Steuer Rückschau</translation>
+    </message>
+    <message>
+        <source>&amp;Bookings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T&amp;ime Phased Bookings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sales &amp;History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brie&amp;f Sales History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Summari&amp;zed Sales History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time &amp;Phased Sales History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List Pricing &amp;Schedules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List Pricing Schedule Assi&amp;gnments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pricing &amp;Schedules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pricing Schedule Assi&amp;gnments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -54200,22 +54599,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
 <context>
     <name>menuSystem</name>
     <message>
-        <source>View Database &amp;Log...</source>
-        <translation>&amp;Datenbank Log ansehen...</translation>
-    </message>
-    <message>
-        <source>&amp;Reports...</source>
-        <translation>&amp;Berichte...</translation>
-    </message>
-    <message>
-        <source>Custom Command&amp;s...</source>
-        <translation>Benutzerbefe&amp;hle...</translation>
-    </message>
-    <message>
-        <source>E&amp;xit xTuple ERP...</source>
-        <translation>&amp;xTuple ERP beenden...</translation>
-    </message>
-    <message>
         <source>Print &amp;Alignment Page...</source>
         <translation>&amp;Ausrichtungsseite drucken...</translation>
     </message>
@@ -54252,28 +54635,8 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Neu...</translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>Auf&amp;listen...</translation>
-    </message>
-    <message>
-        <source>Employee &amp;Groups...</source>
-        <translation>Gru&amp;ppen Mitarbeiter/-in...</translation>
-    </message>
-    <message>
         <source>&amp;Design</source>
         <translation>&amp;Entwicklung</translation>
-    </message>
-    <message>
-        <source>&amp;Hot Keys...</source>
-        <translation>&amp;Tastaturkürzel...</translation>
-    </message>
-    <message>
-        <source>&amp;Packages...</source>
-        <translation>&amp;Pakete...</translation>
     </message>
     <message>
         <source>&amp;Export Data</source>
@@ -54284,28 +54647,12 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Zugriffskontrolle</translation>
     </message>
     <message>
-        <source>Scr&amp;ipts...</source>
-        <translation>Skr&amp;ipte...</translation>
-    </message>
-    <message>
-        <source>E&amp;vent Manager...</source>
-        <translation>&amp;Ereignisverwaltung...</translation>
-    </message>
-    <message>
-        <source>S&amp;creens...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Import Data</source>
         <translation>Daten &amp;importieren</translation>
     </message>
     <message>
         <source>Maintain CS&amp;V Atlases...</source>
         <translation>CS&amp;V Atlanten pflegen...</translation>
-    </message>
-    <message>
-        <source>&amp;MetaSQL Statements...</source>
-        <translation>&amp;MetaSQL Anweisungen...</translation>
     </message>
     <message>
         <source>Maintain &amp;Roles...</source>
@@ -54317,10 +54664,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     </message>
     <message>
         <source>&lt;p&gt;The Maintain CSV Atlases utility is only available when user preferences are set to show windows as free-floating.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Setup...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -54340,10 +54683,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation>&amp;Mitarbeitende</translation>
     </message>
     <message>
-        <source>&amp;Search...</source>
-        <translation>S&amp;uchen...</translation>
-    </message>
-    <message>
         <source>Maintain &amp;User Accounts...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -54360,10 +54699,6 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Preferences...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>User Privilege Audit...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -54373,6 +54708,70 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
     </message>
     <message>
         <source>&amp;Process/Lock Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;vent Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Database &amp;Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hot Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Employee &amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reports</source>
+        <translation type="unfinished">&amp;Berichte</translation>
+    </message>
+    <message>
+        <source>&amp;MetaSQL Statements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;creens</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scr&amp;ipts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Command&amp;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Packages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xit xTuple ERP</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -55897,6 +56296,10 @@ Sie müssen diese Artikelstandorte erst neu zuweisen, bevor Sie den gewählten P
         <source>Create Date on or Before</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Name Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>opportunitySource</name>
@@ -56482,10 +56885,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <translation>S&amp;tapel drucken</translation>
     </message>
     <message>
-        <source>Shipment Number Required</source>
-        <translation>Auslieferungsnummer erforderlich</translation>
-    </message>
-    <message>
         <source>View Transfer Order...</source>
         <translation>Transfer-Auftrag ansehen...</translation>
     </message>
@@ -56496,10 +56895,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <message>
         <source>&amp;Delete Printed</source>
         <translation>Aus&amp;gedruckte löschen</translation>
-    </message>
-    <message>
-        <source>&amp;Print Packing List</source>
-        <translation>&amp;Packliste drucken</translation>
     </message>
     <message>
         <source>Order #</source>
@@ -56548,10 +56943,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <message>
         <source>Customer Name</source>
         <translation>Kundenname</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Packing Lists may only be printed for existing Shipments and there is no Shipment for this Order. Issue Stock To Shipping to create a Shipment.</source>
-        <translation>&lt;p&gt;Packliste kann möglicherweise für bestehende Auslieferungen nicht gedruckt werden und es gibt für diesen Auftrag keine Auslieferung. Lagerbestand für Versand ausgeben, um eine Auslieferung zu erstellen.</translation>
     </message>
     <message>
         <source>Customer #</source>
@@ -56644,6 +57035,10 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <message>
         <source>Tax</source>
         <translation type="unfinished">Steuer</translation>
+    </message>
+    <message>
+        <source>&amp;Print Form</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -57232,6 +57627,10 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>Error Retrieving Bank Account Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no valid payments to post.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -60074,10 +60473,6 @@ Der Systemadministrator dieses Programms muß das korrigieren, bevor Sie Bezugsb
         <translation>Kontoauszug nach Kunde drucken</translation>
     </message>
     <message>
-        <source>&lt;p&gt;No statement is available for the specified Customer and Asof Date.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enter a Valid Customer Number</source>
         <translation>Eine gültige Kundennr. eingeben</translation>
     </message>
@@ -60115,6 +60510,10 @@ Der Systemadministrator dieses Programms muß das korrigieren, bevor Sie Bezugsb
     </message>
     <message>
         <source>You must enter a valid Customer Number for this Statement.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;No statement is available for the specified Customer and As Of Date.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -65837,6 +66236,10 @@ Sie müssen diesen Fertigungsauftrag zurückrufen, bevor Sie ihn neu terminieren
         <source>The Original Sales Order Site (%1) does not match the Shipping Site (%2). &lt;p&gt;Do you want to update it to match the Sales Order?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;p&gt;Expiry Date must be on or later than the Authorization Date.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>returnAuthorizationItem</name>
@@ -68303,10 +68706,6 @@ Sie müssen diese Rechungsposten erst neu zuweisen, bevor Sie die gewählte Umsa
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Saving Order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item Workbench</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68472,10 +68871,6 @@ Do you wish to continue saving the order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You may not delete this Sales Order as it has one or more dropshipped line items on a Purchase Order.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Getting Linked PO Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68562,6 +68957,35 @@ Do you wish to continue saving the order?</source>
     <message>
         <source>Tax</source>
         <translation type="unfinished">Steuer</translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished">Fortgeschritten</translation>
+    </message>
+    <message>
+        <source>Recurring Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have edited a recurring Sales Order.
+Do you wish to change all future Sales Order recurrences?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Updating Sales Order Recurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Saving Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error occurred saving recurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You may not delete this Sales Order as it has one or more line items on a Purchase Order.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -74500,10 +74924,6 @@ You must first delete the Bill of Materials for the selected target item before 
         <translation>Kann Artikel nicht zum Versand ausgeben. Warenbestandsverlauf nicht gefunden.</translation>
     </message>
     <message>
-        <source>The Cost Category for one or more Item Sites for the Purchase Order covered by this Voucher is not configured with Purchase Price Variance or P/O Liability Clearing Account Numbers or the Vendor of this Voucher is not configured with an A/P Account Number. Because of this, G/L Transactions cannot be posted for this Voucher.</source>
-        <translation>Die Kostenkategorie eines oder mehrerer Artikelstandorte dieses Einkaufsauftrages, die von diesem Bezugsbeleg gedeckt wird, ist nicht mit einer Einkaufspreis-Abweichung oder einer Klärungskontonummer aus der Einkaufsauftrags-Verbindlichkeit konfiguriert oder der Anbieter dieses Bezugsbeleg ist nicht durch ein Verbindlichkeitskonto konfiguriert. Deshalb können Hauptbuch-Transaktionen für diesen Bezugsschein nicht verbucht werden.</translation>
-    </message>
-    <message>
         <source>This shipment cannot be recalled because it does not appear to have been shipped.</source>
         <translation>Diese Auslieferung kann nicht zurückgerufen werden, weil sie offenbar nicht ausgeliefert worden ist.</translation>
     </message>
@@ -75152,10 +75572,6 @@ You must first delete the Bill of Materials for the selected target item before 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot delete this Payment because either it has not been voided, it has already been posted or replaced, or it has been transmitted electronically.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The selected Contact cannot be deleted as s/he is the primary or secondary Contact  for a Account.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -75741,6 +76157,98 @@ You must first delete the Bill of Materials for the selected target item before 
     </message>
     <message>
         <source>The selected Order is on Tax Hold and must be taken off of Tax Hold before it may be shipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You do not have privileges to maintain A/R Memos. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a valid Document # for this A/R Memo. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This Document Type/Number already exists. You may not enter a duplicate A/R Memo. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Currency exchange rate not found </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid amount for paid column </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete this Payment because either it has not been voided, it has already been posted or replaced, or it has been transmitted electronically and printed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An Item Site is marked inactive and cannot be receipted against. Please correct this before proceeding.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You do not have privileges to maintain Item Sources.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An Item Source already exists for this Vendor/Item/Vendor Number combination with an overlapping effective date range. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank settings require this payment to be printed before posting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not post this inventory transaction because the transaction will cause inventory to be reduced below current Sales Reservation requirements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher for a negative or zero amount </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher with negative or zero distributions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher with distributions greater than the voucher amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher with distributions less than the voucher amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher as one or more of the line items have already been fully vouchered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher due to unassigned G/L Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher #% due to an unassigned A/P Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot post Voucher #% as it is already posted </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot post Voucher as it has items without any tagged receipts or without distributions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You do not have privileges to delete a Sales Order.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can not delete this Sales Order Line as it has several sub components that have already been shipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error deleting kit components.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -77995,10 +78503,6 @@ Sie müssen diese Steuerschlüssel erst annullieren.</translation>
         <translation>Steuergebiet</translation>
     </message>
     <message>
-        <source>Tax Registrations:</source>
-        <translation>Steueranmeldungen:</translation>
-    </message>
-    <message>
         <source>End Date</source>
         <translation>Abschlußtermin</translation>
     </message>
@@ -78007,39 +78511,39 @@ Sie müssen diese Steuerschlüssel erst annullieren.</translation>
         <translation>Starttermin</translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation>Ans&amp;ehen</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>&amp;Löschen</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>S&amp;chliessen</translation>
-    </message>
-    <message>
         <source>Tax Authority</source>
         <translation>Finanzbehörde</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Bearbeiten</translation>
-    </message>
-    <message>
-        <source>List Tax Registrations</source>
-        <translation>Steueranmeldungen auflisten</translation>
     </message>
     <message>
         <source>Error Deleting Tax Registration Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Retrieving Tax Registration Information</source>
+        <source>Tax Registrations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Kunde</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation type="unfinished">Anbieter</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Bearbeiten</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Ansehen</translation>
+    </message>
+    <message>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -80592,10 +81096,6 @@ Andernfalls wird ein neuer Transfer-Auftrag erstellt werden.</translation>
         <translation>S&amp;chliessen</translation>
     </message>
     <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Bearbeiten</translation>
-    </message>
-    <message>
         <source>Package</source>
         <translation>Paket</translation>
     </message>
@@ -80622,6 +81122,10 @@ Andernfalls wird ein neuer Transfer-Auftrag erstellt werden.</translation>
     <message>
         <source>Could not load file</source>
         <translation>Kann Datei nicht laden</translation>
+    </message>
+    <message>
+        <source>&amp;Edit...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -81741,6 +82245,10 @@ Möchten Sie die Rechnung trotzdem verbuchen?</translation>
     </message>
     <message>
         <source>Unrelease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receipt Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -83199,10 +83707,6 @@ Mit diesem Schlüssel können Sie keinen Kostenermittlungsbestandteil erstellen.
         <translation>Passwort stimmt nicht überein</translation>
     </message>
     <message>
-        <source>Rich Text</source>
-        <translation>Rich Text</translation>
-    </message>
-    <message>
         <source>Plain Text</source>
         <translation>Klartext</translation>
     </message>
@@ -83572,6 +84076,26 @@ Bitte beides nochmals sorgfältig eingeben.</translation>
         <source>Fatal</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rich Te&amp;xt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Delimiter:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Zone:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server Default</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>users</name>
@@ -83639,16 +84163,8 @@ Bitte beides nochmals sorgfältig eingeben.</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Tax Zone</source>
-        <translation>Steuergebiet</translation>
-    </message>
-    <message>
         <source>Getting Vendor</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Getting Tax Registrations</source>
-        <translation type="unfinished">Hole Steueranmeldungen</translation>
     </message>
     <message>
         <source>Tax Code</source>
@@ -83671,10 +84187,6 @@ Bitte beides nochmals sorgfältig eingeben.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New</source>
-        <translation>Neu</translation>
-    </message>
-    <message>
         <source>You must select a Terms code for this Vendor.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -83685,18 +84197,6 @@ Bitte beides nochmals sorgfältig eingeben.</translation>
     <message>
         <source>Default Miscellaneous Distribution</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Registration #</source>
-        <translation>Registrierungsnr.</translation>
-    </message>
-    <message>
-        <source>Deleting Tax Registration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tax Authority</source>
-        <translation>Finanzbehörde</translation>
     </message>
     <message>
         <source>You must select a Vendor Type for this Vendor.</source>
@@ -83877,14 +84377,6 @@ by an Item Source</source>
         <translation>USt.-Ident.-Nummer:</translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation>Bearbeiten</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Ansehen</translation>
-    </message>
-    <message>
         <source>Currency:</source>
         <translation>Währung:</translation>
     </message>
@@ -83903,10 +84395,6 @@ by an Item Source</source>
     <message>
         <source>City</source>
         <translation>Stadt</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Löschen</translation>
     </message>
     <message>
         <source>Country</source>
@@ -85408,6 +85896,26 @@ Sie müssen diese Anbieter erst neu zuweisen, bevor Sie die gewählte Anbieterar
     </message>
     <message>
         <source>You must enter a postive Quantity to Voucher before saving this Voucher Item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a postive Quantity to Voucher.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must make at least one distribution for this Voucher Item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Cancel Voucher Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel Anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Would you like to cancel anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -79,13 +79,6 @@ user::user(QWidget* parent, const char * name, Qt::WindowFlags fl)
   modq.exec( "SELECT DISTINCT priv_module FROM priv ORDER BY priv_module;" );
   for (int i = 0; modq.next(); i++)
     _module->append(i, modq.value("priv_module").toString());
-
-  if(_evaluation == true)
-  {
-    _enhancedAuth->setEnabled(false);
-    _passwd->setEnabled(false);
-    _verify->setEnabled(false);
-  }
 
   if (!_metrics->boolean("MultiWhs"))
   {

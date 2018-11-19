@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -92,6 +92,9 @@ void ContactWidget::init()
     _titleLit		= new QLabel(tr("Job Title:"), this);
     _titleLit->setObjectName("_titleLit");
     _title		= new XLineEdit(this, "_title");
+    _companyLit		= new QLabel(tr("Company:"), this);
+    _companyLit->setObjectName("_companyLit");
+    _company		= new XLineEdit(this, "_company");
 
     _mapper		= new XDataWidgetMapper(this);
 
@@ -103,11 +106,13 @@ void ContactWidget::init()
     _nameBox->addWidget(_suffix,	0);
     _nameBox->addWidget(_list,		0, Qt::AlignRight);
 
-    //_initialsBox->addWidget(_initialsLit, 0);
+    _initialsBox->addWidget(_initialsLit, 0);
     _initialsBox->addWidget(_initials,	  0);
     _initialsBox->addStretch(0);
 
     //_titleBox->addWidget(_titleLit,	0);
+    _titleBox->addWidget(_company,	2);
+    _titleBox->addWidget(_titleLit,	0, Qt::AlignRight);
     _titleBox->addWidget(_title,	2);
 
     _buttonBox 		= new QGridLayout;
@@ -171,7 +176,7 @@ void ContactWidget::init()
     _numberLit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     _label->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     _nameLit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    _titleLit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    _companyLit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     _emailLit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     _initialsLit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     _webaddrLit->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -192,6 +197,7 @@ void ContactWidget::init()
     connect(_suffix,	SIGNAL(textChanged(const QString&)), this, SIGNAL(changed()));
     connect(_initials,	SIGNAL(textChanged(const QString&)), this, SIGNAL(changed()));
     connect(_title,	SIGNAL(textChanged(const QString&)), this, SIGNAL(changed()));
+    connect(_company,	SIGNAL(textChanged(const QString&)), this, SIGNAL(changed()));
     connect(_email,	SIGNAL(currentTextChanged(const QString&)), this, SIGNAL(changed()));
     connect(_webaddr,	SIGNAL(textChanged(const QString&)), this, SIGNAL(changed()));
     connect(_address,	SIGNAL(changed()),                   this, SIGNAL(changed()));
@@ -204,6 +210,7 @@ void ContactWidget::init()
     connect(_suffix,	SIGNAL(editingFinished()), this, SLOT(sCheck()));
     connect(_initials,	SIGNAL(editingFinished()), this, SLOT(sCheck()));
     connect(_title,	SIGNAL(editingFinished()), this, SLOT(sCheck()));
+    connect(_company,	SIGNAL(editingFinished()), this, SLOT(sCheck()));
     connect(emailEdit,	SIGNAL(editingFinished()), this, SLOT(sCheck()));
     connect(_webaddr,	SIGNAL(editingFinished()), this, SLOT(sCheck()));
     connect(_address,	SIGNAL(changed()),   this, SLOT(sCheck()));
@@ -384,6 +391,7 @@ void ContactWidget::silentSetId(const int pId)
           _suffix->setText(idQ.value("cntct_suffix").toString());
           _initials->setText(idQ.value("cntct_initials").toString());
           _title->setText(idQ.value("cntct_title").toString());
+          _company->setText(idQ.value("cntct_companyname").toString());
           _emailCache=idQ.value("cntct_email").toString();
           _email->append(FAKEEMAILID, idQ.value("cntct_email").toString()); // TODO: this is rotten
           _emailopt->setChecked(idQ.value("cntct_email_optin").toBool());
@@ -406,6 +414,7 @@ void ContactWidget::silentSetId(const int pId)
             _mapper->model()->setData(_mapper->model()->index(_mapper->currentIndex(),_mapper->mappedSection(_initials)),     _initials->text());
             _mapper->model()->setData(_mapper->model()->index(_mapper->currentIndex(),_mapper->mappedSection(this)),          _number->text());
             _mapper->model()->setData(_mapper->model()->index(_mapper->currentIndex(),_mapper->mappedSection(_title)),        _title->text());
+            _mapper->model()->setData(_mapper->model()->index(_mapper->currentIndex(),_mapper->mappedSection(_company)),      _company->text());
             _mapper->model()->setData(_mapper->model()->index(_mapper->currentIndex(),_mapper->mappedSection(_email)),        _email->currentText().toLower());
             _mapper->model()->setData(_mapper->model()->index(_mapper->currentIndex(),_mapper->mappedSection(_webaddr)),      _webaddr->text());
            }
@@ -483,6 +492,7 @@ void ContactWidget::clear()
   _suffix->clear();
   _initials->clear();
   _title->clear();
+  _company->clear();
   _email->clear();
   
   if (_x_metrics)
@@ -521,7 +531,7 @@ QString ContactWidget::name() const
 
 void ContactWidget::setDataWidgetMap(XDataWidgetMapper* m)
 {
-  m->addMapping(this          ,  _fieldNameNumber,        "number", "defaultText");
+  m->addMapping(this         ,  _fieldNameNumber,        "number", "defaultText");
   m->addMapping(_change      ,  _fieldNameChange,         "text",   "defaultText");
   m->addMapping(_active      ,  _fieldNameActive);
   m->addMapping(_first       ,  _fieldNameFirst,          "text",   "defaultText");
@@ -530,6 +540,7 @@ void ContactWidget::setDataWidgetMap(XDataWidgetMapper* m)
   m->addMapping(_suffix      ,  _fieldNameSuffix,         "text",   "defaultText");
   m->addMapping(_initials    ,  _fieldNameInitials,       "text",   "defaultText");
   m->addMapping(_title       ,  _fieldNameTitle,          "text",   "defaultText");
+  m->addMapping(_company     ,  _fieldNameCompany,        "text",   "defaultText");
   m->addMapping(_email       ,  _fieldNameEmailAddress,   "text",   "defaultText");
   m->addMapping(_webaddr     ,  _fieldNameWebAddress,     "text",   "defaultText");
   _honorific->setFieldName(_fieldNameHonorific);
@@ -578,7 +589,7 @@ int ContactWidget::save(AddressCluster::SaveFlags flag)
   datamodQ.prepare("SELECT COALESCE(saveCntct(:cntct_id,:cntct_number,:addr_id,"
 		   ":honorific,:first,:middle,:last,:suffix,:initials,"
 		   ":active,:phone,:email,:webaddr,"
-                   ":notes,:title,:flag,:owner, :emailopt),0) AS result;");
+                   ":notes,:title,:flag,:owner, :emailopt, :company),0) AS result;");
   datamodQ.bindValue(":cntct_number", _number->text());
   datamodQ.bindValue(":cntct_id",  id());
   datamodQ.bindValue(":honorific", _honorific->currentText());
@@ -590,6 +601,7 @@ int ContactWidget::save(AddressCluster::SaveFlags flag)
   datamodQ.bindValue(":suffix",	   _suffix->text());
   datamodQ.bindValue(":initials",  _initials->text());
   datamodQ.bindValue(":title",	   _title->text());
+  datamodQ.bindValue(":company",   _company->text());
   datamodQ.bindValue(":phone",	   phonelist);
   datamodQ.bindValue(":email",	   _email->currentText());
   datamodQ.bindValue(":webaddr",   _webaddr->text());
@@ -761,7 +773,7 @@ void ContactWidget::layout()
   _grid->addItem(_initialsBox,  2, 1, 1, -1);
   _grid->addWidget(_active,     2, 2, 1, -1);
   _grid->addItem(_buttonBox,	3, 0, 1, -1);
-  _grid->addWidget(_titleLit,   4, 0, 1, 1);
+  _grid->addWidget(_companyLit, 4, 0, 1, 1);
   _grid->addItem(_titleBox,	4, 1, 1, -1);
 
   if (_minimalLayout)
@@ -886,11 +898,12 @@ void ContactWidget::sCheck()
 
   if ((! _honorific->isVisibleTo(this) || _honorific->currentText().simplified().isEmpty()) &&
       (! _first->isVisibleTo(this)   || _first->text().simplified().isEmpty()) &&
-      (! _middle->isVisibleTo(this)   || _middle->text().simplified().isEmpty()) &&
+      (! _middle->isVisibleTo(this)  || _middle->text().simplified().isEmpty()) &&
       (! _last->isVisibleTo(this)    || _last->text().simplified().isEmpty()) &&
       (! _suffix->isVisibleTo(this)   || _suffix->text().simplified().isEmpty()) &&
       (! _initials->isVisibleTo(this) || _initials->text().simplified().isEmpty()) &&
       (! _title->isVisibleTo(this)   || _title->text().simplified().isEmpty()) &&
+      (! _company->isVisibleTo(this) || _company->text().simplified().isEmpty()) &&
       (! _email->isVisibleTo(this)   || _email->currentText().simplified().isEmpty()) &&
       (! _webaddr->isVisibleTo(this) || _webaddr->text().simplified().isEmpty()) &&
       (! _address->isVisibleTo(this) || _address->id() <= 0))

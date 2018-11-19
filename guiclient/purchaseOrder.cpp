@@ -717,7 +717,7 @@ void purchaseOrder::populate()
     _shipVia->setText(po.value("pohead_shipvia"));
     _fob->setText(po.value("pohead_fob"));
     _notes->setText(po.value("pohead_comments").toString());
-        _so->setId(po.value("cohead_id").toInt());
+        _so->setId(po.value("cohead_id").toInt(), "SO");
 
         if ((po.value("cohead_id").toInt())!=-1)
         {

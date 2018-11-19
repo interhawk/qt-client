@@ -98,8 +98,10 @@
 #include "qprocessenvironmentproto.h"
 #include "qprocessproto.h"
 #include "qpushbuttonproto.h"
+#include "qscrollarea.h"
 #include "qserialportinfoproto.h"
 #include "qserialportproto.h"
+#include "qsettings.h"
 #include "qsizepolicyproto.h"
 #include "qspaceritemproto.h"
 #include "qsqldatabaseproto.h"
@@ -121,6 +123,8 @@
 #include "qsslsocketproto.h"
 #include "qstackedwidgetproto.h"
 #include "qtabwidgetproto.h"
+#include "qtablewidgetproto.h"
+#include "qtablewidgetitemproto.h"
 #include "qtcpserverproto.h"
 #include "qtcpsocketproto.h"
 #include "qtextdocumentproto.h"
@@ -136,31 +140,18 @@
 #include "quuidproto.h"
 #include "qvalidatorproto.h"
 #include "qwebchannelproto.h"
-#if QT_VERSION < 0x050900
-#include "qwebelementcollectionproto.h"
-#include "qwebelementproto.h"
-#include "qwebframeproto.h"
-#include "qwebpageproto.h"
-#include "qwebsecurityoriginproto.h"
-#include "qwebsettingsproto.h"
-#endif
+#include "qwebenginepageproto.h"
+#include "qwebenginesettingsproto.h"
+#include "qwebengineviewproto.h"
 #include "qwebsocketcorsauthenticatorproto.h"
 #include "qwebsocketproto.h"
 #include "qwebsocketprotocolproto.h"
 #include "qwebsocketserverproto.h"
-#if QT_VERSION < 0x050900
-#include "qwebviewproto.h"
-#endif
 #include "qwidgetproto.h"
 #include "webchanneltransport.h"
 #include "xsqlqueryproto.h"
 #include "xvariantsetup.h"
 #include "xwebsync.h"
-
-#if QT_VERSION >= 0x050900
-  #include "qwebenginepageproto.h"
-  #include "qwebengineviewproto.h"
-#endif
 
 static Preferences *prefs = 0;
 /*! \defgroup scriptapi The xTuple ERP Scripting API
@@ -258,8 +249,10 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQProcessEnvironmentProto(engine);
   setupQProcessProto(engine);
   setupQPushButtonProto(engine);
+  setupQScrollAreaProto(engine);
   setupQSerialPortInfoProto(engine);
   setupQSerialPortProto(engine);
+  setupQSettingsProto(engine);
   setupQSizePolicy(engine);
   setupQSpacerItem(engine);
   setupQSqlDatabaseProto(engine);
@@ -281,6 +274,8 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQSslSocketProto(engine);
   setupQStackedWidgetProto(engine);
   setupQTabWidgetProto(engine);
+  setupQTableWidgetProto(engine);
+  setupQTableWidgetItemProto(engine);
   setupQTcpServerProto(engine);
   setupQTcpSocketProto(engine);
   setupQTextDocumentProto(engine);
@@ -295,21 +290,13 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQUuidProto(engine);
   setupQValidatorProto(engine);
   setupQWebChannelProto(engine);
-#if QT_VERSION < 0x050900
-  setupQWebElementCollectionProto(engine);
-  setupQWebElementProto(engine);
-  setupQWebFrameProto(engine);
-  setupQWebPageProto(engine);
-  setupQWebSecurityOriginProto(engine);
-  setupQWebSettingsProto(engine);
-#endif
+  setupQWebEnginePageProto(engine);
+  setupQWebEngineSettingsProto(engine);
+  setupQWebEngineViewProto(engine);
   setupQWebSocketCorsAuthenticatorProto(engine);
   setupQWebSocketProto(engine);
   setupQWebSocketProtocolProto(engine);
   setupQWebSocketServerProto(engine);
-#if QT_VERSION < 0x050900
-  setupQWebViewProto(engine);
-#endif
   setupQWidgetProto(engine);
   setupQt(engine);
   setupWebChannelTransport(engine);
@@ -318,31 +305,6 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupXWebSync(engine);
   setupchar(engine);
   setupFormat(engine);
-
-  #if QT_VERSION < 0x050900
-    setupQWebElementCollectionProto(engine);
-    setupQWebElementProto(engine);
-    setupQWebFrameProto(engine);
-    setupQWebPageProto(engine);
-    setupQWebSecurityOriginProto(engine);
-    setupQWebSettingsProto(engine);
-    setupQWebViewProto(engine);
-  #endif
-
-  #if QT_VERSION <= 0x050600
-    setupQWebElementProto(engine);
-    setupQWebElementCollectionProto(engine);
-    setupQWebFrameProto(engine);
-    setupQWebPageProto(engine);
-    setupQWebSecurityOriginProto(engine);
-    setupQWebSettingsProto(engine);
-    setupQWebViewProto(engine);
-  #endif
-
-  #if QT_VERSION > 0x050900
-    setupQWebEnginePageProto(engine);
-    setupQWebEngineViewProto(engine);
-  #endif
 }
 
 void scriptDeprecated(QString msg)

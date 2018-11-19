@@ -26329,6 +26329,49 @@
     </message>
   </context>
   <context>
+    <name>TaxRegistrations</name>
+    <message>
+      <width>450</width>
+      <source>Tax Registrations</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>95</width>
+      <source>Tax Zone</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>100</width>
+      <source>Start Date</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>80</width>
+      <source>Tax Authority</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>100</width>
+      <source>Registration #</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>100</width>
+      <source>End Date</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>85</width>
+      <source>Page:</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>85</width>
+      <source>Report Date:</source>
+      <translation type="unfinished"/>
+    </message>
+  </context>
+  <context>
     <name>TaxReturn</name>
     <message>
       <width>450</width>
@@ -28582,7 +28625,7 @@
     </message>
     <message>
       <width>80</width>
-      <source>Value</source>
+      <source>Cost Value</source>
       <translation type="unfinished"/>
     </message>
     <message>
@@ -28616,8 +28659,13 @@
       <translation type="unfinished"/>
     </message>
     <message>
-      <width>60</width>
-      <source>Type</source>
+      <width>80</width>
+      <source>P/O Value</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>80</width>
+      <source>By</source>
       <translation type="unfinished"/>
     </message>
     <message>
@@ -28626,13 +28674,33 @@
       <translation type="unfinished"/>
     </message>
     <message>
-      <width>75</width>
-      <source>By</source>
+      <width>80</width>
+      <source>Item Number</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>60</width>
+      <source>Uninvoiced</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>65</width>
+      <source>P/O #</source>
       <translation type="unfinished"/>
     </message>
     <message>
       <width>80</width>
       <source>Vendor</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>80</width>
+      <source>Cost Value</source>
+      <translation type="unfinished"/>
+    </message>
+    <message>
+      <width>80</width>
+      <source>P/O Value</source>
       <translation type="unfinished"/>
     </message>
     <message>
@@ -28642,22 +28710,7 @@
     </message>
     <message>
       <width>60</width>
-      <source>Uninvoiced</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <width>80</width>
-      <source>Value</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <width>80</width>
-      <source>P/O #</source>
-      <translation type="unfinished"/>
-    </message>
-    <message>
-      <width>80</width>
-      <source>Item Number</source>
+      <source>Type</source>
       <translation type="unfinished"/>
     </message>
     <message>

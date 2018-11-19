@@ -4,22 +4,8 @@ TARGET   = xtuple
 CONFIG   += qt warn_on
 
 QT += xml sql script scripttools network
-QT += xmlpatterns printsupport
-
-lessThan(QT_MINOR_VERSION, 6) : equals(QT_MAJOR_VERSION, 5) {
-  QT += webkit webkitwidgets
-} else {
-  QT += webengine webenginewidgets
-}
-
+QT += xmlpatterns printsupport webengine webenginewidgets
 QT += designer uitools quick websockets webchannel serialport
-QT += xmlpatterns printsupport
-
-equals(QT_MAJOR_VERSION, 5) {
-  lessThan (QT_MINOR_VERSION, 9) {
-    QT += webkit webkitwidgets
-  }
-}
 
 CONFIG -= staticlib
 
@@ -59,7 +45,7 @@ win32-msvc* {
 
 QMAKE_LIBDIR = ../lib $${OPENRPT_LIBDIR} $$QMAKE_LIBDIR
 LIBS        += -lxtuplecommon -lxtuplewidgets -lwrtembed -lopenrptcommon
-LIBS        += -lrenderer -lxtuplescriptapi -lqzint $${DMTXLIB} -lMetaSQL
+LIBS        += -lrenderer -lxtuplescriptapi -lqzint -lMetaSQL
 
 lessThan(QT_MAJOR_VERSION, 5) {
 #not the best way to handle this, but it should do
@@ -236,7 +222,7 @@ FORMS =   absoluteCalendarItem.ui               \
           crmaccountMergePickDataPage.ui        \
           crmaccountMergePickTaskPage.ui        \
           crmaccountMergeResultPage.ui          \
-          crmGroup.ui                          \
+          crmGroup.ui                           \
           crmGroups.ui                          \
           crmRole.ui                            \
           crmRoles.ui                           \
@@ -596,7 +582,6 @@ FORMS =   absoluteCalendarItem.ui               \
           taxCodeRate.ui                        \
           taxCodes.ui                           \
           taxRegistration.ui                    \
-          taxRegistrations.ui                   \
           taxType.ui                            \
           taxTypes.ui                           \
           taxZone.ui                            \
@@ -1081,8 +1066,8 @@ HEADERS = ../common/format.h                    \
           profitCenters.h               \
           project.h                     \
           projects.h                    \
-	  projectType.h			\
-	  projectTypes.h		\
+          projectType.h                 \
+          projectTypes.h                \
           prospect.h                    \
           prospects.h                   \
           purchaseOrder.h               \

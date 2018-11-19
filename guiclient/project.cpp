@@ -34,7 +34,7 @@
 #include "purchaseOrder.h"
 #include "purchaseOrderItem.h"
 
-const char *_projectStatuses[] = { "P", "O", "C" };
+const char *_projectStatuses[] = { "N", "P", "O", "C" };
 
 bool project::userHasPriv(const int pMode, const int pId)
 {
@@ -107,6 +107,7 @@ project::project(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   _prjtask->addColumn(tr("Status"),      _orderColumn, Qt::AlignLeft,   true,  "status" );
   _prjtask->addColumn(tr("Name"),         _itemColumn, Qt::AlignLeft,   true,  "name"   );
   _prjtask->addColumn(tr("Description"),           -1, Qt::AlignLeft,   true,  "descrip");
+  _prjtask->addColumn(tr("Assigned To"),           -1, Qt::AlignLeft,   true,  "assignedto");
   _prjtask->addColumn(tr("Due Date"),     _dateColumn, Qt::AlignRight,  true,  "due"  );
   _prjtask->addColumn(tr("Assigned"),     _dateColumn, Qt::AlignRight,  true,  "assigned" );
   _prjtask->addColumn(tr("Started"),      _dateColumn, Qt::AlignRight,  true,  "started"  );
@@ -301,16 +302,14 @@ void project::setViewMode()
 
 void project::sHandleButtons(bool valid)
 {
+  _editTask->setEnabled(valid);
+  _viewTask->setEnabled(valid);
+
   if(_prjtask->altId() == 5)
-  {
-    _editTask->setEnabled(valid);
     _deleteTask->setEnabled(valid);
-    _viewTask->setEnabled(valid);
-  } else {
-    _editTask->setEnabled(false);
+  else
     _deleteTask->setEnabled(false);
-    _viewTask->setEnabled(false);
-  }
+
 }
 
 void project::sPopulateTaskMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
@@ -873,34 +872,41 @@ void project::sNewTask()
 
 void project::sEditTask()
 {
-  if(_prjtask->altId() != 5)
-    return;
-  ParameterList params;
-  params.append("mode", "edit");
-  params.append("parent", "J");
-  params.append("parent_id", _prjid);
-  params.append("task_id", _prjtask->id());
+  if(_prjtask->altId() == 5)
+  {
+    ParameterList params;
+    params.append("mode", "edit");
+    params.append("parent", "J");
+    params.append("parent_id", _prjid);
+    params.append("task_id", _prjtask->id());
 
-  task newdlg(this, "", true);
-  newdlg.set(params);
-  if (newdlg.exec() != XDialog::Rejected)
-    sFillTaskList();
+    task newdlg(this, "", true);
+    newdlg.set(params);
+    if (newdlg.exec() != XDialog::Rejected)
+      sFillTaskList();
+  } else {
+    sEditOrder();
+  }
+
 }
 
 void project::sViewTask()
 {
-  if(_prjtask->altId() != 5)
-    return;
+  if(_prjtask->altId() == 5)
+  {
+    ParameterList params;
+    params.append("mode", "view");
+    params.append("parent", "J");
+    params.append("parent_id", _prjid);
+    params.append("task_id", _prjtask->id());
 
-  ParameterList params;
-  params.append("mode", "view");
-  params.append("parent", "J");
-  params.append("parent_id", _prjid);
-  params.append("task_id", _prjtask->id());
+    task newdlg(this, "", true);
+    newdlg.set(params);
+    newdlg.exec();
+  } else {
+    sViewOrder();
+  }
 
-  task newdlg(this, "", true);
-  newdlg.set(params);
-  newdlg.exec();
 }
 
 void project::sDeleteTask()
@@ -1097,8 +1103,8 @@ void project::sNewIncident()
   
   incident *newdlg = new incident(this);
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
-  sFillTaskList();
+  if (newdlg->exec() != XDialog::Rejected)
+    sFillTaskList();
 }
 
 void project::sNewOpportunity()
@@ -1111,8 +1117,8 @@ void project::sNewOpportunity()
   
   opportunity *newdlg = new opportunity(this);
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
-  sFillTaskList();
+  if (newdlg->exec() != XDialog::Rejected)
+    sFillTaskList();
 }
 
 void project::sNewQuotation()
@@ -1248,7 +1254,8 @@ void project::sEditOrder()
 
     incident newdlg(this, "", true);
     newdlg.set(params);
-    newdlg.exec();
+    if (newdlg.exec() != XDialog::Rejected)
+      sFillTaskList();
   }
   else if(_prjtask->altId() == 110)
   {
@@ -1258,7 +1265,8 @@ void project::sEditOrder()
 
     opportunity newdlg(this, "", true);
     newdlg.set(params);
-    newdlg.exec();
+    if (newdlg.exec() != XDialog::Rejected)
+      sFillTaskList();
   }
 }
 

@@ -24,10 +24,13 @@
   */
 
 xTupleGuiClientInterface::xTupleGuiClientInterface(QObject *pParent)
-  : GuiClientInterface(pParent)
+  : GuiClientInterface(pParent),
+    _scriptCache(0)
 {
   if (pParent)
     connect(pParent, SIGNAL(dbConnectionLost()), this, SIGNAL(dbConnectionLost()));
+  _mqlhash = (omfgThis && omfgThis->_mqlhash) ? omfgThis->_mqlhash
+                                              : new MqlHash(this);
 }
 
 QWidget* xTupleGuiClientInterface::openWindow(const QString      pname,
@@ -140,3 +143,12 @@ void xTupleGuiClientInterface::setMqlHash(MqlHash *pHash)
   _mqlhash = pHash;
 }
 
+ScriptCache *xTupleGuiClientInterface::getScriptCache()
+{
+  return _scriptCache;
+}
+
+void xTupleGuiClientInterface::setScriptCache(ScriptCache *pCache)
+{
+  _scriptCache = pCache;
+}

@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -113,25 +113,7 @@ void ItemCharacteristicDelegate::setModelData(QWidget *editor, QAbstractItemMode
   listVars=charVars.toList();
   
   if (editor->inherits("QComboBox"))
-  {
-    if (listVars.value(CUST_ID).toInt())
-    {
-      ItemetModelData.prepare("SELECT itemcharprice(:item_id,:char_id,:value,:cust_id,:shipto_id,:qty,:curr_id,:effective)::numeric(16,4) AS price;");
-
-      ItemetModelData.bindValue(":item_id"  , listVars.value(ITEM_ID).toInt());
-      ItemetModelData.bindValue(":char_id"  , charidx.model()->data(charidx, Qt::UserRole));
-      ItemetModelData.bindValue(":value"    , comboBox->currentText());
-      ItemetModelData.bindValue(":cust_id"  , listVars.value(CUST_ID));
-      ItemetModelData.bindValue(":shipto_id", listVars.value(SHIPTO_ID));
-      ItemetModelData.bindValue(":qty"      , listVars.value(QTY));
-      ItemetModelData.bindValue(":curr_id"  , listVars.value(CURR_ID));
-      ItemetModelData.bindValue(":effective", listVars.value(EFFECTIVE));
-      ItemetModelData.exec();
-      if (ItemetModelData.first())
-        model->setData(priceidx, ItemetModelData.value("price").toString());
-    }
     model->setData(index, comboBox->currentText());
-  }
   else if (editor->inherits("DLineEdit"))
   {
     DLineEdit *dlineedit = static_cast<DLineEdit*>(editor);

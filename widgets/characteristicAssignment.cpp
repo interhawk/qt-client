@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -427,6 +427,7 @@ void CharacteristicAssignmentPrivate::handleTargetType()
 
   parent->setWindowTitle(parent->tr("Characteristic: %1").arg(targetTypeMap.value(targetType)));
   QSqlQueryModel *model = new QSqlQueryModel;
+  
   model->setQuery("SELECT char_id, char_name, char_type"
                   "  FROM char JOIN charuse ON char_id = charuse_char_id"
                   " WHERE charuse_target_type = '" + charuseTargetType + "'"

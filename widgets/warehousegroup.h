@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -17,6 +17,7 @@
 #include <QRadioButton>
 
 #include "widgets.h"
+#include "wcombobox.h"	
 
 class WComboBox;
 class ParameterList;
@@ -43,6 +44,7 @@ class XTUPLEWIDGETS_EXPORT WarehouseGroup : public QGroupBox
     void setFixedSize(bool);
     void setAll();
     void setId(int);
+    void setType(WComboBox::WComboBoxTypes);
     void findItemSites(int);
 
   signals:
@@ -55,6 +57,7 @@ class XTUPLEWIDGETS_EXPORT WarehouseGroup : public QGroupBox
     QRadioButton *_all;
     QRadioButton *_selected;
     WComboBox    *_warehouses;
+
 };
 
 #endif

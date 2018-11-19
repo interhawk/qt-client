@@ -1,7 +1,7 @@
 #
 # This file is part of the xTuple ERP: PostBooks Edition, a free and
 # open source Enterprise Resource Planning software suite,
-# Copyright (c) 1999-2012 by OpenMFG LLC, d/b/a xTuple.
+# Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
 # It is licensed to you under the Common Public Attribution License
 # version 1.0, the full text of which (including xTuple-specific Exhibits)
 # is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -51,13 +51,6 @@ isEmpty( CSVIMP_HEADERS ) {
 ! exists($${CSVIMP_HEADERS}) {
   error("Could not set the CSVIMP_HEADERS qmake variable.")
 }
-
-DMTXLIB = -ldmtx
-
-exists($${OPENRPT_LIBDIR}/libdmtx.a)           { DMTXLIB = -ldmtx }
-exists($${OPENRPT_LIBDIR}/libDmtx_Library.a)   { DMTXLIB = -lDmtx_Library }
-exists($${OPENRPT_LIBDIR}/libdmtx.lib)         { DMTXLIB = -ldmtx }
-exists($${OPENRPT_LIBDIR}/libDmtx_Library.lib) { DMTXLIB = -lDmtx_Library }
 
 # global.pri is processed at the top level but the variables are used down 1 level
 ! isEmpty( OPENRPT_DIR_REL    ) { OPENRPT_DIR    = ../$${OPENRPT_DIR}
