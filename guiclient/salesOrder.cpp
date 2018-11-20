@@ -2078,7 +2078,7 @@ void salesOrder::populateShipto(int pShiptoid)
                     "       shipto_preferred_warehous_id, "
                     "       shipto_salesrep_id, shipto_commission AS commission"
                     "  FROM shiptoinfo"
-                    " WHERE shipto_active = 't'" 
+                    " WHERE shipto_active " 
                     "   AND shipto_id = :shipto_id;" );
     shipto.bindValue(":shipto_id", pShiptoid);
     shipto.exec();
