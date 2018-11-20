@@ -259,7 +259,7 @@ void incidentWorkbench::sCreateProject()
 {
   XSqlQuery prjq;
   ParameterList params;
-  int prjid;
+  int prjid = -1;
   bool openw = false;
   
   int answer = QMessageBox::question(this,  tr("Open Projects"),
@@ -282,7 +282,7 @@ void incidentWorkbench::sCreateProject()
                            prjq, __FILE__, __LINE__))
       return;
 
-    if (openw)
+    if (openw && prjid > 0)
     {
       params.append("prj_id", prjid);
       params.append("mode", cEdit);
@@ -299,7 +299,7 @@ void incidentWorkbench::sCreateTask()
 {
   XSqlQuery taskq;
   ParameterList params;
-  int taskid;
+  int taskid = -1;
   bool openw = false;
   QString taskname;
   bool ok;
@@ -331,7 +331,7 @@ void incidentWorkbench::sCreateTask()
                            taskq, __FILE__, __LINE__))
       return;
 
-    if (openw)
+    if (openw && taskid > 0)
     {
       params.append("mode", "edit");
       params.append("task_id", taskid);
@@ -346,6 +346,7 @@ void incidentWorkbench::sCreateTask()
 
 void incidentWorkbench::sUpdate(QString source, int id)
 {
+  Q_UNUSED(id);
   if (source == "Incident")
     sFillList();
 }
