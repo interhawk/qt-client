@@ -1869,7 +1869,6 @@ void salesOrder::sPopulateFOB(int pWarehousid)
 // Is the first SELECT here responsible for the bug where the Currency kept disappearing?
 void salesOrder::sPopulateCustomerInfo(int pCustid)
 {
-  qDebug() << "\n\n ********* c++ sPopulateCustomerInfo ";
   ENTERED << "with" << pCustid;
   _holdType->setCode("N");
 
@@ -2067,8 +2066,6 @@ void salesOrder::sParseShipToNumber()
 
 void salesOrder::populateShipto(int pShiptoid)
 {
-#pragma comment(linker,"/SUBSYSTEM:CONSOLE")
-  qDebug() << "\n\n ********* c++ populateShipto ";  
   ENTERED << "with" << pShiptoid;
   if (pShiptoid != -1)
   {
