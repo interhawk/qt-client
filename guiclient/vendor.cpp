@@ -237,6 +237,17 @@ vendor::vendor(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _crmacctid   = -1;
   _captive     = false;
   _NumberGen   = -1;
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 vendor::~vendor()
@@ -535,7 +546,8 @@ bool vendor::sSave()
           "       vend_accnt_id = <? value('vend_accnt_id') ?>,"
           "       vend_expcat_id = <? value('vend_expcat_id') ?>,"
           "       vend_tax_id = <? value('vend_tax_id') ?>, "
-          "       vend_taxtype_id = <? value('vend_taxtype_id') ?> "
+          "       vend_taxtype_id = <? value('vend_taxtype_id') ?>, "
+          "       vend_tax_exemption = <? value('vend_tax_exemption') ?> "
           " WHERE vend_id = <? value('vend_id') ?> "
           " RETURNING vend_crmacct_id;" ;
   }
@@ -554,7 +566,7 @@ bool vendor::sSave()
           "  vend_ach_use_vendinfo,"
           "  vend_ach_accnttype, vend_ach_indiv_number,"
           "  vend_ach_indiv_name,"
-          "  vend_accnt_id, vend_expcat_id, vend_tax_id, vend_taxtype_id) "
+          "  vend_accnt_id, vend_expcat_id, vend_tax_id, vend_taxtype_id, vend_tax_exemption) "
           "VALUES "
           "( <? value('vend_id') ?>,"
           "  <? value('vend_number') ?>,"
@@ -596,7 +608,8 @@ bool vendor::sSave()
           "  <? value('vend_accnt_id') ?>,"
           "  <? value('vend_expcat_id') ?>,"
           "  <? value('vend_tax_id') ?>, "
-          "  <? value('vend_taxtype_id') ?> "
+          "  <? value('vend_taxtype_id') ?>, "
+          "  <? value('vend_tax_exemption') ?> "
           "   ) "
           " RETURNING vend_crmacct_id;" ;
 
@@ -670,6 +683,8 @@ bool vendor::sSave()
   }
   else if (_taxSelected->isChecked() && _taxCode->isValid())
     params.append("vend_tax_id", _taxCode->id());
+
+  params.append("vend_tax_exemption", _taxExempt->code());
 
   MetaSQLQuery mql(sql);
   XSqlQuery upsq = mql.toQuery(params);
@@ -887,7 +902,9 @@ bool vendor::sPopulate()
             "       CASE WHEN LENGTH(vend_ach_accntnumber) > 0 THEN"
             "       formatbytea(decrypt(setbytea(vend_ach_accntnumber),"
             "                           setbytea(<? value('key') ?>), 'bf'))"
-            "            ELSE '' END AS accntnum "
+            "            ELSE '' END AS accntnum, "
+            "       COALESCE(vend_tax_exemption, fetchMetricText('AvalaraUserExemptionCode')) "
+            "       AS tax_exemption "
             "<? else ?>"
             "       <? value('na') ?> AS routingnum,"
             "       <? value('na') ?> AS accntnum "
@@ -994,6 +1011,9 @@ bool vendor::sPopulate()
       _taxSelected->setChecked(true);
       _taxCode->setId(vendorPopulate.value("vend_tax_id").toInt());
     }
+
+    if (!vendorPopulate.value("tax_exemption").toString().isEmpty())
+      _taxExempt->setCode(vendorPopulate.value("tax_exemption").toString());
 
     sFillAddressList();
     _taxreg->setVendid(_vendid);

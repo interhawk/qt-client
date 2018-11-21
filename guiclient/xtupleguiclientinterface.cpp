@@ -128,6 +128,11 @@ Privileges *xTupleGuiClientInterface::getPrivileges()
   return _privileges;
 }
 
+TaxIntegration *xTupleGuiClientInterface::getTaxIntegration()
+{
+  return _taxIntegration;
+}
+
 MqlHash *xTupleGuiClientInterface::getMqlHash()
 {
   return _mqlhash;

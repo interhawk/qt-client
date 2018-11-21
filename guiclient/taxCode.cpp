@@ -50,6 +50,7 @@ taxCode::taxCode(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   sFillList(); 
 
   _account->setType(GLCluster::cRevenue | GLCluster::cLiability | GLCluster::cExpense);
+  _useAccount->setType(GLCluster::cRevenue | GLCluster::cLiability | GLCluster::cExpense);
   _distaccount->setType(GLCluster::cRevenue | GLCluster::cLiability | GLCluster::cExpense);
   if (_metrics->boolean("CashBasedTax"))
     _accountLit->setText(tr("Clearing Account"));
@@ -278,6 +279,7 @@ enum SetResponse taxCode::set(const ParameterList &pParams)
       _code->setEnabled(false);
       _description->setEnabled(false);
       _account->setReadOnly(true); 
+      _useAccount->setReadOnly(true);
       _distaccount->setReadOnly(true);
       _taxClass->setEnabled(false);
       _taxauth->setEnabled(false);
@@ -302,6 +304,8 @@ void taxCode::sSave()
                           tr("You must specify a Code for this Tax.") )
          << GuiErrorCheck(!_account->isValid(), _account,
                           tr("You must select a Ledger Account for this Tax.") )
+         << GuiErrorCheck(!_useAccount->isValid(), _account,
+                          tr("You must select a Use Tax Account for this Tax.") )
          << GuiErrorCheck(_metrics->boolean("CashBasedTax") && !_distaccount->isValid(), _distaccount,
                           tr("You must select a Distribution Ledger Account for this Tax.") )
   ;
@@ -327,6 +331,7 @@ void taxCode::sSave()
   taxSave.prepare("UPDATE tax "
                   "SET tax_code=:tax_code, tax_descrip=:tax_descrip,"
                   "    tax_sales_accnt_id=:tax_sales_accnt_id,"
+                  "    tax_use_accnt_id=:tax_use_accnt_id,"
                   "    tax_dist_accnt_id=:tax_dist_accnt_id,"
                   "    tax_taxclass_id=:tax_taxclass_id,"
                   "    tax_taxauth_id=:tax_taxauth_id,"
@@ -337,6 +342,8 @@ void taxCode::sSave()
   taxSave.bindValue(":tax_descrip", _description->text());
   if(_account->isValid())
      taxSave.bindValue(":tax_sales_accnt_id", _account->id());
+  if(_useAccount->isValid())
+     taxSave.bindValue(":tax_use_accnt_id", _useAccount->id());
   if(_distaccount->isValid())
     taxSave.bindValue(":tax_dist_accnt_id", _distaccount->id());
   if(_taxauth->isValid())
@@ -403,6 +410,7 @@ void taxCode::populate()
     _code->setText(taxpopulate.value("tax_code").toString());
     _description->setText(taxpopulate.value("tax_descrip").toString());
     _account->setId(taxpopulate.value("tax_sales_accnt_id").toInt());
+    _useAccount->setId(taxpopulate.value("tax_use_accnt_id").toInt());
     _distaccount->setId(taxpopulate.value("tax_dist_accnt_id").toInt());
     _taxClass->setId(taxpopulate.value("tax_taxclass_id").toInt());
     _taxauth->setId(taxpopulate.value("tax_taxauth_id").toInt());

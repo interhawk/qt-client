@@ -28,6 +28,7 @@ QMAKE_LIBDIR += $${OPENRPT_LIBDIR}
 LIBS += -lopenrptcommon -lMetaSQL -lz
 
 SOURCES = applock.cpp              \
+          avalaraIntegration.cpp \
           calendarcontrol.cpp      \
           calendargraphicsitem.cpp \
           checkForUpdates.cpp      \
@@ -43,12 +44,14 @@ SOURCES = applock.cpp              \
           metrics.cpp \
           metricsenc.cpp \
           mqlhash.cpp                   \
+          noIntegration.cpp \
           qbase64encode.cpp \
           qmd5.cpp \
           shortcuts.cpp \
           statusbarmessagehandler.cpp \
           storedProcErrorLookup.cpp \
           tarfile.cpp \
+          taxIntegration.cpp \
           xabstractmessagehandler.cpp \
           xbase32.cpp \
           xcachedhash.cpp               \
@@ -57,6 +60,7 @@ SOURCES = applock.cpp              \
           xtsettings.cpp
 
 HEADERS = applock.h              \
+          avalaraIntegration.h \
           calendarcontrol.h      \
           calendargraphicsitem.h \
           cmdlinemessagehandler.h \
@@ -72,12 +76,14 @@ HEADERS = applock.h              \
           metrics.h \
           metricsenc.h \
           mqlhash.h                     \
+          noIntegration.h \
           qbase64encode.h \
           qmd5.h \
           shortcuts.h \
           statusbarmessagehandler.h \
           storedProcErrorLookup.h \
           tarfile.h \
+          taxIntegration.h \
           xabstractmessagehandler.h \
           xbase32.h \
           xcachedhash.h                 \

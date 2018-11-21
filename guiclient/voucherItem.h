@@ -36,8 +36,6 @@ public slots:
     virtual void sSplitReceipt();
     virtual void rollback();
     virtual void reject();
-	virtual void sCalculateTax();
-	virtual void sTaxDetail();
     
 protected:
     virtual void closeEvent(QCloseEvent * event);

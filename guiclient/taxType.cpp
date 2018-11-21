@@ -12,8 +12,11 @@
 
 #include <QVariant>
 #include <QMessageBox>
+
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
+#include "mqlutil.h"
+
 
 taxType::taxType(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
   : XDialog(parent, name, modal, fl)
@@ -23,6 +26,28 @@ taxType::taxType(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   connect(_save, SIGNAL(clicked()), this, SLOT(sSave()));
   connect(_close, SIGNAL(clicked()), this, SLOT(reject()));
   connect(_name, SIGNAL(editingFinished()), this, SLOT(sCheck()));
+  connect(_externalCodeList, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(sUpdateExtTaxCode()));
+  connect(_search, SIGNAL(editingFinished()), this, SLOT(populateServiceList()));
+
+  if (_metrics->value("TaxService") == "A")
+  {
+    _extService = true;
+    _externalCodeList->addColumn(tr("Code"),        -1, Qt::AlignLeft, true, "taxcode" );
+    _externalCodeList->addColumn(tr("Description"), -1, Qt::AlignLeft, true, "description" );
+  }
+  else
+  {
+    _extService = false;
+    _externalCode->setVisible(false);
+    _externalCodeLit->setVisible(false);
+    _externalDescription->setVisible(false);
+    _externalCodeList->setVisible(false);
+    _externalCodeListLit->setVisible(false);
+    _searchLit->setVisible(false);
+    _search->setVisible(false);
+  }
+
+  connect(_taxIntegration, SIGNAL(taxCodesFetched(QJsonObject, QString)), this, SLOT(populateServiceList(QJsonObject, QString)));
 }
 
 taxType::~taxType()
@@ -67,8 +92,16 @@ enum SetResponse taxType::set(const ParameterList &pParams)
       _description->setEnabled(false);
       _close->setText(tr("&Close"));
       _save->hide();
+
+      _externalCodeList->setVisible(false);
+      _externalCodeListLit->setVisible(false);
+      _searchLit->setVisible(false);
+      _search->setVisible(false);
     }
   }
+
+  if (_extService && _mode != cView)
+    populateServiceList();
 
   return NoError;
 }
@@ -102,6 +135,8 @@ void taxType::sSave()
   QList<GuiErrorCheck> errors;
     errors<< GuiErrorCheck(_name->text().trimmed().isEmpty(), _name,
                            tr("You must name this Tax Type before saving it."))
+          << GuiErrorCheck(_externalCode->text().trimmed().isEmpty() && _extService, _externalCodeList,
+                           tr("You must define an external tax code when using an external taxation service."))
     ;
     if (GuiErrorCheck::reportErrors(this, tr("Missing Name"), errors))
       return;
@@ -126,11 +161,13 @@ void taxType::sSave()
 
     taxSave.prepare( "UPDATE taxtype "
                "SET taxtype_name=:taxtype_name,"
-               "    taxtype_descrip=:taxtype_descrip "
+               "    taxtype_descrip=:taxtype_descrip, "
+               "    taxtype_external_code=:taxtype_external_code "
                "WHERE (taxtype_id=:taxtype_id);" );
     taxSave.bindValue(":taxtype_id", _taxtypeid);
     taxSave.bindValue(":taxtype_name", _name->text().trimmed());
     taxSave.bindValue(":taxtype_descrip", _description->text());
+    taxSave.bindValue(":taxtype_external_code", _externalCode->text());
     taxSave.exec();
   }
   else if (_mode == cNew)
@@ -160,12 +197,13 @@ void taxType::sSave()
     }
 
     taxSave.prepare( "INSERT INTO taxtype "
-               "( taxtype_id, taxtype_name, taxtype_descrip ) "
+               "( taxtype_id, taxtype_name, taxtype_descrip, taxtype_external_code ) "
                "VALUES "
-               "( :taxtype_id, :taxtype_name, :taxtype_descrip );" );
+               "( :taxtype_id, :taxtype_name, :taxtype_descrip, :taxtype_external_code );" );
     taxSave.bindValue(":taxtype_id", _taxtypeid);
     taxSave.bindValue(":taxtype_name", _name->text().trimmed());
     taxSave.bindValue(":taxtype_descrip", _description->text());
+    taxSave.bindValue(":taxtype_external_code", _externalCode->text());
     taxSave.exec();
   }
 
@@ -175,7 +213,7 @@ void taxType::sSave()
 void taxType::populate()
 {
   XSqlQuery taxpopulate;
-  taxpopulate.prepare( "SELECT taxtype_name, taxtype_descrip, taxtype_sys "
+  taxpopulate.prepare( "SELECT taxtype_name, taxtype_descrip, taxtype_sys, taxtype_external_code "
              "FROM taxtype "
              "WHERE (taxtype_id=:taxtype_id);" );
   taxpopulate.bindValue(":taxtype_id", _taxtypeid);
@@ -186,6 +224,87 @@ void taxType::populate()
     if(taxpopulate.value("taxtype_sys").toBool())
       _name->setEnabled(false);
     _description->setText(taxpopulate.value("taxtype_descrip").toString());
+    _externalCode->setText(taxpopulate.value("taxtype_external_code").toString());
   }
+}
+
+void taxType::populateServiceList()
+{
+  _taxIntegration->getTaxCodes();
+}
+
+void taxType::populateServiceList(QJsonObject taxCodes, QString error)
+{
+  if (error.isEmpty())
+  {
+    XSqlQuery qry;
+
+    QString sql("WITH taxcodes AS "
+                "( "
+                " SELECT taxcode, description, parent, type, path, level "
+                "   FROM formatExternalTaxCodes(<? value('taxCodes') ?>) "
+                ") "
+                "SELECT taxcode, description, level AS xtindentrole "
+                "  FROM taxcodes "
+                " WHERE TRUE "
+                "<? if exists('search') ?>"
+                "   AND taxcode IN ( "
+                "                   WITH RECURSIVE _taxcodes AS "
+                "                   ( "
+                "                    SELECT taxcode, parent "
+                "                      FROM taxcodes "
+                "                     WHERE (taxcode ~* <? value('search') ?> "
+                "                            OR description ~* <? value('search') ?>) "
+                "                    UNION "
+                "                    SELECT parent.taxcode, parent.parent "
+                "                      FROM _taxcodes "
+                "                      JOIN taxcodes parent ON _taxcodes.parent = parent.taxcode "
+                "                   ) "
+                "                   SELECT taxcode "
+                "                     FROM _taxcodes "
+                "                  ) "
+                "<? endif ?> "
+                "<? if exists('freight') ?> "
+                "   AND type = 'F' "
+                "<? endif ?> "
+                "ORDER BY path, level;");
+    MetaSQLQuery  mql(sql);
+    ParameterList params;
+    params.append("taxCodes", QString::fromUtf8(QJsonDocument(taxCodes).toJson()));
+    if (!_search->text().trimmed().isEmpty())
+      params.append("search", _search->text().trimmed());
+    if (_name->text() == "Freight")
+      params.append("freight");
+
+    qry = mql.toQuery(params);
+    _externalCodeList->populate(qry);
+    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Type Information"),
+                             qry, __FILE__, __LINE__))
+      return;
+
+    QList<XTreeWidgetItem*> current;
+    current = _externalCodeList->findItems(_externalCode->text(), 0, 0);
+    if (current.size() > 0)
+      _externalDescription->setText(current[0]->rawValue("description").toString());
+  }
+  else
+    QMessageBox::critical(this, tr("Avalara Error"), tr("Error retrieving Avalara Tax Codes\n%1").arg(error));
+}
+
+void taxType::sUpdateExtTaxCode()
+{
+  QString sel = _externalCodeList->currentItem()->rawValue("taxcode").toString();
+  if ((sel != _externalCode->text()) && _externalCode->text() != "")
+  {
+    if (QMessageBox::question(this, tr("Confirm Selection"),
+                 tr("<p>You have selected a different external Tax Code for this type.<br>"
+                    "Are you sure you wish to update the Tax Code?"),
+                 QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
+       return;
+  }
+
+  _externalCode->setText(sel);
+  _externalDescription->setText(_externalCodeList->currentItem()->rawValue("description").toString());
+
 }
 

@@ -29,6 +29,9 @@ public slots:
     virtual void sCheck();
     virtual void sSave();
     virtual void populate();
+    virtual void populateServiceList();
+    virtual void populateServiceList(QJsonObject, QString);
+    virtual void sUpdateExtTaxCode();
 
 protected slots:
     virtual void languageChange();
@@ -36,6 +39,7 @@ protected slots:
 private:
     int _mode;
     int _taxtypeid;
+    bool _extService;
 
 };
 

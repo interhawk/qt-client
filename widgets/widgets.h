@@ -18,6 +18,7 @@
 #include <metrics.h>
 
 #include "parameter.h"
+#include "taxIntegration.h"
 
 #include <xtuplecommon.h>
 
@@ -39,6 +40,7 @@ class Metrics;
 class Preferences;
 class Privileges;
 class QMdiArea;
+class TaxIntegration;
 class QScriptEngine;
 class QWidget;
 class GuiClientInterface;
@@ -48,6 +50,7 @@ extern Metrics     *_x_metrics;
 extern QMdiArea    *_x_workspace;
 extern Privileges  *_x_privileges;
 extern QString     _x_username;
+extern TaxIntegration *_x_taxIntegration;
 
 void setupWidgetsScriptApi(QScriptEngine *engine, GuiClientInterface *client = 0);
 

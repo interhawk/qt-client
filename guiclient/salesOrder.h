@@ -64,11 +64,12 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
     virtual void        sClear();
     virtual void        clear();
     virtual void        closeEvent( QCloseEvent *pEvent );
+    virtual void        sMiscTaxtypeChanged();
+    virtual void        sMiscChargeChanged();
     virtual void        sFreightChanged();
     virtual void        sHandleShipchrg( int pShipchrgid );
     virtual void        sHandleSalesOrderEvent(int pSoheadid, bool pLocal);
     virtual void        sTaxZoneChanged();
-    virtual void        sTaxDetail();
     virtual void        sFreightDetail();
     virtual void        setFreeFormShipto( bool pFreeForm );
     virtual void        sNewCharacteristic();
@@ -97,7 +98,6 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
     virtual void        sAllocateCreditMemos();
     virtual void        sCheckValidContacts();
     virtual void        sHandleMore();
-    virtual void        sCalculateTax();
     virtual void        sRecalculatePrice();
     virtual void        sOrderDateChanged();
     virtual void        sShipDateChanged();

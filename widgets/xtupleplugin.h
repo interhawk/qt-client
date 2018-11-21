@@ -33,6 +33,6 @@ class xTuplePlugin : public QObject, public QDesignerCustomWidgetCollectionInter
     QList<QDesignerCustomWidgetInterface*> m_plugins;
 };
 
-void XTUPLEWIDGETS_EXPORT initializePlugin(Preferences *, Metrics *, Privileges *, QString, QMdiArea *);
+void XTUPLEWIDGETS_EXPORT initializePlugin(Preferences *, Metrics *, Privileges *, TaxIntegration *, QString, QMdiArea *);
 
 #endif

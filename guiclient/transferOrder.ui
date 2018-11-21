@@ -261,29 +261,6 @@ to be bound by its terms.</comment>
              </property>
             </widget>
            </item>
-           <item row="2" column="2" rowspan="2">
-            <widget class="QLabel" name="_taxzoneLit">
-             <property name="text">
-              <string>Tax Zone:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="buddy">
-              <cstring>_taxzone</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="3">
-            <widget class="XComboBox" name="_taxzone">
-             <property name="allowNull">
-              <bool>true</bool>
-             </property>
-             <property name="type">
-              <enum>XComboBox::TaxZones</enum>
-             </property>
-            </widget>
-           </item>
            <item row="4" column="0">
             <widget class="QLabel" name="_packDateLit">
              <property name="text">
@@ -673,25 +650,15 @@ to be bound by its terms.</comment>
              </property>
             </widget>
            </item>
+           <item row="0" column="5">
+            <widget class="CurrDisplay" name="_itemFreight"/>
+           </item>
            <item row="0" column="4">
             <widget class="QLabel" name="_itemFreightLit">
              <property name="text">
               <string>Line Item Freight Subtotal:</string>
              </property>
             </widget>
-           </item>
-           <item row="1" column="4">
-            <widget class="QLabel" name="_freightLit">
-             <property name="text">
-              <string>Order-Level Freight:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="5">
-            <widget class="CurrDisplay" name="_itemFreight"/>
            </item>
            <item row="1" column="5">
             <widget class="CurrCluster" name="_freight">
@@ -709,10 +676,10 @@ to be bound by its terms.</comment>
              </property>
             </widget>
            </item>
-           <item row="2" column="4">
-            <widget class="XURLLabel" name="_taxLit">
+           <item row="1" column="4">
+            <widget class="QLabel" name="_freightLit">
              <property name="text">
-              <string>Tax:</string>
+              <string>Order-Level Freight:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -720,32 +687,22 @@ to be bound by its terms.</comment>
             </widget>
            </item>
            <item row="2" column="5">
-            <widget class="CurrDisplay" name="_tax">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="4">
-            <widget class="QLabel" name="_totalLit">
-             <property name="text">
-              <string>Total:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="5">
             <widget class="CurrCluster" name="_total">
              <property name="currencyVisible">
               <bool>false</bool>
              </property>
              <property name="enabled">
               <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QLabel" name="_totalLit">
+             <property name="text">
+              <string>Total:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -882,7 +839,16 @@ to be bound by its terms.</comment>
        <property name="spacing">
         <number>5</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
         <number>5</number>
        </property>
        <item>
@@ -898,7 +864,16 @@ to be bound by its terms.</comment>
        <property name="spacing">
         <number>5</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
         <number>5</number>
        </property>
        <item>
@@ -918,7 +893,16 @@ to be bound by its terms.</comment>
        <property name="spacing">
         <number>5</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
         <number>5</number>
        </property>
        <item>
@@ -948,7 +932,16 @@ to be bound by its terms.</comment>
        <property name="spacing">
         <number>5</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
         <number>5</number>
        </property>
        <item>
@@ -1102,11 +1095,6 @@ to be bound by its terms.</comment>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>XURLLabel</class>
-   <extends>QLabel</extends>
-   <header>xurllabel.h</header>
-  </customwidget>
-  <customwidget>
    <class>XTextEdit</class>
    <extends>QTextEdit</extends>
    <header>xtextedit.h</header>
@@ -1124,7 +1112,6 @@ to be bound by its terms.</comment>
   <tabstop>_packDate</tabstop>
   <tabstop>_status</tabstop>
   <tabstop>_agent</tabstop>
-  <tabstop>_taxzone</tabstop>
   <tabstop>_shipComplete</tabstop>
   <tabstop>_project</tabstop>
   <tabstop>_srcWhs</tabstop>
@@ -1240,38 +1227,6 @@ to be bound by its terms.</comment>
     <hint type="destinationlabel">
      <x>706</x>
      <y>406</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_orderDate</sender>
-   <signal>newDate(QDate)</signal>
-   <receiver>_tax</receiver>
-   <slot>setEffective(QDate)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>706</x>
-     <y>382</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_freightCurrency</sender>
-   <signal>newID(int)</signal>
-   <receiver>_tax</receiver>
-   <slot>setId(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>381</x>
-     <y>316</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>706</x>
-     <y>382</y>
     </hint>
    </hints>
   </connection>

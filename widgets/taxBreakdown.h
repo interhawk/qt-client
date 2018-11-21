@@ -11,13 +11,10 @@
 #ifndef TAXBREAKDOWN_H
 #define TAXBREAKDOWN_H
 
-#include "guiclient.h"
-#include "xdialog.h"
 #include <parameter.h>
-#include "taxCache.h"
 #include "ui_taxBreakdown.h"
 
-class taxBreakdown : public XDialog, public Ui::taxBreakdown
+class XTUPLEWIDGETS_EXPORT taxBreakdown : public QDialog, public Ui::taxBreakdown
 {
   Q_OBJECT
 
@@ -28,17 +25,17 @@ class taxBreakdown : public XDialog, public Ui::taxBreakdown
   public slots:
     void	     languageChange();
 
-    virtual SetResponse set(const ParameterList&);
-    virtual void	sAdjTaxDetail();
-    virtual void	sFreightTaxDetail();
-    virtual void	sLineTaxDetail();
-    virtual void	sTotalTaxDetail();
+    virtual void        set(const ParameterList&);
     virtual void	sPopulate();
+    virtual void        sHandleButtons(bool);
+    virtual void        sNew();
+    virtual void        sDelete();
 
   private:
     int         _mode;
     int		_orderid;
     int         _sense;
     QString	_ordertype;
+    QDate       _date;
 };
 #endif // TAXBREAKDOWN_H

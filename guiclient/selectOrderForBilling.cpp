@@ -17,11 +17,11 @@
 
 #include <metasql.h>
 
+#include "guiErrorCheck.h"
 #include "salesOrder.h"
 #include "salesOrderList.h"
 #include "selectBillingQty.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
 #include "errorReporter.h"
 
 selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, Qt::WindowFlags fl)
@@ -36,14 +36,18 @@ selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, 
 
   connect(_cancel, SIGNAL(clicked()), this, SLOT(sCancelSelection()));
   connect(_edit, SIGNAL(clicked()), this, SLOT(sEditOrder()));
+  connect(_freightTaxtype, SIGNAL(newID(int)), this, SLOT(sMiscTaxtypeChanged()));
   connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
-  connect(_miscCharge, SIGNAL(valueChanged()), this, SLOT(sUpdateTotal()));
-  connect(_salesTaxLit, SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
+  connect(_miscChargeTaxtype, SIGNAL(newID(int)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeDiscount, SIGNAL(toggled(bool)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeAccount, SIGNAL(valid(bool)), this, SLOT(sMiscTaxtypeChanged()));
+  connect(_miscCharge, SIGNAL(valueChanged()), this, SLOT(sMiscChargeChanged()));
   connect(_save, SIGNAL(clicked()), this, SLOT(sSave()));
   connect(_select, SIGNAL(clicked()), this, SLOT(sEditSelection()));
   connect(_selectBalance, SIGNAL(clicked()), this, SLOT(sSelectBalance()));
   connect(_showClosed, SIGNAL(toggled(bool)), this, SLOT(sFillList()));
   connect(_so, SIGNAL(newId(int,QString)), this, SLOT(sPopulate(int)));
+  connect(_salesTax,    SIGNAL(save(bool)),     this, SLOT(save(bool)));
   connect(_salesTax,	SIGNAL(valueChanged()),	this, SLOT(sUpdateTotal()));
   connect(_subtotal,	SIGNAL(valueChanged()),	this, SLOT(sUpdateTotal()));
   connect(_taxZone,	SIGNAL(newID(int)),	this, SLOT(sTaxZoneChanged()));
@@ -92,6 +96,20 @@ selectOrderForBilling::selectOrderForBilling(QWidget* parent, const char* name, 
   _payment->hide(); // Issue 10254:  if no objections over time, we should ultimately remove this.
 
   _miscChargeAccount->setType(GLCluster::cRevenue | GLCluster::cExpense);
+
+  _freightTaxtype->setCode("Freight");
+  _miscChargeTaxtype->setCode("Misc");
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxZone->hide();
+  }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 selectOrderForBilling::~selectOrderForBilling()
@@ -124,11 +142,12 @@ SetResponse selectOrderForBilling::set(const ParameterList &pParams)
     if (param.toString() == "new")
     {
       _mode = cNew;
-
+      _salesTax->setMode(_mode);
     }
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
+      _salesTax->setMode(_mode);
 
       _close->setText(tr("&Cancel"));
 
@@ -142,6 +161,7 @@ void selectOrderForBilling::clear()
 {
   _so->setId(-1);
   _cobmiscid = -1;
+  _salesTax->setOrderId(_cobmiscid);
   _orderDate->clear();
   _shipDate->clear();
   _invoiceDate->clear();
@@ -165,36 +185,49 @@ void selectOrderForBilling::clear()
 
 void selectOrderForBilling::sSave()
 {
+  save(false);
+
+  omfgThis->sBillingSelectionUpdated(_so->id(), true);
+
+  if (_metrics->value("TaxService") == "A")
+    _salesTax->save();
+
+  if (_captive)
+    close();
+  else
+  {
+    clear();
+    _so->setFocus();
+  }
+}
+
+bool selectOrderForBilling::save(bool partial)
+{
   XSqlQuery selectSave;
-  if (!_shipDate->isValid())
-  {
-    QMessageBox::information(this, tr("No Ship Date Entered"),
-                             tr("<p>You must enter a Ship Date before "
-				"approving this order for billing."  ) );
 
-    _shipDate->setFocus();
-    return;
-  }
-
-  if ( (! _miscCharge->isZero()) && (!_miscChargeAccount->isValid()) )
-  {
-    QMessageBox::warning( this, tr("No Misc. Charge Account Number"),
+  QList<GuiErrorCheck> errors;
+  errors << GuiErrorCheck(!_shipDate->isValid(), _shipDate,
+                          tr("<p>You must enter a Ship Date before "
+                             "approving this order for billing."))
+         << GuiErrorCheck(!_miscCharge->isZero() && !_miscChargeAccount->isValid(), _miscChargeAccount,
                           tr("<p>You may not enter a Misc. Charge without "
-			     "indicating the G/L Sales Account number for the "
-			     "charge. Please set the Misc. Charge amount to 0 "
-			     "or select a Misc. Charge Sales Account." ) );
-    _miscChargeAccount->setFocus();
-    return;
-  }
-  
-  if (_total->localValue() < 0)
-  {
-    QMessageBox::warning( this, tr("Negative total"),
+                             "indicating the G/L Sales Account number for the "
+                             "charge.  Please set the Misc. Charge amount to 0 "
+                             "or select a Misc. Charge Sales Account."))
+         << GuiErrorCheck(_miscCharge->isZero() && _miscChargeAccount->isValid(), _miscCharge,
+                          tr("<p>You must enter a Misc. Charge when "
+                             "specifying a Misc. Charge Sales Account. "
+                             "Please enter Misc. Charge amount "
+                             "or remove the Misc. Charge Sales Account."))
+         << GuiErrorCheck(_total->localValue() < 0, _miscCharge,
                           tr("<p>You may not approve "
-			     "for billing a negative total amount" ) );
-    _miscCharge->setFocus();
-    return;
-  }
+			     "for billing a negative total amount"));
+
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
+
+  if (GuiErrorCheck::reportErrors(this, tr("Cannot Approve for Billing"), errors))
+      return false;
 
   if (_cobmiscid != -1)
   {
@@ -207,7 +240,11 @@ void selectOrderForBilling::sSave()
                "    cobmisc_shipvia=:cobmisc_shipvia, cobmisc_closeorder=:cobmisc_closeorder,"
                "    cobmisc_misc=:cobmisc_misc, cobmisc_misc_accnt_id=:cobmisc_misc_accnt_id,"
                "    cobmisc_misc_descrip=:cobmisc_misc_descrip, "
-	       "    cobmisc_curr_id=:cobmisc_curr_id "
+	       "    cobmisc_curr_id=:cobmisc_curr_id, "
+               "    cobmisc_freight_taxtype_id=:cobmisc_freight_taxtype_id, "
+               "    cobmisc_misc_taxtype_id=:cobmisc_misc_taxtype_id, "
+               "    cobmisc_misc_discount=:cobmisc_misc_discount, "
+               "    cobmisc_tax_exemption=:cobmisc_tax_exemption "
                "WHERE (cobmisc_id=:cobmisc_id);" );
     selectSave.bindValue(":cobmisc_id", _cobmiscid);
     selectSave.bindValue(":cobmisc_freight", _freight->localValue());
@@ -225,23 +262,19 @@ void selectOrderForBilling::sSave()
     selectSave.bindValue(":cobmisc_misc_accnt_id", _miscChargeAccount->id());
     selectSave.bindValue(":cobmisc_misc_descrip", _miscChargeDescription->text().trimmed());
     selectSave.bindValue(":cobmisc_curr_id",	_custCurrency->id());
+    selectSave.bindValue(":cobmisc_freight_taxtype_id", _freightTaxtype->id());
+    selectSave.bindValue(":cobmisc_misc_taxtype_id", _miscChargeTaxtype->id());
+    selectSave.bindValue(":cobmisc_misc_discount", _miscChargeDiscount->isChecked());
+    selectSave.bindValue(":cobmisc_tax_exemption", _taxExempt->code());
     selectSave.exec();
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Selected Orders For Billing"),
                                   selectSave, __FILE__, __LINE__))
     {
-      return;
+      return false;
     }
   }
 
-  omfgThis->sBillingSelectionUpdated(_so->id(), true);
-
-  if (_captive)
-    close();
-  else
-  {
-    clear();
-    _so->setFocus();
-  }
+  return true;
 }
 
 void selectOrderForBilling::sSoList()
@@ -273,6 +306,7 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
     if (selectPopulate.first())
     {
       _cobmiscid = selectPopulate.value("cobmisc_id").toInt();
+      _salesTax->setOrderId(_cobmiscid);
       if (_cobmiscid < 0)
       {
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Sales Order Information"),
@@ -296,6 +330,9 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
                      "       cobmisc_payment AS payment,"
                      "       cobmisc_closeorder,"
                      "       cobmisc_curr_id,"
+                     "       cobmisc_freight_taxtype_id, cobmisc_misc_taxtype_id,"
+                     "       cobmisc_misc_discount,"
+                     "       cobmisc_tax_exemption,"
                      "       cohead_number, cohead_shipto_id,"
                      "       cohead_custponumber,"
                      "       cohead_billtoname, cohead_shiptoname,"
@@ -312,6 +349,7 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
     if (cobmisc.first())
     {
       _cobmiscid = cobmisc.value("cobmisc_id").toInt();
+      _salesTax->setOrderId(_cobmiscid);
       // do taxzone first so we can overwrite the result of the signal cascade
       _taxzoneidCache = cobmisc.value("cobmisc_taxzone_id").toInt();
       _taxZone->setId(cobmisc.value("cobmisc_taxzone_id").toInt());
@@ -328,13 +366,16 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
       _miscCharge->setLocalValue(cobmisc.value("cobmisc_misc").toDouble());
       _miscChargeAccount->setId(cobmisc.value("cobmisc_misc_accnt_id").toInt());
       _miscChargeDescription->setText(cobmisc.value("cobmisc_misc_descrip"));
+      _miscChargeTaxtype->setId(cobmisc.value("cobmisc_misc_taxtype_id").toInt());
+      _miscChargeDiscount->setChecked(cobmisc.value("cobmisc_misc_discount").toBool());
+      _freightTaxtype->setId(cobmisc.value("cobmisc_freight_taxtype_id").toInt());
+      _taxExempt->setCode(cobmisc.value("cobmisc_tax_exemption").toString());
       _payment->set(cobmisc.value("payment").toDouble(),
 		    cobmisc.value("cobmisc_curr_id").toInt(),
 		    cobmisc.value("cohead_orderdate").toDate(), false);
       _custCurrency->setId(cobmisc.value("cobmisc_curr_id").toInt());
       _comments->setText(cobmisc.value("cobmisc_notes").toString());
       _closeOpenItems->setChecked(cobmisc.value("cobmisc_closeorder").toBool());
-      _freightCache = cobmisc.value("freight").toDouble();
       if (cobmisc.value("custfreight").toBool())
       {
         _freight->setEnabled(true);
@@ -345,6 +386,7 @@ void selectOrderForBilling::sPopulate(int pSoheadid)
         _freight->setEnabled(false);
         _freight->clear();
       }
+      _freightCache = cobmisc.value("freight").toDouble();
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Billing Selection Information"),
                                   selectPopulate, __FILE__, __LINE__))
@@ -377,6 +419,9 @@ void selectOrderForBilling::sEditSelection()
   if (newdlg.exec() != XDialog::Rejected)
   {
     sFillList();
+
+    _salesTax->sRefresh();
+
     _updated = true;
   }
 }
@@ -393,6 +438,8 @@ void selectOrderForBilling::sCancelSelection()
   selectCancelSelection.exec();
 
   sFillList();
+
+  _salesTax->sRefresh();
 }
 
 void selectOrderForBilling::sSelectBalance()
@@ -419,27 +466,8 @@ void selectOrderForBilling::sSelectBalance()
   }
 
   sFillList();
-}
 
-void selectOrderForBilling::sCalculateTax()   
-{
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(tax) AS tax "
-                "FROM ("
-                "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-                "FROM tax "
-                " JOIN calculateTaxDetailSummary('B', :cobmisc_id, 'T') ON (taxdetail_tax_id=tax_id)"
-	        "GROUP BY tax_id) AS data;" );
-  taxq.bindValue(":cobmisc_id", _cobmiscid);
-  taxq.exec();
-  if (taxq.first())
-    _salesTax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Information"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
-  // changing _tax fires sCalculateTotal()
+  _salesTax->sRefresh();
 }
 
 void selectOrderForBilling::sUpdateTotal()
@@ -527,8 +555,6 @@ void selectOrderForBilling::sFillList()
                            selectFillList, __FILE__, __LINE__);
       _subtotal->clear();
     }
-
-    sCalculateTax();
   }
 }
 
@@ -554,38 +580,6 @@ void selectOrderForBilling::sHandleShipchrg(int pShipchrgid)
                                 query, __FILE__, __LINE__))
   {
     return;
-  }
-}
-
-void selectOrderForBilling::sTaxDetail()
-{
-  XSqlQuery taxq;
-  taxq.prepare("UPDATE cobmisc SET cobmisc_taxzone_id=:taxzone,"
-	           "  cobmisc_freight=:freight,"
-	           "  cobmisc_invcdate=:invcdate "
-	           "WHERE (cobmisc_id=:cobmisc_id);");
-  if(_taxZone->isValid())
-    taxq.bindValue(":taxzone",	_taxZone->id());
-  taxq.bindValue(":freight",	_freight->localValue());
-  taxq.bindValue(":cobmisc_id",	_cobmiscid);
-  taxq.bindValue(":invcdate",   _invoiceDate->date());
-  taxq.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Tax Information"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
-
-  ParameterList params;
-  params.append("order_id",	_cobmiscid);
-  params.append("order_type",	"B");
-  params.append("mode",		"edit");
-
-  taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError)
-  {
-    newdlg.exec();
-    sPopulate(_so->id());
   }
 }
 
@@ -629,14 +623,67 @@ void selectOrderForBilling::sTaxZoneChanged()
       return;
     }
     _taxzoneidCache = _taxZone->id();
-    sCalculateTax();
+    if (_metrics->value("TaxService") == "N")
+      _salesTax->sRecalculate();
   }
+}
+
+void selectOrderForBilling::sMiscTaxtypeChanged()
+{
+  _salesTax->invalidate();
+}
+
+void selectOrderForBilling::sMiscChargeChanged()
+{
+  sUpdateTotal();
+
+  _salesTax->invalidate();
 }
 
 void selectOrderForBilling::sFreightChanged()
 {
   if (_cobmiscid != -1 && _freightCache != _freight->localValue())
   {
+    if (_metrics->value("TaxService") == "A")
+    {
+      XSqlQuery qry;
+      qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                  "                      addr_line1 || addr_line2 || addr_line3 || "
+                  "                      addr_city || addr_state || addr_postalcode || "
+                  "                      addr_country) > 1 "
+                  "       AS check "
+                  "  FROM cobill "
+                  "  JOIN coitem ON cobill_coitem_id = coitem_id "
+                  "  JOIN itemsite ON coitem_itemsite_id = itemsite_id "
+                  "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                  "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                  " WHERE cobill_cobmisc_id = :cobmiscid;");
+      qry.bindValue(":cobmiscid", _cobmiscid);
+      qry.exec();
+      if (qry.first() && qry.value("check").toBool())
+      {
+        QMessageBox::critical(this, tr("Cannot override freight"),
+                              tr("Freight must be calculated automatically when lines are "
+                                 "shipping from different addresses for Avalara tax "
+                                 "calculation."));
+
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+        return;
+      }
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                    qry, __FILE__, __LINE__))
+      {
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+        return;
+      }
+    }
+
     XSqlQuery taxq;
     taxq.prepare("UPDATE cobmisc SET "
       "  cobmisc_freight=:freight "
@@ -650,6 +697,9 @@ void selectOrderForBilling::sFreightChanged()
       return;
     }
     _freightCache = _freight->localValue();
-    sCalculateTax();
+
+    sUpdateTotal();
+
+    _salesTax->invalidate();
   }   
 }

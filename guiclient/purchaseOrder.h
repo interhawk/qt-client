@@ -41,6 +41,7 @@ public slots:
     virtual void setViewMode();
     virtual void populate();
     virtual void sSave();
+    virtual bool save(bool);
     virtual void sNew();
     virtual void sEdit();
     virtual void sDelete();
@@ -54,9 +55,9 @@ public slots:
     virtual void sSetUserOrderNumber();
     virtual void sHandleOrderNumber();
     virtual void closeEvent( QCloseEvent * pEvent );
-    virtual void sCalculateTax();
+    virtual void sFreightTaxtypeChanged();
+    virtual void sFreightChanged();
     virtual void sTaxZoneChanged();
-    virtual void sTaxDetail();
     virtual void sViewSo();
     virtual void sViewWo();
     virtual void sEditSo();
@@ -94,6 +95,7 @@ private:
     PoitemTableModel *_qeitem;
     int _NumberGen;
     int _projectId;
+    double _freightCache;
 };
 
 #endif // PURCHASEORDER_H

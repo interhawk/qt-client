@@ -20,7 +20,7 @@
 #include "errorReporter.h"
 
 #include "priceList.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 #include "storedProcErrorLookup.h"
 #include "returnAuthItemLotSerial.h"
 
@@ -70,7 +70,6 @@ returnAuthorizationItem::returnAuthorizationItem(QWidget* parent, const char* na
 
   connect(_discountFromSale,     SIGNAL(editingFinished()),                    this, SLOT(sCalculateFromDiscount()));
   connect(_saleDiscountFromSale, SIGNAL(editingFinished()),                    this, SLOT(sCalculateSaleFromDiscount()));
-  connect(_extendedPrice,        SIGNAL(valueChanged()),                 this, SLOT(sCalculateTax()));
   connect(_item,                 SIGNAL(newId(int)),                     this, SLOT(sPopulateItemInfo()));
   connect(_listPrices,           SIGNAL(clicked()),                      this, SLOT(sListPrices()));
   connect(_saleListPrices,       SIGNAL(clicked()),                      this, SLOT(sSaleListPrices()));
@@ -85,7 +84,6 @@ returnAuthorizationItem::returnAuthorizationItem(QWidget* parent, const char* na
   connect(_qtyAuth,              SIGNAL(textChanged(const QString&)),    this, SLOT(sCalcWoUnitCost()));
   connect(_save,                 SIGNAL(clicked()),                      this, SLOT(sSaveClicked()));
   connect(_taxLit,               SIGNAL(leftClickedURL(const QString&)), this, SLOT(sTaxDetail()));
-  connect(_taxType,              SIGNAL(newID(int)),                     this, SLOT(sCalculateTax()));
   connect(_qtyUOM,               SIGNAL(newID(int)),                     this, SLOT(sQtyUOMChanged()));
   connect(_qtyUOM,               SIGNAL(newID(int)),                     this, SLOT(sPopulateOrderInfo()));
   connect(_pricingUOM,           SIGNAL(newID(int)),                     this, SLOT(sPriceUOMChanged()));
@@ -146,6 +144,12 @@ returnAuthorizationItem::returnAuthorizationItem(QWidget* parent, const char* na
 
   _altcosAccntid->setType(GLCluster::cRevenue | GLCluster::cExpense);
   _tab->setTabEnabled(_tab->indexOf(_lotserial), false);
+
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 
   returnreturnAuthorizationItem.exec("BEGIN;"); //In case problems or we cancel out
 }
@@ -214,6 +218,12 @@ enum SetResponse returnAuthorizationItem::set(const ParameterList &pParams)
   {
     _preferredShipWarehousid = param.toInt();
     _shipWhs->setId(_preferredShipWarehousid);
+  }
+
+  param = pParams.value("taxExempt", &valid);
+  if (valid)
+  {
+    _taxExempt->setCode(param.toString());
   }
 
   param = pParams.value("mode", &valid);
@@ -328,6 +338,8 @@ enum SetResponse returnAuthorizationItem::set(const ParameterList &pParams)
     populate();
   }
 
+  sCalculateTax();
+
   return NoError;
 }
 
@@ -388,7 +400,7 @@ bool returnAuthorizationItem::sSave()
                "  raitem_unitprice, raitem_taxtype_id, "
                "  raitem_notes, raitem_rsncode_id, raitem_cos_accnt_id, "
                "  raitem_scheddate, raitem_warranty, raitem_coitem_itemsite_id, "
-               "  raitem_saleprice, raitem_unitcost, raitem_custpn ) "
+               "  raitem_saleprice, raitem_unitcost, raitem_custpn, raitem_tax_exemption ) "
                "SELECT :raitem_id, :rahead_id, :raitem_linenumber, rcv.itemsite_id,"
                "       :raitem_disposition, :raitem_qtyauthorized,"
                "       :qty_uom_id, :qty_invuomratio,"
@@ -396,7 +408,7 @@ bool returnAuthorizationItem::sSave()
                "       :raitem_unitprice, :raitem_taxtype_id, "
                "       :raitem_notes, :raitem_rsncode_id, :raitem_cos_accnt_id, "
                "       :raitem_scheddate, :raitem_warranty, shp.itemsite_id, "
-               "       :raitem_saleprice, :raitem_unitcost, :raitem_custpn "
+               "       :raitem_saleprice, :raitem_unitcost, :raitem_custpn, :raitem_tax_exemption "
                "FROM itemsite rcv "
                "  LEFT OUTER JOIN itemsite shp ON "
                "        (shp.itemsite_item_id=rcv.itemsite_item_id) "
@@ -423,7 +435,8 @@ bool returnAuthorizationItem::sSave()
                "    raitem_saleprice=:raitem_saleprice, "
                "    raitem_coitem_itemsite_id=:coitem_itemsite_id, "
                "    raitem_unitcost=:raitem_unitcost, "
-               "    raitem_custpn=:raitem_custpn "
+               "    raitem_custpn=:raitem_custpn, "
+               "    raitem_tax_exemption=:raitem_tax_exemption "
                "WHERE (raitem_id=:raitem_id);" );
 
      if (_disposition->code() == "P" ||
@@ -485,6 +498,7 @@ bool returnAuthorizationItem::sSave()
   if (_costmethod=="A")
     returnSave.bindValue(":raitem_unitcost", _unitCost->localValue());
   returnSave.bindValue(":raitem_custpn", _customerPN->text());
+  returnSave.bindValue(":raitem_tax_exemption", _taxExempt->code());
   returnSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving RA Information"),
                                 returnSave, __FILE__, __LINE__))
@@ -908,6 +922,7 @@ void returnAuthorizationItem::populate()
     _status = raitem.value("raitem_status").toString();
     _qtycredited = raitem.value("raitem_qtycredited").toDouble();
     _customerPN->setText(raitem.value("raitem_custpn").toString());
+    _taxExempt->setCode(raitem.value("raitem_tax_exemption").toString());
 
     _cQtyOrdered = _qtyAuth->toDouble();
     _cScheduledDate = _scheduledDate->date();
@@ -1277,40 +1292,32 @@ void returnAuthorizationItem::sSaleListPrices()
 void returnAuthorizationItem::sCalculateTax()
 {
   XSqlQuery calcq;
-
-  calcq.prepare("SELECT calculateTax(rahead_taxzone_id,:taxtype_id,rahead_authdate,rahead_curr_id,ROUND(:ext,2)) AS tax "
-                "FROM rahead "
-                "WHERE (rahead_id=:rahead_id); " );
-
-  calcq.bindValue(":rahead_id", _raheadid);
-  calcq.bindValue(":taxtype_id", _taxType->id());
-  calcq.bindValue(":ext", _extendedPrice->localValue());
+  calcq.prepare( "SELECT SUM(taxdetail_tax) AS tax "
+                 "  FROM taxhead "     
+                 "  JOIN taxline ON taxhead_id = taxline_taxhead_id "     
+                 "  JOIN taxdetail ON taxline_id = taxdetail_taxline_id "     
+                 " WHERE taxhead_doc_type = 'RA' "
+                 "   AND taxline_line_id = :raitem_id;");
+  calcq.bindValue(":raitem_id", _raitemid);
   calcq.exec();
   if (calcq.first())
     _tax->setLocalValue(calcq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax Information"),
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Tax Calculation"),
                                 calcq, __FILE__, __LINE__))
-  {
     return;
-  }
 }
 
 void returnAuthorizationItem::sTaxDetail()
 {
-  taxDetail newdlg(this, "", true);
   ParameterList params;
-  params.append("taxzone_id",   _taxzoneid);
-  params.append("taxtype_id",  _taxType->id());
-  params.append("date", _netUnitPrice->effective());
-  params.append("curr_id", _netUnitPrice->id());
-  params.append("subtotal", _extendedPrice->localValue());
-  params.append("readOnly");
-
-  if (newdlg.set(params) == NoError && newdlg.exec())
-  {
-    if (_taxType->id() != newdlg.taxtype())
-      _taxType->setId(newdlg.taxtype());
-  }
+  params.append("order_id", _raitemid);
+  params.append("order_type", "RI");
+  if (_mode == cView)
+    params.append("mode", "view");
+ 
+   taxBreakdown newdlg(this, "", true);
+   newdlg.set(params);
+   newdlg.exec();
 }
 
 void returnAuthorizationItem::sPopulateUOM()

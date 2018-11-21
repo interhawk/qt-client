@@ -31,6 +31,7 @@ public:
 public slots:
     virtual SetResponse set( const ParameterList & pParams );
     virtual bool sSave();
+    virtual bool save(bool);
     virtual void sHandleVoucherNumber();
     virtual void sPopulate();
     virtual void sDataChanged();
@@ -45,13 +46,13 @@ public slots:
     virtual void sFillList();
     virtual void sFillMiscList();
     virtual void sFreightDistribution(bool);
+    virtual void sFreightTaxtypeChanged();
+    virtual void sFreightChanged();
     virtual void sPopulatePoInfo();
     virtual void sPopulateDistributed();
     virtual void sPopulateBalanceDue();
-    virtual void sCalculateTax();
-    virtual void sUpdateVoucherTax();
+    virtual void sCalculateTaxOwed();
     virtual void sNewDistDate();
-    virtual void sTaxDetail();
     virtual void populateNumber();
     virtual void populate();
     virtual void clear();

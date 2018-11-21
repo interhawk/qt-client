@@ -1028,6 +1028,7 @@ const struct {
 				     "because it is already frozen."), 0, "" },
 
   { "getAssocLotSerialIds", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "pItemlocdistId is required."), 0, "" },
+  { "getItemTaxType", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "There are multiple Tax Types for this Item and none are set to Default."), 0, "" },
 
   { "insertGLTransaction", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "G/L Transaction can not be posted because "
              "the debit and credit accounts reference two different companies."), 0, "" },
@@ -1628,6 +1629,7 @@ const struct {
 			      "was not found."),			0, "" },
   { "reverseCashReceipt", -8, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot reverse this Cash Receipt because the "
                             "credit card records could not be found."),  0, "" },
+  { "roundTotal", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Values cannot add up to total"),  0, "" },
   { "_soitemBeforeDeleteTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to delete a Sales Order."), 0, "" },
   { "_soitemBeforeDeleteTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You can not delete this Sales Order Line as it has several "
                               "sub components that have already been shipped."), 0, "" },

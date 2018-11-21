@@ -110,7 +110,7 @@ class XTUPLEWIDGETS_EXPORT AddressCluster : public VirtualCluster
 	inline virtual bool    activeVisible() const { return _active->isVisible(); };
         inline virtual QString addrChange()   const { return _addrChange->text(); };
 	Q_INVOKABLE virtual QString city()    const { return _city->text(); }
-	Q_INVOKABLE virtual QString country() const { return _country->currentText(); }
+	Q_INVOKABLE virtual QString country() const { return _country->code(); }
 	Q_INVOKABLE virtual QString description() const { return ""; }
 	Q_INVOKABLE virtual bool    isValid() const { return _valid; }
 	inline virtual QString label()	      const { return _label->text(); };

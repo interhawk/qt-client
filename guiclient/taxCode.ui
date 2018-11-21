@@ -84,7 +84,7 @@ to be bound by its terms.</comment>
        <item row="2" column="0">
         <widget class="QLabel" name="_accountLit">
          <property name="text">
-          <string>Account:</string>
+          <string>Sales Tax Liability Account:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -124,7 +124,7 @@ to be bound by its terms.</comment>
          </item>
         </layout>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="_distaccountLit">
          <property name="text">
           <string>Distrib. Account:</string>
@@ -134,7 +134,7 @@ to be bound by its terms.</comment>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="4" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="GLCluster" name="_distaccount"/>
@@ -154,7 +154,7 @@ to be bound by its terms.</comment>
          </item>
         </layout>
        </item>
-       <item row="4" column="1">
+       <item row="5" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="XComboBox" name="_taxClass">
@@ -207,7 +207,7 @@ to be bound by its terms.</comment>
          </item>
         </layout>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QLabel" name="_taxclassLit">
          <property name="text">
           <string>Tax Class:</string>
@@ -217,7 +217,7 @@ to be bound by its terms.</comment>
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="6" column="0">
         <widget class="QLabel" name="_taxauthLit">
          <property name="text">
           <string>Tax Authority:</string>
@@ -227,7 +227,7 @@ to be bound by its terms.</comment>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="6" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
           <widget class="XComboBox" name="_taxauth">
@@ -256,6 +256,36 @@ to be bound by its terms.</comment>
           </spacer>
          </item>
         </layout>
+       </item>
+       <item row="3" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="GLCluster" name="_useAccount"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="_useAccountLit">
+         <property name="text">
+          <string>Use Tax Liability Account:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

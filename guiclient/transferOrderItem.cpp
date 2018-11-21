@@ -17,7 +17,6 @@
 #include "itemCharacteristicDelegate.h"
 #include "itemSite.h"
 #include "storedProcErrorLookup.h"
-#include "taxDetail.h"
 
 #include "errorReporter.h"
 
@@ -27,7 +26,6 @@ transferOrderItem::transferOrderItem(QWidget* parent, const char* name, bool mod
   setupUi(this);
 
   connect(_cancel,	SIGNAL(clicked()),      this, SLOT(sCancel()));
-  connect(_freight,     SIGNAL(valueChanged()), this, SLOT(sCalculateTax()));
   connect(_freight,	SIGNAL(valueChanged()), this, SLOT(sChanged()));
   connect(_item,	SIGNAL(newId(int)),     this, SLOT(sChanged()));
   connect(_item,	SIGNAL(newId(int)),     this, SLOT(sPopulateItemInfo(int)));
@@ -43,7 +41,6 @@ transferOrderItem::transferOrderItem(QWidget* parent, const char* name, bool mod
   connect(_showAvailability, SIGNAL(toggled(bool)), this, SLOT(sDetermineAvailability()));
   connect(_showAvailability, SIGNAL(toggled(bool)), this, SLOT(sDetermineAvailability()));
   connect(_showIndented,SIGNAL(toggled(bool)), this, SLOT(sDetermineAvailability()));
-  connect(_taxLit, SIGNAL(leftClickedURL(QString)), this, SLOT(sTaxDetail()));
   connect(_warehouse,	SIGNAL(newID(int)), this, SLOT(sChanged()));
   connect(_warehouse,	SIGNAL(newID(int)), this, SLOT(sDetermineAvailability()));
   connect(_inventoryButton, SIGNAL(toggled(bool)), this, SLOT(sHandleButton()));
@@ -103,7 +100,6 @@ transferOrderItem::transferOrderItem(QWidget* parent, const char* name, bool mod
   _itemsiteid	= -1;
   _transwhsid	= -1;
   _toheadid	= -1;
-  _taxzoneid	= -1;
   adjustSize();
   
   _inventoryButton->setEnabled(_showAvailability->isChecked());
@@ -140,10 +136,6 @@ enum SetResponse transferOrderItem::set(const ParameterList &pParams)
   param = pParams.value("srcwarehouse_id", &valid);
   if (valid)
     _warehouse->setId(param.toInt());
-
-  param = pParams.value("taxzone_id", &valid);
-  if (valid)
-    _taxzoneid = param.toInt();
 
   param = pParams.value("orderNumber", &valid);
   if (valid)
@@ -812,7 +804,7 @@ void transferOrderItem::populate()
     item.prepare("SELECT toitem_linenumber,toitem_status,toitem_qty_ordered, "
                  "       toitem_schedshipdate,toitem_notes,toitem_schedrecvdate,"
                  "       toitem_freight,toitem_item_id, toitem_status,"
-                 "       tohead_id,tohead_taxzone_id,tohead_trns_warehous_id,"
+                 "       tohead_id,tohead_trns_warehous_id,"
                  "       tohead_dest_warehous_id,tohead_number, "
 		 "       warehous_id, warehous_code,"
 		 "       stdCost(toitem_item_id) AS stdcost,"
@@ -821,10 +813,8 @@ void transferOrderItem::populate()
 		 "          FROM shipitem, shiphead"
 		 "         WHERE ((shipitem_shiphead_id=shiphead_id)"
 		 "           AND  (shiphead_order_type='TO')"
-		 "           AND  (shipitem_orderitem_id=toitem_id))) AS shipitem_qty, "
-     "        SUM(taxhist_tax) AS tax "
+		 "           AND  (shipitem_orderitem_id=toitem_id))) AS shipitem_qty "
 		 "FROM whsinfo, tohead, itemsite, toitem  "
-     " LEFT OUTER JOIN toitemtax ON (toitem_id=taxhist_parent_id) "
 		 "WHERE ((toitem_tohead_id=tohead_id)"
 		 "  AND  (tohead_src_warehous_id=warehous_id)"
 		 "  AND  (itemsite_item_id=toitem_item_id)"
@@ -832,7 +822,7 @@ void transferOrderItem::populate()
 		 "  AND  (toitem_id=:id)) "
      "GROUP BY toitem_linenumber,toitem_status,toitem_qty_ordered, "
      "       toitem_schedshipdate,toitem_notes,toitem_schedrecvdate,"
-     "       tohead_id,tohead_taxzone_id,tohead_trns_warehous_id,"
+     "       tohead_id,tohead_trns_warehous_id,"
      "       tohead_dest_warehous_id,tohead_number,toitem_freight, "
 		 "       warehous_id, warehous_code,toitem_item_id,"
 		 "       toitem_status, stdcost, shipitem_qty, itemsite_id;");
@@ -843,7 +833,6 @@ void transferOrderItem::populate()
   if (item.first())
   {
     _toheadid	= item.value("tohead_id").toInt();
-    _taxzoneid	= item.value("tohead_taxzone_id").toInt();
     _transwhsid	= item.value("tohead_trns_warehous_id").toInt();
     _dstwhsid	= item.value("tohead_dest_warehous_id").toInt();
     _orderNumber->setText(item.value("tohead_number").toString());
@@ -860,7 +849,6 @@ void transferOrderItem::populate()
       _stdcost->setBaseValue(item.value("stdcost").toDouble());
       _shippedToDate->setDouble(item.value("shipitem_qty").toDouble());
 
-      // do tax stuff before _qtyOrdered so signal cascade has data to work with
       _qtyOrdered->setDouble(item.value("toitem_qty_ordered").toDouble());
       _scheduledDate->setDate(item.value("toitem_schedshipdate").toDate());
       _notes->setText(item.value("toitem_notes").toString());
@@ -871,7 +859,6 @@ void transferOrderItem::populate()
       //  Set the _item here to tickle signal cascade
       _item->setId(item.value("toitem_item_id").toInt());
       _freight->setLocalValue(item.value("toitem_freight").toDouble());
-      _tax->setLocalValue(item.value("tax").toDouble());
       sDetermineAvailability();
     }
   }
@@ -1084,43 +1071,6 @@ void transferOrderItem::sCancel()
   else
     close();
 
-}
-
-void transferOrderItem::sCalculateTax()
-{  
-  XSqlQuery calcq;
-  calcq.prepare("SELECT ROUND(calculateTax(tohead_taxzone_id,getFreightTaxTypeId(),tohead_orderdate,tohead_freight_curr_id,:freight),2) AS tax "
-                "FROM tohead "
-                "WHERE (tohead_id=:tohead_id); " );
-
-  calcq.bindValue(":tohead_id", _toheadid);
-  calcq.bindValue(":freight", _freight->localValue());
-  calcq.exec();
-  if (calcq.first())
-    _tax->setLocalValue(calcq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax"),
-                                calcq, __FILE__, __LINE__))
-  {
-    return;
-  }
-}
-
-void transferOrderItem::sTaxDetail()
-{
-  XSqlQuery fid;
-  fid.exec("SELECT getFreightTaxTypeId() AS taxtype_id;");
-  fid.first();
-  taxDetail newdlg(this, "", true);
-  ParameterList params;
-  params.append("taxzone_id",   _taxzoneid);
-  params.append("taxtype_id",  fid.value("taxtype_id").toInt());
-  params.append("date", _tax->effective());
-  params.append("curr_id", _tax->id());
-  params.append("subtotal", _freight->localValue());
-  params.append("readOnly");
-
-  if (newdlg.set(params) == NoError)
-    newdlg.exec();
 }
 
 void transferOrderItem::sHandleButton()

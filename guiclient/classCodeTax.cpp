@@ -30,6 +30,14 @@ classCodeTax::classCodeTax(QWidget* parent, const char* name, bool modal, Qt::Wi
 
   _classcodetaxid = -1;
   _classcodeid = -1;
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxauthLit->hide();
+    _taxzone->hide();
+  }
+  else
+    _default->hide();
 }
 
 /*
@@ -66,7 +74,8 @@ enum SetResponse classCodeTax::set(const ParameterList & pParams)
     _classcodetaxid = param.toInt();
     classcodetaxet.prepare("SELECT classcodetax_classcode_id,"
               "       COALESCE(classcodetax_taxzone_id,-1) AS taxzone_id,"
-              "       classcodetax_taxtype_id"
+              "       classcodetax_taxtype_id,"
+              "       classcodetax_default"
               "  FROM classcodetax"
               " WHERE (classcodetax_id=:classcodetax_id);");
     classcodetaxet.bindValue(":classcodetax_id", _classcodetaxid);
@@ -76,6 +85,7 @@ enum SetResponse classCodeTax::set(const ParameterList & pParams)
       _classcodeid = classcodetaxet.value("classcodetax_classcode_id").toInt();
       _taxzone->setId(classcodetaxet.value("taxzone_id").toInt());
       _taxtype->setId(classcodetaxet.value("classcodetax_taxtype_id").toInt());
+      _default->setChecked(classcodetaxet.value("classcodetax_default").toBool());
     }
     // TODO: catch any possible errors
   }
@@ -93,6 +103,7 @@ enum SetResponse classCodeTax::set(const ParameterList & pParams)
       _save->hide();
       _taxzone->setEnabled(false);
       _taxtype->setEnabled(false);
+      _default->setEnabled(false);
     }
   }
 
@@ -102,31 +113,36 @@ enum SetResponse classCodeTax::set(const ParameterList & pParams)
 void classCodeTax::sSave()
 {
   XSqlQuery classcodetaxSave;
-  classcodetaxSave.prepare("SELECT classcodetax_id"
-            "  FROM classcodetax"
-            " WHERE ((classcodetax_taxzone_id=:taxzone_id)"
-            "   AND  (classcodetax_classcode_id=:classcode_id)"
-            "   AND  (classcodetax_id != :classcodetax_id))");
-  classcodetaxSave.bindValue(":classcode_id", _classcodeid);
-  classcodetaxSave.bindValue(":classcodetax_id", _classcodetaxid);
-  if(_taxzone->isValid())
-    classcodetaxSave.bindValue(":taxzone_id", _taxzone->id());
-  classcodetaxSave.exec();
-  if(classcodetaxSave.first())
+
+  if (_metrics->value("TaxService") == "N")
   {
-    QMessageBox::warning(this, tr("Tax Zone Already Exists"),
-                      tr("The Tax Zone you have choosen already exists for this Class Code."));
-    return;
+    classcodetaxSave.prepare("SELECT classcodetax_id"
+              "  FROM classcodetax"
+              " WHERE ((classcodetax_taxzone_id=:taxzone_id)"
+              "   AND  (classcodetax_classcode_id=:classcode_id)"
+              "   AND  (classcodetax_id != :classcodetax_id))");
+    classcodetaxSave.bindValue(":classcode_id", _classcodeid);
+    classcodetaxSave.bindValue(":classcodetax_id", _classcodetaxid);
+    if(_taxzone->isValid())
+      classcodetaxSave.bindValue(":taxzone_id", _taxzone->id());
+    classcodetaxSave.exec();
+    if(classcodetaxSave.first())
+    {
+      QMessageBox::warning(this, tr("Tax Zone Already Exists"),
+                        tr("The Tax Zone you have choosen already exists for this Class Code."));
+      return;
+    }
   }
 
   if(cNew == _mode)
     classcodetaxSave.prepare("INSERT INTO classcodetax"
-              "      (classcodetax_classcode_id, classcodetax_taxzone_id, classcodetax_taxtype_id) "
-              "VALUES(:classcode_id, :taxzone_id, :taxtype_id)");
+              "      (classcodetax_classcode_id, classcodetax_taxzone_id, classcodetax_taxtype_id, classcodetax_default) "
+              "VALUES(:classcode_id, :taxzone_id, :taxtype_id, :default)");
   else if(cEdit == _mode)
     classcodetaxSave.prepare("UPDATE classcodetax"
               "   SET classcodetax_taxzone_id=:taxzone_id,"
-              "       classcodetax_taxtype_id=:taxtype_id"
+              "       classcodetax_taxtype_id=:taxtype_id,"
+              "       classcodetax_default=:default"
               " WHERE (classcodetax_id=:classcodetax_id);");
 
   classcodetaxSave.bindValue(":classcode_id", _classcodeid);
@@ -134,6 +150,7 @@ void classCodeTax::sSave()
   if(_taxzone->isValid())
     classcodetaxSave.bindValue(":taxzone_id", _taxzone->id());
   classcodetaxSave.bindValue(":taxtype_id", _taxtype->id());
+  classcodetaxSave.bindValue(":default", _default->isChecked());
   classcodetaxSave.exec();
 
   accept();

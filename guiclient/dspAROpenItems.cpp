@@ -45,6 +45,7 @@
 #include "printStatementByCustomer.h"
 #include "salesOrder.h"
 #include "storedProcErrorLookup.h"
+#include "xdateinputdialog.h"
 
 #include "errorReporter.h"
 
@@ -226,6 +227,9 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
       menuItem->setEnabled(_privileges->check("VoidPostedInvoices"));
 
       menuItem = pMenu->addAction(tr("Edit Posted Invoice..."), this, SLOT(sEditInvoiceDetails()));
+      menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
+
+      menuItem = pMenu->addAction(tr("Refund Invoice Tax..."), this, SLOT(sRefundTax()));
       menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
     }
 
@@ -964,6 +968,18 @@ void dspAROpenItems::sVoidInvoiceDetails()
     ErrorReporter::error(QtCriticalMsg, this,
                          tr("Error Voiding Invoice %1\n").arg(list()->currentItem()->text("docnumber")),
                          post, __FILE__, __LINE__);
+  }
+}
+
+void dspAROpenItems::sRefundTax()
+{
+  ParameterList params;
+  params.append("label", tr("Tax Refund Date:"));
+  XDateInputDialog newdlg(this, "", true);
+  newdlg.set(params);
+  if (newdlg.exec() == XDialog::Accepted)
+  {
+    _taxIntegration->refund(list()->currentItem()->id("docnumber"), newdlg.getDate());
   }
 }
 

@@ -20,7 +20,7 @@
 
 #include "xdoublevalidator.h"
 #include "priceList.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
 #include "itemCharacteristicDelegate.h"
@@ -36,13 +36,11 @@ invoiceItem::invoiceItem(QWidget* parent, const char * name, Qt::WindowFlags fl)
   connect(_billed,       SIGNAL(editingFinished()),       this, SLOT(sCalculateExtendedPrice()));
   connect(_item,         SIGNAL(newId(int)),              this, SLOT(sPopulateItemInfo(int)));
   connect(_item,         SIGNAL(newId(int)),              this, SLOT(sHandleUpdateInv()));
-  connect(_extended,     SIGNAL(valueChanged()),          this, SLOT(sLookupTax()));
   connect(_listPrices,   SIGNAL(clicked()),               this, SLOT(sListPrices()));
   connect(_price,        SIGNAL(idChanged(int)),          this, SLOT(sPriceGroup()));
   connect(_price,        SIGNAL(valueChanged()),          this, SLOT(sCalculateExtendedPrice()));
   connect(_save,         SIGNAL(clicked()),               this, SLOT(sSave()));
   connect(_taxLit,       SIGNAL(leftClickedURL(QString)), this, SLOT(sTaxDetail()));
-  connect(_taxtype,      SIGNAL(newID(int)),              this, SLOT(sLookupTax()));
   connect(_qtyUOM,       SIGNAL(newID(int)),              this, SLOT(sQtyUOMChanged()));
   connect(_pricingUOM,   SIGNAL(newID(int)),              this, SLOT(sPriceUOMChanged()));
   connect(_miscSelected, SIGNAL(toggled(bool)),           this, SLOT(sMiscSelected(bool)));
@@ -84,7 +82,12 @@ invoiceItem::invoiceItem(QWidget* parent, const char * name, Qt::WindowFlags fl)
     _warehouseLit->hide();
     _warehouse->hide();
   }
-  _saved = false;
+
+  if (_metrics->value("TaxService") == "N")
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
   
   adjustSize();
 }
@@ -134,6 +137,12 @@ enum SetResponse invoiceItem::set(const ParameterList &pParams)
     {
       return UndefinedError;
     }
+  }
+
+  param = pParams.value("taxExempt", &valid);
+  if (valid)
+  {
+    _taxExempt->setCode(param.toString());
   }
 
   param = pParams.value("invcitem_id", &valid);
@@ -257,7 +266,7 @@ void invoiceItem::sSave()
                "  invcitem_custprice, invcitem_price, invcitem_listprice,"
                "  invcitem_price_uom_id, invcitem_price_invuomratio,"
                "  invcitem_notes, "
-               "  invcitem_taxtype_id, invcitem_rev_accnt_id) "
+               "  invcitem_taxtype_id, invcitem_rev_accnt_id, invcitem_tax_exemption) "
                "VALUES "
                "( :invcitem_id, :invchead_id, :invcitem_linenumber,"
                "  :item_id, :warehous_id,"
@@ -268,7 +277,7 @@ void invoiceItem::sSave()
                "  :invcitem_custprice, :invcitem_price, :invcitem_listprice,"
                "  :price_uom_id, :price_invuomratio,"
                "  :invcitem_notes, "
-               "  :invcitem_taxtype_id, :invcitem_rev_accnt_id);");
+               "  :invcitem_taxtype_id, :invcitem_rev_accnt_id, :invcitem_tax_exemption);");
 	       
     invoiceSave.bindValue(":invchead_id", _invcheadid);
     invoiceSave.bindValue(":invcitem_linenumber", _lineNumber->text());
@@ -285,7 +294,8 @@ void invoiceItem::sSave()
                "    invcitem_price_uom_id=:price_uom_id, invcitem_price_invuomratio=:price_invuomratio,"
                "    invcitem_notes=:invcitem_notes,"
                "    invcitem_taxtype_id=:invcitem_taxtype_id,"
-               "    invcitem_rev_accnt_id=:invcitem_rev_accnt_id "
+               "    invcitem_rev_accnt_id=:invcitem_rev_accnt_id,"
+               "    invcitem_tax_exemption=:invcitem_tax_exemption "
 	           "WHERE (invcitem_id=:invcitem_id);" );
 
   if (_itemSelected->isChecked())
@@ -321,6 +331,7 @@ void invoiceItem::sSave()
     invoiceSave.bindValue(":invcitem_taxtype_id",	_taxtype->id());
   if (_altRevAccnt->isValid())
     invoiceSave.bindValue(":invcitem_rev_accnt_id", _altRevAccnt->id());
+  invoiceSave.bindValue(":invcitem_tax_exemption", _taxExempt->code());
 
   invoiceSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Invoice Line Item Information"),
@@ -342,7 +353,6 @@ void invoiceItem::sSave()
     invoiceSave.exec();
   }
 
-  _saved = true;
   emit saved(_invcitemid);
 
   done(_invcitemid);
@@ -358,7 +368,6 @@ void invoiceItem::populate()
                    " FROM invcitem JOIN invchead ON (invchead_id=invcitem_invchead_id)"
                    "               LEFT OUTER JOIN taxzone ON (taxzone_id=invchead_taxzone_id)"
                    "               LEFT OUTER JOIN item ON (item_id=invcitem_item_id)"
-                   "               LEFT OUTER JOIN invcitemtax ON (taxhist_parent_id=invcitem_id)"
                    "               LEFT OUTER JOIN itemsite ON (itemsite_item_id=item_id AND"
                    "                                            itemsite_warehous_id=invcitem_warehous_id)"
                    "               LEFT OUTER JOIN cobill ON (cobill_invcitem_id=invcitem_id) "
@@ -422,6 +431,7 @@ void invoiceItem::populate()
 
     _custPn->setText(invcitem.value("invcitem_custpn").toString());
     _notes->setText(invcitem.value("invcitem_notes").toString());
+    _taxExempt->setCode(invcitem.value("invcitem_tax_exemption").toString());
     
     // disable widgets if normal shipping cycle
     if (invcitem.value("cobill_id").toInt() > 0)
@@ -439,23 +449,10 @@ void invoiceItem::populate()
     return;
   }
 
-  invcitem.prepare( "SELECT SUM(COALESCE(taxhist_tax, 0.00)) AS lineTaxTotal "
-                    "FROM invcitem LEFT OUTER JOIN invcitemtax "
-                    "  ON (invcitem_id = taxhist_parent_id) "
-                    "WHERE invcitem_id = :invcitem_id;" );
-  invcitem.bindValue(":invcitem_id", _invcitemid);
-  invcitem.exec();
-  if (invcitem.first())
-    _tax->setLocalValue(invcitem.value("lineTaxTotal").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Invoice Line Item Information"),
-                                invcitem, __FILE__, __LINE__))
-  {
-    return;
-  }
+  sLookupTax();
 
   sCalculateExtendedPrice();
 
-  _saved = true;
   emit populated();
 }
 
@@ -645,32 +642,14 @@ void invoiceItem::sPriceGroup()
 
 void invoiceItem::sTaxDetail()
 {
-  taxDetail newdlg(this, "", true);
+  taxBreakdown newdlg(this, "", true);
   ParameterList params;
-  params.append("taxzone_id", _taxzoneid);
-  params.append("taxtype_id", _taxtype->id());
-  params.append("date", _price->effective());
-  params.append("subtotal",  CurrDisplay::convert(_extended->id(), _tax->id(),
-						 _extended->localValue(),
-						 _extended->effective()));
-  params.append("curr_id",  _tax->id());
-  
-  if(cView == _mode)
-    params.append("readOnly");
-  
-  if(_saved == true)
-  {
-	params.append("order_id", _invcitemid);
-    params.append("order_type", "II");
-  }
+  params.append("order_id", _invcitemid);
+  params.append("order_type", "INVI");
+  params.append("mode", "view");
 
   newdlg.set(params);
-  
-  if (newdlg.set(params) == NoError && newdlg.exec())
-  {
-    if (_taxtype->id() != newdlg.taxtype())
-      _taxtype->setId(newdlg.taxtype());
-  }
+  newdlg.exec();
 }
 
 void invoiceItem::sPopulateUOM()
@@ -911,21 +890,19 @@ void invoiceItem::sListPrices()
 void invoiceItem::sLookupTax()
 {
   XSqlQuery taxcal;
-  taxcal.prepare("SELECT calculatetax(:taxzone_id, :taxtype_id, :date, :curr_id, :amount) AS taxamount;");
-  taxcal.bindValue(":taxzone_id", _taxzoneid);
-  taxcal.bindValue(":taxtype_id", _taxtype->id());
-  taxcal.bindValue(":date", _price->effective());
-  taxcal.bindValue(":curr_id", _tax->id());
-  taxcal.bindValue(":amount", CurrDisplay::convert(_extended->id(), _tax->id(), _extended->localValue(), _extended->effective()));
+  taxcal.prepare("SELECT SUM(taxdetail_tax) AS tax "
+                 "  FROM taxhead "     
+                 "  JOIN taxline ON taxhead_id = taxline_taxhead_id "     
+                 "  JOIN taxdetail ON taxline_id = taxdetail_taxline_id "     
+                 " WHERE taxhead_doc_type = 'INV' "
+                 "   AND taxline_line_id = :invcitemid;");
+  taxcal.bindValue(":invcitemid", _invcitemid);
   taxcal.exec();
   if (taxcal.first())
   {
-    _tax->setLocalValue(taxcal.value("taxamount").toDouble());
-	_saved = false;
+    _tax->setLocalValue(taxcal.value("tax").toDouble());
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Line Item Tax"),
                                 taxcal, __FILE__, __LINE__))
-  {
     return;
-  }
 }

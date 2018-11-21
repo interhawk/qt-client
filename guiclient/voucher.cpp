@@ -28,7 +28,6 @@
 #include "purchaseOrderList.h"
 #include "purchaseOrderItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
 #include "voucherItem.h"
 #include "voucherMiscDistrib.h"
 
@@ -51,12 +50,17 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_delete,                   SIGNAL(clicked()),                                 this,          SLOT(sDeleteMiscDistribution()));
   connect(_invoiceDate,              SIGNAL(newDate(const QDate&)),                     this,          SLOT(sPopulateDistDate()));
   connect(_distributionDate,         SIGNAL(newDate(const QDate&)),                     this,          SLOT(sNewDistDate()));
-  connect(_taxLit,                   SIGNAL(leftClickedURL(const QString&)),            this,          SLOT(sTaxDetail()));
   connect(_terms,                    SIGNAL(newID(int)),                                this,          SLOT(sPopulateDueDate()));
   connect(_poitem,                   SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this,          SLOT(sPopulateMenu(QMenu*)));
   connect(_amountToDistribute,       SIGNAL(idChanged(int)),                            this,          SLOT(sFillList()));
   connect(_amountDistributed,        SIGNAL(valueChanged()),                            this,          SLOT(sPopulateBalanceDue()));
+  connect(_freightTaxtype,           SIGNAL(newID(int)),                                this,          SLOT(sFreightTaxtypeChanged()));
+  connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sFreightChanged()));
   connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
+  connect(_tax,                      SIGNAL(save(bool)),                                this,          SLOT(save(bool)));
+  connect(_tax,                      SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTaxOwed()));
+  connect(_taxCharged,               SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTaxOwed()));
+  connect(_taxCharged,               SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
   connect(_freightDistr,             SIGNAL(toggled(bool)),                             this,          SLOT(sFreightDistribution(bool)));
   connect(_distributeFreight,        SIGNAL(clicked()),                                 this,          SLOT(sDistributeFreight()));
 
@@ -105,10 +109,23 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   if (_metrics->value("DefaultFreightCostElement") > 0)
     _freightCostElement->setId(_metrics->value("DefaultFreightCostElement").toInt());
 
+  _freightTaxtype->setCode("Freight");
+
   _frghtdistr = 0;
   _vendid = -1;
 
   setWindowModified(false);
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 voucher::~voucher()
@@ -133,6 +150,7 @@ enum SetResponse voucher::set(const ParameterList &pParams)
     if (param.toString() == "new")
     {
       _mode = cNew;
+      _tax->setMode(_mode);
 
       if (_metrics->value("VoucherNumberGeneration") == "A")
         populateNumber();
@@ -146,6 +164,7 @@ enum SetResponse voucher::set(const ParameterList &pParams)
       if (insq.first())
       {
         _voheadid = insq.value("vohead_id").toInt();
+        _tax->setOrderId(_voheadid);
         _documents->setId(_voheadid);
         _charass->setId(_voheadid);
         _comments->setId(_voheadid);
@@ -159,6 +178,7 @@ enum SetResponse voucher::set(const ParameterList &pParams)
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
+      _tax->setMode(_mode);
 
       _voucherNumber->setEnabled(false);
       _poNumber->setEnabled(false);
@@ -166,6 +186,7 @@ enum SetResponse voucher::set(const ParameterList &pParams)
     else if (param.toString() == "view")
     {
       _mode = cView;
+      _tax->setMode(_mode);
 
       _poNumber->setAllowedStatuses(OrderLineEdit::AnyStatus);
 
@@ -207,6 +228,7 @@ enum SetResponse voucher::set(const ParameterList &pParams)
   if (valid)
   {
     _voheadid = param.toInt();
+    _tax->setOrderId(_voheadid);
     _documents->setId(_voheadid);
     _charass->setId(_voheadid);
     _comments->setId(_voheadid);
@@ -229,35 +251,88 @@ int voucher::mode() const
 
 bool voucher::sSave()
 {
+  if (!save(false))
+    return false;
+
+  omfgThis->sVouchersUpdated();
+
+  _tax->sRecalculate();
+
+  if (_metrics->value("TaxService") == "A" && _taxOwed->localValue() >= 0.0)
+    _tax->save();
+
+  _voheadid = -1;
+  _tax->setOrderId(_voheadid);
+
+  if (cNew != _mode)
+  {
+    setWindowModified(false);
+    close();
+    return true;
+  }
+
+  _poNumber->setEnabled(true);
+  _poNumber->setId(-1);
+  _amountToDistribute->clear();
+  _amountDistributed->clear();
+  _balance->clear();
+  _flagFor1099->setChecked(false);
+  _invoiceDate->setNull();
+  _distributionDate->setNull();
+  _dueDate->setNull();
+  _invoiceNum->clear();
+  _reference->clear();
+  _poitem->clear();
+  _miscDistrib->clear();
+  _notes->setText("");
+  _charass->setId(-1);
+  _comments->setId(-1);
+  _freight->clear();
+  _freightExpcat->setId(-1);
+
+  setWindowModified(false);
+
+  ParameterList params;
+  params.append("mode", "new");
+  set(params);
+  _poNumber->setFocus();
+  return true;
+}
+
+bool voucher::save(bool partial)
+{
   QList<GuiErrorCheck> errors;
   errors << GuiErrorCheck(! _poNumber->isValid(), _poNumber,
                            tr("<p>You must enter an PO Number before you may "
                               "save this Voucher."))
-         << GuiErrorCheck(!_invoiceDate->isValid(), _invoiceDate,
+         << GuiErrorCheck(!partial &&!_invoiceDate->isValid(), _invoiceDate,
                            tr("<p>You must enter an Invoice Date before you "
                               "may save this Voucher."))
-         << GuiErrorCheck(!_dueDate->isValid(), _dueDate,
+         << GuiErrorCheck(!partial && !_dueDate->isValid(), _dueDate,
                            tr("<p>You must enter a Due Date before you may "
                               "save this Voucher."))
-         << GuiErrorCheck(!_distributionDate->isValid(), _distributionDate,
+         << GuiErrorCheck(!partial && !_distributionDate->isValid(), _distributionDate,
                            tr("<p>You must enter a Distribution Date before "
                               "you may save this Voucher."))
-         << GuiErrorCheck(_metrics->boolean("ReqInvRegVoucher") &&
+         << GuiErrorCheck(!partial && _metrics->boolean("ReqInvRegVoucher") &&
                           _invoiceNum->text().trimmed().isEmpty(),
                           _invoiceNum,
                           tr("<p>You must enter a Vendor Invoice Number "
                              "before you may save this Voucher."))
-         << GuiErrorCheck(_freight->localValue() > 0 && !_freightDistr->isChecked() && !_freightExpcat->isValid(), _freightExpcat,
+         << GuiErrorCheck(!partial &&_freight->localValue() > 0 && !_freightDistr->isChecked() && !_freightExpcat->isValid(), _freightExpcat,
                            tr("<p>You must select an Expense Category to post the  "
                               "freight value to."))
-         << GuiErrorCheck(_freight->localValue() > 0 && _freightDistr->isChecked() && _frghtdistr == 0, _freight,
+         << GuiErrorCheck(!partial && _freight->localValue() > 0 && _freightDistr->isChecked() && _frghtdistr == 0, _freight,
                            tr("<p>You must first distribute freight to item cost elements."))
   ;
+
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
 
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Voucher"), errors))
     return false;
 
-  if (_invoiceNum->text().trimmed().length() > 0)
+  if (!partial && _invoiceNum->text().trimmed().length() > 0)
   {
     XSqlQuery dupq;
     dupq.prepare( "SELECT vohead_id "
@@ -300,9 +375,12 @@ bool voucher::sSave()
              "    vohead_freight=:vohead_freight,"
              "    vohead_freight_expcat_id=:vohead_freight_expcat,"
              "    vohead_freight_distributed=:frghtDistr,"
+             "    vohead_tax_charged=:vohead_tax_charged,"
+             "    vohead_freight_taxtype_id=:vohead_freight_taxtype_id,"
              "    vohead_1099=:vohead_1099, "
              "    vohead_curr_id=:vohead_curr_id, "
-             "    vohead_notes=:vohead_notes "
+             "    vohead_notes=:vohead_notes, "
+             "    vohead_tax_exemption=:vohead_tax_exemption "
              "WHERE (vohead_id=:vohead_id);" );
 
   updq.bindValue(":vohead_id", _voheadid);
@@ -321,50 +399,17 @@ bool voucher::sSave()
   updq.bindValue(":frghtDistr", _frghtdistr);
   if (_freightExpcat->isValid())
     updq.bindValue(":vohead_freight_expcat", _freightExpcat->id());
+  updq.bindValue(":vohead_tax_charged", _taxCharged->localValue());
+  updq.bindValue(":vohead_freight_taxtype_id", _freightTaxtype->id());
   updq.bindValue(":vohead_1099", QVariant(_flagFor1099->isChecked()));
   updq.bindValue(":vohead_curr_id", _amountToDistribute->id());
   updq.bindValue(":vohead_notes", _notes->toPlainText());
+  updq.bindValue(":vohead_tax_exemption", _taxExempt->code());
   updq.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Saving Voucher"),
                            updq, __FILE__, __LINE__))
     return false;
 
-  omfgThis->sVouchersUpdated();
-
-  _voheadid = -1;
-
-  if (cNew != _mode)
-  {
-    setWindowModified(false);
-    close();
-    return true;
-  }
-
-  _poNumber->setEnabled(true);
-  _poNumber->setId(-1);
-  _amountToDistribute->clear();
-  _amountDistributed->clear();
-  _balance->clear();
-  _flagFor1099->setChecked(false);
-  _invoiceDate->setNull();
-  _distributionDate->setNull();
-  _dueDate->setNull();
-  _invoiceNum->clear();
-  _reference->clear();
-  _poitem->clear();
-  _miscDistrib->clear();
-  _notes->setText("");
-  _charass->setId(-1);
-  _comments->setId(-1);
-  _freight->clear();
-  _freightExpcat->setId(-1);
-
-  setWindowModified(false);
-
-  ParameterList params;
-  params.append("mode", "new");
-  set(params);
-  _poNumber->setFocus();
   return true;
 }
 
@@ -396,11 +441,13 @@ void voucher::sHandleVoucherNumber()
     if (editq.first())
     {
       _voheadid = editq.value("vohead_id").toInt();
+      _tax->setOrderId(_voheadid);
 
       _voucherNumber->setEnabled(false);
       _poNumber->setEnabled(false);
 
       _mode = cEdit;
+      _tax->setMode(_mode);
       populate();
 
       return;
@@ -444,6 +491,8 @@ void voucher::sDistributions()
   }
   sFillList();
   sPopulateDistributed();
+
+  _tax->invalidate();
 }
 
 void voucher::sDistributeLine()
@@ -496,6 +545,8 @@ void voucher::sDistributeLine()
   }
   sFillList();
   sPopulateDistributed();
+
+  _tax->invalidate();
 }
 
 void voucher::sClear()
@@ -532,6 +583,8 @@ void voucher::sClear()
   _poNumber->setEnabled(true);
   sFillList();
   sPopulateDistributed();
+
+  _tax->invalidate();
 }
 
 void voucher::sDistributeAll()
@@ -585,6 +638,8 @@ void voucher::sDistributeAll()
   }
   sFillList();
   sPopulateDistributed();
+
+  _tax->invalidate();
 }
 
 void voucher::sNewMiscDistribution()
@@ -603,9 +658,10 @@ void voucher::sNewMiscDistribution()
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
   {
-    sUpdateVoucherTax();
     sFillMiscList();
     sPopulateDistributed();
+
+    _tax->invalidate();
   }
 }
 
@@ -625,10 +681,10 @@ void voucher::sEditMiscDistribution()
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
   {
-    if (_miscDistrib->altId() != 4) // Don't auto update taxes to allow manual override
-      sUpdateVoucherTax();
     sFillMiscList();
     sPopulateDistributed();
+
+    _tax->invalidate();
   }
 }
 
@@ -636,14 +692,7 @@ void voucher::sDeleteMiscDistribution()
 {
   saveDetail();
   XSqlQuery delq;
-  // TODO: split or write a function
-  delq.prepare("DELETE FROM voheadtax"
-               " WHERE (taxhist_parent_id=:vohead_id)"
-               "   AND (taxhist_taxtype_id=getadjustmenttaxtypeid())"
-               "   AND (taxhist_tax_id = (SELECT vodist_tax_id"
-               "                            FROM vodist"
-               "                           WHERE (vodist_id=:vodist_id)));"
-               "DELETE FROM vodist"
+  delq.prepare("DELETE FROM vodist"
                " WHERE (vodist_id=:vodist_id);");
 
   delq.bindValue(":vohead_id", _voheadid);
@@ -654,9 +703,10 @@ void voucher::sDeleteMiscDistribution()
     return;
   else
   {
-    sUpdateVoucherTax();
     sFillMiscList();
     sPopulateDistributed();
+
+    _tax->invalidate();
   }
 }
 
@@ -707,7 +757,9 @@ void voucher::sPopulatePoInfo()
 {
   XSqlQuery po;
   po.prepare("SELECT pohead_terms_id, pohead_taxzone_id, vend_1099, "
-             "       pohead_curr_id, pohead_freight, vend_id, vend_number, vend_name,"
+             "       pohead_curr_id, pohead_freight, "
+             "       pohead_freight_taxtype_id, pohead_tax_exemption, "
+             "       vend_id, vend_number, vend_name,"
              "       addr_line1, addr_line2"
              "  FROM pohead"
              "  JOIN vendinfo ON (pohead_vend_id=vend_id)"
@@ -725,6 +777,8 @@ void voucher::sPopulatePoInfo()
     _amountToDistribute->setId(po.value("pohead_curr_id").toInt());
     _freight->setLocalValue(po.value("pohead_freight").toDouble());
     _freight->setId(po.value("pohead_curr_id").toInt());
+    _freightTaxtype->setId(po.value("pohead_freight_taxtype_id").toInt());
+    _taxExempt->setCode(po.value("pohead_tax_exemption").toString());
     _vendid = po.value("vend_id").toInt();
     _vendor->setText(po.value("vend_number").toString());
     _vendName->setText(po.value("vend_name").toString());
@@ -745,27 +799,20 @@ void voucher::sPopulateDistributed()
 {
   if (_poNumber->isValid())
   {
-    sCalculateTax();
     XSqlQuery getq;
-    getq.prepare( "SELECT (COALESCE(dist,0) + COALESCE(freight,0) + COALESCE(tax,0)) AS distrib"
+    getq.prepare( "SELECT (COALESCE(dist,0) + COALESCE(freight,0)) AS distrib"
                "  FROM (SELECT SUM(COALESCE(voitem_freight,0)) AS freight"
                "          FROM voitem"
                "         WHERE (voitem_vohead_id=:vohead_id)) AS data1, "
                "       (SELECT SUM(COALESCE(vodist_amount, 0)) AS dist"
                "          FROM vodist"
                "         WHERE ( (vodist_vohead_id=:vohead_id)"
-               "           AND   (vodist_tax_id=-1) )) AS data2, "
-               "       (SELECT SUM(tax * -1.0) AS tax "
-               "          FROM ("
-               "            SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-               "              FROM tax "
-               "              JOIN calculateTaxDetailSummary('VO', :vohead_id, 'T') ON (taxdetail_tax_id=tax_id)"
-               "             GROUP BY tax_id) AS taxdata) AS data3;" );
+               "           AND   (vodist_tax_id=-1) )) AS data2;" );
     getq.bindValue(":vohead_id", _voheadid);
     getq.exec();
     if (getq.first())
     {
-      _amountDistributed->setLocalValue(getq.value("distrib").toDouble() + _freight->localValue() - _frghtdistr);
+      _amountDistributed->setLocalValue(getq.value("distrib").toDouble() + _freight->localValue() - _frghtdistr + _taxCharged->localValue());
     }
     else if (ErrorReporter::error(QtCriticalMsg, this,
                                   tr("Getting Distributions"),
@@ -811,8 +858,10 @@ void voucher::populate()
   vohead.prepare( "SELECT vohead_number, vohead_pohead_id, vohead_taxzone_id, vohead_terms_id,"
                   "       vohead_distdate, vohead_docdate, vohead_duedate,"
                   "       vohead_invcnumber, vohead_reference, vohead_freight, vohead_freight_expcat_id,"
-                  "       vohead_freight_distributed,"
-                  "       vohead_1099, vohead_amount, vohead_curr_id, vohead_notes "
+                  "       vohead_freight_distributed, vohead_tax_charged, "
+                  "       vohead_freight_taxtype_id, "
+                  "       vohead_1099, vohead_amount, vohead_curr_id, vohead_notes, "
+                  "       vohead_tax_exemption "
                   "FROM vohead "
                   "WHERE (vohead_id=:vohead_id);" );
   vohead.bindValue(":vohead_id", _voheadid);
@@ -829,6 +878,7 @@ void voucher::populate()
     _freight->set(vohead.value("vohead_freight").toDouble(),
                              vohead.value("vohead_curr_id").toInt(),
                              vohead.value("vohead_docdate").toDate(), false);
+    _taxCharged->setLocalValue(vohead.value("vohead_tax_charged").toDouble());
 
     _frghtdistr = vohead.value("vohead_freight_distributed").toDouble();
     if (_frghtdistr > 0)
@@ -836,6 +886,8 @@ void voucher::populate()
 
     _freightDistr->setChecked(_frghtdistr > 0);
     _freightExpcat->setId(vohead.value("vohead_freight_expcat_id").toInt());
+    _freightTaxtype->setId(vohead.value("vohead_freight_taxtype_id").toInt());
+    _taxExempt->setCode(vohead.value("vohead_tax_exemption").toString());
 
     _distributionDate->setDate(vohead.value("vohead_distdate").toDate(), true);
     _invoiceDate->setDate(vohead.value("vohead_docdate").toDate());
@@ -978,7 +1030,9 @@ bool voucher::saveDetail()
                "    vohead_freight_distributed=:frghtDistr,"
                "    vohead_1099=:vohead_1099, "
                "    vohead_curr_id=:vohead_curr_id, "
-               "    vohead_notes=:vohead_notes "
+               "    vohead_notes=:vohead_notes, "
+               "    vohead_freight_taxtype_id=:vohead_freight_taxtype_id, "
+               "    vohead_tax_exemption=:vohead_tax_exemption "
                "WHERE (vohead_id=:vohead_id);" );
 
     updq.bindValue(":vohead_id", _voheadid);
@@ -1000,6 +1054,8 @@ bool voucher::saveDetail()
     updq.bindValue(":vohead_1099", QVariant(_flagFor1099->isChecked()));
     updq.bindValue(":vohead_curr_id", _amountToDistribute->id());
     updq.bindValue(":vohead_notes", _notes->toPlainText());
+    updq.bindValue(":vohead_freight_taxtype_id", _freightTaxtype->id());
+    updq.bindValue(":vohead_tax_exemption", _taxExempt->code());
     updq.exec();
     if (ErrorReporter::error(QtCriticalMsg, this, tr("Updating Voucher"),
                              updq, __FILE__, __LINE__))
@@ -1008,69 +1064,16 @@ bool voucher::saveDetail()
   return true;
 }
 
-void voucher::sCalculateTax()
+void voucher::sCalculateTaxOwed()
 {
-  if (_vendid == -1)
-    return;
-
-  if (!saveDetail())
-    return;
-
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT ABS(SUM(tax)) AS tax "
-                "FROM ("
-                "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-                "FROM tax "
-                " JOIN calculateTaxDetailSummary('VO', :vohead_id, 'T') ON (taxdetail_tax_id=tax_id)"
-                "GROUP BY tax_id) AS data;" );
-  taxq.bindValue(":vohead_id", _voheadid);
-  taxq.exec();
-  if (taxq.first())
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Calculating Voucher Tax"),
-                                    taxq, __FILE__, __LINE__))
-        return;
-}
-
-void voucher::sTaxDetail()
-{
-  if (!saveDetail())
-    return;
-
-  ParameterList params;
-  params.append("order_id", _voheadid);
-  params.append("order_type", "VO");
-  // mode => view since there are no fields to hold modified tax data
-  if (_mode == cView)
-    params.append("mode", "view");
-
-  taxBreakdown newdlg(this, "", true);
-  newdlg.set(params);
-  newdlg.exec();
-}
-
-void voucher::sUpdateVoucherTax()
-{
-  if (!_taxzone->isValid() || !_distributionDate->isValid())
-    return;
-
-  XSqlQuery updTax;
-  updTax.prepare("SELECT updatemiscvouchertax(:voheadid,:taxzone,:distdate,:curr) as ret;");
-  updTax.bindValue(":voheadid", _voheadid);
-  updTax.bindValue(":taxzone",  _taxzone->id());
-  updTax.bindValue(":distdate", _distributionDate->date());
-  updTax.bindValue(":curr", _amountToDistribute->id());
-  updTax.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Adding Tax to Voucher"),
-                         updTax, __FILE__, __LINE__))
-    return;
+  double diff = _tax->localValue() - _taxCharged->localValue();
+  _taxOwed->setLocalValue(diff < 0.0 ? 0.0 : diff);
 }
 
 void voucher::sNewDistDate()
 {
   if (_miscDistrib->topLevelItemCount())
   {
-     sUpdateVoucherTax();
      sFillMiscList();
   }
 }
@@ -1102,6 +1105,56 @@ void voucher::sFreightDistribution(bool distFreight)
     _freightStack->setCurrentIndex(1);
   else
     _freightStack->setCurrentIndex(0);
+}
+
+void voucher::sFreightTaxtypeChanged()
+{
+  _tax->invalidate();
+}
+
+void voucher::sFreightChanged()
+{
+  if (_freight->localValue() > 0.0 && _metrics->value("TaxService") == "A")
+  {
+    XSqlQuery qry;
+    qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                "                      addr_line1 || addr_line2 || addr_line3 || "
+                "                      addr_city || addr_state || addr_postalcode || "
+                "                      addr_country) > 1 "
+                "       AS check "
+                "  FROM voitem "
+                "  JOIN poitem ON voitem_poitem_id = poitem_id "
+                "  JOIN itemsite ON poitem_itemsite_id = itemsite_id "
+                "  JOIN whsinfo ON itemsite_warehous_id = warehous_id "
+                "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                " WHERE voitem_vohead_id = :vohead_id;");
+    qry.bindValue(":vohead_id", _voheadid);
+    qry.exec();
+    if (qry.first() && qry.value("check").toBool())
+    {
+      QMessageBox::critical(this, tr("Cannot enter order level freight"),
+                            tr("Cannot enter order level freight when lines are "
+                               "shipping to different addresses for Avalara tax "
+                               "calculation."));
+
+      disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      _freight->setLocalValue(0.0);
+      connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+      return;
+    }
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                  qry, __FILE__, __LINE__))
+    {
+      disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+      _freight->setLocalValue(0.0);
+      connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+      return;
+    }
+  }
+
+  _tax->invalidate();
 }
 
 void voucher::sIsDistributed()

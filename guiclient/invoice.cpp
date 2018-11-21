@@ -24,7 +24,6 @@
 #include "distributeInventory.h"
 #include "invoiceItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxBreakdown.h"
 #include "allocateARCreditMemo.h"
 #include "guiErrorCheck.h"
 
@@ -47,12 +46,16 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_view,                SIGNAL(clicked()),                       this,         SLOT(sView()));
   connect(_delete,              SIGNAL(clicked()),                       this,         SLOT(sDelete()));
   connect(_copyToShipto,        SIGNAL(clicked()),                       this,         SLOT(sCopyToShipto()));
-  connect(_taxLit,              SIGNAL(leftClickedURL(const QString&)),  this,         SLOT(sTaxDetail()));
   connect(_shipTo,              SIGNAL(newId(int)),                      this,         SLOT(populateShipto(int)));
   connect(_shipToName,          SIGNAL(textChanged(const QString&)),     this,         SLOT(sShipToModified()));
   connect(_subtotal,            SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
+  connect(_tax,                 SIGNAL(save(bool)),                      this,         SLOT(save(bool)));
   connect(_tax,                 SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
-  connect(_miscAmount,          SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
+  connect(_miscChargeTaxtype,   SIGNAL(newID(int)),                      this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeDiscount,  SIGNAL(toggled(bool)),                   this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscChargeAccount,   SIGNAL(valid(bool)),                     this,         SLOT(sMiscTaxtypeChanged()));
+  connect(_miscAmount,          SIGNAL(valueChanged()),                  this,         SLOT(sMiscAmountChanged()));
+  connect(_freightTaxtype,      SIGNAL(newID(int)),                      this,         SLOT(sMiscTaxtypeChanged()));
   connect(_freight,             SIGNAL(valueChanged()),                  this,         SLOT(sFreightChanged()));
   connect(_allocatedCM,         SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
   connect(_outstandingCM,       SIGNAL(valueChanged()),                  this,         SLOT(sCalculateTotal()));
@@ -127,7 +130,21 @@ invoice::invoice(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   _miscChargeAccount->setType(GLCluster::cRevenue | GLCluster::cExpense);
 
+  _freightTaxtype->setCode("Freight");
+  _miscChargeTaxtype->setCode("Misc");
+
   _postInvoice->setEnabled(_privileges->check("PostMiscInvoices"));
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 invoice::~invoice()
@@ -154,6 +171,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     _documents->setId(_invcheadid);
     _charass->setId(_invcheadid);
     _comments->setId(_invcheadid);
+    _tax->setOrderId(_invcheadid);
     populate();
     populateCMInfo();
     populateCCInfo();
@@ -166,6 +184,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     {
       setObjectName("invoice new");
       _mode = cNew;
+      _tax->setMode(_mode);
 
       invoiceet.exec("SELECT NEXTVAL('invchead_invchead_id_seq') AS invchead_id;");
       if (invoiceet.first())
@@ -175,6 +194,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
         _documents->setId(_invcheadid);
         _charass->setId(_invcheadid);
         _comments->setId(_invcheadid);
+        _tax->setOrderId(_invcheadid);
       }
       else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Invoice Information"),
                                     invoiceet, __FILE__, __LINE__))
@@ -238,6 +258,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     {
       setObjectName(QString("invoice edit %1").arg(_invcheadid));
       _mode = cEdit;
+      _tax->setMode(_mode);
 
       _new->setEnabled(true);
       _cust->setReadOnly(true);
@@ -246,6 +267,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
     {
       setObjectName(QString("invoice view %1").arg(_invcheadid));
       _mode = cView;
+      _tax->setMode(_mode);
 
       _invoiceNumber->setEnabled(false);
       _orderNumber->setEnabled(false);
@@ -281,6 +303,7 @@ enum SetResponse invoice::set(const ParameterList &pParams)
       _shipChrgs->setEnabled(false);
       _shippingZone->setEnabled(false);
       _saleType->setEnabled(false);
+      _warehouse->setEnabled(false);
 //      _documents->setReadOnly(true);
       _charass->setReadOnly(true);
       _postInvoice->setVisible(false);
@@ -404,7 +427,8 @@ void invoice::sPopulateCustomerInfo(int pCustid)
                   "       COALESCE(cust_shipchrg_id, -1) AS cust_shipchrg_id,"
                   "       cust_ffshipto, cust_ffbillto, "
                   "       COALESCE(shipto_id, -1) AS shiptoid, "
-                  "       cust_curr_id "
+                  "       cust_curr_id, "
+                  "       cust_tax_exemption "
                   "FROM custinfo "
                   "  LEFT OUTER JOIN cntct ON (cust_cntct_id=cntct_id) "
                   "  LEFT OUTER JOIN shiptoinfo ON ( (shipto_cust_id=cust_id) "
@@ -425,6 +449,8 @@ void invoice::sPopulateCustomerInfo(int pCustid)
         _shipChrgs->setId(cust.value("cust_shipchrg_id").toInt());
         _shipVia->setText(cust.value("cust_shipvia").toString());
         _custShipVia = _shipVia->currentText();
+        if (!cust.value("cust_tax_exemption").toString().isEmpty())
+          _taxExempt->setCode(cust.value("cust_tax_exemption").toString());
 
 	bool ffBillTo = cust.value("cust_ffbillto").toBool();
         if (_mode != cView)
@@ -538,75 +564,11 @@ void invoice::sCopyToShipto()
 
 void invoice::sSave()
 {
-  QList<GuiErrorCheck> errors;
-    errors<< GuiErrorCheck(_cust->id() <= 0, _cust,
-                           tr("You must enter a Customer for this Invoice before saving it."))
-          << GuiErrorCheck(_total->localValue() < 0, _cust,
-                           tr("The Total must be a positive value."))
-          << GuiErrorCheck(_invcitem->topLevelItemCount() <= 0, _new,
-                           tr("There must be at least one line item for an invoice."))
-    ;
-    if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Invoice"), errors))
-      return;
-
-  //  We can't post a Misc. Charge without a Sales Account
-  if ( (! _miscAmount->isZero()) && (!_miscChargeAccount->isValid()) )
-  {
-    QMessageBox::warning( this, tr("No Misc. Charge Account Number"),
-                          tr("<p>You may not enter a Misc. Charge without "
-                             "indicating the G/L Sales Account number for the "
-                             "charge.  Please set the Misc. Charge amount to 0 "
-                             "or select a Misc. Charge Sales Account." ) );
-    _tabWidget->setCurrentIndex(_tabWidget->indexOf(lineItemsTab));
-    _miscChargeAccount->setFocus();
-    return;
-  }
-  // save address info in case someone wants to use 'em again later
-  // but don't make any global changes to the data and ignore errors
-  _shipToAddr->blockSignals(true);
-  _billToAddr->save(AddressCluster::CHANGEONE);
-  _shipToAddr->save(AddressCluster::CHANGEONE);
-  _shipToAddr->blockSignals(false);
-  // finally save the invchead
-  if (!save())
+  if (!save(false))
     return;
 
-  // If this is a recurring invoice check whether the newly saved invoice
-  // should supercede the original recurring invoice settings
-  if (_recurring->isRecurring() && _mode == cEdit && _recurring->parentId() != _invcheadid)
-  {
-    if (QMessageBox::question(this, tr("Recurring Invoice"),
-                          tr("You have edited a recurring Invoice.\n"
-                          "Do you wish to change all future invoice recurrences?"),
-                          QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
-    {
-    // Update Recurring Invoice with latest saved detail
-      XSqlQuery recurUpd;
-      recurUpd.prepare("UPDATE recur SET recur_parent_id=:newinvoice "
-                       "WHERE ((recur_parent_type = 'I') "
-                       " AND   (recur_parent_id = :oldinvoice));");
-      recurUpd.bindValue(":newinvoice", _invcheadid);
-      recurUpd.bindValue(":oldinvoice", _recurring->parentId());
-      recurUpd.exec();
-      if (recurUpd.lastError().type() != QSqlError::NoError)
-      {
-         ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
-                     recurUpd, __FILE__, __LINE__);
-           return;
-      }
-      // Also update this invoice
-      recurUpd.prepare("UPDATE invchead SET invchead_recurring_invchead_id=:invoice "
-                       "WHERE (invchead_id = :invoice); ");
-      recurUpd.bindValue(":invoice",  _invcheadid);
-      recurUpd.exec();
-      if (recurUpd.lastError().type() != QSqlError::NoError)
-      {
-         ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
-                     recurUpd, __FILE__, __LINE__);
-           return;
-      }
-    }
-  }
+  if (_metrics->value("TaxService") == "A")
+    _tax->save();
 
   // post the Invoice if user desires
   if (_postInvoice->isVisible() && _postInvoice->isChecked())
@@ -618,8 +580,43 @@ void invoice::sSave()
   close();
 }
 
-bool invoice::save()
+bool invoice::save(bool partial)
 {
+  QList<GuiErrorCheck> errors;
+    errors<< GuiErrorCheck(_cust->id() <= 0, _cust,
+                           tr("You must enter a Customer for this Invoice before saving it."))
+          << GuiErrorCheck(!partial && _total->localValue() < 0, _cust,
+                           tr("The Total must be a positive value."))
+          << GuiErrorCheck(!partial && _invcitem->topLevelItemCount() <= 0, _new,
+                           tr("There must be at least one line item for an invoice."))
+          << GuiErrorCheck(!_miscAmount->isZero() && !_miscChargeAccount->isValid(),
+                           _miscChargeAccount,
+                           tr("<p>You may not enter a Misc. Charge without "
+                              "indicating the G/L Sales Account number for the "
+                              "charge.  Please set the Misc. Charge amount to 0 "
+                              "or select a Misc. Charge Sales Account."))
+          << GuiErrorCheck(_miscAmount->isZero() && _miscChargeAccount->isValid(), _miscAmount,
+                           tr("<p>You must enter a Misc. Charge when "
+                              "specifying a Misc. Charge Sales Account. "
+                              "Please enter Misc. Charge amount "
+                              "or remove the Misc. Charge Sales Account."));
+
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
+
+  if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Invoice"), errors))
+    return false;
+
+  if (!partial)
+  {
+    // save address info in case someone wants to use 'em again later
+    // but don't make any global changes to the data and ignore errors
+    _shipToAddr->blockSignals(true);
+    _billToAddr->save(AddressCluster::CHANGEONE);
+    _shipToAddr->save(AddressCluster::CHANGEONE);
+    _shipToAddr->blockSignals(false);
+  }
+
   XSqlQuery invoiceave;
   RecurrenceWidget::RecurrenceChangePolicy cp = _recurring->getChangePolicy();
   if (cp == RecurrenceWidget::NoPolicy)
@@ -662,7 +659,12 @@ bool invoice::save()
              "    invchead_shipchrg_id=:invchead_shipchrg_id, "
              "    invchead_taxzone_id=:invchead_taxzone_id,"
              "    invchead_shipzone_id=:invchead_shipzone_id,"
-             "    invchead_saletype_id=:invchead_saletype_id "
+             "    invchead_saletype_id=:invchead_saletype_id, "
+             "    invchead_warehous_id=:invchead_warehous_id, "
+             "    invchead_freight_taxtype_id=:invchead_freight_taxtype_id, "
+             "    invchead_misc_taxtype_id=:invchead_misc_taxtype_id, "
+             "    invchead_misc_discount=:invchead_misc_discount, "
+             "    invchead_tax_exemption=:invchead_tax_exemption "
 	     "WHERE (invchead_id=:invchead_id);" );
 
   invoiceave.bindValue(":invchead_id",			_invcheadid);
@@ -707,6 +709,11 @@ bool invoice::save()
   invoiceave.bindValue(":invchead_notes",	_notes->toPlainText());
   invoiceave.bindValue(":invchead_prj_id",	_project->id());
   invoiceave.bindValue(":invchead_shipchrg_id",	_shipChrgs->id());
+  invoiceave.bindValue(":invchead_warehous_id", _warehouse->id());
+  invoiceave.bindValue(":invchead_freight_taxtype_id", _freightTaxtype->id());
+  invoiceave.bindValue(":invchead_misc_taxtype_id", _miscChargeTaxtype->id());
+  invoiceave.bindValue(":invchead_misc_discount", _miscChargeDiscount->isChecked());
+  invoiceave.bindValue(":invchead_tax_exemption", _taxExempt->code());
   if(_shippingZone->isValid())
     invoiceave.bindValue(":invchead_shipzone_id",	_shippingZone->id());
   if(_saleType->isValid())
@@ -741,6 +748,46 @@ bool invoice::save()
   }
 
   XSqlQuery commitq("COMMIT;");
+
+  if (!partial)
+  {
+    // If this is a recurring invoice check whether the newly saved invoice
+    // should supercede the original recurring invoice settings
+    if (_recurring->isRecurring() && _mode == cEdit && _recurring->parentId() != _invcheadid)
+    {
+      if (QMessageBox::question(this, tr("Recurring Invoice"),
+                            tr("You have edited a recurring Invoice.\n"
+                            "Do you wish to change all future invoice recurrences?"),
+                            QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+      {
+      // Update Recurring Invoice with latest saved detail
+        XSqlQuery recurUpd;
+        recurUpd.prepare("UPDATE recur SET recur_parent_id=:newinvoice "
+                         "WHERE ((recur_parent_type = 'I') "
+                         " AND   (recur_parent_id = :oldinvoice));");
+        recurUpd.bindValue(":newinvoice", _invcheadid);
+        recurUpd.bindValue(":oldinvoice", _recurring->parentId());
+        recurUpd.exec();
+        if (recurUpd.lastError().type() != QSqlError::NoError)
+        {
+           ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
+                       recurUpd, __FILE__, __LINE__);
+             return false;
+        }
+        // Also update this invoice
+        recurUpd.prepare("UPDATE invchead SET invchead_recurring_invchead_id=:invoice "
+                         "WHERE (invchead_id = :invoice); ");
+        recurUpd.bindValue(":invoice",  _invcheadid);
+        recurUpd.exec();
+        if (recurUpd.lastError().type() != QSqlError::NoError)
+        {
+           ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Invoice Recurrence"),
+                       recurUpd, __FILE__, __LINE__);
+             return false;
+        }
+      }
+    }
+  }
 
   return true;
 }
@@ -917,22 +964,27 @@ void invoice::postInvoice()
 
 void invoice::sNew()
 {
-  if (!save())
+  if (!save(true))
     return;
 
   ParameterList params;
   params.append("mode", "new");
   params.append("invchead_id", _invcheadid);
 
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
+
   invoiceItem newdlg(this);
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
     sFillItemList();
+
+  _tax->invalidate();
 }
 
 void invoice::sEdit()
 {
-  if (!save())
+  if (!save(true))
     return;
 
   ParameterList params;
@@ -940,10 +992,15 @@ void invoice::sEdit()
   params.append("invchead_id", _invcheadid);
   params.append("invcitem_id", _invcitem->id());
 
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
+
   invoiceItem newdlg(this);
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
     sFillItemList();
+
+  _tax->invalidate();
 }
 
 void invoice::sView()
@@ -952,6 +1009,9 @@ void invoice::sView()
   params.append("mode", "view");
   params.append("invchead_id", _invcheadid);
   params.append("invcitem_id", _invcitem->id());
+
+  if (_metrics->value("TaxService") != "N")
+    params.append("taxExempt", _taxExempt->code());
 
   invoiceItem newdlg(this);
   newdlg.set(params);
@@ -972,6 +1032,10 @@ void invoice::sDelete()
   }
 
   sFillItemList();
+
+  sCalculateTotal();
+
+  _tax->invalidate();
 }
 
 void invoice::populate()
@@ -1034,6 +1098,7 @@ void invoice::populate()
     _project->setId(invoicepopulate.value("invchead_prj_id").toInt());
     _shippingZone->setId(invoicepopulate.value("invchead_shipzone_id").toInt());
     _saleType->setId(invoicepopulate.value("invchead_saletype_id").toInt());
+    _warehouse->setId(invoicepopulate.value("invchead_warehous_id").toInt());
 
     bool ffBillTo = invoicepopulate.value("cust_ffbillto").toBool();
     if (_mode != cView)
@@ -1071,6 +1136,10 @@ void invoice::populate()
     _miscChargeDescription->setText(invoicepopulate.value("invchead_misc_descrip"));
     _miscChargeAccount->setId(invoicepopulate.value("invchead_misc_accnt_id").toInt());
     _miscAmount->setLocalValue(invoicepopulate.value("invchead_misc_amount").toDouble());
+    _miscChargeTaxtype->setId(invoicepopulate.value("invchead_misc_taxtype_id").toInt());
+    _miscChargeDiscount->setChecked(invoicepopulate.value("invchead_misc_discount").toBool());
+    _freightTaxtype->setId(invoicepopulate.value("invchead_freight_taxtype_id").toInt());
+    _taxExempt->setCode(invoicepopulate.value("invchead_tax_exemption").toString());
 
     _notes->setText(invoicepopulate.value("invchead_notes").toString());
 
@@ -1093,6 +1162,7 @@ void invoice::populate()
       _freight->setEnabled(false);
       _shippingZone->setEnabled(false);
       _saleType->setEnabled(false);
+      _warehouse->setEnabled(false);
       _postInvoice->setVisible(false);
     }
 
@@ -1142,7 +1212,7 @@ void invoice::sFillItemList()
   _custCurrency->setEnabled(_invcitem->topLevelItemCount() == 0);
 
   // TODO: Calculate the Freight weight here.
-  sCalculateTax();
+  sCalculateTotal();
 }
 
 void invoice::sCalculateTotal()
@@ -1201,53 +1271,6 @@ void invoice::sReleaseNumber()
                          invoiceReleaseNumber, __FILE__, __LINE__);
     _NumberGen = -1;
   }
-}
-
-
-void invoice::sTaxDetail()
-{
-  if (_mode != cView)
-  {
-    if (!save())
-	  return;
-  }
-
-  ParameterList params;
-  params.append("order_id", _invcheadid);
-  params.append("order_type", "I");
-
-  if (_mode == cView || _posted)
-    params.append("mode", "view");
-  else if (_mode == cNew || _mode == cEdit)
-    params.append("mode", "edit");
-
-  taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError)
-  {
-    newdlg.exec();
-    sCalculateTax();
-  }
-}
-
-void invoice::sCalculateTax()
-{
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(tax) AS tax "
-                "FROM ("
-                "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-                "FROM tax "
-                " JOIN calculateTaxDetailSummary('I', :invchead_id, 'T') ON (taxdetail_tax_id=tax_id)"
-	        "GROUP BY tax_id) AS data;" );
-  taxq.bindValue(":invchead_id", _invcheadid);
-  taxq.exec();
-  if (taxq.first())
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Calculating Tax Amounts"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
-  // changing _tax fires sCalculateTotal()
 }
 
 void invoice::setFreeFormShipto(bool pFreeForm)
@@ -1532,21 +1555,78 @@ void invoice::sTaxZoneChanged()
 {
   if (_loading == false && _invcheadid != -1 && _taxzoneidCache != _taxzone->id())
   {
-    if (!save())
+    if (!save(true))
 	  return;
     _taxzoneidCache = _taxzone->id();
-    sCalculateTax();
+
+    if (_metrics->value("TaxService") == "N")
+      _tax->sRecalculate();
   }
+}
+
+void invoice::sMiscTaxtypeChanged()
+{
+  _tax->invalidate();
+}
+
+void invoice::sMiscAmountChanged()
+{
+  sCalculateTotal();
+
+  _tax->invalidate();
 }
 
 void invoice::sFreightChanged()
 {
   if (_loading == false && _invcheadid != -1 && _freightCache != _freight->localValue())
   {
-    if (!save())
+    if (_metrics->value("TaxService") == "A")
+    {
+      XSqlQuery qry;
+      qry.prepare("SELECT COUNT(DISTINCT ARRAY[]::TEXT[] || "
+                  "                      addr_line1 || addr_line2 || addr_line3 || "
+                  "                      addr_city || addr_state || addr_postalcode || "
+                  "                      addr_country) > 1 "
+                  "       AS check "
+                  "  FROM invcitem "
+                  "  JOIN invchead ON invcitem_invchead_id = invchead_id "
+                  "  LEFT OUTER JOIN whsinfo "
+                  "    ON COALESCE(invcitem_warehous_id, invchead_warehous_id) = warehous_id "
+                  "  LEFT OUTER JOIN addr ON warehous_addr_id = addr_id "
+                  " WHERE invcitem_invchead_id = :invcheadid;");
+      qry.bindValue(":invcheadid", _invcheadid);
+      qry.exec();
+      if (qry.first() && qry.value("check").toBool())
+      {
+        QMessageBox::critical(this, tr("Cannot override freight"),
+                              tr("Freight must be calculated automatically when lines are "
+                                 "shipping from different addresses for Avalara tax "
+                                 "calculation."));
+
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+        return;
+      }
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Failed to check freight"),
+                                    qry, __FILE__, __LINE__))
+      {
+        disconnect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+        _freight->setLocalValue(_freightCache);
+        connect(_freight, SIGNAL(valueChanged()), this, SLOT(sFreightChanged()));
+
+        return;
+      }
+    }
+
+    if (!save(true))
 	  return;
     _freightCache = _freight->localValue();
-    sCalculateTax();
+
+    sCalculateTotal();
+
+    _tax->invalidate();
   }
 }
 

@@ -72,6 +72,8 @@
 #include "plugins/shipmentclusterplugin.h"
 #include "plugins/shiptoclusterplugin.h"
 #include "plugins/shiptoeditplugin.h"
+#include "plugins/taxdisplayplugin.h"
+#include "plugins/taxexemptclusterplugin.h"
 #include "plugins/usernameclusterplugin.h"
 #include "plugins/usernamelineeditplugin.h"
 #include "plugins/vendorclusterplugin.h"
@@ -156,6 +158,8 @@ xTuplePlugin::xTuplePlugin(QObject * parent) : QObject(parent)
   m_plugins.append(new ShipmentClusterPlugin(this));
   m_plugins.append(new ShiptoClusterPlugin(this));
   m_plugins.append(new ShiptoEditPlugin(this));
+  m_plugins.append(new TaxDisplayPlugin(this));
+  m_plugins.append(new TaxExemptClusterPlugin(this));
   m_plugins.append(new UsernameClusterPlugin(this));
   m_plugins.append(new UsernameLineEditPlugin(this));
   m_plugins.append(new VendorClusterPlugin(this));
@@ -199,14 +203,16 @@ Metrics     *_x_metrics = 0;
 QMdiArea    *_x_workspace = 0;
 Privileges  *_x_privileges = 0;
 QString     _x_username;
+TaxIntegration * _x_taxIntegration = 0;
 
-void initializePlugin(Preferences *pPreferences, Metrics *pMetrics, Privileges *pPrivileges, QString pUsername, QMdiArea *pWorkspace)
+void initializePlugin(Preferences *pPreferences, Metrics *pMetrics, Privileges *pPrivileges, TaxIntegration* pTaxIntegration, QString pUsername, QMdiArea *pWorkspace)
 {
   _x_preferences = pPreferences;
   _x_metrics = pMetrics;
   _x_workspace = pWorkspace;
   _x_privileges = pPrivileges;
   _x_username = pUsername;
+  _x_taxIntegration = pTaxIntegration;
 }
 
 void setupWidgetsScriptApi(QScriptEngine *engine, GuiClientInterface *client)

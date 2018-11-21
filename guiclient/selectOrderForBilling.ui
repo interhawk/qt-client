@@ -252,32 +252,53 @@ to be bound by its terms.</comment>
                </widget>
               </item>
               <item row="3" column="0">
-               <widget class="QLabel" name="_taxzoneLit">
-                <property name="text">
-                 <string>Tax Zone:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
+               <layout class="QVBoxLayout">
+                <item>
+                 <widget class="QLabel" name="_taxzoneLit">
+                  <property name="text">
+                   <string>Tax Zone:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="_taxExemptLit">
+                  <property name="text">
+                   <string>Tax Exempt Category:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="3" column="1">
                <layout class="QHBoxLayout">
                 <item>
-                 <widget class="XComboBox" name="_taxZone">
-                  <property name="enabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="allowNull">
-                   <bool>true</bool>
-                  </property>
-                  <property name="nullStr">
-                   <string>None</string>
-                  </property>
-                  <property name="type">
-                   <enum>XComboBox::TaxZones</enum>
-                  </property>
-                 </widget>
+                 <layout class="QVBoxLayout">
+                  <item>
+                   <widget class="XComboBox" name="_taxZone">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="allowNull">
+                     <bool>true</bool>
+                    </property>
+                    <property name="nullStr">
+                     <string>None</string>
+                    </property>
+                    <property name="type">
+                     <enum>XComboBox::TaxZones</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="TaxExemptCluster" name="_taxExempt"/>
+                  </item>
+                 </layout>
                 </item>
                 <item>
                  <spacer>
@@ -657,7 +678,7 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="3" column="2">
-              <widget class="XURLLabel" name="_salesTaxLit">
+              <widget class="XLabel" name="_salesTaxLit">
                <property name="text">
                 <string>Tax:</string>
                </property>
@@ -667,12 +688,15 @@ to be bound by its terms.</comment>
               </widget>
              </item>
              <item row="3" column="3">
-              <widget class="CurrDisplay" name="_salesTax">
+              <widget class="TaxDisplay" name="_salesTax">
                <property name="minimumSize">
                 <size>
                  <width>120</width>
                  <height>0</height>
                 </size>
+               </property>
+               <property name="type">
+                <string>COB</string>
                </property>
               </widget>
              </item>
@@ -748,6 +772,47 @@ to be bound by its terms.</comment>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="_miscChargeTaxtypeLit">
+               <property name="text">
+                <string>Misc. Charge Tax Type:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="XComboBox" name="_miscChargeTaxtype">
+               <property name="type">
+                <enum>XComboBox::TaxTypes</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="XCheckBox" name="_miscChargeDiscount">
+               <property name="text">
+                <string>Misc. Charge is Discount</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="_freightTaxtypeLit">
+               <property name="text">
+                <string>Freight Tax Type:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="XComboBox" name="_freightTaxtype">
+               <property name="type">
+                <enum>XComboBox::TaxTypes</enum>
                </property>
               </widget>
              </item>
@@ -840,9 +905,29 @@ to be bound by its terms.</comment>
    <header>ordercluster.h</header>
   </customwidget>
   <customwidget>
+   <class>TaxDisplay</class>
+   <extends>CurrDisplay</extends>
+   <header>taxdisplay.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>XComboBox</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>xcheckbox.h</header>
+  </customwidget>
+  <customwidget>
    <class>XComboBox</class>
    <extends>QComboBox</extends>
    <header>xcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XLabel</class>
+   <extends>QLabel</extends>
+   <header>xlabel.h</header>
   </customwidget>
   <customwidget>
    <class>XLineEdit</class>
@@ -855,11 +940,6 @@ to be bound by its terms.</comment>
    <extends>QTreeWidget</extends>
    <header>xtreewidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>XURLLabel</class>
-   <extends>QLabel</extends>
-   <header>xurllabel.h</header>
   </customwidget>
   <customwidget>
    <class>XTextEdit</class>

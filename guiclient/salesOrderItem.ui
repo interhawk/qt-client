@@ -13,8 +13,8 @@ to be bound by its terms.</comment>
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>897</width>
-    <height>946</height>
+    <width>936</width>
+    <height>716</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -29,7 +29,16 @@ to be bound by its terms.</comment>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
     <layout class="QGridLayout">
-     <property name="margin">
+     <property name="leftMargin">
+      <number>12</number>
+     </property>
+     <property name="topMargin">
+      <number>12</number>
+     </property>
+     <property name="rightMargin">
+      <number>12</number>
+     </property>
+     <property name="bottomMargin">
       <number>12</number>
      </property>
      <property name="spacing">
@@ -268,7 +277,16 @@ to be bound by its terms.</comment>
           <string/>
          </property>
          <layout class="QGridLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>5</number>
+          </property>
+          <property name="topMargin">
+           <number>5</number>
+          </property>
+          <property name="rightMargin">
+           <number>5</number>
+          </property>
+          <property name="bottomMargin">
            <number>5</number>
           </property>
           <property name="spacing">
@@ -703,6 +721,9 @@ to be bound by its terms.</comment>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="_priceUOMLit">
+          <property name="visible">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Pric&amp;e UOM:</string>
           </property>
@@ -714,9 +735,6 @@ to be bound by its terms.</comment>
           </property>
           <property name="margin">
            <number>5</number>
-          </property>
-          <property name="visible">
-           <bool>false</bool>
           </property>
           <property name="buddy">
            <cstring>_priceUOM</cstring>
@@ -831,7 +849,16 @@ to be bound by its terms.</comment>
         <string/>
        </property>
        <layout class="QGridLayout">
-        <property name="margin">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <property name="bottomMargin">
          <number>5</number>
         </property>
         <item row="0" column="0">
@@ -2014,6 +2041,16 @@ to be bound by its terms.</comment>
             <string>Tax</string>
            </property>
            <layout class="QGridLayout">
+            <item row="2" column="1">
+             <widget class="CurrCluster" name="_tax">
+              <property name="format">
+               <enum>CurrDisplay::SalesPrice</enum>
+              </property>
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="_taxtypeLit">
               <property name="minimumSize">
@@ -2063,7 +2100,7 @@ to be bound by its terms.</comment>
               </item>
              </layout>
             </item>
-            <item row="1" column="0">
+            <item row="2" column="0">
              <widget class="XURLLabel" name="_taxLit">
               <property name="text">
                <string>Tax:</string>
@@ -2076,17 +2113,7 @@ to be bound by its terms.</comment>
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="CurrCluster" name="_tax">
-              <property name="format">
-               <enum>CurrDisplay::SalesPrice</enum>
-              </property>
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
+            <item row="3" column="0">
              <spacer>
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -2098,6 +2125,16 @@ to be bound by its terms.</comment>
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="_taxExemptLit">
+              <property name="text">
+               <string>Tax Exempt Category:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="TaxExemptCluster" name="_taxExempt"/>
             </item>
            </layout>
           </widget>
@@ -2409,7 +2446,16 @@ to be bound by its terms.</comment>
          <property name="spacing">
           <number>0</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
           <number>5</number>
          </property>
          <item>
@@ -2429,7 +2475,16 @@ to be bound by its terms.</comment>
          <property name="spacing">
           <number>5</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
           <number>5</number>
          </property>
          <item>
@@ -2588,6 +2643,11 @@ to be bound by its terms.</comment>
    <class>ItemLineEdit</class>
    <extends>XLineEdit</extends>
    <header>itemlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>XComboBox</extends>
+   <header>taxexemptcluster.h</header>
   </customwidget>
   <customwidget>
    <class>WComboBox</class>

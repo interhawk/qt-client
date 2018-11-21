@@ -24,11 +24,12 @@ public:
     selectOrderForBilling(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::Window);
     ~selectOrderForBilling();
 
+    virtual bool save(bool);
+
 public slots:
     virtual SetResponse set( const ParameterList & pParams );
 
     virtual void clear();
-    virtual void sCalculateTax();
     virtual void sCancelSelection();
     virtual void sEditOrder();
     virtual void sEditSelection();
@@ -41,11 +42,11 @@ public slots:
     virtual void sUpdateTotal();
     virtual void sTaxZoneChanged();
     virtual void sFreightChanged();
+    virtual void sMiscTaxtypeChanged();
+    virtual void sMiscChargeChanged();
 
 protected slots:
     virtual void languageChange();
-
-    virtual void sTaxDetail();
 
 protected:
     virtual void closeEvent(QCloseEvent * event);

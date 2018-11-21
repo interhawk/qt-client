@@ -39,6 +39,7 @@ public slots:
     virtual void populateShipto( int pShiptoid );
     virtual void sCopyToShipto();
     virtual void sSave();
+    virtual bool save(bool);
     virtual void sNew();
     virtual void sEdit();
     virtual void sView();
@@ -47,7 +48,6 @@ public slots:
     virtual void postInvoice();
     virtual void sFillItemList();
     virtual void sCalculateTotal();
-    virtual void sCalculateTax();
     virtual void closeEvent( QCloseEvent * pEvent );
     virtual void setFreeFormShipto( bool pFreeForm );
     virtual void sShipToModified();
@@ -57,6 +57,8 @@ public slots:
     virtual bool sCheckInvoiceNumber();
     virtual void sHandleShipchrg( int pShipchrgid );
     virtual void sTaxZoneChanged();
+    virtual void sMiscTaxtypeChanged();
+    virtual void sMiscAmountChanged();
     virtual void sFreightChanged();
     virtual void sReleaseNumber();
 
@@ -65,7 +67,6 @@ protected:
 
 protected slots:
     virtual void languageChange();
-    virtual void sTaxDetail();
 
 private:
     int		_mode;
@@ -77,7 +78,6 @@ private:
     int		_taxzoneidCache;
     bool        _loading;
     double      _freightCache;
-    bool        save();
     bool        _saved;
     bool        _posted;
     int         _NumberGen;

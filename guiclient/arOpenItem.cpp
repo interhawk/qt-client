@@ -19,7 +19,7 @@
 #include "errorReporter.h"
 #include "printArOpenItem.h"
 #include "storedProcErrorLookup.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 #include "currcluster.h"
 #include "guiErrorCheck.h"
 
@@ -74,6 +74,13 @@ arOpenItem::arOpenItem(QWidget* parent, const char* name, bool modal, Qt::Window
 
   _journalNumber->setEnabled(false);
 
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+    _taxLit->hide();
+    _tax->hide();
+  }
 }
 
 arOpenItem::~arOpenItem()
@@ -426,7 +433,7 @@ void arOpenItem::populate()
              "       aropen_commission_due, cust_commprcnt,"
              "       aropen_notes, aropen_rsncode_id, aropen_salescat_id, "
              "       aropen_accnt_id, aropen_curr_id, aropen_taxzone_id, "
-             "       COALESCE(SUM(taxhist_tax),0) AS tax, "
+             "       getOrderTax('AR', aropen_id) AS tax, "
              "       CASE WHEN (aropen_doctype = 'D' OR "
              "                 (aropen_doctype='C' AND cmhead_id IS NULL)) THEN "
              "         true "
@@ -435,15 +442,9 @@ void arOpenItem::populate()
              "       END AS showTax "
              "FROM aropen "
              "  JOIN custinfo ON (cust_id=aropen_cust_id) "
-             "  LEFT OUTER JOIN aropentax ON (aropen_id=taxhist_parent_id) "
              "  LEFT OUTER JOIN cmhead ON ((aropen_doctype='C') "
              "                         AND (aropen_docnumber=cmhead_number)) "
-             "WHERE (aropen_id=:aropen_id) "
-             "GROUP BY aropen_cust_id, aropen_docdate, aropen_duedate,      "
-             "  aropen_doctype, aropen_docnumber, aropen_ordernumber, aropen_journalnumber,  "
-             "  aropen_amount, aropen_amount, aropen_paid, f_balance, aropen_terms_id, "
-             "  aropen_salesrep_id, aropen_commission_due, cust_commprcnt, aropen_notes, aropen_rsncode_id, "
-             "  aropen_salescat_id, aropen_accnt_id, aropen_curr_id, aropen_taxzone_id, cmhead_id;" );
+             "WHERE (aropen_id=:aropen_id);" );
   arpopulate.bindValue(":aropen_id", _aropenid);
   arpopulate.exec();
   if (arpopulate.first())
@@ -673,46 +674,29 @@ void arOpenItem::sTaxDetail()
       return;
   }
 
-  taxDetail newdlg(this, "", true);
   ParameterList params;
-
-  params.append("curr_id", _tax->id());
-  params.append("date",    _tax->effective());
-  if (_docType->code() == "C")
-    params.append("sense",-1);
-  if (_mode != cNew)
-    params.append("readOnly");
-
-  ar.exec("SELECT getadjustmenttaxtypeid() as taxtype;");
-  if(ar.first())
-    params.append("taxtype_id", ar.value("taxtype").toInt());
-
-  params.append("order_type", "AR");
   params.append("order_id", _aropenid);
-  params.append("display_type", "A");
-  params.append("subtotal", _amount->localValue());
-  params.append("adjustment");
-  if (newdlg.set(params) == NoError)
+  params.append("order_type", "AR");
+ 
+  taxBreakdown newdlg(this, "", true);
+  newdlg.set(params);
+  newdlg.exec();
+
+  XSqlQuery taxq;
+  taxq.prepare( "SELECT getOrderTax('AR', :aropen_id) AS tax " );
+  taxq.bindValue(":aropen_id", _aropenid);
+  taxq.exec();
+  if (taxq.first())
   {
-    newdlg.exec();
-    XSqlQuery taxq;
-    taxq.prepare( "SELECT SUM(taxhist_tax) AS tax "
-      "FROM aropentax "
-      "WHERE (taxhist_parent_id=:aropen_id);" );
-    taxq.bindValue(":aropen_id", _aropenid);
-    taxq.exec();
-    if (taxq.first())
-    {
-      if (_docType->code() == "C")
-        _tax->setLocalValue(taxq.value("tax").toDouble() * -1);
-      else
-        _tax->setLocalValue(taxq.value("tax").toDouble());
-    }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Cannot set tax amounts"),
-                                  taxq, __FILE__, __LINE__))
-    {
-      return;
-    }
+    if (_docType->code() == "C")
+      _tax->setLocalValue(taxq.value("tax").toDouble() * -1);
+    else
+      _tax->setLocalValue(taxq.value("tax").toDouble());
+  }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Cannot set tax amounts"),
+                                taxq, __FILE__, __LINE__))
+  {
+    return;
   }
 }
 

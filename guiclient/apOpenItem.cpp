@@ -17,7 +17,7 @@
 #include "errorReporter.h"
 #include "guiErrorCheck.h"
 #include "printApOpenItem.h"
-#include "taxDetail.h"
+#include "taxBreakdown.h"
 
 apOpenItem::apOpenItem(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl)
@@ -55,6 +55,14 @@ apOpenItem::apOpenItem(QWidget* parent, const char* name, bool modal, Qt::Window
   _journalNumber->setEnabled(false);
 
   sToggleAccount();
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxZoneLit->hide();
+    _taxzone->hide();
+    _taxLit->hide();
+    _tax->hide();
+  }
 }
 
 apOpenItem::~apOpenItem()
@@ -389,9 +397,7 @@ void apOpenItem::populate()
              "                          WHEN 'O' THEN 1 "
              "                          WHEN 'H' THEN 2 "
              "       END AS status_id, apopen_status, "
-             "       (SELECT COALESCE(SUM(taxhist_tax),0) "
-             "        FROM apopentax "
-             "        WHERE (taxhist_parent_id=apopen_id)) AS tax, "
+             "       getOrderTax('AP', apopen_id) AS tax, "
              "       CASE WHEN (apopen_doctype IN ('D', 'C')) THEN true "
              "            ELSE false "
              "       END AS showTax "
@@ -603,47 +609,30 @@ void apOpenItem::sTaxDetail()
     if (!sInitializeMemo())
       return;
   }
-  
-  taxDetail newdlg(this, "", true);
+
   ParameterList params;
-
-  params.append("curr_id", _tax->id());
-  params.append("date",    _tax->effective());
-  if (_mode != cNew)
-    params.append("readOnly");
-
-  ap.exec("SELECT getadjustmenttaxtypeid() as taxtype;");
-  if(ap.first())
-    params.append("taxtype_id", ap.value("taxtype").toInt());  
-   
-  params.append("order_type", "AP");
   params.append("order_id", _apopenid);
-  params.append("display_type", "A");
-  params.append("subtotal", _amount->localValue());
-  params.append("adjustment");
-  if (_docType->code() == "D")
-    params.append("sense",-1);
-  if (newdlg.set(params) == NoError)  
+  params.append("order_type", "AP");
+ 
+  taxBreakdown newdlg(this, "", true);
+  newdlg.set(params);
+  newdlg.exec();
+
+  XSqlQuery taxq;
+  taxq.prepare( "SELECT getOrderTax('AP', :apopen_id) AS tax;" );
+  taxq.bindValue(":apopen_id", _apopenid);
+  taxq.exec();
+  if (taxq.first())
   {
-    newdlg.exec();
-    XSqlQuery taxq;
-    taxq.prepare( "SELECT SUM(taxhist_tax) AS tax "
-      "FROM apopentax "
-      "WHERE (taxhist_parent_id=:apopen_id);" );
-    taxq.bindValue(":apopen_id", _apopenid);
-    taxq.exec();
-    if (taxq.first())
-    {
-      if (_docType->code() == "D")
-        _tax->setLocalValue(taxq.value("tax").toDouble() * -1);
-      else
-        _tax->setLocalValue(taxq.value("tax").toDouble());
-    }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Setting Tax Amounts"),
-                                  taxq, __FILE__, __LINE__))
-    {
-      return;
-    }
+    if (_docType->code() == "D")
+      _tax->setLocalValue(taxq.value("tax").toDouble() * -1);
+    else
+      _tax->setLocalValue(taxq.value("tax").toDouble());
+  }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Setting Tax Amounts"),
+                                taxq, __FILE__, __LINE__))
+  {
+    return;
   }
 }
 

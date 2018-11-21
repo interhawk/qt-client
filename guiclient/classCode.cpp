@@ -34,7 +34,10 @@ classCode::classCode(QWidget* parent, const char* name, bool modal, Qt::WindowFl
   connect(_deleteTax, SIGNAL(clicked()), this, SLOT(sDeleteTax()));
 
   _classcodetax->addColumn(tr("Tax Type"), _itemColumn, Qt::AlignLeft, true, "taxtype_name");
-  _classcodetax->addColumn(tr("Tax Zone"),          -1, Qt::AlignLeft, true, "taxzone");
+  if (_metrics->value("TaxService") == "N")
+    _classcodetax->addColumn(tr("Tax Zone"),          -1, Qt::AlignLeft, true, "taxzone");
+  else
+    _classcodetax->addColumn(tr("Default"),           -1, Qt::AlignLeft, true, "default");
 
 }
 
@@ -187,7 +190,8 @@ void classCode::sFillListTax()
 { 
   XSqlQuery fillListItemtax;
   fillListItemtax.prepare("SELECT classcodetax_id, taxtype_name,"
-            "       COALESCE(taxzone_code,:any) AS taxzone"
+            "       COALESCE(taxzone_code,:any) AS taxzone,"
+            "       classcodetax_default AS default"
             "  FROM classcodetax JOIN taxtype ON (classcodetax_taxtype_id=taxtype_id)"
             "       LEFT OUTER JOIN taxzone ON (classcodetax_taxzone_id=taxzone_id)"
             " WHERE (classcodetax_classcode_id=:classcode_id)"

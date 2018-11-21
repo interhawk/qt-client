@@ -139,8 +139,7 @@ void AddressCluster::init()
   _country->setAllowNull(true);
   _country->setType(XComboBox::Countries);
   _country->setMaximumWidth(250);
-  _country->setEditable(! (_x_metrics &&
-                           _x_metrics->boolean("StrictAddressCountry")));
+  _country->setEditable(false);
   if (DEBUG)
     qDebug("%s::_country.isEditable() = %d",
            (objectName().isEmpty() ? "AddressCluster":qPrintable(objectName())),
@@ -340,7 +339,7 @@ void AddressCluster::populateStateComboBox()
                      " WHERE (addr_country=:country)"
                      " GROUP BY addr_state"
                      " ORDER BY addr_state;");
-      stateq.bindValue(":country", _country->currentText());
+      stateq.bindValue(":country", _country->code());
       stateq.exec();
       _state->populate(stateq);
     }
@@ -506,36 +505,22 @@ void AddressCluster::setCountry(const QString& p)
     qDebug("%s::setCountry(%s) entered",
            (objectName().isEmpty() ? "AddressCluster":qPrintable(objectName())),
            qPrintable(p));
-  if (p == _country->currentText())
+  if (p == _country->code())
     return;
-
-  int matchid = _country->id(_country->findText(p, Qt::MatchExactly));
 
   if (p.isEmpty())
   {
     if (DEBUG) qDebug("%s::setCountry() handling empty country",
                       (objectName().isEmpty() ? "AddressCluster" :
                                                 qPrintable(objectName())));
-    _country->setEditable(! (_x_metrics &&
-                             _x_metrics->boolean("StrictAddressCountry")));
     _country->setId(-1);
   }
-  else if (matchid >= 0)
+  else
   {
     if (DEBUG) qDebug("%s::setCountry(%s) found matching country",
            (objectName().isEmpty() ? "AddressCluster":qPrintable(objectName())),
            qPrintable(p));
-    _country->setEditable(! (_x_metrics &&
-                             _x_metrics->boolean("StrictAddressCountry")));
-    _country->setId(matchid);
-  }
-  else
-  {
-    _country->setEditable(true);
-    _country->setId(-1);
-    bool blocked = _country->blockSignals(true);
-    _country->setEditText(p);
-    _country->blockSignals(blocked);
+    _country->setCode(p);
   }
   emitAddressChanged();
 }
@@ -605,8 +590,7 @@ int AddressCluster::save(enum SaveFlags flag)
     silentSetId(-1);
     return 0;
   }
-  if (_x_metrics && _x_metrics->boolean("StrictAddressCountry") &&
-      !_country->currentText().isEmpty() &&
+  if (!_country->currentText().isEmpty() &&
       _country->findText(_country->currentText(), Qt::MatchExactly) < 0)
   {
     QMessageBox::critical(this, tr("Error"),
@@ -629,7 +613,7 @@ int AddressCluster::save(enum SaveFlags flag)
   datamodQ.bindValue(":city", _city->text());
   datamodQ.bindValue(":state", _state->currentText());
   datamodQ.bindValue(":postalcode", _postalcode->text());
-  datamodQ.bindValue(":country", _country->currentText());
+  datamodQ.bindValue(":country", _country->code());
   datamodQ.bindValue(":active", QVariant(_active->isChecked()));
   datamodQ.bindValue(":notes", _notes);
   if (flag == CHECK)

@@ -45,6 +45,9 @@ miscCheck::miscCheck(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _aropenamt = 0;
 
   _bankaccnt->setType(XComboBox::APBankAccounts);
+
+  if (_metrics->value("TaxService") != "N")
+    _taxGroup->hide();
 }
 
 miscCheck::~miscCheck()

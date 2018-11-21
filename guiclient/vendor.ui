@@ -13,7 +13,7 @@ to be bound by its terms.</comment>
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>723</width>
+    <width>811</width>
     <height>699</height>
    </rect>
   </property>
@@ -558,14 +558,14 @@ to be bound by its terms.</comment>
                   </item>
                   <item>
                    <widget class="XComboBox" name="_taxType">
-                    <property name="type">
-                     <enum>XComboBox::TaxTypes</enum>
-                    </property>
                     <property name="enabled">
-                      <bool>true</bool>
+                     <bool>true</bool>
                     </property>
                     <property name="allowNull">
                      <bool>true</bool>
+                    </property>
+                    <property name="type">
+                     <enum>XComboBox::TaxTypes</enum>
                     </property>
                    </widget>
                   </item>
@@ -818,6 +818,33 @@ and Purchase Order amounts</string>
              </item>
              <item>
               <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <item>
+              <widget class="QLabel" name="_taxExemptLit">
+               <property name="text">
+                <string>Tax Exempt Category:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="TaxExemptCluster" name="_taxExempt"/>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_10">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -1130,7 +1157,7 @@ and Purchase Order amounts</string>
        <item>
         <widget class="Documents" name="_documents">
          <property name="type">
-           <enum>Documents::Vendor</enum>
+          <enum>Documents::Vendor</enum>
          </property>
         </widget>
        </item>
@@ -1246,7 +1273,7 @@ and Purchase Order amounts</string>
               <enum>Qt::StrongFocus</enum>
              </property>
              <property name="type">
-               <enum>Comments::CRMAccount</enum>
+              <enum>Comments::CRMAccount</enum>
              </property>
             </widget>
            </item>
@@ -1811,6 +1838,11 @@ and Purchase Order amounts</string>
    <class>GLCluster</class>
    <extends>QWidget</extends>
    <header>glcluster.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>XComboBox</extends>
+   <header>taxexemptcluster.h</header>
   </customwidget>
   <customwidget>
    <class>VendorCluster</class>

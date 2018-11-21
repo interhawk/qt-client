@@ -263,6 +263,17 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _ytdSales->setPrecision(omfgThis->moneyVal());
 
   _chartempl->setAlternatingRowColors(true);
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxzoneLit->hide();
+    _taxzone->hide();
+  }
+  else
+  {
+    _taxExemptLit->hide();
+    _taxExempt->hide();
+  }
 }
 
 customer::~customer()
@@ -566,6 +577,7 @@ bool customer::sSave()
                "       cust_terms_id=:cust_terms_id,"
                "       cust_discntprcnt=:cust_discntprcnt,"
                "       cust_taxzone_id=:cust_taxzone_id, "
+               "       cust_tax_exemption=:cust_tax_exemption, "
                "       cust_active=:cust_active, cust_usespos=:cust_usespos,"
                "       cust_blanketpos=:cust_blanketpos, cust_comments=:cust_comments,"
                "       cust_preferred_warehous_id=:cust_preferred_warehous_id, "
@@ -587,7 +599,7 @@ bool customer::sSave()
                "  cust_commprcnt, cust_partialship,"
                "  cust_shipvia,"
                "  cust_shipchrg_id, cust_shipform_id, cust_terms_id,"
-               "  cust_discntprcnt, cust_taxzone_id, "
+               "  cust_discntprcnt, cust_taxzone_id, cust_tax_exemption, "
                "  cust_active, cust_usespos, cust_blanketpos, cust_comments,"
                "  cust_preferred_warehous_id, "
                "  cust_gracedays, cust_curr_id, cust_financecharge ) "
@@ -603,7 +615,7 @@ bool customer::sSave()
                "  :cust_commprcnt, :cust_partialship,"
                "  :cust_shipvia,"
                "  :cust_shipchrg_id, :cust_shipform_id, :cust_terms_id,"
-               "  :cust_discntprcnt, :cust_taxzone_id,"
+               "  :cust_discntprcnt, :cust_taxzone_id, :cust_tax_exemption,"
                "  :cust_active, :cust_usespos, :cust_blanketpos, :cust_comments,"
                "  :cust_preferred_warehous_id, "
                "  :cust_gracedays, :cust_curr_id, :cust_financecharge ) " );
@@ -641,6 +653,7 @@ bool customer::sSave()
   if (_taxzone->isValid())
     customerSave.bindValue(":cust_taxzone_id", _taxzone->id());
 
+  customerSave.bindValue(":cust_tax_exemption", _taxExempt->code());
   customerSave.bindValue(":cust_shipvia", _shipvia->currentText());
   customerSave.bindValue(":cust_shipchrg_id", _shipchrg->id());
   if(_shipform->id() > 0)
@@ -1279,6 +1292,8 @@ void customer::populate()
     _defaultCommissionPrcnt->setDouble(cust.value("cust_commprcnt").toDouble() * 100);
     _terms->setId(cust.value("cust_terms_id").toInt());
     _taxzone->setId(cust.value("cust_taxzone_id").toInt());
+    if (!cust.value("cust_tax_exemption").toString().isEmpty())
+      _taxExempt->setCode(cust.value("cust_tax_exemption").toString());
     _shipform->setId(cust.value("cust_shipform_id").toInt());
     _shipchrg->setId(cust.value("cust_shipchrg_id").toInt());
     _shipvia->setText(cust.value("cust_shipvia").toString());

@@ -65,7 +65,7 @@ salesOrderSimple::salesOrderSimple(QWidget *parent, const char *name, Qt::Window
   connect(_soitem,              SIGNAL(populateMenu(QMenu*,QTreeWidgetItem *)), this,         SLOT(sPopulateMenu(QMenu *)));
   connect(_soitem,              SIGNAL(itemSelected(int)),                      this,         SLOT(sEdit()));
   connect(_subtotal,            SIGNAL(valueChanged()),                         this,         SLOT(sCalculateTotal()));
-  connect(_taxLit,              SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sTaxDetail()));
+  connect(_tax,                 SIGNAL(save(bool)),                             this,         SLOT(save(bool)));
   if (_privileges->check("ApplyARMemos"))
     connect(_availCreditLit,    SIGNAL(leftClickedURL(const QString &)),        this,         SLOT(sCreditAllocate()));
 
@@ -127,6 +127,12 @@ salesOrderSimple::salesOrderSimple(QWidget *parent, const char *name, Qt::Window
 
   _bankaccnt->setType(XComboBox::ARBankAccounts);
   _qty->setDouble(1.0);
+
+  if (_metrics->value("TaxService") != "N")
+  {
+    _taxZoneLit->hide();
+    _taxZone->hide();
+  }
 }
 
 salesOrderSimple::~salesOrderSimple()
@@ -153,6 +159,7 @@ enum SetResponse salesOrderSimple:: set(const ParameterList &pParams)
     {
       setObjectName("salesOrderSimple new");
       _mode = cNew;
+      _tax->setMode(_mode);
       _lineMode = cNew;
 
       _cust->setType(CLineEdit::ActiveCustomers);
@@ -175,6 +182,7 @@ enum SetResponse salesOrderSimple:: set(const ParameterList &pParams)
     if (setSales.first())
     {
       _soheadid = setSales.value("head_id").toInt();
+      _tax->setOrderId(_soheadid);
       emit newId(_soheadid);
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving SO ID Information"),
@@ -218,6 +226,7 @@ enum SetResponse salesOrderSimple:: set(const ParameterList &pParams)
   if (valid)
   {
     _soheadid = param.toInt();
+    _tax->setOrderId(_soheadid);
     emit newId(_soheadid);
     populate();
     populateCCInfo();
@@ -308,6 +317,9 @@ void salesOrderSimple::sCompleteOrder()
 bool salesOrderSimple::sSave()
 {
   return save(true);
+
+  if (_metrics->value("TaxService") == "A")
+    _tax->save();
 }
 
 bool salesOrderSimple::save(bool partial)
@@ -368,6 +380,9 @@ bool salesOrderSimple::save(bool partial)
       }
     }
   }
+
+  if (partial && GuiErrorCheck::checkForErrors(errors))
+    return false;
 
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Sales Order"), errors))
       return false;
@@ -963,31 +978,9 @@ void salesOrderSimple::sFillItemList()
     return;
   }
 
-  sCalculateTax();  // triggers sCalculateTotal();
-}
+  if (_metrics->value("TaxService") != "A")
+    _tax->sRecalculate();
 
-void salesOrderSimple::sCalculateTax()
-{
-  XSqlQuery taxq;
-  taxq.prepare( "SELECT SUM(tax) AS tax "
-               "FROM ("
-               "SELECT ROUND(SUM(taxdetail_tax),2) AS tax "
-               "FROM tax "
-               " JOIN calculateTaxDetailSummary(:type, :cohead_id, 'T') ON (taxdetail_tax_id=tax_id)"
-               "GROUP BY tax_id) AS data;" );
-
-  taxq.bindValue(":cohead_id", _soheadid);
-  taxq.bindValue(":type","S");
-  taxq.exec();
-  if (taxq.first())
-  {
-    _tax->setLocalValue(taxq.value("tax").toDouble());
-  }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving SO Tax Information"),
-                                taxq, __FILE__, __LINE__))
-  {
-    return;
-  }
   sCalculateTotal();
 }
 
@@ -1125,6 +1118,7 @@ void salesOrderSimple::prepare()
   if (_mode == cNew)
   {
     _mode = cNew;
+    _tax->setMode(_mode);
     setObjectName("salesOrderSimple new");
   }
 
@@ -1134,6 +1128,7 @@ void salesOrderSimple::prepare()
   if (headid.first())
   {
     _soheadid = headid.value("_soheadid").toInt();
+    _tax->setOrderId(_soheadid);
     emit newId(_soheadid);
     populateCCInfo();
     sFillCcardList();
@@ -1241,7 +1236,8 @@ void salesOrderSimple::sTaxDetail()
   params.append("mode", "view");
 
   taxBreakdown newdlg(this, "", true);
-  if (newdlg.set(params) == NoError && newdlg.exec() == XDialog::Accepted)
+  newdlg.set(params);
+  if (newdlg.exec() == QDialog::Accepted)
   {
     populate();
   }

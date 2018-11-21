@@ -83,6 +83,8 @@ setup::setup(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
 
   insert(tr("Search Path"), "configureSearchPath", Configure, Xt::SystemModule, _privileges->isDba() ? cEdit : 0, 0);
 
+  insert(tr("Tax Integration"), "configureTax", Configure, Xt::SystemModule, mode("ConfigureTax"), 0);
+
   // Account Mappings
   int modeVal;
   modeVal = mode("MaintainCostCategories", "ViewCostCategories");

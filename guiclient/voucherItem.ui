@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>731</width>
-    <height>794</height>
+    <height>716</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,16 @@ to be bound by its terms.</comment>
   <layout class="QGridLayout" name="gridLayout_12">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_11">
-     <property name="margin">
+     <property name="leftMargin">
+      <number>12</number>
+     </property>
+     <property name="topMargin">
+      <number>12</number>
+     </property>
+     <property name="rightMargin">
+      <number>12</number>
+     </property>
+     <property name="bottomMargin">
       <number>12</number>
      </property>
      <property name="spacing">
@@ -740,6 +749,16 @@ to be bound by its terms.</comment>
              </item>
              <item row="1" column="0">
               <layout class="QGridLayout" name="gridLayout">
+               <item row="0" column="1">
+                <widget class="XLabel" name="_freightToVoucherLit">
+                 <property name="text">
+                  <string>Freight:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <spacer name="horizontalSpacer_5">
                  <property name="orientation">
@@ -752,13 +771,6 @@ to be bound by its terms.</comment>
                   </size>
                  </property>
                 </spacer>
-               </item>
-               <item row="0" column="2">
-                <widget class="CurrCluster" name="_freightToVoucher">
-                 <property name="format">
-                  <enum>CurrDisplay::Money</enum>
-                 </property>
-                </widget>
                </item>
                <item row="1" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -809,43 +821,21 @@ to be bound by its terms.</comment>
                  </item>
                 </layout>
                </item>
-               <item row="1" column="1">
-                <widget class="XURLLabel" name="_taxLit">
-                 <property name="text">
-                  <string>Tax:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-                 </property>
-                 <property name="margin">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="CurrCluster" name="_tax">
-                 <property name="format">
-                  <enum>CurrDisplay::SalesPrice</enum>
-                 </property>
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="0">
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>258</width>
-                   <height>21</height>
-                  </size>
-                 </property>
-                </spacer>
+                <layout class="QHBoxLayout">
+                 <item>
+                  <widget class="QLabel" name="_taxExemptLit">
+                   <property name="text">
+                    <string>Tax Exempt Category:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="TaxExemptCluster" name="_taxExempt"/>
+                 </item>
+                </layout>
                </item>
-               <item row="2" column="1">
+               <item row="1" column="1">
                 <widget class="XLabel" name="_totalDistributedLit">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -861,20 +851,17 @@ to be bound by its terms.</comment>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="2">
-                <widget class="CurrDisplay" name="_totalDistributed">
-                 <property name="focusPolicy">
-                  <enum>Qt::StrongFocus</enum>
+               <item row="0" column="2">
+                <widget class="CurrCluster" name="_freightToVoucher">
+                 <property name="format">
+                  <enum>CurrDisplay::Money</enum>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="XLabel" name="_freightToVoucherLit">
-                 <property name="text">
-                  <string>Freight:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               <item row="1" column="2">
+                <widget class="CurrDisplay" name="_totalDistributed">
+                 <property name="focusPolicy">
+                  <enum>Qt::StrongFocus</enum>
                  </property>
                 </widget>
                </item>
@@ -1104,6 +1091,11 @@ to be bound by its terms.</comment>
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>TaxExemptCluster</class>
+   <extends>XComboBox</extends>
+   <header>taxexemptcluster.h</header>
+  </customwidget>
+  <customwidget>
    <class>XComboBox</class>
    <extends>QComboBox</extends>
    <header>xcombobox.h</header>
@@ -1124,11 +1116,6 @@ to be bound by its terms.</comment>
    <extends>QTreeWidget</extends>
    <header>xtreewidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>XURLLabel</class>
-   <extends>QLabel</extends>
-   <header>xurllabel.h</header>
   </customwidget>
   <customwidget>
    <class>XTextEdit</class>

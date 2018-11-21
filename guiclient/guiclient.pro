@@ -177,6 +177,7 @@ FORMS =   absoluteCalendarItem.ui               \
           configurePO.ui                        \
           configureSearchPath.ui                \
           configureSO.ui                        \
+          configureTax.ui                       \
           configureWO.ui                        \
           confirmAchOK.ui                       \
           contact.ui                            \
@@ -572,17 +573,14 @@ FORMS =   absoluteCalendarItem.ui               \
           taskAssignment.ui                     \
           taskTemplate.ui                       \
           taskTemplates.ui                      \
-          taxAdjustment.ui                      \
           taxAssignment.ui                      \
           taxAssignments.ui                     \
           taxAuthority.ui                       \
-          taxBreakdown.ui                       \
           taxClass.ui                           \
           taxClasses.ui                         \
           taxCode.ui                            \
           taxCodeRate.ui                        \
           taxCodes.ui                           \
-          taxDetail.ui                          \
           taxRegistration.ui                    \
           taxType.ui                            \
           taxTypes.ui                           \
@@ -748,6 +746,7 @@ HEADERS = ../common/format.h                    \
           configurePO.h                 \
           configureSearchPath.h         \
           configureSO.h                 \
+          configureTax.h                \
           configureWO.h                 \
           confirmAchOK.h                \
           contact.h                     \
@@ -1182,19 +1181,15 @@ HEADERS = ../common/format.h                    \
           taskAssignment.h              \
           taskTemplate.h                \
           taskTemplates.h               \
-          taxAdjustment.h               \
           taxAssignment.h               \
           taxAssignments.h              \
           taxAuthorities.h              \
           taxAuthority.h                \
-          taxBreakdown.h                \
-          taxCache.h                    \
           taxClass.h                    \
           taxClasses.h                  \
           taxCode.h                     \
           taxCodeRate.h                 \
           taxCodes.h                    \
-          taxDetail.h                   \
           taxRegistration.h             \
           taxRegistrations.h            \
           taxType.h                     \
@@ -1376,6 +1371,7 @@ SOURCES = absoluteCalendarItem.cpp              \
           configurePO.cpp                       \
           configureSearchPath.cpp               \
           configureSO.cpp                       \
+          configureTax.cpp                      \
           configureWO.cpp                       \
           confirmAchOK.cpp                      \
           contact.cpp                           \
@@ -1807,19 +1803,15 @@ SOURCES = absoluteCalendarItem.cpp              \
           taskAssignment.cpp                    \
           taskTemplate.cpp                      \
           taskTemplates.cpp                     \
-          taxAdjustment.cpp                     \
           taxAssignment.cpp                     \
           taxAssignments.cpp                    \
           taxAuthorities.cpp                    \
           taxAuthority.cpp                      \
-          taxBreakdown.cpp                      \
-          taxCache.cpp                          \
           taxClass.cpp                          \
           taxClasses.cpp                        \
           taxCode.cpp                           \
           taxCodeRate.cpp                       \
           taxCodes.cpp                          \
-          taxDetail.cpp                         \
           taxRegistration.cpp                   \
           taxRegistrations.cpp                  \
           taxType.cpp                           \

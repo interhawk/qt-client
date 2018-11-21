@@ -420,11 +420,11 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     // Accounting | Tax
     { "menu", tr("&Tax"), (char*)taxMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
     { "gl.taxAuthorities",	tr("Tax &Authorities"),	SLOT(sTaxAuthorities()),	taxMenu,	"MaintainTaxAuthorities ViewTaxAuthorities", NULL, NULL, true, NULL },
-    { "gl.taxZones",		tr("Tax &Zones"),		SLOT(sTaxZones()),		taxMenu,	"MaintainTaxZones ViewTaxZones",             NULL, NULL, true, NULL }, 
-    { "gl.taxClasses",		tr("Tax &Classes"),		SLOT(sTaxClasses()),		taxMenu,	"MaintainTaxClasses ViewTaxClasses",         NULL, NULL, true, NULL }, 
-    { "gl.taxCodes",		tr("Tax &Codes"),		SLOT(sTaxCodes()),		taxMenu,	"MaintainTaxCodes ViewTaxCodes",             NULL, NULL, true, NULL },
+    { "gl.taxZones",		tr("Tax &Zones"),		SLOT(sTaxZones()),		taxMenu,	"MaintainTaxZones ViewTaxZones",             NULL, NULL, _metrics->value("TaxService") == "N", NULL }, 
+    { "gl.taxClasses",		tr("Tax &Classes"),		SLOT(sTaxClasses()),		taxMenu,	"MaintainTaxClasses ViewTaxClasses",         NULL, NULL, _metrics->value("TaxService") == "N", NULL }, 
+    { "gl.taxCodes",		tr("Tax &Codes"),		SLOT(sTaxCodes()),		taxMenu,	"MaintainTaxCodes ViewTaxCodes",             NULL, NULL, _metrics->value("TaxService") == "N", NULL },
     { "gl.taxTypes",		tr("Tax &Types"),		SLOT(sTaxTypes()),		taxMenu,	"MaintainTaxTypes ViewTaxTypes",             NULL, NULL, true, NULL },
-    { "gl.taxAssignments",	tr("Tax Assi&gnments"),	SLOT(sTaxAssignments()),	taxMenu,	"MaintainTaxAssignments ViewTaxAssignments", NULL, NULL, true, NULL },
+    { "gl.taxAssignments",	tr("Tax Assi&gnments"),	SLOT(sTaxAssignments()),	taxMenu,	"MaintainTaxAssignments ViewTaxAssignments", NULL, NULL, _metrics->value("TaxService") == "N", NULL },
     { "gl.taxRegistatrions",	tr("Tax &Registrations"),	SLOT(sTaxRegistrations()),	taxMenu,	"MaintainTaxRegistrations ViewTaxRegistrations", NULL, NULL, true, NULL },
     { "separator",		NULL,			        NULL,			        taxMenu,	"true",	                                     NULL, NULL, true, NULL },
  
