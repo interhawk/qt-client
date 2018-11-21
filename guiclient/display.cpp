@@ -295,11 +295,14 @@ void displayPrivate::setupCharacteristics(QStringList uses)
     }
     else if (chartype == characteristic::Date)
     {
-      _charidsdate.append(chars.value("char_id").toInt());
-      QString start = QApplication::translate("display", "Start Date", 0);
-      QString end = QApplication::translate("display", "End Date", 0);
-      _parameterWidget->append(name + " " + start, column + "startDate", ParameterWidget::Date);
-      _parameterWidget->append(name + " " + end, column + "endDate", ParameterWidget::Date);
+      if (!_charidslist.contains(chars.value("char_id").toInt()))
+      {
+        _charidsdate.append(chars.value("char_id").toInt());
+        QString start = QApplication::translate("display", "Start Date", 0);
+        QString end = QApplication::translate("display", "End Date", 0);
+        _parameterWidget->append(name + " " + start, column + "startDate", ParameterWidget::Date);
+        _parameterWidget->append(name + " " + end, column + "endDate", ParameterWidget::Date);
+      }
     }
   }
 }
