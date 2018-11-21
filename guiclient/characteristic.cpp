@@ -214,6 +214,9 @@ enum SetResponse characteristic::set(const ParameterList &pParams)
       if (characteristicet.first())
         _d->setId(characteristicet.value("char_id").toInt());
 
+      // Mask was defaulting to first item on the list so set to null
+      _mask->setText(QString());
+
       sFillList();
     }
     else if (param.toString() == "edit")
