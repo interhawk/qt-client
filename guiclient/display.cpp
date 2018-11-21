@@ -295,7 +295,7 @@ void displayPrivate::setupCharacteristics(QStringList uses)
     }
     else if (chartype == characteristic::Date)
     {
-      if (!_charidslist.contains(chars.value("char_id").toInt()))
+      if (!_charidsdate.contains(chars.value("char_id").toInt()))
       {
         _charidsdate.append(chars.value("char_id").toInt());
         QString start = QApplication::translate("display", "Start Date", 0);
