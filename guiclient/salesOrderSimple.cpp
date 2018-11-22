@@ -415,7 +415,6 @@ bool salesOrderSimple::save(bool partial)
   {
     return false;
   }
-
   if ((cNew == _mode) && (!_saved)
       && ! _lock.acquire("cohead", _soheadid,
                          AppLock::Interactive))
@@ -433,9 +432,7 @@ bool salesOrderSimple::save(bool partial)
   else
   {
     populateCCInfo();
-
   }
-
   sRecalculatePrice();
   emit saved(_soheadid);
 
