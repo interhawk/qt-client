@@ -208,26 +208,6 @@ to be bound by its terms.</comment>
                    <property name="allowNull">
                     <bool>true</bool>
                    </property>
-                   <item>
-                    <property name="text">
-                     <string>00/00/0000</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>###-###-####</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>###-##-####</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>00,000.00</string>
-                    </property>
-                   </item>
                   </widget>
                  </item>
                  <item row="1" column="0">
