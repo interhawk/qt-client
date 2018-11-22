@@ -77,6 +77,8 @@ enum SetResponse contactAccountAssign::set(const ParameterList &pParams)
   {
     _contact->setId(param.toInt());
     _contact->setEnabled(false);
+    if (_mode == cNew)
+      _accnt->setEnabled(true);
   }
 
   return NoError;
@@ -126,6 +128,7 @@ void contactAccountAssign::sSave()
                                 saveq, __FILE__, __LINE__))
     return;
 
+  omfgThis->sCrmAccountsUpdated(-1);
   done(_assignid);
 }
 

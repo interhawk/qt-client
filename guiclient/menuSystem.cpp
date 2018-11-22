@@ -332,7 +332,7 @@ void menuSystem::sEmployeeGroups()
 
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+  newdlg->exec();
 }
 
 void menuSystem::sErrorLog()

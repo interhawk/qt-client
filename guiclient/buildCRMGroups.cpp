@@ -228,7 +228,7 @@ void buildCRMGroups::sAddGroup()
   crmGroups* newdlg = new crmGroups();
   newdlg->set(params);
   if (newdlg->exec() != XDialog::Rejected)
-    _targetGrp->setType(_elem->groupcombo);
+    _targetGrp->populate();
 }
 
 void buildCRMGroups::sGenerateGroupRecords()

@@ -840,7 +840,7 @@ void menuSales::sCustomerGroups()
 
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+  newdlg->exec();
 }
 
 void menuSales::sNewProspect()
@@ -865,7 +865,7 @@ void menuSales::sProspectGroups()
 
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+  newdlg->exec();
 }
 
 void menuSales::sReassignCustomerTypeByCustomerType()

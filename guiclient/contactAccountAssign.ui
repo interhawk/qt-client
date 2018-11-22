@@ -117,9 +117,6 @@ to be bound by its terms.</comment>
          <property name="descriptionVisible">
           <bool>false</bool>
          </property>
-         <property name="readOnly">
-          <bool>false</bool>
-         </property>
         </widget>
        </item>
        <item>

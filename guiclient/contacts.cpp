@@ -121,10 +121,11 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   _detachAct->setEnabled(false);
   _detachAct->setVisible(false);
 
-  connect(_activeOnly, SIGNAL(clicked()),    this, SLOT(sFillList()));
-  connect(attachBtn, SIGNAL(clicked()),      this, SLOT(sAttach()));
-  connect(detachBtn, SIGNAL(clicked()),      this, SLOT(sDetach()));
-  connect(list(), SIGNAL(itemSelected(int)), this, SLOT(sOpen()));
+  connect(omfgThis,    SIGNAL(contactsUpdated(int)), this, SLOT(sFillList()));
+  connect(_activeOnly, SIGNAL(clicked()),            this, SLOT(sFillList()));
+  connect(attachBtn,   SIGNAL(clicked()),            this, SLOT(sAttach()));
+  connect(detachBtn,   SIGNAL(clicked()),            this, SLOT(sDetach()));
+  connect(list(),      SIGNAL(itemSelected(int)),    this, SLOT(sOpen()));
 
   if (_privileges->check("MaintainAllContacts") || _privileges->check("MaintainPersonalContacts"))
   {
@@ -490,11 +491,10 @@ void contacts::sEdit()
     params.append("mode", "edit");
     params.append("cntct_id", ((XTreeWidgetItem*)(selected[i]))->id());
 
-    contact newdlg(0, "", false);
-    newdlg.set(params);
-    newdlg.setAttribute(Qt::WA_DeleteOnClose);
-    if (newdlg.exec() != XDialog::Rejected)
-      sFillList();
+    contact* newdlg = new contact(0, "", false);
+    newdlg->set(params);
+    newdlg->setAttribute(Qt::WA_DeleteOnClose);
+    newdlg->show();
   }
 }
 
@@ -507,10 +507,10 @@ void contacts::sEditAssignment()
     params.append("mode", "edit");
     params.append("assign_id", ((XTreeWidgetItem*)(selected[i]))->altId());
 
-    contactAccountAssign newdlg(0, "", false);
-    newdlg.set(params);
-    if (newdlg.exec() != XDialog::Rejected)
-      sFillList();
+    contactAccountAssign* newdlg = new contactAccountAssign(0, "", false);
+    newdlg->set(params);
+    newdlg->setAttribute(Qt::WA_DeleteOnClose);
+    newdlg->show();
   }
 }
 
@@ -677,7 +677,6 @@ void contacts::sAttach()
 
 void contacts::sDetach()
 {
-  XTreeWidgetItem * item = (XTreeWidgetItem*)list()->currentItem();
   int answer = QMessageBox::question(this, tr("Detach Contact?"),
                         tr("<p>Are you sure you want to deactivate the Contact "
 			   "from this Account?"),

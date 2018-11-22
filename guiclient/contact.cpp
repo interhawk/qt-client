@@ -474,6 +474,7 @@ void contact::sPopulateUsesMenu(QMenu* pMenu)
   }
 
   struct privSet privs = _data->rowPrivs(_uses->currentItem());
+  editAssignAction->setEnabled(privs.canEdit && (cView != _data->_mode));
   editAction->setEnabled(privs.canEdit && (cView != _data->_mode));
   viewAction->setEnabled(privs.canView);
   QAction *detachAction = pMenu->addAction(tr("Detach"), this, SLOT(sDetachUse()));
@@ -587,7 +588,8 @@ void contact::sSave()
     }
   }
   _cntctid = _contact->id();
-  done(_contact->id());
+  omfgThis->sContactsUpdated(_cntctid);
+  done(_cntctid);
 }
 
 void contact::sPopulate()
@@ -980,7 +982,7 @@ void contact::sEditAssignment()
 {
   XSqlQuery getq;
   ParameterList params;
-  int _assign;
+  int _assign = -1;
 
   getq.prepare("SELECT crmacctcntctass_id AS id "
                "  FROM crmacctcntctass "
