@@ -424,17 +424,15 @@ bool salesOrderSimple::save(bool partial)
 
   _saved = true;
 
-  if (!partial)
+  if (partial)
+    populateCCInfo();
+  else
   {
     omfgThis->sSalesOrdersUpdated(_soheadid);
     omfgThis->sProjectsUpdated(_soheadid);
+    sRecalculatePrice();
+    emit saved(_soheadid);
   }
-  else
-  {
-    populateCCInfo();
-  }
-  sRecalculatePrice();
-  emit saved(_soheadid);
 
   return true;
 }
