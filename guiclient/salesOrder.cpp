@@ -1429,7 +1429,7 @@ bool salesOrder::save(bool partial)
   }
 
   QString errmsg;
-  if (ISORDER(_mode) && !_recur->save(true, cp, &errmsg))
+  if (ISORDER(_mode) && !partial && !_recur->save(true, cp, &errmsg))
   {
     rollbackq.exec();
     ErrorReporter::error(QtCriticalMsg, this, tr("Error occurred saving recurrence"),
@@ -2920,6 +2920,7 @@ void salesOrder::populate()
           _fromQuote->setText(so.value("rahead_number").toString());
         }
       }
+
       if (so.value("cohead_recurring_cohead_id").toInt() != 0)
         _recur->setParent(so.value("cohead_recurring_cohead_id").toInt(), "S");
       else

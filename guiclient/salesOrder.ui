@@ -2521,16 +2521,11 @@ to be bound by its terms.</comment>
       <attribute name="title">
        <string>Advanced</string>
       </attribute>
-      <widget class="RecurrenceWidget" name="_recur">
-       <property name="geometry">
-        <rect>
-         <x>9</x>
-         <y>9</y>
-         <width>357</width>
-         <height>132</height>
-        </rect>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="RecurrenceWidget" name="_recur"/>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
