@@ -85,6 +85,7 @@
 #include "configureWO.h"
 #include "confirmAchOK.h"
 #include "contact.h"
+#include "contactAccountAssign.h"
 #include "contacts.h"
 #include "contactMerge.h"
 #include "contract.h"

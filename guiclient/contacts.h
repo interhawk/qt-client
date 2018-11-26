@@ -37,6 +37,7 @@ public slots:
     virtual void sReplace();
     virtual void sNew();
     virtual void sEdit();
+    virtual void sEditAssignment();
     virtual void sView();
     virtual void sDelete();
     virtual void sMerge();

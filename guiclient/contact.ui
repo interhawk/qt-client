@@ -170,6 +170,16 @@ to be bound by its terms.</comment>
        <item>
         <layout class="QVBoxLayout">
          <item>
+          <widget class="QPushButton" name="_attachUse">
+           <property name="text">
+            <string>Attach</string>
+           </property>
+           <property name="toolTip">
+            <string>Attach Contact to a CRM Account</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="_editUse">
            <property name="text">
             <string>Edit</string>

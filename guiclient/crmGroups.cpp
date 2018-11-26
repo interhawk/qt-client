@@ -38,28 +38,29 @@ bool crmGroups::addToMap(int id, QString _title, QString _priv, QString _table, 
 
 QMap<int, struct GroupMap *> &crmGroups::groupMap() {
   if (_grpMap.isEmpty()) {
-    addToMap(Account, tr("Account"), "MaintainAccountGroups", "crmacctgrp",  "crmacctgrpitem", "CRMAcctSearch", CRMAcctLineEdit::Crmacct, "CRMA",XComboBox::AccountGroups);
-    addToMap(Customer, tr("Customer"), "MaintainCustomerGroups", "custgrp",  "custgrpitem",  "CRMAcctSearch", CRMAcctLineEdit::Cust,    "C",     XComboBox::CustomerGroups);
-    addToMap(Prospect, tr("Prospect"), "MaintainProspectGroups", "pspctgrp", "pspctgrpitem", "CRMAcctSearch", CRMAcctLineEdit::Prospect,"PSPCT", XComboBox::ProspectGroups);
-    addToMap(Employee, tr("Employee"), "MaintainEmployeeGroups", "empgrp",   "empgrpitem",   "CRMAcctSearch", CRMAcctLineEdit::Employee,"EMP",   XComboBox::EmployeeGroups);
-    addToMap(Contact,  tr("Contact"),  "MaintainContactGroups",  "cntctgrp", "cntctgrpitem", "ContactSearch", CRMAcctLineEdit::Crmacct, "T",     XComboBox::ContactGroups);
-    addToMap(Address,  tr("Address"),  "MaintainAddressGroups",  "addrgrp",  "addrgrpitem",  "AddressSearch", CRMAcctLineEdit::Crmacct, "ADDR",  XComboBox::AddressGroups);
+    addToMap(Account,  tr("Account"),  "MaintainAccountGroups",  "crmacctgrp",  "crmacctgrpitem", "CRMAcctSearch", CRMAcctLineEdit::Crmacct, "CRMA",  XComboBox::AccountGroups);
+    addToMap(Customer, tr("Customer"), "MaintainCustomerGroups", "custgrp",     "custgrpitem",    "CRMAcctSearch", CRMAcctLineEdit::Cust,    "C",     XComboBox::CustomerGroups);
+    addToMap(Prospect, tr("Prospect"), "MaintainProspectGroups", "pspctgrp",    "pspctgrpitem",   "CRMAcctSearch", CRMAcctLineEdit::Prospect,"PSPCT", XComboBox::ProspectGroups);
+    addToMap(Employee, tr("Employee"), "MaintainEmployeeGroups", "empgrp",      "empgrpitem",     "CRMAcctSearch", CRMAcctLineEdit::Employee,"EMP",   XComboBox::EmployeeGroups);
+    addToMap(Contact,  tr("Contact"),  "MaintainContactGroups",  "cntctgrp",    "cntctgrpitem",   "ContactSearch", CRMAcctLineEdit::Crmacct, "T",     XComboBox::ContactGroups);
+    addToMap(Address,  tr("Address"),  "MaintainAddressGroups",  "addrgrp",     "addrgrpitem",    "AddressSearch", CRMAcctLineEdit::Crmacct, "ADDR",  XComboBox::AddressGroups);
   }
   return _grpMap;
 }
 
-crmGroups::crmGroups(QWidget* parent, const char* name, Qt::WindowFlags fl)
-    : XWidget(parent, name, fl)
+crmGroups::crmGroups(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
+    : XDialog(parent, name, fl)
 {
   setupUi(this);
 
   if (_grpMap.isEmpty())
     (void)groupMap();
 
-  connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
-  connect(_edit, SIGNAL(clicked()), this, SLOT(sEdit()));
+  connect(_new,    SIGNAL(clicked()), this, SLOT(sNew()));
+  connect(_edit,   SIGNAL(clicked()), this, SLOT(sEdit()));
   connect(_delete, SIGNAL(clicked()), this, SLOT(sDelete()));
-  connect(_view, SIGNAL(clicked()), this, SLOT(sView()));
+  connect(_view,   SIGNAL(clicked()), this, SLOT(sView()));
+  connect(_close,  SIGNAL(clicked()), this, SLOT(sClose()));
 
   _grp->addColumn(tr("Name"), _itemColumn, Qt::AlignLeft, true, "groups_name");
   _grp->addColumn(tr("Description"),   -1, Qt::AlignLeft, true, "groups_descrip");
@@ -78,7 +79,7 @@ void crmGroups::languageChange()
 
 enum SetResponse crmGroups::set(const ParameterList &pParams)
 {
-  XWidget::set(pParams);
+  XDialog::set(pParams);
   QVariant param;
   bool     valid;
 
@@ -105,6 +106,11 @@ enum SetResponse crmGroups::set(const ParameterList &pParams)
   sFillList();
 
   return NoError;
+}
+
+void crmGroups::sClose()
+{
+  XDialog::done(1);
 }
 
 void crmGroups::sDelete()

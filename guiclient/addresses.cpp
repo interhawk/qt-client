@@ -52,6 +52,13 @@ addresses::addresses(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("Postal Code"), "postalcode", ParameterWidget::Text);
   parameterWidget()->append(tr("Show Inactive"), "showInactive", ParameterWidget::Exists);
 
+  QString psql = QString("SELECT 0 AS id, '%1' AS code "
+                         "UNION SELECT 1, '%2' "
+                         "ORDER BY id;")
+                        .arg(tr("No Campaign"))
+                        .arg(tr("Postal Campaign"));
+  parameterWidget()->appendComboBox(tr("Marketing Campaign"), "campaign", psql, 0, true);
+
   list()->addColumn(tr("Line 1"),	 -1, Qt::AlignLeft, true, "addr_line1");
   list()->addColumn(tr("Line 2"),	 150, Qt::AlignLeft, true, "addr_line2");
   list()->addColumn(tr("Line 3"),	 150, Qt::AlignLeft, true, "addr_line3");

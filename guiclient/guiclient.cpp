@@ -1382,6 +1382,14 @@ void GUIClient::sProjectsUpdated(int prjid)
   emit projectsUpdated(prjid);
 }
 
+/** @brief This slot tells other open windows the definition or status of one or more Contacts have changed.
+    @param cntctid the internal id of the Contact which changed or -1 for multiple or unspecified Contacts
+ */
+void GUIClient::sContactsUpdated(int cntctid)
+{
+  emit contactsUpdated(cntctid);
+}
+
 /** @brief This slot tells other open windows the definition or status of one or more CRM Accounts has changed.
     @param crmacctid the internal id of the CRM Account which changed or -1 for multiple or unspecified CRM Accounts
  */

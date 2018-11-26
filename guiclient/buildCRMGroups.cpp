@@ -18,6 +18,7 @@
 #include <metasql.h>
 #include "characteristic.h"
 #include "mqlutil.h"
+#include "crmGroups.h"
 #include "parameterwidget.h"
 #include "errorReporter.h"
 
@@ -46,6 +47,7 @@ buildCRMGroups::buildCRMGroups(QWidget* parent, const char* name, Qt::WindowFlag
   connect(_type, SIGNAL(newID(int)), this, SLOT(sTypeSelected()));
   connect(_params, SIGNAL(updated()), this, SLOT(sHandleButton()));
   connect(_generate, SIGNAL(clicked()), this, SLOT(sGenerateGroupRecords()));
+  connect(_addGroup, SIGNAL(clicked()), this, SLOT(sAddGroup()));
 
   _params->append(tr("Street Pattern"), "addr_street_pattern", ParameterWidget::Text);
   _params->append(tr("City Pattern"), "addr_city_pattern", ParameterWidget::Text);
@@ -70,6 +72,7 @@ void buildCRMGroups::sTypeSelected()
 {
   _elem = _grpMap.value(_type->id());
   _targetGrp->setType(_elem->groupcombo);
+  _addGroup->setEnabled(_privileges->check(_elem->priv));
   buildParameters();
 }
 
@@ -215,6 +218,17 @@ void buildCRMGroups::addDynamicFilters()
 void buildCRMGroups::sHandleButton()
 {
   _generate->setEnabled(_targetGrp->isValid() && _params->parameters().length() > 0);
+}
+
+void buildCRMGroups::sAddGroup()
+{
+  ParameterList params;
+  params.append("groupType", _elem->groupId);
+
+  crmGroups* newdlg = new crmGroups();
+  newdlg->set(params);
+  if (newdlg->exec() != XDialog::Rejected)
+    _targetGrp->populate();
 }
 
 void buildCRMGroups::sGenerateGroupRecords()

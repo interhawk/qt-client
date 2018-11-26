@@ -46,7 +46,6 @@ protected slots:
     virtual void languageChange();
 
     virtual void sAddAddress();
-    virtual void sAddContact();
     virtual void sClose();
     virtual void sCustomer();
     virtual void sDeleteReg();

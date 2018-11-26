@@ -277,7 +277,7 @@ void menuCRM::sCRMAccountGroups()
 
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+  newdlg->exec();
 }
 
 void menuCRM::sEditOwners()
@@ -311,7 +311,7 @@ void menuCRM::sContactGroups()
 
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+  newdlg->exec();
 }
 
 void menuCRM::sContactMerge()
@@ -355,7 +355,7 @@ void menuCRM::sAddressGroups()
 
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+  newdlg->exec();
 }
 
 void menuCRM::sDocuments()
@@ -442,7 +442,7 @@ void menuCRM::sProspectGroups()
 
   crmGroups *newdlg = new crmGroups();
   newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+  newdlg->exec();
 }
 
 void menuCRM::sSetup()

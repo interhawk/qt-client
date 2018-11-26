@@ -181,6 +181,7 @@ FORMS =   absoluteCalendarItem.ui               \
           configureWO.ui                        \
           confirmAchOK.ui                       \
           contact.ui                            \
+          contactAccountAssign.ui               \
           contacts.ui                           \
           contactMerge.ui                       \
           contract.ui                           \
@@ -750,6 +751,7 @@ HEADERS = ../common/format.h                    \
           configureWO.h                 \
           confirmAchOK.h                \
           contact.h                     \
+          contactAccountAssign.h        \
           contacts.h                    \
           contactMerge.h                \
           contract.h                    \
@@ -1375,6 +1377,7 @@ SOURCES = absoluteCalendarItem.cpp              \
           configureWO.cpp                       \
           confirmAchOK.cpp                      \
           contact.cpp                           \
+          contactAccountAssign.cpp              \
           contacts.cpp                          \
           contactMerge.cpp                      \
           contract.cpp                          \

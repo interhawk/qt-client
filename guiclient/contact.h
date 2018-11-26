@@ -43,7 +43,9 @@ protected slots:
 
     virtual void sClose();
     virtual void setViewMode();
+    virtual void sAttachUse();
     virtual void sDetachUse();
+    virtual void sEditAssignment();
     virtual void sEditCRMAccount();
     virtual void sEditCustomer();
     virtual void sEditEmployee();

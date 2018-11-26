@@ -21,6 +21,7 @@
 
 #include "characteristic.h"
 #include "contact.h"
+#include "contactAccountAssign.h"
 #include "contactMerge.h"
 #include "errorReporter.h"
 #include "metasql.h"
@@ -41,6 +42,7 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   setNewVisible(true);
   setSearchVisible(true);
   setQueryOnStartEnabled(true);
+  setUseAltId(true);
 
   _crmacctid = -1;
   _attachAct = 0;
@@ -68,9 +70,20 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   parameterWidget()->append(tr("Updated Before"), "updateEndDate", ParameterWidget::Date);
   parameterWidget()->append(tr("Updated After"), "updateStartDate", ParameterWidget::Date);
 
+  QString psql = QString("SELECT 0 AS id, '%1' AS code "
+                         "UNION SELECT 1, '%2' "
+                         "UNION SELECT 2, '%3' "
+                         "UNION SELECT 3, '%4' "
+                         "ORDER BY id;")
+                        .arg(tr("No Campaign"))
+                        .arg(tr("Email Campaign"))
+                        .arg(tr("Postal Campaign"))
+                        .arg(tr("Phone Campaign"));
+  parameterWidget()->appendComboBox(tr("Marketing Campaign"), "campaign", psql, 0, true);
+
   list()->addColumn(tr("First Name"),          80, Qt::AlignLeft,  true, "cntct_first_name");
   list()->addColumn(tr("Last Name"),          100, Qt::AlignLeft,  true, "cntct_last_name");
-  list()->addColumn(tr("Active"),              50, Qt::AlignLeft,  true, "cntct_active");
+  list()->addColumn(tr("Active Contact"),      50, Qt::AlignLeft,  true, "cntct_active");
   list()->addColumn(tr("Owner"),      _userColumn, Qt::AlignLeft, false, "cntct_owner_username");
   list()->addColumn(tr("CRM Account(s)"),      -1, Qt::AlignLeft,  true, "crmacct");
   list()->addColumn(tr("Company"),             -1, Qt::AlignLeft, false, "company");
@@ -108,9 +121,11 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
   _detachAct->setEnabled(false);
   _detachAct->setVisible(false);
 
-  connect(attachBtn, SIGNAL(clicked()),      this, SLOT(sAttach()));
-  connect(detachBtn, SIGNAL(clicked()),      this, SLOT(sDetach()));
-  connect(list(), SIGNAL(itemSelected(int)), this, SLOT(sOpen()));
+  connect(omfgThis,    SIGNAL(contactsUpdated(int)), this, SLOT(sFillList()));
+  connect(_activeOnly, SIGNAL(clicked()),            this, SLOT(sFillList()));
+  connect(attachBtn,   SIGNAL(clicked()),            this, SLOT(sAttach()));
+  connect(detachBtn,   SIGNAL(clicked()),            this, SLOT(sDetach()));
+  connect(list(),      SIGNAL(itemSelected(int)),    this, SLOT(sOpen()));
 
   if (_privileges->check("MaintainAllContacts") || _privileges->check("MaintainPersonalContacts"))
   {
@@ -118,9 +133,8 @@ contacts::contacts(QWidget* parent, const char*, Qt::WindowFlags fl)
     connect(list(), SIGNAL(valid(bool)), _detachAct, SLOT(setEnabled(bool)));
   }
   else
-  {
     newAction()->setEnabled(false);
-  }
+
 }
 
 enum SetResponse contacts::set(const ParameterList& pParams)
@@ -143,8 +157,10 @@ enum SetResponse contacts::set(const ParameterList& pParams)
   param = pParams.value("showRole", &valid);
   if (valid)
   {
-    list()->addColumn(tr("Role"), 80, Qt::AlignLeft, true, "crmrole");
+    list()->addColumn(tr("Role"), 100, Qt::AlignLeft, true, "crmrole");
+    list()->addColumn(tr("Active Role"), 100, Qt::AlignLeft, true, "crmacctcntctass_active");
     list()->moveColumn(list()->column("crmrole"), 0);
+    list()->moveColumn(list()->column("crmacctcntctass_active"), 1);
     _captive = true;
   }
 
@@ -166,6 +182,12 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
   bool viewPriv =
       (omfgThis->username() == list()->currentItem()->rawValue("cntct_owner_username") && _privileges->check("ViewPersonalContacts")) ||
       _privileges->check("ViewAllContacts");
+
+  if (_captive)
+  {
+    menuItem = pMenu->addAction(tr("Edit Assignment"), this, SLOT(sEditAssignment()));
+    menuItem->setEnabled(editPriv);
+  }
 
   menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
   menuItem->setEnabled(editPriv);
@@ -298,14 +320,11 @@ void contacts::sReplace()
 
   if (col.contains("cntct"))
     replace = QInputDialog::getText(this, tr("Replace"), label, QLineEdit::Normal, "", &ok);
-  else if (col.contains("crmacct") || col.contains("addr"))
+  else if (col.contains("addr"))
   {
     ParameterList params;
     params.append("label", label);
-    if (col.contains("crmacct"))
-      params.append("type", "crmacct");
-    else if (col.contains("addr"))
-      params.append("type", "addr");
+    params.append("type", "addr");
 
     XClusterInputDialog newdlg(this, "", true);
     newdlg.set(params);
@@ -366,25 +385,7 @@ void contacts::sReplace()
     ParameterList params;
     MetaSQLQuery insert;
     MetaSQLQuery update;
-    if (!col.contains("char"))
-    {
-      QString column;
-      if (col.contains("cntct"))
-        column = col;
-      else if(col.contains("crmacct"))
-        column = "cntct_crmacct_id";
-      else if(col.contains("addr"))
-        column = "cntct_addr_id";
-
-      update.setQuery(QString("UPDATE cntct "
-                              "   SET %1 = <? value('replace') ?> "
-                              " WHERE cntct_id IN (-1 "
-                              "       <? foreach('contacts') ?> "
-                              "       , <? value('contacts') ?> "
-                              "       <? endforeach ?> "
-                              "       );").arg(column));
-    }
-    else
+    if (col.contains("char"))
     {
       insert.setQuery("INSERT INTO charass "
                       "(charass_target_type, charass_target_id, charass_char_id, charass_value) "
@@ -411,6 +412,22 @@ void contacts::sReplace()
                       "       );");
 
       params.append("char_id", charid);
+    }
+    else
+    {
+      QString column;
+      if (col.contains("cntct"))
+        column = col;
+      else if(col.contains("addr"))
+        column = "cntct_addr_id";
+
+      update.setQuery(QString("UPDATE cntct "
+                              "   SET %1 = <? value('replace') ?> "
+                              " WHERE cntct_id IN (-1 "
+                              "       <? foreach('contacts') ?> "
+                              "       , <? value('contacts') ?> "
+                              "       <? endforeach ?> "
+                              "       );").arg(column));
     }
 
     QList<QVariant> contacts;
@@ -475,6 +492,22 @@ void contacts::sEdit()
     params.append("cntct_id", ((XTreeWidgetItem*)(selected[i]))->id());
 
     contact* newdlg = new contact(0, "", false);
+    newdlg->set(params);
+    newdlg->setAttribute(Qt::WA_DeleteOnClose);
+    newdlg->show();
+  }
+}
+
+void contacts::sEditAssignment()
+{
+  QList<XTreeWidgetItem*> selected = list()->selectedItems();
+  for (int i = 0; i < selected.size(); i++)
+  {
+    ParameterList params;
+    params.append("mode", "edit");
+    params.append("assign_id", ((XTreeWidgetItem*)(selected[i]))->altId());
+
+    contactAccountAssign* newdlg = new contactAccountAssign(0, "", false);
     newdlg->set(params);
     newdlg->setAttribute(Qt::WA_DeleteOnClose);
     newdlg->show();
@@ -632,73 +665,31 @@ void contacts::sUnmark()
 
 void contacts::sAttach()
 {
-  ContactCluster attached(this, "attached");
-  attached.sEllipses();
-  if (attached.id() > 0)
-  {
-    int answer = QMessageBox::Yes;
+  ParameterList params;
+  params.append("mode", "new");
+  params.append("crmacct", _crmacctid);
 
-    if (attached.crmAcctId() > 0 && attached.crmAcctId() != _crmacctid)
-      answer = QMessageBox::question(this, tr("Attach Contact?"),
-			    tr("<p>This Contact is currently attached to a "
-			       "different Account. Are you sure you want "
-			       "to also attach this Account for this person?"),
-			    QMessageBox::Yes, QMessageBox::No | QMessageBox::Default);
-    if (answer == QMessageBox::Yes)
-    {
-      XSqlQuery attq;
-      attq.prepare("SELECT attachContact(:cntct_id, :crmacct_id) AS returnVal;");
-      attq.bindValue(":cntct_id", attached.id());
-      attq.bindValue(":crmacct_id", _crmacctid);
-      attq.exec();
-      if (attq.first())
-      {
-        int returnVal = attq.value("returnVal").toInt();
-        if (returnVal < 0)
-        {
-            ErrorReporter::error(QtCriticalMsg, this, tr("Error Attaching Contact"),
-                                 storedProcErrorLookup("attachContact", returnVal),
-                                 __FILE__, __LINE__);
-            return;
-        }
-      }
-      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Attaching Contact"),
-                                    attq, __FILE__, __LINE__))
-	return;
-    }
+  contactAccountAssign newdlg(0, "", false);
+  newdlg.set(params);
+  if (newdlg.exec() != XDialog::Rejected)
     sFillList();
-  }
 }
 
 void contacts::sDetach()
 {
-  XTreeWidgetItem * item = (XTreeWidgetItem*)list()->currentItem();
   int answer = QMessageBox::question(this, tr("Detach Contact?"),
-			tr("<p>Are you sure you want to detach this Contact "
+                        tr("<p>Are you sure you want to deactivate the Contact "
 			   "from this Account?"),
 			QMessageBox::Yes, QMessageBox::No | QMessageBox::Default);
   if (answer == QMessageBox::Yes)
   {
-    int cntctId = list()->id();
-    QString role = item->rawValue("crmrole").toString();
+    int assignId = list()->altId();
     XSqlQuery detq;
-    detq.prepare("SELECT detachContact(:cntct_id, :crmacct_id, :role) AS returnVal;");
-    detq.bindValue(":cntct_id", cntctId);
-    detq.bindValue(":crmacct_id", _crmacctid);
-    if(role.length() > 0)
-      detq.bindValue(":role", role);
+    detq.prepare("SELECT detachContact(:assignid) AS returnVal;");
+    detq.bindValue(":assignid", assignId);
     detq.exec();
     if (detq.first())
-    {
-      int returnVal = detq.value("returnVal").toInt();
-      if (returnVal < 0)
-      {
-        ErrorReporter::error(QtCriticalMsg, this, tr("Error detaching Contact from Account (%1)")
-                        .arg(returnVal),detq, __FILE__, __LINE__);
-        return;
-      }
-      emit cntctDetached(cntctId);
-    }
+      emit cntctDetached(list()->id());
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Detaching Contact"),
                                   detq, __FILE__, __LINE__))
       return;
@@ -720,6 +711,7 @@ void contacts::setCrmacctid(int crmacctId)
   {
     parameterWidget()->setDefault(tr("Account"), _crmacctid, true);
     setNewVisible(false);
+    _attachAct->setVisible(true);
     _detachAct->setVisible(true);
   }
 }

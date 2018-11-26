@@ -37,7 +37,6 @@ contactMerge::contactMerge(QWidget* parent, const char* name, Qt::WindowFlags fl
   _cntct->addColumn(tr("Contact#"),       100, Qt::AlignLeft, true,  "cntct_number");
   _cntct->addColumn(tr("Active"),          50, Qt::AlignLeft, true,  "cntct_active");
   _cntct->addColumn(tr("Acct.#"),         100, Qt::AlignLeft, false, "crmacct_number");
-  _cntct->addColumn(tr("Acct. Name"),     100, Qt::AlignLeft, false, "crmacct_name");
   _cntct->addColumn(tr("Hnrfc"),           50, Qt::AlignLeft, false, "cntct_honorific");
   _cntct->addColumn(tr("First"),           80, Qt::AlignLeft, true,  "cntct_first_name");
   _cntct->addColumn(tr("Middle"),          50, Qt::AlignLeft, false, "cntct_middle");
@@ -61,7 +60,6 @@ contactMerge::contactMerge(QWidget* parent, const char* name, Qt::WindowFlags fl
   _srccntct->addColumn(tr("Contact#"),       100, Qt::AlignLeft, true,  "cntct_number");
   _srccntct->addColumn(tr("Active"),          50, Qt::AlignLeft, true,  "cntct_active");
   _srccntct->addColumn(tr("Acct.#"),         100, Qt::AlignLeft, false, "crmacct_number");
-  _srccntct->addColumn(tr("Acct. Name"),     100, Qt::AlignLeft, false, "crmacct_name");
   _srccntct->addColumn(tr("Hnrfc"),           50, Qt::AlignLeft, false, "cntct_honorific");
   _srccntct->addColumn(tr("First"),           80, Qt::AlignLeft, true,  "cntct_first_name");
   _srccntct->addColumn(tr("Middle"),          50, Qt::AlignLeft, false, "cntct_middle");
@@ -274,11 +272,17 @@ void contactMerge::sFillList()
                      "            WHEN cntctmrgd_cntct_id IS NOT NULL THEN 4 "
                      "            ELSE 0 "
                      "        END AS status, "
-                     "       cntct_crmacct_id, cntct_first_name, cntct_last_name, cntct_honorific, "
-                     "       cntct_initials, cntct_active, cntct_phone, cntct_phone2, cntct_fax, "
+                     "       cntct_first_name, cntct_last_name, cntct_honorific, "
+                     "       cntct_initials, cntct_active, "
+                     "       (SELECT array_to_string(array_agg(cntctphone_phone), ',', '')"
+                     "          FROM cntctphone "
+                     "         WHERE cntctphone_cntct_id=cntct_id) AS contact_phones, "
                      "       cntct_email, cntct_webaddr, cntct_notes, cntct_title, cntct_number, "
                      "       cntct_middle, cntct_suffix, cntct_owner_username, "
-                     "       crmacct_number,crmacct_name, "
+                     "      (SELECT array_to_string(array_agg(DISTINCT crmacct_number), ',', '')"
+                     "         FROM crmacct"
+                     "         JOIN crmacctcntctass ON crmacctcntctass_crmacct_id=crmacct_id"
+                     "         WHERE crmacctcntctass_cntct_id=cntct_id) AS crmacct_number,"
                      "       addr_id, addr_line1, addr_line2, addr_line3, addr_city, addr_state, "
                      "       addr_postalcode, addr_country, addr_active, addr_notes, addr_number, "
                      "       CASE WHEN cntctsel_cntct_id IS NOT NULL "
@@ -291,7 +295,6 @@ void contactMerge::sFillList()
                      "        END AS qtforegroundrole "
                      "  FROM cntct "
                      "  LEFT OUTER JOIN addr ON cntct_addr_id=addr_id "
-                     "  LEFT OUTER JOIN crmacct ON cntct_crmacct_id=crmacct_id "
                      "  LEFT OUTER JOIN cntctsel ON cntct_id=cntctsel_cntct_id "
                      "  LEFT OUTER JOIN cntctmrgd ON cntct_id=cntctmrgd_cntct_id "
                      " WHERE cntct_id IN (-1 "
@@ -425,7 +428,7 @@ void contactMerge::sPopulateSrcMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int pC
   if (pCol > 1)
     col = header->text(pCol); 
 
-  menuStr = tr("Merge ") + col + tr(" to target");
+  menuStr = tr("Merge") + col + tr(" to target");
   _selectCol = pCol > 18 ? 18 : pCol;
 
   menuItem = pMenu->addAction(tr("Deselect"), this, SLOT(sDeselectSource()));
