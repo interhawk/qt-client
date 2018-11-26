@@ -59,11 +59,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Street
-Address:</source>
-        <translation>Postadres:</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;There are multiple Contacts sharing this Address.&lt;/p&gt;&lt;p&gt;What would you like to do?&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -130,6 +125,38 @@ Address:</source>
     <message>
         <source>Saving Shared Address</source>
         <translation type="unfinished">Gedeeld adres opslaan ...</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street 1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street 2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street 3:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow Marketing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Longitude:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Latitude:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accuracy:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -240,6 +267,10 @@ Address:</source>
     <message>
         <source>Account</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Addresses</source>
+        <translation type="unfinished">Adressen</translation>
     </message>
 </context>
 <context>
@@ -468,6 +499,21 @@ Address:</source>
     </message>
 </context>
 <context>
+    <name>AvalaraIntegration</name>
+    <message>
+        <source>Error building request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid authentication details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: %2&lt;br&gt;&lt;br&gt;Caused by:&lt;br&gt;%3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BOM</name>
     <message>
         <source>Item #:</source>
@@ -476,10 +522,6 @@ Address:</source>
     <message>
         <source>You must specify a valid item number to continue.</source>
         <translation>Voer een geldig artikel nummer in om door te gaan.</translation>
-    </message>
-    <message>
-        <source>Item Number Required</source>
-        <translation>Artikel Nummer Benodigd</translation>
     </message>
     <message>
         <source>Standard Material Cost:</source>
@@ -618,10 +660,6 @@ Address:</source>
         <translation>Artikelnummer</translation>
     </message>
     <message>
-        <source>&lt;p&gt;The Batch Size quantity must be greater than zero.</source>
-        <translation>De Batch Grootte moet groter zijn dan nul.</translation>
-    </message>
-    <message>
         <source>Type</source>
         <translation>Type</translation>
     </message>
@@ -632,10 +670,6 @@ Address:</source>
     <message>
         <source>Description</source>
         <translation>Omschrijving</translation>
-    </message>
-    <message>
-        <source>Batch Size Error</source>
-        <translation>Fout in Batch Grootte</translation>
     </message>
     <message>
         <source>Issue Method</source>
@@ -775,6 +809,14 @@ Address:</source>
     </message>
     <message>
         <source>Error Retrieving BOM Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Batch Size quantity must be greater than zero.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BOM saving error.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1456,6 +1498,10 @@ Address:</source>
         <source>Project Task</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished">Prospect</translation>
+    </message>
 </context>
 <context>
     <name>ConfigAuthorizeDotNetProcessor</name>
@@ -1742,10 +1788,6 @@ Address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>. Would you like to use the existing contact?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Multple contacts exist with the same first and last name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1802,18 +1844,6 @@ Address:</source>
         <translation type="unfinished">Actief</translation>
     </message>
     <message>
-        <source>Voice:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alternate:</source>
-        <translation type="unfinished">Alternatief:</translation>
-    </message>
-    <message>
-        <source>Fax:</source>
-        <translation type="unfinished">Fax:</translation>
-    </message>
-    <message>
         <source>E-Mail:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1828,10 +1858,6 @@ What would you like to do?</source>
     </message>
     <message>
         <source>. Would you like to view all the existing contacts?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A contact exists with the same first and last name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1855,23 +1881,43 @@ What would you like to do?</source>
         <translation type="unfinished">Zoekvenster kon niet gestart worden</translation>
     </message>
     <message>
-        <source>Account:</source>
-        <translation type="unfinished">Rekening:</translation>
-    </message>
-    <message>
-        <source> not associated with any Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> on the current Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> associated with another Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A contact exists with the same first and last name on the current Account. Would you like to use the existing contact?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opt In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A contact exists with the same first and last name %1. Would you like to use the existing contact?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Getting Email Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Getting Phone Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-</source>
+        <translation type="unfinished">-</translation>
+    </message>
+    <message>
+        <source>Removing Contact Phone Details</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2385,10 +2431,6 @@ What would you like to do?</source>
         <translation type="unfinished">Klant</translation>
     </message>
     <message>
-        <source>Partner</source>
-        <translation type="unfinished">Partner</translation>
-    </message>
-    <message>
         <source>Vendor</source>
         <translation type="unfinished">Leverancier</translation>
     </message>
@@ -2406,10 +2448,6 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Street Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide Merges in Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2439,10 +2477,6 @@ What would you like to do?</source>
     <message>
         <source>Email Pattern</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Competitor</source>
-        <translation type="unfinished">Concurrent</translation>
     </message>
     <message>
         <source>User</source>
@@ -2500,14 +2534,6 @@ What would you like to do?</source>
         <translation type="unfinished">Actief</translation>
     </message>
     <message>
-        <source>Primary Contact</source>
-        <translation type="unfinished">Voornaamste contact</translation>
-    </message>
-    <message>
-        <source>Secondary Contact</source>
-        <translation type="unfinished">Tweede contact</translation>
-    </message>
-    <message>
         <source>Prospect</source>
         <translation type="unfinished">Prospect</translation>
     </message>
@@ -2536,19 +2562,11 @@ What would you like to do?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Updating Merge Sources</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Organization</source>
         <translation type="unfinished">Organisatie</translation>
     </message>
     <message>
         <source>[N/A]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Updating Merge Destination</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2568,16 +2586,8 @@ What would you like to do?</source>
         <translation type="unfinished">Persoon</translation>
     </message>
     <message>
-        <source>Competitor</source>
-        <translation type="unfinished">Concurrent</translation>
-    </message>
-    <message>
         <source>Error Deleting Merge Data</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Partner</source>
-        <translation type="unfinished">Partner</translation>
     </message>
     <message>
         <source>Getting Accounts</source>
@@ -2585,10 +2595,6 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Getting Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Are you sure you want to merge the Accounts as described here?&lt;/p&gt;&lt;p&gt;If you click YES then the merge will be run immediately. You will have a chance to undo it later.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2615,6 +2621,10 @@ What would you like to do?</source>
         <source>Delete Account</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;p&gt;Are you sure you want to merge the Accounts as described here?&lt;/p&gt;&lt;p&gt;If you click YES then the merge will be run immediately and cannot be undone.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CrmaccountMergePickTaskPage</name>
@@ -2632,66 +2642,7 @@ What would you like to do?</source>
     </message>
 </context>
 <context>
-    <name>CrmaccountMergePurgePage</name>
-    <message>
-        <source>Status</source>
-        <translation type="unfinished">Status</translation>
-    </message>
-    <message>
-        <source>Purge Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Getting List of Merges</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Data selection in progress</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Obsolete - will be deleted by purge</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Merge complete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account Name</source>
-        <translation type="unfinished">Account naam</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Are you sure you want to delete the selected merge records?&lt;/p&gt;&lt;p&gt;Note that obsolete Accounts will be deleted when purging completed merges.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Are you sure you want to delete all of these merge records?&lt;/p&gt;&lt;p&gt;Note that obsolete Accounts will be deleted when purging completed merges.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CrmaccountMergeResultPage</name>
-    <message>
-        <source>Revert?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Checking Undo Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Undoing Merge</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Getting Source Accounts</source>
         <translation type="unfinished"></translation>
@@ -2702,34 +2653,6 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Could not find the portion of the window in which to draw the target Account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account Name</source>
-        <translation type="unfinished">Account naam</translation>
-    </message>
-    <message>
-        <source>Error Getting Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could Not Find Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not find the merged Account (%1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Getting Obsolete Accounts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Are you sure you want to undo this Account Merge?&lt;/p&gt;&lt;p&gt;The Accounts will be restored and you will need to start the merge from the beginning.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5310,6 +5233,17 @@ returned %2
     </message>
 </context>
 <context>
+    <name>ScriptApiTestResults</name>
+    <message>
+        <source>Script API Test Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re-Run Tests</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ScriptToolbox</name>
     <message>
         <source>There was an error loading the UI Form from the database.</source>
@@ -5481,6 +5415,73 @@ returned %2
     </message>
     <message>
         <source>Enter System Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaxDisplay</name>
+    <message>
+        <source>Recalculate Tax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Breakdown...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Avalara Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Calculating Tax:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error fetching tax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error invalidating tax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculate Tax</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaxExemptCluster</name>
+    <message>
+        <source>Error Retrieving Tax Exempt Categories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Avalara Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error retrieving Avalara Tax Exempt Categories
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaxIntegration</name>
+    <message>
+        <source>Error calculating tax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error posting tax transaction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error voiding tax transaction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error refunding tax</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6313,6 +6314,18 @@ returned %2
         <source>Period Length:</source>
         <translation>Periode:</translation>
     </message>
+    <message>
+        <source>You must provide a Period Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must provide a Start Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error stuff</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>account1099</name>
@@ -6423,10 +6436,6 @@ returned %2
 <context>
     <name>accountNumber</name>
     <message>
-        <source>Cannot Save Account</source>
-        <translation type="unfinished">Kan rekening niet opslaan</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;This Account has a balance. Are you sure you want to mark it inactive?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6499,10 +6508,6 @@ returned %2
         <translation>&amp;Opmerkingen:</translation>
     </message>
     <message>
-        <source>&lt;p&gt;This Account cannot be saved as an Account with the same number already exists.</source>
-        <translation>Deze rekening kan niet opgeslagen worden. Dit rekeningnummer bestaat reeds.</translation>
-    </message>
-    <message>
         <source>Ledger Account Number</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6524,6 +6529,14 @@ returned %2
     </message>
     <message>
         <source>You must specify an account number before you may save this record.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This account number already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No description provided.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6805,6 +6818,10 @@ returned %2
     </message>
     <message>
         <source>Error Populating Accounting Period</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You much provide a name for the Accounting Period</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7129,10 +7146,6 @@ or Name</source>
         <translation>Telefoon</translation>
     </message>
     <message>
-        <source>Alternate</source>
-        <translation>Alternatief</translation>
-    </message>
-    <message>
         <source>Fax</source>
         <translation>Fax</translation>
     </message>
@@ -7212,6 +7225,177 @@ Check the database server log for errors.</source>
     </message>
     <message>
         <source>Locking Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>addressMerge</name>
+    <message>
+        <source>Address Merge Utility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>Addresses</source>
+        <translation type="unfinished">Adressen</translation>
+    </message>
+    <message>
+        <source>Query</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search for:</source>
+        <translation type="unfinished">Zoeken naar:</translation>
+    </message>
+    <message>
+        <source>Search Through</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation type="unfinished">Woonplaats</translation>
+    </message>
+    <message>
+        <source>Postal Code</source>
+        <translation type="unfinished">Postcode</translation>
+    </message>
+    <message>
+        <source>Right click for selection options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selections</source>
+        <translation type="unfinished">Selecties</translation>
+    </message>
+    <message>
+        <source>Source Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country</source>
+        <translation type="unfinished">Land</translation>
+    </message>
+    <message>
+        <source>State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>#</source>
+        <translation type="unfinished">#</translation>
+    </message>
+    <message>
+        <source>Street 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Used Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address #</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The delete action cannot be undone. Are you sure you want to proceed?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Address?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deselecting Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving Address Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set as Source...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set as Target...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deselect...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Adding Delete Action To Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Merge %1 to target</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deselect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target Address (#%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Merging Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Processing Requested Action</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7332,6 +7516,54 @@ as an Address. Please select a Prospect to edit:</source>
     <message>
         <source>Address</source>
         <translation type="unfinished">Adres</translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Campaign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postal Campaign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marketing Campaign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRM Account(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detach</source>
+        <translation type="unfinished">Ontkoppelen</translation>
+    </message>
+    <message>
+        <source>Role</source>
+        <translation type="unfinished">Rol</translation>
+    </message>
+    <message>
+        <source>Detach Address?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Are you sure you want to detach this Address from this Account?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error detaching Address from Account (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Detaching Address</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9354,20 +9586,20 @@ Are you sure that you want to save this change?</source>
 <context>
     <name>assignClassCodeToPlannerCode</name>
     <message>
-        <source>No Planner Code Selected</source>
-        <translation type="unfinished">Geen planner code geselecteerd</translation>
-    </message>
-    <message>
         <source>Assign Items to Planner Code by Class Code</source>
         <translation>Artikelen aan Planner Code toewijzen per Klas Code</translation>
     </message>
     <message>
-        <source>You must select a Planner Code to assign before continuing.</source>
-        <translation>U moet een Planner Code keizen alvorens verder te gaan</translation>
-    </message>
-    <message>
         <source>Planner Code:</source>
         <translation>Planner Code:</translation>
+    </message>
+    <message>
+        <source>Please select a planner code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assign items to planner code</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10102,10 +10334,6 @@ Are you sure that you want to save this change?</source>
         <translation type="unfinished">Kan bewerkingstype niet opslaan</translation>
     </message>
     <message>
-        <source>You must enter a valid name for this Adjustment Type.</source>
-        <translation>Geef een geldige naam in voor dit correctietype</translation>
-    </message>
-    <message>
         <source>You must select a valid account for this Adjustment Type.</source>
         <translation>Geef een geldige rekening in voor dit correctietype</translation>
     </message>
@@ -10136,6 +10364,10 @@ Are you sure that you want to save this change?</source>
     <message>
         <source>Adj. Account:</source>
         <translation>Bewerk Account</translation>
+    </message>
+    <message>
+        <source>YYou must enter a valid name for this Adjustment Type.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10615,6 +10847,105 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>Error Retrieving Budget Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>buildCRMGroups</name>
+    <message>
+        <source>Build CRM Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the Group Type to be updated, then choose one or more filter parameters.  Choose the group to populate, then press generate.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NOTE: Generated group items selected will override existing group items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRM Group Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Target Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>Create a new CRM Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>Generate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postal Code Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sales Rep</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer Types</source>
+        <translation type="unfinished">Klantsoorten</translation>
+    </message>
+    <message>
+        <source>Item Group</source>
+        <translation type="unfinished">Artikelgroep</translation>
+    </message>
+    <message>
+        <source>Item</source>
+        <translation type="unfinished">Artikel</translation>
+    </message>
+    <message>
+        <source>Open Quotes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to update the %1 %2 Group with the results of this selection?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generate Group Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting %1 Group Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Generating %1 Group Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group %1 has been successfully populated with %2 %3s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11786,10 +12117,6 @@ Om te voldoen moet het aantal verhoogd worden met %1. Wil u het aantal verhogen 
         <translation type="unfinished">Waarde</translation>
     </message>
     <message>
-        <source>###-###-####</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>New</source>
         <translation type="unfinished">Nieuw</translation>
     </message>
@@ -11834,19 +12161,7 @@ Om te voldoen moet het aantal verhoogd worden met %1. Wil u het aantal verhogen 
         <translation type="unfinished">Order:</translation>
     </message>
     <message>
-        <source>00/00/0000</source>
-        <translation type="unfinished">00/00/0000</translation>
-    </message>
-    <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>00,000.00</source>
-        <translation type="unfinished">00,000.00</translation>
-    </message>
-    <message>
-        <source>###-##-####</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12438,6 +12753,10 @@ You may not create duplicate Forms.</source>
         <source>Error Retrieving Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
+    </message>
 </context>
 <context>
     <name>classCodeTax</name>
@@ -12472,6 +12791,10 @@ You may not create duplicate Forms.</source>
     <message>
         <source>The Tax Zone you have choosen already exists for this Class Code.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
     </message>
 </context>
 <context>
@@ -13362,10 +13685,6 @@ Wil u dit nu rechtzetten?</translation>
 <context>
     <name>configureCRM</name>
     <message>
-        <source>&lt;p&gt;The database contains invalid countries in historical records, such as closed sales orders and posted invoices. If you do not correct these countries before turning on strict country checking, you may lose country values if you open these documents and save them again. You may download and install the fixCountry.gz package to help update your records.&lt;p&gt;Are you sure you want to turn on strict country checking?</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Automatic</source>
         <translation>Automatisch</translation>
     </message>
@@ -13378,23 +13697,11 @@ Wil u dit nu rechtzetten?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Query Not Found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Incident # Generation:</source>
         <translation>Gebeurtenis # generatie:</translation>
     </message>
     <message>
         <source>New:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;The application could not find the MetaSQL query crm-strictcountrycheck.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enforce Valid Country Names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13410,20 +13717,12 @@ Wil u dit nu rechtzetten?</translation>
         <translation>Handmatig</translation>
     </message>
     <message>
-        <source>&lt;p&gt;The database contains invalid countries in active records, such as addresses and open sales orders. Please correct these records before turning on strict country checking. You may download and install the fixCountry.gz package to help with this task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use Projects</source>
         <translation>Gebruikers Projecten</translation>
     </message>
     <message>
         <source>Account # Generation:</source>
         <translation>Account # generatie:</translation>
-    </message>
-    <message>
-        <source>Invalid Countries</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>[ no default ]</source>
@@ -13456,10 +13755,6 @@ Wil u dit nu rechtzetten?</translation>
     <message>
         <source>Assigned:</source>
         <translation type="unfinished">Toegewezen:</translation>
-    </message>
-    <message>
-        <source>Post Opportunity Changes to the Change Log</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Incident Public checkbox</source>
@@ -13514,15 +13809,71 @@ Wil u dit nu rechtzetten?</translation>
         <translation type="unfinished">Dagen</translation>
     </message>
     <message>
-        <source>Error Confirming Country Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>If checked, an unprivileged user can still view the document in a document listing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>View Documents in list(s) if unprivileged</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project # Generation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task # Generation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Require unique email addresses across Contacts.  System checks uniqueness when activating this setting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Require Unique Contact Email Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When adding email addresses default the Opt In/Opt out setting for that email (check yes to opt in).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email Addresses Default Marketing Opt In / Opt Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When adding postal addresses default the Opt In/Opt out setting for that address (check yes to opt in).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address Default Marketing Opt In / Opt Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Log</source>
+        <translation type="unfinished">Logbestand</translation>
+    </message>
+    <message>
+        <source>Post Account Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Address Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Contact Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Opportunity Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique Emails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot enable unique email addresses on contacts when duplicates exist.  Please first remove all duplicate email addresses on contacts, then enable this setting.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13598,6 +13949,18 @@ Wil u dit nu rechtzetten?</translation>
     </message>
     <message>
         <source>&lt;p&gt;The xTuple key file name has changed. Once the key file has been used you cannot change the file without risking loss of data. Do you wish to proceed?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a Key File Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a File Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encryption error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14616,6 +14979,18 @@ Wil u dit nu rechtzetten?</translation>
         <source>Next Planned Order #:</source>
         <translation>Volgend gepland Ordernr:</translation>
     </message>
+    <message>
+        <source>Enter a Next Planned Order Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a default calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure MS Error</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>configurePD</name>
@@ -15334,6 +15709,10 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <source>Allow Free Form Bill-Tos</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Post Prospect Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>configureSearchPath</name>
@@ -15427,6 +15806,110 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     </message>
 </context>
 <context>
+    <name>configureTax</name>
+    <message>
+        <source>Tax Service Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Service:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account #:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>License Key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Service URL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable Document Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Logging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company Code:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sales Tax Liability Account:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable AvaTax UPC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Avalara Admin Console</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>https://admin-avatax.avalara.net</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Purchase Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Tax Liability Account:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter an Account #.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a License Key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a Service URL.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a Company Code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a Sales Tax Liability Account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a Use Tax Liability Account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Save Tax Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Avalara Integration Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection Test Succeeded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection Test Failed:
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>configureWO</name>
     <message>
         <source>Post Material Usage Variances</source>
@@ -15508,6 +15991,14 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <source>Allow Issue To Exploded Work Orders</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enter Next Work Order Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure WO Error</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>confirmAchOK</name>
@@ -15547,10 +16038,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation>Medewerker</translation>
     </message>
     <message>
-        <source>Uses of the Contact</source>
-        <translation>Contact gebruikt</translation>
-    </message>
-    <message>
         <source>Are you sure that you want to remove this Contact as the Billing Contact for this Customer?</source>
         <translation>Wilt u deze contactpersoon echt verwijderen als facuratiecontact bij deze klant?</translation>
     </message>
@@ -15563,20 +16050,12 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation>Wilt u deze contactpersoon echt verwijderen als contact voor deze werknemer?</translation>
     </message>
     <message>
-        <source>Account #:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Documents</source>
         <translation type="unfinished">Documenten</translation>
     </message>
     <message>
         <source>Owner:</source>
         <translation type="unfinished">Eigenaar:</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished">Algemeen</translation>
     </message>
     <message>
         <source>Number:</source>
@@ -15593,10 +16072,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     <message>
         <source>Are you sure that you want to remove this Contact as the Contact for this Ship-To Address?</source>
         <translation>Wilt u deze contactpersoon echt verwijderen als contact bij dit verzendadres?</translation>
-    </message>
-    <message>
-        <source>Are you sure that you want to remove this Contact as the Contact for this Prospect?</source>
-        <translation>Wilt u deze contactpersoon echt verwijderen als contact bij deze Prospect?</translation>
     </message>
     <message>
         <source>Are you sure that you want to remove this Contact as the Secondary Contact for this Vendor?</source>
@@ -15636,10 +16111,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     </message>
     <message>
         <source>Detaching</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure you want to remove this Contact as the Contact for this To-Do Item?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -15839,14 +16310,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Are you sure that you want to remove this Contact as the Primary Contact for this Account?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure that you want to remove this Contact as the Secondary Contact for this Account?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You must fill in a contact first or last name as a minimum before saving.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15864,6 +16327,97 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     </message>
     <message>
         <source>Locking Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Relationships</source>
+        <translation type="unfinished">Relaties</translation>
+    </message>
+    <message>
+        <source>Attach</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attach Contact to a CRM Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remarks</source>
+        <translation type="unfinished">Opmerkingen</translation>
+    </message>
+    <message>
+        <source>Active Role</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Assignment...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure that you want to remove this Contact from this Account?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Getting Assignment Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>contactAccountAssign</name>
+    <message>
+        <source>Contact/Account Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account:</source>
+        <translation type="unfinished">Rekening:</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
+    </message>
+    <message>
+        <source>Active</source>
+        <translation type="unfinished">Actief</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Annuleren</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must select a valid Account before continuing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a valid Contact before continuing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must select a valid CRM Role before continuing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Save Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Saving Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving Assignment Information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15953,10 +16507,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Acct. Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>State</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15966,10 +16516,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     </message>
     <message>
         <source>Set as Target...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Merge </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16029,18 +16575,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Last Name</source>
-        <translation type="unfinished">Achternaam</translation>
-    </message>
-    <message>
-        <source>Web Address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished">Adres</translation>
-    </message>
-    <message>
         <source>Active</source>
         <translation type="unfinished">Actief</translation>
     </message>
@@ -16093,36 +16627,16 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>First Name</source>
-        <translation type="unfinished">Voornaam</translation>
-    </message>
-    <message>
-        <source>Middle Initial</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation type="unfinished">Verwijderen</translation>
-    </message>
-    <message>
-        <source>Alt. Phone</source>
-        <translation type="unfinished">Alt. telefoonnummer</translation>
     </message>
     <message>
         <source>Account Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Phone</source>
-        <translation type="unfinished">Telefoon</translation>
-    </message>
-    <message>
         <source>Initials</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fax</source>
-        <translation type="unfinished">Fax</translation>
     </message>
     <message>
         <source>Middle</source>
@@ -16161,10 +16675,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation type="unfinished">Eerste</translation>
     </message>
     <message>
-        <source>Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Deleting Contact</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16182,6 +16692,10 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     </message>
     <message>
         <source>Error Processing Requested Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone #s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16224,10 +16738,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation>Toon alleen actieve kontaktpersonen</translation>
     </message>
     <message>
-        <source>Phone</source>
-        <translation>Telefoon</translation>
-    </message>
-    <message>
         <source>First Name</source>
         <translation>Voornaam</translation>
     </message>
@@ -16242,10 +16752,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     <message>
         <source>Country</source>
         <translation type="unfinished">Land</translation>
-    </message>
-    <message>
-        <source>Account #</source>
-        <translation>Account #</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -16270,10 +16776,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     <message>
         <source>City</source>
         <translation type="unfinished">Woonplaats</translation>
-    </message>
-    <message>
-        <source>Account Name</source>
-        <translation>Account naam</translation>
     </message>
     <message>
         <source>City Pattern</source>
@@ -16308,14 +16810,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
         <translation>E-mail</translation>
     </message>
     <message>
-        <source>Alternate</source>
-        <translation>Alternatief</translation>
-    </message>
-    <message>
-        <source>Fax</source>
-        <translation>Fax</translation>
-    </message>
-    <message>
         <source>State</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16341,22 +16835,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;This Contact is currently attached to a different Account. Are you sure you want to change the Account for this person?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Are you sure you want to detach this Contact from this Account?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Attaching Contact</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error detaching Contact from Account (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16397,10 +16875,6 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     </message>
     <message>
         <source>There are parent objects that use this contact. Do you wish to delete these objects as well?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Fetching CRM Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16489,6 +16963,102 @@ Dit kan niet ongedaan gemaakt worden. Verder gaan?</translation>
     </message>
     <message>
         <source>Unmarking failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Campaign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email Campaign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postal Campaign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone Campaign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marketing Campaign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRM Account(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company</source>
+        <translation type="unfinished">Bedrijf</translation>
+    </message>
+    <message>
+        <source>Office #</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mobile #</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fax #</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role</source>
+        <translation type="unfinished">Rol</translation>
+    </message>
+    <message>
+        <source>Active Role</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Checking CRM Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Are you sure you want to deactivate the Contact from this Account?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Fetching CRM Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple CRM Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are Multiple CRM Accounts with the selected Contact. Please select a CRM Account to use for the new Prospect:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Fetching Prospects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple Prospects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are multiple Prospects with the selected Contact. Please select a Prospect to edit:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19002,10 +19572,6 @@ Item: %2 - %3</source>
         </translation>
     </message>
     <message>
-        <source>To-Do Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Projects</source>
         <translation type="unfinished">Projecten</translation>
     </message>
@@ -19016,6 +19582,10 @@ Item: %2 - %3</source>
     <message>
         <source>Sales Orders</source>
         <translation type="unfinished">Verkoopopdrachten</translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished">Taken</translation>
     </message>
 </context>
 <context>
@@ -19191,10 +19761,6 @@ Toch verder gaan? </translation>
     <message>
         <source>Project:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid Memo # Entered</source>
-        <translation>Ongeldig memonr ingegeven</translation>
     </message>
     <message>
         <source>Description</source>
@@ -19405,10 +19971,6 @@ Toch verder gaan? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Calculating Tax</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sales Credit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19430,6 +19992,66 @@ Toch verder gaan? </translation>
     </message>
     <message>
         <source>&lt;p&gt;This Sales Credit has been Posted and this cannot be modified.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orig. Ship Via:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Site:</source>
+        <translation type="unfinished">Magazijn:</translation>
+    </message>
+    <message>
+        <source>Misc. Charge Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Charge is Discount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving CM Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot override freight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight must be calculated automatically when lines are shipping from different addresses for Avalara tax calculation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to check freight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual Freight?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Manually editing the freight will disable automatic Freight recalculations.  Are you sure you want to do this?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatic Freight?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Manually clearing the freight will enable automatic Freight recalculations.  Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19734,6 +20356,346 @@ Toch verder gaan? </translation>
         <source>Getting Sales Credit UOMs</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>crmGroup</name>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished">Omschrijving:</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Members:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nieuw</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Nummer</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>%1 Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1:</source>
+        <translation type="unfinished">%1 %2 {1:?}</translation>
+    </message>
+    <message>
+        <source>Error Retrieving %1 Group Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error rejecting %1 Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot have an empty name.</source>
+        <translation type="unfinished">Naam dient ingevuld te zijn.</translation>
+    </message>
+    <message>
+        <source>Cannot Save %1 Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving Group Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot have a duplicate group name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Saving %1 Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting %1 From Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Adding %1 To Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving Group Source Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>crmGroups</name>
+    <message>
+        <source>List Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nieuw</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Klant</translation>
+    </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished">Prospect</translation>
+    </message>
+    <message>
+        <source>Employee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Adres</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Omschrijving</translation>
+    </message>
+    <message>
+        <source>List %1 Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Groups:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to delete this %1 Group?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting %1 Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving %1 Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>crmRole</name>
+    <message>
+        <source>CRM Role</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role Applies To:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Kontaktpersonen</translation>
+    </message>
+    <message>
+        <source>Addresses</source>
+        <translation type="unfinished">Adressen</translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone #</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order:</source>
+        <translation type="unfinished">Order:</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Sluiten</translation>
+    </message>
+    <message>
+        <source>Esc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return</source>
+        <translation type="unfinished">Terug</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>You must enter a Role before you may save it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must make at least one assignment before you may save the role.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Save CRM Role</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Saving CRM Role</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>crmRoles</name>
+    <message>
+        <source>CRM Roles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRM Roles:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>Esc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>Ctrl+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+V</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Ctrl+D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role</source>
+        <translation type="unfinished">Rol</translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Adres</translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation type="unfinished">Telefoon</translation>
+    </message>
+    <message>
+        <source>System Role</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You cannot delete a system role.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting CRM Role</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>crmaccount</name>
@@ -19750,20 +20712,12 @@ Toch verder gaan? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All</source>
-        <translation>Allen</translation>
-    </message>
-    <message>
         <source>Error deleting Lot/Serial data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure you want to convert this Customer to a Prospect and delete its Customer information?</source>
         <translation>Wil u van deze klant een Prospect maken, en zijn klanteninfo verwijderen?</translation>
-    </message>
-    <message>
-        <source>Secondary</source>
-        <translation>Tweede contact</translation>
     </message>
     <message>
         <source>Convert Error</source>
@@ -19792,10 +20746,6 @@ Toch verder gaan? </translation>
     <message>
         <source>&lt;p&gt;Do you want to convert all of the Quotes for the Prospect to Sales Orders?</source>
         <translation type="unfinished">Wilt u alle offertes voor deze Prospect omzetten naar verkoopsorders?</translation>
-    </message>
-    <message>
-        <source>Primary</source>
-        <translation>Voornaamste</translation>
     </message>
     <message>
         <source>Error collecting Lot/Serial data</source>
@@ -19898,10 +20848,6 @@ Toch verder gaan? </translation>
         <translation>Bekijk...</translation>
     </message>
     <message>
-        <source>The %1 relationship is selected but no appropriate data have been created. Either click the %2 button  to enter the data or unselect the check box.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Account Name:</source>
         <translation>Relatie naam:</translation>
     </message>
@@ -19926,10 +20872,6 @@ Toch verder gaan? </translation>
         <translation>Actief</translation>
     </message>
     <message>
-        <source>Partner</source>
-        <translation>Partner</translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>
@@ -19952,10 +20894,6 @@ Toch verder gaan? </translation>
     <message>
         <source>Account</source>
         <translation>Relatie</translation>
-    </message>
-    <message>
-        <source>Competitor</source>
-        <translation>Concurrent</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -20007,10 +20945,6 @@ Toch verder gaan? </translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure you want to close this window without saving the new Account?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error detaching Contact from Account.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -20081,6 +21015,66 @@ Toch verder gaan? </translation>
         <source>Error deleting Registrations from Account</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Contacts/Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Addresses</source>
+        <translation type="unfinished">Adressen</translation>
+    </message>
+    <message>
+        <source>Contacts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Addresses:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attach Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Voeg toe</translation>
+    </message>
+    <message>
+        <source>Error retrieving CRM Roles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error detaching Contacts from Account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The %1 relationship is selected but no appropriate data has been created. Either click the %2 button  to enter the data or unselect the check box.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please first select a Role.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please first select an Address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Add Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error assigning Address</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>crmaccountMerge</name>
@@ -20131,36 +21125,20 @@ Toch verder gaan? </translation>
         <translation></translation>
     </message>
     <message>
-        <source>Pick the Details to Add to the Target</source>
+        <source>Confirm Merge Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Deselect</source>
+        <source>Confirm merge details.  The Source account details will be merged into the Target account.  Once confirmed, this cannot be undone.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>[ Selected values are in this color ]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select</source>
-        <translation type="unfinished">Selecteer</translation>
-    </message>
-    <message>
-        <source>Double-click in the table below to indicate what you want in the final merged Account. Alternatively, click once on values in the table then click Select or Deselect to record your choices. Continue when there is one value highlighted in each column. You can select more than one Notes. You may choose either one Customer or one Prospect, but not one of each.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Source Accounts:</source>
+        <source>Merge Accounts:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>crmaccountMergePickTaskPage</name>
-    <message>
-        <source>Revert a completed merge</source>
-        <translation></translation>
-    </message>
     <message>
         <source>WizardPage</source>
         <translation type="unfinished"></translation>
@@ -20178,38 +21156,7 @@ Toch verder gaan? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Purge old records</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This Wizard guides you through the steps of merging Accounts. You can close at any time. The work in progress will be saved for you to come back to later.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>crmaccountMergePurgePage</name>
-    <message>
-        <source>WizardPage</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Purge Completed Merges</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Completed Merges:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purge All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purge</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The following Accounts have been merged. Pick a parent account and click Purge Selected to remove the obsolete Accounts and merge data. You should do this as soon as you have confirmed that the merge was successful.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -20224,23 +21171,7 @@ Toch verder gaan? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To keep this merge result, make sure Keep is selected below and click the Continue or Next Page button. To undo the merge, make sure the Undo button is selected and click Next Page or Continue.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Keep</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Result of Account Merge:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Source Accounts:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -20375,14 +21306,6 @@ Toch verder gaan? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Competitor</source>
-        <translation>Concurrent</translation>
-    </message>
-    <message>
-        <source>Partner</source>
-        <translation>Partner</translation>
-    </message>
-    <message>
         <source>View...</source>
         <translation>Bekijk...</translation>
     </message>
@@ -20428,6 +21351,10 @@ Toch verder gaan? </translation>
     </message>
     <message>
         <source>Are you sure you want to delete these Account(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account Group</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -21624,6 +22551,10 @@ Please check the values of these dates.</source>
         <source>Error Deleting Credit Card</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>customerFormAssignment</name>
@@ -21752,128 +22683,6 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Sales Credit</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>customerGroup</name>
-    <message>
-        <source>You cannot have an empty name.</source>
-        <translation type="unfinished">Naam dient ingevuld te zijn.</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation>&amp;Nieuw</translation>
-    </message>
-    <message>
-        <source>Cannot Save Customer Group</source>
-        <translation>Klantengroep kan niet worden opgeslagen</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Nummer</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Naam</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Naam:</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Bewaar</translation>
-    </message>
-    <message>
-        <source>Member Customers:</source>
-        <translation>Klanten:</translation>
-    </message>
-    <message>
-        <source>You cannot have a duplicate name.</source>
-        <translation>Dubbele naam niet toegestaan.</translation>
-    </message>
-    <message>
-        <source>Customer Group</source>
-        <translation>Klantengroep</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Sluiten</translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation>Omschrijving:</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>Error Retrieving Customer Group Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Rejecting Customer Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Saving Customer Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Deleting Customer From Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Adding Customer To Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>customerGroups</name>
-    <message>
-        <source>&amp;View</source>
-        <translation type="unfinished">&amp;Beeld</translation>
-    </message>
-    <message>
-        <source>Customer Groups:</source>
-        <translation>Klanten groepen:</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Naam</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation>Omschrijving</translation>
-    </message>
-    <message>
-        <source>List Customer Groups</source>
-        <translation>Overzicht klanten groepen</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Sluiten</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation>&amp;Nieuw</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Bewerk</translation>
-    </message>
-    <message>
-        <source>Delete?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this Customer Group?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -22199,6 +23008,10 @@ Please check the values of these dates.</source>
     <message>
         <source>Customer Type</source>
         <translation type="unfinished">Klantensoort</translation>
+    </message>
+    <message>
+        <source>Customer Group</source>
+        <translation type="unfinished">Klantengroep</translation>
     </message>
 </context>
 <context>
@@ -24189,6 +25002,14 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Could not void invoice because the accounting period for the posting date is closed. Try again with a different date?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refund Invoice Tax...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Refund Date:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -33713,6 +34534,101 @@ Total</source>
     </message>
 </context>
 <context>
+    <name>dspProjectSummary</name>
+    <message>
+        <source>Project Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project</source>
+        <translation type="unfinished">Project</translation>
+    </message>
+    <message>
+        <source>Project Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Status</translation>
+    </message>
+    <message>
+        <source>Assigned To</source>
+        <translation type="unfinished">Toegewezen aan</translation>
+    </message>
+    <message>
+        <source>Show Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Klant</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Nummer</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Budget Hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pending Budget Hrs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actual Hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hours Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Budget Exp.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pending Budget Exp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actual Exp.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exp. Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active</source>
+        <translation type="unfinished">Actief</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation type="unfinished">Hangende</translation>
+    </message>
+    <message>
+        <source>Closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>dspPurchaseReqsByItem</name>
     <message>
         <source>Create Date</source>
@@ -36920,10 +37836,6 @@ Total</source>
         <translation type="unfinished">Factuur</translation>
     </message>
     <message>
-        <source>Debit Memo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Other</source>
         <translation type="unfinished"></translation>
     </message>
@@ -36945,10 +37857,6 @@ Total</source>
     </message>
     <message>
         <source>Sales %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sales Freight %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -37068,14 +37976,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tax</source>
-        <translation type="unfinished">Belasting</translation>
-    </message>
-    <message>
-        <source>Tax %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You must enter a valid Start Date to print this report.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -37088,20 +37988,12 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Freight Taxed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Purchase Tax %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Purchases %1</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Credit Memo</source>
-        <translation>Credit factuur</translation>
     </message>
     <message>
         <source>Sales Tax %1</source>
@@ -37160,16 +38052,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Purchase Freight %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Currency 
 Rate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purchase %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -37178,6 +38062,156 @@ Rate</source>
     </message>
     <message>
         <source>Cannot Execute Tax History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orig. Order#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orig. Doc. Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Nummer</translation>
+    </message>
+    <message>
+        <source>Tax Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Zone Descrip.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exemption Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order Discount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order Discount %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Paid 
+to Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Paid 
+to Vendor %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation type="unfinished">Lijn</translation>
+    </message>
+    <message>
+        <source>Item Descrip.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Type Descrip.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit Price %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extension %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Taxable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Taxable %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Code Descrip.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Class Descrip.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Authority Descrip.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sequence</source>
+        <translation type="unfinished">Volgorde</translation>
+    </message>
+    <message>
+        <source>Basis Tax Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amount %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Percent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sales Tax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Tax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Tax %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A/R Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A/R Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A/P Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A/P Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Avalara</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight</source>
+        <translation type="unfinished">Vracht</translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjustment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -39342,6 +40376,113 @@ Rate</source>
     </message>
 </context>
 <context>
+    <name>dynamicfilter</name>
+    <message>
+        <source>Dynamic Group Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Description:</source>
+        <translation type="unfinished">&amp;Omschrijving:</translation>
+    </message>
+    <message>
+        <source>&amp;Name:</source>
+        <translation type="unfinished">&amp;Naam:</translation>
+    </message>
+    <message>
+        <source>Filter clause must return a valid list of ids for the selected group type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter Clause:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;CRM Group:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Rerieving %1 Group Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid Filter SQL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a valid Name for this Filter </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must select a CRM Group type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must validate your filter first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A Filter has already been defined with the selected name.
+You may not create duplicate Filters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Save Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Saving Dynamic Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving Dynamic Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dynamicfilters</name>
+    <message>
+        <source>Dynamic Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nieuw</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Omschrijving</translation>
+    </message>
+</context>
+<context>
     <name>editOwners</name>
     <message>
         <source>&lt;p&gt;Are you sure that you want to change the new owner to &apos;%1&apos; for the selected records?</source>
@@ -39400,10 +40541,6 @@ Rate</source>
         <translation type="unfinished">Project</translation>
     </message>
     <message>
-        <source>To Do</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>In the following categories:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -39439,127 +40576,9 @@ Rate</source>
         <source>Error Changing Owner Information</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>empGroup</name>
     <message>
-        <source>Invalid Name</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Code</source>
-        <translation>Code</translation>
-    </message>
-    <message>
-        <source>You must enter a valid Name for this Employee Group.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Nummer</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Sluiten</translation>
-    </message>
-    <message>
-        <source>Employee Group</source>
-        <translation type="unfinished">Werknemer groep</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Naam:</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Bewaar</translation>
-    </message>
-    <message>
-        <source>Member Employees:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation>&amp;Nieuw</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation>Omschrijving:</translation>
-    </message>
-    <message>
-        <source>Privilege Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1: Insufficient Privileges to View/Edit Employee Groups</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving Employee Group Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Saving Employee Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Deleting Employee From Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Adding Employee To Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>empGroups</name>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">Naam</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation>Omschrijving</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation>&amp;Nieuw</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Bewerk</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Sluiten</translation>
-    </message>
-    <message>
-        <source>Employee Groups:</source>
-        <translation>Werknemer groepen:</translation>
-    </message>
-    <message>
-        <source>List Employee Groups</source>
-        <translation>Werknemer groepen oplijsten</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation>&amp;Beeld</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>Error Deleting Employee Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving Employee Group Information</source>
-        <translation type="unfinished"></translation>
+        <source>Task</source>
+        <translation type="unfinished">Taak</translation>
     </message>
 </context>
 <context>
@@ -40848,10 +41867,6 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot delete this Sales Rep as it is associated with an Employee.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Employee Type is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -40977,10 +41992,6 @@ Would you like to automatically create a credit memo against this return?</sourc
     </message>
     <message>
         <source>A Customer Type already exists with this code.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A Customer Gropu already exists with this name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -41552,26 +42563,6 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot delete a Account with attached Contacts.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot attach a Contact to an invalid Account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot delete the Account since it is still associated with a Customer.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set the Account to an invalid Customer.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set the Account to an invalid Employee.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Account number is required.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -41581,34 +42572,6 @@ Would you like to automatically create a credit memo against this return?</sourc
     </message>
     <message>
         <source>Cannot save a Account with an invalid parent Account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot delete the Account since it is still associated with a Prospect.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set the Account to an invalid Prospect.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Sales Rep cannot be deleted as s/he is still associated with a Account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set the Account to an invalid Sales Rep.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set the Account to an invalid Tax Authority.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot delete the Account since it is still associated with a Vendor.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot set the Account to an invalid Vendor.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -41639,6 +42602,74 @@ Would you like to automatically create a credit memo against this return?</sourc
         <source>Cannot delete Terms as they exist on a Purchase Order.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Duplicated CRM Role.  Please choose a different name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete this CRM Role as it is referenced by CRM Account addresses.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete this CRM Role as it is referenced by Contact addresses.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete this CRM Role as it is referenced by Contacts.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete this CRM Role as it is referenced by Phone numbers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A Customer Group already exists with this name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete CRM Account because it is a Customer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete CRM Account because it is an Employee.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete the Task Template as it is linked to an Incident Category.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete the Task Template as it is linked to an Opportunity Type.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete the Task Template as it is linked to a Project Type.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete CRM Account because it is a Prospect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete CRM Account because it is a Sales Rep.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter both a Task Number and Task Name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A Task Template already exists with this number.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete CRM Account because it is a Tax Authority.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete CRM Account because it is a Vendor.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>errorcatorter</name>
@@ -41656,10 +42687,6 @@ Would you like to automatically create a credit memo against this return?</sourc
     <message>
         <source>Show &amp;Acknowledged Events</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>View Todo Item...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Events:</source>
@@ -41817,6 +42844,10 @@ Would you like to automatically create a credit memo against this return?</sourc
         <source>Error Retrieving Event Log Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Task...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>expenseCategories</name>
@@ -41953,6 +42984,14 @@ Would you like to automatically create a credit memo against this return?</sourc
     </message>
     <message>
         <source>&lt;p&gt;You must specify a Category.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sales Tax Expense:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You must select a Sales Tax Expense Account Number for this Expense Category before you may save it.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -42600,6 +43639,10 @@ Would you like to automatically create a credit memo against this return?</sourc
     <message>
         <source>You are not allowed to overwrite shared filters.
 Please, change the name of the filter if you want to save its current settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Columns</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -45370,10 +46413,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation type="unfinished">Project</translation>
     </message>
     <message>
-        <source>Owner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Public</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45394,24 +46433,12 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Alarm meldingen</translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>Nieuw...</translation>
-    </message>
-    <message>
         <source>Documents</source>
         <translation type="unfinished">Documenten</translation>
     </message>
     <message>
-        <source>To-Do List Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Priority:</source>
         <translation>Prioriteit:</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Naam</translation>
     </message>
     <message>
         <source>History</source>
@@ -45446,16 +46473,8 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation>Bewerk</translation>
-    </message>
-    <message>
         <source>You must specify the Account that this incident is for.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Bekijk...</translation>
     </message>
     <message>
         <source>New Incident</source>
@@ -45476,10 +46495,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Contact</source>
         <translation>Relatie</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Bewerk...</translation>
     </message>
     <message>
         <source>Comment</source>
@@ -45538,10 +46553,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
         <source>Assigned</source>
         <translation type="unfinished">Toegekend</translation>
     </message>
@@ -45594,16 +46605,8 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Gebruikersnaam</translation>
     </message>
     <message>
-        <source>Due Date</source>
-        <translation>Vervaldatum</translation>
-    </message>
-    <message>
         <source>Account:</source>
         <translation type="unfinished">Rekening:</translation>
-    </message>
-    <message>
-        <source>Getting To-Do Items</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Cancelling Incident</source>
@@ -45615,10 +46618,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>Error Retrieving Incident History</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Deleting To-Do Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -45635,6 +46634,30 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>Locking Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished">Taken</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished">Gebruiker</translation>
+    </message>
+    <message>
+        <source>Existing Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Tasks already exist for this Incident.&lt;br&gt;Do you want to replace tasks with the new template?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Applying Template Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Incident Project</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -45720,16 +46743,8 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You must enter a Category Name to continue.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Description:</source>
         <translation>Omschrijving:</translation>
-    </message>
-    <message>
-        <source>Category Name Required</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Order:</source>
@@ -45749,6 +46764,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>Error Retrieving Incident Category Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Template:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a valid Name for this Incident Category.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -45833,6 +46856,10 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <source>Error Deleting Incident Priority</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
+    </message>
 </context>
 <context>
     <name>incidentPriority</name>
@@ -45875,6 +46902,10 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Error Retrieving Incident Priority Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
     </message>
 </context>
 <context>
@@ -46227,6 +47258,50 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <source>Resolution</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error Determining Incident Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to open the Project(s) after creation?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Creating Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to open the Task(s) after creation?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a Task Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Creating Task</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>invoice</name>
@@ -46341,10 +47416,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>&amp;Save</source>
         <translation>&amp;Bewaar</translation>
-    </message>
-    <message>
-        <source>No Misc. Charge Account Number</source>
-        <translation>Geen Div. Onkostenrekening</translation>
     </message>
     <message>
         <source>Authorized CC Payments:</source>
@@ -46619,10 +47690,6 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Calculating Tax Amounts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Retrieving Customer Credit Card Information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -46656,6 +47723,46 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>Co&amp;mments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Site:</source>
+        <translation type="unfinished">Magazijn:</translation>
+    </message>
+    <message>
+        <source>Misc. Charge Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Charge is Discount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You must enter a Misc. Charge when specifying a Misc. Charge Sales Account. Please enter Misc. Charge amount or remove the Misc. Charge Sales Account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot override freight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight must be calculated automatically when lines are shipping from different addresses for Avalara tax calculation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to check freight</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -46891,6 +47998,10 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>Invoice Line Characteristics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -50939,6 +52050,10 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <source>Save</source>
         <translation>Bewaar</translation>
     </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
+    </message>
 </context>
 <context>
     <name>labelForm</name>
@@ -52930,10 +54045,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;To-Do</source>
-        <translation>&amp;Te-Doen</translation>
-    </message>
-    <message>
         <source>Pro&amp;ject</source>
         <translation>Pro&amp;ject</translation>
     </message>
@@ -53006,14 +54117,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Contactpersoon</translation>
     </message>
     <message>
-        <source>&amp;Merge Contacts...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Merge &amp;Accounts...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;New</source>
         <translation type="unfinished">&amp;Nieuw</translation>
     </message>
@@ -53027,6 +54130,42 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project Summary...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Groups...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Prospect</source>
+        <translation type="unfinished">&amp;Kansrijk Contact</translation>
+    </message>
+    <message>
+        <source>&amp;List...</source>
+        <translation type="unfinished">&amp;Toon...</translation>
+    </message>
+    <message>
+        <source>Merge &amp;Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Merge Contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Build CRM Groups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -54396,6 +55535,10 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>&amp;Setup</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Groups...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>menuSchedule</name>
@@ -55131,15 +56274,31 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Adding Tax to Voucher</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Retrieving Misc Distributions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Co&amp;mments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VCH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vendor Charged Tax:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Tax Owed:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -55714,10 +56873,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Assigned</source>
-        <translation type="unfinished">Toegekend</translation>
-    </message>
-    <message>
         <source>Documents</source>
         <translation type="unfinished">Documenten</translation>
     </message>
@@ -55738,19 +56893,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished">Prioriteit:</translation>
     </message>
     <message>
-        <source>Owner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Assigned:</source>
         <translation type="unfinished">Toegewezen:</translation>
     </message>
     <message>
         <source>Number: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>To-Do&apos;s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -55760,14 +56907,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Probability:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must specify a Name for this opportunity report.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Status</translation>
     </message>
     <message>
         <source>Opp. Type:</source>
@@ -55862,10 +57001,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Bedrag:</translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation>Naam</translation>
-    </message>
-    <message>
         <source>Target Close:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -55880,22 +57015,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Edit</source>
         <translation>Bewerk</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation>Omschrijving</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Vervaldatum</translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Prioriteit</translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation>Nieuw...</translation>
     </message>
     <message>
         <source>Ext. Price</source>
@@ -55974,14 +57093,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Deleting To-Do Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving To-Do Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Converting Prospect To Customer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -56024,6 +57135,47 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Locking Error</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished">Taken</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished">Gebruiker</translation>
+    </message>
+    <message>
+        <source>You must specify a Name for this Opportunity.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must specify an opportunity type.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Existing Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Tasks already exist for this Opportunity.
+Do you want to replace tasks with the new template?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Applying Template Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error updating Opportunity Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project</source>
+        <translation type="unfinished">Project</translation>
     </message>
 </context>
 <context>
@@ -56186,6 +57338,88 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Name Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project</source>
+        <translation type="unfinished">Project</translation>
+    </message>
+    <message>
+        <source>Error Determining Opportunity Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to open the Project(s) after creation?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Creating Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to open the Task(s) after creation?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a Task Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Creating Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Quotes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to open the Quotes(s) after creation?
+You will need to complete the quotation details afterwards.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account Missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opportunity &apos;%1&apos; has no Account assigned. Please assign an account first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opportunity &apos;%1&apos; has been assigned to Account &apos;%2&apos; but this account is neither Customer or Prospect.
+Please update this account to a Customer/Prospect first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Creating Quote</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -56370,15 +57604,19 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <translation>&amp;Naam:</translation>
     </message>
     <message>
-        <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You must enter a valid Name for this Opportunity Type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Saving Opportunity Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Template:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Save Opportunity Type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -60837,11 +62075,6 @@ You may not create a Product Category with this code.</source>
 <context>
     <name>project</name>
     <message>
-        <source>Could not delete the project task for one or more reasons.
-</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>In-Process</source>
         <translation type="unfinished">In behandeling</translation>
     </message>
@@ -60854,44 +62087,20 @@ You may not create a Product Category with this code.</source>
         <translation>&amp;Nieuw</translation>
     </message>
     <message>
-        <source>Actual hours have been posted to this project task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Bewerk</translation>
-    </message>
-    <message>
-        <source>Actual expenses have been posted to this project task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error #%1 encountered while trying to delete project task.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;View</source>
         <translation>&amp;Beeld</translation>
     </message>
     <message>
-        <source>Project task not found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You must specify a due date before saving it.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Additional</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print</source>
         <translation>Afdrukken</translation>
-    </message>
-    <message>
-        <source>Cannot Delete Project Task</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Complete</source>
@@ -61022,16 +62231,8 @@ You may not create a Product Category with this code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show Types</source>
-        <translation type="unfinished">Toon types</translation>
-    </message>
-    <message>
         <source>Incidents</source>
         <translation type="unfinished">Incidenten</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>0.0</source>
@@ -61140,14 +62341,6 @@ You may not create a Product Category with this code.</source>
     <message>
         <source>Work Order</source>
         <translation type="unfinished">Productie order</translation>
-    </message>
-    <message>
-        <source>Print Tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print Orders</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit Task...</source>
@@ -61386,6 +62579,96 @@ You may not create a Product Category with this code.</source>
         <source>Locking Error</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished">Omschrijving:</translation>
+    </message>
+    <message>
+        <source>Show Incidents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Opportunities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orders</source>
+        <translation type="unfinished">Orders</translation>
+    </message>
+    <message>
+        <source>Assigned Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Nummer</translation>
+    </message>
+    <message>
+        <source>Assigned To</source>
+        <translation type="unfinished">Toegewezen aan</translation>
+    </message>
+    <message>
+        <source>Opportunity</source>
+        <translation type="unfinished">Opportuniteit</translation>
+    </message>
+    <message>
+        <source>Edit Opportunity...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Opportunity...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Existing Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Tasks already exist for this Project.
+Do you want to replace tasks with the new template?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Applying Template Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deferred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sub-Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Sub-tasks exist for this Task.
+Do you also want to delete sub-tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Project Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished">Taken</translation>
+    </message>
+    <message>
+        <source>Opportunities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not get Project Order Information</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>projectCopy</name>
@@ -61481,15 +62764,23 @@ You may not create a Product Category with this code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You must enter a Code for this Project Type before you may save it.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Deleting Project Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Saving Project Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Template:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If a task template is optionally selected, the tasks are defaulted into the project when created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a valid Code for this Project Type.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -61551,6 +62842,10 @@ You may not create a Product Category with this code.</source>
         <source>Error Deleting Project Type</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You cannot delete this Project Type as it is used on project(s).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>projects</name>
@@ -61579,32 +62874,12 @@ You may not create a Product Category with this code.</source>
         <translation>Compleet</translation>
     </message>
     <message>
-        <source>Due</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Assigned</source>
-        <translation type="unfinished">Toegekend</translation>
-    </message>
-    <message>
-        <source>Balance Hrs.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Start End Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Completed</source>
-        <translation type="unfinished">Afgewerkt</translation>
-    </message>
-    <message>
         <source>Owner</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation>Nummer</translation>
     </message>
     <message>
         <source>Status</source>
@@ -61623,32 +62898,12 @@ You may not create a Product Category with this code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation>Naam</translation>
-    </message>
-    <message>
-        <source>Budget Hrs.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Assigned Start Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Actual Hrs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Completed End Date</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Started</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="unfinished">Omschrijving</translation>
     </message>
     <message>
         <source>Completed Start Date</source>
@@ -61675,10 +62930,6 @@ You may not create a Product Category with this code.</source>
         <translation>Onbepaald</translation>
     </message>
     <message>
-        <source>Show Orders:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sales Orders</source>
         <translation type="unfinished">Verkoopopdrachten</translation>
     </message>
@@ -61689,14 +62940,6 @@ You may not create a Product Category with this code.</source>
     <message>
         <source>Purchase Orders</source>
         <translation type="unfinished">Inkoop orders</translation>
-    </message>
-    <message>
-        <source>Incidents</source>
-        <translation type="unfinished">Incidenten</translation>
-    </message>
-    <message>
-        <source>Export View</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Project</source>
@@ -61763,76 +63006,8 @@ You may not create a Product Category with this code.</source>
         <translation type="unfinished">Inkooporder</translation>
     </message>
     <message>
-        <source>Account/Customer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Qty</source>
-        <translation type="unfinished">Aantal</translation>
-    </message>
-    <message>
-        <source>UOM</source>
-        <translation type="unfinished">Eenheid</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
-    </message>
-    <message>
-        <source>Budget Exp.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Actual Exp.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Balance Exp.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Task</source>
         <translation type="unfinished">Taak</translation>
-    </message>
-    <message>
-        <source>Task Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Owner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Assigned To</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer</source>
-        <translation type="unfinished">Klant</translation>
-    </message>
-    <message>
-        <source>Task Due</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Assigned</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Started</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Completed</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Project Copy</source>
@@ -62018,10 +63193,6 @@ You may not create a Product Category with this code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Print...</source>
         <translation type="unfinished">Afdrukken...</translation>
     </message>
@@ -62083,6 +63254,106 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>Locking Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned To:</source>
+        <translation type="unfinished">Toegewezen aan:</translation>
+    </message>
+    <message>
+        <source>Source:</source>
+        <translation type="unfinished">Bron:</translation>
+    </message>
+    <message>
+        <source>Owner:</source>
+        <translation type="unfinished">Eigenaar:</translation>
+    </message>
+    <message>
+        <source>Assigned:</source>
+        <translation type="unfinished">Toegewezen:</translation>
+    </message>
+    <message>
+        <source>Last Touched:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Updated:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Kontaktpersonen</translation>
+    </message>
+    <message>
+        <source>Associated Contacts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attach Contact:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Role:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Voeg toe</translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished">Taken</translation>
+    </message>
+    <message>
+        <source>Characteristics</source>
+        <translation type="unfinished">Eigenschappen</translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Documenten</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished">Gebruiker</translation>
+    </message>
+    <message>
+        <source>Retrieve Contact Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cleaning Up Prospect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cleaning Up Prospect CRM Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please first select a Role.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please first select a Contact.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Add Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error assigning Contact</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -62190,6 +63461,46 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure you want to delete the selected Prospect(s)?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prospect Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Owner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned</source>
+        <translation type="unfinished">Toegekend</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished">Aangemaakt</translation>
+    </message>
+    <message>
+        <source>Error Determining Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Opportunity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Quote</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -62678,10 +63989,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calculating P/O Tax</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You may not save this Purchase Order until you have selected a valid Vendor.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62703,6 +64010,30 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&lt;p&gt;The selected item has no Std. Costing information. Please see your controller to correct this situation before continuing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot enter order level freight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot enter order level freight when lines are shipping to different addresses for Avalara tax calculation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to check freight</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -63025,14 +64356,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tax Breakdown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Please save the Purchase Order Item before viewing the tax breakdown.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item Characteristics:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63046,6 +64369,10 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>Purchase Line Characteristics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -66028,10 +67355,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Calculating Tax</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Receiving RA Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -66089,6 +67412,42 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>&lt;p&gt;Expiry Date must be on or later than the Authorization Date.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Orig. Ship Via:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Charge Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Charge is Discount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot override freight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight must be calculated automatically when lines are shipping from different addresses for Avalara tax calculation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to check freight</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -66463,10 +67822,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Calculating Tax Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>-Global</source>
         <translation type="unfinished"></translation>
     </message>
@@ -66492,6 +67847,14 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>Error Deleting RA Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Calculation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -68646,14 +70009,6 @@ Do you wish to continue saving the order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Updating Sales Order Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Updating Quote Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You may not delete this Sales Order as it has one or more unshipped line items with inventory at shipping.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68671,10 +70026,6 @@ Do you wish to continue saving the order?</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving Tax Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -68828,6 +70179,38 @@ Do you wish to change all future Sales Order recurrences?</source>
     </message>
     <message>
         <source>You may not delete this Sales Order as it has one or more line items on a Purchase Order.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Charge is Discount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Charge Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You must enter a Misc. Charge when specifying a Misc. Charge Sales Account. Please enter Misc. Charge amount or remove the Misc. Charge Sales Account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot override freight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight must be calculated automatically when lines are shipping from different addresses for Avalara tax calculation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to check freight</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -70043,6 +71426,10 @@ Are you sure you want to do this?</source>
         <source>Sales Line Characteristics</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>salesOrderList</name>
@@ -70439,10 +71826,6 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Error Retrieving SO Subtotal Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving SO Tax Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -71513,6 +72896,10 @@ Are you sure you want to do this?</source>
         <source>Error Retrieving Tax Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>selectOrderForBilling</name>
@@ -71523,10 +72910,6 @@ Are you sure you want to do this?</source>
     <message>
         <source>&amp;Edit</source>
         <translation>&amp;Bewerk</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;You may not enter a Misc. Charge without indicating the G/L Sales Account number for the charge. Please set the Misc. Charge amount to 0 or select a Misc. Charge Sales Account.</source>
-        <translation type="unfinished">U kan geen diverse kosten ingeven zonder een overeenkomstige grootboekrekening. Zet diverse kosten op 0 of geed een dicerse kostenrekening in.</translation>
     </message>
     <message>
         <source>Ca&amp;ncel</source>
@@ -71567,10 +72950,6 @@ Are you sure you want to do this?</source>
     <message>
         <source>Cust. Name:</source>
         <translation>Klantnaam:</translation>
-    </message>
-    <message>
-        <source>No Ship Date Entered</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Freight:</source>
@@ -71681,10 +73060,6 @@ Are you sure you want to do this?</source>
         <translation>Teruggekeerd</translation>
     </message>
     <message>
-        <source>No Misc. Charge Account Number</source>
-        <translation>Geen Div. Onkostenrekening</translation>
-    </message>
-    <message>
         <source>Approve Order for Billing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -71698,10 +73073,6 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>&lt;p&gt;You must enter a Ship Date before approving this order for billing.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Negative total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -71725,10 +73096,6 @@ Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Retrieving Tax Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Retrieving Shipping Charge Information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -71742,6 +73109,50 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Error Updating Freight Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Charge Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Charge is Discount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You may not enter a Misc. Charge without indicating the G/L Sales Account number for the charge.  Please set the Misc. Charge amount to 0 or select a Misc. Charge Sales Account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You must enter a Misc. Charge when specifying a Misc. Charge Sales Account. Please enter Misc. Charge amount or remove the Misc. Charge Sales Account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Approve for Billing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot override freight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight must be calculated automatically when lines are shipping from different addresses for Avalara tax calculation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to check freight</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -72444,15 +73855,7 @@ Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Opportunity Sources</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Lot/Serial Sequences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Incident Priorities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -72529,6 +73932,30 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Purchase Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dynamic Filters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRM Roles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priorities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sources</source>
+        <translation type="unfinished">Bronnen</translation>
+    </message>
+    <message>
+        <source>Task Templates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -74049,10 +75476,6 @@ Do you wish to convert %1 %2 at the current rate?</source>
     </message>
     <message>
         <source>Distribution would result in a negative amount. Please distribute manually.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The selected Opportunity cannot be deleted because there are ToDo Items assigned to it.  You must delete or reassign these ToDo Items before you may delete it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -76076,6 +77499,38 @@ You must first delete the Bill of Materials for the selected target item before 
         <source>Error deleting kit components.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Emails are required to be unique. You cannot use this email more than once.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected Opportunity cannot be deleted because there are Task Items assigned to it.  You must first delete or reassign these Tasks before you may delete it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Task was not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actual hours have been posted to this task (or sub-task).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actual expenses have been posted to this task (or sub-task).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are multiple Tax Types for this Item and none are set to Default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot merge two CRM Accounts that both refer to the same entity.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Values cannot add up to total</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>subAccntType</name>
@@ -77128,10 +78583,6 @@ Account: %4</source>
         <translation type="unfinished">Nodig:</translation>
     </message>
     <message>
-        <source>Assigned:</source>
-        <translation>Toegewezen:</translation>
-    </message>
-    <message>
         <source>Number:</source>
         <translation>Nummer:</translation>
     </message>
@@ -77144,20 +78595,12 @@ Account: %4</source>
         <translation>Eigenaar:</translation>
     </message>
     <message>
-        <source>Concept</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Alarms</source>
         <translation>Alarm meldingen</translation>
     </message>
     <message>
         <source>In-Process</source>
         <translation type="unfinished">In behandeling</translation>
-    </message>
-    <message>
-        <source>Complete</source>
-        <translation>Compleet</translation>
     </message>
     <message>
         <source>Comments</source>
@@ -77188,10 +78631,6 @@ Account: %4</source>
         <translation>Gebudgeteerd:</translation>
     </message>
     <message>
-        <source>Assigned to:</source>
-        <translation>Toegewezen aan:</translation>
-    </message>
-    <message>
         <source>Cannot Save Project Task</source>
         <translation>Kan projekt taak niet opslaan</translation>
     </message>
@@ -77212,20 +78651,12 @@ Account: %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Plan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Characteristics</source>
         <translation type="unfinished">Eigenschappen</translation>
     </message>
     <message>
         <source>Documents</source>
         <translation type="unfinished">Documenten</translation>
-    </message>
-    <message>
-        <source>Error Retrieving Project Task Information</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Retrieving Task Information</source>
@@ -77241,6 +78672,684 @@ Account: %4</source>
     </message>
     <message>
         <source>Percent Complete:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parent Task:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">dagen</translation>
+    </message>
+    <message>
+        <source>Assignments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Assignments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time and Expenses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation type="unfinished">Hangende</translation>
+    </message>
+    <message>
+        <source>Deferred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished">Afgewerkt</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished">Gebruiker</translation>
+    </message>
+    <message>
+        <source>Assigned</source>
+        <translation type="unfinished">Toegekend</translation>
+    </message>
+    <message>
+        <source>Role</source>
+        <translation type="unfinished">Rol</translation>
+    </message>
+    <message>
+        <source>Error Assigning Default to Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter valid due days.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Task Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Assignments</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>taskAssignment</name>
+    <message>
+        <source>Task Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned:</source>
+        <translation type="unfinished">Toegewezen:</translation>
+    </message>
+    <message>
+        <source>Username:</source>
+        <translation type="unfinished">Gebruikersnaam:</translation>
+    </message>
+    <message>
+        <source>Role:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must select a User.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a CRM Role.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Save Task Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Saving Task Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>taskList</name>
+    <message>
+        <source>Task List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished">Toon</translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished">Taken</translation>
+    </message>
+    <message>
+        <source>Opportunities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Incidents</source>
+        <translation type="unfinished">Incidenten</translation>
+    </message>
+    <message>
+        <source>Projects</source>
+        <translation type="unfinished">Projecten</translation>
+    </message>
+    <message>
+        <source>Show Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished">Gebruiker</translation>
+    </message>
+    <message>
+        <source>Owner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned To</source>
+        <translation type="unfinished">Toegewezen aan</translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Incident</source>
+        <translation type="unfinished">gebeurtenis</translation>
+    </message>
+    <message>
+        <source>Opportunity</source>
+        <translation type="unfinished">Opportuniteit</translation>
+    </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished">Prospect</translation>
+    </message>
+    <message>
+        <source>Project</source>
+        <translation type="unfinished">Project</translation>
+    </message>
+    <message>
+        <source>Start Date on or Before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Date on or After</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Due Date on or Before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Due Date on or After</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Completed Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished">Prioriteit</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Nummer</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Date</source>
+        <translation type="unfinished">Start Datum</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Vervaldatum</translation>
+    </message>
+    <message>
+        <source>Account#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account Name</source>
+        <translation type="unfinished">Account naam</translation>
+    </message>
+    <message>
+        <source>Parent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Klant</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished">Taak</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Edit Parent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Parent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Customer</source>
+        <translation type="unfinished">Wijzig klant</translation>
+    </message>
+    <message>
+        <source>View Customer</source>
+        <translation type="unfinished">Toon klant</translation>
+    </message>
+    <message>
+        <source>Delete Recurring Item?</source>
+        <translation type="unfinished">Terugkerend item verwijderen?</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;This is a recurring item. Do you want to delete just this one item or delete all open items in this recurrence?</source>
+        <translation type="unfinished">Dit is een terugkerend item. Wil u enkel dit item verwijderen of alle items van deze referentie?</translation>
+    </message>
+    <message>
+        <source>Error Retrieving To Do Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete List Item?</source>
+        <translation type="unfinished">Lijst item verwijderen?</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Are you sure that you want to completely delete the selected item?</source>
+        <translation type="unfinished">Bent u zeker dat u het geselecteerde item wil verwijderen?</translation>
+    </message>
+    <message>
+        <source>Error Retrieving Recurring To Do Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Recurring Task Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sub-Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Sub-tasks exist for this Task.
+Do you also want to delete sub-tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished">Afgewerkt</translation>
+    </message>
+    <message>
+        <source>Deferred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation type="unfinished">Hangende</translation>
+    </message>
+    <message>
+        <source>InProcess</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Feedback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirmed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned</source>
+        <translation type="unfinished">Toegekend</translation>
+    </message>
+    <message>
+        <source>Resolved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Concept</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>Restricted Access</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have not been granted privileges to open this item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>taskListCalendar</name>
+    <message>
+        <source>Task Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished">Afgewerkt</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Sluiten</translation>
+    </message>
+    <message>
+        <source>Error Retrieving User Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished">Prioriteit</translation>
+    </message>
+    <message>
+        <source>Owner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned</source>
+        <translation type="unfinished">Toegekend</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Omschrijving</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Status</translation>
+    </message>
+    <message>
+        <source>Due Date</source>
+        <translation type="unfinished">Vervaldatum</translation>
+    </message>
+    <message>
+        <source>Incident</source>
+        <translation type="unfinished">gebeurtenis</translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Klant</translation>
+    </message>
+    <message>
+        <source>New...</source>
+        <translation type="unfinished">Nieuw...</translation>
+    </message>
+    <message>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Edit Customer</source>
+        <translation type="unfinished">Wijzig klant</translation>
+    </message>
+    <message>
+        <source>View Customer</source>
+        <translation type="unfinished">Toon klant</translation>
+    </message>
+    <message>
+        <source>Sub-Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Sub-tasks exist for this Task.
+Do you also want to delete sub-tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving Customer Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving To Do Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>taskTemplate</name>
+    <message>
+        <source>Task Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished">Omschrijving:</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Sluiten</translation>
+    </message>
+    <message>
+        <source>Esc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return</source>
+        <translation type="unfinished">Terug</translation>
+    </message>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Nummer</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Error Deleting Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a Name for this Template before you may save it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Save Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Saving Template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Creating Template Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Assigning Template Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Removing Template Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The removed task does not exist on any Templates.
+Do you wish to also delete the task?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Template Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>taskTemplates</name>
+    <message>
+        <source>Task Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Templates:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Sluiten</translation>
+    </message>
+    <message>
+        <source>Esc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>Ctrl+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Ctrl+D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Omschrijving</translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished">Taken</translation>
+    </message>
+    <message>
+        <source>Error Deleting Template</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -77611,44 +79720,16 @@ You first need to Revoke those Tax Codes.</source>
         <translation></translation>
     </message>
     <message>
-        <source>Tax Breakdown for Transfer Order:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voucher Total:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Misc. Tax Adjustment:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>None</source>
         <translation type="unfinished">Geen</translation>
-    </message>
-    <message>
-        <source>Line Item Tax:</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tax Breakdown for Voucher:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Freight Value:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Total Tax:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Tax Zone:</source>
         <translation type="unfinished">Belastingzone:</translation>
-    </message>
-    <message>
-        <source>Pre-Tax Total Value:</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Purchase Order Currency:</source>
@@ -77659,35 +79740,7 @@ You first need to Revoke those Tax Codes.</source>
         <translation type="unfinished">Sluiten</translation>
     </message>
     <message>
-        <source>Document Currency:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Taxable Line Item Value:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tax Currency:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Tax Breakdown for Purchase Order:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Order Total:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purchase Order Total:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transfer Order Currency:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transfer Order Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -77699,10 +79752,6 @@ You first need to Revoke those Tax Codes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Return Total:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invoice Currency:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -77711,19 +79760,7 @@ You first need to Revoke those Tax Codes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Freight Tax:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sales Order Total:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Tax Breakdown for Invoice:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invoice Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -77739,16 +79776,8 @@ You first need to Revoke those Tax Codes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Quote Total:</source>
-        <translation>Totaal aanbieding:</translation>
-    </message>
-    <message>
         <source>Quote Currency:</source>
         <translation>Valuta aanbieding:</translation>
-    </message>
-    <message>
-        <source>Billing Total:</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tax Breakdown for Quote:</source>
@@ -77763,19 +79792,7 @@ You first need to Revoke those Tax Codes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Total P/O Freight Value:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Tax Breakdown for Purchase Order Item:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Purchase Item Total:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Total Voucher Freight:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -77791,7 +79808,115 @@ You first need to Revoke those Tax Codes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sales Credit Total:</source>
+        <source>Currency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Service:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Verwijderen</translation>
+    </message>
+    <message>
+        <source>Line</source>
+        <translation type="unfinished">Lijn</translation>
+    </message>
+    <message>
+        <source>Item</source>
+        <translation type="unfinished">Artikel</translation>
+    </message>
+    <message>
+        <source>Qty</source>
+        <translation type="unfinished">Aantal</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extended</source>
+        <translation type="unfinished">Uitkomst</translation>
+    </message>
+    <message>
+        <source>Taxable Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation type="unfinished">Code</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Omschrijving</translation>
+    </message>
+    <message>
+        <source>Sequence</source>
+        <translation type="unfinished">Volgorde</translation>
+    </message>
+    <message>
+        <source>Flat Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Percent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax</source>
+        <translation type="unfinished">Belasting</translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation type="unfinished">Totaal</translation>
+    </message>
+    <message>
+        <source>A/R Open Currency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Breakdown for A/R Open:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A/P Open Currency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Breakdown for A/P Open:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight</source>
+        <translation type="unfinished">Vracht</translation>
+    </message>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjustment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Tax Adjustment?</source>
+        <translation type="unfinished">Verwijder BTW correctie?</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Are you sure that you want to delete this tax adjustment?</source>
+        <translation type="unfinished">Bent u zeker dat u deze BTW correctie wil verwijderen?</translation>
+    </message>
+    <message>
+        <source>Error Deleting Tax Adjustment Information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -77932,10 +80057,6 @@ You first need to Revoke those Tax Codes.</source>
         <translation>Omschrijving:</translation>
     </message>
     <message>
-        <source>Account:</source>
-        <translation>Rekening:</translation>
-    </message>
-    <message>
         <source>A Tax Code already exists for the parameters specified.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -78063,6 +80184,18 @@ You first need to Revoke those Tax Codes.</source>
         <source>Error Deleting Tax Rate Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sales Tax Liability Account:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Tax Liability Account:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must select a Use Tax Account for this Tax.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>taxCodeRate</name>
@@ -78175,81 +80308,6 @@ You first need to Revoke those Tax Codes.</source>
     </message>
     <message>
         <source>Error Deleting Tax Code</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>taxDetail</name>
-    <message>
-        <source>Tax Type:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation>Omschrijving:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Are you sure that you want to delete this tax adjustment?</source>
-        <translation>Bent u zeker dat u deze BTW correctie wil verwijderen?</translation>
-    </message>
-    <message>
-        <source>Delete Tax Adjustment?</source>
-        <translation>Verwijder BTW correctie?</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Sluiten</translation>
-    </message>
-    <message>
-        <source>Tax Detail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sequence</source>
-        <translation type="unfinished">Volgorde</translation>
-    </message>
-    <message>
-        <source>Unspecified</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Code</source>
-        <translation type="unfinished">Code</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="unfinished">Omschrijving</translation>
-    </message>
-    <message>
-        <source>Tax Codes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="unfinished">Nieuw</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>Amount:</source>
-        <translation type="unfinished">Bedrag:</translation>
-    </message>
-    <message>
-        <source>Error Retrieving Tax Detail Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving Tax Type Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Deleting Tax Adjustment Information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -78415,6 +80473,47 @@ You first need to Revoke those Tax Codes.</source>
     </message>
     <message>
         <source>You must name this Tax Type before saving it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>External Tax Code:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of Available External Tax Codes (click to select):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation type="unfinished">Code</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Omschrijving</translation>
+    </message>
+    <message>
+        <source>You must define an external tax code when using an external taxation service.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Avalara Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error retrieving Avalara Tax Codes
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You have selected a different external Tax Code for this type.&lt;br&gt;Are you sure you wish to update the Tax Code?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -78786,483 +80885,6 @@ You must first re-assign these items before deleting the selected Tax Type.</sou
     </message>
 </context>
 <context>
-    <name>todoItem</name>
-    <message>
-        <source>Contact</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Owner:</source>
-        <translation>Eigenaar:</translation>
-    </message>
-    <message>
-        <source>Account #:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Comments</source>
-        <translation type="unfinished">Opmerkingen</translation>
-    </message>
-    <message>
-        <source>Priority:</source>
-        <translation>Prioriteit:</translation>
-    </message>
-    <message>
-        <source>To-Do List Item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation type="unfinished">Documenten</translation>
-    </message>
-    <message>
-        <source>Assigned to:</source>
-        <translation>Toegewezen aan:</translation>
-    </message>
-    <message>
-        <source>Pending Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deferred</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neither</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alarms</source>
-        <translation>Alarm meldingen</translation>
-    </message>
-    <message>
-        <source>Active</source>
-        <translation>Actief</translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation>Omschrijving:</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation>Status</translation>
-    </message>
-    <message>
-        <source>Due:</source>
-        <translation type="unfinished">Nodig:</translation>
-    </message>
-    <message>
-        <source>Assigned:</source>
-        <translation>Toegewezen:</translation>
-    </message>
-    <message>
-        <source>Started:</source>
-        <translation type="unfinished">Gestart:</translation>
-    </message>
-    <message>
-        <source>Completed:</source>
-        <translation type="unfinished">Afgewerkt:</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation>Notities</translation>
-    </message>
-    <message>
-        <source>Relationships</source>
-        <translation type="unfinished">Relaties</translation>
-    </message>
-    <message>
-        <source>Opportunity #:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Incident #:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Name:</source>
-        <translation>Taak naam:</translation>
-    </message>
-    <message>
-        <source>Error Retrieving To Do Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Saving To Do Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Occurred</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving Incident Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot Open Recursively</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This todo is already open and cannot be raised. Please close windows to get to it.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Locking Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>todoList</name>
-    <message>
-        <source>Customer</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Assigned To</source>
-        <translation>Toegewezen aan</translation>
-    </message>
-    <message>
-        <source>Delete List Item?</source>
-        <translation>Lijst item verwijderen?</translation>
-    </message>
-    <message>
-        <source>Task</source>
-        <translation>Taak</translation>
-    </message>
-    <message>
-        <source>To-do</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>To-Do List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Completed</source>
-        <translation type="unfinished">Afgewerkt</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Nieuw</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>Soort</translation>
-    </message>
-    <message>
-        <source>View Customer</source>
-        <translation type="unfinished">Toon klant</translation>
-    </message>
-    <message>
-        <source>User</source>
-        <translation type="unfinished">Gebruiker</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Naam</translation>
-    </message>
-    <message>
-        <source>Start Date</source>
-        <translation type="unfinished">Start Datum</translation>
-    </message>
-    <message>
-        <source>Projects</source>
-        <translation type="unfinished">Projecten</translation>
-    </message>
-    <message>
-        <source>Show</source>
-        <translation type="unfinished">Toon</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Are you sure that you want to completely delete the selected item?</source>
-        <translation>Bent u zeker dat u het geselecteerde item wil verwijderen?</translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Vervaldatum</translation>
-    </message>
-    <message>
-        <source>Incident</source>
-        <translation>gebeurtenis</translation>
-    </message>
-    <message>
-        <source>Project</source>
-        <translation type="unfinished">Project</translation>
-    </message>
-    <message>
-        <source>Incidents</source>
-        <translation>Incidenten</translation>
-    </message>
-    <message>
-        <source>Owner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;This is a recurring item. Do you want to delete just this one item or delete all open items in this recurrence?</source>
-        <translation>Dit is een terugkerend item. Wil u enkel dit item verwijderen of alle items van deze referentie?</translation>
-    </message>
-    <message>
-        <source>InProcess</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Recurring Item?</source>
-        <translation>Terugkerend item verwijderen?</translation>
-    </message>
-    <message>
-        <source>To-Do Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Resolved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Confirmed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pending</source>
-        <translation type="unfinished">Hangende</translation>
-    </message>
-    <message>
-        <source>Deferred</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Assigned</source>
-        <translation type="unfinished">Toegekend</translation>
-    </message>
-    <message>
-        <source>Closed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Concept</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start Date on or Before</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Customer</source>
-        <translation type="unfinished">Wijzig klant</translation>
-    </message>
-    <message>
-        <source>Start Date on or After</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Due Date on or Before</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Due Date on or After</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Completed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account Name</source>
-        <translation type="unfinished">Account naam</translation>
-    </message>
-    <message>
-        <source>Show Completed Only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account#</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>To-Do Item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Opportunity</source>
-        <translation type="unfinished">Opportuniteit</translation>
-    </message>
-    <message>
-        <source>Restricted Access</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have not been granted privileges to open this item.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Opportunities</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Feedback</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Prioriteit</translation>
-    </message>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving To Do Item Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving Recurring To Do Item Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Deleting Recurring To Do Item Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished">Verwijderen</translation>
-    </message>
-    <message>
-        <source>Edit Parent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Parent</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>todoListCalendar</name>
-    <message>
-        <source>Assigned</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Customer</source>
-        <translation>Toon klant</translation>
-    </message>
-    <message>
-        <source>Owner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="unfinished">Status</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">Naam</translation>
-    </message>
-    <message>
-        <source>Customer</source>
-        <translation>Klant</translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Prioriteit</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seq</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="unfinished">Omschrijving</translation>
-    </message>
-    <message>
-        <source>Incident</source>
-        <translation>gebeurtenis</translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation type="unfinished">Nieuw...</translation>
-    </message>
-    <message>
-        <source>To-Do List Calendar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Due Date</source>
-        <translation>Vervaldatum</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>Completed</source>
-        <translation type="unfinished">Afgewerkt</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished">Sluiten</translation>
-    </message>
-    <message>
-        <source>Active Only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Customer</source>
-        <translation>Wijzig klant</translation>
-    </message>
-    <message>
-        <source>Error Retrieving User Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Deleting To Do Item Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving Customer Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Retrieving To Do Item Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>toggleBankrecCleared</name>
     <message>
         <source>Toggle BankRec Cleared</source>
@@ -79365,10 +80987,6 @@ You must first re-assign these items before deleting the selected Tax Type.</sou
     <message>
         <source>&amp;Delete</source>
         <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>Tax Zone:</source>
-        <translation type="unfinished">Belastingzone:</translation>
     </message>
     <message>
         <source>&lt;p&gt;You must enter either a Scheduled Date or a Pack Date before using the Quick Entry tab.</source>
@@ -79520,10 +81138,6 @@ otherwise a new one will be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tax:</source>
-        <translation>Belasting:</translation>
-    </message>
-    <message>
         <source>Error Adding to Packing List Batch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -79556,19 +81170,11 @@ otherwise a new one will be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Updating Details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Checking Inventory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Order-Level Freight:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Calculating Tax</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -79999,10 +81605,6 @@ otherwise a new one will be created.</source>
         <translation>Notities</translation>
     </message>
     <message>
-        <source>Tax:</source>
-        <translation>Belasting:</translation>
-    </message>
-    <message>
         <source>Pend. Alloc.</source>
         <translation type="unfinished">Toewijzingen oiphanden</translation>
     </message>
@@ -80100,10 +81702,6 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Error Cancelling Transfer Order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Calculating Tax</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -84415,10 +86013,6 @@ and Purchase Order amounts</source>
         <translation type="unfinished">Nieuwste</translation>
     </message>
     <message>
-        <source>Error Retrieving Vendor CRM Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Retrieving Vendor Information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -84448,6 +86042,10 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>Error saving address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -84648,10 +86246,6 @@ and Purchase Order amounts</source>
         <translation></translation>
     </message>
     <message>
-        <source>C&amp;ode:</source>
-        <translation>C&amp;ode:</translation>
-    </message>
-    <message>
         <source>You must enter a valid Code for this Vendor Type before creating it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -84673,6 +86267,14 @@ and Purchase Order amounts</source>
     </message>
     <message>
         <source>Error Saving Vendor Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Code:</source>
+        <translation type="unfinished">Code:</translation>
+    </message>
+    <message>
+        <source>Default:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -84722,6 +86324,10 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     <message>
         <source>&amp;Edit</source>
         <translation>&amp;Bewerk</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaard</translation>
     </message>
 </context>
 <context>
@@ -85400,10 +87006,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calculating Voucher Tax</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Retrieving PO Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -85452,10 +87054,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Adding Tax to Voucher</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Freight Distributed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -85473,6 +87071,38 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Co&amp;mments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Freight Tax Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VCH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vendor Charged Tax:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Tax Owed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot enter order level freight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot enter order level freight when lines are shipping to different addresses for Avalara tax calculation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to check freight</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -85552,10 +87182,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Receiving</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tax:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -85703,10 +87329,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tax Calculation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You must enter a postive Quantity to Voucher before saving this Voucher Item.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -85728,6 +87350,10 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Would you like to cancel anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -85866,6 +87492,18 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Cannot Save Voucher Distribution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Site:</source>
+        <translation type="unfinished">Magazijn:</translation>
+    </message>
+    <message>
+        <source>Tax Exempt Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Fetching Site</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
