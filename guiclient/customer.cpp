@@ -72,7 +72,7 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _taxPage->layout()->addWidget(_taxreg);
   _taxreg->setCloseVisible(false);
   _taxreg->parameterWidget()->setDefault(tr("Customer"), QVariant(), true);
-  _taxreg->parameterWidget()->append("", "hasContext", ParameterWidget::Exists, true);
+  _taxreg->parameterWidget()->append("hasContext", "hasContext", ParameterWidget::Exists, true);
   _taxreg->setParameterWidgetVisible(false);
   _taxreg->setQueryOnStartEnabled(false);
 
