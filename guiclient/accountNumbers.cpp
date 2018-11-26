@@ -88,7 +88,7 @@ void accountNumbers::sDelete()
     if (result < 0)
     {
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Account"),
-                             storedProcErrorLookup("deleteAccounting", result),
+                             storedProcErrorLookup("deleteAccount", result),
                              __FILE__, __LINE__);
         return;
     }

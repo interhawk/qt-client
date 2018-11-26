@@ -1429,7 +1429,7 @@ bool salesOrder::save(bool partial)
   }
 
   QString errmsg;
-  if (ISORDER(_mode) && !_recur->save(true, cp, &errmsg))
+  if (ISORDER(_mode) && !partial && !_recur->save(true, cp, &errmsg))
   {
     rollbackq.exec();
     ErrorReporter::error(QtCriticalMsg, this, tr("Error occurred saving recurrence"),
@@ -1946,12 +1946,11 @@ void salesOrder::sPopulateCustomerInfo(int pCustid)
                 "       cust_tax_exemption, "
                 "       true AS iscustomer "
                 "FROM custinfo "
-                "  JOIN crmacct           ON crmacct_cust_id = cust_id"
                 "  LEFT OUTER JOIN cntct  ON (cust_cntct_id=cntct_id) "
                 "  LEFT OUTER JOIN addr   ON (cntct_addr_id=addr_id) "
                 "  LEFT OUTER JOIN shiptoinfo ON ((shipto_cust_id=cust_id)"
-                "                         AND (shipto_default)) "
-                "LEFT OUTER JOIN crmacct ON (cust_crmacct_id = crmacct_id) "
+                "                         AND shipto_default) "
+                "  LEFT OUTER JOIN crmacct ON (cust_crmacct_id = crmacct_id) "
                 "WHERE (cust_id=<? value('cust_id') ?>) "
                 "<? if exists('isQuote') ?>"
                 "UNION "
@@ -2921,6 +2920,7 @@ void salesOrder::populate()
           _fromQuote->setText(so.value("rahead_number").toString());
         }
       }
+
       if (so.value("cohead_recurring_cohead_id").toInt() != 0)
         _recur->setParent(so.value("cohead_recurring_cohead_id").toInt(), "S");
       else

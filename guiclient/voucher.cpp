@@ -42,7 +42,6 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_clear,                    SIGNAL(clicked()),                                 this,          SLOT(sClear()));
   connect(_distributeall,            SIGNAL(clicked()),                                 this,          SLOT(sDistributeAll()));
   connect(_voucherNumber,            SIGNAL(editingFinished()),                         this,          SLOT(sHandleVoucherNumber()));
-  connect(_poNumber,                 SIGNAL(newId(int, const QString&)),                this,          SLOT(sFillList()));
   connect(_poNumber,                 SIGNAL(newId(int, const QString&)),                this,          SLOT(sPopulatePoInfo()));
   connect(_amountToDistribute,       SIGNAL(valueChanged()),                            this,          SLOT(sPopulateBalanceDue()));
   connect(_new,                      SIGNAL(clicked()),                                 this,          SLOT(sNewMiscDistribution()));
@@ -769,8 +768,11 @@ void voucher::sPopulatePoInfo()
   po.exec();
   if (po.first())
   {
-    bool gets1099 = po.value("vend_1099").toBool();
+    _vendid = po.value("vend_id").toInt();
+    _vendor->setText(po.value("vend_number").toString());
+    _vendName->setText(po.value("vend_name").toString());
 
+    bool gets1099 = po.value("vend_1099").toBool();
     _flagFor1099->setChecked(gets1099);
     _terms->setId(po.value("pohead_terms_id").toInt());
     _taxzone->setId(po.value("pohead_taxzone_id").toInt());
@@ -779,20 +781,20 @@ void voucher::sPopulatePoInfo()
     _freight->setId(po.value("pohead_curr_id").toInt());
     _freightTaxtype->setId(po.value("pohead_freight_taxtype_id").toInt());
     _taxExempt->setCode(po.value("pohead_tax_exemption").toString());
-    _vendid = po.value("vend_id").toInt();
-    _vendor->setText(po.value("vend_number").toString());
-    _vendName->setText(po.value("vend_name").toString());
     // TODO: replace with a compact AddressCluster when such exists
     _vendAddress1->setText(po.value("addr_line1").toString());
     _vendAddress2->setText(po.value("addr_line2").toString());
     if (_mode != cView)
       _new->setEnabled(true);
+
+    sFillList();
   } else {
     _freight->setLocalValue(0.00);
   }
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting P/O Information"),
                                 po, __FILE__, __LINE__))
     return;
+
 }
 
 void voucher::sPopulateDistributed()
