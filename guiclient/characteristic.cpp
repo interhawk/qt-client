@@ -173,6 +173,12 @@ characteristic::characteristic(QWidget* parent, const char* name, bool modal, Qt
   _validator->append(2, "[1-9]\\d{0,3}");
   _validator->append(3, "[A-Z]\\d{5}[1-9]");
   _validator->append(4, "(https?:\\/\\/(?:www\\.|(?!www))[^\\s\\.]+\\.[^\\s]{2,}|www\\.[^\\s]+\\.[^\\s]{2,})");
+
+  _mask->append(0, "00/00/0000");
+  _mask->append(1, "###-###-####");
+  _mask->append(2, "###-##-####");
+  _mask->append(3, "00,000.00");
+
 }
 
 characteristic::~characteristic()
