@@ -382,6 +382,7 @@ void docAttach::sSave()
     return;
   }
 
+  setSaveStatus(OK);
   _docAttachPurpose->setEnabled(true);
   XSqlQuery newDocass;
   QString title;

@@ -64,16 +64,16 @@ protected slots:
     virtual void showEvent(QShowEvent *);
 
 private:
-    int _id;
-    int _sourceid;
-    QString _sourcetype;
-    int _targetid;
-    int _charid;
-    QString _targettype;
-    QString _purpose;
-    QString _mode;
+    int        _id;
+    int        _sourceid;
+    QString    _sourcetype;
+    int        _targetid;
+    int        _charid;
+    QString    _targettype;
+    QString    _purpose;
+    QString    _mode;
     docAttachPrivate *_p;
-    SaveStatus            _saveStatus;
+    SaveStatus _saveStatus;
 };
 
 #endif // docAttach_H
