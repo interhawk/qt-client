@@ -205,7 +205,7 @@ Privileges  *_x_privileges = 0;
 QString     _x_username;
 TaxIntegration * _x_taxIntegration = 0;
 
-void initializePlugin(Preferences *pPreferences, Metrics *pMetrics, Privileges *pPrivileges, TaxIntegration* pTaxIntegration, QString pUsername, QMdiArea *pWorkspace)
+void initializePlugin(Preferences *pPreferences, Metrics *pMetrics, Privileges *pPrivileges, QString pUsername, QMdiArea *pWorkspace, TaxIntegration* pTaxIntegration)
 {
   _x_preferences = pPreferences;
   _x_metrics = pMetrics;

@@ -638,7 +638,7 @@ int main(int argc, char *argv[])
 
   _taxIntegration = TaxIntegration::getTaxIntegration();
 
-  initializePlugin(_preferences, _metrics, _privileges, _taxIntegration, omfgThis->username(), omfgThis->workspace());
+  initializePlugin(_preferences, _metrics, _privileges, omfgThis->username(), omfgThis->workspace(), _taxIntegration);
 
 // START code for updating the locale settings if they haven't been already
   XSqlQuery lc;
