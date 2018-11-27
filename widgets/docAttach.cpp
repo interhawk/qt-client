@@ -559,7 +559,7 @@ void docAttach::sSave()
         return;
       }
       bytarr = sourceFile.readAll();
-      url.setPath(fi.fileName().remove(" "));
+      url.setUrl(fi.fileName().remove(" "));
       url.setScheme("");
     }
 
