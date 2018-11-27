@@ -159,20 +159,20 @@ void prospects::sCreateQuote()
 
 void prospects::sCreateProject()
 {
-  XSqlQuery cntctq;
+  XSqlQuery prjq;
   ParameterList params;
 
   params.append("mode", cNew);
   params.append("crmacct_id", list()->altId());
   params.append("username", list()->rawValue("prospect_assigned_username").toString());
 
-  cntctq.prepare("SELECT getcrmaccountcontact(:crmacct) AS ret;");
-  cntctq.bindValue(":crmacct", list()->altId());
-  cntctq.exec();
-  if (cntctq.first())
-    params.append("cntct_id", cntctq.value("ret"));
+  prjq.prepare("SELECT getcrmaccountcontact(:crmacct) AS ret;");
+  prjq.bindValue(":crmacct", list()->altId());
+  prjq.exec();
+  if (prjq.first())
+    params.append("cntct_id", prjq.value("ret"));
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Determining Contact"),
-                             cntctq, __FILE__, __LINE__))
+                             prjq, __FILE__, __LINE__))
       return;
    
   project* newdlg = new project(0, "", false);
@@ -186,8 +186,8 @@ void prospects::sCreateTask()
   ParameterList params;
 
   params.append("mode", "new");
-  params.append("parent", "CRMA");
-  params.append("parent_id", list()->altId());
+  params.append("parent", "PSPCT");
+  params.append("parent_id", list()->id());
   params.append("parent_owner_username", list()->rawValue("prospect_owner_username").toString());
   params.append("parent_assigned_username", list()->rawValue("prospect_assigned_username").toString());
 
@@ -199,25 +199,39 @@ void prospects::sCreateTask()
 
 void prospects::sCreateOpportunity()
 {
-  XSqlQuery cntctq;
+  XSqlQuery oppq;
+  int oppid = -1;
   ParameterList params;
+
   params.append("mode", "new");
   params.append("crmacct_id",list()->altId());
   params.append("parent_owner_username", list()->rawValue("prospect_owner_username").toString());
   params.append("parent_assigned_username", list()->rawValue("prospect_assigned_username").toString());
 
-  cntctq.prepare("SELECT getcrmaccountcontact(:crmacct) AS ret;");
-  cntctq.bindValue(":crmacct", list()->altId());
-  cntctq.exec();
-  if (cntctq.first())
-    params.append("cntct_id", cntctq.value("ret"));
+  oppq.prepare("SELECT getcrmaccountcontact(:crmacct) AS ret;");
+  oppq.bindValue(":crmacct", list()->altId());
+  oppq.exec();
+  if (oppq.first())
+    params.append("cntct_id", oppq.value("ret"));
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Determining Contact"),
-                             cntctq, __FILE__, __LINE__))
+                             oppq, __FILE__, __LINE__))
       return;
 
   opportunity newdlg(0, "", true);
   newdlg.set(params);
-  newdlg.exec();
+  oppid = newdlg.exec();
+  if(oppid != XDialog::Rejected && oppid > 0)
+  {
+    oppq.prepare("INSERT INTO docass(docass_source_id, docass_source_type, docass_target_id,"
+                 "                   docass_target_type, docass_purpose, docass_notes, docass_username)"
+                 " VALUES (:source, 'PSPCT', :target, 'OPP', 'S', :notes, geteffectivextuser());" );
+    oppq.bindValue(":source", list()->id());
+    oppq.bindValue(":target", oppid);
+    oppq.bindValue(":notes", tr("Opportunity created from Prospect"));
+    oppq.exec();
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Determining Contact"),
+                             oppq, __FILE__, __LINE__);
+  }
 }
 
 void prospects::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)

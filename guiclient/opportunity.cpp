@@ -112,6 +112,7 @@ opportunity::opportunity(QWidget* parent, const char* name, bool modal, Qt::Wind
   _salesList->addColumn(tr("Ext. Price"),  _priceColumn, Qt::AlignRight, true, "sale_extprice");
 
   _charass->setType("OPP");
+  _documents->setType("OPP");
 
   _owner->setUsername(omfgThis->username());
   _owner->setType(UsernameLineEdit::UsersActive);
