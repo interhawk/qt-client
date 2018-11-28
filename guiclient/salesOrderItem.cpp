@@ -907,7 +907,6 @@ void salesOrderItem::clear()
     disconnect(_supplyDropShip,    SIGNAL(toggled(bool)),                this, SLOT(sHandleSupplyOrder()));
   }
 
-  _soheadid                      = -1;
   _soitemid                      = -1;
 
   _autoord                       = true;
@@ -929,7 +928,6 @@ void salesOrderItem::clear()
   _itemsubsLastItemid            = -1;
   _itemsubsLastWarehousid        = -1;
   _leadTime                      = 999;
-  _mode                          = cView;
   _modified                      = false;
   _originalQtyOrd                = 0.0;
   _partialsaved                  = false;
@@ -1882,7 +1880,6 @@ void salesOrderItem::sRecalcPrice()
 void salesOrderItem::sDeterminePrice(bool force)
 {
   ENTERED << "with" << force;
-  if (DEBUG) qDebug() << "sDeterminePrice(force) entered with" << force;
   XSqlQuery salesDeterminePrice;
   // Determine if we can or should update the price
   if ( _mode == cView ||
