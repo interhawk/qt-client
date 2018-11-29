@@ -113,8 +113,8 @@ bool configureTax::sSave()
 
   _taxIntegration->wait();
   delete _taxIntegration;
-  _taxIntegration = TaxIntegration::getTaxIntegration();
-  _x_taxIntegration = TaxIntegration::getTaxIntegration();
+  _taxIntegration = TaxIntegration::getTaxIntegration(true);
+  _x_taxIntegration = _taxIntegration;
 
   return true;
 }

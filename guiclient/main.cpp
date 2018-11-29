@@ -636,7 +636,7 @@ int main(int argc, char *argv[])
 	_metricsenc = new Metricsenc(key);
   }
 
-  _taxIntegration = TaxIntegration::getTaxIntegration();
+  _taxIntegration = TaxIntegration::getTaxIntegration(true);
 
   initializePlugin(_preferences, _metrics, _privileges, omfgThis->username(), omfgThis->workspace(), _taxIntegration);
 

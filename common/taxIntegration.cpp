@@ -17,31 +17,34 @@
 #include "avalaraIntegration.h"
 #include "noIntegration.h"
 
-TaxIntegration* TaxIntegration::getTaxIntegration()
+TaxIntegration* TaxIntegration::getTaxIntegration(bool listen)
 {
   // Can't access _metrics from here, but only queries once at startup and in setup
   XSqlQuery service("SELECT fetchMetricText('TaxService') AS TaxService;");
 
   if (service.first() && service.value("TaxService") == "A")
-    return new AvalaraIntegration();
+    return new AvalaraIntegration(listen);
   else
-    return new NoIntegration();
+    return new NoIntegration(listen);
 }
 
-TaxIntegration::TaxIntegration()
+TaxIntegration::TaxIntegration(bool listen)
 {
-  if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("calculatetax"))
-    QSqlDatabase::database().driver()->subscribeToNotification("calculatetax");
-  if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("commit"))
-    QSqlDatabase::database().driver()->subscribeToNotification("commit");
-  if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("cancel"))
-    QSqlDatabase::database().driver()->subscribeToNotification("cancel");
+  if (listen)
+  {
+    if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("calculatetax"))
+      QSqlDatabase::database().driver()->subscribeToNotification("calculatetax");
+    if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("commit"))
+      QSqlDatabase::database().driver()->subscribeToNotification("commit");
+    if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("cancel"))
+      QSqlDatabase::database().driver()->subscribeToNotification("cancel");
 
-  connect(QSqlDatabase::database().driver(),
-          SIGNAL(notification(const QString&, QSqlDriver::NotificationSource, const QVariant&)),
-          this,
-          SLOT(sNotified(const QString&, QSqlDriver::NotificationSource, const QVariant&))
-         );
+    connect(QSqlDatabase::database().driver(),
+            SIGNAL(notification(const QString&, QSqlDriver::NotificationSource, const QVariant&)),
+            this,
+            SLOT(sNotified(const QString&, QSqlDriver::NotificationSource, const QVariant&))
+           );
+  }
 }
 
 void TaxIntegration::getTaxCodes()

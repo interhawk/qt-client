@@ -18,7 +18,7 @@ class NoIntegration : public TaxIntegration
   Q_OBJECT
 
   public:
-    NoIntegration();
+    NoIntegration(bool = false);
 
   protected:
     virtual void sendRequest(QString, QString, int, QString, QStringList, QString);
