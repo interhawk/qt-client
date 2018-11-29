@@ -420,7 +420,7 @@ void selectOrderForBilling::sEditSelection()
   {
     sFillList();
 
-    _salesTax->sRefresh();
+    _salesTax->invalidate();
 
     _updated = true;
   }
@@ -439,7 +439,7 @@ void selectOrderForBilling::sCancelSelection()
 
   sFillList();
 
-  _salesTax->sRefresh();
+  _salesTax->invalidate();
 }
 
 void selectOrderForBilling::sSelectBalance()
@@ -467,7 +467,7 @@ void selectOrderForBilling::sSelectBalance()
 
   sFillList();
 
-  _salesTax->sRefresh();
+  _salesTax->invalidate();
 }
 
 void selectOrderForBilling::sUpdateTotal()

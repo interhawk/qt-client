@@ -301,6 +301,9 @@ void shipOrder::sShip()
       }
       else if (_create->isChecked())
       {
+        _taxIntegration->calculateTax("COB", cobmiscid);
+        _taxIntegration->wait();
+
         shipq.prepare("SELECT createInvoice(:cobmisc_id) AS result;");
         shipq.bindValue(":cobmisc_id", cobmiscid);
         shipq.exec();
