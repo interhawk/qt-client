@@ -323,6 +323,9 @@ GUIClient::GUIClient(const QString &pDatabaseURL, const QString &pUsername)
     _spellChecker(0),
     _menu(0)
 {
+#ifdef Q_OS_LINUX
+  QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar, true); // bug 34231 - testability
+#endif
   XSqlQuery qry;
 
   __saveSizePositionEventFilter = new SaveSizePositionEventFilter(this);
