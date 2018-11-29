@@ -22,7 +22,7 @@
 
 #include "errorReporter.h"
 
-AvalaraIntegration::AvalaraIntegration() : TaxIntegration()
+AvalaraIntegration::AvalaraIntegration(bool listen) : TaxIntegration(listen)
 {
   restclient = new QNetworkAccessManager;
   connect(restclient, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleResponse(QNetworkReply*)));

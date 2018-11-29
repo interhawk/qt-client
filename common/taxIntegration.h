@@ -24,9 +24,9 @@ class TaxIntegration : public QObject
   Q_OBJECT
 
   public:
-    TaxIntegration();
+    TaxIntegration(bool = false);
 
-    Q_INVOKABLE static TaxIntegration* getTaxIntegration();
+    Q_INVOKABLE static TaxIntegration* getTaxIntegration(bool = false);
     Q_INVOKABLE virtual void test(QStringList);
     Q_INVOKABLE virtual void getTaxCodes();
     Q_INVOKABLE virtual void getTaxExemptCategories(QStringList = QStringList());

@@ -13,7 +13,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-NoIntegration::NoIntegration() : TaxIntegration()
+NoIntegration::NoIntegration(bool listen) : TaxIntegration(listen)
 {
 }
 

@@ -21,7 +21,7 @@ class AvalaraIntegration : public TaxIntegration
   Q_OBJECT
 
   public:
-    AvalaraIntegration();
+    AvalaraIntegration(bool = false);
     void wait();
 
   protected:
