@@ -382,34 +382,6 @@ void crmaccount::sClose()
 
     XSqlQuery begin("BEGIN;");
 
-    XSqlQuery detachq;
-    detachq.prepare("SELECT MIN(detachContact(crmacctcntctass_cntct_id, crmacctcntctass_crmacct_id)) AS returnVal "
-              "FROM crmacctcntctass "
-              "WHERE (crmacctcntctass_crmacct_id=:crmacct_id);");
-    detachq.bindValue(":crmacct_id", _crmacctId);
-    detachq.exec();
-    if (detachq.first())
-    {
-      int returnVal = detachq.value("returnVal").toInt();
-      if (returnVal < 0)
-      {
-        rollback.exec();
-        ErrorReporter::error(QtCriticalMsg, this,
-                             tr("Error detaching Contacts from Account."),
-                             storedProcErrorLookup("detachContact", returnVal),
-                             __FILE__, __LINE__);
-        return;
-      }
-    }
-    else if (detachq.lastError().type() != QSqlError::NoError)
-    {
-      rollback.exec();
-      ErrorReporter::error(QtCriticalMsg, this,
-                           tr("Error detaching Contact from Account"),
-                           detachq, __FILE__, __LINE__);
-      return;
-    }
-
     if (_metrics->boolean("LotSerialControl"))
     {
       XSqlQuery deleteReg;
