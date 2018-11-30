@@ -271,44 +271,36 @@ SetResponse vendor::set(const ParameterList &pParams)
       _mode = cNew;
       emit newMode(_mode);
 
-      
       clear();
       _accountingTab->setEnabled(false);
-
-      if (_privileges->check("MaintainVendorAddresses"))
-      {
-        connect(_vendaddr, SIGNAL(valid(bool)), _editAddress, SLOT(setEnabled(bool)));
-        connect(_vendaddr, SIGNAL(valid(bool)), _deleteAddress, SLOT(setEnabled(bool)));
-        connect(_vendaddr, SIGNAL(itemSelected(int)), _editAddress, SLOT(animateClick()));
-      }
-      else
-      {
-        _newAddress->setEnabled(false);
-        connect(_vendaddr, SIGNAL(itemSelected(int)), _viewAddress, SLOT(animateClick()));
-      }
     }
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
       emit newMode(_mode);
-
-      if (_privileges->check("MaintainVendorAddresses"))
-      {
-        connect(_vendaddr, SIGNAL(valid(bool)), _editAddress, SLOT(setEnabled(bool)));
-        connect(_vendaddr, SIGNAL(valid(bool)), _deleteAddress, SLOT(setEnabled(bool)));
-        connect(_vendaddr, SIGNAL(itemSelected(int)), _editAddress, SLOT(animateClick()));
-      }
-      else
-      {
-        _newAddress->setEnabled(false);
-        connect(_vendaddr, SIGNAL(itemSelected(int)), _viewAddress, SLOT(animateClick()));
-      }
     }
     else if (param.toString() == "view")
     {
       setViewMode();
     }
     _tempMode = _mode;
+  }
+
+  if (_mode != cView)
+  {
+    if (_privileges->check("MaintainVendorAddresses"))
+    {
+      connect(_vendaddr, SIGNAL(valid(bool)), _editAddress, SLOT(setEnabled(bool)));
+      connect(_vendaddr, SIGNAL(valid(bool)), _deleteAddress, SLOT(setEnabled(bool)));
+      connect(_vendaddr, SIGNAL(itemSelected(int)), _editAddress, SLOT(animateClick()));
+    }
+    else
+    {
+      _address->setEnabled(false);
+      _newAddress->setEnabled(false);
+      if (_privileges->check("ViewVendorAddresses"))
+        connect(_vendaddr, SIGNAL(valid(bool)), _viewAddress, SLOT(setEnabled(bool)));
+    }
   }
 
   param = pParams.value("crmacct_id", &valid);

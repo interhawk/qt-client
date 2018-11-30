@@ -34,11 +34,13 @@ address::address(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
 {
     setupUi(this);
 
-    connect(_editAddrUse, SIGNAL(clicked()), this, SLOT(sEdit()));
-    connect(_viewAddrUse, SIGNAL(clicked()), this, SLOT(sView()));
-    connect(_buttonBox, SIGNAL(accepted()), this, SLOT(sSave()));
-    connect(_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    connect(_uses, SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*)), this, SLOT(sPopulateMenu(QMenu*)));
+    connect(_editAddrUse, SIGNAL(clicked()),         this, SLOT(sEdit()));
+    connect(_viewAddrUse, SIGNAL(clicked()),         this, SLOT(sView()));
+    connect(_buttonBox,   SIGNAL(accepted()),        this, SLOT(sSave()));
+    connect(_buttonBox,   SIGNAL(rejected()),        this, SLOT(reject()));
+    connect(_uses,        SIGNAL(valid(bool)),       this, SLOT(sHandleSelection()));
+    connect(_uses,        SIGNAL(doubleClicked()), _editAddrUse, SLOT(animateClick()));
+    connect(_uses,        SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*)), this, SLOT(sPopulateMenu(QMenu*)));
 
     _uses->addColumn(tr("Used by"),	 50, Qt::AlignLeft, true, "type");
     _uses->addColumn(tr("First Name\nor Number"),50, Qt::AlignLeft, true, "cntct_first_name");
@@ -53,6 +55,7 @@ address::address(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
     _charass->setType("ADDR");
 
     _close = false;
+    _editableMode = true;
 }
 
 address::~address()
@@ -113,10 +116,11 @@ enum SetResponse address::set(const ParameterList &pParams)
 void address::setViewMode()
 {
   _mode = cView;
+  _editableMode = false;
 
   _editAddrUse->hide();
-  disconnect(_uses, SIGNAL(itemSelected(int)), _editAddrUse, SLOT(animateClick()));
-  connect(_uses, SIGNAL(itemSelected(int)), _viewAddrUse, SLOT(animateClick()));
+  disconnect(_uses, SIGNAL(doubleClicked()), _editAddrUse, SLOT(animateClick()));
+  connect(_uses, SIGNAL(doubleClicked()), _viewAddrUse, SLOT(animateClick()));
 
   _addr->setEnabled(false);
   _notes->setEnabled(false);
@@ -124,6 +128,35 @@ void address::setViewMode()
   _editAddrUse->setEnabled(false);
   _charass->setReadOnly(true);
   _buttonBox->setStandardButtons(QDialogButtonBox::Close);
+}
+
+void address::sHandleSelection()
+{
+  switch (_uses->altId())
+  {
+    case 1:
+      _editAddrUse->setEnabled(_privileges->check("MaintainAllContacts MaintainPersonalContacts") && _editableMode);
+      _viewAddrUse->setEnabled(_privileges->check("ViewAllContacts ViewPersonalContacts"));
+      break;
+    case 2:	// ship-to
+      _editAddrUse->setEnabled(_privileges->check("MaintainShiptos") && _editableMode);
+      _viewAddrUse->setEnabled(_privileges->check("ViewShiptos"));
+      break;
+    case 3:	// vendor
+      _editAddrUse->setEnabled(_privileges->check("MaintainVendors") && _editableMode);
+      _viewAddrUse->setEnabled(_privileges->check("ViewVendors"));
+      break;
+    case 4:	// vendaddr
+      _editAddrUse->setEnabled(_privileges->check("MaintainVendorAddresses") && _editableMode);
+      _viewAddrUse->setEnabled(_privileges->check("ViewVendorAddresses"));
+      break;
+    case 5:	// warehouse
+      _editAddrUse->setEnabled(_privileges->check("MaintainWarehouses") && _editableMode);
+      _viewAddrUse->setEnabled(_privileges->check("ViewWarehouses"));
+      break;
+    default:
+      break;
+  }
 }
 
 void address::sSave()
@@ -239,49 +272,42 @@ void address::sPopulateMenu(QMenu *pMenu)
   switch (_uses->altId())
   {
     case 1:
-      if (_privileges->check("MaintainAllContacts") &&
-	  (cNew == _mode || cEdit == _mode))
-    (void)pMenu->addAction(editStr, this, SLOT(sEditContact()));
+      if (_privileges->check("MaintainAllContacts") && _editableMode)
+        (void)pMenu->addAction(editStr, this, SLOT(sEditContact()));
       else if (_privileges->check("ViewAllContacts"))
-    (void)pMenu->addAction(viewStr, this, SLOT(sViewContact()));
+        (void)pMenu->addAction(viewStr, this, SLOT(sViewContact()));
 
       break;
 
     case 2:	// ship-to
-      if (_privileges->check("MaintainShiptos") &&
-	  (cNew == _mode || cEdit == _mode))
-    (void)pMenu->addAction(editStr, this, SLOT(sEditShipto()));
+      if (_privileges->check("MaintainShiptos") && _editableMode)
+        (void)pMenu->addAction(editStr, this, SLOT(sEditShipto()));
       else if (_privileges->check("ViewShiptos"))
-    (void)pMenu->addAction(viewStr, this, SLOT(sViewShipto()));
+        (void)pMenu->addAction(viewStr, this, SLOT(sViewShipto()));
 
       break;
 
     case 3:	// vendor
-      /* comment out until we make vendor a XDialog or address a XMainWindow
-      if (_privileges->check("MaintainVendors") &&
-	  (cNew == _mode || cEdit == _mode))
-	menuItem = pMenu->addAction(editStr, this, SLOT(sEditVendor()));
+      if (_privileges->check("MaintainVendors") && _editableMode)
+        (void)pMenu->addAction(editStr, this, SLOT(sEditVendor()));
       else if (_privileges->check("ViewVendors"))
-	menuItem = pMenu->addAction(viewStr, this, SLOT(sViewVendor()));
-      */
+        (void)pMenu->addAction(viewStr, this, SLOT(sViewVendor()));
 
       break;
 
     case 4:	// vendaddr
-      if (_privileges->check("MaintainVendorAddresses") &&
-	  (cNew == _mode || cEdit == _mode))
-    (void)pMenu->addAction(editStr, this, SLOT(sEditVendorAddress()));
+      if (_privileges->check("MaintainVendorAddresses") && _editableMode)
+        (void)pMenu->addAction(editStr, this, SLOT(sEditVendorAddress()));
       else if (_privileges->check("ViewVendorAddresses"))
-    (void)pMenu->addAction(viewStr, this, SLOT(sViewVendorAddress()));
+        (void)pMenu->addAction(viewStr, this, SLOT(sViewVendorAddress()));
 
       break;
 
     case 5:	// warehouse
-      if (_privileges->check("MaintainWarehouses") &&
-	  (cNew == _mode || cEdit == _mode))
-    (void)pMenu->addAction(editStr, this, SLOT(sEditWarehouse()));
+      if (_privileges->check("MaintainWarehouses") && _editableMode)
+        (void)pMenu->addAction(editStr, this, SLOT(sEditWarehouse()));
       else if (_privileges->check("ViewWarehouses"))
-    (void)pMenu->addAction(viewStr, this, SLOT(sViewWarehouse()));
+        (void)pMenu->addAction(viewStr, this, SLOT(sViewWarehouse()));
 
       break;
 
