@@ -637,6 +637,8 @@ enum SetResponse salesOrder::set(const ParameterList &pParams)
     _opportunity->setId(param.toInt());
 
   param = pParams.value("sohead_id", &valid);
+  if (! valid)
+    param = pParams.value("cohead_id", &valid);
   if (valid)
   {
     _soheadid = param.toInt();
