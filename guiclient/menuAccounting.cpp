@@ -240,7 +240,7 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     { "ap.enterMiscCreditMemo", tr("&New Misc. Credit Memo"), SLOT(sEnterMiscApCreditMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
     { "ap.unapplidCreditMemo", tr("&List Unapplied Credit Memos"), SLOT(sUnappliedApCreditMemos()), apMemosMenu, "MaintainAPMemos ViewAPMemos", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apMemosMenu, "true", NULL, NULL, true, NULL },
-    { "ap.enterMiscDebitMemo", tr("New &Misc. Debit Memoz"), SLOT(sEnterMiscApDebitMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
+    { "ap.enterMiscDebitMemo", tr("New &Misc. Debit Memo"), SLOT(sEnterMiscApDebitMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
 
     // Accounting | Accaunts Payable |  Payments
     { "menu", tr("&Payments"), (char*)apPaymentsMenu, apMenu, "true", NULL, NULL, true, NULL },
