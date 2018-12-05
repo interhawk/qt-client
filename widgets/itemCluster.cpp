@@ -586,12 +586,11 @@ void ItemLineEdit::sHandleCompleter()
                  .arg(QString(_sql)).remove(";"));
     numQ.bindValue(":number", stripped);
     
-    if( _itemType & ItemLineEdit::cActive)
+    if( _itemType.toUInt() & ItemLineEdit::cActive)
     {
       QStringList clauses;
       clauses << " (AND item_active) ";
     }
-    
   }
   else
   {
@@ -601,7 +600,7 @@ void ItemLineEdit::sHandleCompleter()
 
     QStringList clauses;
     clauses = _extraClauses;
-    if( _itemType & ItemLineEdit::cActive)
+    if( _itemType.toUInt() & ItemLineEdit::cActive)
       clauses << " (AND item_active) ";
     clauses << "((POSITION(:searchString IN item_number) = 1)"
             " OR (POSITION(:searchString IN item_upccode) = 1))";
