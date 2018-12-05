@@ -582,10 +582,16 @@ void ItemLineEdit::sHandleCompleter()
     numQ.prepare(QString("SELECT *"
                          "  FROM (%1) data"
                          " WHERE (POSITION(:number IN item_number)=1)"
-                         "   AND item_active"
                          " ORDER BY item_number LIMIT 10")
                  .arg(QString(_sql)).remove(";"));
     numQ.bindValue(":number", stripped);
+    
+    if( _itemType & ItemLineEdit::cActive)
+    {
+      QStringList clauses;
+      clauses << " (AND item_active) ";
+    }
+    
   }
   else
   {
@@ -595,7 +601,8 @@ void ItemLineEdit::sHandleCompleter()
 
     QStringList clauses;
     clauses = _extraClauses;
-    clauses << " (AND item_active) ";
+    if( _itemType & ItemLineEdit::cActive)
+      clauses << " (AND item_active) ";
     clauses << "((POSITION(:searchString IN item_number) = 1)"
             " OR (POSITION(:searchString IN item_upccode) = 1))";
     if (_crmacct > 0)
@@ -1168,7 +1175,7 @@ void itemList::sFillList()
     QString whereClause = "";
     if(clauses.size()>0)
       whereClause = " WHERE" + clauses.join(" AND ");
-    QString sql = "SELECT * FROM (" + _sql + ") AS dummy " + whereClause + ";" ; 
+    QString sql = "SELECT * FROM (" + _sql.remove(";") + ") AS dummy " + whereClause + ";" ; 
     _listTab->populate(sql, _itemid);
   }
   else
@@ -1347,7 +1354,7 @@ void itemSearch::sFillList()
     if(clauses.size()>0 )
       whereClauses = " WHERE " + clauses.join(" AND ");
 
-    sql = "SELECT * FROM (" + _sql + ") AS dummy  " + whereClauses  + ";" ;   
+    sql = "SELECT * FROM (" + _sql.remove(";") + ") AS dummy  " + whereClauses  + ";" ;   
   }
   else
   {
