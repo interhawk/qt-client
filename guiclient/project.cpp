@@ -101,6 +101,7 @@ project::project(QWidget* parent, const char* name, bool modal, Qt::WindowFlags 
   connect(omfgThis, SIGNAL(workOrdersUpdated(int, bool)), this, SLOT(sFillTaskList()));
   connect(omfgThis, SIGNAL(purchaseOrdersUpdated(int, bool)), this, SLOT(sFillTaskList()));
 
+  _documents->setType("J");
   _charass->setType("PROJ");
 
   _prjtask->addColumn(tr("Number"),       _itemColumn, Qt::AlignLeft,   true,  "number" );
@@ -197,7 +198,6 @@ enum SetResponse project::set(const ParameterList &pParams)
   {
     _prjid = param.toInt();
     populate();
-    _charass->setId(_prjid);
   }
 
   param = pParams.value("mode", &valid);
@@ -231,11 +231,6 @@ enum SetResponse project::set(const ParameterList &pParams)
           _name->setFocus();
         }
       }
-
-      _comments->setId(_prjid);
-      _documents->setId(_prjid);
-      _charass->setId(_prjid);
-      _recurring->setParent(_prjid, "J");
     }
     else if (param.toString() == "edit")
     {
@@ -256,6 +251,11 @@ enum SetResponse project::set(const ParameterList &pParams)
       connect(_projectType, SIGNAL(newID(int)), this, SLOT(sProjectTypeChanged(int)));
     }
   }
+
+  _comments->setId(_prjid);
+  _documents->setId(_prjid);
+  _charass->setId(_prjid);
+  _recurring->setParent(_prjid, "J");
 
   param = pParams.value("crmacct_id", &valid);
   if (valid)
@@ -544,8 +544,7 @@ void project::populate()
 
   sFillTaskList();
   sFillOrdersList();
-  _comments->setId(_prjid);
-  _documents->setId(_prjid);
+
   emit populated(_prjid);
 }
 
