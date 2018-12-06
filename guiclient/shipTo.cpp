@@ -229,6 +229,8 @@ void shipTo::sSave()
 
   saveq.bindValue(":shipto_id", _shiptoid);
   saveq.bindValue(":shipto_active", QVariant(_active->isChecked()));
+  if(!_active->isChecked()) // if shipTo is inactive, default should be false
+    _default->setChecked(false);
   saveq.bindValue(":shipto_default", QVariant(_default->isChecked()));
   saveq.bindValue(":shipto_cust_id", _custid);
   saveq.bindValue(":shipto_num", _shipToNumber->text().trimmed());
