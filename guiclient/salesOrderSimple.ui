@@ -417,6 +417,9 @@ to be bound by its terms.</comment>
              <property name="currencyEditable" stdset="0">
               <bool>false</bool>
              </property>
+             <property name="type">
+              <string>S</string>
+             </property>
             </widget>
            </item>
            <item row="0" column="2">
