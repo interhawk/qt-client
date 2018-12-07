@@ -58,6 +58,7 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_freight,                  SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
   connect(_tax,                      SIGNAL(save(bool)),                                this,          SLOT(save(bool)));
   connect(_tax,                      SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTaxOwed()));
+  connect(_tax,                      SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
   connect(_taxCharged,               SIGNAL(valueChanged()),                            this,          SLOT(sCalculateTaxOwed()));
   connect(_taxCharged,               SIGNAL(valueChanged()),                            this,          SLOT(sPopulateDistributed()));
   connect(_freightDistr,             SIGNAL(toggled(bool)),                             this,          SLOT(sFreightDistribution(bool)));
@@ -112,6 +113,7 @@ voucher::voucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
 
   _frghtdistr = 0;
   _vendid = -1;
+  _loading = false;
 
   setWindowModified(false);
 
@@ -398,7 +400,8 @@ bool voucher::save(bool partial)
   updq.bindValue(":frghtDistr", _frghtdistr);
   if (_freightExpcat->isValid())
     updq.bindValue(":vohead_freight_expcat", _freightExpcat->id());
-  updq.bindValue(":vohead_tax_charged", _taxCharged->localValue());
+  if (!_taxCharged->isEmpty())
+    updq.bindValue(":vohead_tax_charged", _taxCharged->localValue());
   updq.bindValue(":vohead_freight_taxtype_id", _freightTaxtype->id());
   updq.bindValue(":vohead_1099", QVariant(_flagFor1099->isChecked()));
   updq.bindValue(":vohead_curr_id", _amountToDistribute->id());
@@ -814,7 +817,7 @@ void voucher::sPopulateDistributed()
     getq.exec();
     if (getq.first())
     {
-      _amountDistributed->setLocalValue(getq.value("distrib").toDouble() + _freight->localValue() - _frghtdistr + _taxCharged->localValue());
+      _amountDistributed->setLocalValue(getq.value("distrib").toDouble() + _freight->localValue() - _frghtdistr + (_taxCharged->isEmpty() ? _tax->localValue() : _taxCharged->localValue()));
     }
     else if (ErrorReporter::error(QtCriticalMsg, this,
                                   tr("Getting Distributions"),
@@ -870,6 +873,8 @@ void voucher::populate()
   vohead.exec();
   if (vohead.first())
   {
+    _loading = true;
+
     _voucherNumber->setText(vohead.value("vohead_number").toString());
     _poNumber->setId(vohead.value("vohead_pohead_id").toInt(), "PO");
     _taxzone->setId(vohead.value("vohead_taxzone_id").toInt());
@@ -880,7 +885,8 @@ void voucher::populate()
     _freight->set(vohead.value("vohead_freight").toDouble(),
                              vohead.value("vohead_curr_id").toInt(),
                              vohead.value("vohead_docdate").toDate(), false);
-    _taxCharged->setLocalValue(vohead.value("vohead_tax_charged").toDouble());
+    if (!vohead.value("vohead_tax_charged").isNull())
+      _taxCharged->setLocalValue(vohead.value("vohead_tax_charged").toDouble());
 
     _frghtdistr = vohead.value("vohead_freight_distributed").toDouble();
     if (_frghtdistr > 0)
@@ -898,6 +904,8 @@ void voucher::populate()
     _reference->setText(vohead.value("vohead_reference").toString());
     _flagFor1099->setChecked(vohead.value("vohead_1099").toBool());
     _notes->setText(vohead.value("vohead_notes").toString());
+
+    _loading = false;
 
     sFillList();
     sFillMiscList();
@@ -1068,7 +1076,7 @@ bool voucher::saveDetail()
 
 void voucher::sCalculateTaxOwed()
 {
-  double diff = _tax->localValue() - _taxCharged->localValue();
+  double diff = _taxCharged->isEmpty() ? 0.0 : _tax->localValue() - _taxCharged->localValue();
   _taxOwed->setLocalValue(diff < 0.0 ? 0.0 : diff);
 }
 
@@ -1111,7 +1119,8 @@ void voucher::sFreightDistribution(bool distFreight)
 
 void voucher::sFreightTaxtypeChanged()
 {
-  _tax->invalidate();
+  if (!_loading)
+    _tax->invalidate();
 }
 
 void voucher::sFreightChanged()
@@ -1156,7 +1165,8 @@ void voucher::sFreightChanged()
     }
   }
 
-  _tax->invalidate();
+  if (!_loading)
+    _tax->invalidate();
 }
 
 void voucher::sIsDistributed()

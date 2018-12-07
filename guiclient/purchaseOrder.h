@@ -96,6 +96,7 @@ private:
     int _NumberGen;
     int _projectId;
     double _freightCache;
+    bool _loading;
 };
 
 #endif // PURCHASEORDER_H

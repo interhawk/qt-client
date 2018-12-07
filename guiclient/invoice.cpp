@@ -1566,14 +1566,18 @@ void invoice::sTaxZoneChanged()
 
 void invoice::sMiscTaxtypeChanged()
 {
-  _tax->invalidate();
+  if (!_loading)
+    _tax->invalidate();
 }
 
 void invoice::sMiscAmountChanged()
 {
-  sCalculateTotal();
+  if (!_loading)
+  {
+    sCalculateTotal();
 
-  _tax->invalidate();
+    _tax->invalidate();
+  }
 }
 
 void invoice::sFreightChanged()
