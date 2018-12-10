@@ -379,7 +379,7 @@ void taxBreakdown::sPopulate()
                         " WHERE aropen_id = :orderid ");
 
     params.append("doctype", "AR");
-    params.append("docitem_id", _orderid);
+    params.append("dochead_id", _orderid);
   }
   else if (_ordertype == "AP")
   {
@@ -395,7 +395,7 @@ void taxBreakdown::sPopulate()
                         " WHERE apopen_id = :orderid ");
 
     params.append("doctype", "AP");
-    params.append("docitem_id", _orderid);
+    params.append("dochead_id", _orderid);
   }
 
   taxPopulate.bindValue(":orderid", _orderid);
@@ -441,7 +441,7 @@ void taxBreakdown::sPopulate()
 
 void taxBreakdown::sHandleButtons(bool valid)
 {
-  _delete->setEnabled(valid && _tax->altId() == 3 &&
+  _delete->setEnabled(valid && _tax->altId() == 4 &&
                       _tax->id() > 0);
 }
 
