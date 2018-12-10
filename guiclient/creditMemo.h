@@ -56,7 +56,7 @@ public slots:
 
 protected slots:
     virtual void languageChange();
-    virtual bool save(bool);
+    virtual bool save(bool, bool = false);
 
 private:
     int _mode;

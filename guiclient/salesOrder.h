@@ -25,7 +25,7 @@ class salesOrder : public XDocumentWindow, public Ui::salesOrder
   public: salesOrder(QWidget *parent = 0, const char *name = 0, Qt::WindowFlags fl = Qt::Window);
     ~salesOrder();
 
-    Q_INVOKABLE virtual bool  save( bool partial );
+    Q_INVOKABLE virtual bool  save( bool partial, bool report = false );
     Q_INVOKABLE virtual void  setViewMode();
     Q_INVOKABLE static bool   deleteSalesOrder(int pId, QWidget *parent = 0 );
     Q_INVOKABLE static void   newSalesOrder( int pCustid, QWidget *parent = 0 );

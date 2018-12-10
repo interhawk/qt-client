@@ -580,7 +580,7 @@ void invoice::sSave()
   close();
 }
 
-bool invoice::save(bool partial)
+bool invoice::save(bool partial, bool report)
 {
   QList<GuiErrorCheck> errors;
     errors<< GuiErrorCheck(_cust->id() <= 0, _cust,
@@ -601,7 +601,7 @@ bool invoice::save(bool partial)
                               "Please enter Misc. Charge amount "
                               "or remove the Misc. Charge Sales Account."));
 
-  if (partial && GuiErrorCheck::checkForErrors(errors))
+  if (partial && !report && GuiErrorCheck::checkForErrors(errors))
     return false;
 
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Invoice"), errors))
@@ -964,7 +964,7 @@ void invoice::postInvoice()
 
 void invoice::sNew()
 {
-  if (!save(true))
+  if (!save(true, true))
     return;
 
   ParameterList params;
@@ -984,7 +984,7 @@ void invoice::sNew()
 
 void invoice::sEdit()
 {
-  if (!save(true))
+  if (!save(true, true))
     return;
 
   ParameterList params;

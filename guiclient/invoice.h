@@ -39,7 +39,7 @@ public slots:
     virtual void populateShipto( int pShiptoid );
     virtual void sCopyToShipto();
     virtual void sSave();
-    virtual bool save(bool);
+    virtual bool save(bool, bool = false);
     virtual void sNew();
     virtual void sEdit();
     virtual void sView();

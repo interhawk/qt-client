@@ -398,7 +398,7 @@ void returnAuthorization::setNumber()
     _authNumber->setFocus();
 }
 
-bool returnAuthorization::sSave(bool partial)
+bool returnAuthorization::sSave(bool partial, bool report)
 {
   XSqlQuery returnSave;
 
@@ -435,7 +435,7 @@ bool returnAuthorization::sSave(bool partial)
                    tr("<p>Expiry Date must be on or later than the Authorization Date."))
   ;
 
-  if (partial && GuiErrorCheck::checkForErrors(errors))
+  if (partial && !report && GuiErrorCheck::checkForErrors(errors))
     return false;
   
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Return Authorization"), errors))
@@ -1011,7 +1011,7 @@ void returnAuthorization::sCopyToShipto()
 
 void returnAuthorization::sNew()
 {
-  if (sSave(true))
+  if (sSave(true, true))
   {
     ParameterList params;
     params.append("mode", "new");
@@ -1036,7 +1036,7 @@ void returnAuthorization::sNew()
 
 void returnAuthorization::sEdit()
 {
-  if (sSave(true))
+  if (sSave(true, true))
   {
     bool fill;
     fill = false;
@@ -1781,7 +1781,7 @@ void returnAuthorization::sHandleSalesOrderEvent(int pSoheadid, bool)
 
 void returnAuthorization::sRefund()
 {
-  if (! sSave(true))
+  if (! sSave(true, true))
     return;
 
   XSqlQuery begin("BEGIN;");

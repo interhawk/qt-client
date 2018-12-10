@@ -303,7 +303,7 @@ void creditMemo::sSave()
   close();
 }
 
-bool creditMemo::save(bool partial)
+bool creditMemo::save(bool partial, bool report)
 {
   //  Make sure that all of the required field have been populated
   QList<GuiErrorCheck>errors;
@@ -342,7 +342,7 @@ bool creditMemo::save(bool partial)
                          "charge. Please set the Misc. Charge amount to 0 "
                          "or select a Misc. Charge Sales Account."));
 
-  if (partial && GuiErrorCheck::checkForErrors(errors))
+  if (partial && !report && GuiErrorCheck::checkForErrors(errors))
     return false;
 
   if(GuiErrorCheck::reportErrors(this,tr("Cannot Save Credit Memo"),errors))
@@ -739,7 +739,7 @@ void creditMemo::sCopyToShipto()
 
 void creditMemo::sNew()
 {
-  if (!save(true))
+  if (!save(true, true))
     return;
 
   ParameterList params;
@@ -758,7 +758,7 @@ void creditMemo::sNew()
 
 void creditMemo::sEdit()
 {
-  if (!save(true))
+  if (!save(true, true))
     return;
 
   ParameterList params;
