@@ -41,6 +41,7 @@ miscVoucher::miscVoucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_voucherNumber,        SIGNAL(editingFinished()),              this, SLOT(sHandleVoucherNumber()));
   connect(_tax,                  SIGNAL(save(bool)),                     this, SLOT(save(bool)));
   connect(_tax,                  SIGNAL(valueChanged()),                 this, SLOT(sCalculateTaxOwed()));
+  connect(_tax,                  SIGNAL(valueChanged()),                 this, SLOT(sPopulateDistributed()));
   connect(_taxCharged,           SIGNAL(valueChanged()),                 this, SLOT(sCalculateTaxOwed()));
   connect(_taxCharged,           SIGNAL(valueChanged()),                 this, SLOT(sPopulateDistributed()));
 
@@ -350,7 +351,8 @@ bool miscVoucher::save(bool partial)
       updq.bindValue(":vohead_recurring_vohead_id", _voheadid);
   }
   updq.bindValue(":vohead_notes",   _notes->toPlainText());
-  updq.bindValue(":vohead_tax_charged", _taxCharged->localValue());
+  if (!_taxCharged->isEmpty())
+    updq.bindValue(":vohead_tax_charged", _taxCharged->localValue());
   updq.bindValue(":vohead_tax_exemption", _taxExempt->code());
   updq.exec();
   if (updq.lastError().type() != QSqlError::NoError)
@@ -555,7 +557,7 @@ void miscVoucher::sPopulateDistributed()
   sumq.exec();
   if (sumq.first())
   {
-    _amountDistributed->setLocalValue(sumq.value("distrib").toDouble() + _taxCharged->localValue());
+    _amountDistributed->setLocalValue(sumq.value("distrib").toDouble() + (_taxCharged->isEmpty() ? _tax->localValue() : _taxCharged->localValue()));
     sPopulateBalanceDue();
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting Total"),
@@ -620,7 +622,8 @@ void miscVoucher::populate()
     if(vohead.value("vohead_posted").toBool())
       _postVoucher->setVisible(false);
 
-    _taxCharged->setLocalValue(vohead.value("vohead_tax_charged").toDouble());
+    if (!vohead.value("vohead_tax_charged").isNull())
+      _taxCharged->setLocalValue(vohead.value("vohead_tax_charged").toDouble());
     _taxExempt->setCode(vohead.value("vohead_tax_exemption").toString());
 
     sFillMiscList();
@@ -682,7 +685,7 @@ void miscVoucher::sDistributionDateUpdated()
 
 void miscVoucher::sCalculateTaxOwed()
 {
-  double diff = _tax->localValue() - _taxCharged->localValue();
+  double diff = _taxCharged->isEmpty() ? 0.0 : _tax->localValue() - _taxCharged->localValue();
   _taxOwed->setLocalValue(diff < 0.0 ? 0.0 : diff);
 }
 

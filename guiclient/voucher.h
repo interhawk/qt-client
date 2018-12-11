@@ -75,6 +75,7 @@ private:
     int _voheadid;
     int _mode;
     double _frghtdistr;
+    bool _loading;
 };
 
 #endif // VOUCHER_H

@@ -2340,6 +2340,8 @@ void salesOrder::sEdit()
 
   if ( ( (_mode == cNew) || (_mode == cNewQuote) || (_mode == cEdit) || (_mode == cEditQuote) ) )
     sFillItemList();
+
+  _tax->invalidate();
 }
 
 void salesOrder::sHandleButtons()

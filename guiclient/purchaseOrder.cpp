@@ -148,6 +148,7 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   _so->setReadOnly(true);
 
   _projectId = -1;
+  _loading = false;
 
   XSqlQuery getWeightUOM;
   getWeightUOM.prepare("SELECT uom_name FROM uom WHERE (uom_item_weight);");
@@ -702,6 +703,8 @@ void purchaseOrder::populate()
   po.exec();
   if (po.first())
   {
+    _loading = true;
+
     if (po.value("pohead_status").toString() == "C")
       setViewMode();
     
@@ -791,6 +794,8 @@ void purchaseOrder::populate()
 
    // must be after _vendor
     _purchaseType->setId(po.value("pohead_potype_id").toInt());
+
+    _loading = false;
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Getting P/O"),
                                 po, __FILE__, __LINE__))
@@ -802,6 +807,8 @@ void purchaseOrder::populate()
 
 void purchaseOrder::sSave()
 {
+  _save->setFocus();
+
   if(!save(false))
     return;
 
@@ -883,7 +890,6 @@ void purchaseOrder::sSave()
 bool purchaseOrder::save(bool partial)
 {
   XSqlQuery purchaseSave;
-  _save->setFocus();
 
   if(_orderNumber->hasFocus())
     sHandleOrderNumber();
@@ -1137,6 +1143,8 @@ void purchaseOrder::sEdit()
   newdlg.set(params);
   if (newdlg.exec() != XDialog::Rejected)
     sFillList();
+
+  _tax->invalidate();
 }
 
 void purchaseOrder::sDelete()
@@ -1182,6 +1190,8 @@ void purchaseOrder::sDelete()
   }
 
   sFillList();
+
+  _tax->invalidate();
 }
 
 void purchaseOrder::sVendaddrList()
@@ -1697,7 +1707,8 @@ void purchaseOrder::sHandleOrderDate()
 
 void purchaseOrder::sFreightTaxtypeChanged()
 {
-  _tax->invalidate();
+  if (!_loading)
+    _tax->invalidate();
 }
 
 void purchaseOrder::sFreightChanged()
@@ -1741,7 +1752,8 @@ void purchaseOrder::sFreightChanged()
     }
   }
 
-  _tax->invalidate();
+  if (!_loading)
+    _tax->invalidate();
 }
 
 void purchaseOrder::sTaxZoneChanged()
