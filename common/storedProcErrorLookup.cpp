@@ -1600,6 +1600,7 @@ const struct {
                                 	0, "" },
   { "reversearapplication", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "This application has already been reversed."),
                                 	0, "" },
+  { "returnWoMaterial",  0, QT_TRANSLATE_NOOP("storedProcErrorLookup", "No quantity to return for this item."), 0, "" },
   { "returnWoMaterial", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An itemlocSeries is Required."), 0, "" },
   { "returnWoMaterial", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "No transaction found for invhist_id"), 0, "" },
   { "returnWoMaterial", -3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Missing Item Site or Cost Category."), 0, "" },
