@@ -323,6 +323,13 @@ bool displayPrivate::setParams(ParameterList &params)
     params.append("search_pattern", _search->text());
     QString searchon =  QApplication::translate("display", "Search On:", 0);
     filter.prepend(searchon + " " + _search->text() + "\n");
+
+    // Pass list of displayed columns to be applied against the search pattern
+    QList<QVariant> searchFields;
+    for (int i = 0; i < _list->columnCount(); i++)
+      searchFields.append(_list->column(i));
+
+    params.append("search_fields", searchFields);
   }
   params.append("filter", filter);
 
