@@ -751,6 +751,8 @@ void prospect::sAddContact()
   if(!_saved)
     sSave(true);
 
+  _mode = cEdit;
+
   addc.prepare("INSERT INTO crmacctcntctass (crmacctcntctass_crmacct_id, crmacctcntctass_cntct_id, "
                "                             crmacctcntctass_crmrole_id, crmacctcntctass_default)  "
                " SELECT :crmacct_id, :cntct_id, :crmrole_id, :default "
