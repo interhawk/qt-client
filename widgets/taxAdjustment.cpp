@@ -120,6 +120,7 @@ void taxAdjustment::sSave()
     taxSave.prepare("UPDATE taxdetail "
                     "   SET taxdetail_tax = :tax "
                     " WHERE taxdetail_id = :taxdetail_id;");
+    taxSave.bindValue(":tax", _amount->localValue());
     taxSave.bindValue(":taxdetail_id", _taxdetailid);
     taxSave.exec();
     ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Tax Adjustment Information"),
