@@ -135,6 +135,11 @@ displayPrivate::displayPrivate(::display *parent)
 
   _parent->layout()->setContentsMargins(0,0,0,0);
   _parent->layout()->setSpacing(0);
+
+  // Status Bar
+  _statusBar = new QStatusBar();
+  _statusBarLayout->addWidget(_statusBar);
+
 }
 
 void displayPrivate::sFilterChanged()
@@ -144,6 +149,8 @@ void displayPrivate::sFilterChanged()
 
 void displayPrivate::sSavedFilterApplied(int pFilter, QString pColumns)
 {
+  Q_UNUSED(pFilter);
+
   QString     savedString;
   QStringList savedParts;
   QString     part, key, val;
@@ -861,6 +868,7 @@ void display::sFillList(ParameterList pParams, bool forceSetParams)
                            xq, __FILE__, __LINE__);
     return;
   }
+  _data->_statusBar->showMessage(tr("Records found: %1").arg(xq.size()));
   emit fillListAfter();
 }
 

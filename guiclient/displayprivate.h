@@ -14,6 +14,7 @@
 #include "ui_display.h"
 
 #include <parameter.h>
+#include <QStatusBar>
 
 #include "parameterlistsetup.h"
 
@@ -58,6 +59,7 @@ class displayPrivate : public QObject, public Ui::display
     QAction *_autoUpdateAct;
 
     QMenu *_queryMenu;
+    QStatusBar *_statusBar;
 
     QToolButton *_newBtn;
     QToolButton *_closeBtn;
