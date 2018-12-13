@@ -391,6 +391,11 @@ void invoice::sClose()
         return;
       else
       {
+        XSqlQuery rollback;
+        rollback.prepare("ROLLBACK;");
+
+        XSqlQuery("BEGIN");
+
         invoiceClose.prepare( "SELECT deleteInvoice(:invchead_id) AS result;" );
         invoiceClose.bindValue(":invchead_id", _invcheadid);
         invoiceClose.exec();
@@ -399,14 +404,30 @@ void invoice::sClose()
           int result = invoiceClose.value("result").toInt();
           if (result < 0)
           {
+            rollback.exec();
             ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Invoice"),
                                    storedProcErrorLookup("deleteInvoice", result),
                                    __FILE__, __LINE__);
+            return;
           }
+
+          // Only call here, document doesn't exist yet in new mode
+          if (!_taxIntegration->cancel("INV", _invcheadid, _invoiceNumber->text()))
+          {
+            rollback.exec();
+            QMessageBox::critical(this, tr("Error Deleting Invoice"), _taxIntegration->error());
+            return;
+          }
+
+          XSqlQuery("COMMIT;");
         }
         else if (invoiceClose.lastError().type() != QSqlError::NoError)
+        {
+          rollback.exec();
           ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Invoice"),
                              invoiceClose, __FILE__, __LINE__);
+          return;
+        }
       }
     }
   }
@@ -928,7 +949,6 @@ void invoice::postInvoice()
     return;
   }
 
-  // TODO - remove this after postInvoice has had the remaining negative error codes replaced with RAISE EXCEPTIONs
   XSqlQuery rollback;
   rollback.prepare("ROLLBACK;");
 
@@ -950,6 +970,13 @@ void invoice::postInvoice()
       ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Invoice"),
                           storedProcErrorLookup("postInvoice", result),
                           __FILE__, __LINE__);
+      return;
+    }
+
+    if (!_taxIntegration->commit("INV", _invcheadid))
+    {
+      rollback.exec();
+      QMessageBox::critical(this, tr("Error Posting Invoice"), _taxIntegration->error());
       return;
     }
   }

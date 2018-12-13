@@ -140,9 +140,6 @@
 #include "quuidproto.h"
 #include "qvalidatorproto.h"
 #include "qwebchannelproto.h"
-#include "qwebenginepageproto.h"
-#include "qwebenginesettingsproto.h"
-#include "qwebengineviewproto.h"
 #include "qwebsocketcorsauthenticatorproto.h"
 #include "qwebsocketproto.h"
 #include "qwebsocketprotocolproto.h"
@@ -290,9 +287,6 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQUuidProto(engine);
   setupQValidatorProto(engine);
   setupQWebChannelProto(engine);
-  setupQWebEnginePageProto(engine);
-  setupQWebEngineSettingsProto(engine);
-  setupQWebEngineViewProto(engine);
   setupQWebSocketCorsAuthenticatorProto(engine);
   setupQWebSocketProto(engine);
   setupQWebSocketProtocolProto(engine);

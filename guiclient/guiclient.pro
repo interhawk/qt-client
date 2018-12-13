@@ -4,7 +4,7 @@ TARGET   = xtuple
 CONFIG   += qt warn_on
 
 QT += xml sql script scripttools network
-QT += xmlpatterns printsupport webengine webenginewidgets
+QT += xmlpatterns printsupport webkit webkitwidgets
 QT += designer uitools quick websockets webchannel serialport
 
 CONFIG -= staticlib

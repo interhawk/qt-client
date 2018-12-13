@@ -355,7 +355,7 @@ void unpostedCreditMemos::sPost()
       rollback.prepare("ROLLBACK;");
 
       XSqlQuery postPost;
-      postPost.exec("BEGIN;");  // TODO - remove this when postCreditMemo no longer returns negative error codes
+      postPost.exec("BEGIN;");
       postPost.prepare("SELECT postCreditMemo(:cmheadId, :journalNumber, :itemlocSeries, TRUE) AS result;");
       postPost.bindValue(":cmheadId", memoId);
       postPost.bindValue(":journalNumber", journalNumber);
@@ -372,6 +372,15 @@ void unpostedCreditMemos::sPost()
           failedMemos.append(memoNumber);
           errors.append(tr("Error Posting Credit Memo %1")
             .arg(storedProcErrorLookup("postCreditMemo", result)));
+          continue;
+        }
+
+        if (!_taxIntegration->commit("CM", memoId))
+        {
+          rollback.exec();
+          cleanup.exec();
+          failedMemos.append(memoNumber);
+          errors.append(_taxIntegration->error());
           continue;
         }
 
@@ -444,20 +453,42 @@ void unpostedCreditMemos::sDelete()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
       {
+        XSqlQuery rollback;
+        rollback.prepare("ROLLBACK;");
+
+        XSqlQuery("BEGIN;");
+
         delq.bindValue(":cmhead_id", ((XTreeWidgetItem*)(selected[i]))->id());
         delq.exec();
         if (delq.first())
         {
           int result = delq.value("result").toInt();
           if (result < 0)
+          {
+            rollback.exec();
             ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Credit Memo Information"),
                                  storedProcErrorLookup("deleteCreditMemo", result),
                                  __FILE__, __LINE__);
+            return;
+          }
+
+          if (!_taxIntegration->cancel("CM", ((XTreeWidgetItem*)(selected[i]))->id(), ((XTreeWidgetItem*)(selected[i]))->text("cmhead_number")))
+          {
+            rollback.exec();
+            QMessageBox::critical(this, tr("Error Deleting Credit Memo"), _taxIntegration->error());
+            continue;
+          }
+
+          XSqlQuery("COMMIT;");
         }
         else if (delq.lastError().type() != QSqlError::NoError)
+        {
+          rollback.exec();
           ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Credit Memo Information %1\n")
                              .arg(selected[i]->text(0)) + delq.lastError().databaseText(),
                              delq, __FILE__, __LINE__);
+          return;
+        }
       }
     }
 

@@ -389,6 +389,11 @@ void miscVoucher::postVoucher()
                                 post, __FILE__, __LINE__))
     return;
 
+  XSqlQuery rollback;
+  rollback.prepare("ROLLBACK;");
+
+  XSqlQuery("BEGIN;");
+
   post.prepare("SELECT postVoucher(:vohead_id, :journalNumber, FALSE) AS result;");
   post.bindValue(":vohead_id", _voheadid);
   post.bindValue(":journalNumber", journalNumber);
@@ -397,12 +402,28 @@ void miscVoucher::postVoucher()
   {
     int result = post.value("result").toInt();
     if (result < 0)
+    {
+      rollback.exec();
       ErrorReporter::error(QtCriticalMsg, this, tr("Posting Voucher"),
                          post, __FILE__, __LINE__);
+      return;
+    }
+
+    if (!_taxIntegration->commit("VCH", _voheadid))
+    {
+      rollback.exec();
+      QMessageBox::critical(this, tr("Posting Voucher"), _taxIntegration->error());
+      return;
+    }
+
+    XSqlQuery("COMMIT");
   }
   else
+  {
+    rollback.exec();
     ErrorReporter::error(QtCriticalMsg, this, tr("Posting Voucher"),
                          post, __FILE__, __LINE__);
+  }
 }
 
 void miscVoucher::sHandleVoucherNumber()

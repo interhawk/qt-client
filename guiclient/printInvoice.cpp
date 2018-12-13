@@ -84,6 +84,18 @@ void printInvoice::sHandleDocUpdated(int docid)
   omfgThis->sInvoicesUpdated(docid, true);
 }
 
+void printInvoice::sHandlePosted(int docid)
+{
+  if (!_taxIntegration->commit("INV", docid))
+  {
+    XSqlQuery("ROLLBACK;");
+    QMessageBox::critical(this, tr("Error Posting Invoice"), _taxIntegration->error());
+    return;
+  }
+
+  XSqlQuery("COMMIT;");
+}
+
 int printInvoice::distributeInventory(XSqlQuery *qry)
 {
   int invoiceId = qry->value("docid").toInt();

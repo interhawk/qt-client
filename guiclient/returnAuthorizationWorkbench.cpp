@@ -241,6 +241,11 @@ void returnAuthorizationWorkbench::sProcess()
   bool _post = ((_radue->altId() > 1) ||
 		(_radue->altId() == 1 && _postmemos->isChecked())) ;
 
+  XSqlQuery rollback;
+  rollback.prepare("ROLLBACK;");
+
+  XSqlQuery("BEGIN;");
+
   returnProcess.prepare("SELECT createRaCreditMemo(:rahead_id,:post) AS result;");
   returnProcess.bindValue(":rahead_id",_radue->id());
   returnProcess.bindValue(":post",QVariant(_post));
@@ -250,11 +255,22 @@ void returnAuthorizationWorkbench::sProcess()
     int cmheadid = returnProcess.value("result").toInt();
     if (cmheadid < 0)
     {
+      rollback.exec();
       ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving RA Credit Memo Information"),
                              storedProcErrorLookup("createRaCreditMemo", cmheadid),
                              __FILE__, __LINE__);
       return;
     }
+
+    if (!_taxIntegration->commit("CM", cmheadid))
+    {
+      rollback.exec();
+      QMessageBox::critical(this, tr("Error Posting Credit Memo"), _taxIntegration->error());
+      return;
+    }
+
+    XSqlQuery("COMMIT;");
+
     returnProcess.prepare( "SELECT cmhead_number "
                "FROM cmhead "
                "WHERE (cmhead_id=:cmhead_id);" );
@@ -362,6 +378,7 @@ void returnAuthorizationWorkbench::sProcess()
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving RA Information"),
                                            returnProcess, __FILE__, __LINE__))
   {
+    rollback.exec();
     return;
   }
 }

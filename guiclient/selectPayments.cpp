@@ -641,6 +641,12 @@ void selectPayments::sVoidVoucher()
       if (returnVal == XDialog::Accepted)
       {
         QDate voidDate = newdlg.getDate();
+
+        XSqlQuery rollback;
+        rollback.prepare("ROLLBACK;");
+
+        XSqlQuery("BEGIN;");
+
         dspVoidVoucher.bindValue(":apopen_id", cursor->id());
         dspVoidVoucher.bindValue(":voidDate", voidDate);
         dspVoidVoucher.exec();
@@ -649,13 +655,24 @@ void selectPayments::sVoidVoucher()
         {
           if(dspVoidVoucher.value("result").toInt() < 0)
           {
+            rollback.exec();
             ErrorReporter::error(QtCriticalMsg, this, tr("Error Voiding Voucher"),
                                  dspVoidVoucher, __FILE__, __LINE__);
             return;
           }
+
+          if (!_taxIntegration->cancel("VCH", cursor->id()))
+          {
+            rollback.exec();
+            QMessageBox::critical(this, tr("Error Voiding Voucher"), _taxIntegration->error());
+            return;
+          }
+
+          XSqlQuery("COMMIT;");
         }
         else
         {
+          rollback.exec();
           ErrorReporter::error(QtCriticalMsg, this, tr("Voiding Voucher"),
                                dspVoidVoucher, __FILE__, __LINE__);
           return;

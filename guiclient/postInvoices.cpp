@@ -278,6 +278,15 @@ void postInvoices::sPost()
           errors.append(tr("Error Posting Invoice. Expected: %1, returned: %2").arg(itemlocSeries).arg(result));
         continue;
       }
+
+      if (!_taxIntegration->commit("INV", invoiceIds.at(i)))
+      {
+        rollback.exec();
+        cleanup.exec();
+        failedInvoiceNumbers.append(invoiceNumber);
+        errors.append(_taxIntegration->error());
+        continue;
+      }
     }
     else if (postPost.lastError().type() != QSqlError::NoError)
     {

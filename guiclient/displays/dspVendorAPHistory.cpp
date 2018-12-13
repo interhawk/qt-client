@@ -12,6 +12,7 @@
 
 #include <QAction>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>
 
@@ -225,6 +226,11 @@ void dspVendorAPHistory::sVoidVoucher()
   int returnVal = newdlg.exec();
   if (returnVal == XDialog::Accepted)
   {
+    XSqlQuery rollback;
+    rollback.prepare("ROLLBACK;");
+
+    XSqlQuery("BEGIN;");
+
     QDate voidDate = newdlg.getDate();
     dspVoidVoucher.bindValue(":apopen_id", list()->id());
     dspVoidVoucher.bindValue(":voidDate", voidDate);
@@ -233,14 +239,46 @@ void dspVendorAPHistory::sVoidVoucher()
     if(dspVoidVoucher.first())
     {
       if(dspVoidVoucher.value("result").toInt() < 0)
+      {
+        rollback.exec();
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Voucher Information"),
                              dspVoidVoucher, __FILE__, __LINE__);
-      else
-        sFillList();
+        return;
+      }
+
+      XSqlQuery vohead;
+      vohead.prepare("SELECT vohead_id "
+                     "  FROM apopen "
+                     "  JOIN vohead ON apopen_docnumber = vohead_number "
+                     " WHERE apopen_id = :apopen_id;");
+      vohead.bindValue(":apopen_id", list()->id());
+      vohead.exec();
+      if (vohead.first())
+      {
+        if (!_taxIntegration->cancel("VCH", vohead.value("vohead_id").toInt()))
+        {
+          rollback.exec();
+          QMessageBox::critical(this, tr("Voiding Voucher"), _taxIntegration->error());
+          return;
+        }
+      }
+      else if (vohead.lastError().type() != QSqlError::NoError)
+      {
+        XSqlQuery rollback("ROLLBACK;");
+        ErrorReporter::error(QtCriticalMsg, this, tr("Voiding Voucher"),
+                             vohead, __FILE__, __LINE__);
+        return;
+      }
+
+      XSqlQuery("COMMIT;");
+      sFillList();
     }
-    else
+    else if (dspVoidVoucher.lastError().type() != QSqlError::NoError)
+    {
+      XSqlQuery rollback("ROLLBACK;");
       ErrorReporter::error(QtCriticalMsg, this, tr("Voiding Voucher"),
                            dspVoidVoucher, __FILE__, __LINE__);
+    }
   }
 
 }

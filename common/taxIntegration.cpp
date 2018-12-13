@@ -34,10 +34,6 @@ TaxIntegration::TaxIntegration(bool listen)
   {
     if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("calculatetax"))
       QSqlDatabase::database().driver()->subscribeToNotification("calculatetax");
-    if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("commit"))
-      QSqlDatabase::database().driver()->subscribeToNotification("commit");
-    if (!QSqlDatabase::database().driver()->subscribedToNotifications().contains("cancel"))
-      QSqlDatabase::database().driver()->subscribeToNotification("cancel");
 
     connect(QSqlDatabase::database().driver(),
             SIGNAL(notification(const QString&, QSqlDriver::NotificationSource, const QVariant&)),
@@ -80,10 +76,13 @@ void TaxIntegration::calculateTax(QString orderType, int orderId, bool record)
                          qry, __FILE__, __LINE__);
 }
 
-void TaxIntegration::commit(QString orderType, int orderId)
+bool TaxIntegration::commit(QString orderType, int orderId)
 {
   calculateTax(orderType, orderId, true);
   wait();
+
+  if (!_error.isEmpty())
+    return false;
 
   XSqlQuery qry;
   qry.prepare("SELECT postTax(:orderType, :orderId) AS request;");
@@ -93,11 +92,16 @@ void TaxIntegration::commit(QString orderType, int orderId)
   if (qry.first() && !qry.value("request").isNull())
     sendRequest("committransaction", orderType, orderId, qry.value("request").toString());
   else
-    ErrorReporter::error(QtCriticalMsg, 0, tr("Error posting tax transaction"),
-                         qry, __FILE__, __LINE__);
+  {
+    _error =  qry.lastError().text();
+    return false;
+  }
+
+  wait();
+  return _error.isEmpty();
 }
 
-void TaxIntegration::cancel(QString orderType, int orderId, QString orderNumber)
+bool TaxIntegration::cancel(QString orderType, int orderId, QString orderNumber)
 {
   XSqlQuery qry;
   qry.prepare("SELECT voidTax(:orderType, :orderId) AS request;");
@@ -108,8 +112,13 @@ void TaxIntegration::cancel(QString orderType, int orderId, QString orderNumber)
     sendRequest("voidtransaction", orderType, orderId, qry.value("request").toString(),
                 QStringList(), orderNumber);
   else
-    ErrorReporter::error(QtCriticalMsg, 0, tr("Error voiding tax transaction"),
-                         qry, __FILE__, __LINE__);
+  {
+    _error = qry.lastError().text();
+    return false;
+  }
+
+  wait();
+  return _error.isEmpty();
 }
 
 void TaxIntegration::refund(int invcheadId, QDate refundDate)
@@ -128,6 +137,8 @@ void TaxIntegration::refund(int invcheadId, QDate refundDate)
 
 void TaxIntegration::handleResponse(QString type, QString orderType, int orderId, QString response, QString error)
 {
+  _error = error;
+
   if (type == "test")
   {
     done();
@@ -159,12 +170,20 @@ void TaxIntegration::handleResponse(QString type, QString orderType, int orderId
         emit taxCalculated(qry.value("tax").toDouble(), error);
       }
       else
+      {
+        done();
         ErrorReporter::error(QtCriticalMsg, 0, tr("Error calculating tax"),
                              qry, __FILE__, __LINE__);
+      }
     }
     else
+    {
+      done();
       emit taxCalculated(0.0, error);
+    }
   }
+  else
+    done();
 }
 
 void TaxIntegration::sNotified(const QString& name, QSqlDriver::NotificationSource source, const QVariant& payload)
@@ -181,17 +200,6 @@ void TaxIntegration::sNotified(const QString& name, QSqlDriver::NotificationSour
     else
       calculateTax(args[0], args[1].toInt(), true);
   }
-
-  if (name == "commit" && args.size() >= 2)
-    commit(args[0], args[1].toInt());
-
-  if (name == "cancel" && args.size() >= 2)
-  {
-    if (args.size() == 2)
-      cancel(args[0], args[1].toInt());
-    else
-      cancel(args[0], args[1].toInt(), args[2]);
-  }
 }
 
 void TaxIntegration::wait()
@@ -200,4 +208,9 @@ void TaxIntegration::wait()
 
 void TaxIntegration::done()
 {
+}
+
+QString TaxIntegration::error()
+{
+  return _error;
 }
