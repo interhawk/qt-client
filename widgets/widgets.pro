@@ -5,7 +5,7 @@ TEMPLATE = lib
 CONFIG  += qt warn_on plugin
 
 QT      += core network printsupport script scripttools sql \
-           webkit webkitwidgets widgets xml
+           webengine webenginewidgets widgets xml
 QT      += designer printsupport serialport uitools \
            webchannel websockets
 
