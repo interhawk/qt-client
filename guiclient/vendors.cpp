@@ -29,6 +29,7 @@ vendors::vendors(QWidget* parent, const char*, Qt::WindowFlags fl)
   setReportName("VendorMasterList");
   setMetaSQLOptions("vendors", "detail");
   setParameterWidgetVisible(true);
+  setNewVisible(true);
   setSearchVisible(true);
   setQueryOnStartEnabled(true);
 
