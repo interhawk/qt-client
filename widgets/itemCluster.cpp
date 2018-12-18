@@ -579,7 +579,18 @@ void ItemLineEdit::sHandleCompleter()
 
   if (_useQuery)
   {
+    QString clause;
+    if (this->parent()->parent()->parent()->objectName()  == "tebilling")
+      clause = "AND item_active";
     numQ.prepare(QString("SELECT *"
+                         "  FROM (%1) data"
+                         " WHERE (POSITION(:number IN item_number)=1) %2"
+                         " ORDER BY item_number LIMIT 10")
+                 .arg(QString(_sql)).remove(";")
+                 .arg(clause));
+    numQ.bindValue(":number", stripped);
+    
+    /* numQ.prepare(QString("SELECT *"
                          "  FROM (%1) data"
                          " WHERE (POSITION(:number IN item_number)=1)"
                          " ORDER BY item_number LIMIT 10")
@@ -598,7 +609,7 @@ void ItemLineEdit::sHandleCompleter()
                  .arg(QString(_sql)).remove(";"));
       numQ.bindValue(":number", stripped);
 
-    }
+    } */
   }
   else
   {
