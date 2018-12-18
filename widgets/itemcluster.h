@@ -160,7 +160,7 @@ friend class ItemLineEditDelegate;
     Q_INVOKABLE bool    isConfigured();
     Q_INVOKABLE bool    isFractional();
     Q_INVOKABLE void setCRMAcctId(unsigned int);
-    
+
   public slots:
     void sHandleCompleter();
     void sInfo();
