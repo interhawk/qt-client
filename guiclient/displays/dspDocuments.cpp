@@ -237,7 +237,6 @@ void dspDocuments::sOpenAssignment()
     QMessageBox::critical(this, tr("Invalid Source"), tr("Could not determine the ui form to open"));
     return;
   }
-
   QWidget *w = ScriptableWidget::_guiClientInterface->openWindow(ui, params, this, 
                                                                   Qt::NonModal, Qt::Window);
   QDialog* newdlg = qobject_cast<QDialog*>(w);

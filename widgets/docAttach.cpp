@@ -559,7 +559,7 @@ void docAttach::sSave()
         return;
       }
       bytarr = sourceFile.readAll();
-      url.setPath(fi.fileName().remove(" "));
+      url.setUrl(fi.fileName().remove(" "));
       url.setScheme("");
     }
 
@@ -741,41 +741,46 @@ void docAttach::sPopulateDocPrivs()
                  " FROM grp "
                  " WHERE grp_id NOT IN (SELECT filegrp_grp_id FROM filegrp WHERE filegrp_file_id=:file);" );
    privs.bindValue(":file", _charid);
-   if (privs.exec() && privs.first())
-     _fileAvailable->populate(privs);
-   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
-                                 privs, __FILE__, __LINE__))
+   privs.exec();
+   if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
+                            privs, __FILE__, __LINE__))
      return;
+   else
+     _fileAvailable->populate(privs);
 
    privs.prepare("SELECT grp_id, grp_name AS file_assigned "
                  " FROM filegrp "
                  " JOIN grp ON filegrp_grp_id=grp_id AND filegrp_file_id=:file;" );
    privs.bindValue(":file", _charid);
-   if (privs.exec() && privs.first())
-     _fileAssigned->populate(privs);
-   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
-                                 privs, __FILE__, __LINE__))
+   privs.exec();
+   if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
+                            privs, __FILE__, __LINE__))
      return;
+   else
+     _fileAssigned->populate(privs);
 
    privs.prepare("SELECT grp_id, grp_name AS url_available "
                  " FROM grp "
                  " WHERE grp_id NOT IN (SELECT filegrp_grp_id FROM filegrp WHERE filegrp_file_id=:url);" );
    privs.bindValue(":url", _charid);
-   if (privs.exec() && privs.first())
-     _urlAvailable->populate(privs);
-   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
-                                 privs, __FILE__, __LINE__))
+   privs.exec();
+   if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
+                            privs, __FILE__, __LINE__))
      return;
+   else
+     _urlAvailable->populate(privs);
 
    privs.prepare("SELECT grp_id, grp_name AS url_assigned "
                  " FROM filegrp "
                  " JOIN grp ON filegrp_grp_id=grp_id AND filegrp_file_id=:url;" );
    privs.bindValue(":url", _charid);
-   if (privs.exec() && privs.first())
-     _urlAssigned->populate(privs);
-   else if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
+   privs.exec();
+   if (ErrorReporter::error(QtCriticalMsg, 0, tr("Error Retrieving Permissions"),
                                  privs, __FILE__, __LINE__))
      return;
+   else
+     _urlAssigned->populate(privs);
+
 }
 
 void docAttach::sAddFilePriv()

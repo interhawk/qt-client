@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -240,7 +240,7 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     { "ap.enterMiscCreditMemo", tr("&New Misc. Credit Memo"), SLOT(sEnterMiscApCreditMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
     { "ap.unapplidCreditMemo", tr("&List Unapplied Credit Memos"), SLOT(sUnappliedApCreditMemos()), apMemosMenu, "MaintainAPMemos ViewAPMemos", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apMemosMenu, "true", NULL, NULL, true, NULL },
-    { "ap.enterMiscDebitMemo", tr("New &Misc. Debit Memoz"), SLOT(sEnterMiscApDebitMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
+    { "ap.enterMiscDebitMemo", tr("New &Misc. Debit Memo"), SLOT(sEnterMiscApDebitMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
 
     // Accounting | Accaunts Payable |  Payments
     { "menu", tr("&Payments"), (char*)apPaymentsMenu, apMenu, "true", NULL, NULL, true, NULL },

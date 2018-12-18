@@ -2764,6 +2764,14 @@ What would you like to do?</source>
         <source>Invalid type</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invalid Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have entered an invalid expression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CyberSourceProcessor</name>
@@ -2943,6 +2951,17 @@ What would you like to do?</source>
     </message>
 </context>
 <context>
+    <name>DocClusterLineEdit</name>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Documents</name>
     <message>
         <source>View</source>
@@ -3090,6 +3109,14 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Error Getting Document Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Url Open Error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3315,6 +3342,49 @@ returned %2
         <source>Could not find XSLT mapping with internal id %1.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Avoid delimiters more than 1 char long.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is not permitted as a delimiter. The following characters are not allowed: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 may cause problems. We suggest avoiding the following: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExportOptions</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text, Other Separator (*.csv)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text VCF (*.vcf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text  (*.txt)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTML (*.html)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ODF Text Document (*.odt)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open on Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ExternalCCProcessor</name>
@@ -3534,15 +3604,7 @@ returned %2
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 Evaluation %2 - Logged on as %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Initializing the CRM Module</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unnamed Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3595,6 +3657,14 @@ returned %2
     </message>
     <message>
         <source>&lt;p&gt;Could not find spell checking files named&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt; in &lt;ul&gt;&lt;li&gt;%2&lt;/li&gt;&lt;/ul&gt;.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[ unknown edition ]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not get user and edition</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5524,6 +5594,14 @@ returned %2
         <source>Vendor Type Pattern</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invalid Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have entered an invalid expression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VendorLineEdit</name>
@@ -5859,6 +5937,17 @@ returned %2
     </message>
 </context>
 <context>
+    <name>XClusterInputDialog</name>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Odustani</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+</context>
+<context>
     <name>XComboBoxPrivate</name>
     <message>
         <source>Edit List</source>
@@ -6180,10 +6269,6 @@ returned %2
     </message>
     <message>
         <source>Do Not Remember Sort Order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text CSV (*.csv);;Text VCF (*.vcf);;Text (*.txt);;ODF Text Document (*.odt);;HTML Document (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7243,6 +7328,10 @@ as an Address. Please select a CRM Account to use for the new Prospect:</source>
 %1
 as an Address. Please select a Prospect to edit:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Adresa</translation>
     </message>
 </context>
 <context>
@@ -10386,6 +10475,10 @@ Are you sure that you want to save this change?</source>
         <source>Error Deleting BOM Cost Component</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> #</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>bomList</name>
@@ -13418,19 +13511,20 @@ You may not create duplicate Forms.</source>
         <source>Error Confirming Country Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>If checked, an unprivileged user can still view the document in a document listing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Documents in list(s) if unprivileged</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>configureEncryption</name>
     <message>
         <source>Encryption Key location for Credit Card and EFT processing:</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Lucida Grande&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;whatsthis for a label with a buddy that&apos;s an empty text field&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;p&gt;Cannot read encrypted information from database.</source>
@@ -13449,10 +13543,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>keyfile.txt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Mac Location:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13462,6 +13552,46 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Linux Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Create Key File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encryption Key Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not create key file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encryption Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A key has been generated for your file. Please select this key or enter one of your own.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encryption Key Required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The file must have valid Encryption Key text entered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>xTuple Key File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The xTuple key file was generated. You will need to distribute the file to all users who need access to encrypted information (such as credit card or EFT information). The file must be located on each desktop in the directory specified on this screen. Once the key file has been used you cannot change the file without risking loss of data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The xTuple key file name has changed. Once the key file has been used you cannot change the file without risking loss of data. Do you wish to proceed?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14661,6 +14791,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Ship Via:</source>
         <translation>Otpremi putem:</translation>
+    </message>
+    <message>
+        <source>Copy S/O Shipping notes to Purchase Orders</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -16260,6 +16394,94 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Error Fetching CRM Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created Before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created After</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Updated Before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Updated After</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Updated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge Contacts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Characteristic lookup failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace</source>
+        <translation type="unfinished">Zamijeni</translation>
+    </message>
+    <message>
+        <source>Characteristic option lookup failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bulk Replace?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The selected value will be replaced for all %1 selected items. Are you sure you want to do this?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Replace failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact in Use</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact is used on an incident and cannot be deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marking failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unmarking failed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -18601,6 +18823,18 @@ Please verify the Count Tag Qty. and attempt to post again.</source>
         <source>&lt;p&gt;You must select a preassigned Lot/Serial number.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You cannot assign a quantity more than is remaining.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot assign a quantity more than was issued on the lot/serial.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Please enter an expiration date greater than today.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>createPlannedOrdersByItem</name>
@@ -18771,6 +19005,10 @@ creating Planned Orders.</source>
     <message>
         <source>Projects</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sales Orders</source>
+        <translation type="unfinished">Prodajni nalozi</translation>
     </message>
 </context>
 <context>
@@ -21187,20 +21425,12 @@ Please check the values of these dates.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Deleting Tax Registrations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Uses Blanket P/O&apos;s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Discover</source>
         <translation>Otkrij</translation>
-    </message>
-    <message>
-        <source>Getting Tax Registrations</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Getting Commission</source>
@@ -21247,20 +21477,12 @@ Please check the values of these dates.</source>
         <translation>Uredi</translation>
     </message>
     <message>
-        <source>Tax Authority</source>
-        <translation>Porezni ured</translation>
-    </message>
-    <message>
         <source>Move Up</source>
         <translation>Pomakni gore</translation>
     </message>
     <message>
         <source>Move Down</source>
         <translation>Pomakni dolje</translation>
-    </message>
-    <message>
-        <source>Registration #</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;p&gt;This number is currently used by an existing Customer. Do you want to edit that Customer?</source>
@@ -22896,6 +23118,50 @@ to be deleted.</source>
         <source>Ignore</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished">Bilješke:</translation>
+    </message>
+    <message>
+        <source>Characteristics</source>
+        <translation type="unfinished">Značajke</translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add -&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;- Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Document:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available Roles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned Roles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Retrieving Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Adding Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Removing Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>documents</name>
@@ -24357,10 +24623,6 @@ Would you like to post it anyway?</source>
         <translation>&amp;Uredi</translation>
     </message>
     <message>
-        <source>Create &amp;Invoice</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Odustani</translation>
     </message>
@@ -24398,6 +24660,10 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Error Retrieving Billing Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create &amp;Invoice(s)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -26574,6 +26840,113 @@ Would you like to post it anyway?</source>
     </message>
 </context>
 <context>
+    <name>dspDocuments</name>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assigned To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created Start Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created By</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Vrsta</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Broj</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished">Naslov</translation>
+    </message>
+    <message>
+        <source>Description/Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detach Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Open Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could Not Create File %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Getting Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Url Open Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Determining Target Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not determine the ui form to open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Deleting Assignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>dspEarnedCommissions</name>
     <message>
         <source>Include Misc. Charges and Items</source>
@@ -28056,10 +28429,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Available QOH</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A Class</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28077,6 +28446,10 @@ Total</source>
     </message>
     <message>
         <source>Reserved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current QOH Avail.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37665,15 +38038,19 @@ Rate</source>
         <translation>Vrsta</translation>
     </message>
     <message>
-        <source>Value</source>
-        <translation>Vrijednost</translation>
-    </message>
-    <message>
         <source>Uninvoiced P/O Receipts and Returns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Retrieving Receiving Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cost Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P/O Value</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -40144,6 +40521,14 @@ Would you like to automatically create a credit memo against this return?</sourc
     </message>
     <message>
         <source>Error Saving PO Receipt Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inactive Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Item Site is marked inactive and cannot be receipted against. Please correct this before proceeding.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -46950,10 +47335,6 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
         <translation></translation>
     </message>
     <message>
-        <source>Insufficient Inventory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Issue Work Order Material Batch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -46975,13 +47356,6 @@ Could not post Invoice #%1 due to a missing exchange rate.</source>
     </message>
     <message>
         <source>Short</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Item Number %1 in Site %2 is a Multiple Location or
-Lot/Serial controlled Item which is short on Inventory.
-This transaction cannot be completed as is. Please make
-sure there is sufficient Quantity on Hand before proceeding.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -47049,10 +47423,6 @@ sure there is sufficient Quantity on Hand before proceeding.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>One or more items cannot be issued due to insufficient inventory. Issue all other items?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Posting distribution detail for item number %1 was cancelled but there are more items to issue. Continue issuing the remaining materials?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47081,6 +47451,10 @@ sure there is sufficient Quantity on Hand before proceeding.</source>
     </message>
     <message>
         <source>There is no Qty to Issue.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The following items cannot be issued due to insufficient inventory:&lt;ul&gt;&lt;li&gt;%1&lt;/li&gt;&lt;/ul&gt;. Issue all other items?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -47784,6 +48158,14 @@ sure there is sufficient Quantity on Hand before proceeding.</source>
         <source>Error Fetching BOM</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Loc. Cntrl.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You have changed the Item Type of this Item. To ensure Item Sites do not have invalid settings, all Item Sites for it are inactivated before this change may occur.  However open orders exist for one or more of the Item Sites so inactivating the Site will fail.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>itemAlias</name>
@@ -48123,6 +48505,14 @@ You may not create duplicate Item Aliases.</source>
     </message>
     <message>
         <source>The selected Group is already a child of this Item Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Characteristics</source>
+        <translation type="unfinished">Značajke</translation>
+    </message>
+    <message>
+        <source>Documents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -49087,10 +49477,6 @@ You must delete these assignments before you may delete the selected Pricing Sch
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stocked</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The Item Site for this Item at %1 is inactive. Would you like to make it active?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49473,6 +49859,14 @@ You must delete these assignments before you may delete the selected Pricing Sch
     </message>
     <message>
         <source>&lt;p&gt;You cannot change the Control Method to None when inventory exists at this Site.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suppress Automatic Order Creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculate Inventory Buffer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -49932,12 +50326,6 @@ before you may save this Item Source.</source>
     </message>
     <message>
         <source>Contracted Qty:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>An Item Source already exists for the Item Number, Vendor,
-Contract, Effective Date, Expires Date,
-Vendor Item, Manfacturer Name and Manufacturer Item Number you have specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -51046,15 +51434,6 @@ You must reassign the Locales for these Users before you may delete the selected
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;Sorry, can&apos;t connect to the specified xTuple ERP server. &lt;p&gt;This may be due to a problem with your user name, password, or server connection information. &lt;p&gt;Below is more detail on the connection problem: &lt;p&gt;%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A System Error occurred at %1::%2:
-%3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Initializing the Database Connector</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51064,10 +51443,6 @@ You must reassign the Locales for these Users before you may delete the selected
     </message>
     <message>
         <source>Recent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;An unknown error occurred at %1::%2. You may not log in to the specified xTuple ERP Server at this time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -51119,7 +51494,19 @@ You must reassign the Locales for these Users before you may delete the selected
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;The database &quot;%1&quot; does not appear to be a valid xTuple database.&lt;/p&gt;&lt;p&gt;Please check the database name and try again.&lt;/p&gt;</source>
+        <source>&lt;p&gt;Sorry, can&apos;t connect to the specified xTuple ERP server:&lt;/p&gt;&lt;pre&gt;%1&lt;/pre&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&apos;%1&apos; does not appear to be a valid xTuple database.&lt;/p&gt;&lt;p&gt;Please check the database name and try again.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not set the time zone: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not set up database session properly: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -52033,10 +52420,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation></translation>
     </message>
     <message>
-        <source>Open &amp;Payables...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>List Unposted Vouchers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -52049,28 +52432,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Journals...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Transactions...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Payables Workbench</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Utilities</source>
         <translation>&amp;Alati</translation>
-    </message>
-    <message>
-        <source>&amp;New Adjustment...</source>
-        <translation>&amp;Novo podešavanje...</translation>
-    </message>
-    <message>
-        <source>&amp;Chart of Accounts...</source>
-        <translation>&amp;Kontni plan...</translation>
     </message>
     <message>
         <source>Cash Receipt Edit List</source>
@@ -52093,14 +52460,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Duplicate Account Numbers...</source>
-        <translation>&amp;Duplirani kontni brojevi...</translation>
-    </message>
-    <message>
-        <source>&amp;List Recurring Invoices...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>List Unposted Journal Entries</source>
         <translation type="unfinished"></translation>
     </message>
@@ -52109,36 +52468,16 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Obrasci</translation>
     </message>
     <message>
-        <source>&amp;List Open...</source>
-        <translation type="unfinished">&amp;Izlistaj otvoreno...</translation>
-    </message>
-    <message>
         <source>&amp;Release...</source>
         <translation type="unfinished">&amp;Objavi...</translation>
-    </message>
-    <message>
-        <source>Su&amp;mmarized Transactions...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Update Late Customer Credit Status...</source>
-        <translation>&amp;Ažuriraj kreditni status kupca koji kasni s plaćanjem...</translation>
     </message>
     <message>
         <source>&amp;Reports</source>
         <translation>&amp;Izvješća</translation>
     </message>
     <message>
-        <source>&amp;Open Receivables...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Payments</source>
         <translation>&amp;Plaćanja</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Classes...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Invoice</source>
@@ -52149,20 +52488,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Uninvoiced Receipts and Returns...</source>
-        <translation>&amp;Nefakturirani računi i povratnice...</translation>
-    </message>
-    <message>
         <source>Financial &amp;Statements</source>
         <translation>Financij&amp;sko računovodstvo i izjave</translation>
-    </message>
-    <message>
-        <source>New &amp;Misc. Debit Memo...</source>
-        <translation>Nova raznovrsna zabilješka o dugovanju...</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Types...</source>
-        <translation>Vrs&amp;te poreza...</translation>
     </message>
     <message>
         <source>Receivables Aging</source>
@@ -52177,52 +52504,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished">&amp;Povijest</translation>
     </message>
     <message>
-        <source>&amp;Voucher Register...</source>
-        <translation>&amp;Registar bonova...</translation>
-    </message>
-    <message>
         <source>Accounts Recei&amp;vable</source>
         <translation>Potraži&amp;vanja od kupaca</translation>
     </message>
     <message>
         <source>&amp;Memos</source>
         <translation>&amp;Zabilješke</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Zones...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Series...</source>
-        <translation>&amp;Serije...</translation>
-    </message>
-    <message>
-        <source>&amp;List Unposted...</source>
-        <translation>&amp;Izlistaj neknjiženo...</translation>
-    </message>
-    <message>
-        <source>New &amp;Miscellaneous...</source>
-        <translation>Novo raznovrsno...</translation>
-    </message>
-    <message>
-        <source>&amp;Tax History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Novo...</translation>
-    </message>
-    <message>
-        <source>Tax Assi&amp;gnments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vendor &amp;History...</source>
-        <translation>Povijest dobavljača</translation>
-    </message>
-    <message>
-        <source>Ve&amp;ndors...</source>
-        <translation>Dobavljači...</translation>
     </message>
     <message>
         <source>Accounts &amp;Payable</source>
@@ -52237,20 +52524,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Računovodstveni alati</translation>
     </message>
     <message>
-        <source>Fiscal &amp;Years...</source>
-        <translation>Fiskalne godine...</translation>
-    </message>
-    <message>
         <source>&amp;Journal Entry</source>
         <translation>&amp;Unos u dnevnik</translation>
-    </message>
-    <message>
-        <source>Cash &amp;Receipts...</source>
-        <translation>Priznanice za gotovinu...</translation>
-    </message>
-    <message>
-        <source>&amp;New Financial Report...</source>
-        <translation>&amp;Novo financijsko izvješće...</translation>
     </message>
     <message>
         <source>&amp;Edit List...</source>
@@ -52261,16 +52536,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>T&amp;iskaj fakture...</translation>
     </message>
     <message>
-        <source>A&amp;ging...</source>
-        <translation>&amp;Grupiranje po datumima...</translation>
-    </message>
-    <message>
         <source>&amp;Re-Print Invoices...</source>
         <translation>&amp;Ponovno tiskaj fakture...</translation>
-    </message>
-    <message>
-        <source>In&amp;voice Register...</source>
-        <translation>Registar faktura...</translation>
     </message>
     <message>
         <source>Print S&amp;tatement by Customer...</source>
@@ -52285,96 +52552,20 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Informacije o fakturi...</translation>
     </message>
     <message>
-        <source>&amp;Customers...</source>
-        <translation>&amp;Kupci...</translation>
-    </message>
-    <message>
-        <source>&amp;List Financial Reports...</source>
-        <translation>&amp;Izlistaj financijska izvješća...</translation>
-    </message>
-    <message>
-        <source>&amp;Deposits Register...</source>
-        <translation>&amp;Registar depozita...</translation>
-    </message>
-    <message>
         <source>General &amp;Ledger</source>
         <translation>G&amp;lavna knjiga</translation>
-    </message>
-    <message>
-        <source>Customer &amp;History...</source>
-        <translation>Povijest kupca...</translation>
-    </message>
-    <message>
-        <source>View &amp;Trial Balances...</source>
-        <translation>Pogledaj probnu bilancu...</translation>
-    </message>
-    <message>
-        <source>View &amp;Financial Report...</source>
-        <translation>Pogledaj financijsko izvješće...</translation>
     </message>
     <message>
         <source>&amp;Fiscal Calendar</source>
         <translation>&amp;Fiskalni kalendar</translation>
     </message>
     <message>
-        <source>Accounting &amp;Periods...</source>
-        <translation>Računovodstvo i &amp;razdoblja...</translation>
-    </message>
-    <message>
-        <source>S&amp;imple...</source>
-        <translation>Jednostavno...</translation>
-    </message>
-    <message>
-        <source>C&amp;ompanies...</source>
-        <translation>Tvrtke...</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Registrations...</source>
-        <translation>Prijave po&amp;reza...</translation>
-    </message>
-    <message>
-        <source>&amp;New Budget...</source>
-        <translation>&amp;Novi budžet...</translation>
-    </message>
-    <message>
-        <source>&amp;Profit Center Numbers...</source>
-        <translation>&amp;Brojevi profitnih centara...</translation>
-    </message>
-    <message>
-        <source>&amp;Subaccount Numbers...</source>
-        <translation>&amp;Brojevi podračuna...</translation>
-    </message>
-    <message>
-        <source>Su&amp;baccount Types...</source>
-        <translation>Vrsta podračuna...</translation>
-    </message>
-    <message>
         <source>Bu&amp;dget</source>
         <translation>Budžet</translation>
     </message>
     <message>
-        <source>&amp;List Budgets...</source>
-        <translation>&amp;Izlistaj budžete...</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Authorities...</source>
-        <translation>Porezni uredi...</translation>
-    </message>
-    <message>
         <source>&amp;Tax</source>
         <translation>&amp;Porez</translation>
-    </message>
-    <message>
-        <source>Tax &amp;Codes...</source>
-        <translation>Kodovi poreza...</translation>
-    </message>
-    <message>
-        <source>&amp;Applications...</source>
-        <translation>&amp;Aplikacije...</translation>
-    </message>
-    <message>
-        <source>&amp;Workbench...</source>
-        <translation>&amp;Radna ploha</translation>
     </message>
     <message>
         <source>&amp;Aging...</source>
@@ -52387,14 +52578,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>&amp;Standard Journals</source>
         <translation>&amp;Standardni dnevnici</translation>
-    </message>
-    <message>
-        <source>List &amp;Groups...</source>
-        <translation>Izlistaj &amp;grupe...</translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>&amp;Izlistaj...</translation>
     </message>
     <message>
         <source>&amp;Forward Update Accounts...</source>
@@ -52413,14 +52596,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Sravni...</translation>
     </message>
     <message>
-        <source>Adjustment Edit &amp;List...</source>
-        <translation>&amp;Lista uređivanja korekcije...</translation>
-    </message>
-    <message>
-        <source>&amp;List Unapplied Credit Memos...</source>
-        <translation>&amp;Izlistaj neiskorištene kreditne zabilješke...</translation>
-    </message>
-    <message>
         <source>Purchase &amp;Order</source>
         <translation>Narudžbenica</translation>
     </message>
@@ -52433,16 +52608,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Knjiži...</translation>
     </message>
     <message>
-        <source>&amp;New Misc. Credit Memo...</source>
-        <translation>&amp;Novi raznovrsni kreditni zapis...</translation>
-    </message>
-    <message>
         <source>Purge &amp;Invoices...</source>
         <translation>Obriš&amp;i fakture...</translation>
-    </message>
-    <message>
-        <source>Standard &amp;Journal History...</source>
-        <translation>Povi&amp;jest standarne knjige...</translation>
     </message>
     <message>
         <source>&amp;Approve...</source>
@@ -52453,15 +52620,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;List Approved...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Prepare Payment Run...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create &amp;Miscellaneous Payment...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -52489,10 +52648,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Payment Register...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Assess Finance Charges...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -52505,15 +52660,251 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Tax Return...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Info for 1099...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ledger Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;List Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New &amp;Miscellaneous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Misc. Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unapplied Credit Memos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New &amp;Misc. Debit Memoz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Approved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create &amp;Miscellaneous Payment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Workbench</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Uninvoiced Receipts and Returns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open &amp;Payables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Payment Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Voucher Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vendor &amp;History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ve&amp;ndors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Recurring Invoices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New &amp;Misc. Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open Receivables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A&amp;ging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In&amp;voice Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cash &amp;Receipts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Deposits Register</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer &amp;History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Customers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;imple</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List &amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Transactions</source>
+        <translation type="unfinished">&amp;Transakcije</translation>
+    </message>
+    <message>
+        <source>Su&amp;mmarized Transactions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard &amp;Journal History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Journals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Adjustment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjustment Edit &amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Financial Report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Financial Reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;Trial Balances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View &amp;Financial Report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fiscal &amp;Years</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accounting &amp;Periods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Chart of Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C&amp;ompanies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Profit Center Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Subaccount Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Su&amp;baccount Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Budget</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Budgets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Authorities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Zones</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Classes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Codes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax Assi&amp;gnments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax &amp;Registrations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tax History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Tax Return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Info for 1099</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Duplicate Account Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Update Late Customer Credit Status</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -52524,20 +52915,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished">&amp;Aktivnost naloga po projektima...</translation>
     </message>
     <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Reports</source>
         <translation>&amp;Izvješća</translation>
     </message>
     <message>
         <source>Incident List</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>&amp;Izlistaj...</translation>
     </message>
     <message>
         <source>&amp;Incident</source>
@@ -52619,6 +53002,22 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>Merge &amp;Accounts...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>menuInventory</name>
@@ -52635,16 +53034,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished">&amp;Povijest...</translation>
     </message>
     <message>
-        <source>Enter &amp;Misc. Inventory Count...</source>
-        <translation>Unos inventurnog prebrojavanja...</translation>
-    </message>
-    <message>
         <source>History by Lo&amp;cation...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Novo...</translation>
     </message>
     <message>
         <source>History by &amp;Lot/Serial #...</source>
@@ -52672,10 +53063,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Inventory &amp;Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Backlog...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -52707,16 +53094,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Tiskaj prijemne etikete...</translation>
     </message>
     <message>
-        <source>&amp;List Unposted Receipts...</source>
-        <translation>&amp;Izlistaj neknjižene račune...</translation>
-    </message>
-    <message>
         <source>&amp;Shipping Form...</source>
         <translation>&amp;Otpremnica...</translation>
-    </message>
-    <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S&amp;hipping Forms...</source>
@@ -52777,10 +53156,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>&amp;Release by Agent...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;List Open...</source>
-        <translation type="unfinished">&amp;Izlistaj otvoreno...</translation>
     </message>
     <message>
         <source>&amp;Transactions</source>
@@ -52847,10 +53222,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Detalji lokacije/šarže/serijskog br...</translation>
     </message>
     <message>
-        <source>L&amp;ocations...</source>
-        <translation>L&amp;okacije...</translation>
-    </message>
-    <message>
         <source>Transfer &amp;Order</source>
         <translation>Prenesi nal&amp;og</translation>
     </message>
@@ -52879,24 +53250,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Održavanje...</translation>
     </message>
     <message>
-        <source>Post Count S&amp;lips...</source>
-        <translation>Knjiži inventurne &amp;listiće...</translation>
-    </message>
-    <message>
-        <source>&amp;Zero Uncounted Count Tags...</source>
-        <translation>&amp;Nuliraj neprebrojene oznake za brojanje...</translation>
-    </message>
-    <message>
-        <source>Enter Count &amp;Tag...</source>
-        <translation>Unesi inventurnu mapu..</translation>
-    </message>
-    <message>
         <source>Tha&amp;w Item Sites...</source>
         <translation>Odledi stanje skladišta...</translation>
-    </message>
-    <message>
-        <source>Post Count T&amp;ags...</source>
-        <translation>Knjiži inven&amp;turne mape...</translation>
     </message>
     <message>
         <source>&amp;Substitute Availability...</source>
@@ -52913,10 +53268,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>&amp;Item Site Lead Times...</source>
         <translation>&amp;Latencije skladišta artikla</translation>
-    </message>
-    <message>
-        <source>&amp;Frozen Item Sites...</source>
-        <translation>&amp;Skladišta s zaleđenim stanjem</translation>
     </message>
     <message>
         <source>Count Ta&amp;g Edit List...</source>
@@ -52971,10 +53322,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Učestalost periodičkih inventura...</translation>
     </message>
     <message>
-        <source>&amp;Create Item Sites...</source>
-        <translation>&amp;Kreiraj skladišta artikala...</translation>
-    </message>
-    <message>
         <source>&amp;Order Up To Levels</source>
         <translation>&amp;Naruči sve do razine</translation>
     </message>
@@ -53003,18 +53350,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Izdaj u ekspedit</translation>
     </message>
     <message>
-        <source>&amp;Maintain Shipping Contents...</source>
-        <translation>&amp;Održavanje sadržaja pošiljke...</translation>
-    </message>
-    <message>
-        <source>&amp;New Receipt...</source>
-        <translation>&amp;Novi račun...</translation>
-    </message>
-    <message>
-        <source>Create C&amp;ycle Count Tags...</source>
-        <translation>Kreiraj inv. mape za period.inventuru...</translation>
-    </message>
-    <message>
         <source>&amp;Site Transfer...</source>
         <translation>&amp;Skladišni premještaj...</translation>
     </message>
@@ -53039,10 +53374,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>po artiklu</translation>
     </message>
     <message>
-        <source>Enter Count &amp;Slip...</source>
-        <translation>Unesi inventurni li&amp;stić...</translation>
-    </message>
-    <message>
         <source>Print Packing List Batch...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53056,6 +53387,78 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Quantities On Hand By &amp;Zone...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;List Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create C&amp;ycle Count Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Count &amp;Slip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Count &amp;Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter &amp;Misc. Inventory Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Zero Uncounted Count Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Count S&amp;lips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Count T&amp;ags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Frozen Item Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted Receipts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Maintain Shipping Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Backlog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>L&amp;ocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Create Item Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -53102,10 +53505,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Sirovine</translation>
     </message>
     <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Re&amp;schedule...</source>
         <translation>Promijeni ra&amp;spored...</translation>
     </message>
@@ -53140,10 +53539,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>&amp;Work Order</source>
         <translation>&amp;Radni nalog</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Novo...</translation>
     </message>
     <message>
         <source>&amp;Implode...</source>
@@ -53245,6 +53640,14 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>&amp;Manufacture</source>
         <translation>&amp;Proizvedi</translation>
     </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>menuProducts</name>
@@ -53289,10 +53692,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Slike...</translation>
     </message>
     <message>
-        <source>&amp;Groups...</source>
-        <translation>&amp;Grupe...</translation>
-    </message>
-    <message>
         <source>&amp;Pending BOM Changes...</source>
         <translation>&amp;Tekuće promjene sastavnice</translation>
     </message>
@@ -53307,10 +53706,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Reassign &amp;Class Codes...</source>
         <translation>Predodijeli šifre razreda...</translation>
-    </message>
-    <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;User-Defined Costing Elements...</source>
@@ -53377,10 +53772,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Artikl</translation>
     </message>
     <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Novo...</translation>
-    </message>
-    <message>
         <source>&amp;Lot/Serial...</source>
         <translation>&amp;Šarža/serijski broj...</translation>
     </message>
@@ -53389,16 +53780,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Specifikacija sirovina</translation>
     </message>
     <message>
-        <source>Undefined &amp;Manufactured Items...</source>
-        <translation>Nedefinirani proizvedeni artikli...</translation>
-    </message>
-    <message>
         <source>&amp;Reassign Product Categories...</source>
         <translation>&amp;Predodijeli kategorije proizvoda...</translation>
-    </message>
-    <message>
-        <source>Bills of Ma&amp;terials without Component Item Sites...</source>
-        <translation>Specifikacija sirovina bez pripadajućih skladišta...</translation>
     </message>
     <message>
         <source>&amp;Where Used</source>
@@ -53420,13 +53803,33 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>Summari&amp;zed...</source>
         <translation>&amp;Zbrojno...</translation>
     </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undefined &amp;Manufactured Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bills of Ma&amp;terials without Component Item Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>menuPurchase</name>
-    <message>
-        <source>&amp;Setup...</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Purchase &amp;Requests</source>
         <translation>Zahtjevi za nabavu</translation>
@@ -53442,14 +53845,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>by &amp;Planner Code...</source>
         <translation>po šifri plana</translation>
-    </message>
-    <message>
-        <source>&amp;List Open...</source>
-        <translation type="unfinished">&amp;Izlistaj otvoreno...</translation>
-    </message>
-    <message>
-        <source>Item &amp;Sites...</source>
-        <translation>&amp;Skladište artikla...</translation>
     </message>
     <message>
         <source>&amp;Workbench...</source>
@@ -53528,14 +53923,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Novo...</translation>
-    </message>
-    <message>
-        <source>&amp;List Unposted...</source>
-        <translation>&amp;Izlistaj neknjiženo...</translation>
-    </message>
-    <message>
         <source>&amp;Post...</source>
         <translation>&amp;Knjiži...</translation>
     </message>
@@ -53556,10 +53943,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Obrasci</translation>
     </message>
     <message>
-        <source>New &amp;Miscellaneous...</source>
-        <translation>Novo raznovrsno...</translation>
-    </message>
-    <message>
         <source>Print &amp;P/O Form...</source>
         <translation>Tiskaj obrazac narudžbenice...</translation>
     </message>
@@ -53572,16 +53955,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Stavke narudžbenice</translation>
     </message>
     <message>
-        <source>&amp;List...</source>
-        <translation>&amp;Izlistaj...</translation>
-    </message>
-    <message>
         <source>&amp;Receipts and Returns</source>
         <translation>&amp;Računi i povratnice</translation>
-    </message>
-    <message>
-        <source>&amp;Uninvoiced Receipts and Returns...</source>
-        <translation>&amp;Nefakturirani računi i povratnice...</translation>
     </message>
     <message>
         <source>Rejected &amp;Material...</source>
@@ -53600,10 +53975,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Pridijeli artikle planskoj šifri...</translation>
     </message>
     <message>
-        <source>&amp;Items without Item Sources...</source>
-        <translation>&amp;Artikli bez izvora</translation>
-    </message>
-    <message>
         <source>&amp;Utilities</source>
         <translation>&amp;Alati</translation>
     </message>
@@ -53620,16 +53991,48 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished">&amp;Pogledaj</translation>
     </message>
     <message>
-        <source>&amp;Item Source Prices...</source>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;List Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New &amp;Miscellaneous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Item &amp;Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Item Source Prices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Uninvoiced Receipts and Returns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Items without Item Sources</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>menuSales</name>
-    <message>
-        <source>Inventory &amp;Availability...</source>
-        <translation></translation>
-    </message>
     <message>
         <source>&amp;Update List Prices...</source>
         <translation>&amp;Ažuriraj kataloške cijene...</translation>
@@ -53643,16 +54046,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>S&amp;tatus prodajnog naloga...</translation>
     </message>
     <message>
-        <source>T&amp;ime Phased Bookings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Allocate Reser&amp;vations...</source>
         <translation>Alociraj rezer&amp;vacije...</translation>
-    </message>
-    <message>
-        <source>&amp;Backlog...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print Sales &amp;Order Form...</source>
@@ -53679,44 +54074,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Ponovno tiskaj fakture...</translation>
     </message>
     <message>
-        <source>Pricing &amp;Schedules...</source>
-        <translation>Količinski popu&amp;sti...</translation>
-    </message>
-    <message>
-        <source>&amp;Bookings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Brie&amp;f Sales History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sales &amp;History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time &amp;Phased Sales History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Update Credit Status by Customer...</source>
         <translation>&amp;Ažuriraj kreditni status po kupcima...</translation>
     </message>
     <message>
-        <source>Summari&amp;zed Sales History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Reassign Customer Type by Customer Type...</source>
         <translation>&amp;Predodijeli tip kupca po tipu kupca...</translation>
-    </message>
-    <message>
-        <source>S&amp;ales...</source>
-        <translation>Prodaja...</translation>
-    </message>
-    <message>
-        <source>Pricing Schedule Assi&amp;gnments...</source>
-        <translation>Dodjela količinskih popusta...</translation>
     </message>
     <message>
         <source>Reservations by Item...</source>
@@ -53733,10 +54096,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Restore &amp;Sales History...</source>
         <translation>Obnovi povije&amp;st prodaje...</translation>
-    </message>
-    <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Archive Sales History...</source>
@@ -53768,10 +54127,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>S&amp;ales</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tax History...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -53807,20 +54162,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Alati za prodaju</translation>
     </message>
     <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Novo...</translation>
-    </message>
-    <message>
         <source>Freight Prices by Customer &amp;Type...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Freight Prices by &amp;Customer...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;List Unposted Invoices...</source>
-        <translation>&amp;Izlistaj neknjižene fakture...</translation>
     </message>
     <message>
         <source>&amp;Forms</source>
@@ -53835,22 +54182,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Tiskaj račune...</translation>
     </message>
     <message>
-        <source>Su&amp;mmarized Backlog...</source>
-        <translation>Zbrojni zaostaci...</translation>
-    </message>
-    <message>
-        <source>&amp;Partially Shipped Orders...</source>
-        <translation>&amp;Djelomično otpremljene narudžbe...</translation>
-    </message>
-    <message>
-        <source>&amp;Earned Commissions...</source>
-        <translation>&amp;Ostvarene provizije...</translation>
-    </message>
-    <message>
-        <source>B&amp;rief Earned Commissions...</source>
-        <translation>Za&amp;rađene provizije ukratko...</translation>
-    </message>
-    <message>
         <source>&amp;Prospect</source>
         <translation>&amp;Prilika</translation>
     </message>
@@ -53863,32 +54194,16 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>&amp;Radna ploha</translation>
     </message>
     <message>
-        <source>&amp;Groups...</source>
-        <translation>&amp;Grupe...</translation>
-    </message>
-    <message>
         <source>&amp;Sales Order</source>
         <translation>&amp;Ulazna narudžba</translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>&amp;Izlistaj...</translation>
     </message>
     <message>
         <source>&amp;Invoice</source>
         <translation>&amp;Faktura...</translation>
     </message>
     <message>
-        <source>&amp;List Open...</source>
-        <translation>&amp;Izlistaj otvoreno...</translation>
-    </message>
-    <message>
         <source>&amp;Billing</source>
         <translation>&amp;Fakturiranje</translation>
-    </message>
-    <message>
-        <source>&amp;Uninvoiced Shipments...</source>
-        <translation>&amp;Nefakturirane otpreme...</translation>
     </message>
     <message>
         <source>Post &amp;Invoices...</source>
@@ -53897,10 +54212,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>&amp;Reports</source>
         <translation>&amp;Izvješća</translation>
-    </message>
-    <message>
-        <source>&amp;List Unposted...</source>
-        <translation>&amp;Izlistaj neknjiženo...</translation>
     </message>
     <message>
         <source>&amp;Post...</source>
@@ -53915,14 +54226,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Grupa pakirnih &amp;lista...</translation>
     </message>
     <message>
-        <source>&amp;Edit List...</source>
-        <translation>&amp;Uredi listu...</translation>
-    </message>
-    <message>
-        <source>&amp;Search Orders...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Approve &amp;All Shipped Orders for Billing...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53931,23 +54234,11 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Billing &amp;Approvals...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Billing Approvals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Return Auth.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New Simple...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New Invoice...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -53963,15 +54254,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>List Pricing &amp;Schedules...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Update List Pricing Schedules...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>List Pricing Schedule Assi&amp;gnments...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -53979,7 +54262,127 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Search RAs...</source>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Simple</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Uninvoiced Shipment.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Billing &amp;Approvals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted Invoices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;List Unposted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search RAs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Su&amp;mmarized Backlog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Backlog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Partially Shipped Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory &amp;Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Earned Commissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B&amp;rief Earned Commissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tax History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Bookings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T&amp;ime Phased Bookings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sales &amp;History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brie&amp;f Sales History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Summari&amp;zed Sales History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time &amp;Phased Sales History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List Pricing &amp;Schedules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List Pricing Schedule Assi&amp;gnments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pricing &amp;Schedules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pricing Schedule Assi&amp;gnments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -54089,47 +54492,19 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Tiskaj stranicu za poravnanje...</translation>
     </message>
     <message>
-        <source>E&amp;vent Manager...</source>
-        <translation>Upravitelj događaja...</translation>
-    </message>
-    <message>
         <source>&amp;Help</source>
         <translation>&amp;Pomoć</translation>
-    </message>
-    <message>
-        <source>&amp;Packages...</source>
-        <translation>&amp;Paketi...</translation>
     </message>
     <message>
         <source>&amp;Utilities</source>
         <translation type="unfinished">&amp;Alati</translation>
     </message>
     <message>
-        <source>&amp;Setup...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Database &amp;Log...</source>
-        <translation>Pogledaj &amp;log baze podataka</translation>
-    </message>
-    <message>
-        <source>&amp;List...</source>
-        <translation>&amp;Izlistaj...</translation>
-    </message>
-    <message>
         <source>&amp;Design</source>
         <translation>&amp;Dizajn</translation>
     </message>
     <message>
-        <source>&amp;Hot Keys...</source>
-        <translation>&amp;Tipkovničke kratice...</translation>
-    </message>
-    <message>
         <source>&amp;Export Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scr&amp;ipts...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -54137,24 +54512,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>S&amp;creens...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;MetaSQL Statements...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation>&amp;Novo...</translation>
-    </message>
-    <message>
         <source>&amp;Access Control</source>
         <translation>&amp;Kontrola pristupa</translation>
-    </message>
-    <message>
-        <source>E&amp;xit xTuple ERP...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Employees</source>
@@ -54163,14 +54522,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>&amp;Serial Columns</source>
         <translation>&amp;Serijski stupci</translation>
-    </message>
-    <message>
-        <source>&amp;Reports...</source>
-        <translation>&amp;Izvješća...</translation>
-    </message>
-    <message>
-        <source>Custom Command&amp;s...</source>
-        <translation>Korisnički definirane naredbe...</translation>
     </message>
     <message>
         <source>Rescan &amp;Privileges</source>
@@ -54205,14 +54556,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Bl&amp;ogovi...</translation>
     </message>
     <message>
-        <source>&amp;Search...</source>
-        <translation>&amp;Potraga...</translation>
-    </message>
-    <message>
-        <source>Employee &amp;Groups...</source>
-        <translation>Grupe zaposlenika...</translation>
-    </message>
-    <message>
         <source>&amp;About...</source>
         <translation>&amp;O programu...</translation>
     </message>
@@ -54233,10 +54576,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Preferences...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>User Privilege Audit...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -54246,6 +54585,70 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Process/Lock Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;vent Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Database &amp;Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hot Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Novo</translation>
+    </message>
+    <message>
+        <source>&amp;List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Employee &amp;Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reports</source>
+        <translation type="unfinished">&amp;Izvješća</translation>
+    </message>
+    <message>
+        <source>&amp;MetaSQL Statements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;creens</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scr&amp;ipts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom Command&amp;s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Packages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E&amp;xit xTuple ERP</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -55770,6 +56173,10 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>Create Date on or Before</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Name Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>opportunitySource</name>
@@ -56385,23 +56792,11 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <translation>Automatski ažuriraj</translation>
     </message>
     <message>
-        <source>&amp;Print Packing List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Shipment #</source>
         <translation>Br.otpreme</translation>
     </message>
     <message>
-        <source>Shipment Number Required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;All of the Packing Lists appear to have been printed already.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Packing Lists may only be printed for existing Shipments and there is no Shipment for this Order. Issue Stock To Shipping to create a Shipment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -56515,6 +56910,10 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <message>
         <source>Tax</source>
         <translation type="unfinished">Porez</translation>
+    </message>
+    <message>
+        <source>&amp;Print Form</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -57098,6 +57497,10 @@ Contact you Systems Administrator.</source>
     </message>
     <message>
         <source>Error Retrieving Bank Account Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no valid payments to post.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -59933,10 +60336,6 @@ post Vouchers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;No statement is available for the specified Customer and Asof Date.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Print Statement by Customer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -59970,6 +60369,10 @@ post Vouchers.</source>
     </message>
     <message>
         <source>You must enter a valid Customer Number for this Statement.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;No statement is available for the specified Customer and As Of Date.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -65673,6 +66076,10 @@ You must Recall this Work Order before Rescheduling it.</source>
         <source>The Original Sales Order Site (%1) does not match the Shipping Site (%2). &lt;p&gt;Do you want to update it to match the Sales Order?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;p&gt;Expiry Date must be on or later than the Authorization Date.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>returnAuthorizationItem</name>
@@ -68131,10 +68538,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Saving Order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item Workbench</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68300,10 +68703,6 @@ Do you wish to continue saving the order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You may not delete this Sales Order as it has one or more dropshipped line items on a Purchase Order.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Getting Linked PO Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68390,6 +68789,35 @@ Do you wish to continue saving the order?</source>
     <message>
         <source>Tax</source>
         <translation type="unfinished">Porez</translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recurring Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have edited a recurring Sales Order.
+Do you wish to change all future Sales Order recurrences?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Updating Sales Order Recurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Saving Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error occurred saving recurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You may not delete this Sales Order as it has one or more line items on a Purchase Order.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -73705,10 +74133,6 @@ Do you wish to convert %1 %2 at the current rate?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The Cost Category for one or more Item Sites for the Purchase Order covered by this Voucher is not configured with Purchase Price Variance or P/O Liability Clearing Account Numbers or the Vendor of this Voucher is not configured with an A/P Account Number. Because of this, G/L Transactions cannot be posted for this Voucher.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The selected Sales Rep. cannot be deleted as he/she is still assigned to one or more Customers.  You must reassign different Sales Reps. to all Customers to which the selected Sales Rep. is assigned before you may delete the selected Sales Rep.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -74962,10 +75386,6 @@ You must first delete the Bill of Materials for the selected target item before 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot delete this Payment because either it has not been voided, it has already been posted or replaced, or it has been transmitted electronically.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The selected Contact cannot be deleted as s/he is the primary or secondary Contact  for a Account.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -75551,6 +75971,98 @@ You must first delete the Bill of Materials for the selected target item before 
     </message>
     <message>
         <source>The selected Order is on Tax Hold and must be taken off of Tax Hold before it may be shipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You do not have privileges to maintain A/R Memos. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a valid Document # for this A/R Memo. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This Document Type/Number already exists. You may not enter a duplicate A/R Memo. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Currency exchange rate not found </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid amount for paid column </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot delete this Payment because either it has not been voided, it has already been posted or replaced, or it has been transmitted electronically and printed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An Item Site is marked inactive and cannot be receipted against. Please correct this before proceeding.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You do not have privileges to maintain Item Sources.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An Item Source already exists for this Vendor/Item/Vendor Number combination with an overlapping effective date range. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bank settings require this payment to be printed before posting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not post this inventory transaction because the transaction will cause inventory to be reduced below current Sales Reservation requirements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher for a negative or zero amount </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher with negative or zero distributions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher with distributions greater than the voucher amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher with distributions less than the voucher amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher as one or more of the line items have already been fully vouchered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher due to unassigned G/L Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot Post Voucher #% due to an unassigned A/P Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot post Voucher #% as it is already posted </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Cannot post Voucher as it has items without any tagged receipts or without distributions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You do not have privileges to delete a Sales Order.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can not delete this Sales Order Line as it has several sub components that have already been shipped.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error deleting kit components.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -77796,10 +78308,6 @@ You first need to Revoke those Tax Codes.</source>
 <context>
     <name>taxRegistrations</name>
     <message>
-        <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Uredi</translation>
-    </message>
-    <message>
         <source>Tax Zone</source>
         <translation type="unfinished"></translation>
     </message>
@@ -77816,31 +78324,7 @@ You first need to Revoke those Tax Codes.</source>
         <translation type="unfinished">Datum početka</translation>
     </message>
     <message>
-        <source>&amp;Close</source>
-        <translation>&amp;Zatvori</translation>
-    </message>
-    <message>
         <source>Registration #</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tax Registrations:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation>&amp;Novo</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation>&amp;Obriši</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation>&amp;Pogled</translation>
-    </message>
-    <message>
-        <source>List Tax Registrations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -77848,8 +78332,32 @@ You first need to Revoke those Tax Codes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Retrieving Tax Registration Information</source>
+        <source>Tax Registrations</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Kupac</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation type="unfinished">Dobavljač</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Novo</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Uredi</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Pogledaj</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Obriši</translation>
     </message>
 </context>
 <context>
@@ -80368,10 +80876,6 @@ otherwise a new one will be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Uredi</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete this screen?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80425,6 +80929,10 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>&amp;Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81544,6 +82052,10 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Unrelease</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receipt Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -83023,10 +83535,6 @@ You may not create a Costing Element with this code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rich Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Username</source>
         <translation type="unfinished">Korisničko ime</translation>
     </message>
@@ -83371,6 +83879,26 @@ Please enter both again carefully.</source>
         <source>Fatal</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rich Te&amp;xt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Delimiter:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Zone:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server Default</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>users</name>
@@ -83582,19 +84110,11 @@ Please enter both again carefully.</source>
         <translation type="unfinished">Kategorija rashoda</translation>
     </message>
     <message>
-        <source>Tax Zone</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>Tiskanje</translation>
     </message>
     <message>
         <source>You must select a Vendor Type for this Vendor.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deleting Tax Registration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -83638,10 +84158,6 @@ Please enter both again carefully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Getting Tax Registrations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save Changes?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -83664,32 +84180,8 @@ and Purchase Order amounts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation>Obriši</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Uredi</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Pogledaj</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Novo</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Nijedan</translation>
-    </message>
-    <message>
-        <source>Registration #</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tax Authority</source>
-        <translation>Porezni ured</translation>
     </message>
     <message>
         <source>Use Instead of Vendor Number and Name:</source>
@@ -85205,6 +85697,26 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>You must enter a postive Quantity to Voucher before saving this Voucher Item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a postive Quantity to Voucher.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must make at least one distribution for this Voucher Item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot Cancel Voucher Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel Anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Would you like to cancel anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
