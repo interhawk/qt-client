@@ -160,6 +160,7 @@ friend class ItemLineEditDelegate;
     Q_INVOKABLE bool    isConfigured();
     Q_INVOKABLE bool    isFractional();
     Q_INVOKABLE void setCRMAcctId(unsigned int);
+    
 
   public slots:
     void sHandleCompleter();
@@ -214,6 +215,7 @@ friend class ItemLineEditDelegate;
     bool    _fractional;
     bool    _useQuery;
     bool    _useValidationQuery;
+    bool    _xtte;
 };
 
 class ItemLineEditDelegate : public QItemDelegate

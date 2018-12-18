@@ -25,7 +25,7 @@
 #include "xtreewidget.h"
 #include "xsqltablemodel.h"
 
-#define DEBUG false
+#define DEBUG true
 
 QString buildItemLineEditQuery(const QString, const QStringList, const QString, const unsigned int, bool);
 QString buildItemLineEditTitle(const unsigned int, const QString);
@@ -586,22 +586,29 @@ void ItemLineEdit::sHandleCompleter()
                  .arg(QString(_sql)).remove(";"));
     numQ.bindValue(":number", stripped);
     
-    if( _itemType.toUInt() & ItemLineEdit::cActive)
+
+    // when in tebilling filter out inactive results
+    if (this->parent()->parent()->parent()->objectName()  == "tebilling")
     {
-      QStringList clauses;
-      clauses << " (AND item_active) ";
+      numQ.prepare(QString("SELECT *"
+                           "  FROM (%1) data"
+                           " WHERE (POSITION(:number IN item_number)=1)"
+                           "   AND item_active"
+                           " ORDER BY item_number LIMIT 10")
+                 .arg(QString(_sql)).remove(";"));
+      numQ.bindValue(":number", stripped);
+
     }
   }
   else
   {
+    qDebug() << "~~~~~~~~~~ entered else";
     QString pre( "SELECT DISTINCT item_id, item_number, "
                  "(item_descrip1 || ' ' || item_descrip2) AS itemdescrip, "
                  "item_upccode AS description " );
 
     QStringList clauses;
     clauses = _extraClauses;
-    if( _itemType.toUInt() & ItemLineEdit::cActive)
-      clauses << " (AND item_active) ";
     clauses << "((POSITION(:searchString IN item_number) = 1)"
             " OR (POSITION(:searchString IN item_upccode) = 1))";
     if (_crmacct > 0)
