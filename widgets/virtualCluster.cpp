@@ -33,7 +33,7 @@
 
 #include "virtualCluster.h"
 
-#define DEBUG true
+#define DEBUG false
 
 void VirtualCluster::init()
 {

@@ -25,7 +25,7 @@
 #include "xtreewidget.h"
 #include "xsqltablemodel.h"
 
-#define DEBUG true
+#define DEBUG false
 
 QString buildItemLineEditQuery(const QString, const QStringList, const QString, const unsigned int, bool);
 QString buildItemLineEditTitle(const unsigned int, const QString);
@@ -589,31 +589,9 @@ void ItemLineEdit::sHandleCompleter()
                  .arg(QString(_sql)).remove(";")
                  .arg(clause));
     numQ.bindValue(":number", stripped);
-    
-    /* numQ.prepare(QString("SELECT *"
-                         "  FROM (%1) data"
-                         " WHERE (POSITION(:number IN item_number)=1)"
-                         " ORDER BY item_number LIMIT 10")
-                 .arg(QString(_sql)).remove(";"));
-    numQ.bindValue(":number", stripped);
-    
-
-    // when in tebilling filter out inactive results
-    if (this->parent()->parent()->parent()->objectName()  == "tebilling")
-    {
-      numQ.prepare(QString("SELECT *"
-                           "  FROM (%1) data"
-                           " WHERE (POSITION(:number IN item_number)=1)"
-                           "   AND item_active"
-                           " ORDER BY item_number LIMIT 10")
-                 .arg(QString(_sql)).remove(";"));
-      numQ.bindValue(":number", stripped);
-
-    } */
   }
   else
   {
-    qDebug() << "~~~~~~~~~~ entered else";
     QString pre( "SELECT DISTINCT item_id, item_number, "
                  "(item_descrip1 || ' ' || item_descrip2) AS itemdescrip, "
                  "item_upccode AS description " );
