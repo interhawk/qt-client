@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -222,33 +222,33 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     
     // Accounting | Accaunts Payable | Purchase Orders
     { "menu", tr("Purchase &Order"), (char*)apPurchaseMenu, apMenu, "true", NULL, NULL, true, NULL },
-    { "ap.enterPurchaseOrder", tr("&New..."), SLOT(sEnterPurchaseOrder()), apPurchaseMenu, "MaintainPurchaseOrders", NULL, NULL, true , NULL },
-    { "ap.listUnpostedPurchaseOrders", tr("&List Open..."), SLOT(sUnpostedPurchaseOrders()), apPurchaseMenu, "MaintainPurchaseOrders ViewPurchaseOrders", NULL, NULL, true , NULL },
+    { "ap.enterPurchaseOrder", tr("&New"), SLOT(sEnterPurchaseOrder()), apPurchaseMenu, "MaintainPurchaseOrders", NULL, NULL, true , NULL },
+    { "ap.listUnpostedPurchaseOrders", tr("&List Open"), SLOT(sUnpostedPurchaseOrders()), apPurchaseMenu, "MaintainPurchaseOrders ViewPurchaseOrders", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apPurchaseMenu, "true", NULL, NULL, true, NULL },
     { "ap.postPurchaseOrder", tr("&Release..."), SLOT(sPostPurchaseOrder()), apPurchaseMenu, "ReleasePurchaseOrders", NULL, NULL, true , NULL },
 
     // Accounting | Accaunts Payable | Vouchers
     { "menu", tr("&Voucher"), (char*)apVoucherMenu, apMenu, "true", NULL, NULL, true, NULL },
-    { "ar.enterNewVoucher", tr("&New..."), SLOT(sEnterVoucher()), apVoucherMenu, "MaintainVouchers", NULL, NULL, true , NULL },
-    { "ar.enterNewMiscVoucher", tr("New &Miscellaneous..."), SLOT(sEnterMiscVoucher()), apVoucherMenu, "MaintainVouchers", NULL, NULL, true , NULL },
-    { "ar.listUnpostedVouchers", tr("&List Unposted..."), SLOT(sUnpostedVouchers()), apVoucherMenu, "MaintainVouchers ViewVouchers", new QPixmap(":/images/listUnpostedVouchers.png"), toolBar, true , tr("List Unposted Vouchers") },
+    { "ar.enterNewVoucher", tr("&New"), SLOT(sEnterVoucher()), apVoucherMenu, "MaintainVouchers", NULL, NULL, true , NULL },
+    { "ar.enterNewMiscVoucher", tr("New &Miscellaneous"), SLOT(sEnterMiscVoucher()), apVoucherMenu, "MaintainVouchers", NULL, NULL, true , NULL },
+    { "ar.listUnpostedVouchers", tr("&List Unposted"), SLOT(sUnpostedVouchers()), apVoucherMenu, "MaintainVouchers ViewVouchers", new QPixmap(":/images/listUnpostedVouchers.png"), toolBar, true , tr("List Unposted Vouchers") },
     { "separator", NULL, NULL, apVoucherMenu, "true", NULL, NULL, true, NULL },
     { "ar.postVouchers", tr("&Post..."), SLOT(sPostVouchers()), apVoucherMenu, "PostVouchers", NULL, NULL, true , NULL },
 
     // Accounting | Accaunts Payable | Memos
     { "menu", tr("&Memos"), (char*)apMemosMenu, apMenu, "true", NULL, NULL, true, NULL },
-    { "ap.enterMiscCreditMemo", tr("&New Misc. Credit Memo..."), SLOT(sEnterMiscApCreditMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
-    { "ap.unapplidCreditMemo", tr("&List Unapplied Credit Memos..."), SLOT(sUnappliedApCreditMemos()), apMemosMenu, "MaintainAPMemos ViewAPMemos", NULL, NULL, true , NULL },
+    { "ap.enterMiscCreditMemo", tr("&New Misc. Credit Memo"), SLOT(sEnterMiscApCreditMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
+    { "ap.unapplidCreditMemo", tr("&List Unapplied Credit Memos"), SLOT(sUnappliedApCreditMemos()), apMemosMenu, "MaintainAPMemos ViewAPMemos", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apMemosMenu, "true", NULL, NULL, true, NULL },
-    { "ap.enterMiscDebitMemo", tr("New &Misc. Debit Memo..."), SLOT(sEnterMiscApDebitMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
+    { "ap.enterMiscDebitMemo", tr("New &Misc. Debit Memo"), SLOT(sEnterMiscApDebitMemo()), apMemosMenu, "MaintainAPMemos", NULL, NULL, true , NULL },
 
     // Accounting | Accaunts Payable |  Payments
     { "menu", tr("&Payments"), (char*)apPaymentsMenu, apMenu, "true", NULL, NULL, true, NULL },
     { "ap.selectPayments", tr("&Approve..."), SLOT(sSelectPayments()), apPaymentsMenu, "MaintainPayments", NULL, NULL, true , tr("Approve Payments") },
-    { "ap.listSelectPayments", tr("&List Approved..."), SLOT(sSelectedPayments()), apPaymentsMenu, "MaintainPayments", NULL, NULL, true , NULL },
+    { "ap.listSelectPayments", tr("&List Approved"), SLOT(sSelectedPayments()), apPaymentsMenu, "MaintainPayments", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apPaymentsMenu, "true", NULL, NULL, true, NULL },
     { "ap.prepareCheckRun", tr("&Prepare Payment Run..."), SLOT(sPrepareCheckRun()), apPaymentsMenu, "MaintainPayments", NULL, NULL, true , NULL },
-    { "ap.createMiscCheck", tr("Create &Miscellaneous Payment..."), SLOT(sCreateMiscCheck()), apPaymentsMenu, "MaintainPayments", NULL, NULL, true , NULL },
+    { "ap.createMiscCheck", tr("Create &Miscellaneous Payment"), SLOT(sCreateMiscCheck()), apPaymentsMenu, "MaintainPayments", NULL, NULL, true , NULL },
     { "ap.viewCheckRun", tr("Vie&w Payment Run..."), SLOT(sViewCheckRun()), apPaymentsMenu, "MaintainPayments", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apPaymentsMenu, "true", NULL, NULL, true, NULL },
     { "ap.voidCheckRun", tr("&Void Payment Run..."), SLOT(sVoidCheckRun()), apPaymentsMenu, "MaintainPayments", NULL, NULL, true , NULL },
@@ -257,7 +257,7 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     { "ap.postChecks", tr("P&ost Payments..."), SLOT(sPostChecks()), apPaymentsMenu, "PostPayments", NULL, NULL, true , NULL },
                        
     { "separator", NULL, NULL, apMenu, "true", NULL, NULL, true, NULL },
-    { "ap.workbench", tr("&Workbench..."), SLOT(sApWorkBench()), apMenu, "MaintainPayments MaintainAPMemos", new QPixmap(":/images/viewCheckRun.png"), toolBar, true, tr("Payables Workbench") },
+    { "ap.workbench", tr("&Workbench"), SLOT(sApWorkBench()), apMenu, "MaintainPayments MaintainAPMemos", new QPixmap(":/images/viewCheckRun.png"), toolBar, true, tr("Payables Workbench") },
     { "separator", NULL, NULL, apMenu, "true", NULL, NULL, true, NULL },
     
     // Accounting | Accaunts Payable | Forms
@@ -269,48 +269,48 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     
     // Accounting | Accaunts Payable |  Reports
     { "menu", tr("&Reports"), (char*)apReportsMenu, apMenu, "true", NULL, NULL, true, NULL },
-    { "ap.uninvoicedReceipts", tr("&Uninvoiced Receipts and Returns..."), SLOT(sDspUninvoicedReceipts()), apReportsMenu, "ViewUninvoicedReceipts MaintainUninvoicedReceipts", NULL, NULL, true , NULL },
+    { "ap.uninvoicedReceipts", tr("&Uninvoiced Receipts and Returns"), SLOT(sDspUninvoicedReceipts()), apReportsMenu, "ViewUninvoicedReceipts MaintainUninvoicedReceipts", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apReportsMenu, "true", NULL, NULL, true, NULL },
-    { "ap.dspOpenAPItemsByVendor", tr("Open &Payables..."), SLOT(sDspAPOpenItemsByVendor()), apReportsMenu, "ViewAPOpenItems", NULL, NULL, true , NULL },
+    { "ap.dspOpenAPItemsByVendor", tr("Open &Payables"), SLOT(sDspAPOpenItemsByVendor()), apReportsMenu, "ViewAPOpenItems", NULL, NULL, true , NULL },
     { "ap.dspAPAging", tr("&Aging..."), SLOT(sDspTimePhasedOpenAPItems()), apReportsMenu, "ViewAPOpenItems", new QPixmap(":/images/apAging.png"), toolBar, true , tr("Payables Aging") },
     { "separator", NULL, NULL, apReportsMenu, "true", NULL, NULL, true, NULL },
-    { "ap.dspCheckRegister", tr("&Payment Register..."), SLOT(sDspCheckRegister()), apReportsMenu, "MaintainPayments", NULL, NULL, true , NULL },
-    { "ap.dspVoucherRegister", tr("&Voucher Register..."), SLOT(sDspVoucherRegister()), apReportsMenu, "MaintainVouchers ViewVouchers", NULL, NULL, true , NULL },
+    { "ap.dspCheckRegister", tr("&Payment Register"), SLOT(sDspCheckRegister()), apReportsMenu, "MaintainPayments", NULL, NULL, true , NULL },
+    { "ap.dspVoucherRegister", tr("&Voucher Register"), SLOT(sDspVoucherRegister()), apReportsMenu, "MaintainVouchers ViewVouchers", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apReportsMenu, "true", NULL, NULL, true, NULL },
-    { "ap.dspAPApplications", tr("&Applications..."), SLOT(sDspAPApplications()), apReportsMenu, "ViewAPOpenItems", NULL, NULL, true , NULL },
+    { "ap.dspAPApplications", tr("&Applications"), SLOT(sDspAPApplications()), apReportsMenu, "ViewAPOpenItems", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, apReportsMenu, "true", NULL, NULL, true, NULL },
-    { "ap.dspVendorHistory", tr("Vendor &History..."), SLOT(sDspVendorHistory()), apReportsMenu, "ViewAPOpenItems", NULL, NULL, true , NULL },
+    { "ap.dspVendorHistory", tr("Vendor &History"), SLOT(sDspVendorHistory()), apReportsMenu, "ViewAPOpenItems", NULL, NULL, true , NULL },
 
     { "separator", NULL, NULL, apMenu, "true", NULL, NULL, true, NULL },
-    { "ap.vendors", tr("Ve&ndors..."), SLOT(sVendors()), apMenu, "MaintainVendors ViewVendors", NULL, NULL, true , NULL },
+    { "ap.vendors", tr("Ve&ndors"), SLOT(sVendors()), apMenu, "MaintainVendors ViewVendors", NULL, NULL, true , NULL },
     
     // Accounting | Accounts Receivable
     { "menu", tr("Accounts Recei&vable"),	(char*)arMenu,	mainMenu, "true", NULL, NULL, true, NULL },
   
     // Accounting | Accounts Receivable | Invoices
     { "menu", tr("&Invoice"), (char*)arInvoicesMenu,	arMenu, "true",	 NULL, NULL, true, NULL },
-    { "ar.createInvoice", tr("&New..."), SLOT(sCreateInvoice()), arInvoicesMenu, "MaintainMiscInvoices", NULL, NULL, true , NULL },
-    { "ar.listRecurringInvoices", tr("&List Recurring Invoices..."),	SLOT(sRecurringInvoices()), arInvoicesMenu, "SelectBilling",	NULL, NULL,  true, NULL },
-    { "ar.listUnpostedInvoices", tr("&List Unposted..."), SLOT(sUnpostedInvoices()), arInvoicesMenu, "SelectBilling", new QPixmap(":/images/unpostedInvoices.png"), toolBar, true , tr("List Unposted Invoices") },
+    { "ar.createInvoice", tr("&New"), SLOT(sCreateInvoice()), arInvoicesMenu, "MaintainMiscInvoices", NULL, NULL, true , NULL },
+    { "ar.listRecurringInvoices", tr("&List Recurring Invoices"),	SLOT(sRecurringInvoices()), arInvoicesMenu, "SelectBilling",	NULL, NULL,  true, NULL },
+    { "ar.listUnpostedInvoices", tr("&List Unposted"), SLOT(sUnpostedInvoices()), arInvoicesMenu, "SelectBilling", new QPixmap(":/images/unpostedInvoices.png"), toolBar, true , tr("List Unposted Invoices") },
     { "separator", NULL, NULL, arInvoicesMenu, "true", NULL, NULL, true, NULL },
     { "ar.postInvoices", tr("&Post..."), SLOT(sPostInvoices()), arInvoicesMenu, "PostMiscInvoices", NULL, NULL, true , NULL },
     { "ar.assessFinanceCharges", tr("&Assess Finance Charges..."), SLOT(sAssessFinanceCharges()), arInvoicesMenu, "PostMiscInvoices", NULL, NULL, true , NULL },
 
     // Accounting | Accounts Receivable | Memos
     { "menu", tr("&Memos"), (char*)arMemosMenu,	arMenu, "true",	 NULL, NULL, true, NULL },
-    { "ar.enterMiscCreditMemo", tr("&New Misc. Credit Memo..."), SLOT(sEnterMiscArCreditMemo()), arMemosMenu, "MaintainARMemos", NULL, NULL, true , NULL },
-    { "ar.unapplidCreditMemo", tr("&List Unapplied Credit Memos..."), SLOT(sUnappliedArCreditMemos()), arMemosMenu, "MaintainARMemos ViewARMemos", NULL, NULL, true , NULL },
+    { "ar.enterMiscCreditMemo", tr("&New Misc. Credit Memo"), SLOT(sEnterMiscArCreditMemo()), arMemosMenu, "MaintainARMemos", NULL, NULL, true , NULL },
+    { "ar.unapplidCreditMemo", tr("&List Unapplied Credit Memos"), SLOT(sUnappliedArCreditMemos()), arMemosMenu, "MaintainARMemos ViewARMemos", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, arMemosMenu, "true", NULL, NULL, true, NULL },
-    { "ar.enterMiscDebitMemo", tr("New &Misc. Debit Memo..."), SLOT(sEnterMiscArDebitMemo()), arMemosMenu, "MaintainARMemos", NULL, NULL, true , NULL },
+    { "ar.enterMiscDebitMemo", tr("New &Misc. Debit Memo"), SLOT(sEnterMiscArDebitMemo()), arMemosMenu, "MaintainARMemos", NULL, NULL, true , NULL },
 
     // Accounting | Accounts Receivable | Cash Receipts
     { "menu", tr("C&ash Receipt"), (char*)arCashReceiptsMenu,	arMenu, "true",	 NULL, NULL, true, NULL },
-    { "ar.enterCashReceipt", tr("&New..."), SLOT(sEnterCashReceipt()), arCashReceiptsMenu, "MaintainCashReceipts", NULL, NULL, true , NULL },
+    { "ar.enterCashReceipt", tr("&New"), SLOT(sEnterCashReceipt()), arCashReceiptsMenu, "MaintainCashReceipts", NULL, NULL, true , NULL },
     { "ar.cashReceiptEditList", tr("&Edit List..."), SLOT(sCashReceiptEditList()), arCashReceiptsMenu, "MaintainCashReceipts ViewCashReceipt", new QPixmap(":/images/editCashReceipts.png"), toolBar, true , tr("Cash Receipt Edit List") },
     { "ar.postCashReceipts", tr("&Post..."), SLOT(sPostCashReceipts()), arCashReceiptsMenu, "PostCashReceipts", NULL, NULL, true , NULL },
 
     { "separator", NULL, NULL, arMenu, "true", NULL, NULL, true, NULL },
-    { "ar.arWorkBench", tr("&Workbench..."), SLOT(sArWorkBench()), arMenu, "ViewAROpenItems" , new QPixmap(":/images/arWorkbench.png"), toolBar, true , tr("Receivables Workbench") },
+    { "ar.arWorkBench", tr("&Workbench"), SLOT(sArWorkBench()), arMenu, "ViewAROpenItems" , new QPixmap(":/images/arWorkbench.png"), toolBar, true , tr("Receivables Workbench") },
 
     { "separator", NULL, NULL, arMenu, "true", NULL, NULL, true, NULL },
     // Accounting | Accounts Receivable | Forms
@@ -325,34 +325,34 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     { "menu", tr("&Reports"), (char*)arReportsMenu,	arMenu, "true",	 NULL, NULL, true, NULL },
     { "ar.dspInvoiceInformation", tr("&Invoice Information..."), SLOT(sDspInvoiceInformation()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, arReportsMenu, "true", NULL, NULL, true, NULL },
-    { "ar.dspOpenItems", tr("&Open Receivables..."), SLOT(sDspAROpenItems()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
-    { "ar.dspARAging", tr("A&ging..."), SLOT(sDspTimePhasedOpenItems()), arReportsMenu, "ViewAROpenItems", new QPixmap(":/images/arAging.png"), toolBar, true , tr("Receivables Aging") },
+    { "ar.dspOpenItems", tr("&Open Receivables"), SLOT(sDspAROpenItems()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
+    { "ar.dspARAging", tr("A&ging"), SLOT(sDspTimePhasedOpenItems()), arReportsMenu, "ViewAROpenItems", new QPixmap(":/images/arAging.png"), toolBar, true , tr("Receivables Aging") },
     { "separator", NULL, NULL, arReportsMenu, "true", NULL, NULL, true, NULL }, 
-    { "ar.dspInvoiceRegister", tr("In&voice Register..."), SLOT(sDspInvoiceRegister()), arReportsMenu, "ViewInvoiceRegister", NULL, NULL, true , NULL },
-    { "ar.dspCashReceipts", tr("Cash &Receipts..."), SLOT(sDspCashReceipts()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
-    { "ar.dspARApplications", tr("&Applications..."), SLOT(sDspARApplications()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
-    { "ar.dspDepositsRegister", tr("&Deposits Register..."), SLOT(sDspDepositsRegister()), arReportsMenu, "ViewDepositsRegister", NULL, NULL, true , NULL },
+    { "ar.dspInvoiceRegister", tr("In&voice Register"), SLOT(sDspInvoiceRegister()), arReportsMenu, "ViewInvoiceRegister", NULL, NULL, true , NULL },
+    { "ar.dspCashReceipts", tr("Cash &Receipts"), SLOT(sDspCashReceipts()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
+    { "ar.dspARApplications", tr("&Applications"), SLOT(sDspARApplications()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
+    { "ar.dspDepositsRegister", tr("&Deposits Register"), SLOT(sDspDepositsRegister()), arReportsMenu, "ViewDepositsRegister", NULL, NULL, true , NULL },
     { "separator", NULL, NULL, arReportsMenu, "true", NULL, NULL, true, NULL },
-    { "ar.dspCustomerHistory", tr("Customer &History..."), SLOT(sDspCustomerHistory()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
+    { "ar.dspCustomerHistory", tr("Customer &History"), SLOT(sDspCustomerHistory()), arReportsMenu, "ViewAROpenItems", NULL, NULL, true , NULL },
 
     { "separator", NULL, NULL, arMenu, "true", NULL, NULL, true, NULL },
-    { "ar.customers", tr("&Customers..."), SLOT(sCustomers()), arMenu, "MaintainCustomerMasters ViewCustomerMasters", NULL, NULL, true , NULL },
+    { "ar.customers", tr("&Customers"), SLOT(sCustomers()), arMenu, "MaintainCustomerMasters ViewCustomerMasters", NULL, NULL, true , NULL },
   
     // Accounting | G/L
     { "menu",		    tr("General &Ledger"),		(char*)glMenu,	mainMenu,		"true",					NULL, NULL, true, NULL },
     
     // Accounting | G/L | Journals
     { "menu",		    tr("&Journal Entry"),		(char*)glEnterTransactionMenu,	glMenu,		"true",					NULL, NULL, true, NULL },
-    { "gl.simpleEntry",	    tr("S&imple..."),	SLOT(sSimpleEntry()),		glEnterTransactionMenu,	"PostJournalEntries", NULL, NULL, true, NULL },
-    { "gl.seriesEntry",     tr("&Series..."),	SLOT(sSeriesEntry()),		glEnterTransactionMenu,	"PostJournalEntries", NULL, NULL, true, NULL },
+    { "gl.simpleEntry",	    tr("S&imple"),	SLOT(sSimpleEntry()),		glEnterTransactionMenu,	"PostJournalEntries", NULL, NULL, true, NULL },
+    { "gl.seriesEntry",     tr("&Series"),	SLOT(sSeriesEntry()),		glEnterTransactionMenu,	"PostJournalEntries", NULL, NULL, true, NULL },
     { "separator",	    NULL,				NULL,			        glEnterTransactionMenu,   "true",					NULL, NULL, true, NULL },
-    { "gl.unpostedEntries", tr("&List Unposted..."), SLOT(sUnpostedEntries()),	glEnterTransactionMenu,	"PostJournalEntries", new QPixmap(":/images/journalEntries.png"), toolBar,  true, tr("List Unposted Journal Entries") },
+    { "gl.unpostedEntries", tr("&List Unposted"), SLOT(sUnpostedEntries()),	glEnterTransactionMenu,	"PostJournalEntries", new QPixmap(":/images/journalEntries.png"), toolBar,  true, tr("List Unposted Journal Entries") },
 
     // Accounting | G/L | Standard Journals
     { "menu",			     tr("&Standard Journals"),		   (char*)glStandardJournalsMenu,	     glMenu,		   "true",					      NULL, NULL, true, NULL },
-    { "gl.enterNewStandardJournal",  tr("&New..."),  SLOT(sEnterStandardJournal()),    glStandardJournalsMenu, "MaintainStandardJournals",     NULL, NULL, true, NULL },
-    { "gl.listStandardJournals",     tr("&List..."),	   SLOT(sStandardJournals()),	     glStandardJournalsMenu, "MaintainStandardJournals",     NULL, NULL, true, NULL },
-    { "gl.listStandardJournalGroups",tr("List &Groups..."),SLOT(sStandardJournalGroups()),   glStandardJournalsMenu, "MaintainStandardJournalGroups", NULL, NULL, true, NULL },
+    { "gl.enterNewStandardJournal",  tr("&New"),  SLOT(sEnterStandardJournal()),    glStandardJournalsMenu, "MaintainStandardJournals",     NULL, NULL, true, NULL },
+    { "gl.listStandardJournals",     tr("&List"),	   SLOT(sStandardJournals()),	     glStandardJournalsMenu, "MaintainStandardJournals",     NULL, NULL, true, NULL },
+    { "gl.listStandardJournalGroups",tr("List &Groups"),SLOT(sStandardJournalGroups()),   glStandardJournalsMenu, "MaintainStandardJournalGroups", NULL, NULL, true, NULL },
     { "separator",		     NULL,				   NULL,			     glStandardJournalsMenu, "true",					      NULL, NULL, true, NULL },
     { "gl.postStandardJournal",	     tr("&Post..."),	   SLOT(sPostStandardJournal()),     glStandardJournalsMenu, "PostStandardJournals",	      NULL, NULL, true, NULL },
     { "gl.postStandardJournalGroup", tr("Post G&roup..."), SLOT(sPostStandardJournalGroup()),glStandardJournalsMenu, "PostStandardJournalGroups",    NULL, NULL, true, NULL },
@@ -365,20 +365,20 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     
     // Accounting | General Ledger |  Reports
     { "menu", tr("&Reports"), (char*)glReportsMenu, glMenu, "true", NULL, NULL, true, NULL },
-    { "gl.dspGLTransactions",		tr("&Transactions..."),		SLOT(sDspGLTransactions()),		glReportsMenu, "ViewGLTransactions",	NULL, NULL, true, NULL },
-    { "gl.dspSummarizedGLTransactions",	tr("Su&mmarized Transactions..."),	SLOT(sDspSummarizedGLTransactions()),	glReportsMenu, "ViewGLTransactions",	NULL, NULL, true, NULL },
-    { "gl.dspGLSeries",			tr("&Series..."),			SLOT(sDspGLSeries()),			glReportsMenu, "ViewGLTransactions",	NULL, NULL, true, NULL },
-    { "gl.dspStandardJournalHistory",	tr("Standard &Journal History..."),	SLOT(sDspStandardJournalHistory()),	glReportsMenu, "ViewGLTransactions",	NULL, NULL, true, NULL },
+    { "gl.dspGLTransactions",		tr("&Transactions"),		SLOT(sDspGLTransactions()),		glReportsMenu, "ViewGLTransactions",	NULL, NULL, true, NULL },
+    { "gl.dspSummarizedGLTransactions",	tr("Su&mmarized Transactions"),	SLOT(sDspSummarizedGLTransactions()),	glReportsMenu, "ViewGLTransactions",	NULL, NULL, true, NULL },
+    { "gl.dspGLSeries",			tr("&Series"),			SLOT(sDspGLSeries()),			glReportsMenu, "ViewGLTransactions",	NULL, NULL, true, NULL },
+    { "gl.dspStandardJournalHistory",	tr("Standard &Journal History"),	SLOT(sDspStandardJournalHistory()),	glReportsMenu, "ViewGLTransactions",	NULL, NULL, true, NULL },
     { "separator", NULL, NULL, glReportsMenu, "true", NULL, NULL, _metrics->boolean("UseJournals"), NULL },
-    { "gl.dspJournals",	  tr("Journals..."),	SLOT(sDspJournals()),	glReportsMenu, "ViewJournals",	     NULL, NULL, _metrics->boolean("UseJournals"), NULL },
+    { "gl.dspJournals",	  tr("Journals"),	SLOT(sDspJournals()),	glReportsMenu, "ViewJournals",	     NULL, NULL, _metrics->boolean("UseJournals"), NULL },
     { "separator",        NULL,                 NULL,                   glReportsMenu, "true",               NULL, NULL, true, NULL },
     { "gl.ledgerControl", tr("Ledger Control"), SLOT(sLedgerControl()), glReportsMenu, "ViewGLTransactions", NULL, NULL, true, NULL },
 
     { "menu",			tr("&Bank Reconciliation"), 	(char*)bankrecMenu,		mainMenu,    "true",						NULL, NULL, true, NULL },
     { "gl.reconcileBankaccnt",	tr("&Reconcile..."),SLOT(sReconcileBankaccount()),	bankrecMenu, "MaintainBankRec", new QPixmap(":/images/bankReconciliation.png"), toolBar,  true, tr("Reconcile Bank Account") },
     { "separator",		NULL,				NULL,				bankrecMenu, "true",						NULL, NULL, true, NULL },
-    { "gl.enterAdjustment",	tr("&New Adjustment..."),	SLOT(sEnterAdjustment()),	bankrecMenu, "MaintainBankAdjustments",	NULL, NULL, true, NULL },
-    { "gl.adjustmentEditList",	tr("Adjustment Edit &List..."),	SLOT(sAdjustmentEditList()),	bankrecMenu, "MaintainBankAdjustments ViewBankAdjustments", NULL, NULL, true, NULL },
+    { "gl.enterAdjustment",	tr("&New Adjustment"),	SLOT(sEnterAdjustment()),	bankrecMenu, "MaintainBankAdjustments",	NULL, NULL, true, NULL },
+    { "gl.adjustmentEditList",	tr("Adjustment Edit &List"),	SLOT(sAdjustmentEditList()),	bankrecMenu, "MaintainBankAdjustments ViewBankAdjustments", NULL, NULL, true, NULL },
  
     { "separator", NULL, NULL, bankrecMenu, "true", NULL, NULL, true, NULL },
  
@@ -391,58 +391,58 @@ menuAccounting::menuAccounting(GUIClient *Pparent) :
     
     // Accounting | Statements
     { "menu",			  tr("Financial &Statements"),		(char*)financialReportsMenu,		mainMenu,			"true",					       NULL, NULL, true, NULL },
-    { "gl.createFinancialReports",tr("&New Financial Report..."),	SLOT(sNewFinancialReport()),		financialReportsMenu,		"MaintainFinancialLayouts", NULL, NULL, true, NULL },
-    { "gl.editFinancialReports",  tr("&List Financial Reports..."),	SLOT(sFinancialReports()),		financialReportsMenu,		"MaintainFinancialLayouts", NULL, NULL, true, NULL },
+    { "gl.createFinancialReports",tr("&New Financial Report"),	SLOT(sNewFinancialReport()),		financialReportsMenu,		"MaintainFinancialLayouts", NULL, NULL, true, NULL },
+    { "gl.editFinancialReports",  tr("&List Financial Reports"),	SLOT(sFinancialReports()),		financialReportsMenu,		"MaintainFinancialLayouts", NULL, NULL, true, NULL },
     { "separator",		  NULL,					NULL,					financialReportsMenu,		"true",					       NULL, NULL, true, NULL },
-    { "gl.dspTrialBalances",	  tr("View &Trial Balances..."),		SLOT(sDspTrialBalances()),		financialReportsMenu,		"ViewTrialBalances",	   new QPixmap(":/images/viewTrialBalance.png"), toolBar,  true, NULL },
-    { "gl.viewFinancialReport",	  tr("View &Financial Report..."),	SLOT(sViewFinancialReport()),		financialReportsMenu,		"ViewFinancialReports",   new QPixmap(":/images/viewFinancialReport.png"), toolBar, true, NULL },
+    { "gl.dspTrialBalances",	  tr("View &Trial Balances"),		SLOT(sDspTrialBalances()),		financialReportsMenu,		"ViewTrialBalances",	   new QPixmap(":/images/viewTrialBalance.png"), toolBar,  true, NULL },
+    { "gl.viewFinancialReport",	  tr("View &Financial Report"),	SLOT(sViewFinancialReport()),		financialReportsMenu,		"ViewFinancialReports",   new QPixmap(":/images/viewFinancialReport.png"), toolBar, true, NULL },
 
     { "separator",		  NULL,					NULL,					mainMenu,		"true",					       NULL, NULL, true, NULL },
     
     // Accounting | Fiscal Calendar
     { "menu", tr("&Fiscal Calendar"), (char*)calendarMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "gl.accountingYearPeriods",	tr("Fiscal &Years..."),	SLOT(sAccountingYearPeriods()),	calendarMenu,	"MaintainAccountingPeriods",	NULL, NULL, true, NULL },
-    { "gl.accountingPeriods",	tr("Accounting &Periods..."),	SLOT(sAccountingPeriods()),	calendarMenu,	"MaintainAccountingPeriods",	NULL, NULL, true, NULL },
+    { "gl.accountingYearPeriods",	tr("Fiscal &Years"),	SLOT(sAccountingYearPeriods()),	calendarMenu,	"MaintainAccountingPeriods",	NULL, NULL, true, NULL },
+    { "gl.accountingPeriods",	tr("Accounting &Periods"),	SLOT(sAccountingPeriods()),	calendarMenu,	"MaintainAccountingPeriods",	NULL, NULL, true, NULL },
     
     // Accounting | Account
     { "menu", tr("&Ledger Accounts"), (char*)coaMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "gl.accountNumbers",	tr("&Chart of Accounts..."),	SLOT(sAccountNumbers()), coaMenu,	"MaintainChartOfAccounts",	NULL, NULL, true, NULL },
-    { "gl.companies",		tr("C&ompanies..."),		SLOT(sCompanies()),		coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLCompanySize").toInt() > 0), NULL },
-    { "gl.profitCenterNumber",	tr("&Profit Center Numbers..."),	SLOT(sProfitCenters()),	coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLProfitSize").toInt() > 0), NULL },
-    { "gl.subaccountNumbers",	tr("&Subaccount Numbers..."),	SLOT(sSubaccounts()), coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLSubaccountSize").toInt() > 0), NULL },
-    { "gl.subAccntTypes",	tr("Su&baccount Types..."),	SLOT(sSubAccntTypes()),	coaMenu,	"MaintainChartOfAccounts",	NULL, NULL, true, NULL },
+    { "gl.accountNumbers",	tr("&Chart of Accounts"),	SLOT(sAccountNumbers()), coaMenu,	"MaintainChartOfAccounts",	NULL, NULL, true, NULL },
+    { "gl.companies",		tr("C&ompanies"),		SLOT(sCompanies()),		coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLCompanySize").toInt() > 0), NULL },
+    { "gl.profitCenterNumber",	tr("&Profit Center Numbers"),	SLOT(sProfitCenters()),	coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLProfitSize").toInt() > 0), NULL },
+    { "gl.subaccountNumbers",	tr("&Subaccount Numbers"),	SLOT(sSubaccounts()), coaMenu,	"MaintainChartOfAccounts", NULL, NULL, (_metrics->value("GLSubaccountSize").toInt() > 0), NULL },
+    { "gl.subAccntTypes",	tr("Su&baccount Types"),	SLOT(sSubAccntTypes()),	coaMenu,	"MaintainChartOfAccounts",	NULL, NULL, true, NULL },
 
     // Accounting | Budget
     { "menu", tr("Bu&dget"), (char*)budgetMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "gl.maintainBudget",	tr("&New Budget..."),	SLOT(sMaintainBudget()), budgetMenu,	"MaintainBudgets",	NULL, NULL, true, NULL },
-    { "gl.maintainBudgets",	tr("&List Budgets..."),	SLOT(sBudgets()),	 budgetMenu,	"MaintainBudgets ViewBudgets",	NULL, NULL, true, NULL },
+    { "gl.maintainBudget",	tr("&New Budget"),	SLOT(sMaintainBudget()), budgetMenu,	"MaintainBudgets",	NULL, NULL, true, NULL },
+    { "gl.maintainBudgets",	tr("&List Budgets"),	SLOT(sBudgets()),	 budgetMenu,	"MaintainBudgets ViewBudgets",	NULL, NULL, true, NULL },
 
     // Accounting | Tax
     { "menu", tr("&Tax"), (char*)taxMenu, mainMenu,	"true",	NULL, NULL, true, NULL },
-    { "gl.taxAuthorities",	tr("Tax &Authorities..."),	SLOT(sTaxAuthorities()),	taxMenu,	"MaintainTaxAuthorities ViewTaxAuthorities", NULL, NULL, true, NULL },
-    { "gl.taxZones",		tr("Tax &Zones..."),		SLOT(sTaxZones()),		taxMenu,	"MaintainTaxZones ViewTaxZones",             NULL, NULL, true, NULL }, 
-    { "gl.taxClasses",		tr("Tax &Classes..."),		SLOT(sTaxClasses()),		taxMenu,	"MaintainTaxClasses ViewTaxClasses",         NULL, NULL, true, NULL }, 
-    { "gl.taxCodes",		tr("Tax &Codes..."),		SLOT(sTaxCodes()),		taxMenu,	"MaintainTaxCodes ViewTaxCodes",             NULL, NULL, true, NULL },
-    { "gl.taxTypes",		tr("Tax &Types..."),		SLOT(sTaxTypes()),		taxMenu,	"MaintainTaxTypes ViewTaxTypes",             NULL, NULL, true, NULL },
-    { "gl.taxAssignments",	tr("Tax Assi&gnments..."),	SLOT(sTaxAssignments()),	taxMenu,	"MaintainTaxAssignments ViewTaxAssignments", NULL, NULL, true, NULL },
-    { "gl.taxRegistatrions",	tr("Tax &Registrations..."),	SLOT(sTaxRegistrations()),	taxMenu,	"MaintainTaxRegistrations ViewTaxRegistrations", NULL, NULL, true, NULL },
+    { "gl.taxAuthorities",	tr("Tax &Authorities"),	SLOT(sTaxAuthorities()),	taxMenu,	"MaintainTaxAuthorities ViewTaxAuthorities", NULL, NULL, true, NULL },
+    { "gl.taxZones",		tr("Tax &Zones"),		SLOT(sTaxZones()),		taxMenu,	"MaintainTaxZones ViewTaxZones",             NULL, NULL, true, NULL }, 
+    { "gl.taxClasses",		tr("Tax &Classes"),		SLOT(sTaxClasses()),		taxMenu,	"MaintainTaxClasses ViewTaxClasses",         NULL, NULL, true, NULL }, 
+    { "gl.taxCodes",		tr("Tax &Codes"),		SLOT(sTaxCodes()),		taxMenu,	"MaintainTaxCodes ViewTaxCodes",             NULL, NULL, true, NULL },
+    { "gl.taxTypes",		tr("Tax &Types"),		SLOT(sTaxTypes()),		taxMenu,	"MaintainTaxTypes ViewTaxTypes",             NULL, NULL, true, NULL },
+    { "gl.taxAssignments",	tr("Tax Assi&gnments"),	SLOT(sTaxAssignments()),	taxMenu,	"MaintainTaxAssignments ViewTaxAssignments", NULL, NULL, true, NULL },
+    { "gl.taxRegistatrions",	tr("Tax &Registrations"),	SLOT(sTaxRegistrations()),	taxMenu,	"MaintainTaxRegistrations ViewTaxRegistrations", NULL, NULL, true, NULL },
     { "separator",		NULL,			        NULL,			        taxMenu,	"true",	                                     NULL, NULL, true, NULL },
  
     // Accounting | Tax | Reports
     { "menu",			tr("&Reports"),	                (char*)taxReportsMenu,		taxMenu,	"true",			    NULL, NULL, true, NULL },
-    { "gl.dspTaxHistory",	tr("&Tax History..."),           SLOT(sDspTaxHistory()),        taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
-    { "gl.dspTaxReturn",	tr("&Tax Return..."),            SLOT(sDspTaxReturn()),         taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
-    { "gl.dspTax1099",	tr("&Info for 1099..."),                 SLOT(sDspTax1099()),           taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
+    { "gl.dspTaxHistory",	tr("&Tax History"),           SLOT(sDspTaxHistory()),        taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
+    { "gl.dspTaxReturn",	tr("&Tax Return"),            SLOT(sDspTaxReturn()),         taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
+    { "gl.dspTax1099",	tr("&Info for 1099"),                 SLOT(sDspTax1099()),           taxReportsMenu, "ViewTaxReconciliations",   NULL, NULL, true, NULL },
     
     { "separator",		  NULL,					NULL,					mainMenu,		"true",					       NULL, NULL, true, NULL },
 
     // Accounting | Utilities
     { "menu",				tr("&Utilities"),			(char*)utilitiesMenu,		mainMenu,	"true",	NULL, NULL, true, NULL },
     { "gl.forwardUpdateAccounts",	tr("&Forward Update Accounts..."),	SLOT(sForwardUpdateAccounts()),	utilitiesMenu,	"ViewTrialBalances",	NULL, NULL, _metrics->boolean("ManualForwardUpdate"), NULL },
-    { "gl.duplicateAccountNumbers",      tr("&Duplicate Account Numbers..."),  SLOT(sDuplicateAccountNumbers()), utilitiesMenu,  "MaintainChartOfAccounts", NULL, NULL, true, NULL },
+    { "gl.duplicateAccountNumbers",      tr("&Duplicate Account Numbers"),  SLOT(sDuplicateAccountNumbers()), utilitiesMenu,  "MaintainChartOfAccounts", NULL, NULL, true, NULL },
     { "separator",		  NULL,					NULL,					utilitiesMenu,		"true",					       NULL, NULL, true, NULL },
     { "so.purgeInvoices", tr("Purge &Invoices..."), SLOT(sPurgeInvoices()), utilitiesMenu, "PurgeInvoices", NULL, NULL, true , NULL },
-    { "ar.updateLateCustCreditStatus", tr("&Update Late Customer Credit Status..."), SLOT(sUpdateLateCustCreditStatus()), utilitiesMenu, "UpdateCustomerCreditStatus", NULL, NULL, _metrics->boolean("AutoCreditWarnLateCustomers"), NULL },
+    { "ar.updateLateCustCreditStatus", tr("&Update Late Customer Credit Status"), SLOT(sUpdateLateCustCreditStatus()), utilitiesMenu, "UpdateCustomerCreditStatus", NULL, NULL, _metrics->boolean("AutoCreditWarnLateCustomers"), NULL },
 //    { "ar.createRecurringInvoices", tr("&Create Recurring Invoices..."), SLOT(sCreateRecurringInvoices()), utilitiesMenu, "MaintainMiscInvoices", NULL, NULL, true, NULL },
     { "separator",		  NULL,					NULL,					utilitiesMenu,		"true",					       NULL, NULL, _metrics->boolean("MultiCompanyFinancialConsolidation"), NULL },
     { "gl.syncCompanies",           tr("&Synchronize Companies"),        SLOT(sSyncCompanies()),           utilitiesMenu, "SynchronizeCompanies", NULL, NULL, _metrics->boolean("MultiCompanyFinancialConsolidation"), NULL },

@@ -2,7 +2,7 @@
 <ui version="4.0">
  <comment>This file is part of the xTuple ERP: PostBooks Edition, a free and
 open source Enterprise Resource Planning software suite,
-Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
 It is licensed to you under the Common Public Attribution License
 version 1.0, the full text of which (including xTuple-specific Exhibits)
 is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -192,54 +192,5 @@ to be bound by its terms.</comment>
   <tabstop>_notes</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>_uses</sender>
-   <signal>itemSelected(int)</signal>
-   <receiver>_editAddrUse</receiver>
-   <slot>animateClick()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_uses</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_editAddrUse</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_uses</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_viewAddrUse</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>380</x>
-     <y>511</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

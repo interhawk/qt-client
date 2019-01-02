@@ -14,40 +14,6 @@
 #include "guiclient.h"
 #include "xdialog.h"
 #include "ui_voucherItem.h"
-#include <vector>
-
-class voDist 
-{
-  private:
-    int _vodist_id;
-    int _voheadid;
-    int _poitemid;
-    int _vodist_costelem_id;
-    double _vodist_amount;
-    bool _vodist_discountable;
-    QString _vodist_notes;
-    
-  public:
-    int getId();
-    int getVoheadid();
-    int getPoitemid();
-    int getCostelem();
-    double getAmount();
-    bool getDiscountable();
-    QString getNotes();
-
-    void setId(int id);
-    void setVoheadid(int id);
-    void setPoitemid(int id);
-    void setCostelem(int c);
-    void setAmount(double amount);
-    void setDiscountable(bool disc);
-    void setNotes(QString notes);
-    
-    void insertRow();
-    void updateRow();
-
-};
 
 class voucherItem : public XDialog, public Ui::voucherItem
 {
@@ -60,7 +26,6 @@ public:
 public slots:
     virtual SetResponse set( const ParameterList & pParams );
     virtual void sSave();
-    virtual void sClose();
     virtual void sNew();
     virtual void sEdit();
     virtual void sDelete();
@@ -90,13 +55,6 @@ private:
     bool _saved;
     double _freighttax;
     QString _rejectedMsg;
-
-    std::vector<voDist> _voOld;
-    
-    void deleteRow(int vodist_id);
-
 };
-
-
 
 #endif // VOUCHERITEM_H

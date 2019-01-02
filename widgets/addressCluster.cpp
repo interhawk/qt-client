@@ -196,7 +196,7 @@ AddressCluster::SaveFlags AddressCluster::askForSaveMode(int pAddrId, QWidget *p
   params.append("contact",  tr("Contact"));
   params.append("shipto",   tr("Ship-to Address"));
   params.append("vendor",   tr("Vendor"));
-  params.append("vendaddr", tr("Vendor addresss"));
+  params.append("vendaddr", tr("Vendor address"));
   params.append("whs",      tr("Site"));
 
   MetaSQLQuery mql(_guiClientInterface->getMqlHash()->value("address", "uses"));
@@ -218,7 +218,17 @@ AddressCluster::SaveFlags AddressCluster::askForSaveMode(int pAddrId, QWidget *p
 
   QStringList countlist;
   foreach (QString type, count.keys())
-    countlist << QString("%1 - %2").arg(type).arg(count[type]);
+  {
+    if (type == tr("Vendor address") && _x_privileges && !_x_privileges->check("MaintainVendorAddresses"))
+    {
+      QMessageBox::warning(pParent, tr("Saving Shared Address"),
+                           tr("<p>This address is shared by a Vendor Address and you do not have "
+                              "privileges to edit Vendor Addresses."));
+      return PRIV;
+    }
+    else
+      countlist << QString("%1 - %2").arg(type).arg(count[type]);
+  }
 
   QString message = tr("There are multiple uses of this address:<UL><li>%1</li></UL>"
                        "<p>Would you like to save just this one use, save all "
@@ -518,6 +528,9 @@ void AddressCluster::setDataWidgetMap(XDataWidgetMapper* m)
  */
 int AddressCluster::save(enum SaveFlags flag)
 {
+
+  if (flag == PRIV)
+    return -99;
 
   if (_number->text() == "" &&
       _addr1->text() == "" && _addr2->text() == "" &&

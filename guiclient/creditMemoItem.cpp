@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -492,6 +492,8 @@ void creditMemoItem::populate()
       _itemDescrip->setText(cmitem.value("cmitem_descrip").toString());
       _salescat->setId(cmitem.value("cmitem_salescat_id").toInt());
       _qtyReturned->setEnabled(false);
+      _updateInv->setChecked(false);
+      _updateInv->setEnabled(false);
     }
     _lineNumber->setText(cmitem.value("cmitem_linenumber").toString());
     _netUnitPrice->setLocalValue(cmitem.value("cmitem_unitprice").toDouble());
@@ -505,7 +507,7 @@ void creditMemoItem::populate()
       _updateInv->setEnabled(false);
       _qtyReturned->setEnabled(false);
     }
-    else
+    else if (cmitem.value("cmitem_itemsite_id").toInt() > 0)
     {
       _updateInv->setChecked(cmitem.value("cmitem_updateinv").toBool());
       _updateInv->setEnabled(true);
