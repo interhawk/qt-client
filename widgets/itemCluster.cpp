@@ -580,7 +580,7 @@ void ItemLineEdit::sHandleCompleter()
   if (_useQuery)
   {
     QString clause;
-    if (this->parent()->parent()->parent()->objectName()  == "tebilling")
+    if (_type & (cActive | cItemActive))
       clause = "AND item_active";
     numQ.prepare(QString("SELECT *"
                          "  FROM (%1) data"
