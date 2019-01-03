@@ -335,7 +335,8 @@ void taxCode::sSave()
                   "    tax_dist_accnt_id=:tax_dist_accnt_id,"
                   "    tax_taxclass_id=:tax_taxclass_id,"
                   "    tax_taxauth_id=:tax_taxauth_id,"
-                  "    tax_basis_tax_id=:tax_basis_tax_id "
+                  "    tax_basis_tax_id=:tax_basis_tax_id, "
+                  "    tax_vat=:tax_vat "
                   "WHERE (tax_id=:tax_id);" );
   
   taxSave.bindValue(":tax_code", _code->text().trimmed());
@@ -352,6 +353,7 @@ void taxCode::sSave()
     taxSave.bindValue(":tax_taxclass_id", _taxClass->id());
   if(_basis->isValid())
     taxSave.bindValue(":tax_basis_tax_id", _basis->id());
+  taxSave.bindValue(":tax_vat", _vat->isChecked());
   taxSave.bindValue(":tax_id", _taxid); 
   taxSave.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Saving Tax Code"),
@@ -415,6 +417,7 @@ void taxCode::populate()
     _taxClass->setId(taxpopulate.value("tax_taxclass_id").toInt());
     _taxauth->setId(taxpopulate.value("tax_taxauth_id").toInt());
     _basis->setId(taxpopulate.value("tax_basis_tax_id").toInt());
+    _vat->setChecked(taxpopulate.value("tax_vat").toBool());
   }
   
   sFillList();
