@@ -80,6 +80,8 @@ printMulticopyDocument::printMulticopyDocument(QWidget    *parent,
           this, SLOT(sMarkOnePrinted(XSqlQuery*)));
   connect(this, SIGNAL(timeToPostOneDoc(XSqlQuery*, int)),
           this, SLOT(sPostOneDoc(XSqlQuery*, int)));
+  connect(this, SIGNAL(posted(int)),
+          this, SLOT(sHandlePosted(int)));
 
   _distributeInventory = false;
 }
@@ -109,6 +111,8 @@ printMulticopyDocument::printMulticopyDocument(QString numCopiesMetric,
           this, SLOT(sMarkOnePrinted(XSqlQuery*)));
   connect(this, SIGNAL(timeToPostOneDoc(XSqlQuery*, int)),
           this, SLOT(sPostOneDoc(XSqlQuery*, int)));
+  connect(this, SIGNAL(posted(int)),
+          this, SLOT(sHandlePosted(int)));
 
   _distributeInventory = false;
 
@@ -308,12 +312,15 @@ bool printMulticopyDocument::sPostOneDoc(XSqlQuery *docq, int itemlocSeries)
       return false;
     }
 
-    XSqlQuery("COMMIT;");
-
     emit posted(_data->_docid);
   }
 
   return true;
+}
+
+void printMulticopyDocument::sHandlePosted(int docid)
+{
+  XSqlQuery("COMMIT;");
 }
 
 void printMulticopyDocument::sPrint()

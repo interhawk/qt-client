@@ -1831,6 +1831,10 @@ bool salesOrderSimple::sShipInvoice()
     newdlg.exec();
   }
 
+  rollback.prepare("ROLLBACK;");
+
+  XSqlQuery("BEGIN;");
+
   shipq.prepare("SELECT postInvoice(:invchead_id) AS result;");
   shipq.bindValue(":invchead_id", invcheadid);
   shipq.exec();
@@ -1840,15 +1844,26 @@ bool salesOrderSimple::sShipInvoice()
     // result of -10 indicates the invoice was posted when printed
     if (result < 0 && result != -10)
     {
+      rollback.exec();
       ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Invoice Information"),
                                storedProcErrorLookup("postInvoice", result),
                                __FILE__, __LINE__);
       return false;
     }
+
+    if (!_taxIntegration->commit("INV", invcheadid))
+    {
+      rollback.exec();
+      QMessageBox::critical(this, tr("Error Posting Invoice"), _taxIntegration->error());
+      return false;
+    }
+
+    XSqlQuery("COMMIT;");
   }
   else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Invoice"),
                                 shipq, __FILE__, __LINE__))
   {
+    rollback.exec();
     ErrorReporter::error(QtCriticalMsg, this, tr("Error Occurred"),
                          tr("%1: <p>Although Sales Order %2 was successfully shipped "
                             "selected for billing, and an Invoice was created "

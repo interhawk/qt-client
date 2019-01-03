@@ -191,7 +191,7 @@ void postCreditMemos::sPost()
     XSqlQuery rollback;
     rollback.prepare("ROLLBACK;");
 
-    postPost.exec("BEGIN;");  // TODO - remove this when postCreditMemo no longer returns negative error codes
+    postPost.exec("BEGIN;");
     postPost.prepare("SELECT postCreditMemo(:cmheadId, :journalNumber, :itemlocSeries, TRUE) AS result;");
     postPost.bindValue(":cmheadId", creditMemoId);
     postPost.bindValue(":journalNumber", journalNumber);
@@ -208,6 +208,15 @@ void postCreditMemos::sPost()
         failedItems.append(creditMemoNumber);
         errors.append(tr("Error Posting Credit Memo %1")
           .arg(storedProcErrorLookup("postCreditMemo", result)));
+        continue;
+      }
+
+      if (!_taxIntegration->commit("CM", creditMemoId))
+      {
+        rollback.exec();
+        cleanup.exec();
+        failedItems.append(creditMemoNumber);
+        errors.append(_taxIntegration->error());
         continue;
       }
 

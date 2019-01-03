@@ -190,15 +190,34 @@ void openVouchers::sDelete()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
       {
+       XSqlQuery rollback;
+       rollback.prepare("ROLLBACK;");
+
+       XSqlQuery("BEGIN;");
+
        int id = ((XTreeWidgetItem*)(selected[i]))->id();
        delq.bindValue(":vohead_id", id);
        delq.exec();
-       ErrorReporter::error(QtCriticalMsg, this, tr("Deleting Voucher"),
-                            delq, __FILE__, __LINE__);
+       if (delq.first())
+       {
+         if (!_taxIntegration->cancel("VCH", id, ((XTreeWidgetItem*)(selected[i]))->text("vohead_number")))
+         {
+           rollback.exec();
+           QMessageBox::critical(this, tr("Deleting Voucher"), _taxIntegration->error());
+           return;
+         }
+
+         XSqlQuery("COMMIT;");
+         omfgThis->sVouchersUpdated();
+       }
+       else if (delq.lastError().type() != QSqlError::NoError)
+       {
+         rollback.exec();
+         ErrorReporter::error(QtCriticalMsg, this, tr("Deleting Voucher"),
+                              delq, __FILE__, __LINE__);
+       }
       }
     }
-
-    omfgThis->sVouchersUpdated();
   }
 }
 
@@ -265,6 +284,11 @@ void openVouchers::sPost()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
       {
+        XSqlQuery rollback;
+        rollback.prepare("ROLLBACK;");
+
+        XSqlQuery("BEGIN;");
+
         int id = ((XTreeWidgetItem*)(selected[i]))->id();
 
         post.bindValue(":vohead_id", id);
@@ -274,13 +298,27 @@ void openVouchers::sPost()
         {
           int result = post.value("result").toInt();
           if (result < 0)
+          {
+            rollback.exec();
             ErrorReporter::error(QtCriticalMsg, this, tr("Posting Voucher"),
                                  storedProcErrorLookup("postVoucher", result),
                                  __FILE__, __LINE__);
+            return;
+          }
+
+         if (!_taxIntegration->commit("VCH", id))
+         {
+           rollback.exec();
+           QMessageBox::critical(this, tr("Posting Voucher"), _taxIntegration->error());
+           return;
+         }
+
+         XSqlQuery("COMMIT;");
         }
       // contains() string is hard-coded in stored procedure
         else if (post.lastError().databaseText().contains("post to closed period"))
         {
+          rollback.exec();
           if (changeDate)
           {
             triedToClosed = selected;
@@ -290,8 +328,11 @@ void openVouchers::sPost()
             triedToClosed.append(selected[i]);
         }
         else
+        {
+          rollback.exec();
           ErrorReporter::error(QtCriticalMsg, this, tr("Posting Voucher"),
                                post, __FILE__, __LINE__);
+        }
       }
     }
 

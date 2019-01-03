@@ -477,22 +477,42 @@ void dspAROpenItems::sDeleteCreditMemo()
 
     if (checkCreditMemoSitePrivs(list()->currentItem()->id("docnumber")))
     {
+      XSqlQuery rollback;
+      rollback.prepare("ROLLBACK;");
+
+      XSqlQuery("BEGIN;");
+
       delq.bindValue(":cmhead_id", (list()->currentItem()->id("docnumber")));
       delq.exec();
       if (delq.first())
       {
             if (! delq.value("result").toBool())
+            {
+              rollback.exec();
               ErrorReporter::error(QtCriticalMsg, this,
-                                 tr("Error Deleting Credit Memo %1\n").arg(list()->currentItem()->text("docnumber")),
-                                 delq, __FILE__, __LINE__);
+                                   tr("Error Deleting Credit Memo %1\n").arg(list()->currentItem()->text("docnumber")),
+                                   delq, __FILE__, __LINE__);
+              return;
+            }
+
+        if (!_taxIntegration->cancel("CM", list()->currentItem()->id("docnumber"), list()->currentItem()->text("docnumber")))
+        {
+          rollback.exec();
+          QMessageBox::critical(this, tr("Error Deleting Credit Memo %1\n").arg(list()->currentItem()->text("docnumber")), _taxIntegration->error());
+          return;
+        }
+
+        XSqlQuery("COMMIT;");
+        omfgThis->sCreditMemosUpdated();
       }
       else if (delq.lastError().type() != QSqlError::NoError)
+      {
+        rollback.exec();
         ErrorReporter::error(QtCriticalMsg,
                          this, tr("Error Deleting Credit Memo %1\n").arg(list()->currentItem()->text("docnumber")),
                          delq, __FILE__, __LINE__);
+      }
     }
-
-    omfgThis->sCreditMemosUpdated();
   }
 }
 
@@ -508,6 +528,11 @@ void dspAROpenItems::sDeleteInvoice()
 
     if (checkInvoiceSitePrivs(list()->currentItem()->id("docnumber")))
     {
+      XSqlQuery rollback;
+      rollback.prepare("ROLLBACK;");
+
+      XSqlQuery("BEGIN;");
+
       dspDeleteInvoice.bindValue(":invchead_id", list()->currentItem()->id("docnumber"));
       dspDeleteInvoice.exec();
       if (dspDeleteInvoice.first())
@@ -515,20 +540,33 @@ void dspAROpenItems::sDeleteInvoice()
             int result = dspDeleteInvoice.value("result").toInt();
             if (result < 0)
             {
+              rollback.exec();
               ErrorReporter::error(QtCriticalMsg, this,
                                    tr("Error Deleting Invoice %1\n").arg(list()->currentItem()->text("docnumber")),
                                    storedProcErrorLookup("deleteInvoice", result),
                                    __FILE__, __LINE__);
+              return;
             }
+
+        if (!_taxIntegration->cancel("INV", list()->currentItem()->id("docnumber"), list()->currentItem()->text("docnumber")))
+        {
+          rollback.exec();
+          QMessageBox::critical(this, tr("Error Deleting Invoice %1\n").arg(list()->currentItem()->text("docnumber")), _taxIntegration->error());
+          return;
+        }
+
+        XSqlQuery("COMMIT;");
+        omfgThis->sInvoicesUpdated(-1, true);
+        omfgThis->sBillingSelectionUpdated(-1, -1);
       }
       else
+      {
+          rollback.exec();
           ErrorReporter::error(QtCriticalMsg, this,
                                tr("Error Deleting Invoice %1\n").arg(list()->currentItem()->text("docnumber")),
                                dspDeleteInvoice, __FILE__, __LINE__);
+      }
     }
-
-    omfgThis->sInvoicesUpdated(-1, true);
-    omfgThis->sBillingSelectionUpdated(-1, -1);
   }
 }
 
@@ -699,7 +737,7 @@ void dspAROpenItems::sVoidCreditMemo()
   XSqlQuery rollback;
   rollback.prepare("ROLLBACK;");
 
-  dspVoidCreditMemo.exec("BEGIN;"); // TODO - remove this once voidCreditMemo no longer returns negative error codes
+  dspVoidCreditMemo.exec("BEGIN;");
   XSqlQuery post;
   post.prepare("SELECT voidCreditMemo(:cmhead_id, :itemlocSeries, TRUE) AS result;");
   post.bindValue(":cmhead_id", list()->currentItem()->id("docnumber"));
@@ -716,6 +754,14 @@ void dspAROpenItems::sVoidCreditMemo()
                               tr("Error Voiding Credit Memo %1\n").arg(list()->currentItem()->text("docnumber")),
                                storedProcErrorLookup("voidCreditMemo", result),
                                __FILE__, __LINE__);
+      return;
+    }
+
+    if (!_taxIntegration->cancel("CM", list()->currentItem()->id("docnumber")))
+    {
+      rollback.exec();
+      cleanup.exec();
+      QMessageBox::critical(this, tr("Error Voiding Credit Memo %1\n").arg(list()->currentItem()->text("docnumber")), _taxIntegration->error());
       return;
     }
 
@@ -936,7 +982,7 @@ void dspAROpenItems::sVoidInvoiceDetails()
   XSqlQuery rollback;
   rollback.prepare("ROLLBACK;");
 
-  dspVoidInvoiceDetails.exec("BEGIN;"); // TODO - remove after voidInvoice no longer returns negative error codes
+  dspVoidInvoiceDetails.exec("BEGIN;");
 
   XSqlQuery post;
   post.prepare("SELECT voidInvoice(:invchead_id, :itemlocSeries, TRUE, :voidDate) AS result;");
@@ -955,6 +1001,14 @@ void dspAROpenItems::sVoidInvoiceDetails()
                            tr("Error Voiding Invoice %1\n").arg(list()->currentItem()->text("docnumber")),
                            storedProcErrorLookup("voidInvoice", result),
                            __FILE__, __LINE__);
+      return;
+    }
+
+    if (!_taxIntegration->cancel("INV", list()->currentItem()->id("docnumber")))
+    {
+      rollback.exec();
+      cleanup.exec();
+      QMessageBox::critical(this, tr("Error Voiding Invoice %1\n").arg(list()->currentItem()->text("docnumber")), _taxIntegration->error());
       return;
     }
 
@@ -1288,7 +1342,7 @@ void dspAROpenItems::sPostCreditMemo()
   rollback.prepare("ROLLBACK;");
 
   XSqlQuery tx;
-  tx.exec("BEGIN;");  // TODO - remove this after postCreditMemo can no longer return negative error codes
+  tx.exec("BEGIN;");
     
   XSqlQuery postq;
   postq.prepare("SELECT postCreditMemo(:cmhead_id, fetchJournalNumber('AR-CM', :seriesDate), :itemlocSeries, TRUE) AS result;");
@@ -1309,8 +1363,16 @@ void dspAROpenItems::sPostCreditMemo()
                            __FILE__, __LINE__);
       return;
     }
-    else
-      dspPostCreditMemo.exec("COMMIT;");
+
+    if (!_taxIntegration->commit("CM", id))
+    {
+      rollback.exec();
+      cleanup.exec();
+      QMessageBox::critical(this, tr("Error Posting Credit Memo %1\n").arg(list()->currentItem()->text("docnumber")), _taxIntegration->error());
+      return;
+    }
+
+    dspPostCreditMemo.exec("COMMIT;");
   }
   else if (postq.lastError().type() != QSqlError::NoError)
   {
@@ -1508,7 +1570,7 @@ void dspAROpenItems::sPostInvoice()
   rollback.prepare("ROLLBACK;");
 
   XSqlQuery tx;
-  tx.exec("BEGIN;");	// TODO - remove this after postInvoice function no longer returns negative error codes.
+  tx.exec("BEGIN;");
 
   XSqlQuery post;
   post.prepare("SELECT postInvoice(:invchead_id, :journal, :itemlocSeries, TRUE) AS result;");
@@ -1529,9 +1591,18 @@ void dspAROpenItems::sPostInvoice()
                                        .arg(post.lastError().databaseText()),
                            storedProcErrorLookup("postInvoice", result),
                            __FILE__, __LINE__);
+      return;
     }
-    else
-      dspPostInvoice.exec("COMMIT;");
+
+    if (!_taxIntegration->commit("INV", list()->currentItem()->id("docnumber")))
+    {
+      rollback.exec();
+      cleanup.exec();
+      QMessageBox::critical(this, tr("Error Posting Invoice#%1\n").arg(list()->currentItem()->text("docnumber")), _taxIntegration->error());
+      return;
+    }
+
+    dspPostInvoice.exec("COMMIT;");
   }
   else if (post.lastError().type() != QSqlError::NoError)
   {

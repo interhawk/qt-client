@@ -113,6 +113,11 @@ void unpostedInvoices::sDelete()
     {
       if (checkSitePrivs(((XTreeWidgetItem*)(selected[i]))->id()))
 	  {
+        XSqlQuery rollback;
+        rollback.prepare("ROLLBACK;");
+
+        XSqlQuery("BEGIN;");
+
         unpostedDelete.bindValue(":invchead_id", ((XTreeWidgetItem*)(selected[i]))->id());
         unpostedDelete.exec();
         if (unpostedDelete.first())
@@ -120,15 +125,28 @@ void unpostedInvoices::sDelete()
 	      int result = unpostedDelete.value("result").toInt();
 	      if (result < 0)
           {
+            rollback.exec();
             ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Invoice Information"),
                                    storedProcErrorLookup("deleteInvoice", result),
                                    __FILE__, __LINE__);
+            continue;
+          }
+
+          if (!_taxIntegration->cancel("INV", ((XTreeWidgetItem*)(selected[i]))->id(), ((XTreeWidgetItem*)(selected[i]))->text("invchead_invcnumber")))
+          {
+            rollback.exec();
+            QMessageBox::critical(this, tr("Error Deleting Invoice"), _taxIntegration->error());
+            continue;
           }
         }
         else if (unpostedDelete.lastError().type() != QSqlError::NoError)
+        {
+          rollback.exec();
           ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Invoice Information: %1\n")
                              .arg(selected[i]->text(0)) + unpostedDelete.lastError().databaseText(),
                              unpostedDelete, __FILE__, __LINE__);
+          continue;
+        }
       }
     }
 
@@ -437,6 +455,15 @@ void unpostedInvoices::sPost()
           cleanup.exec();
           failedInvoices.append(invoiceNumber);
           errors.append(tr("Error Posting Invoice %1").arg(storedProcErrorLookup("postInvoice", result))); 
+          continue;
+        }
+
+        if (!_taxIntegration->commit("INV", invoiceId))
+        {
+          rollback.exec();
+          cleanup.exec();
+          failedInvoices.append(invoiceNumber);
+          errors.append(_taxIntegration->error());
           continue;
         }
 

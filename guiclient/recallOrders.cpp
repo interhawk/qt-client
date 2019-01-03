@@ -56,6 +56,8 @@ void recallOrders::sRecall()
   if (!checkSitePrivs(_ship->id()))
     return;
 
+  QString invoiceNumber;
+
   if (_ship->altId() != -1)
   {    
     int answer = QMessageBox::question(this, tr("Purge Invoice?"),
@@ -67,7 +69,24 @@ void recallOrders::sRecall()
                               QMessageBox::No);
     if (answer == QMessageBox::No)
       return;
+
+    XSqlQuery invoice;
+    invoice.prepare("SELECT invchead_invcnumber "
+                    "  FROM invchead "
+                    " WHERE invchead_id = :invchead_id;");
+    invoice.bindValue(":invchead_id", _ship->altId());
+    invoice.exec();
+    if (invoice.first())
+      invoiceNumber = invoice.value("invchead_invcnumber").toString();
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching invoice number"),
+                                  invoice, __FILE__, __LINE__))
+      return;
   }
+
+  XSqlQuery rollback;
+  rollback.prepare("ROLLBACK;");
+
+  XSqlQuery("BEGIN;");
 
   recallRecall.prepare("SELECT recallShipment(:shiphead_id) AS result;");
   recallRecall.bindValue(":shiphead_id", _ship->id());
@@ -77,16 +96,28 @@ void recallOrders::sRecall()
     int result = recallRecall.value("result").toInt();
     if (result < 0)
     {
+      rollback.exec();
       ErrorReporter::error(QtCriticalMsg, this, tr("Error Recalling Shipment"),
                              storedProcErrorLookup("recallShipment", result),
                              __FILE__, __LINE__);
       return;
     }
+
+    if (!invoiceNumber.isEmpty() && !_taxIntegration->cancel("INV", _ship->altId(), invoiceNumber))
+    {
+      rollback.exec();
+      QMessageBox::critical(this, tr("Error Recalling Shipment"), _taxIntegration->error());
+      return;
+    }
+
+    XSqlQuery("COMMIT;");
     sFillList();
   }
-  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Recalling Shipment"),
-                                recallRecall, __FILE__, __LINE__))
+  else if (recallRecall.lastError().type() != QSqlError::NoError)
   {
+    rollback.exec();
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Recalling Shipment"),
+                         recallRecall, __FILE__, __LINE__);
     return;
   }
 }

@@ -74,6 +74,18 @@ void printCreditMemos::sHandleFinishedWithAll()
   this->close();
 }
 
+void printCreditMemos::sHandlePosted(int docid)
+{
+  if (!_taxIntegration->commit("CM", docid))
+  {
+    XSqlQuery("ROLLBACK;");
+    QMessageBox::critical(this, tr("Error Posting Credit Memo"), _taxIntegration->error());
+    return;
+  }
+
+  XSqlQuery("COMMIT;");
+}
+
 int printCreditMemos::distributeInventory(XSqlQuery *qry)
 {
   int creditMemoId = qry->value("docid").toInt();

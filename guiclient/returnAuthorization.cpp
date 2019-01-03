@@ -1882,6 +1882,13 @@ void returnAuthorization::sRefund()
       XSqlQuery rollback("ROLLBACK;");
       return;
     }
+
+    if (!_taxIntegration->commit("CM", cmheadid))
+    {
+      XSqlQuery rollback("ROLLBACK;");
+      QMessageBox::critical(this, tr("Creating R/A Sales Credit"), _taxIntegration->error());
+      return;
+    }
   }
   else if (cmq.lastError().type() != QSqlError::NoError)
   {

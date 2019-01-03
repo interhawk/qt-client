@@ -71,6 +71,7 @@ class printMulticopyDocument : public XDialog
     virtual void    sAddToPrintedList(XSqlQuery *docq);
     virtual bool    sMarkOnePrinted(XSqlQuery *docq);
     virtual bool    sPostOneDoc(XSqlQuery  *docq, int itemlocSeries = 0);
+    virtual void    sHandlePosted(int);
     virtual void    sPrint();
     virtual bool    sPrintOneDoc(XSqlQuery *docq);
     virtual void    setDoctype(QString doctype);

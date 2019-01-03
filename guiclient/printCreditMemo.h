@@ -29,6 +29,7 @@ class printCreditMemo : public printMulticopyDocument,
     virtual void languageChange();
     virtual void sHandleDocUpdated(int docid);
     virtual void sHandlePopulated(XSqlQuery *qry);
+    virtual void sHandlePosted(int);
 
   protected:
 

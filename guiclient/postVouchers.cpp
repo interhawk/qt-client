@@ -16,6 +16,7 @@
 
 #include <openreports.h>
 #include "errorReporter.h"
+#include "storedProcErrorLookup.h"
 
 postVouchers::postVouchers(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
     : XDialog(parent, name, modal, fl)
@@ -51,63 +52,104 @@ void postVouchers::sPost()
   if (GuiErrorCheck::reportErrors(this, tr("No Vouchers to Post"), errors))
     return;
 
-  postPost.prepare("SELECT postVouchers(false) AS result;");
-  postPost.exec();
+  int journalNumber = 0;
+
+  postPost.exec("SELECT fetchJournalNumber('AP-VO') AS journal;");
   if (postPost.first())
-  {
-    int result = postPost.value("result").toInt();
-    if (result == -5)
-    {
-      QMessageBox::critical( this, tr("Cannot Post Voucher"),
-                             tr( "The Cost Category(s) for one or more Item Sites for the Purchase Order covered by one or more\n"
-                                 "of the Vouchers that you are trying to post is not configured with Purchase Price Variance or\n"
-                                 "P/O Liability Clearing Account Numbers or the Vendor of these Vouchers is not configured with an\n"
-                                 "A/P Account Number.  Because of this, G/L Transactions cannot be posted for these Vouchers.\n"
-                                 "You must contact your Systems Administrator to have this corrected before you may\n"
-                                 "post Vouchers." ) );
-      return;
-    }
-    else if (result < 0)
-    {
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Voucher"),
-                           postPost, __FILE__, __LINE__);
-      return;
-    }
-
-    omfgThis->sVouchersUpdated();
- 
-    if (_printJournal->isChecked())
-    {
-      ParameterList params;
-      params.append("source", "A/P");
-      params.append("sourceLit", tr("A/P"));
-      params.append("startJrnlnum", result);
-      params.append("endJrnlnum", result);
-
-      if (_metrics->boolean("UseJournals"))
-      {
-        params.append("title",tr("Journal Series"));
-        params.append("table", "sltrans");
-      }
-      else
-      {
-        params.append("title",tr("General Ledger Series"));
-        params.append("gltrans", true);
-        params.append("table", "gltrans");
-      }
-
-      orReport report("GLSeries", params);
-      if (report.isValid())
-        report.print();
-      else
-        report.reportError(this);
-    }
-  }
-  else
-  {
-    ErrorReporter::error(QtCriticalMsg, this, tr("Error Posting Voucher"),
-                         postPost, __FILE__, __LINE__);
+    journalNumber = postPost.value("journal").toInt();
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching journal number"),
+                                postPost, __FILE__, __LINE__))
     return;
+
+  int succeeded = 0;
+  QList<QString> failedItems;
+  QList<QString> postErrors;
+
+  XSqlQuery vouchers("SELECT vohead_id, vohead_number "
+                     "  FROM vohead "
+                     " WHERE NOT vohead_posted;");
+  while (vouchers.next())
+  {
+    XSqlQuery rollback;
+    rollback.prepare("ROLLBACK;");
+
+    XSqlQuery("BEGIN;");
+
+    postPost.prepare("SELECT postVoucher(:vohead_id, :journal, false) AS result;");
+    postPost.bindValue(":vohead_id", vouchers.value("vohead_id").toInt());
+    postPost.bindValue(":journal", journalNumber);
+    postPost.exec();
+    if (postPost.first())
+    {
+      int result = postPost.value("result").toInt();
+      if (result < 0)
+      {
+        rollback.exec();
+        failedItems.append(vouchers.value("vohead_number").toString());
+        postErrors.append(storedProcErrorLookup("postVoucher", result));
+        continue;
+      }
+
+      if (!_taxIntegration->commit("VCH", vouchers.value("vohead_id").toInt()))
+      {
+        rollback.exec();
+        failedItems.append(vouchers.value("vohead_number").toString());
+        postErrors.append(_taxIntegration->error());
+        continue;
+      }
+    }
+    else if (postPost.lastError().type() != QSqlError::NoError)
+    {
+      rollback.exec();
+      failedItems.append(vouchers.value("vohead_number").toString());
+      postErrors.append(postPost.lastError().text());
+      continue;
+    }
+
+    succeeded++;
+    XSqlQuery("COMMIT;");
+  }
+
+  if (postErrors.size() > 0)
+  {
+    QMessageBox dlg(QMessageBox::Critical, "Errors Posting Voucher", "", QMessageBox::Ok, this);
+    dlg.setText(tr("%1 Vouchers succeeded.\n%2 Vouchers failed.").arg(succeeded).arg(failedItems.size()));
+
+    QString details;
+    for (int i=0; i<failedItems.size(); i++)
+      details += tr("Voucher number %1 failed with:\n%2\n").arg(failedItems[i]).arg(postErrors[i]);
+    dlg.setDetailedText(details);
+
+    dlg.exec();
+  }
+
+  omfgThis->sVouchersUpdated();
+ 
+  if (_printJournal->isChecked())
+  {
+    ParameterList params;
+    params.append("source", "A/P");
+    params.append("sourceLit", tr("A/P"));
+    params.append("startJrnlnum", journalNumber);
+    params.append("endJrnlnum", journalNumber);
+
+    if (_metrics->boolean("UseJournals"))
+    {
+      params.append("title",tr("Journal Series"));
+      params.append("table", "sltrans");
+    }
+    else
+    {
+      params.append("title",tr("General Ledger Series"));
+      params.append("gltrans", true);
+      params.append("table", "gltrans");
+    }
+
+    orReport report("GLSeries", params);
+    if (report.isValid())
+      report.print();
+    else
+      report.reportError(this);
   }
 
   accept();

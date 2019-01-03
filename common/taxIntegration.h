@@ -31,10 +31,12 @@ class TaxIntegration : public QObject
     Q_INVOKABLE virtual void getTaxCodes();
     Q_INVOKABLE virtual void getTaxExemptCategories(QStringList = QStringList());
     Q_INVOKABLE virtual void calculateTax(QString, int, bool = false);
-    Q_INVOKABLE virtual void commit(QString, int);
-    Q_INVOKABLE virtual void cancel(QString, int, QString = QString());
+    Q_INVOKABLE virtual bool commit(QString, int);
+    Q_INVOKABLE virtual bool cancel(QString, int, QString = QString());
     Q_INVOKABLE virtual void refund(int, QDate);
     Q_INVOKABLE virtual void wait();
+
+    Q_INVOKABLE virtual QString error();
 
   signals:
     void connectionTested(QString);
@@ -47,6 +49,7 @@ class TaxIntegration : public QObject
     virtual void done();
 
     QElapsedTimer timer;
+    QString _error;
 
   protected slots:
     virtual void handleResponse(QString, QString, int, QString, QString);
