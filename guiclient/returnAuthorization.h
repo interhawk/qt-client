@@ -31,7 +31,7 @@ public:
 
 public slots:
     virtual SetResponse set( const ParameterList & pParams );
-    virtual bool sSave( bool partial );
+    virtual bool sSave( bool partial, bool report = false );
     virtual void sSaveClick();
     virtual void populateShipto( int pShiptoid );
     virtual void sPopulateCustomerInfo();

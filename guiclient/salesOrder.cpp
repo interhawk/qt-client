@@ -884,7 +884,7 @@ void salesOrder::sSaveAndAdd()
   }
 }
 
-bool salesOrder::save(bool partial)
+bool salesOrder::save(bool partial, bool report)
 {
   ENTERED << "with" << partial;
   XSqlQuery saveSales;
@@ -1017,7 +1017,7 @@ bool salesOrder::save(bool partial)
     }
   }
 
-  if (partial && GuiErrorCheck::checkForErrors(errors))
+  if (partial && !report && GuiErrorCheck::checkForErrors(errors))
     return false;
 
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Sales Order"), errors))
@@ -2237,7 +2237,7 @@ void salesOrder::sNew()
   ENTERED;
   if ( !_saved && ((_mode == cNew) || (_mode == cNewQuote)) )
   {
-    if (!save(true))
+    if (!save(true, true))
       return;
   }
 
