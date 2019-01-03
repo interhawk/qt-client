@@ -113,11 +113,10 @@ void XComboBoxDescrip::sListen()
            notification.split(" ", QString::SkipEmptyParts))
   {
     if (! db.driver()->subscribedToNotifications().contains(notice))
-    {
       db.driver()->subscribeToNotification(notice);
-      connect(db.driver(), SIGNAL(notification(const QString&)),
-              this,        SLOT(sNotified(const QString&)));
-    }
+
+    connect(db.driver(), SIGNAL(notification(const QString&)),
+            this,        SLOT(sNotified(const QString&)));
   }
 }
 
