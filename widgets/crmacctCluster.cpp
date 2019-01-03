@@ -104,7 +104,7 @@ static QString _listAndSearchQueryString(
       "                 ~ <? value('searchString') ?>)"
       "    <? endif ?>"
       "    <? if exists('searchPhone') ?>"
-      "       OR (phonejson(cntct_id) ~ <? value('searchString') ?>)"
+      "       OR (phonejson(cntct.cntct_id)::TEXT ~ <? value('searchString') ?>)"
       "    <? endif ?>"
       "    <? if exists('searchEmail') ?>"
       "       OR (cntct_email ~* <? value('searchString') ?>)"
