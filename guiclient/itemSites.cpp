@@ -266,11 +266,11 @@ void itemSites::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));;
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));;
   if ((!_privileges->check("MaintainItemSites")) && (!_privileges->check("ViewItemSites")))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));;
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));;
   if (!_privileges->check("MaintainItemSites"))
     menuItem->setEnabled(false);
 
@@ -278,19 +278,19 @@ void itemSites::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
   if (!_privileges->check("MaintainItemSites"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));;
+  menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));;
   if (!_privileges->check("MaintainItemSites"))
     menuItem->setEnabled(false);
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("View Inventory Availability..."), this, SLOT(sInventoryAvailability()));;
+  menuItem = pMenu->addAction(tr("View Inventory Availability"), this, SLOT(sInventoryAvailability()));;
   if (!_privileges->check("ViewInventoryAvailability"))
     menuItem->setEnabled(false);
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Issue Count Tag..."), this, SLOT(sIssueCountTag()));;
+  menuItem = pMenu->addAction(tr("Issue Count Tag"), this, SLOT(sIssueCountTag()));;
   if (!_privileges->check("IssueCountTags"))
     menuItem->setEnabled(false);
 }

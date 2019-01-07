@@ -114,11 +114,11 @@ void dspCashReceipts::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
     // Cash Receipt
     if (!list()->currentItem()->rawValue("posted").toBool() && !list()->currentItem()->rawValue("voided").toBool())
     {
-      menuItem = pMenu->addAction(tr("Edit Cash Receipt..."), this, SLOT(sEditCashrcpt()));
+      menuItem = pMenu->addAction(tr("Edit Cash Receipt"), this, SLOT(sEditCashrcpt()));
       menuItem->setEnabled(_privileges->check("MaintainCashReceipts"));
     }
 
-    menuItem = pMenu->addAction(tr("View Cash Receipt..."), this, SLOT(sViewCashrcpt()));
+    menuItem = pMenu->addAction(tr("View Cash Receipt"), this, SLOT(sViewCashrcpt()));
     menuItem->setEnabled(_privileges->check("ViewCashReceipts") || _privileges->check("MaintainCashReceipts"));
 
     if (!list()->currentItem()->rawValue("voided").toBool())
@@ -139,9 +139,9 @@ void dspCashReceipts::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
     if (list()->currentItem()->id("target") > -1 )
     {
       pMenu->addSeparator();
-      menuItem = pMenu->addAction(tr("Edit Receivable Item..."), this, SLOT(sEditAropen()));
+      menuItem = pMenu->addAction(tr("Edit Receivable Item"), this, SLOT(sEditAropen()));
       menuItem->setEnabled(_privileges->check("EditAROpenItem"));
-      menuItem = pMenu->addAction(tr("View Receivable Item..."), this, SLOT(sViewAropen()));
+      menuItem = pMenu->addAction(tr("View Receivable Item"), this, SLOT(sViewAropen()));
       menuItem->setEnabled(_privileges->check("ViewAROpenItems") || _privileges->check("EditAROpenItem"));
     }
   }

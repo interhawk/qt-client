@@ -1449,7 +1449,7 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
   if (_mode == cView &&
       _numSelected == 1 &&
       _lineMode == cClosed)
-        pMenu->addAction(tr("Open Line..."), this, SLOT(sAction()));
+        pMenu->addAction(tr("Open Line"), this, SLOT(sAction()));
 
   if ((_mode == cNew) || (_mode == cEdit))
   {
@@ -1459,37 +1459,37 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
     {
       didsomething = true;
       if (_lineMode == cClosed)
-        pMenu->addAction(tr("Open Line..."), this, SLOT(sAction()));
+        pMenu->addAction(tr("Open Line"), this, SLOT(sAction()));
       else if (_lineMode == cActiveOpen)
       {
         if (_lineFirm == 1)
         {
-          pMenu->addAction(tr("Edit Line..."), this, SLOT(sEdit()));
-          menuItem = pMenu->addAction(tr("Firm Line..."), this, SLOT(sFirm()));
+          pMenu->addAction(tr("Edit Line"), this, SLOT(sEdit()));
+          menuItem = pMenu->addAction(tr("Firm Line"), this, SLOT(sFirm()));
           menuItem->setEnabled(_privileges->check("FirmSalesOrder"));
         }
         else
         {
-          menuItem = pMenu->addAction(tr("Soften Line..."), this, SLOT(sSoften()));
+          menuItem = pMenu->addAction(tr("Soften Line"), this, SLOT(sSoften()));
           menuItem->setEnabled(_privileges->check("FirmSalesOrder"));
         }
-        pMenu->addAction(tr("Close Line..."), this, SLOT(sAction()));
+        pMenu->addAction(tr("Close Line"), this, SLOT(sAction()));
       }
       else if (_lineMode == cInactiveOpen)
       {
         if (_lineFirm == 1)
         {
-          pMenu->addAction(tr("Edit Line..."), this, SLOT(sEdit()));
-          menuItem = pMenu->addAction(tr("Firm Line..."), this, SLOT(sFirm()));
+          pMenu->addAction(tr("Edit Line"), this, SLOT(sEdit()));
+          menuItem = pMenu->addAction(tr("Firm Line"), this, SLOT(sFirm()));
           menuItem->setEnabled(_privileges->check("FirmSalesOrder"));
         }
         else
         {
-          menuItem = pMenu->addAction(tr("Soften Line..."), this, SLOT(sSoften()));
+          menuItem = pMenu->addAction(tr("Soften Line"), this, SLOT(sSoften()));
           menuItem->setEnabled(_privileges->check("FirmSalesOrder"));
         }
-        pMenu->addAction(tr("Close Line..."), this, SLOT(sAction()));
-        pMenu->addAction(tr("Cancel Line..."), this, SLOT(sCancel()));
+        pMenu->addAction(tr("Close Line"), this, SLOT(sAction()));
+        pMenu->addAction(tr("Cancel Line"), this, SLOT(sCancel()));
 
         XSqlQuery invhist;
         invhist.prepare("SELECT 1 "
@@ -1503,7 +1503,7 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
           if(ErrorReporter::error(QtCriticalMsg, this, "Error checking invhist",
                                   invhist, __FILE__, __LINE__))
             return;
-          pMenu->addAction(tr("Delete Line..."), this, SLOT(sDelete()));
+          pMenu->addAction(tr("Delete Line"), this, SLOT(sDelete()));
         }
       }
     }
@@ -1513,7 +1513,7 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
       if (didsomething)
         pMenu->addSeparator();
 
-      menuItem = pMenu->addAction(tr("Show Reservations..."), this, SLOT(sShowReservations()));
+      menuItem = pMenu->addAction(tr("Show Reservations"), this, SLOT(sShowReservations()));
 
       pMenu->addSeparator();
 
@@ -1534,7 +1534,7 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
 
       menuItem = pMenu->addAction(tr("Return Stock"), this, SLOT(sReturnStock()));
       menuItem->setEnabled(_privileges->check("IssueStockToShipping"));
-      menuItem = pMenu->addAction(tr("Issue Stock..."), this, SLOT(sIssueStock()));
+      menuItem = pMenu->addAction(tr("Issue Stock"), this, SLOT(sIssueStock()));
       menuItem->setEnabled(_privileges->check("IssueStockToShipping"));
       menuItem = pMenu->addAction(tr("Issue Line Balance"), this, SLOT(sIssueLineBalance()));
       menuItem->setEnabled(_privileges->check("IssueStockToShipping"));
@@ -1565,10 +1565,10 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
           checkPO.exec();
           if (checkPO.first())
           {
-            menuItem = pMenu->addAction(tr("View Purchase Order..."), this, SLOT(sViewPO()));
+            menuItem = pMenu->addAction(tr("View Purchase Order"), this, SLOT(sViewPO()));
             menuItem->setEnabled(_privileges->check("ViewPurchaseOrders"));
 
-            menuItem = pMenu->addAction(tr("Edit Purchase Order..."), this, SLOT(sMaintainPO()));
+            menuItem = pMenu->addAction(tr("Edit Purchase Order"), this, SLOT(sMaintainPO()));
             menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
           }
           else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Purchase Order Information"),
@@ -1587,10 +1587,10 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
           checkPR.exec();
           if (checkPR.first())
           {
-            menuItem = pMenu->addAction(tr("Release P/R..."), this, SLOT(sReleasePR()));
+            menuItem = pMenu->addAction(tr("Release P/R"), this, SLOT(sReleasePR()));
             menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
 
-            menuItem = pMenu->addAction(tr("View Purchase Request..."), this, SLOT(sViewPR()));
+            menuItem = pMenu->addAction(tr("View Purchase Request"), this, SLOT(sViewPR()));
             menuItem->setEnabled(_privileges->check("ViewPurchaseRequests"));
           }
           else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Purchase Request Information"),
@@ -1609,10 +1609,10 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
           checkWO.exec();
           if (checkWO.first())
           {
-            menuItem = pMenu->addAction(tr("View Work Order..."), this, SLOT(sViewWO()));
+            menuItem = pMenu->addAction(tr("View Work Order"), this, SLOT(sViewWO()));
             menuItem->setEnabled(_privileges->check("ViewWorkOrders"));
 
-            menuItem = pMenu->addAction(tr("Edit Work Order..."), this, SLOT(sMaintainWO()));
+            menuItem = pMenu->addAction(tr("Edit Work Order"), this, SLOT(sMaintainWO()));
             menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
           }
           else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Work Order Information"),

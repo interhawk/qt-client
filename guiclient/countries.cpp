@@ -144,11 +144,11 @@ void countries::sPopulateMenu(QMenu* pMenu)
 {
     QAction *menuItem;
     
-    pMenu->addAction("View...", this, SLOT(sView()));
+    pMenu->addAction("View", this, SLOT(sView()));
     
-    menuItem = pMenu->addAction("Edit...", this, SLOT(sEdit()));
+    menuItem = pMenu->addAction("Edit", this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainCountries"));
     
-    menuItem = pMenu->addAction("Delete...", this, SLOT(sDelete()));
+    menuItem = pMenu->addAction("Delete", this, SLOT(sDelete()));
     menuItem->setEnabled(_privileges->check("MaintainCountries"));
 }

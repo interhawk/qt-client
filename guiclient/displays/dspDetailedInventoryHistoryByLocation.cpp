@@ -174,7 +174,7 @@ void dspDetailedInventoryHistoryByLocation::sPopulateMenu(QMenu *menuThis, QTree
        (transType == "EX") ||
        (transType == "RX") ||
        (transType == "CC") )
-    menuThis->addAction(tr("View Transaction Information..."), this, SLOT(sViewTransInfo()));
+    menuThis->addAction(tr("View Transaction Information"), this, SLOT(sViewTransInfo()));
 }
 
 

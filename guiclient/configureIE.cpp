@@ -338,8 +338,8 @@ void configureIE::sNewMap()
 void configureIE::sPopulateMenu(QMenu* pMenu, QTreeWidgetItem* /* pItem */)
 {
 
-  QAction *newAct  = pMenu->addAction(tr("New..."));
-  QAction *editAct = pMenu->addAction(tr("Edit..."));
+  QAction *newAct  = pMenu->addAction(tr("New"));
+  QAction *editAct = pMenu->addAction(tr("Edit"));
   QAction *delAct  = pMenu->addAction(tr("Delete"));
 
   if (sender() == _map)

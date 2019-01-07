@@ -67,7 +67,7 @@ void dspUninvoicedReceivings::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
         menuItem->setEnabled(false);
     }
     if (list()->altId() == 3)
-      menuItem = pMenu->addAction(tr("Create Credit Memo..."), this, SLOT(sCreateCreditMemo()));
+      menuItem = pMenu->addAction(tr("Create Credit Memo"), this, SLOT(sCreateCreditMemo()));
   }
 }
 

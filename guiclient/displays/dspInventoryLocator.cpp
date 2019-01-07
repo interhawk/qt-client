@@ -138,11 +138,11 @@ void dspInventoryLocator::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected
 
   if (((XTreeWidgetItem *)pSelected)->altId() == 1)
   {
-    menuItem = pMenu->addAction(tr("Relocate..."), this, SLOT(sRelocateInventory()));;
+    menuItem = pMenu->addAction(tr("Relocate"), this, SLOT(sRelocateInventory()));;
     if (!_privileges->check("RelocateInventory"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Reassign Lot/Serial #..."), this, SLOT(sReassignLotSerial()));;
+    menuItem = pMenu->addAction(tr("Reassign Lot/Serial #"), this, SLOT(sReassignLotSerial()));;
     if (!_privileges->check("ReassignLotSerial"))
       menuItem->setEnabled(false);
   }

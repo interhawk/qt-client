@@ -521,8 +521,8 @@ void salesOrderSimple::sSaveLine()
 void salesOrderSimple::sPopulateMenu(QMenu *pMenu)
 {
   QAction *menuItem;
-  pMenu->addAction(tr("Edit Line..."), this, SLOT(sEdit()));
-  pMenu->addAction(tr("Delete Line..."), this, SLOT(sDelete()));
+  pMenu->addAction(tr("Edit Line"), this, SLOT(sEdit()));
+  pMenu->addAction(tr("Delete Line"), this, SLOT(sDelete()));
   pMenu->addSeparator();
   menuItem = pMenu->addAction(tr("Item Workbench"), this, SLOT(sViewItemWorkbench()));
   menuItem->setEnabled(_privileges->check("ViewItemAvailabilityWorkbench"));

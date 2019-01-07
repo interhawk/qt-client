@@ -93,7 +93,7 @@ void dspTimePhasedSales::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem *, int p
 
   _column = pColumn;
 
-  menuItem = menuThis->addAction(tr("View Sales Detail..."), this, SLOT(sViewHistory()));
+  menuItem = menuThis->addAction(tr("View Sales Detail"), this, SLOT(sViewHistory()));
   menuItem->setEnabled(_privileges->check("ViewSalesHistory"));
 }
 

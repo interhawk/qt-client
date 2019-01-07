@@ -90,7 +90,7 @@ void group::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction("Maintain User...", this, SLOT(sEditUser()));
+  menuItem = pMenu->addAction("Maintain User", this, SLOT(sEditUser()));
   if (!_privileges->check("MaintainUsers"))
     menuItem->setEnabled(false);
 }

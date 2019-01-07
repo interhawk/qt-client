@@ -74,7 +74,7 @@ void dspItemCostSummary::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected,
 {
   if (pSelected->text(1) == "Yes")
   {
-    pMenu->addAction(tr("View Costing Detail..."), this, SLOT(sViewDetail()));
+    pMenu->addAction(tr("View Costing Detail"), this, SLOT(sViewDetail()));
     pMenu->addSeparator();
   }
 }

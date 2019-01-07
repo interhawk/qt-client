@@ -135,9 +135,9 @@ void prospects::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction("View...", this, SLOT(sView()));
+  menuItem = pMenu->addAction("View", this, SLOT(sView()));
 
-  menuItem = pMenu->addAction("Edit...", this, SLOT(sEdit()));
+  menuItem = pMenu->addAction("Edit", this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainProspectMasters"));
 
   menuItem = pMenu->addAction("Delete", this, SLOT(sDelete()));

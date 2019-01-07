@@ -119,10 +119,10 @@ bool dspCostedBOMBase::setParams(ParameterList &params)
 void dspCostedBOMBase::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, int)
 {
   if (((XTreeWidgetItem *)pSelected)->id() != -1)
-    pMenu->addAction(tr("Maintain Item Costs..."), this, SLOT(sMaintainItemCosts()));
+    pMenu->addAction(tr("Maintain Item Costs"), this, SLOT(sMaintainItemCosts()));
 
   if (((XTreeWidgetItem *)pSelected)->id() != -1)
-    pMenu->addAction(tr("View Item Costing..."), this, SLOT(sViewItemCosting()));
+    pMenu->addAction(tr("View Item Costing"), this, SLOT(sViewItemCosting()));
 }
 
 void dspCostedBOMBase::sMaintainItemCosts()

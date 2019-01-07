@@ -84,16 +84,16 @@ enum SetResponse dspSalesOrdersByItem::set(const ParameterList &pParams)
 void dspSalesOrdersByItem::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
   if(_privileges->check("MaintainSalesOrders"))
-    menuThis->addAction(tr("Edit..."), this, SLOT(sEditOrder()));
-  menuThis->addAction(tr("View..."), this, SLOT(sViewOrder()));
+    menuThis->addAction(tr("Edit"), this, SLOT(sEditOrder()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewOrder()));
   if(_privileges->check("MaintainSalesOrders"))
   {
     menuThis->addSeparator();
     menuThis->addAction(tr("Copy..."), this, SLOT(sCopyOrder()));
   }
   menuThis->addSeparator();
-  menuThis->addAction(tr("Shipment Status..."), this, SLOT(sDspShipmentStatus()));
-  menuThis->addAction(tr("Shipments.."), this, SLOT(sDspShipments()));
+  menuThis->addAction(tr("Shipment Status"), this, SLOT(sDspShipmentStatus()));
+  menuThis->addAction(tr("Shipments"), this, SLOT(sDspShipments()));
 
   if ( (_metrics->boolean("EnableReturnAuth")) && (_privileges->check("MaintainReturns")) )
   {

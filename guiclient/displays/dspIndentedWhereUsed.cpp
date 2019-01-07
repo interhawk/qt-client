@@ -116,7 +116,7 @@ void dspIndentedWhereUsed::sPopulateMenu(QMenu *menu, QTreeWidgetItem*, int)
 {
   QAction *menuItem;
 
-  menuItem = menu->addAction(tr("View Item Inventory History..."), this, SLOT(sViewInventoryHistory()));
+  menuItem = menu->addAction(tr("View Item Inventory History"), this, SLOT(sViewInventoryHistory()));
   menuItem->setEnabled(_privileges->check("ViewInventoryHistory"));
 }
 

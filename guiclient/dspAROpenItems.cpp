@@ -167,7 +167,7 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
   QAction *menuItem = 0;
 
   if ( _privileges->check("MaintainCustomerMasters") || _privileges->check("ViewCustomerMasters") )
-    menuItem = pMenu->addAction(tr("Open Customer..."), this, SLOT(sOpenCustomer()));
+    menuItem = pMenu->addAction(tr("Open Customer"), this, SLOT(sOpenCustomer()));
 
   if (((XTreeWidgetItem *)pItem)->altId() < 4)
   {
@@ -187,33 +187,33 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
   if (((XTreeWidgetItem *)pItem)->altId() == 0 && ((XTreeWidgetItem *)pItem)->rawValue("posted") == 0)
   // Invoice
   {
-    menuItem = pMenu->addAction(tr("Edit Invoice..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Invoice"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
   }
   else if (((XTreeWidgetItem *)pItem)->altId() == 1 && ((XTreeWidgetItem *)pItem)->id("docnumber") > -1
              && ((XTreeWidgetItem *)pItem)->rawValue("posted") == 0)
   // Credit Memo
   {
-    menuItem = pMenu->addAction(tr("Edit Sales Credit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Sales Credit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainCreditMemos"));
   }
   else if (((XTreeWidgetItem *)pItem)->id() > 0)
   // Open Item
   {
-    menuItem = pMenu->addAction(tr("Edit Receivable Item..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Receivable Item"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("EditAROpenItem"));
   }
   else
   // Incident
   {
-    menuItem = pMenu->addAction(tr("Edit Incident..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Incident"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainAllIncidents"));
   }
 
   if (((XTreeWidgetItem *)pItem)->id() > 0)
   // Open Item
   {
-    menuItem = pMenu->addAction(tr("View Receivable Item..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Receivable Item"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("EditAROpenItem") || _privileges->check("ViewAROpenItems"));
   }
   
@@ -225,14 +225,14 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
       menuItem = pMenu->addAction(tr("Void Posted Invoice..."), this, SLOT(sVoidInvoiceDetails()));
       menuItem->setEnabled(_privileges->check("VoidPostedInvoices"));
 
-      menuItem = pMenu->addAction(tr("Edit Posted Invoice..."), this, SLOT(sEditInvoiceDetails()));
+      menuItem = pMenu->addAction(tr("Edit Posted Invoice"), this, SLOT(sEditInvoiceDetails()));
       menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
     }
 
-    menuItem = pMenu->addAction(tr("View Invoice..."), this, SLOT(sViewInvoiceDetails()));
+    menuItem = pMenu->addAction(tr("View Invoice"), this, SLOT(sViewInvoiceDetails()));
     menuItem->setEnabled(_privileges->check("ViewMiscInvoices"));
   
-    menuItem = pMenu->addAction(tr("View Invoice Information..."), this, SLOT(sViewInvoice()));
+    menuItem = pMenu->addAction(tr("View Invoice Information"), this, SLOT(sViewInvoice()));
     menuItem->setEnabled(_privileges->check("ViewMiscInvoices"));
   }
   else if (((XTreeWidgetItem *)pItem)->altId() == 1 &&
@@ -245,13 +245,13 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
       menuItem->setEnabled(_privileges->check("VoidPostedARCreditMemos"));
     }
 
-    menuItem = pMenu->addAction(tr("View Sales Credit..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Sales Credit"), this, SLOT(sViewCreditMemo()));
     menuItem->setEnabled(_privileges->check("MaintainCreditMemos") || _privileges->check("ViewCreditMemos"));
   }
   else if (((XTreeWidgetItem *)pItem)->altId() == 4)
   // Incident
   {
-    menuItem = pMenu->addAction(tr("View Incident..."), this, SLOT(sViewIncident()));
+    menuItem = pMenu->addAction(tr("View Incident"), this, SLOT(sViewIncident()));
     menuItem->setEnabled(_privileges->check("ViewAllIncidents") || _privileges->check("MaintainAllIncidents"));
   }
   
@@ -265,12 +265,12 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
     
     if (((XTreeWidgetItem *)pItem)->altId() == 0)
     {
-      menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDeleteInvoice()));
+      menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDeleteInvoice()));
       menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
     }
     else
     {
-      menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDeleteCreditMemo()));
+      menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDeleteCreditMemo()));
       menuItem->setEnabled(_privileges->check("MaintainCreditMemos"));
     }
   }
@@ -288,13 +288,13 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
       ((XTreeWidgetItem *)pItem)->altId() == 0) )
   {
     pMenu->addSeparator();
-    menuItem = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEditSalesOrder()));
+    menuItem = pMenu->addAction(tr("Edit Sales Order"), this, SLOT(sEditSalesOrder()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders") || _privileges->check("ViewSalesOrders"));
-    menuItem = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sViewSalesOrder()));
+    menuItem = pMenu->addAction(tr("View Sales Order"), this, SLOT(sViewSalesOrder()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
-    menuItem = pMenu->addAction(tr("Shipment Status..."), this, SLOT(sDspShipmentStatus()));
+    menuItem = pMenu->addAction(tr("Shipment Status"), this, SLOT(sDspShipmentStatus()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders") || _privileges->check("ViewSalesOrders"));
-    menuItem = pMenu->addAction(tr("Shipments..."), this, SLOT(sShipment()));
+    menuItem = pMenu->addAction(tr("Shipments"), this, SLOT(sShipment()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders") || _privileges->check("ViewSalesOrders"));
   }
   
@@ -305,7 +305,7 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
       ((XTreeWidgetItem *)pItem)->rawValue("open").toBool() )
   {
     pMenu->addSeparator();
-    menuItem = pMenu->addAction(tr("New Cash Receipt..."), this, SLOT(sNewCashrcpt()));
+    menuItem = pMenu->addAction(tr("New Cash Receipt"), this, SLOT(sNewCashrcpt()));
     menuItem->setEnabled(_privileges->check("MaintainCashReceipts"));
   }
 
@@ -322,7 +322,7 @@ void dspAROpenItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, int)
      ((XTreeWidgetItem *)pItem)->rawValue("open").toBool() )
   {
     pMenu->addSeparator();
-    menuItem = pMenu->addAction(tr("New Incident..."), this, SLOT(sIncident()));
+    menuItem = pMenu->addAction(tr("New Incident"), this, SLOT(sIncident()));
     if (!_privileges->check("MaintainAllIncidents"))
       menuItem->setEnabled(false);
   }

@@ -236,12 +236,12 @@ void openSalesOrders::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
 
-  menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
 
   pMenu->addSeparator();
@@ -254,7 +254,7 @@ void openSalesOrders::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
   menuItem = pMenu->addAction(tr("Print Packing List..."), this, SLOT(sPrintPackingList()));
   menuItem->setEnabled(_privileges->check("PrintPackingLists"));
 
-  menuItem = pMenu->addAction(tr("Add to Packing List Batch..."), this, SLOT(sAddToPackingListBatch()));
+  menuItem = pMenu->addAction(tr("Add to Packing List Batch"), this, SLOT(sAddToPackingListBatch()));
   menuItem->setEnabled(_privileges->check("MaintainPackingListBatch"));
 
   menuItem = pMenu->addAction(tr("Print Sales Order Form..."), this, SLOT(sPrintForms())); 
@@ -264,8 +264,8 @@ void openSalesOrders::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
   menuItem = pMenu->addAction(tr("Issue to Shipping..."), this, SLOT(sIssueToShipping()));
   menuItem->setEnabled(_privileges->check("IssueStockToShipping"));
 
-  pMenu->addAction(tr("Shipment Status..."), this, SLOT(sDspShipmentStatus()));
-  pMenu->addAction(tr("Shipments..."), this, SLOT(sShipment()));
+  pMenu->addAction(tr("Shipment Status"), this, SLOT(sDspShipmentStatus()));
+  pMenu->addAction(tr("Shipments"), this, SLOT(sShipment()));
 }
 
 void openSalesOrders::sPrintForms()

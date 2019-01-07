@@ -76,8 +76,8 @@ void dspBillingSelections::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *)
 {
   QAction *menuItem;
 
-  pMenu->addAction("Edit...", this, SLOT(sEdit()));
-  pMenu->addAction("Cancel...", this, SLOT(sCancel()));
+  pMenu->addAction("Edit", this, SLOT(sEdit()));
+  pMenu->addAction("Cancel", this, SLOT(sCancel()));
 
   menuItem = pMenu->addAction("Create Invoice", this, SLOT(sPost()));
   menuItem->setEnabled(_privileges->check("PostARDocuments"));

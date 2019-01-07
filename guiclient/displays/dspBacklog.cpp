@@ -194,11 +194,11 @@ void dspBacklog::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 
   if (selected.size() == 1)
   {
-    menuItem = pMenu->addAction(tr("Edit Order..."), this, SLOT(sEditOrder()));
+    menuItem = pMenu->addAction(tr("Edit Order"), this, SLOT(sEditOrder()));
     if (!_privileges->check("MaintainSalesOrders"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("View Order..."), this, SLOT(sViewOrder()));
+    menuItem = pMenu->addAction(tr("View Order"), this, SLOT(sViewOrder()));
     if ((!_privileges->check("MaintainSalesOrders")) && (!_privileges->check("ViewSalesOrders")))
       menuItem->setEnabled(false);
 
@@ -206,11 +206,11 @@ void dspBacklog::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
     {
       pMenu->addSeparator();
 
-      menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));
+      menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));
       if (!_privileges->check("MaintainSalesOrders") || list()->rawValue("coitem_firm").toBool())
         menuItem->setEnabled(false);
 
-      menuItem = pMenu->addAction(tr("View Item..."), this, SLOT(sViewItem()));
+      menuItem = pMenu->addAction(tr("View Item"), this, SLOT(sViewItem()));
       if ((!_privileges->check("MaintainSalesOrders")) && (!_privileges->check("ViewSalesOrders")))
         menuItem->setEnabled(false);
     }

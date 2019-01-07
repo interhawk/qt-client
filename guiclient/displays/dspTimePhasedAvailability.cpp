@@ -126,20 +126,20 @@ void dspTimePhasedAvailability::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSe
   _column = pColumn;
   if (_column > 2)
   {
-    (void)pMenu->addAction(tr("View Availability Detail..."), this, SLOT(sViewAvailability()));
-    (void)pMenu->addAction(tr("View Allocations..."), this, SLOT(sViewAllocations()));
-    (void)pMenu->addAction(tr("View Orders..."), this, SLOT(sViewOrders()));
+    (void)pMenu->addAction(tr("View Availability Detail"), this, SLOT(sViewAvailability()));
+    (void)pMenu->addAction(tr("View Allocations"), this, SLOT(sViewAllocations()));
+    (void)pMenu->addAction(tr("View Orders"), this, SLOT(sViewOrders()));
   
     if (((XTreeWidgetItem *)pSelected)->altId() == 1)
     {
       pMenu->addSeparator();
-      (void)pMenu->addAction(tr("Create W/O..."), this, SLOT(sCreateWO()));
+      (void)pMenu->addAction(tr("Create W/O"), this, SLOT(sCreateWO()));
     }
     else if (((XTreeWidgetItem *)pSelected)->altId() == 2)
     {
       pMenu->addSeparator();
-      (void)pMenu->addAction(tr("Create P/R..."), this, SLOT(sCreatePR()));
-      (void)pMenu->addAction(tr("Create P/O..."), this, SLOT(sCreatePO()));
+      (void)pMenu->addAction(tr("Create P/R"), this, SLOT(sCreatePR()));
+      (void)pMenu->addAction(tr("Create P/O"), this, SLOT(sCreatePO()));
     }
   }
 }

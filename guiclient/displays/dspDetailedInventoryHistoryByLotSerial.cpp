@@ -162,7 +162,7 @@ void dspDetailedInventoryHistoryByLotSerial::sPopulateMenu(QMenu *menuThis, QTre
        (transType == "EX") ||
        (transType == "RX") ||
        (transType == "CC") )
-    menuThis->addAction(tr("View Transaction Information..."), this, SLOT(sViewTransInfo()));
+    menuThis->addAction(tr("View Transaction Information"), this, SLOT(sViewTransInfo()));
 }
 
 void dspDetailedInventoryHistoryByLotSerial::sFillList()

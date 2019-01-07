@@ -141,23 +141,23 @@ void dspBookings::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, int pC
 {
   Q_UNUSED(pSelected);
   Q_UNUSED(pColumn);
-  QAction* viewSoAct = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sViewOrder()));
+  QAction* viewSoAct = pMenu->addAction(tr("View Sales Order"), this, SLOT(sViewOrder()));
   viewSoAct->setEnabled(_privileges->check("ViewSalesOrders") || _privileges->check("MaintainSalesOrders"));
 
   if (!(list()->rawValue("cohead_status") == "C"))
   {
-    QAction* editSoAct = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEditOrder()));
+    QAction* editSoAct = pMenu->addAction(tr("Edit Sales Order"), this, SLOT(sEditOrder()));
     editSoAct->setEnabled(_privileges->check("MaintainSalesOrders"));
   }
 
   pMenu->addSeparator();
 
-  QAction* viewItemAct = pMenu->addAction(tr("View Sales Order Item..."), this, SLOT(sViewItem()));
+  QAction* viewItemAct = pMenu->addAction(tr("View Sales Order Item"), this, SLOT(sViewItem()));
   viewItemAct->setEnabled(_privileges->check("ViewSalesOrders") || _privileges->check("MaintainSalesOrders"));
 
   if (!(list()->rawValue("cohead_status") == "C") && !(list()->rawValue("coitem_status") == "C"))
   {
-    QAction* editItemAct = pMenu->addAction(tr("Edit Sales Order Item..."), this, SLOT(sEditItem()));
+    QAction* editItemAct = pMenu->addAction(tr("Edit Sales Order Item"), this, SLOT(sEditItem()));
     editItemAct->setEnabled(_privileges->check("MaintainSalesOrders"));
   }
 }

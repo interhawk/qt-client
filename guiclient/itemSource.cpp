@@ -467,10 +467,10 @@ void itemSource::sPopulateMenu(QMenu *pMenu)
   {
     QAction *menuItem;
     
-    menuItem = pMenu->addAction("Edit Item Source Price...", this, SLOT(sEdit()));
+    menuItem = pMenu->addAction("Edit Item Source Price", this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainItemSources"));
     
-    menuItem = pMenu->addAction("Delete Item Source Price...", this, SLOT(sDelete()));
+    menuItem = pMenu->addAction("Delete Item Source Price", this, SLOT(sDelete()));
     menuItem->setEnabled(_privileges->check("MaintainItemSources"));
   }
 }

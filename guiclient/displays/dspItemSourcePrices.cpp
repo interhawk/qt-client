@@ -108,10 +108,10 @@ void dspItemSourcePrices::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
   QAction *menuItem;
 
-  menuItem = menuThis->addAction(tr("Edit Item Source..."), this, SLOT(sEdit()));
+  menuItem = menuThis->addAction(tr("Edit Item Source"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 
-  menuItem = menuThis->addAction(tr("View Item Source..."), this, SLOT(sView()));
+  menuItem = menuThis->addAction(tr("View Item Source"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources") || _privileges->check("ViewItemSource"));
 }
 

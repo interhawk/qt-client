@@ -77,8 +77,8 @@ void dspWoHistoryByClassCode::sEdit()
 
 void dspWoHistoryByClassCode::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
-  (void)pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
-  (void)pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  (void)pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
+  (void)pMenu->addAction(tr("View"), this, SLOT(sView()));
 }
 
 void dspWoHistoryByClassCode::sHandleCosts(bool pShowCosts)

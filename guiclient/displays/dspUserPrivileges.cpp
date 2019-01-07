@@ -98,11 +98,11 @@ void dspUserPrivileges::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int pColu
   Q_UNUSED(pColumn);
   QAction *menuItem;
 
-  menuItem = pMenu->addAction("Maintain User...", this, SLOT(sEditUser()));
+  menuItem = pMenu->addAction("Maintain User", this, SLOT(sEditUser()));
   if (!_privileges->check("MaintainUsers"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction("Maintain Role...", this, SLOT(sEditRole()));
+  menuItem = pMenu->addAction("Maintain Role", this, SLOT(sEditRole()));
   if (!_privileges->check("MaintainGroups") || list()->altId() == -1)
     menuItem->setEnabled(false);
 

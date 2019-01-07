@@ -185,20 +185,20 @@ void dspUsageStatistics::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int pCol
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction("View All Transactions...", this, SLOT(sViewAll()));
+  menuItem = pMenu->addAction("View All Transactions", this, SLOT(sViewAll()));
   if (!_privileges->check("ViewInventoryHistory"))
     menuItem->setEnabled(false);
 
   switch (pColumn)
   {
     case 3:
-      menuItem = pMenu->addAction("View Receipt Transactions...", this, SLOT(sViewReceipt()));
+      menuItem = pMenu->addAction("View Receipt Transactions", this, SLOT(sViewReceipt()));
       if (!_privileges->check("ViewInventoryHistory"))
         menuItem->setEnabled(false);
       break;
 
     case 4:
-      menuItem = pMenu->addAction("View Issue Transactions...", this, SLOT(sViewIssue()));
+      menuItem = pMenu->addAction("View Issue Transactions", this, SLOT(sViewIssue()));
       if (!_privileges->check("ViewInventoryHistory"))
         menuItem->setEnabled(false);
       break;
@@ -210,19 +210,19 @@ void dspUsageStatistics::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int pCol
       break;
 
     case 6:
-      menuItem = pMenu->addAction("View Scrap Transactions...", this, SLOT(sViewScrap()));
+      menuItem = pMenu->addAction("View Scrap Transactions", this, SLOT(sViewScrap()));
       if (!_privileges->check("ViewInventoryHistory"))
         menuItem->setEnabled(false);
       break;
 
     case 7:
-      menuItem = pMenu->addAction("View Adjustment Transactions...", this, SLOT(sViewAdjustment()));
+      menuItem = pMenu->addAction("View Adjustment Transactions", this, SLOT(sViewAdjustment()));
       if (!_privileges->check("ViewInventoryHistory"))
         menuItem->setEnabled(false);
       break;
 
     case 8:
-      menuItem = pMenu->addAction("View Transfer Transactions...", this, SLOT(sViewTransfer()));
+      menuItem = pMenu->addAction("View Transfer Transactions", this, SLOT(sViewTransfer()));
       if (!_privileges->check("ViewInventoryHistory"))
         menuItem->setEnabled(false);
       break;

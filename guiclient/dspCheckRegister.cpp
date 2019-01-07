@@ -205,7 +205,7 @@ void dspCheckRegister::sPopulateMenu( QMenu * pMenu )
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("View Payment..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View Payment"), this, SLOT(sView()));
   menuItem->setEnabled(true);
 
   if(_check->altId() == 1)

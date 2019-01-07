@@ -1865,17 +1865,17 @@ void returnAuthorization::sRefund()
 void returnAuthorization::sPopulateMenu( QMenu * pMenu,  QTreeWidgetItem *selected)
 {
   QAction *menuItem;
-  menuItem = pMenu->addAction(tr("Edit Line..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit Line"), this, SLOT(sEdit()));
   if (((XTreeWidgetItem *)selected)->rawValue("raitem_status").toString() == "O")
-    menuItem = pMenu->addAction(tr("Close Line..."), this, SLOT(sAction()));
+    menuItem = pMenu->addAction(tr("Close Line"), this, SLOT(sAction()));
   if (((XTreeWidgetItem *)selected)->rawValue("raitem_status").toString() == "C")
-    menuItem = pMenu->addAction(tr("Open Line..."), this, SLOT(sAction()));
-  menuItem = pMenu->addAction(tr("Delete Line..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Open Line"), this, SLOT(sAction()));
+  menuItem = pMenu->addAction(tr("Delete Line"), this, SLOT(sDelete()));
   pMenu->addSeparator();
 
   if (((XTreeWidgetItem *)selected)->id("oldcohead_number") > -1)
   {
-    pMenu->addAction(tr("View Original Order..."), this, SLOT(sViewOrigOrder()));
+    pMenu->addAction(tr("View Original Order"), this, SLOT(sViewOrigOrder()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
   }
 
@@ -1883,24 +1883,24 @@ void returnAuthorization::sPopulateMenu( QMenu * pMenu,  QTreeWidgetItem *select
 
   if (((XTreeWidgetItem *)selected)->id("newcohead_number") > -1)
   {
-    menuItem = pMenu->addAction(tr("Edit New Order..."), this, SLOT(sEditNewOrder()));
+    menuItem = pMenu->addAction(tr("Edit New Order"), this, SLOT(sEditNewOrder()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
 
-    pMenu->addAction(tr("View New Order..."), this, SLOT(sViewNewOrder()));
+    pMenu->addAction(tr("View New Order"), this, SLOT(sViewNewOrder()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
 
     pMenu->addSeparator();
 
-    menuItem = pMenu->addAction(tr("Edit New Order Line..."), this, SLOT(sEditNewOrderLine()));
+    menuItem = pMenu->addAction(tr("Edit New Order Line"), this, SLOT(sEditNewOrderLine()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
 
-    pMenu->addAction(tr("View New Order Line..."), this, SLOT(sViewNewOrderLine()));
+    pMenu->addAction(tr("View New Order Line"), this, SLOT(sViewNewOrderLine()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
 
     pMenu->addSeparator();
 
-    pMenu->addAction(tr("New Order Shipment Status..."), this, SLOT(sShipmentStatus()));
-    pMenu->addAction(tr("New Order Shipments..."), this, SLOT(sShipment()));
+    pMenu->addAction(tr("New Order Shipment Status"), this, SLOT(sShipmentStatus()));
+    pMenu->addAction(tr("New Order Shipments"), this, SLOT(sShipment()));
 
   }
 }

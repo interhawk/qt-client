@@ -79,37 +79,37 @@ void accountingPeriods::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
   QAction *menuItem;
   int altId = ((XTreeWidgetItem *)pSelected)->altId();
 
-  if (altId == 0)
+  //if (altId == 0)
   {
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainAccountingPeriods"));
   }
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
 
-  if (altId == 0)
+  //if (altId == 0)
   {
-    menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
     menuItem->setEnabled(_privileges->check("MaintainAccountingPeriods"));
   }
 
   pMenu->addSeparator();
 
-  if (altId == 0)
+  //if (altId == 0)
   {
-    menuItem = pMenu->addAction(tr("Freeze..."), this, SLOT(sFreezePeriod()));
+    menuItem = pMenu->addAction(tr("Freeze"), this, SLOT(sFreezePeriod()));
 
     menuItem = pMenu->addAction(tr("Close..."), this, SLOT(sClosePeriod()));
   }
-  else if (altId == 1)
+ // else if (altId == 1)
   {
     menuItem = pMenu->addAction(tr("Thaw..."), this, SLOT(sThawPeriod()));
 
     menuItem = pMenu->addAction(tr("Close..."), this, SLOT(sClosePeriod()));
   }
-  else if (altId == 2 || altId == 3)
+  //else if (altId == 2 || altId == 3)
   {
-    menuItem = pMenu->addAction(tr("Open..."), this, SLOT(sOpenPeriod()));
+    menuItem = pMenu->addAction(tr("Open"), this, SLOT(sOpenPeriod()));
   }
 }
 

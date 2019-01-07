@@ -44,7 +44,7 @@ void dspCapacityUOMsByParameter::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, 
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));;
+  menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));;
   if (!_privileges->check("MaintainItemMasters"))
     menuItem->setEnabled(false);
 }

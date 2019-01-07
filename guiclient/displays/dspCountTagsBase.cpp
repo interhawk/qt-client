@@ -86,7 +86,7 @@ bool dspCountTagsBase::setParams(ParameterList &params)
 
 void dspCountTagsBase::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 {
-  pMenu->addAction(tr("View Count Tag..."), this, SLOT(sView()));
+  pMenu->addAction(tr("View Count Tag"), this, SLOT(sView()));
 }
 
 void dspCountTagsBase::sView()

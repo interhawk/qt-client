@@ -149,7 +149,7 @@ void dspTimePhasedOpenAPItems::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem *,
   _column = pColumn;
 
   if ((_column > 1) && (list()->id() > 0))
-    menuThis->addAction(tr("View Open Items..."), this, SLOT(sViewOpenItems()));
+    menuThis->addAction(tr("View Open Items"), this, SLOT(sViewOpenItems()));
 }
 
 void dspTimePhasedOpenAPItems::sFillList()

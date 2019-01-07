@@ -106,7 +106,7 @@ void dspInvoiceRegister::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 
   if (list()->altId() == 1)
   {
-    menuItem = pMenu->addAction(tr("View Invoice..."), this, SLOT(sViewInvoice()));
+    menuItem = pMenu->addAction(tr("View Invoice"), this, SLOT(sViewInvoice()));
     if (! _privileges->check("MaintainMiscInvoices") &&
         ! _privileges->check("ViewMiscInvoices"))
       menuItem->setEnabled(false);
@@ -114,21 +114,21 @@ void dspInvoiceRegister::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 
   else if (list()->altId() == 2)
   {
-    menuItem = pMenu->addAction(tr("View Credit Memo..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Credit Memo"), this, SLOT(sViewCreditMemo()));
     if (! _privileges->check("MaintainARMemos") &&
         ! _privileges->check("ViewARMemos"))
       menuItem->setEnabled(false);
   }
   else if (list()->altId() == 3)
   {
-    menuItem = pMenu->addAction(tr("View Debit Memo..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Debit Memo"), this, SLOT(sViewCreditMemo()));
     if (! _privileges->check("MaintainARMemos") &&
         ! _privileges->check("ViewARMemos"))
       menuItem->setEnabled(false);
   }
   else if (list()->altId() == 4)
   {
-    menuItem = pMenu->addAction(tr("View Customer Deposit..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Customer Deposit"), this, SLOT(sViewCreditMemo()));
     if (! _privileges->check("MaintainARMemos") &&
         ! _privileges->check("ViewARMemos"))
       menuItem->setEnabled(false);

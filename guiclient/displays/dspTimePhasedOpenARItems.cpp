@@ -159,7 +159,7 @@ void dspTimePhasedOpenARItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, in
 
   if ((_column > 1) && (list()->id() > 0))
   {
-    (void)pMenu->addAction(tr("View Open Items..."), this, SLOT(sViewOpenItems()));
+    (void)pMenu->addAction(tr("View Open Items"), this, SLOT(sViewOpenItems()));
 
     pMenu->addSeparator();
 

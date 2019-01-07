@@ -101,12 +101,12 @@ void dspPurchaseReqsByPlannerCode::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem* 
 
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Running Availability..."), this, SLOT(sDspRunningAvailability()));
+  menuItem = pMenu->addAction(tr("Running Availability"), this, SLOT(sDspRunningAvailability()));
   menuItem->setEnabled(_privileges->check("ViewInventoryAvailability"));
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Edit P/R..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit P/R"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseRequests"));
 
   menuItem = pMenu->addAction(tr("Release P/R..."), this, SLOT(sRelease()));

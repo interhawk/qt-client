@@ -165,13 +165,13 @@ void todoListCalendar::sPopulateMenu(QMenu *pMenu)
         (omfgThis->username() == _list->currentItem()->rawValue("assigned") && _privileges->check("ViewPersonalToDoItems")) ||
         (_privileges->check("ViewAllToDoItems"));
 
-    menuItem = pMenu->addAction(tr("New..."), this, SLOT(sNew()));
+    menuItem = pMenu->addAction(tr("New"), this, SLOT(sNew()));
     menuItem->setEnabled(editPriv);
 
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(editPriv);
 
-   menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+   menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
     menuItem->setEnabled(viewPriv);
 
     menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));

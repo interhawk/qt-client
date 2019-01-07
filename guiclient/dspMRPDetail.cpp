@@ -118,14 +118,14 @@ void dspMRPDetail::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int pColumn)
 
   _column = pColumn;
 
-  menuItem = pMenu->addAction(tr("View Allocations..."), this, SLOT(sViewAllocations()));
+  menuItem = pMenu->addAction(tr("View Allocations"), this, SLOT(sViewAllocations()));
   while ((mrpIndex < _mrp->topLevelItemCount()) &&
 	 (_mrp->topLevelItem(mrpIndex)->text(0) != tr("Allocations")))
     mrpIndex++;
   if (_mrp->topLevelItem(mrpIndex)->text(pColumn).toDouble() == 0.0)
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("View Orders..."), this, SLOT(sViewOrders()));
+  menuItem = pMenu->addAction(tr("View Orders"), this, SLOT(sViewOrders()));
   while ((mrpIndex < _mrp->topLevelItemCount()) &&
 	 (_mrp->topLevelItem(mrpIndex)->text(0) != tr("Orders")))
     mrpIndex++;

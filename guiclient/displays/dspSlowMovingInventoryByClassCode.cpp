@@ -105,11 +105,11 @@ void dspSlowMovingInventoryByClassCode::sPopulateMenu(QMenu *pMenu, QTreeWidgetI
 
   if (((XTreeWidgetItem *)pSelected)->id() != -1)
   {
-    menuItem = pMenu->addAction(tr("Transfer to another Site..."), this, SLOT(sTransfer()));;
+    menuItem = pMenu->addAction(tr("Transfer to another Site"), this, SLOT(sTransfer()));;
     if (!_privileges->check("CreateInterWarehouseTrans"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Adjust this QOH..."), this, SLOT(sAdjust()));;
+    menuItem = pMenu->addAction(tr("Adjust this QOH"), this, SLOT(sAdjust()));;
     if (!_privileges->check("CreateAdjustmentTrans"))
       menuItem->setEnabled(false);
 
@@ -119,13 +119,13 @@ void dspSlowMovingInventoryByClassCode::sPopulateMenu(QMenu *pMenu, QTreeWidgetI
 
     pMenu->addSeparator();
 
-    menuItem = pMenu->addAction(tr("Enter Misc. Count..."), this, SLOT(sMiscCount()));;
+    menuItem = pMenu->addAction(tr("Enter Misc. Count"), this, SLOT(sMiscCount()));;
     if (!_privileges->check("EnterMiscCounts"))
       menuItem->setEnabled(false);
 
     pMenu->addSeparator();
 
-    menuItem = pMenu->addAction(tr("Issue Count Tag..."), this, SLOT(sIssueCountTag()));;
+    menuItem = pMenu->addAction(tr("Issue Count Tag"), this, SLOT(sIssueCountTag()));;
     if (!_privileges->check("IssueCountTags"))
       menuItem->setEnabled(false);
   } 

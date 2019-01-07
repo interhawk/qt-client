@@ -118,25 +118,25 @@ void dspUnbalancedQOHByClassCode::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, 
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Balance Item Site..."), this, SLOT(sBalance()));
+  menuItem = pMenu->addAction(tr("Balance Item Site"), this, SLOT(sBalance()));
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("View Item Site..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View Item Site"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainItemSites") ||
                        _privileges->check("ViewItemSites"));
 
-  menuItem = pMenu->addAction(tr("Edit Item Site..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit Item Site"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainItemSites"));
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("View Inventory Availability..."), this, SLOT(sInventoryAvailability()));
+  menuItem = pMenu->addAction(tr("View Inventory Availability"), this, SLOT(sInventoryAvailability()));
   menuItem->setEnabled(_privileges->check("ViewInventoryAvailability"));
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Issue Count Tag..."), this, SLOT(sIssueCountTag()));
+  menuItem = pMenu->addAction(tr("Issue Count Tag"), this, SLOT(sIssueCountTag()));
   menuItem->setEnabled(_privileges->check("IssueCountTags"));
 }
 

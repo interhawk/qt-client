@@ -1751,19 +1751,19 @@ void purchaseOrder::sPopulateMenu( QMenu * pMenu, QTreeWidgetItem * pSelected )
 
   if (pSelected->text(_poitem->column("demand_type")) == tr("SO"))
   {
-    menuItem = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sViewSo()));
+    menuItem = pMenu->addAction(tr("View Sales Order"), this, SLOT(sViewSo()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
 
-    menuItem = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEditSo()));
+    menuItem = pMenu->addAction(tr("Edit Sales Order"), this, SLOT(sEditSo()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
   }
 
   else if (pSelected->text(_poitem->column("demand_type")) == "WO")
   {
-    menuItem = pMenu->addAction(tr("View Work Order..."), this, SLOT(sViewWo()));
+    menuItem = pMenu->addAction(tr("View Work Order"), this, SLOT(sViewWo()));
     menuItem->setEnabled(_privileges->check("ViewWorkOrders")); 
 
-    menuItem = pMenu->addAction(tr("Edit Work Order..."), this, SLOT(sEditWo()));
+    menuItem = pMenu->addAction(tr("Edit Work Order"), this, SLOT(sEditWo()));
     menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
   }
 }

@@ -170,28 +170,28 @@ void dspJournals::sPopulateMenu(QMenu * menuThis, QTreeWidgetItem* pItem, int)
   if(0 == item)
     return;
 
-  menuThis->addAction(tr("View..."), this, SLOT(sViewTrans()));
-  QAction* viewSeriesAct = menuThis->addAction(tr("View Journal Series..."), this, SLOT(sViewSeries()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewTrans()));
+  QAction* viewSeriesAct = menuThis->addAction(tr("View Journal Series"), this, SLOT(sViewSeries()));
   viewSeriesAct->setDisabled(item->data(0, Xt::DeletedRole).toBool());
 
   if(item->rawValue("sltrans_doctype").toString() == "VO")
-    menuThis->addAction(tr("View Voucher..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Voucher"), this, SLOT(sViewDocument()));
   else if(item->rawValue("sltrans_doctype").toString() == "IN")
-    menuThis->addAction(tr("View Invoice..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Invoice"), this, SLOT(sViewDocument()));
   else if(item->rawValue("sltrans_doctype").toString() == "PO")
-    menuThis->addAction(tr("View Purchase Order..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Purchase Order"), this, SLOT(sViewDocument()));
   else if(item->rawValue("sltrans_doctype").toString() == "SH")
-    menuThis->addAction(tr("View Shipment..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Shipment"), this, SLOT(sViewDocument()));
   else if(item->rawValue("sltrans_doctype").toString() == "CM")
-    menuThis->addAction(tr("View Credit Memo..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Credit Memo"), this, SLOT(sViewDocument()));
   else if(item->rawValue("sltrans_doctype").toString() == "DM")
-    menuThis->addAction(tr("View Debit Memo..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Debit Memo"), this, SLOT(sViewDocument()));
   else if(item->rawValue("sltrans_doctype").toString() == "SO")
-    menuThis->addAction(tr("View Sales Order..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Sales Order"), this, SLOT(sViewDocument()));
   else if(item->rawValue("sltrans_doctype").toString() == "WO")
-    menuThis->addAction(tr("View WO History..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View WO History"), this, SLOT(sViewDocument()));
   else if(item->rawValue("sltrans_source").toString() == "I/M")
-    menuThis->addAction(tr("View Inventory History..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Inventory History"), this, SLOT(sViewDocument()));
 }
 
 bool dspJournals::setParams(ParameterList &params)

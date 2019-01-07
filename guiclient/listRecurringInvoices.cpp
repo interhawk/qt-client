@@ -113,11 +113,11 @@ void listRecurringInvoices::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem* pItem, 
 
   if(!item->rawValue("invchead_posted").toBool())
   {
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
   }
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainMiscInvoices") ||
                        _privileges->check("ViewMiscInvoices"));
 }

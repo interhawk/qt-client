@@ -162,7 +162,7 @@ void metasqls::sPopulateMenu(QMenu *pMenu)
   QAction *menuAction;
 
   menuAction = pMenu->addAction(_privileges->check("MaintainMetaSQL") ?
-                                            tr("Edit...") : tr("View..."),
+                                            tr("Edit") : tr("View"),
                                 this, SLOT(sEdit()));
   menuAction->setEnabled(_privileges->check("MaintainMetaSQL") ||
                          _privileges->check("ViewMetaSQL"));

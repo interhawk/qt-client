@@ -339,12 +339,12 @@ void openVouchers::sPopulateMenu(QMenu *pMenu)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Voucher..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit Voucher"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainVouchers"));
 
-  menuItem = pMenu->addAction(tr("View Voucher..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View Voucher"), this, SLOT(sView()));
 
-  menuItem = pMenu->addAction(tr("Delete Voucher..."), this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Delete Voucher"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainVouchers"));
 
   pMenu->addSeparator();

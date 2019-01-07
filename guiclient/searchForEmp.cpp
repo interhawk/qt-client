@@ -133,15 +133,15 @@ void searchForEmp::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainEmployees"));
 
   if (((XTreeWidgetItem *)pSelected)->altId() > 0)
   {
     pMenu->addSeparator();
-    menuItem = pMenu->addAction(tr("View Manager..."), this, SLOT(sViewMgr()));
-    menuItem = pMenu->addAction(tr("Edit Manager..."), this, SLOT(sEditMgr()));
+    menuItem = pMenu->addAction(tr("View Manager"), this, SLOT(sViewMgr()));
+    menuItem = pMenu->addAction(tr("Edit Manager"), this, SLOT(sEditMgr()));
     menuItem->setEnabled(_privileges->check("MaintainEmployees"));
   }
 }

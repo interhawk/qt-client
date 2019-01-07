@@ -355,20 +355,20 @@ void transferOrders::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
   QAction *menuItem;
   XTreeWidgetItem * item = (XTreeWidgetItem*)pSelected;
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
 
   if (item->altId() == 1 || item->altId() == 2)
   {
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainTransferOrders"));
 
-    menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
     menuItem->setEnabled(_privileges->check("MaintainTransferOrders"));
   }
 
   if (item->altId() == 1)
   {  
-    menuItem = pMenu->addAction(tr("Release..."), this, SLOT(sRelease()));
+    menuItem = pMenu->addAction(tr("Release"), this, SLOT(sRelease()));
     menuItem->setEnabled(_privileges->check("ReleaseTransferOrders"));
   }
 
@@ -388,7 +388,7 @@ void transferOrders::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
     menuItem = pMenu->addAction(tr("Print Packing List..."), this, SLOT(sPrintPackingList()));
     menuItem->setEnabled(_privileges->check("PrintPackingLists"));
 
-    menuItem = pMenu->addAction(tr("Add to Packing List Batch..."), this, SLOT(sAddToPackingListBatch()));
+    menuItem = pMenu->addAction(tr("Add to Packing List Batch"), this, SLOT(sAddToPackingListBatch()));
     menuItem->setEnabled(_privileges->check("MaintainPackingListBatch"));
   }
 }

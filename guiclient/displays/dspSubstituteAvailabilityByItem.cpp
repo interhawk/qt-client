@@ -143,8 +143,8 @@ void dspSubstituteAvailabilityByItem::sViewOrders()
 
 void dspSubstituteAvailabilityByItem::sPopulateMenu(QMenu *menu, QTreeWidgetItem*, int)
 {
-  menu->addAction(tr("View Allocations..."), this, SLOT(sViewAllocations()));
-  menu->addAction(tr("View Orders..."), this, SLOT(sViewOrders()));
+  menu->addAction(tr("View Allocations"), this, SLOT(sViewAllocations()));
+  menu->addAction(tr("View Orders"), this, SLOT(sViewOrders()));
 }
 
 bool dspSubstituteAvailabilityByItem::setParams(ParameterList &params)

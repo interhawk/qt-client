@@ -122,14 +122,14 @@ void dspItemCostsByClassCode::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int
 {
   QAction *menuItem;
 
-  pMenu->addAction(tr("Maintain Item Costs..."), this, SLOT(sMaintainItemCosts()));
-  pMenu->addAction(tr("View Item Costing Summary..."), this, SLOT(sViewItemCostingSummary()));
+  pMenu->addAction(tr("Maintain Item Costs"), this, SLOT(sMaintainItemCosts()));
+  pMenu->addAction(tr("View Item Costing Summary"), this, SLOT(sViewItemCostingSummary()));
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Update Actual Costs..."), this, SLOT(sUpdateCosts()));;
+  menuItem = pMenu->addAction(tr("Update Actual Costs"), this, SLOT(sUpdateCosts()));;
   menuItem->setEnabled(_privileges->check("UpdateActualCosts"));
 
-  menuItem = pMenu->addAction(tr("Post Actual Costs..."), this, SLOT(sPostCosts()));;
+  menuItem = pMenu->addAction(tr("Post Actual Costs"), this, SLOT(sPostCosts()));;
   menuItem->setEnabled(_privileges->check("PostActualCosts"));
 }
 

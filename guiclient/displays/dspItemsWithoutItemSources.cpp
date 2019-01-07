@@ -38,11 +38,11 @@ void dspItemsWithoutItemSources::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, 
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Create Item Source..."), this, SLOT(sCreateItemSource()));;
+  menuItem = pMenu->addAction(tr("Create Item Source"), this, SLOT(sCreateItemSource()));;
   if (!_privileges->check("MaintainItemSources"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));;
+  menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));;
   if (!_privileges->check("MaintainItemMasters"))
     menuItem->setEnabled(false);
 }

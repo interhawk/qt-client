@@ -724,22 +724,22 @@ void transferOrder::sPopulateMenu(QMenu *pMenu)
     if(_numSelected == 1)
     {
       if (_lineMode == cClosed)
-        pMenu->addAction(tr("Open Line..."), this, SLOT(sAction()));
+        pMenu->addAction(tr("Open Line"), this, SLOT(sAction()));
       else if (_lineMode == cActiveOpen)
       {
-        pMenu->addAction(tr("Edit Line..."), this, SLOT(sEdit()));
-        pMenu->addAction(tr("Close Line..."), this, SLOT(sAction()));
+        pMenu->addAction(tr("Edit Line"), this, SLOT(sEdit()));
+        pMenu->addAction(tr("Close Line"), this, SLOT(sAction()));
       }
       else if (_lineMode == cInactiveOpen)
       {
-        pMenu->addAction(tr("Edit Line..."), this, SLOT(sEdit()));
-        pMenu->addAction(tr("Close Line..."), this, SLOT(sAction()));
-        pMenu->addAction(tr("Delete Line..."), this, SLOT(sDelete()));
+        pMenu->addAction(tr("Edit Line"), this, SLOT(sEdit()));
+        pMenu->addAction(tr("Close Line"), this, SLOT(sAction()));
+        pMenu->addAction(tr("Delete Line"), this, SLOT(sDelete()));
       }
       else if (_lineMode == cUnreleased)
       {
-        pMenu->addAction(tr("Edit Line..."), this, SLOT(sEdit()));
-        pMenu->addAction(tr("Delete Line..."), this, SLOT(sDelete()));
+        pMenu->addAction(tr("Edit Line"), this, SLOT(sEdit()));
+        pMenu->addAction(tr("Delete Line"), this, SLOT(sDelete()));
       }
     }
 
@@ -750,7 +750,7 @@ void transferOrder::sPopulateMenu(QMenu *pMenu)
         pMenu->addSeparator();
 
       pMenu->addAction(tr("Return Stock"), this, SLOT(sReturnStock()));
-      pMenu->addAction(tr("Issue Stock..."), this, SLOT(sIssueStock()));
+      pMenu->addAction(tr("Issue Stock"), this, SLOT(sIssueStock()));
       pMenu->addAction(tr("Issue Line Balance"), this, SLOT(sIssueLineBalance()));
     }
   }

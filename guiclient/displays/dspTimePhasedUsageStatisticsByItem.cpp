@@ -73,7 +73,7 @@ void dspTimePhasedUsageStatisticsByItem::sPopulateMenu(QMenu *menu, QTreeWidgetI
 
   _column = pColumn;
 
-  menuItem = menu->addAction(tr("View Transactions..."), this, SLOT(sViewTransactions()));
+  menuItem = menu->addAction(tr("View Transactions"), this, SLOT(sViewTransactions()));
   menuItem->setEnabled(_privileges->check("ViewInventoryHistory"));
 }
 

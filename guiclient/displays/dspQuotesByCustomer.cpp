@@ -69,13 +69,13 @@ void dspQuotesByCustomer::sPopulatePo()
 
 void dspQuotesByCustomer::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
-  menuThis->addAction(tr("Edit..."), this, SLOT(sEditOrder()));
-  menuThis->addAction(tr("View..."), this, SLOT(sViewOrder()));
+  menuThis->addAction(tr("Edit"), this, SLOT(sEditOrder()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewOrder()));
 
   if (_privileges->check("ConvertQuotes"))
   {
     menuThis->addSeparator();
-    menuThis->addAction(tr("Convert..."), this, SLOT(sConvert()));
+    menuThis->addAction(tr("Convert"), this, SLOT(sConvert()));
   }
 }
 

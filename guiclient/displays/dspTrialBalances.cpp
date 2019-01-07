@@ -76,7 +76,7 @@ void dspTrialBalances::languageChange()
 
 void dspTrialBalances::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
-  (void)pMenu->addAction(tr("View Transactions..."), this, SLOT(sViewTransactions()));
+  (void)pMenu->addAction(tr("View Transactions"), this, SLOT(sViewTransactions()));
 
   if (_metrics->boolean("ManualForwardUpdate"))
   {

@@ -119,10 +119,10 @@ void employees::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
   bool viewPriv =
       (_privileges->check("ViewEmployees"));
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(editPriv);
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(viewPriv);
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));

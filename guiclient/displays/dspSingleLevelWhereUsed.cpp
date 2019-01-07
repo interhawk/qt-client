@@ -85,15 +85,15 @@ void dspSingleLevelWhereUsed::sPopulateMenu(QMenu *menu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = menu->addAction(tr("Edit Bill of Materials..."), this, SLOT(sEditBOM()));
+  menuItem = menu->addAction(tr("Edit Bill of Materials"), this, SLOT(sEditBOM()));
   if (!_privileges->check("MaintainBOMs"))
     menuItem->setEnabled(false);
 
-  menuItem = menu->addAction(tr("Edit Item Master..."), this, SLOT(sEditItem()));
+  menuItem = menu->addAction(tr("Edit Item Master"), this, SLOT(sEditItem()));
   if (!_privileges->check("MaintainItemMasters"))
     menuItem->setEnabled(false);
 
-  menuItem = menu->addAction(tr("View Item Inventory History..."), this, SLOT(sViewInventoryHistory()));
+  menuItem = menu->addAction(tr("View Item Inventory History"), this, SLOT(sViewInventoryHistory()));
   if (!_privileges->check("ViewInventoryHistory"))
     menuItem->setEnabled(false);
 }

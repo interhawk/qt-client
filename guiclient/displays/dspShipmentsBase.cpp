@@ -93,7 +93,7 @@ void dspShipmentsBase::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
   menuItem = pMenu->addAction(tr("Print Shipping Form..."), this, SLOT(sPrintShippingForm()));
   menuItem->setEnabled(_privileges->check("PrintBillsOfLading"));
 
-  menuItem = pMenu->addAction(tr("Query Shipment Status..."), this, SLOT(sFillURL()));
+  menuItem = pMenu->addAction(tr("Query Shipment Status"), this, SLOT(sFillURL()));
 }
 
 bool dspShipmentsBase::setParams(ParameterList& params)
