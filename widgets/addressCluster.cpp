@@ -479,6 +479,8 @@ void AddressCluster::clear()
   _id = -1;
   _valid = false;
 
+  setCountry(_x_metrics->value("DefaultAddressCountry"));
+
   // reset cache
   c_active     = true;
   c_addr1      = "";
@@ -496,7 +498,6 @@ void AddressCluster::clear()
   _addr3->clear();
   _city->clear();
   _state->setText(QString());
-  _country->setId(-1);
   _postalcode->clear();
   _active->setChecked(c_active);
   _selected = false;
