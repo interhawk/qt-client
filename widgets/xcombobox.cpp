@@ -142,7 +142,7 @@ static QString cmnttypeMQL("SELECT cmnttype_id, cmnttype_name, cmnttype_name"
                            " WHERE source_name = <? value('source_name') ?>"
                            "<? endif ?>"
                            " ORDER BY cmnttype_order, cmnttype_name;");
-static QString countryMQL("SELECT country_id, country_name, country_name"
+static QString countryMQL("SELECT country_id, country_name, country_abbr"
                           "  FROM country"
                           " <? if exists('Qt') ?>WHERE country_qt_number IS NOT NULL<? endif ?>"
                           " ORDER BY country_name;");
