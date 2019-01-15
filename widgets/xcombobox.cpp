@@ -1443,9 +1443,7 @@ int XComboBox::id(int pIndex) const
 {
   if ((pIndex >= 0) && (pIndex < count()))
   {
-    if ( (allowNull()) && (currentIndex() <= 0) )
-      return -1;
-    else if(pIndex < _data->_ids.count())
+    if(pIndex < _data->_ids.count())
       return _data->_ids.at(pIndex);
   }
   return -1;
