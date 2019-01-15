@@ -91,7 +91,7 @@ bool TaxIntegration::commit(QString orderType, int orderId)
   qry.exec();
   if (qry.first() && !qry.value("request").isNull())
     sendRequest("committransaction", orderType, orderId, qry.value("request").toString());
-  else
+  else if (qry.lastError().type() != QSqlError::NoError)
   {
     _error =  qry.lastError().text();
     return false;
@@ -111,7 +111,7 @@ bool TaxIntegration::cancel(QString orderType, int orderId, QString orderNumber)
   if (qry.first() && !qry.value("request").isNull())
     sendRequest("voidtransaction", orderType, orderId, qry.value("request").toString(),
                 QStringList(), orderNumber);
-  else
+  else if (qry.lastError().type() != QSqlError::NoError)
   {
     _error = qry.lastError().text();
     return false;
