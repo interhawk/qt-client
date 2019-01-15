@@ -2189,7 +2189,7 @@ void workOrder::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
       }
       if (status == "I")
       {
-          menuItem = pMenu->addAction(tr("Return"), this, SLOT(sReturnMatl()));
+          menuItem = pMenu->addAction(tr("Return..."), this, SLOT(sReturnMatl()));
           if (!_privileges->check("ReturnWoMaterials"))
             menuItem->setEnabled(false);
 

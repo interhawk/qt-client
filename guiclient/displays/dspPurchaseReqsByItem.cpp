@@ -100,7 +100,7 @@ void dspPurchaseReqsByItem::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem* pItem, 
   menuItem = pMenu->addAction(tr("Edit P/R"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseRequests"));
 
-  menuItem = pMenu->addAction(tr("Release P/R"), this, SLOT(sRelease()));
+  menuItem = pMenu->addAction(tr("Release P/R..."), this, SLOT(sRelease()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
 
   menuItem = pMenu->addAction(tr("Delete P/R"), this, SLOT(sDelete()));

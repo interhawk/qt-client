@@ -159,7 +159,7 @@ void dspRunningAvailability::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelec
     if (ordertype == tr("Planned W/O (firmed)") || ordertype == tr("Planned P/O (firmed)") )
       pMenu->addAction(tr("Soften Order"), this, SLOT(sSoftenOrder()));
     else
-      pMenu->addAction(tr("Firm Order"), this, SLOT(sFirmOrder()));
+      pMenu->addAction(tr("Firm Order..."), this, SLOT(sFirmOrder()));
  
     pMenu->addAction(tr("Release Order..."), this, SLOT(sReleaseOrder()));
     pMenu->addAction(tr("Delete Order..."), this, SLOT(sDeleteOrder()));

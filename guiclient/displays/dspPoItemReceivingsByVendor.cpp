@@ -115,8 +115,8 @@ void dspPoItemReceivingsByVendor::sPopulateMenu(QMenu *menu, QTreeWidgetItem *, 
   switch (list()->altId())
   {
     case 1:     // id = recv_id
-      markInvoiced   = new QAction(tr("Mark As Invoiced"),  this);
-      correctReceipt = new QAction(tr("Correct Receiving"), this);
+      markInvoiced   = new QAction(tr("Mark As Invoiced..."),  this);
+      correctReceipt = new QAction(tr("Correct Receiving..."), this);
 
       markInvoiced->setEnabled(_privileges->check("MaintainUninvoicedReceipts")
                                && ! list()->currentItem()->rawValue("invoiced").isNull()

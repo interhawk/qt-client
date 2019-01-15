@@ -96,7 +96,7 @@ void unpostedCreditMemos::sPopulateMenu(QMenu *pMenu)
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Post"), this, SLOT(sPost()));
+  menuItem = pMenu->addAction(tr("Post..."), this, SLOT(sPost()));
   menuItem->setEnabled(_privileges->check("PostARDocuments"));
 }
 
