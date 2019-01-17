@@ -116,10 +116,6 @@ Address:</source>
         <translation type="unfinished">供应商</translation>
     </message>
     <message>
-        <source>Vendor addresss</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation type="unfinished"></translation>
     </message>
@@ -130,6 +126,14 @@ Address:</source>
     <message>
         <source>Saving Shared Address</source>
         <translation type="unfinished">正在存储共享地址</translation>
+    </message>
+    <message>
+        <source>Vendor address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;This address is shared by a Vendor Address and you do not have privileges to edit Vendor Addresses.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5634,10 +5638,6 @@ returned %2
         <translation>物体</translation>
     </message>
     <message>
-        <source>Open...</source>
-        <translation>打开...</translation>
-    </message>
-    <message>
         <source>View record information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5662,10 +5662,6 @@ returned %2
         <translation>在 %1::%2.发生一个系统错误.</translation>
     </message>
     <message>
-        <source>Info...</source>
-        <translation>信息...</translation>
-    </message>
-    <message>
         <source>Ctrl+Shift+O</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5674,20 +5670,12 @@ returned %2
         <translation>%1::sList()还没有被定义</translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>新建...</translation>
-    </message>
-    <message>
         <source>%1::sSearch() not yet defined</source>
         <translation>%1::sSearch()还没有被定义</translation>
     </message>
     <message>
         <source>%1::sInfo() not yet defined</source>
         <translation>%1::sInfo()还没有被定义</translation>
-    </message>
-    <message>
-        <source>Copy...</source>
-        <translation type="unfinished">复制...</translation>
     </message>
     <message>
         <source>Ctrl+Shift+C</source>
@@ -5712,6 +5700,22 @@ returned %2
     <message>
         <source>Error Finding Matching Record</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">打开</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">复制</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">新建</translation>
     </message>
 </context>
 <context>
@@ -6079,10 +6083,6 @@ returned %2
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>List...</source>
-        <translation>列表...</translation>
-    </message>
-    <message>
         <source>Ctrl+Shift+A</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6099,8 +6099,12 @@ returned %2
         <translation>按特定要求搜索</translation>
     </message>
     <message>
-        <source>Search...</source>
-        <translation>搜索...</translation>
+        <source>List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">搜索</translation>
     </message>
 </context>
 <context>
@@ -6836,34 +6840,6 @@ returned %2
         <translation>冻结</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
-        <source>Close...</source>
-        <translation>关闭...</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>打开...</translation>
-    </message>
-    <message>
-        <source>Freeze...</source>
-        <translation>冻结...</translation>
-    </message>
-    <message>
-        <source>Thaw...</source>
-        <translation>解冻...</translation>
-    </message>
-    <message>
         <source>Accounting Periods:</source>
         <translation>会计期间:</translation>
     </message>
@@ -6943,6 +6919,34 @@ returned %2
         <source>Error Getting Periods</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <source>Freeze</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">关闭</translation>
+    </message>
+    <message>
+        <source>Thaw</source>
+        <translation type="unfinished">解冻</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">打开</translation>
+    </message>
 </context>
 <context>
     <name>accountingYearPeriod</name>
@@ -6998,24 +7002,8 @@ returned %2
         <translation>关闭了的</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
         <source>Close...</source>
         <translation>关闭...</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>打开...</translation>
     </message>
     <message>
         <source>Fiscal Years:</source>
@@ -7072,6 +7060,22 @@ returned %2
     <message>
         <source>Error Opening Requested Period</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">打开</translation>
     </message>
 </context>
 <context>
@@ -7167,14 +7171,6 @@ Check the database server log for errors.</source>
         <translation>供应商地址</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>仓库</translation>
     </message>
@@ -7263,14 +7259,6 @@ Check the database server log for errors.</source>
         <translation>邮政编码</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
@@ -7288,10 +7276,6 @@ Check the database server log for errors.</source>
     </message>
     <message>
         <source>View Prospect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Prospect...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7333,6 +7317,18 @@ as an Address. Please select a Prospect to edit:</source>
     <message>
         <source>Address</source>
         <translation type="unfinished">地址</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Create Prospect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10036,18 +10032,6 @@ Are you sure that you want to save this change?</source>
         <translation>货币</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
         <source>Post...</source>
         <translation>过帐...</translation>
     </message>
@@ -10094,6 +10078,18 @@ Are you sure that you want to save this change?</source>
     <message>
         <source>Error Posting Bank Adjustment</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -11445,10 +11441,6 @@ Are you sure that you want to save this change?</source>
 <context>
     <name>cashReceiptsEditList</name>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
         <source>Other</source>
         <translation>其它</translation>
     </message>
@@ -11493,16 +11485,8 @@ Are you sure that you want to save this change?</source>
         <translation>现金收据</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
         <source>Cust. #</source>
         <translation>客户编号</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>Wire Transfer</source>
@@ -11591,6 +11575,18 @@ Are you sure that you want to save this change?</source>
     <message>
         <source>Deposit Date</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -12848,24 +12844,12 @@ You may not create duplicate Forms.</source>
 <context>
     <name>companies</name>
     <message>
-        <source>Delete...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&amp;Close</source>
         <translation>关闭</translation>
     </message>
     <message>
         <source>Companies:</source>
         <translation>公司:</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
     </message>
     <message>
         <source>Number</source>
@@ -12902,6 +12886,18 @@ You may not create duplicate Forms.</source>
     <message>
         <source>Error Retrieving Company Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -14207,14 +14203,6 @@ You may not create duplicate Forms.</source>
     <message>
         <source>&lt;p&gt;XSLT is not configured. Some XML imports may fail. Would you like to fix this now?&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation>新建...</translation>
     </message>
     <message>
         <source>Windows</source>
@@ -16317,16 +16305,8 @@ You may not create duplicate Forms.</source>
         <translation>传真</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Web Address</source>
         <translation>网址</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -16487,6 +16467,14 @@ You may not create duplicate Forms.</source>
     <message>
         <source>Unmarking failed</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -16657,27 +16645,11 @@ Contract Number you have specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished">编辑采购订单</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete Purchase Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Release Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Receipt...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Return...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16728,17 +16700,17 @@ Contract Number you have specified.</source>
         <source>Error Rejecting Contract Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>contracts</name>
-    <message>
-        <source>View...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="unfinished">删除...</translation>
-    </message>
     <message>
         <source>Expires</source>
         <translation type="unfinished">过期</translation>
@@ -16804,14 +16776,6 @@ Contract Number you have specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
-        <source>Copy...</source>
-        <translation type="unfinished">复制...</translation>
-    </message>
-    <message>
         <source>Are you sure that you want to delete the selected Contract?</source>
         <translation>你确定要删除你所选的合同吗?</translation>
     </message>
@@ -16822,6 +16786,22 @@ Contract Number you have specified.</source>
     <message>
         <source>Error Deleting Contract</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">复制</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -17539,22 +17519,6 @@ Please check the values of these dates.</source>
         <translation>删除</translation>
     </message>
     <message>
-        <source>Delete Inventory Cost Category...</source>
-        <translation>删除库存成本类别...</translation>
-    </message>
-    <message>
-        <source>View Inventory Cost Category...</source>
-        <translation>查看库存成本类别...</translation>
-    </message>
-    <message>
-        <source>Edit Inventory Cost Cateogry...</source>
-        <translation>编辑库存成本类别...</translation>
-    </message>
-    <message>
-        <source>List Items in this Inventory Cost Category...</source>
-        <translation>列出存货清单中成本类别物料</translation>
-    </message>
-    <message>
         <source>&amp;Close</source>
         <translation>关闭</translation>
     </message>
@@ -17576,6 +17540,22 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Error Deleting Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Inventory Cost Cateogry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Inventory Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List Items in this Inventory Cost Category</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19510,15 +19490,15 @@ creating Planned Orders.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Sales Credit Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You may not view or edit this Sales Credit as it references a Site for which you have not been granted privileges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -20385,14 +20365,6 @@ creating Planned Orders.</source>
         <translation type="unfinished">国家</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Postal Code</source>
         <translation>邮政编码</translation>
     </message>
@@ -20428,13 +20400,17 @@ creating Planned Orders.</source>
         <source>Are you sure you want to delete these Account(s)?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>currencies</name>
-    <message>
-        <source>Delete...</source>
-        <translation type="unfinished">删除...</translation>
-    </message>
     <message>
         <source>&amp;Delete</source>
         <translation>删除</translation>
@@ -20444,16 +20420,8 @@ creating Planned Orders.</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>&amp;View</source>
         <translation>查看</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>&lt;p&gt;Your system is configured to use multiple Currencies, but the Currency Gain/Loss Account and/or the G/L Series Discrepancy Account does not appear to be configured correctly. You should define these Accounts in &apos;System | Configure Modules | Configure G/L...&apos; before posting any transactions in the system.</source>
@@ -20518,6 +20486,18 @@ creating Planned Orders.</source>
     <message>
         <source>Exchange Rate Comments:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -20692,10 +20672,6 @@ Please check the values of these dates.</source>
         <translation>无外币定义</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>No Exchange Rate Direction Defined</source>
         <translation>无汇率方向定义</translation>
     </message>
@@ -20708,16 +20684,8 @@ Please check the values of these dates.</source>
         <translation>查询(Q)</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
         <source>Base Currency:</source>
         <translation>基础货币：</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -20762,6 +20730,18 @@ Please check the values of these dates.</source>
     <message>
         <source>Error Retrieving Currency Exchange Rates</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -23267,22 +23247,6 @@ to be deleted.</source>
         <translation>必须选择你想查看的应收账款套用的厂商</translation>
     </message>
     <message>
-        <source>View Apply-To Debit Memo...</source>
-        <translation>查看应用到借款事项...</translation>
-    </message>
-    <message>
-        <source>View Source Check...</source>
-        <translation>查看源支票...</translation>
-    </message>
-    <message>
-        <source>View Source Credit Memo...</source>
-        <translation>查看原始贷项通知单...</translation>
-    </message>
-    <message>
-        <source>View Apply-To Voucher...</source>
-        <translation>查看应用到凭证...</translation>
-    </message>
-    <message>
         <source>You must enter a valid Start Date.</source>
         <translation>你必须输入一个有效的开始日期</translation>
     </message>
@@ -23344,6 +23308,22 @@ to be deleted.</source>
     </message>
     <message>
         <source>Cannot set Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Source Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Source Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Voucher</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -23459,10 +23439,6 @@ This Item is already selected for payment.</source>
         <translation type="unfinished">记账日期</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>?????</source>
         <translation>????</translation>
     </message>
@@ -23471,17 +23447,9 @@ This Item is already selected for payment.</source>
         <translation>货币</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Balance
 (in %1)</source>
         <translation>余额（在%1）</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation type="unfinished">查看凭单...</translation>
     </message>
     <message>
         <source>Access Denied</source>
@@ -23510,6 +23478,18 @@ This Item is already selected for payment.</source>
     <message>
         <source>Apply Credit Memo...</source>
         <translation type="unfinished">应用信用备忘...</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -23655,10 +23635,6 @@ This Item is already selected for payment.</source>
         <translation>所有客户</translation>
     </message>
     <message>
-        <source>View Source Credit Memo...</source>
-        <translation>查看源贷项备忘...</translation>
-    </message>
-    <message>
         <source>A/R Applications</source>
         <translation>应收账款套用</translation>
     </message>
@@ -23677,14 +23653,6 @@ This Item is already selected for payment.</source>
     <message>
         <source>Cash Deposit</source>
         <translation>现金存款</translation>
-    </message>
-    <message>
-        <source>View Apply-To Debit Memo...</source>
-        <translation>查看应用到借项备忘...</translation>
-    </message>
-    <message>
-        <source>View Apply-To Invoice...</source>
-        <translation>查看应用到发票...</translation>
     </message>
     <message>
         <source>Dist. Date</source>
@@ -23724,6 +23692,18 @@ This Item is already selected for payment.</source>
     </message>
     <message>
         <source>Cannot Set Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Source Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Invoice</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -23776,10 +23756,6 @@ This Item is already selected for payment.</source>
     <message>
         <source>Deposit</source>
         <translation type="unfinished">现金存款</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>查看发票...</translation>
     </message>
     <message>
         <source>Name/Desc.</source>
@@ -23939,28 +23915,8 @@ Would you like to post it anyway?</source>
         <translation>杂项借项通知单</translation>
     </message>
     <message>
-        <source>Edit Invoice...</source>
-        <translation>编辑发票...</translation>
-    </message>
-    <message>
         <source>Print...</source>
         <translation>打印...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
-        <source>Edit Receivable Item...</source>
-        <translation>编辑可接受物料...</translation>
-    </message>
-    <message>
-        <source>View Receivable Item...</source>
-        <translation>查看可接受物料...</translation>
-    </message>
-    <message>
-        <source>View Invoice Information...</source>
-        <translation>查看发票信息...</translation>
     </message>
     <message>
         <source>Document</source>
@@ -23983,32 +23939,12 @@ Would you like to post it anyway?</source>
         <translation>打开</translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation>查看销售订单...</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order...</source>
-        <translation>编辑销售订单...</translation>
-    </message>
-    <message>
         <source>Balance (in %1)</source>
         <translation>余额（在%1）</translation>
     </message>
     <message>
         <source>Apply Credit Memo...</source>
         <translation>应用信用备忘...</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation>发货状态...</translation>
-    </message>
-    <message>
-        <source>New Cash Receipt...</source>
-        <translation>新建现金收据...</translation>
-    </message>
-    <message>
-        <source>Shipments...</source>
-        <translation>装货单...</translation>
     </message>
     <message>
         <source>Recurring</source>
@@ -24031,20 +23967,12 @@ Would you like to post it anyway?</source>
         <translation>信用卡处理错误</translation>
     </message>
     <message>
-        <source>New Incident...</source>
-        <translation>新建事件...</translation>
-    </message>
-    <message>
         <source>Debit Memo</source>
         <translation>借项通知单</translation>
     </message>
     <message>
         <source>Credit Memo</source>
         <translation>贷项通知单</translation>
-    </message>
-    <message>
-        <source>Edit Posted Invoice...</source>
-        <translation>编辑已过帐发票...</translation>
     </message>
     <message>
         <source>Edit Posted Invoice?</source>
@@ -24055,24 +23983,12 @@ Would you like to post it anyway?</source>
         <translation>这个发票已过账。你确定要编辑它吗？</translation>
     </message>
     <message>
-        <source>View Incident...</source>
-        <translation>查看事件...</translation>
-    </message>
-    <message>
-        <source>Edit Incident...</source>
-        <translation>编辑事件...</translation>
-    </message>
-    <message>
         <source>Date Range</source>
         <translation>日期范围</translation>
     </message>
     <message>
         <source>Credit Card Processing Note</source>
         <translation>信用卡处理备注</translation>
-    </message>
-    <message>
-        <source>Open Customer...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Retrieving AR Information</source>
@@ -24146,15 +24062,7 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Void Posted Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Credit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -24189,6 +24097,74 @@ Would you like to post it anyway?</source>
         <source>Could not void invoice because the accounting period for the posting date is closed. Try again with a different date?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open Customer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Posted Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished">货运</translation>
+    </message>
+    <message>
+        <source>New Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Incident</source>
+        <translation type="unfinished">新建事件</translation>
+    </message>
 </context>
 <context>
     <name>dspAllocations</name>
@@ -24213,28 +24189,12 @@ Would you like to post it anyway?</source>
         <translation>类型</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation>编辑销售订单...</translation>
-    </message>
-    <message>
         <source>Relieved</source>
         <translation>解除</translation>
     </message>
     <message>
         <source>Total Qty.</source>
         <translation>总数量</translation>
-    </message>
-    <message>
-        <source>Edit Transfer Order...</source>
-        <translation>编辑转移订单...</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>查看销售订单...</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation>查看制令单...</translation>
     </message>
     <message>
         <source>Balance</source>
@@ -24251,10 +24211,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Item Site Lead Time</source>
         <translation>物料所在地订货至交货时间</translation>
-    </message>
-    <message>
-        <source>View Transfer Order...</source>
-        <translation>查看调度单...</translation>
     </message>
     <message>
         <source>Site:</source>
@@ -24275,6 +24231,26 @@ Would you like to post it anyway?</source>
     <message>
         <source>Required</source>
         <translation>需求</translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -24304,14 +24280,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
         <source>Never</source>
         <translation type="unfinished">决不</translation>
     </message>
@@ -24322,6 +24290,14 @@ Would you like to post it anyway?</source>
     <message>
         <source>You must enter a valid item number.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -24371,10 +24347,6 @@ Would you like to post it anyway?</source>
         <translation>延伸价格</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>编辑订单...</translation>
-    </message>
-    <message>
         <source>Customer Group</source>
         <translation>客户组</translation>
     </message>
@@ -24411,10 +24383,6 @@ Would you like to post it anyway?</source>
         <translation>开始订单日期：</translation>
     </message>
     <message>
-        <source>View Item...</source>
-        <translation>查看物料</translation>
-    </message>
-    <message>
         <source>Customer Type</source>
         <translation>客户类型</translation>
     </message>
@@ -24447,16 +24415,8 @@ Would you like to post it anyway?</source>
         <translation>订单:</translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation>查看订单...</translation>
-    </message>
-    <message>
         <source>Ordered</source>
         <translation>已订购</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>编辑物料</translation>
     </message>
     <message>
         <source>Sale Type</source>
@@ -24476,6 +24436,22 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>QOH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -24756,16 +24732,8 @@ Would you like to post it anyway?</source>
         <translation type="unfinished">单位价格</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished">编辑销售订单...</translation>
-    </message>
-    <message>
         <source>Base Ext. Price</source>
         <translation type="unfinished">基本外部价格</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">查看销售订单...</translation>
     </message>
     <message>
         <source>Base Unit Price</source>
@@ -24780,20 +24748,12 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished">查看销售订单物料...</translation>
-    </message>
-    <message>
         <source>Customer Type Pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Customer Group Pattern</source>
         <translation type="unfinished">客户组模糊查询</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unit Cost</source>
@@ -24829,6 +24789,22 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Line Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -24940,10 +24916,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Name</source>
         <translation>名字</translation>
-    </message>
-    <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cust. #</source>
@@ -25061,6 +25033,10 @@ Would you like to post it anyway?</source>
         <source>Cust. P/O #</source>
         <translation type="unfinished">客户采购订单号</translation>
     </message>
+    <message>
+        <source>View Sales Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspCapacityUOMsByClassCode</name>
@@ -25104,16 +25080,16 @@ Would you like to post it anyway?</source>
 <context>
     <name>dspCapacityUOMsByParameter</name>
     <message>
-        <source>Edit Item...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Capacity UOMs</source>
         <translation>产能单位</translation>
     </message>
     <message>
         <source>Capacity UOMs by Class Code</source>
         <translation type="unfinished">按分类代码的产能单位</translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -25170,10 +25146,6 @@ Would you like to post it anyway?</source>
         <translation>客户</translation>
     </message>
     <message>
-        <source>Edit Receivable Item...</source>
-        <translation>编辑可接受物料...</translation>
-    </message>
-    <message>
         <source>Post Cash Receipt</source>
         <translation>现金收据过账</translation>
     </message>
@@ -25184,10 +25156,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Latest</source>
         <translation>最近</translation>
-    </message>
-    <message>
-        <source>View Receivable Item...</source>
-        <translation>查看可接受物料...</translation>
     </message>
     <message>
         <source>Reverse Entire Posting?</source>
@@ -25266,10 +25234,6 @@ Would you like to post it anyway?</source>
         <translation>发现</translation>
     </message>
     <message>
-        <source>View Cash Receipt...</source>
-        <translation>查看现金收据...</translation>
-    </message>
-    <message>
         <source>Cash</source>
         <translation>现金</translation>
     </message>
@@ -25300,10 +25264,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Unposted</source>
         <translation>未过帐</translation>
-    </message>
-    <message>
-        <source>Edit Cash Receipt...</source>
-        <translation>编辑现金收据...</translation>
     </message>
     <message>
         <source>Base Amount</source>
@@ -25339,6 +25299,22 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Date not Entered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Receivable Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -25465,10 +25441,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Payment...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Void Posted Payment...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25482,6 +25454,10 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Invalid dates specified. Please specify a valid date range.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Payment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -25568,12 +25544,12 @@ Would you like to post it anyway?</source>
         <translation type="unfinished">单位</translation>
     </message>
     <message>
-        <source>Maintain Item Costs...</source>
-        <translation type="unfinished">维护物料成本...</translation>
+        <source>Maintain Item Costs</source>
+        <translation type="unfinished">维护物料成本</translation>
     </message>
     <message>
-        <source>View Item Costing...</source>
-        <translation>查看物料成本总结...</translation>
+        <source>View Item Costing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -25882,10 +25858,6 @@ Would you like to post it anyway?</source>
         <translation>价格.</translation>
     </message>
     <message>
-        <source>Count Slip Edit List...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Tag/Slip #</source>
         <translation>盘点标签/盘点条#</translation>
     </message>
@@ -25906,16 +25878,8 @@ Would you like to post it anyway?</source>
         <translation>物料编号</translation>
     </message>
     <message>
-        <source>Enter Count Slip...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Count Qty.</source>
         <translation>盘点数量</translation>
-    </message>
-    <message>
-        <source>View Pending Inventory History...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unfreeze Itemsite?</source>
@@ -25926,15 +25890,7 @@ Would you like to post it anyway?</source>
         <translation>差额</translation>
     </message>
     <message>
-        <source>Edit Count Tag...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Post Count Tag...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Count Slip...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -26053,6 +26009,26 @@ Would you like to post it anyway?</source>
         <source>Error Retrieving Count Tag Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enter Count Slip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count Slip Edit List</source>
+        <translation type="unfinished">盘点条编辑列表</translation>
+    </message>
+    <message>
+        <source>View Pending Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Count Slip</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspCountTagsBase</name>
@@ -26125,12 +26101,12 @@ Would you like to post it anyway?</source>
         <translation>已盘点数量</translation>
     </message>
     <message>
-        <source>View Count Tag...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%</source>
         <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>View Count Tag</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -26320,16 +26296,8 @@ Would you like to post it anyway?</source>
         <translation>客户保证金</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Credit Memo</source>
         <translation>贷项通知单</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>Doc. Type</source>
@@ -26451,6 +26419,14 @@ Would you like to post it anyway?</source>
         <source>Base Balance</source>
         <translation>基础余额</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>dspDepositsRegister</name>
@@ -26532,10 +26508,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Qty. After</source>
         <translation>之后的数量</translation>
-    </message>
-    <message>
-        <source>View Transaction Information...</source>
-        <translation>查看交易信息...</translation>
     </message>
     <message>
         <source>Please enter a valid Start Date.</source>
@@ -26651,6 +26623,10 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Active:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transaction Information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -26781,10 +26757,6 @@ Would you like to post it anyway?</source>
         <translation>之前的数量</translation>
     </message>
     <message>
-        <source>View Transaction Information...</source>
-        <translation>查看交易信息...</translation>
-    </message>
-    <message>
         <source>Qty. After</source>
         <translation>之后的数量</translation>
     </message>
@@ -26843,6 +26815,10 @@ Would you like to post it anyway?</source>
     <message>
         <source>Phone</source>
         <translation type="unfinished">电话</translation>
+    </message>
+    <message>
+        <source>View Transaction Information</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -27367,10 +27343,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Transactions...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Year</source>
         <translation>年</translation>
     </message>
@@ -27465,6 +27437,10 @@ Total</source>
     </message>
     <message>
         <source>Please make sure all accounting periods are associated with a quarter and fiscal year before using this application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transactions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -27748,15 +27724,7 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>deleted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Journal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -27778,10 +27746,6 @@ Total</source>
     <message>
         <source>Journal %1 by %2 on %3</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reverse Journal...</source>
-        <translation>反冲日记帐...</translation>
     </message>
     <message>
         <source>All Sources</source>
@@ -27859,6 +27823,18 @@ Total</source>
         <source>Error Deleting GL Series Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspGLTransactions</name>
@@ -27869,10 +27845,6 @@ Total</source>
     <message>
         <source>Source</source>
         <translation>来源</translation>
-    </message>
-    <message>
-        <source>View Journal...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Date</source>
@@ -27889,10 +27861,6 @@ Total</source>
     <message>
         <source>GL Account</source>
         <translation>总账系列账户</translation>
-    </message>
-    <message>
-        <source>View Shipment...</source>
-        <translation>查看货运...</translation>
     </message>
     <message>
         <source>Doc. #</source>
@@ -27917,10 +27885,6 @@ Total</source>
     <message>
         <source>Sub Account</source>
         <translation>子账户</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>查看凭单...</translation>
     </message>
     <message>
         <source>Doc. Type</source>
@@ -27951,10 +27915,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Journal Series...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Posted</source>
         <translation>已过账</translation>
     </message>
@@ -27975,24 +27935,12 @@ Total</source>
         <translation type="unfinished">利润中心</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Sub Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Expense</source>
         <translation>费用</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>查看发票...</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation>查看采购订单...</translation>
     </message>
     <message>
         <source>Liability</source>
@@ -28003,32 +27951,12 @@ Total</source>
         <translation>用户名</translation>
     </message>
     <message>
-        <source>View WO History...</source>
-        <translation>查看生产订单历史</translation>
-    </message>
-    <message>
-        <source>View Credit Memo...</source>
-        <translation>查看贷项通知单...</translation>
-    </message>
-    <message>
         <source>Running Total</source>
         <translation>余额</translation>
     </message>
     <message>
-        <source>View Debit Memo...</source>
-        <translation>查看借款通知单..</translation>
-    </message>
-    <message>
         <source>Date Created</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>查看销售订单...</translation>
-    </message>
-    <message>
-        <source>View Inventory History...</source>
-        <translation>查看库存历史...</translation>
     </message>
     <message>
         <source>Show Running Total</source>
@@ -28064,6 +27992,54 @@ Total</source>
     </message>
     <message>
         <source>Error Updating GL Account Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>View Journal Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Shipment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View WO History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28181,12 +28157,12 @@ Total</source>
         <translation>过期</translation>
     </message>
     <message>
-        <source>View Item Inventory History...</source>
-        <translation>查看物料库存历史...</translation>
-    </message>
-    <message>
         <source>Indented Where Used</source>
         <translation>已约定使用场合</translation>
+    </message>
+    <message>
+        <source>View Item Inventory History</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -28212,36 +28188,28 @@ Total</source>
         <translation>当物料或物料站点更改的时候更新</translation>
     </message>
     <message>
-        <source>Edit Parent Item Site...</source>
-        <translation>编辑母料站点...</translation>
-    </message>
-    <message>
-        <source>Edit Parent Item...</source>
-        <translation>编辑母料...</translation>
-    </message>
-    <message>
         <source>Component Item Description</source>
         <translation>子件物料描述</translation>
-    </message>
-    <message>
-        <source>Create Component Item Site...</source>
-        <translation>创建子件物料地点...</translation>
     </message>
     <message>
         <source>Bills of Materials without Component Item Sites</source>
         <translation>没有子件物料地点的 BOM</translation>
     </message>
+    <message>
+        <source>Edit Parent Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Parent Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Component Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInventoryAvailability</name>
-    <message>
-        <source>View Allocations...</source>
-        <translation type="unfinished">查看分配...</translation>
-    </message>
-    <message>
-        <source>View Inventory History...</source>
-        <translation>查看库存历史</translation>
-    </message>
     <message>
         <source>Source Vendor Type</source>
         <translation>供货商来源类型</translation>
@@ -28291,20 +28259,12 @@ Total</source>
         <translation>已订购</translation>
     </message>
     <message>
-        <source>Enter Misc. Inventory Count...</source>
-        <translation>&amp;输入杂项盘点</translation>
-    </message>
-    <message>
         <source>Inventory Availability</source>
         <translation>库存可用量</translation>
     </message>
     <message>
         <source>Item Site Lead Time</source>
         <translation>物料站点交货时间</translation>
-    </message>
-    <message>
-        <source>View Orders...</source>
-        <translation>查看订单...</translation>
     </message>
     <message>
         <source>Show</source>
@@ -28343,10 +28303,6 @@ Total</source>
         <translation>杂项生产过账</translation>
     </message>
     <message>
-        <source>View Substitute Availability...</source>
-        <translation>查看可用替代品可用性...</translation>
-    </message>
-    <message>
         <source>Issue Count Tag...</source>
         <translation>建立盘点标签</translation>
     </message>
@@ -28357,10 +28313,6 @@ Total</source>
     <message>
         <source>Reorder Lvl.</source>
         <translation>再订购库存水平</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished">运行可用性...</translation>
     </message>
     <message>
         <source>Please enter a valid date.</source>
@@ -28395,14 +28347,6 @@ Total</source>
         <translation>请选择一个有效时间范围</translation>
     </message>
     <message>
-        <source>Create Purchase Order...</source>
-        <translation>创建采购订单</translation>
-    </message>
-    <message>
-        <source>Create Purchase Request...</source>
-        <translation>创建采购申请</translation>
-    </message>
-    <message>
         <source>Create W/O...</source>
         <translation>创建制令单</translation>
     </message>
@@ -28431,10 +28375,6 @@ Total</source>
         <translation>可用性</translation>
     </message>
     <message>
-        <source>Enter Adjustment...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A Class</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28456,6 +28396,42 @@ Total</source>
     </message>
     <message>
         <source>Current QOH Avail.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Create Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Purchase Order</source>
+        <translation type="unfinished">创建采购订单</translation>
+    </message>
+    <message>
+        <source>View Substitute Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Inventory Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Adjustment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28518,10 +28494,6 @@ Total</source>
         <translation>这个可用.</translation>
     </message>
     <message>
-        <source>Show Reservations...</source>
-        <translation>显示预留...</translation>
-    </message>
-    <message>
         <source>Total Avail.</source>
         <translation>总可用.</translation>
     </message>
@@ -28554,23 +28526,27 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation type="unfinished">编辑订单...</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation type="unfinished">查看订单...</translation>
-    </message>
-    <message>
-        <source>Print Packing List...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error Retrieving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Updating Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Packing List</source>
+        <translation type="unfinished">打印装箱单</translation>
+    </message>
+    <message>
+        <source>Show Reservations</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28585,10 +28561,6 @@ Total</source>
         <translation>保留生产线结余</translation>
     </message>
     <message>
-        <source>Show Reservations...</source>
-        <translation>显示预留...</translation>
-    </message>
-    <message>
         <source>Sched. Date</source>
         <translation>已安排的日期</translation>
     </message>
@@ -28599,10 +28571,6 @@ Total</source>
     <message>
         <source>No Sales Order Selected</source>
         <translation>未选中销售订单</translation>
-    </message>
-    <message>
-        <source>Reserve Stock...</source>
-        <translation>预留库存...</translation>
     </message>
     <message>
         <source>Unreserve Stock</source>
@@ -28700,6 +28668,14 @@ Total</source>
         <source>Error Updating Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show Reservations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reserve Stock</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInventoryAvailabilityByWorkOrder</name>
@@ -28756,10 +28732,6 @@ Total</source>
         <translation>总结母/子制令单</translation>
     </message>
     <message>
-        <source>Create P/R...</source>
-        <translation>创建采购请求...</translation>
-    </message>
-    <message>
         <source>Inventory Availability by Work Order</source>
         <translation>可用于制令单的库存</translation>
     </message>
@@ -28776,18 +28748,6 @@ Total</source>
         <translation>总可用.</translation>
     </message>
     <message>
-        <source>View Inventory History...</source>
-        <translation>查看库存历史...</translation>
-    </message>
-    <message>
-        <source>Post Misc. Production...</source>
-        <translation>杂项生产入库单过帐...</translation>
-    </message>
-    <message>
-        <source>Enter Misc. Inventory Count...</source>
-        <translation>&amp;输入杂项库存盘点...</translation>
-    </message>
-    <message>
         <source>Shortages</source>
         <translation>缺货</translation>
     </message>
@@ -28797,6 +28757,22 @@ Total</source>
     </message>
     <message>
         <source>Available QOH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Misc. Production</source>
+        <translation type="unfinished">杂项生产入库单过帐</translation>
+    </message>
+    <message>
+        <source>Enter Misc. Inventory Count</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28963,10 +28939,6 @@ Total</source>
         <translation>结束日期</translation>
     </message>
     <message>
-        <source>View Work Order Information...</source>
-        <translation>查看制令单信息...</translation>
-    </message>
-    <message>
         <source>Receipts</source>
         <translation>收据</translation>
     </message>
@@ -28977,14 +28949,6 @@ Total</source>
     <message>
         <source>QOH Before</source>
         <translation>之前的在库数量</translation>
-    </message>
-    <message>
-        <source>Edit Transaction Information...</source>
-        <translation>编辑交易信息...</translation>
-    </message>
-    <message>
-        <source>View Transaction Information...</source>
-        <translation>查看交易信息...</translation>
     </message>
     <message>
         <source>A Class</source>
@@ -29000,6 +28964,18 @@ Total</source>
     </message>
     <message>
         <source>ABC Class</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order Information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29028,14 +29004,6 @@ Total</source>
     <message>
         <source>Qty.</source>
         <translation>数量</translation>
-    </message>
-    <message>
-        <source>Relocate...</source>
-        <translation>重新部署...</translation>
-    </message>
-    <message>
-        <source>Reassign Lot/Serial #...</source>
-        <translation>再分配组/序列号...</translation>
     </message>
     <message>
         <source>N/A</source>
@@ -29076,6 +29044,14 @@ Total</source>
     <message>
         <source>Lot/Serial</source>
         <translation type="unfinished">组/序列</translation>
+    </message>
+    <message>
+        <source>Relocate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reassign Lot/Serial #</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -29292,18 +29268,6 @@ Total</source>
         <translation>小计</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>查看发票...</translation>
-    </message>
-    <message>
-        <source>View Credit Memo...</source>
-        <translation>查看贷项通知单...</translation>
-    </message>
-    <message>
-        <source>View Debit Memo...</source>
-        <translation>查看借款通知单..</translation>
-    </message>
-    <message>
         <source>Document Not Found</source>
         <translation>未找到凭证</translation>
     </message>
@@ -29328,10 +29292,6 @@ Total</source>
         <translation>借项通知单</translation>
     </message>
     <message>
-        <source>View Customer Deposit...</source>
-        <translation>查看客户押金...</translation>
-    </message>
-    <message>
         <source>Customer Deposit</source>
         <translation>客户保证金</translation>
     </message>
@@ -29345,6 +29305,22 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Credit Memo Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Customer Deposit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29521,12 +29497,12 @@ Total</source>
         <translation>物料成本总和</translation>
     </message>
     <message>
-        <source>View Costing Detail...</source>
-        <translation>查看成本细节...</translation>
-    </message>
-    <message>
         <source>Never</source>
         <translation>决不</translation>
+    </message>
+    <message>
+        <source>View Costing Detail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -29570,14 +29546,6 @@ Total</source>
     <message>
         <source>Std. Cost</source>
         <translation>标准成本</translation>
-    </message>
-    <message>
-        <source>Maintain Item Costs...</source>
-        <translation>维护物料成本...</translation>
-    </message>
-    <message>
-        <source>View Item Costing Summary...</source>
-        <translation>查看物料成本总结...</translation>
     </message>
     <message>
         <source>Post Actual Costs...</source>
@@ -29629,6 +29597,14 @@ Total</source>
     </message>
     <message>
         <source>Item Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintain Item Costs</source>
+        <translation type="unfinished">维护物料成本</translation>
+    </message>
+    <message>
+        <source>View Item Costing Summary</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29807,14 +29783,6 @@ Total</source>
         <translation type="unfinished">订购类型</translation>
     </message>
     <message>
-        <source>Edit Item Source...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Item Source...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&apos;Always&apos;</source>
         <translation type="unfinished">&apos;&apos;总是&apos;&apos;</translation>
     </message>
@@ -29834,6 +29802,14 @@ Total</source>
         <source>Drop Ship</source>
         <translation type="unfinished">直接货运</translation>
     </message>
+    <message>
+        <source>Edit Item Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Source</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspItemSources</name>
@@ -29844,10 +29820,6 @@ Total</source>
     <message>
         <source>Lead Time</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
     </message>
     <message>
         <source>Manufacturer Pattern</source>
@@ -29946,10 +29918,6 @@ Total</source>
         <translation type="unfinished">过期</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
         <source>UOM Ratio</source>
         <translation>度量单位比率</translation>
     </message>
@@ -30014,12 +29982,20 @@ Total</source>
         <translation type="unfinished">复制...</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation type="unfinished">删除...</translation>
-    </message>
-    <message>
         <source>Error Deleting Item Source Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -30033,16 +30009,8 @@ Total</source>
         <translation>物料编号</translation>
     </message>
     <message>
-        <source>Edit Item...</source>
-        <translation>编辑物料...</translation>
-    </message>
-    <message>
         <source>Type</source>
         <translation>类型</translation>
-    </message>
-    <message>
-        <source>Create Item Source...</source>
-        <translation>创建物料来源...</translation>
     </message>
     <message>
         <source>Purchased</source>
@@ -30055,6 +30023,14 @@ Total</source>
     <message>
         <source>Items without Item Sources</source>
         <translation>该商品没有物料来源</translation>
+    </message>
+    <message>
+        <source>Create Item Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -30137,14 +30113,6 @@ Total</source>
     <message>
         <source>Sub Account</source>
         <translation type="unfinished">子账户</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">查看销售订单...</translation>
     </message>
     <message>
         <source>Account Type</source>
@@ -30251,40 +30219,48 @@ Total</source>
         <translation type="unfinished">用户名</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation type="unfinished">查看凭单...</translation>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <source>View Debit Memo...</source>
-        <translation type="unfinished">查看借款通知单..</translation>
-    </message>
-    <message>
-        <source>View Journal Series...</source>
+        <source>View Journal Series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
+        <source>View Voucher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation type="unfinished">查看发票...</translation>
-    </message>
-    <message>
-        <source>View Credit Memo...</source>
-        <translation type="unfinished">查看贷项通知单...</translation>
-    </message>
-    <message>
-        <source>View Shipment...</source>
-        <translation type="unfinished">查看货运...</translation>
-    </message>
-    <message>
-        <source>View Inventory History...</source>
+        <source>View Invoice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View WO History...</source>
-        <translation type="unfinished">查看生产订单历史</translation>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Shipment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View WO History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -30370,19 +30346,19 @@ Total</source>
         <translation>MRP详细</translation>
     </message>
     <message>
-        <source>View Allocations...</source>
-        <translation>查看分配...</translation>
-    </message>
-    <message>
         <source>Allocations</source>
         <translation>分配</translation>
     </message>
     <message>
-        <source>View Orders...</source>
-        <translation>查看订单...</translation>
+        <source>Error Printing MRP Detail</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Printing MRP Detail</source>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -30812,10 +30788,6 @@ Total</source>
         <translation type="unfinished">已下达</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation>编辑销售订单...</translation>
-    </message>
-    <message>
         <source>Work Order</source>
         <translation>制令单</translation>
     </message>
@@ -30844,10 +30816,6 @@ Total</source>
         <translation>发票</translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
-        <translation>查看采购订单</translation>
-    </message>
-    <message>
         <source>Order Activity by Project</source>
         <translation>按项目的订单活动</translation>
     </message>
@@ -30862,10 +30830,6 @@ Total</source>
     <message>
         <source>Purchase Orders</source>
         <translation>采购订单</translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation>编辑采购订单</translation>
     </message>
     <message>
         <source>Status</source>
@@ -30884,24 +30848,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Quote...</source>
-        <translation>查看报价单...</translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order Item...</source>
-        <translation>编辑采购订单物料</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>查看销售订单...</translation>
-    </message>
-    <message>
         <source>Closed</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Quote...</source>
-        <translation>编辑报价单</translation>
     </message>
     <message>
         <source>Sales Order</source>
@@ -30912,28 +30860,8 @@ Total</source>
         <translation type="unfinished">打开</translation>
     </message>
     <message>
-        <source>View Purchase Request...</source>
-        <translation>查看采购申请...</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation>查看制令单...</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>查看发票...</translation>
-    </message>
-    <message>
         <source>Unposted</source>
         <translation type="unfinished">未过帐</translation>
-    </message>
-    <message>
-        <source>Edit Invoice...</source>
-        <translation>编辑发票...</translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
-        <translation>编辑制令单</translation>
     </message>
     <message>
         <source>Quote</source>
@@ -30950,10 +30878,6 @@ Total</source>
     <message>
         <source>Description</source>
         <translation type="unfinished">描述</translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished">查看销售订单物料...</translation>
     </message>
     <message>
         <source>UOM</source>
@@ -30980,10 +30904,6 @@ Total</source>
         <translation type="unfinished">已过期</translation>
     </message>
     <message>
-        <source>View Purchase Order Item...</source>
-        <translation>查看采购订单物料</translation>
-    </message>
-    <message>
         <source>Show Types</source>
         <translation>显示类型</translation>
     </message>
@@ -30992,27 +30912,7 @@ Total</source>
         <translation>采购申请</translation>
     </message>
     <message>
-        <source>View Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Invoice Item...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -31084,14 +30984,6 @@ Total</source>
         <translation type="unfinished">任务</translation>
     </message>
     <message>
-        <source>Edit Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Concept</source>
         <translation type="unfinished">概念</translation>
     </message>
@@ -31101,6 +30993,90 @@ Total</source>
     </message>
     <message>
         <source>Please save the Project first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -31163,36 +31139,36 @@ Total</source>
         <translation>需求</translation>
     </message>
     <message>
-        <source>Reschedule P/O Item...</source>
-        <translation>重新排程采购订单物料</translation>
-    </message>
-    <message>
-        <source>Change P/O Item Quantity...</source>
-        <translation>更改采购订单物料数量...</translation>
-    </message>
-    <message>
-        <source>Reprioritize W/O...</source>
-        <translation>变更制令单优先顺序...</translation>
-    </message>
-    <message>
-        <source>Reschedule W/O...</source>
-        <translation>重排制令单...</translation>
-    </message>
-    <message>
-        <source>Change W/O Quantity...</source>
-        <translation>更改(不含数量)...</translation>
-    </message>
-    <message>
-        <source>Print Traveler...</source>
-        <translation>打印电子工序表</translation>
-    </message>
-    <message>
         <source>Show Availability as of:</source>
         <translation>显示可用至:</translation>
     </message>
     <message>
         <source>Item Orders</source>
         <translation>物料订单</translation>
+    </message>
+    <message>
+        <source>Reschedule P/O Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change P/O Item Quantity</source>
+        <translation type="unfinished">修改采购物料数量</translation>
+    </message>
+    <message>
+        <source>Reprioritize W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Traveler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -31274,14 +31250,6 @@ Total</source>
         <translation>最近</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>编辑订单...</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>查看订单...</translation>
-    </message>
-    <message>
         <source>Please enter a valid Start Date.</source>
         <translation>请输入一个有效的开始日期.</translation>
     </message>
@@ -31305,6 +31273,14 @@ Total</source>
         <source>Enter End Date</source>
         <translation>输入结束日期</translation>
     </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPOsByVendor</name>
@@ -31315,10 +31291,6 @@ Total</source>
     <message>
         <source>Latest</source>
         <translation>最近</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>编辑订单...</translation>
     </message>
     <message>
         <source>Unposted</source>
@@ -31377,10 +31349,6 @@ Total</source>
         <translation>关闭了的</translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation>查看订单...</translation>
-    </message>
-    <message>
         <source>Received</source>
         <translation>已收到</translation>
     </message>
@@ -31391,6 +31359,14 @@ Total</source>
     <message>
         <source>Receipt Date</source>
         <translation>收货日期</translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -31469,10 +31445,6 @@ Total</source>
         <translation>打包日期</translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation>查看订单...</translation>
-    </message>
-    <message>
         <source>Currency</source>
         <translation>货币</translation>
     </message>
@@ -31481,16 +31453,8 @@ Total</source>
         <translation>货运</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>编辑订单...</translation>
-    </message>
-    <message>
         <source>Credit</source>
         <translation>贷方</translation>
-    </message>
-    <message>
-        <source>Print Packing List...</source>
-        <translation>打印装箱单...</translation>
     </message>
     <message>
         <source>None</source>
@@ -31503,6 +31467,18 @@ Total</source>
     <message>
         <source>Tax</source>
         <translation type="unfinished">税</translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Packing List</source>
+        <translation type="unfinished">打印装箱单</translation>
     </message>
 </context>
 <context>
@@ -31607,10 +31583,6 @@ Total</source>
         <translation>过期</translation>
     </message>
     <message>
-        <source>Edit BOM Item...</source>
-        <translation>编辑物料清单...</translation>
-    </message>
-    <message>
         <source>You must specify a valid item.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -31651,10 +31623,6 @@ Total</source>
         <translation>单位</translation>
     </message>
     <message>
-        <source>View BOM Item...</source>
-        <translation>查看物料清单...</translation>
-    </message>
-    <message>
         <source>Effective</source>
         <translation>生效</translation>
     </message>
@@ -31666,6 +31634,14 @@ Total</source>
         <source>Cutoff Date:</source>
         <translation>截止日期:</translation>
     </message>
+    <message>
+        <source>Edit BOM Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View BOM Item</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPlannedOrders</name>
@@ -31675,10 +31651,6 @@ Total</source>
     </message>
     <message>
         <source>Planned Orders</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Usage Statistics...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -31702,10 +31674,6 @@ Total</source>
         <translation type="unfinished">公司</translation>
     </message>
     <message>
-        <source>Soften Order...</source>
-        <translation type="unfinished">缓和订单...</translation>
-    </message>
-    <message>
         <source>Release Order...</source>
         <translation type="unfinished">下达订单...</translation>
     </message>
@@ -31718,10 +31686,6 @@ Total</source>
         <translation type="unfinished">物料组</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation type="unfinished">编辑订单...</translation>
-    </message>
-    <message>
         <source>Planner Code Pattern</source>
         <translation type="unfinished">计划员代码模糊查询</translation>
     </message>
@@ -31732,10 +31696,6 @@ Total</source>
     <message>
         <source>Firm Order...</source>
         <translation type="unfinished">公司订单...</translation>
-    </message>
-    <message>
-        <source>Delete Order...</source>
-        <translation>删除订单...</translation>
     </message>
     <message>
         <source>Item Number</source>
@@ -31770,10 +31730,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished">运行可用性...</translation>
-    </message>
-    <message>
         <source>From Site</source>
         <translation type="unfinished">从仓库</translation>
     </message>
@@ -31795,6 +31751,26 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Usage Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soften Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -32340,10 +32316,6 @@ Total</source>
         <translation>已收到/已返回</translation>
     </message>
     <message>
-        <source>Create Voucher...</source>
-        <translation>创建付款凭单...</translation>
-    </message>
-    <message>
         <source>Item Number</source>
         <translation>物料编号</translation>
     </message>
@@ -32423,6 +32395,10 @@ Total</source>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPoItemsByDate</name>
@@ -32471,20 +32447,8 @@ Total</source>
         <translation>物料编号</translation>
     </message>
     <message>
-        <source>Edit Item...</source>
-        <translation>编辑物料...</translation>
-    </message>
-    <message>
-        <source>Open Item...</source>
-        <translation>打开的物料...</translation>
-    </message>
-    <message>
         <source>Returned</source>
         <translation>退货</translation>
-    </message>
-    <message>
-        <source>View Item...</source>
-        <translation>查看物料...</translation>
     </message>
     <message>
         <source>Site</source>
@@ -32501,22 +32465,6 @@ Total</source>
     <message>
         <source>UOM</source>
         <translation>单位</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>编辑订单...</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>查看订单...</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>运行可用性...</translation>
-    </message>
-    <message>
-        <source>Change Qty...</source>
-        <translation>更改数量...</translation>
     </message>
     <message>
         <source>Reschedule...</source>
@@ -32606,6 +32554,34 @@ Total</source>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Qty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Item</source>
+        <translation type="unfinished">未清项目</translation>
+    </message>
 </context>
 <context>
     <name>dspPoItemsByItem</name>
@@ -32630,10 +32606,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Item...</source>
-        <translation>查看物料...</translation>
-    </message>
-    <message>
         <source>Enter Item Number</source>
         <translation>输入物料号</translation>
     </message>
@@ -32642,20 +32614,12 @@ Total</source>
         <translation>以物料采购订单</translation>
     </message>
     <message>
-        <source>Edit Item...</source>
-        <translation>编辑物料...</translation>
-    </message>
-    <message>
         <source>Received</source>
         <translation>已收到</translation>
     </message>
     <message>
         <source>Partial</source>
         <translation>部分</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>编辑订单...</translation>
     </message>
     <message>
         <source>Vendor</source>
@@ -32678,16 +32642,8 @@ Total</source>
         <translation>已订购</translation>
     </message>
     <message>
-        <source>Open Item...</source>
-        <translation>打开的物料...</translation>
-    </message>
-    <message>
         <source>Returned</source>
         <translation>退货</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>查看订单...</translation>
     </message>
     <message>
         <source>All Items</source>
@@ -32696,10 +32652,6 @@ Total</source>
     <message>
         <source>Selected:</source>
         <translation>选择:</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>运行可用性...</translation>
     </message>
     <message>
         <source>Closed Items</source>
@@ -32745,6 +32697,30 @@ Total</source>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Item</source>
+        <translation type="unfinished">未清项目</translation>
+    </message>
 </context>
 <context>
     <name>dspPoItemsByVendor</name>
@@ -32759,10 +32735,6 @@ Total</source>
     <message>
         <source>Change Qty...</source>
         <translation>更改数量...</translation>
-    </message>
-    <message>
-        <source>Open Item...</source>
-        <translation>打开的物料...</translation>
     </message>
     <message>
         <source>Please enter a valid Vendor Number.</source>
@@ -32791,10 +32763,6 @@ Total</source>
     <message>
         <source>Reschedule...</source>
         <translation>重新安排...</translation>
-    </message>
-    <message>
-        <source>View Item...</source>
-        <translation>查看物料...</translation>
     </message>
     <message>
         <source>All Purchase Orders</source>
@@ -32857,10 +32825,6 @@ Total</source>
         <translation>采购订单号</translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation>运行可用性...</translation>
-    </message>
-    <message>
         <source>Due Date</source>
         <translation>截止日期</translation>
     </message>
@@ -32871,18 +32835,6 @@ Total</source>
     <message>
         <source>UOM</source>
         <translation>单位</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>编辑订单...</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>查看订单...</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>编辑物料...</translation>
     </message>
     <message>
         <source>Open Items</source>
@@ -32911,6 +32863,30 @@ Total</source>
     <message>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Item</source>
+        <translation type="unfinished">未清项目</translation>
     </message>
 </context>
 <context>
@@ -33745,10 +33721,6 @@ Total</source>
         <translation>子编号</translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation>运行可用性...</translation>
-    </message>
-    <message>
         <source>Release P/R...</source>
         <translation>转换采购申请为采购订单</translation>
     </message>
@@ -33767,10 +33739,6 @@ Total</source>
     <message>
         <source>Due Date</source>
         <translation>截止日期</translation>
-    </message>
-    <message>
-        <source>Delete P/R...</source>
-        <translation>删除采购申请</translation>
     </message>
     <message>
         <source>Parent Order</source>
@@ -33809,15 +33777,23 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit P/R...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View S/O Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error opening Sales Order item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Edit P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete P/R</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -33880,10 +33856,6 @@ Total</source>
         <translation>删除采购申请</translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation>运行可用性...</translation>
-    </message>
-    <message>
         <source>Release P/R...</source>
         <translation>转换采购申请为采购订单</translation>
     </message>
@@ -33936,10 +33908,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit P/R...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View S/O Item</source>
         <translation type="unfinished"></translation>
     </message>
@@ -33947,13 +33915,17 @@ Total</source>
         <source>Error opening Sales Order item</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Edit P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspQOH</name>
-    <message>
-        <source>Transfer to another Site...</source>
-        <translation type="unfinished">调拨到另一个站点</translation>
-    </message>
     <message>
         <source>QOH</source>
         <translation>在库数量</translation>
@@ -33975,16 +33947,8 @@ Total</source>
         <translation>单位成本</translation>
     </message>
     <message>
-        <source>View Location/Lot/Serial # Detail...</source>
-        <translation>查看货位/组/序列号细节...</translation>
-    </message>
-    <message>
         <source>Item Number</source>
         <translation>物料编码</translation>
-    </message>
-    <message>
-        <source>Enter Misc. Count...</source>
-        <translation>输入杂项盘点</translation>
     </message>
     <message>
         <source>Default Location</source>
@@ -34013,10 +33977,6 @@ Total</source>
     <message>
         <source>N/A</source>
         <translation type="unfinished">不可用</translation>
-    </message>
-    <message>
-        <source>Adjust this Quantity...</source>
-        <translation>调整数量</translation>
     </message>
     <message>
         <source>Show All Quantities</source>
@@ -34065,10 +34025,6 @@ Total</source>
     <message>
         <source>Use Standard Costs</source>
         <translation>使用标准成本</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation>创建盘点标签</translation>
     </message>
     <message>
         <source>Item</source>
@@ -34134,6 +34090,26 @@ Total</source>
         <source>ABC Class</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Location/Lot/Serial # Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspQOHByLocation</name>
@@ -34160,10 +34136,6 @@ Total</source>
     <message>
         <source>Lot/Serial #</source>
         <translation>组/序列号</translation>
-    </message>
-    <message>
-        <source>Relocate...</source>
-        <translation>重新部署...</translation>
     </message>
     <message>
         <source>UOM</source>
@@ -34217,6 +34189,10 @@ Total</source>
         <source>T/O</source>
         <translation type="unfinished">调度单</translation>
     </message>
+    <message>
+        <source>Relocate</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspQOHByZone</name>
@@ -34265,27 +34241,7 @@ Total</source>
         <translation type="unfinished">箱</translation>
     </message>
     <message>
-        <source>View Location/Lot/Serial # Detail...</source>
-        <translation type="unfinished">查看货位/组/序列号细节...</translation>
-    </message>
-    <message>
-        <source>Transfer to another Site...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Adjust this Quantity...</source>
-        <translation type="unfinished">调整数量</translation>
-    </message>
-    <message>
         <source>Reset this Quantity to 0...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Misc. Count...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -34294,6 +34250,26 @@ Total</source>
     </message>
     <message>
         <source>&lt;p&gt;Please select a Warehouse Zone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Location/Lot/Serial # Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -34380,18 +34356,6 @@ Total</source>
         <translation>客户采购订单号</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>Convert...</source>
-        <translation>转换 ...</translation>
-    </message>
-    <message>
         <source>Convert Selected Quote(s)</source>
         <translation>转换选中的报价单</translation>
     </message>
@@ -34415,6 +34379,18 @@ Total</source>
         <source>Quotes</source>
         <translation>报价单</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Convert</source>
+        <translation type="unfinished">转换</translation>
+    </message>
 </context>
 <context>
     <name>dspQuotesByItem</name>
@@ -34435,16 +34411,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Quote Lookup by Item</source>
         <translation>依物料寻找报价</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>Dates Required</source>
@@ -34498,6 +34466,14 @@ Total</source>
         <source>Earliest</source>
         <translation>最早</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>dspReorderExceptionsByPlannerCode</name>
@@ -34522,16 +34498,8 @@ Total</source>
         <translation>仓库</translation>
     </message>
     <message>
-        <source>Create Work Order...</source>
-        <translation>创建生产订单...</translation>
-    </message>
-    <message>
         <source>Exception Date</source>
         <translation>过期日期</translation>
-    </message>
-    <message>
-        <source>View Running Availability...</source>
-        <translation>查看运行可用...</translation>
     </message>
     <message>
         <source>Proj. Avail.</source>
@@ -34549,6 +34517,14 @@ Total</source>
         <source>&amp;Include Planned Orders</source>
         <translation>&amp;包含计划订单</translation>
     </message>
+    <message>
+        <source>View Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Work Order</source>
+        <translation type="unfinished">创建制令单</translation>
+    </message>
 </context>
 <context>
     <name>dspReservations</name>
@@ -34557,24 +34533,12 @@ Total</source>
         <translation></translation>
     </message>
     <message>
-        <source>Edit Transfer Order...</source>
-        <translation>编辑转移订单...</translation>
-    </message>
-    <message>
         <source>Item Required</source>
         <translation type="unfinished">物料需求</translation>
     </message>
     <message>
-        <source>View Transfer Order...</source>
-        <translation>查看调度单...</translation>
-    </message>
-    <message>
         <source>Relieved</source>
         <translation>解除</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation>查看制令单...</translation>
     </message>
     <message>
         <source>Total Qty.</source>
@@ -34595,14 +34559,6 @@ Total</source>
     <message>
         <source>Required</source>
         <translation>需求</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order...</source>
-        <translation>编辑销售订单...</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>查看销售订单...</translation>
     </message>
     <message>
         <source>QOH:</source>
@@ -34626,6 +34582,26 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -34716,14 +34692,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
         <source>Undefined</source>
         <translation type="unfinished">未下定义的</translation>
     </message>
@@ -34770,6 +34738,14 @@ Total</source>
     <message>
         <source>&lt;p&gt;You may not view or edit this Return Authorization as it references a Site for which you have not been granted privileges.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -34827,14 +34803,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
         <source>Item Required</source>
         <translation type="unfinished">物料需求</translation>
     </message>
@@ -34882,6 +34850,14 @@ Total</source>
         <source>&lt;p&gt;You may not view or edit this Return Authorization as it references a Site for which you have not been granted privileges.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>dspRunningAvailability</name>
@@ -34906,14 +34882,6 @@ Total</source>
         <translation>下达订单...</translation>
     </message>
     <message>
-        <source>View Work Order Details...</source>
-        <translation>查看制令单详细...</translation>
-    </message>
-    <message>
-        <source>Work Order Schedule by Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Planned T/O (firmed)</source>
         <translation>已计划调度单(已确认)</translation>
     </message>
@@ -34924,10 +34892,6 @@ Total</source>
     <message>
         <source>Planned W/O Req. (firmed)</source>
         <translation>已计划制令单序列(已确定)</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation>查看采购订单...</translation>
     </message>
     <message>
         <source>Planned W/O Req.</source>
@@ -34966,20 +34930,8 @@ Total</source>
         <translation>订购类型</translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation>查看销售订单...</translation>
-    </message>
-    <message>
-        <source>Soften Order...</source>
-        <translation>缓和订单...</translation>
-    </message>
-    <message>
         <source>Running Avail.</source>
         <translation>计算可用量</translation>
-    </message>
-    <message>
-        <source>View Transfer Order...</source>
-        <translation>查看调度单...</translation>
     </message>
     <message>
         <source>Site:</source>
@@ -35042,18 +34994,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished">编辑销售订单...</translation>
-    </message>
-    <message>
-        <source>Edit Transfer Order...</source>
-        <translation type="unfinished">编辑转移订单...</translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished">编辑采购订单</translation>
-    </message>
-    <message>
         <source>Reserved</source>
         <translation type="unfinished">已留存</translation>
     </message>
@@ -35069,16 +35009,48 @@ Total</source>
         <source>Error Retrieving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Soften Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work Order Schedule by Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspSalesHistory</name>
     <message>
         <source>Customer Type</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
     </message>
     <message>
         <source>Customer Ship-to</source>
@@ -35143,10 +35115,6 @@ Total</source>
     <message>
         <source>Doc. #</source>
         <translation type="unfinished">凭证号</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
     </message>
     <message>
         <source>Product Category</source>
@@ -35243,6 +35211,14 @@ Total</source>
     <message>
         <source>Cust. P/O #</source>
         <translation type="unfinished">客户采购订单号</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -35411,28 +35387,8 @@ Total</source>
         <translation type="unfinished">客户采购订单号</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
         <source>Copy...</source>
         <translation type="unfinished">复制...</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation type="unfinished">发货状态...</translation>
-    </message>
-    <message>
-        <source>Shipments...</source>
-        <translation type="unfinished">装货单...</translation>
-    </message>
-    <message>
-        <source>Create Return Authorization...</source>
-        <translation type="unfinished">创建退货协议</translation>
     </message>
     <message>
         <source>No Lines</source>
@@ -35470,6 +35426,26 @@ Total</source>
         <source>Created By</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished">货运</translation>
+    </message>
+    <message>
+        <source>Create Return Authorization</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspSalesOrdersByItem</name>
@@ -35478,20 +35454,8 @@ Total</source>
         <translation type="unfinished">你不可以查看或编辑这个销售订单，因为你没有它所在位置的权限</translation>
     </message>
     <message>
-        <source>Shipments..</source>
-        <translation>发货..</translation>
-    </message>
-    <message>
         <source>Closed</source>
         <translation>已关闭</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation>发货状态...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>Dates Required</source>
@@ -35566,10 +35530,6 @@ Total</source>
         <translation>退货</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Could Not Open Window</source>
         <translation>不能打开窗口</translation>
     </message>
@@ -35608,6 +35568,22 @@ Total</source>
     <message>
         <source>Inv. Balance</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished">货运</translation>
     </message>
 </context>
 <context>
@@ -35681,10 +35657,6 @@ Total</source>
         <translation>打印发货表格</translation>
     </message>
     <message>
-        <source>Query Shipment Status...</source>
-        <translation>查询运输状态...</translation>
-    </message>
-    <message>
         <source>Shipments</source>
         <translation>货运</translation>
     </message>
@@ -35722,6 +35694,10 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Shipment Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query Shipment Status</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -35952,20 +35928,8 @@ Total</source>
         <translation>固定数量</translation>
     </message>
     <message>
-        <source>Edit Item Master...</source>
-        <translation>编辑物料所有者...</translation>
-    </message>
-    <message>
         <source>Expires</source>
         <translation>过期</translation>
-    </message>
-    <message>
-        <source>Edit Bill of Materials...</source>
-        <translation>编辑物料清单...</translation>
-    </message>
-    <message>
-        <source>View Item Inventory History...</source>
-        <translation>查看物料库存历史...</translation>
     </message>
     <message>
         <source>Single Level Where Used</source>
@@ -35974,6 +35938,18 @@ Total</source>
     <message>
         <source>Today</source>
         <translation>今天</translation>
+    </message>
+    <message>
+        <source>Edit Bill of Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item Master</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Inventory History</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -35989,10 +35965,6 @@ Total</source>
     <message>
         <source>Item Number</source>
         <translation>物料编号</translation>
-    </message>
-    <message>
-        <source>Adjust this QOH...</source>
-        <translation>调整库存量...</translation>
     </message>
     <message>
         <source>Last Movement</source>
@@ -36017,14 +35989,6 @@ Total</source>
     <message>
         <source>Reset this QOH to 0...</source>
         <translation>重置库存量为0...</translation>
-    </message>
-    <message>
-        <source>Enter Misc. Count...</source>
-        <translation>输入杂项盘点单...</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation>签发数量标签...</translation>
     </message>
     <message>
         <source>Value</source>
@@ -36059,10 +36023,6 @@ Total</source>
         <translation>仓库</translation>
     </message>
     <message>
-        <source>Transfer to another Site...</source>
-        <translation>调拨到另一个站点...</translation>
-    </message>
-    <message>
         <source>Use Posted Costs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -36073,6 +36033,22 @@ Total</source>
     <message>
         <source>%</source>
         <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this QOH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36153,10 +36129,6 @@ Total</source>
         <translation>物料所在地订货至交货时间</translation>
     </message>
     <message>
-        <source>View Orders...</source>
-        <translation>查看订单...</translation>
-    </message>
-    <message>
         <source>Item Required</source>
         <translation type="unfinished">物料需求</translation>
     </message>
@@ -36193,10 +36165,6 @@ Total</source>
         <translation>再订购库存水平.</translation>
     </message>
     <message>
-        <source>View Allocations...</source>
-        <translation>查看分配...</translation>
-    </message>
-    <message>
         <source>Show Availability as of:</source>
         <translation>显示可用至:</translation>
     </message>
@@ -36227,6 +36195,14 @@ Total</source>
     <message>
         <source>Site</source>
         <translation>仓库</translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36291,10 +36267,6 @@ Total</source>
         <translation>已订购/已发货</translation>
     </message>
     <message>
-        <source>Inventory Availability by Sales Order...</source>
-        <translation>库存可用量(按销售订单)...</translation>
-    </message>
-    <message>
         <source>No</source>
         <translation>否</translation>
     </message>
@@ -36323,20 +36295,8 @@ Total</source>
         <translation>客户承运商</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Pack</source>
         <translation>打包</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
     </message>
     <message>
         <source>Ship</source>
@@ -36414,6 +36374,22 @@ Total</source>
         <source>Tax</source>
         <translation type="unfinished">税</translation>
     </message>
+    <message>
+        <source>Inventory Availability by Sales Order</source>
+        <translation type="unfinished">按销售订单的库存可用量</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
 </context>
 <context>
     <name>dspSummarizedBankrecHistory</name>
@@ -36489,10 +36465,6 @@ Total</source>
         <translation type="unfinished">总分类帐交易汇总</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>查看发票...</translation>
-    </message>
-    <message>
         <source>A/R</source>
         <translation>A/R</translation>
     </message>
@@ -36507,10 +36479,6 @@ Total</source>
     <message>
         <source>Account #</source>
         <translation>帐户号</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>查看凭单...</translation>
     </message>
     <message>
         <source>Doc. Type</source>
@@ -36547,10 +36515,6 @@ Total</source>
     <message>
         <source>Doc. #</source>
         <translation>凭证号</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>Selected Source:</source>
@@ -36597,8 +36561,20 @@ Total</source>
         <translation>所有来源</translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
-        <translation>查看采购订单...</translation>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36610,10 +36586,6 @@ Total</source>
     <message>
         <source>Product Category Pattern</source>
         <translation type="unfinished">产品类别模糊查询:</translation>
-    </message>
-    <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invoice End Date</source>
@@ -36785,6 +36757,10 @@ Total</source>
     </message>
     <message>
         <source>Sale Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Detail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37297,14 +37273,6 @@ Rate</source>
 <context>
     <name>dspTimePhasedAvailability</name>
     <message>
-        <source>Create P/R...</source>
-        <translation type="unfinished">创建采购请求...</translation>
-    </message>
-    <message>
-        <source>View Availability Detail...</source>
-        <translation>查看可用性详情...</translation>
-    </message>
-    <message>
         <source>Item Number</source>
         <translation>物料编号</translation>
     </message>
@@ -37313,28 +37281,36 @@ Rate</source>
         <translation>单位</translation>
     </message>
     <message>
-        <source>View Orders...</source>
-        <translation>查看订单...</translation>
-    </message>
-    <message>
-        <source>View Allocations...</source>
-        <translation>查看分配...</translation>
-    </message>
-    <message>
-        <source>Create W/O...</source>
-        <translation>创建工作订单...</translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>仓库</translation>
     </message>
     <message>
-        <source>Create P/O...</source>
-        <translation>创建采购订单...</translation>
-    </message>
-    <message>
         <source>Time-Phased Availability</source>
         <translation>时间同步可用性</translation>
+    </message>
+    <message>
+        <source>View Availability Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/O</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37404,10 +37380,6 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Bookings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation type="unfinished">描述</translation>
     </message>
@@ -37422,6 +37394,10 @@ Rate</source>
     <message>
         <source>UOM</source>
         <translation type="unfinished">单位</translation>
+    </message>
+    <message>
+        <source>View Bookings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37457,10 +37433,6 @@ Rate</source>
     <message>
         <source>Use</source>
         <translation>使用</translation>
-    </message>
-    <message>
-        <source>View Open Items...</source>
-        <translation>查看打开的项目...</translation>
     </message>
     <message>
         <source>Select Calendar Periods</source>
@@ -37526,6 +37498,10 @@ Rate</source>
         <source>The criteria you specified are not complete. Please make sure all fields are correctly filled out before running the report.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Open Items</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedOpenARItems</name>
@@ -37560,10 +37536,6 @@ Rate</source>
     <message>
         <source>Customer</source>
         <translation>客户</translation>
-    </message>
-    <message>
-        <source>View Open Items...</source>
-        <translation>查看打开的项目...</translation>
     </message>
     <message>
         <source>Select Calendar Periods</source>
@@ -37633,6 +37605,10 @@ Rate</source>
         <source>The criteria you specified are not complete. Please make sure all fields are correctly filled out before running the report.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Open Items</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedSales</name>
@@ -37667,10 +37643,6 @@ Rate</source>
     <message>
         <source>Cust. #</source>
         <translation type="unfinished">客户编号</translation>
-    </message>
-    <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sales Dollars</source>
@@ -37724,6 +37696,10 @@ Rate</source>
         <source>Include Misc. Items</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Sales Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedUsageStatisticsByItem</name>
@@ -37742,10 +37718,6 @@ Rate</source>
     <message>
         <source>Received</source>
         <translation>已收到</translation>
-    </message>
-    <message>
-        <source>View Transactions...</source>
-        <translation>检查交易...</translation>
     </message>
     <message>
         <source>Sold</source>
@@ -37769,6 +37741,10 @@ Rate</source>
     </message>
     <message>
         <source>Transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transactions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37839,10 +37815,6 @@ Rate</source>
         <translation>结束</translation>
     </message>
     <message>
-        <source>View Transactions...</source>
-        <translation>查看移库信息...</translation>
-    </message>
-    <message>
         <source>Debits</source>
         <translation>借方</translation>
     </message>
@@ -37862,6 +37834,10 @@ Rate</source>
         <source>Fiscal Year</source>
         <translation type="unfinished">会计年度</translation>
     </message>
+    <message>
+        <source>View Transactions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspUnbalancedQOHByClassCode</name>
@@ -37870,24 +37846,8 @@ Rate</source>
         <translation type="unfinished">物料仓库</translation>
     </message>
     <message>
-        <source>Balance Item Site...</source>
-        <translation>均衡物料仓库...</translation>
-    </message>
-    <message>
         <source>QOH Detail.</source>
         <translation>库存量详细信息</translation>
-    </message>
-    <message>
-        <source>Edit Item Site...</source>
-        <translation>编辑物料站点...</translation>
-    </message>
-    <message>
-        <source>View Item Site...</source>
-        <translation>查看物料仓库...</translation>
-    </message>
-    <message>
-        <source>View Inventory Availability...</source>
-        <translation>查看库存可用性</translation>
     </message>
     <message>
         <source>None</source>
@@ -37896,10 +37856,6 @@ Rate</source>
     <message>
         <source>Regular</source>
         <translation>正常的</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation>签发数量标签...</translation>
     </message>
     <message>
         <source>Serial #</source>
@@ -37935,6 +37891,26 @@ Rate</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37973,16 +37949,16 @@ Rate</source>
         <translation>未定义的生产物料</translation>
     </message>
     <message>
-        <source>Edit Item...</source>
-        <translation>编辑物料...</translation>
-    </message>
-    <message>
         <source>Show &amp;Inactive Items</source>
         <translation>&amp;显示非活动物料</translation>
     </message>
     <message>
-        <source>Create BOM...</source>
-        <translation>创建BOM...</translation>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create BOM</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -38040,10 +38016,6 @@ Rate</source>
         <translation>物料编号</translation>
     </message>
     <message>
-        <source>Create Credit Memo...</source>
-        <translation>创建贷项通知单...</translation>
-    </message>
-    <message>
         <source>Uninvoiced P/O Receipts and Returns</source>
         <translation>未开采购订单收据和退货发票</translation>
     </message>
@@ -38058,6 +38030,10 @@ Rate</source>
     <message>
         <source>P/O Value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Credit Memo</source>
+        <translation type="unfinished">创建贷项通知单</translation>
     </message>
 </context>
 <context>
@@ -38299,20 +38275,12 @@ Rate</source>
         <translation type="unfinished">贷项通知单</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation>查看凭单...</translation>
-    </message>
-    <message>
         <source>Void</source>
         <translation>无效</translation>
     </message>
     <message>
         <source>P/O #</source>
         <translation>采购订单号</translation>
-    </message>
-    <message>
-        <source>View A/P Open...</source>
-        <translation>查看应付账款未决定...</translation>
     </message>
     <message>
         <source>Doc. Date</source>
@@ -38343,10 +38311,6 @@ Rate</source>
         <translation>打开</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Voucher</source>
         <translation>付款凭单</translation>
     </message>
@@ -38365,10 +38329,6 @@ Rate</source>
     <message>
         <source>Currency</source>
         <translation>货币</translation>
-    </message>
-    <message>
-        <source>View G/L Series...</source>
-        <translation>查看总账套...</translation>
     </message>
     <message>
         <source>Voiding Voucher</source>
@@ -38392,6 +38352,22 @@ Rate</source>
     </message>
     <message>
         <source>Please make a valid vendor selection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -38450,10 +38426,6 @@ Rate</source>
         <translation>已选择帐户:</translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
-        <translation>查看采购订单...</translation>
-    </message>
-    <message>
         <source>Username</source>
         <translation>用户名</translation>
     </message>
@@ -38470,24 +38442,12 @@ Rate</source>
         <translation>借方</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>查看发票...</translation>
-    </message>
-    <message>
         <source>Account</source>
         <translation>帐户</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Credit</source>
         <translation>贷方</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>查看凭单...</translation>
     </message>
     <message>
         <source>Voucher Register</source>
@@ -38496,6 +38456,22 @@ Rate</source>
     <message>
         <source>Invalid Dates</source>
         <translation type="unfinished">失效日期</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -38545,10 +38521,6 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Work Orders</source>
         <translation>制令单</translation>
     </message>
@@ -38563,10 +38535,6 @@ Rate</source>
     <message>
         <source>Show</source>
         <translation>显示</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>Item #</source>
@@ -38588,13 +38556,17 @@ Rate</source>
         <source>Ordered</source>
         <translation>已订购</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>dspWoHistoryByItem</name>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
     <message>
         <source>Invalid Start Date</source>
         <translation type="unfinished"></translation>
@@ -38660,10 +38632,6 @@ Rate</source>
         <translation>已订购</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Start Date</source>
         <translation>开始日期</translation>
     </message>
@@ -38678,6 +38646,14 @@ Rate</source>
     <message>
         <source>You must enter a valid item number for this report.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -38747,16 +38723,8 @@ Rate</source>
         <translation>成本</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Due Date</source>
         <translation>截止日期</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>Work Order History by W/O Number</source>
@@ -38781,6 +38749,14 @@ Rate</source>
     <message>
         <source>You must enter a work order pattern for this report.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -38877,10 +38853,6 @@ Rate</source>
         <translation type="unfinished">按制令单的物料需求</translation>
     </message>
     <message>
-        <source>View Requirement...</source>
-        <translation>查看需求...</translation>
-    </message>
-    <message>
         <source>Due Date</source>
         <translation>截止日期</translation>
     </message>
@@ -38964,6 +38936,10 @@ Rate</source>
         <source>Component Item Description 2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Requirement</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspWoSchedule</name>
@@ -38976,24 +38952,12 @@ Rate</source>
         <translation>你确定要删除选中的制令单吗?</translation>
     </message>
     <message>
-        <source>View Material Requirements...</source>
-        <translation>查看物料要求...</translation>
-    </message>
-    <message>
         <source>Planner Code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
         <source>Implode...</source>
         <translation>收起制令单...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="unfinished">删除...</translation>
     </message>
     <message>
         <source>Post Production...</source>
@@ -39008,16 +38972,8 @@ Rate</source>
         <translation type="unfinished">状态</translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished">运行可用性...</translation>
-    </message>
-    <message>
         <source>Print Traveler...</source>
         <translation>打印电子工序表</translation>
-    </message>
-    <message>
-        <source>View Bill of Materials...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Start Date</source>
@@ -39026,10 +38982,6 @@ Rate</source>
     <message>
         <source>Ordered</source>
         <translation type="unfinished">已订购</translation>
-    </message>
-    <message>
-        <source>Inventory Availability...</source>
-        <translation>库存可用量...</translation>
     </message>
     <message>
         <source>Issue Material Item...</source>
@@ -39056,32 +39008,12 @@ Rate</source>
         <translation type="unfinished">物料</translation>
     </message>
     <message>
-        <source>Reprioritize...</source>
-        <translation>重新设定优先级</translation>
-    </message>
-    <message>
-        <source>Change Quantity...</source>
-        <translation>更改数量</translation>
-    </message>
-    <message>
         <source>Recall</source>
         <translation>召回</translation>
     </message>
     <message>
-        <source>Reschedule...</source>
-        <translation>重新安排...</translation>
-    </message>
-    <message>
         <source>Close...</source>
         <translation type="unfinished">关闭...</translation>
-    </message>
-    <message>
-        <source>View Parent Sales Order Information...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Parent Work Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open</source>
@@ -39180,10 +39112,6 @@ Rate</source>
         <translation type="unfinished">描述</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
         <source>Delete Work Order?</source>
         <translation>删除制令单?</translation>
     </message>
@@ -39265,6 +39193,54 @@ Rate</source>
     </message>
     <message>
         <source>Return Material Item...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <source>View Bill of Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Material Requirements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory Availability</source>
+        <translation type="unfinished">库存可用量</translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Reprioritize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Parent Sales Order Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Parent Work Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -39826,16 +39802,8 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
         <source>Code</source>
         <translation>代码</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
     </message>
     <message>
         <source>Employees</source>
@@ -39864,6 +39832,14 @@ Rate</source>
     <message>
         <source>Employee Group</source>
         <translation type="unfinished">职员组</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -39922,10 +39898,6 @@ Rate</source>
     <message>
         <source>Item Number</source>
         <translation>物料编号</translation>
-    </message>
-    <message>
-        <source>Enter Receipt...</source>
-        <translation>输入收据(R)...</translation>
     </message>
     <message>
         <source>Manufacturer</source>
@@ -41656,44 +41628,20 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation type="unfinished">关闭</translation>
     </message>
     <message>
-        <source>View Incident...</source>
-        <translation>查看事件...</translation>
-    </message>
-    <message>
-        <source>View Todo Item...</source>
-        <translation>查看要做的物料...</translation>
-    </message>
-    <message>
         <source>Events</source>
         <translation>提醒</translation>
-    </message>
-    <message>
-        <source>View Project Task...</source>
-        <translation>查看项目任务...</translation>
     </message>
     <message>
         <source>Are you sure that you want to delete the selected Work Order?</source>
         <translation>你确定要删除选中的制令单吗?</translation>
     </message>
     <message>
-        <source>View Inventory Availability...</source>
-        <translation>查看库存可用性</translation>
-    </message>
-    <message>
         <source>Print Packing List...</source>
         <translation>打印装箱单...</translation>
     </message>
     <message>
-        <source>Issue Count Tag...</source>
-        <translation>签发数量标签...</translation>
-    </message>
-    <message>
         <source>Acknowleged</source>
         <translation>已阅</translation>
-    </message>
-    <message>
-        <source>View Inventory History...</source>
-        <translation>查看库存历史...</translation>
     </message>
     <message>
         <source>Recall Work Order</source>
@@ -41708,16 +41656,8 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation>打印制令单电子工序表</translation>
     </message>
     <message>
-        <source>Change W/O Quantity...</source>
-        <translation>更改(不含数量)...</translation>
-    </message>
-    <message>
         <source>Delete Work Order...</source>
         <translation>删除生产订单...</translation>
-    </message>
-    <message>
-        <source>Change W/O Due Date...</source>
-        <translation>更改制令单截止日期...</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -41740,10 +41680,6 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation>时间</translation>
     </message>
     <message>
-        <source>View Purchase Order Item...</source>
-        <translation>查看采购订单物料...</translation>
-    </message>
-    <message>
         <source>Events:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -41756,10 +41692,6 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation>仓库</translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation>查看销售订单...</translation>
-    </message>
-    <message>
         <source>Acknowledge</source>
         <translation>已阅</translation>
     </message>
@@ -41770,14 +41702,6 @@ Would you like to automatically create a credit memo against this return?</sourc
     <message>
         <source>Order #</source>
         <translation>订单号</translation>
-    </message>
-    <message>
-        <source>Inventory Availability by Work Order...</source>
-        <translation>可用于工作订单的库存</translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation>查看销售订单物料...</translation>
     </message>
     <message>
         <source>Current &amp;User Account</source>
@@ -41813,6 +41737,54 @@ Would you like to automatically create a credit memo against this return?</sourc
     </message>
     <message>
         <source>Error Retrieving Event Log Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory Availability by Work Order</source>
+        <translation type="unfinished">可用于制令单的库存</translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Due Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Todo Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Project Task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -44764,16 +44736,8 @@ You must reassign these Users before you may delete the selected Group.</source>
         <translation>称谓</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>删除</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>List Titles</source>
@@ -44786,6 +44750,14 @@ You must reassign these Users before you may delete the selected Group.</source>
     <message>
         <source>Error Deleting Title</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -45639,14 +45611,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
 <context>
     <name>incidentCategories</name>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
@@ -45701,6 +45665,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Error Deleting Selected Incident Category %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -45961,16 +45933,8 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>删除</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Resolution</source>
         <translation>解决</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>Description</source>
@@ -45983,6 +45947,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Error Deleting Incident Resolution</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -45998,14 +45970,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Delete</source>
         <translation>删除</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -46050,6 +46014,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Error Deleting Incident Severity</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -46186,16 +46158,8 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
         <source>Project</source>
         <translation type="unfinished">项目</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
     </message>
     <message>
         <source>Item Number</source>
@@ -46224,6 +46188,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Resolution</source>
         <translation type="unfinished">解决</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -49879,10 +49851,6 @@ You must delete these assignments before you may delete the selected Pricing Sch
 <context>
     <name>itemSites</name>
     <message>
-        <source>Edit...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>无</translation>
     </message>
@@ -49935,14 +49903,6 @@ You must delete these assignments before you may delete the selected Pricing Sch
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Inventory Availability...</source>
-        <translation>查看库存可用量...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
         <source>Planner Code</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49967,16 +49927,8 @@ You must delete these assignments before you may delete the selected Pricing Sch
         <translation type="unfinished">删除选中的行吗?</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation type="unfinished">删除...</translation>
-    </message>
-    <message>
         <source>Show &amp;Inactive Item Sites</source>
         <translation>显示非活动物料仓库</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>N/A</source>
@@ -50072,6 +50024,26 @@ You must delete these assignments before you may delete the selected Pricing Sch
     </message>
     <message>
         <source>Error Deleting Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -50720,10 +50692,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation>参考</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>By-Product</source>
         <translation>副产品</translation>
     </message>
@@ -50860,16 +50828,8 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation>虚构件</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Copy...</source>
         <translation>复制...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
     </message>
     <message>
         <source>Breeder</source>
@@ -50898,6 +50858,18 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     <message>
         <source>Cannot Delete Item</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -51063,10 +51035,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">编辑...</translation>
-    </message>
-    <message>
         <source>Week</source>
         <translation>周</translation>
     </message>
@@ -51115,10 +51083,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation type="unfinished">拒绝访问</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">查看...</translation>
-    </message>
-    <message>
         <source>Minute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51157,6 +51121,14 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     <message>
         <source>Posted</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -51959,14 +51931,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>总额</translation>
     </message>
     <message>
-        <source>Delete Cost...</source>
-        <translation>删除成本...</translation>
-    </message>
-    <message>
-        <source>Edit Actual Cost...</source>
-        <translation>编辑实际成本...</translation>
-    </message>
-    <message>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51979,16 +51943,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>!EEROR!</translation>
     </message>
     <message>
-        <source>New Actual Cost...</source>
-        <translation>新建实际成本...</translation>
-    </message>
-    <message>
         <source>Maintain Item Costs</source>
         <translation>维护物料成本</translation>
-    </message>
-    <message>
-        <source>Update Actual Cost...</source>
-        <translation>更新实际成本...</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -52035,10 +51991,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>更新</translation>
     </message>
     <message>
-        <source>View Costing Detail...</source>
-        <translation>查看成本细节...</translation>
-    </message>
-    <message>
         <source>Error Posting Cost Information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -52056,6 +52008,26 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Error Retrieving Cost Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update Actual Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Costing Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Actual Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Actual Cost</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -52691,10 +52663,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;List Unapplied Credit Memos</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New &amp;Misc. Debit Memoz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -54732,10 +54700,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>可对外显示的标注</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>MetaSQL Statements</source>
         <translation type="unfinished"></translation>
     </message>
@@ -54746,10 +54710,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>View</source>
         <translation>查看</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>Delete MetaSQL?</source>
@@ -55237,10 +55197,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>过期</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Are you sure that you want to completely delete the selected Return Authorization?</source>
         <translation>你确定要完全删除退货授权工作台吗?</translation>
     </message>
@@ -55249,16 +55205,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>否</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Print Return Authorization Form...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
     </message>
     <message>
         <source>Undefined</source>
@@ -55336,16 +55284,24 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>Error Retrieving Return Authorization Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
 </context>
 <context>
     <name>openSalesOrders</name>
     <message>
         <source>Status</source>
         <translation type="unfinished">状态</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>Print Sales Order Form...</source>
@@ -55360,28 +55316,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>已订购</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
         <source>Print Packing List...</source>
         <translation>打印装箱单...</translation>
-    </message>
-    <message>
-        <source>Shipments...</source>
-        <translation>装货单...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation type="unfinished">发货状态...</translation>
-    </message>
-    <message>
-        <source>Add to Packing List Batch...</source>
-        <translation>添加到批次装箱单...</translation>
     </message>
     <message>
         <source>Ship-To</source>
@@ -55543,6 +55479,30 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>Tax</source>
         <translation type="unfinished">税</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <source>Add to Packing List Batch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished">货运</translation>
+    </message>
 </context>
 <context>
     <name>openVouchers</name>
@@ -55635,20 +55595,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>新建杂项(&amp;N)</translation>
     </message>
     <message>
-        <source>Edit Voucher...</source>
-        <translation>编辑付款凭单...</translation>
-    </message>
-    <message>
         <source>Vend. Type</source>
         <translation>供应商类型</translation>
     </message>
     <message>
         <source>Amount</source>
         <translation>金额</translation>
-    </message>
-    <message>
-        <source>Delete Voucher...</source>
-        <translation>删除付款凭单...</translation>
     </message>
     <message>
         <source>Access Denied</source>
@@ -55669,10 +55621,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Vchr. #</source>
         <translation>付款凭单编号</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>查看凭单...</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -55697,6 +55645,18 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>G/L Post Date</source>
         <translation>总账过账日期</translation>
+    </message>
+    <message>
+        <source>Edit Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Voucher</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -56029,10 +55989,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished">用户</translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>新建...</translation>
-    </message>
-    <message>
         <source>Type Pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -56137,14 +56093,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>CRM 帐号</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Target Date</source>
         <translation type="unfinished"></translation>
     </message>
@@ -56183,6 +56131,18 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Name Pattern</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">新建</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
     </message>
 </context>
 <context>
@@ -56648,10 +56608,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <translation>自动更新</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>Enable</source>
         <translation>启用</translation>
     </message>
@@ -56727,6 +56683,10 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <source>Error Disabling Package</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>packingListBatch</name>
@@ -56747,10 +56707,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <translation>承运商</translation>
     </message>
     <message>
-        <source>View Transfer Order...</source>
-        <translation>查看调度单...</translation>
-    </message>
-    <message>
         <source>Print &amp;Batch</source>
         <translation>打印批次装箱单</translation>
     </message>
@@ -56769,10 +56725,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <message>
         <source>Print &amp;Edit List</source>
         <translation>打印编辑列表</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>查看销售订单...</translation>
     </message>
     <message>
         <source>Ship</source>
@@ -56920,6 +56872,14 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Print Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -58006,10 +57966,6 @@ may be posted.</source>
         <translation type="unfinished">全部选择</translation>
     </message>
     <message>
-        <source>View Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Products</source>
         <translation>产品</translation>
     </message>
@@ -58055,6 +58011,10 @@ may be posted.</source>
     </message>
     <message>
         <source>%1: Could not initialize printing system for multiple reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Journal</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -61146,98 +61106,6 @@ You may not create a Product Category with this code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Quote...</source>
-        <translation type="unfinished">编辑报价单</translation>
-    </message>
-    <message>
-        <source>View Quote...</source>
-        <translation type="unfinished">查看报价单...</translation>
-    </message>
-    <message>
-        <source>Edit Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished">编辑销售订单...</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">查看销售订单...</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished">查看销售订单物料...</translation>
-    </message>
-    <message>
-        <source>Edit Invoice...</source>
-        <translation type="unfinished">编辑发票...</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation type="unfinished">查看发票...</translation>
-    </message>
-    <message>
-        <source>Edit Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished">编辑制令单</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished">查看制令单...</translation>
-    </message>
-    <message>
-        <source>View Purchase Request...</source>
-        <translation type="unfinished">查看采购申请...</translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished">编辑采购订单</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order Item...</source>
-        <translation type="unfinished">编辑采购订单物料</translation>
-    </message>
-    <message>
-        <source>View Purchase Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Incident...</source>
-        <translation type="unfinished">编辑事件...</translation>
-    </message>
-    <message>
-        <source>View Incident...</source>
-        <translation type="unfinished">查看事件...</translation>
-    </message>
-    <message>
         <source>Purchase Request</source>
         <translation type="unfinished">采购申请</translation>
     </message>
@@ -61380,6 +61248,98 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>Locking Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -62274,14 +62234,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Work Order...</source>
-        <translation>查看制令单...</translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished">编辑制令单</translation>
-    </message>
-    <message>
         <source>Sales Order #:</source>
         <translation>销售订单#:</translation>
     </message>
@@ -62330,10 +62282,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
         <translation>空</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation>编辑销售订单...</translation>
-    </message>
-    <message>
         <source>Delete Purchase Order Item?</source>
         <translation>删除采购订单物料吗?</translation>
     </message>
@@ -62372,10 +62320,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     <message>
         <source>#</source>
         <translation>#</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">查看销售订单...</translation>
     </message>
     <message>
         <source>Ext. Price</source>
@@ -62700,6 +62644,22 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     <message>
         <source>&lt;p&gt;The selected item has no Std. Costing information. Please see your controller to correct this situation before continuing.</source>
         <translation type="unfinished">&lt;p&gt;选择的物料没有标准的成本核算信息.在继续之前请联系你的控制员以更正此状况.</translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -63424,10 +63384,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Convert to S/O...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Are you sure that you want to convert the selected Quote(s) to %1(s)?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63470,10 +63426,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
     <message>
         <source>Show Expired</source>
         <translation type="unfinished">显示过期的</translation>
-    </message>
-    <message>
-        <source>Convert to Invoice...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Start Date</source>
@@ -63540,18 +63492,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation>采购订单号码</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
         <source>Delete Selected Quotes</source>
         <translation>删除选中的报价单</translation>
     </message>
@@ -63574,10 +63514,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
     <message>
         <source>Total</source>
         <translation type="unfinished">总额</translation>
-    </message>
-    <message>
-        <source>Copy to Cust./Prospect</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;p&gt;The prospect must be manually converted to customer from either the Account or Customer windows before coverting this quote.</source>
@@ -63614,6 +63550,30 @@ Are you sure that you want to delete the selected Invoice Records?</source>
     <message>
         <source>Error Deleting Quote #%1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to S/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to Cust./Prospect...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -65453,10 +65413,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close Line...</source>
-        <translation>关闭生产线物料</translation>
-    </message>
-    <message>
         <source>New Order</source>
         <translation type="unfinished"></translation>
     </message>
@@ -65765,18 +65721,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit New Order Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Line...</source>
-        <translation>删除行...</translation>
-    </message>
-    <message>
-        <source>New Order Shipments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
@@ -65817,36 +65761,8 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation>运费:</translation>
     </message>
     <message>
-        <source>View Original Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View New Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit New Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Order Shipment Status...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View New Order Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>仓库</translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Status</source>
@@ -66086,6 +66002,50 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>&lt;p&gt;Expiry Date must be on or later than the Authorization Date.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Original Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit New Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View New Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit New Order Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View New Order Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Order Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Order Shipments</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -67687,22 +67647,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>机会:</translation>
     </message>
     <message>
-        <source>View Purchase Request...</source>
-        <translation>查看采购申请...</translation>
-    </message>
-    <message>
-        <source>Release P/R...</source>
-        <translation>转换采购申请为采购订单</translation>
-    </message>
-    <message>
-        <source>Show Reservations...</source>
-        <translation type="unfinished">显示预留...</translation>
-    </message>
-    <message>
-        <source>Firm Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sched. Date</source>
         <translation>已安排的日期</translation>
     </message>
@@ -67846,10 +67790,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>为出库签发物料</translation>
     </message>
     <message>
-        <source>Soften Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Manually editing the freight will disable automatic Freight recalculations.  Are you sure you want to do this?</source>
         <translation>手动编辑运费会导致运费的重新计算。 是否继续？</translation>
     </message>
@@ -67910,10 +67850,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished">编辑采购订单</translation>
-    </message>
-    <message>
         <source>American Express</source>
         <translation>美国运通</translation>
     </message>
@@ -67924,10 +67860,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>Cannot Process Credit Card Transaction</source>
         <translation>不能处理信用卡交易</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>VISA</source>
@@ -68000,14 +67932,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>From Quote:</source>
         <translation>来源报价单:</translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished">编辑制令单</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation>查看制令单...</translation>
     </message>
     <message>
         <source>You must enter an Order Date for this order before you may save it.</source>
@@ -68318,10 +68242,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>描述</translation>
     </message>
     <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You must select a Customer for this order before you may save it.</source>
         <translation>在你保存前必须为这个订单选个客户</translation>
     </message>
@@ -68343,10 +68263,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Return Stock</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -68374,10 +68290,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>编号</translation>
     </message>
     <message>
-        <source>Delete Line...</source>
-        <translation type="unfinished">删除行...</translation>
-    </message>
-    <message>
         <source>Type</source>
         <translation>类型</translation>
     </message>
@@ -68388,10 +68300,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>&lt;p&gt;You must enter a Customer P/O for this Sales Order before you may process a creditcard transaction.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close Line...</source>
-        <translation>关闭物料线</translation>
     </message>
     <message>
         <source>Reserve Stock...</source>
@@ -68767,10 +68675,6 @@ Do you wish to continue saving the order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete Purchase Order Item?</source>
         <translation type="unfinished">删除采购订单物料吗?</translation>
     </message>
@@ -68825,6 +68729,62 @@ Do you wish to change all future Sales Order recurrences?</source>
     </message>
     <message>
         <source>You may not delete this Sales Order as it has one or more line items on a Purchase Order.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firm Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soften Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Reservations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Release P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -70347,14 +70307,6 @@ Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Line...</source>
-        <translation type="unfinished">删除行...</translation>
-    </message>
-    <message>
         <source>Item Workbench</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70717,6 +70669,14 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Error Creating itemlocdist Records</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -71309,28 +71269,12 @@ Are you sure you want to do this?</source>
         <translation>编号</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Shift</source>
         <translation>轮班</translation>
     </message>
     <message>
         <source>Dept.</source>
         <translation>部门</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>View Manager...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Manager...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -71414,6 +71358,22 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Error Retrieving Employee Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Manager</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -72040,26 +72000,6 @@ Are you sure you want to do this?</source>
         <translation type="unfinished">贷项通知单</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation type="unfinished">查看凭单...</translation>
-    </message>
-    <message>
-        <source>Void Voucher...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit A/P Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View A/P Open...</source>
-        <translation type="unfinished">查看应付账款未决定...</translation>
-    </message>
-    <message>
-        <source>View G/L Series...</source>
-        <translation type="unfinished">查看总账套...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;You cannot set this item as On Hold. This Item is already approved for payment.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -72113,6 +72053,26 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Enter an On Hold Comment:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Void Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -73117,10 +73077,6 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
         <translation type="unfinished">物料</translation>
     </message>
     <message>
-        <source>View Order Line...</source>
-        <translation>查看订单物料</translation>
-    </message>
-    <message>
         <source>Notes</source>
         <translation>可对外显示的标注</translation>
     </message>
@@ -73131,10 +73087,6 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
     <message>
         <source>Shipment Header</source>
         <translation>运单头信息</translation>
-    </message>
-    <message>
-        <source>Return ALL Stock Issued for this Order Line to the Site...</source>
-        <translation>退回所有这个订单生产线的库存签发到仓库中...</translation>
     </message>
     <message>
         <source>Order #:</source>
@@ -73205,10 +73157,6 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Issue Additional Stock for this Order Line to Shipping...</source>
-        <translation>给这个订单发其它库存物料</translation>
-    </message>
-    <message>
         <source>Tare Wght.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -73234,6 +73182,18 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
     </message>
     <message>
         <source>Error Returning Items From Shipment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Additional Stock for this Order Line to Shipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return ALL Stock Issued for this Order Line to the Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -73365,14 +73325,6 @@ before you may save it.</source>
         <translation>描述</translation>
     </message>
     <message>
-        <source>Delete Site Type...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Site Type...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Code</source>
         <translation>代码</translation>
     </message>
@@ -73402,10 +73354,6 @@ You must reassign these Sites before deleting this Site Type.</source>
         <translation>取消(C)</translation>
     </message>
     <message>
-        <source>Edit Site Type...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Close</source>
         <translation>关闭</translation>
     </message>
@@ -73428,6 +73376,14 @@ You must reassign these Sites before deleting this Site Type.</source>
     <message>
         <source>&amp;Edit</source>
         <translation>编辑</translation>
+    </message>
+    <message>
+        <source>Edit Site Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Site Type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -79258,6 +79214,18 @@ You must first re-assign these items before deleting the selected Tax Type.</sou
         <source>Error Retrieving To Do Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">新建</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>toggleBankrecCleared</name>
@@ -79405,10 +79373,6 @@ otherwise a new one will be created.</source>
         <translation>已关闭</translation>
     </message>
     <message>
-        <source>Issue Stock...</source>
-        <translation type="unfinished">签发存货</translation>
-    </message>
-    <message>
         <source>Unreleased</source>
         <translation type="unfinished"></translation>
     </message>
@@ -79441,10 +79405,6 @@ otherwise a new one will be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete Line...</source>
-        <translation>删除行...</translation>
-    </message>
-    <message>
         <source>Shipped</source>
         <translation>已发货</translation>
     </message>
@@ -79471,10 +79431,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>&lt;p&gt;Are you sure you want to delete this Transfer Order and its associated Line Items?</source>
         <translation>你确定要删除这个调度单和与其相关的所有生产线物料吗？</translation>
-    </message>
-    <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ship To</source>
@@ -79507,10 +79463,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Error Deleting Line</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close Line...</source>
-        <translation>关闭生产线物料</translation>
     </message>
     <message>
         <source>Error Updating Details</source>
@@ -79683,10 +79635,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Issue Line Bal.</source>
         <translation>签发余额</translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shipping Notes</source>
@@ -79862,6 +79810,22 @@ otherwise a new one will be created.</source>
         <source>Item %1 failed with:
 %2
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -80166,10 +80130,6 @@ otherwise a new one will be created.</source>
         <translation>未下达</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
         <source>Closed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80194,10 +80154,6 @@ otherwise a new one will be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Release...</source>
-        <translation>下达</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Are you sure that you want to completely delete the selected Transfer Order?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80220,18 +80176,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>&lt;p&gt;The selected Transfer Order cannot be deleted as there have been shipments posted against it. Would you like to Close it instead?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Add to Packing List Batch...</source>
-        <translation>添加到批次装箱单...</translation>
     </message>
     <message>
         <source>Copy...</source>
@@ -80315,6 +80259,22 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Error Retrieving Transfer Order Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <source>Add to Packing List Batch</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81125,11 +81085,11 @@ otherwise a new one will be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Approve This Order for Billing...</source>
+        <source>Error Retrieving Shipment Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Retrieving Shipment Information</source>
+        <source>Approve This Order for Billing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81138,14 +81098,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Prnt&apos;d</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>Post...</source>
@@ -81279,6 +81231,14 @@ otherwise a new one will be created.</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>unpostedGLTransactions</name>
@@ -81319,22 +81279,6 @@ otherwise a new one will be created.</source>
         <translation>已过账</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>查看发票...</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>查看凭单...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation>查看采购订单...</translation>
-    </message>
-    <message>
         <source>The following G/L Transactions will be posted to the Trial Balance if you open this period:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81360,6 +81304,22 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Error Retrieving G/L Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81406,24 +81366,8 @@ otherwise a new one will be created.</source>
         <translation>打印P</translation>
     </message>
     <message>
-        <source>Edit G/L Series...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cancel G/L Transactions?</source>
         <translation>取消总账交易？</translation>
-    </message>
-    <message>
-        <source>Post G/L Series...</source>
-        <translation>过账总账套..</translation>
-    </message>
-    <message>
-        <source>View G/L Series...</source>
-        <translation type="unfinished">查看总账套...</translation>
-    </message>
-    <message>
-        <source>Delete G/L Series...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unposted G/L Series Entries</source>
@@ -81471,6 +81415,22 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Error Posting G/L Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post G/L Series</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81556,18 +81516,6 @@ otherwise a new one will be created.</source>
         <source>Invoice #%1 has a total value of 0.
 Would you like to post it anyway?</source>
         <translation>发票#%1总额为0.无论如何也要过账吗？</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>Post...</source>
@@ -81677,6 +81625,14 @@ Would you like to post it anyway?</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
 </context>
 <context>
     <name>unpostedPoReceipts</name>
@@ -81729,20 +81685,12 @@ Would you like to post it anyway?</source>
         <translation>已收到</translation>
     </message>
     <message>
-        <source>Delete Receipt...</source>
-        <translation>删除收据...</translation>
-    </message>
-    <message>
         <source>Cancel Receipts?</source>
         <translation>取消接收?</translation>
     </message>
     <message>
         <source>G/L Post Date</source>
         <translation>总账过账日期</translation>
-    </message>
-    <message>
-        <source>Edit Receipt...</source>
-        <translation>编辑收据...</translation>
     </message>
     <message>
         <source>Post Receipt...</source>
@@ -81787,10 +81735,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Type</source>
         <translation>类型</translation>
-    </message>
-    <message>
-        <source>View Order Item...</source>
-        <translation>查看采购订单物料...</translation>
     </message>
     <message>
         <source>From</source>
@@ -81865,6 +81809,14 @@ Would you like to post it anyway?</source>
         <source>Item %1 failed with:
 %2
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Receipt</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81947,20 +81899,8 @@ Would you like to post it anyway?</source>
         <translation>删除选中的采购订单</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Status</source>
         <translation>状态</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
     </message>
     <message>
         <source>Print...</source>
@@ -82065,6 +82005,18 @@ Would you like to post it anyway?</source>
     <message>
         <source>Receipt Order</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
     </message>
 </context>
 <context>
@@ -84792,18 +84744,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete Vendor...</source>
-        <translation>删除供应商...</translation>
-    </message>
-    <message>
-        <source>Edit Vendor...</source>
-        <translation>编辑供应商...</translation>
-    </message>
-    <message>
-        <source>View Vendor...</source>
-        <translation>查看供应商...</translation>
-    </message>
-    <message>
         <source>Error Deleting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -84849,6 +84789,18 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Vendor</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -85078,10 +85030,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>PO Unit Price</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View P/O Item...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -85472,6 +85420,10 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <source>Co&amp;mments</source>
         <translation type="unfinished">注解(&amp;m)</translation>
     </message>
+    <message>
+        <source>View P/O Item</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>voucherItem</name>
@@ -85516,16 +85468,8 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation>订单编号:</translation>
     </message>
     <message>
-        <source>Split Receipt...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Distributions</source>
         <translation>分销</translation>
-    </message>
-    <message>
-        <source>Correct Receipt...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rejected:</source>
@@ -85725,6 +85669,14 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Would you like to cancel anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correct Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Receipt</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -86183,10 +86135,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation>编辑</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
         <source>&amp;Print</source>
         <translation>打印P</translation>
     </message>
@@ -86203,16 +86151,8 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation>地址</translation>
     </message>
     <message>
-        <source>List Item Sites...</source>
-        <translation>物料仓库列表</translation>
-    </message>
-    <message>
         <source>&amp;Close</source>
         <translation>关闭</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
     </message>
     <message>
         <source>Sites:</source>
@@ -86220,6 +86160,18 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Show &amp;Inactive Sites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>List Item Sites</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -86407,10 +86359,6 @@ and Work Order Component Items may not be Job Costed.</source>
         <translation type="unfinished">打印电子工序表</translation>
     </message>
     <message>
-        <source>Substitute Availability...</source>
-        <translation>替代品可用性</translation>
-    </message>
-    <message>
         <source>Order Parameters for this Item do not allow a quantitiy of %1 to be created.
 You must create an order for at least %2 of this item.
 Do you want to update the order quantity and create the order?</source>
@@ -86527,10 +86475,6 @@ Please correct before updating this Work Order</source>
         <translation>制令单物料需求不能被删除因为已签发物料。必须在删除物料需求前把物料退回到库存。你现在想把物料退回到库存吗？</translation>
     </message>
     <message>
-        <source>Change Quantity...</source>
-        <translation>更改数量</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The Work Order that you selected to delete was created to satisfy Sales Order demand. If you delete the selected Work Order then the Sales Order demand will remain but the Work Order to relieve that demand will not. Are you sure that you want to delete the selected Work Order?</source>
         <translation>选择要删除的制令单被创建满足销售订单需求。如果你要删除选定的制令单，销售订单需求会保留，但制令单不会解除需求。你确定要删除选定的制令单吗?</translation>
     </message>
@@ -86541,10 +86485,6 @@ Please correct before updating this Work Order</source>
     <message>
         <source>&lt;p&gt;The Work Order that you selected to delete is a child of another Work Order.  If you delete the selected Work Order then the Work Order Materials Requirements for the Component Item will remain but the Work Order to relieve that demand will not. Are you sure that you want to delete the selected Work Order?</source>
         <translation>选择要删除的制令单是另一个制令单的子订单。如果要删除选择的制令单，制令单为组成物料的原材料需求将会保留，但制令单不会解除需求。你确定要删除选定的制令单吗？</translation>
-    </message>
-    <message>
-        <source>Substitute...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>UOM</source>
@@ -86561,10 +86501,6 @@ Please correct before updating this Work Order</source>
     <message>
         <source>Return...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scrap...</source>
-        <translation>损耗...</translation>
     </message>
     <message>
         <source>To Date</source>
@@ -86725,32 +86661,8 @@ Make sure the itemsite you are creating the work order in is set to allow manufa
         <translation>制令单没有展开</translation>
     </message>
     <message>
-        <source>Reprioritize...</source>
-        <translation>重新设定优先级</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Are you sure that you want to delete the selected Work Order?</source>
         <translation>你确定要删除选中的生产订单吗?</translation>
-    </message>
-    <message>
-        <source>Inventory Availability...</source>
-        <translation type="unfinished">库存可用量...</translation>
-    </message>
-    <message>
-        <source>Post Production...</source>
-        <translation>成品入库过账...</translation>
-    </message>
-    <message>
-        <source>Issue...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
     </message>
     <message>
         <source>Delete Work Order?</source>
@@ -86805,10 +86717,6 @@ Please correct before updating this Work Order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reschedule...</source>
-        <translation>重新安排...</translation>
-    </message>
-    <message>
         <source>Print Traveler...</source>
         <translation>打印电子工序表</translation>
     </message>
@@ -86828,20 +86736,8 @@ sure there is sufficient Quantity on Hand before proceeding.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Material...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Indented</source>
         <translation>缩进</translation>
-    </message>
-    <message>
-        <source>Issue Batch...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Detail</source>
@@ -86860,28 +86756,8 @@ sure there is sufficient Quantity on Hand before proceeding.</source>
         <translation>显示</translation>
     </message>
     <message>
-        <source>Return Batch...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="unfinished">删除...</translation>
-    </message>
-    <message>
-        <source>Close...</source>
-        <translation type="unfinished">关闭...</translation>
-    </message>
-    <message>
         <source>Release</source>
         <translation>下达(R)</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished">运行可用性...</translation>
-    </message>
-    <message>
-        <source>Correct Production Posting...</source>
-        <translation>更正生产过账...</translation>
     </message>
     <message>
         <source>Available QOH</source>
@@ -87019,6 +86895,78 @@ Please correct before creating this Work Order</source>
         <source>Work Order Characteristics</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">关闭</translation>
+    </message>
+    <message>
+        <source>New Material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Batch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return Batch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Production</source>
+        <translation type="unfinished">成品入库过账</translation>
+    </message>
+    <message>
+        <source>Correct Production Posting</source>
+        <translation type="unfinished">修正生产过账</translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">运行可用性</translation>
+    </message>
+    <message>
+        <source>Inventory Availability</source>
+        <translation type="unfinished">库存可用量</translation>
+    </message>
+    <message>
+        <source>Reprioritize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Issue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Substitute</source>
+        <translation type="unfinished">替代品</translation>
+    </message>
+    <message>
+        <source>Availability</source>
+        <translation type="unfinished">可用性</translation>
+    </message>
+    <message>
+        <source>Substitute Availability</source>
+        <translation type="unfinished">替代品可用性</translation>
+    </message>
 </context>
 <context>
     <name>workOrderMaterials</name>
@@ -87119,10 +87067,6 @@ Please correct before creating this Work Order</source>
         <translation>损耗</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>编辑...</translation>
-    </message>
-    <message>
         <source>Material Requirements:</source>
         <translation>物料需求:</translation>
     </message>
@@ -87131,27 +87075,7 @@ Please correct before creating this Work Order</source>
         <translation>相对于标准单位的总数量</translation>
     </message>
     <message>
-        <source>View Item-Defined Subsitute Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>删除...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>查看...</translation>
-    </message>
-    <message>
-        <source>View Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>W/O Material Requirement cannot be Deleted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Substitute...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -87205,6 +87129,30 @@ Please correct before creating this Work Order</source>
     <message>
         <source>Error Retrieving Work Order Material Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">编辑</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">查看</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">删除</translation>
+    </message>
+    <message>
+        <source>View Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item-Defined Subsitute Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Substitute</source>
+        <translation type="unfinished">替代品</translation>
     </message>
 </context>
 <context>
