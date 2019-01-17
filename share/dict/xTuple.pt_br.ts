@@ -117,10 +117,6 @@ Address:</source>
         <translation type="unfinished">Fornecedor</translation>
     </message>
     <message>
-        <source>Vendor addresss</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation type="unfinished">Local</translation>
     </message>
@@ -131,6 +127,14 @@ Address:</source>
     <message>
         <source>Saving Shared Address</source>
         <translation type="unfinished">Armazenando Endereço</translation>
+    </message>
+    <message>
+        <source>Vendor address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;This address is shared by a Vendor Address and you do not have privileges to edit Vendor Addresses.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5634,16 +5638,8 @@ returned %2
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open...</source>
-        <translation>Abrir...</translation>
-    </message>
-    <message>
         <source>Open record detail</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Info...</source>
-        <translation>Info...</translation>
     </message>
     <message>
         <source>Ctrl+Shift+O</source>
@@ -5656,10 +5652,6 @@ returned %2
     <message>
         <source>Objects</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation>Novo...</translation>
     </message>
     <message>
         <source>View record information</source>
@@ -5686,10 +5678,6 @@ returned %2
         <translation>%1::sInfo() não foi definido</translation>
     </message>
     <message>
-        <source>Copy...</source>
-        <translation type="unfinished">Copiar...</translation>
-    </message>
-    <message>
         <source>Ctrl+Shift+C</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5712,6 +5700,22 @@ returned %2
     <message>
         <source>Error Finding Matching Record</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">Aberto</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">Copiar</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Novo</translation>
     </message>
 </context>
 <context>
@@ -6075,14 +6079,6 @@ returned %2
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>List...</source>
-        <translation>Listar...</translation>
-    </message>
-    <message>
-        <source>Search...</source>
-        <translation>Pesquisar...</translation>
-    </message>
-    <message>
         <source>Ctrl+Shift+L</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6101,6 +6097,14 @@ returned %2
     <message>
         <source>List of alias records</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation type="unfinished">Lista</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">pesquisar</translation>
     </message>
 </context>
 <context>
@@ -6836,34 +6840,6 @@ returned %2
         <translation>Congelado</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
-        <source>Close...</source>
-        <translation>Fechar...</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Abrir...</translation>
-    </message>
-    <message>
-        <source>Freeze...</source>
-        <translation>Congelar...</translation>
-    </message>
-    <message>
-        <source>Thaw...</source>
-        <translation>Descongelar....</translation>
-    </message>
-    <message>
         <source>Accounting Periods:</source>
         <translation>Períodos de Contas:</translation>
     </message>
@@ -6943,6 +6919,34 @@ returned %2
         <source>Error Getting Periods</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Freeze</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Fechar</translation>
+    </message>
+    <message>
+        <source>Thaw</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">Aberto</translation>
+    </message>
 </context>
 <context>
     <name>accountingYearPeriod</name>
@@ -6998,24 +7002,8 @@ returned %2
         <translation>Fechado</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>Close...</source>
         <translation>Fechar...</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Abrir...</translation>
     </message>
     <message>
         <source>Fiscal Years:</source>
@@ -7072,6 +7060,22 @@ returned %2
     <message>
         <source>Error Opening Requested Period</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">Aberto</translation>
     </message>
 </context>
 <context>
@@ -7167,14 +7171,6 @@ Check the database server log for errors.</source>
         <translation>Endereço do Vendedor</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Local</translation>
     </message>
@@ -7263,14 +7259,6 @@ Check the database server log for errors.</source>
         <translation>CEP</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Apagar</translation>
     </message>
@@ -7288,10 +7276,6 @@ Check the database server log for errors.</source>
     </message>
     <message>
         <source>View Prospect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Prospect...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7333,6 +7317,18 @@ as an Address. Please select a Prospect to edit:</source>
     <message>
         <source>Address</source>
         <translation type="unfinished">Endereço</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Create Prospect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10036,18 +10032,6 @@ Are you sure that you want to save this change?</source>
         <translation>Moeda</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>Post...</source>
         <translation>Postar...</translation>
     </message>
@@ -10094,6 +10078,18 @@ Are you sure that you want to save this change?</source>
     <message>
         <source>Error Posting Bank Adjustment</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -11475,10 +11471,6 @@ Se não, clique Não e mude a Conta Bancária no campo REMETER PARA.</translatio
         <translation>Moeda</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Cust. #</source>
         <translation>Clie. #</translation>
     </message>
@@ -11495,16 +11487,8 @@ Se não, clique Não e mude a Conta Bancária no campo REMETER PARA.</translatio
         <translation>Forma de Pagamento</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Check</source>
         <translation>Cheque</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
     </message>
     <message>
         <source>Cash Receipts</source>
@@ -11593,6 +11577,18 @@ Se não, clique Não e mude a Conta Bancária no campo REMETER PARA.</translatio
     <message>
         <source>Deposit Date</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -12851,10 +12847,6 @@ You may not create duplicate Forms.</source>
 <context>
     <name>companies</name>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">Visualizar...</translation>
-    </message>
-    <message>
         <source>Number</source>
         <translation>Número</translation>
     </message>
@@ -12867,16 +12859,8 @@ You may not create duplicate Forms.</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Companies:</source>
         <translation>Empresas:</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -12905,6 +12889,18 @@ You may not create duplicate Forms.</source>
     <message>
         <source>Error Retrieving Company Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -14275,16 +14271,8 @@ Você tem certeza que quer habilitar a verificação estrita de país?</translat
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>Novo...</translation>
-    </message>
-    <message>
         <source>Windows</source>
         <translation>Windows</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Default Import File Directory</source>
@@ -16219,14 +16207,6 @@ Você tem certeza que quer habilitar a verificação estrita de país?</translat
         <translation>Eliminando contato</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Last Name</source>
         <translation>Sobrenome</translation>
     </message>
@@ -16494,6 +16474,14 @@ Você tem certeza que quer habilitar a verificação estrita de país?</translat
         <source>Unmarking failed</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
 </context>
 <context>
     <name>contract</name>
@@ -16663,27 +16651,11 @@ Contract Number you have specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete Purchase Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Release Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Receipt...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Return...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16734,6 +16706,14 @@ Contract Number you have specified.</source>
         <source>Error Rejecting Contract Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>contracts</name>
@@ -16750,24 +16730,12 @@ Contract Number you have specified.</source>
         <translation type="unfinished">Nunca</translation>
     </message>
     <message>
-        <source>Copy...</source>
-        <translation type="unfinished">Copiar...</translation>
-    </message>
-    <message>
         <source>Do you want to deactivate the associated Item Sources?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Are you sure that you want to delete the selected Contract?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="unfinished">Apagar...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
     </message>
     <message>
         <source>Contracts</source>
@@ -16814,10 +16782,6 @@ Contract Number you have specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">Visualizar...</translation>
-    </message>
-    <message>
         <source>Delete Contract</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16828,6 +16792,22 @@ Contract Number you have specified.</source>
     <message>
         <source>Error Deleting Contract</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">Copiar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -17513,16 +17493,8 @@ Please check the values of these dates.</source>
         <translation>Exibir categorias de custo</translation>
     </message>
     <message>
-        <source>List Items in this Inventory Cost Category...</source>
-        <translation>Listar Itens desta Categoria de Custo do Estoque...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The selected Cost Category cannot be deleted as it still contains Items. You must reassign these Items before deleting this Cost Category.</source>
         <translation>As categorias de custo selecionadas não podem ser eliminadas por ainda conterem itens. Redefinir os itens antes de eliminar esta categoria de custo</translation>
-    </message>
-    <message>
-        <source>Delete Inventory Cost Category...</source>
-        <translation>Apagar Categoria de Custo do Estoque...</translation>
     </message>
     <message>
         <source>Delete Cost Category</source>
@@ -17537,16 +17509,8 @@ Please check the values of these dates.</source>
         <translation>Categorias de custo em uso</translation>
     </message>
     <message>
-        <source>Edit Inventory Cost Cateogry...</source>
-        <translation>Editar Categoria de Custo do Estoque...</translation>
-    </message>
-    <message>
         <source>&amp;Delete</source>
         <translation>Apagar</translation>
-    </message>
-    <message>
-        <source>View Inventory Cost Category...</source>
-        <translation>Visualizar Categoria de Custo do Estoque...</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -17582,6 +17546,22 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Error Deleting Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Inventory Cost Cateogry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Inventory Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List Items in this Inventory Cost Category</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19511,15 +19491,15 @@ Item: %2 - %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Sales Credit Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You may not view or edit this Sales Credit as it references a Site for which you have not been granted privileges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -20318,10 +20298,6 @@ Item: %2 - %3</source>
         <translation type="unfinished">Primeiro</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Customer</source>
         <translation>Cliente</translation>
     </message>
@@ -20378,10 +20354,6 @@ Item: %2 - %3</source>
         <translation>Parceiro</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Contact Name Pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20429,13 +20401,17 @@ Item: %2 - %3</source>
         <source>Are you sure you want to delete these Account(s)?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
 </context>
 <context>
     <name>currencies</name>
-    <message>
-        <source>Delete...</source>
-        <translation type="unfinished">Apagar...</translation>
-    </message>
     <message>
         <source>Cannot delete base currency</source>
         <translation>Não é possível apagar a moeda base</translation>
@@ -20449,16 +20425,8 @@ Item: %2 - %3</source>
         <translation>Abreviação</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Your system is configured to use multiple Currencies, but the Currency Gain/Loss Account and/or the G/L Series Discrepancy Account does not appear to be configured correctly. You should define these Accounts in &apos;System | Configure Modules | Configure G/L...&apos; before posting any transactions in the system.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -20519,6 +20487,18 @@ Item: %2 - %3</source>
     <message>
         <source>Exchange Rate Comments:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -20701,18 +20681,6 @@ Please check the values of these dates.</source>
         <translation>Última</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Base Currency:</source>
         <translation>Base Monetária:</translation>
     </message>
@@ -20763,6 +20731,18 @@ Please check the values of these dates.</source>
     <message>
         <source>Error Retrieving Currency Exchange Rates</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -23236,10 +23216,6 @@ to be deleted.</source>
         <translation type="unfinished">Data de Afixação</translation>
     </message>
     <message>
-        <source>View Apply-To Debit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Apply-To</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23272,19 +23248,7 @@ to be deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Source Credit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Source Check...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You must select the Vendor(s) whose A/R Applications you wish to view.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Apply-To Voucher...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -23345,6 +23309,22 @@ to be deleted.</source>
     </message>
     <message>
         <source>Cannot set Parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Source Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Source Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Voucher</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -23408,17 +23388,9 @@ to be deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>You cannot set this item as On Hold.
 This Item is already selected for payment.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Latest</source>
@@ -23481,10 +23453,6 @@ This Item is already selected for payment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation type="unfinished">Visualizar Vale...</translation>
-    </message>
-    <message>
         <source>Access Denied</source>
         <translation type="unfinished">Acesso Negado</translation>
     </message>
@@ -23511,6 +23479,18 @@ This Item is already selected for payment.</source>
     <message>
         <source>Apply Credit Memo...</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -23601,18 +23581,6 @@ This Item is already selected for payment.</source>
     </message>
     <message>
         <source>&lt;p&gt;The Credit Memo #%1 could not be found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Source Credit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Apply-To Debit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Apply-To Invoice...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -23727,6 +23695,18 @@ This Item is already selected for payment.</source>
         <source>Cannot Set Parameters</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Source Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspAROpenItems</name>
@@ -23753,10 +23733,6 @@ This Item is already selected for payment.</source>
     <message>
         <source>Invoice</source>
         <translation>Fatura</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>Visualizar Facturação...</translation>
     </message>
     <message>
         <source>Void Posted Invoice?</source>
@@ -23924,10 +23900,6 @@ Would you like to post it anyway?</source>
         <translation>Exibir</translation>
     </message>
     <message>
-        <source>Edit Posted Invoice...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit Posted Invoice?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23948,22 +23920,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished">Erro de processamento no cartão de crédito</translation>
     </message>
     <message>
-        <source>Shipments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Visualizar Ordem de Compras...</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Apply Credit Memo...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23972,28 +23928,8 @@ Would you like to post it anyway?</source>
         <translation>A Receber</translation>
     </message>
     <message>
-        <source>View Invoice Information...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Receivable Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>As of Date:</source>
         <translation type="unfinished">A partir da Data:</translation>
-    </message>
-    <message>
-        <source>New Cash Receipt...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Receivable Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Invoice...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Credit Card</source>
@@ -24020,10 +23956,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Apagar</translation>
     </message>
@@ -24044,18 +23976,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Incident...</source>
-        <translation type="unfinished">Visualizar incidente...</translation>
-    </message>
-    <message>
-        <source>Edit Incident...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Incident...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Customer Deposit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24070,10 +23990,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Credit Card Processing Warning</source>
         <translation type="unfinished">Aviso de processamento no cartão de crédito</translation>
-    </message>
-    <message>
-        <source>Open Customer...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Retrieving AR Information</source>
@@ -24147,15 +24063,7 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Void Posted Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Credit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -24190,19 +24098,79 @@ Would you like to post it anyway?</source>
         <source>Could not void invoice because the accounting period for the posting date is closed. Try again with a different date?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open Customer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Posted Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished">Expedições</translation>
+    </message>
+    <message>
+        <source>New Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspAllocations</name>
     <message>
-        <source>View Transfer Order...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Running Bal.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Transfer Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -24246,14 +24214,6 @@ Would you like to post it anyway?</source>
         <translation>Item Pai</translation>
     </message>
     <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Visualizar Ordem de Compras...</translation>
-    </message>
-    <message>
         <source>Show Availability as of:</source>
         <translation>Mostrar Disponibilidade com:</translation>
     </message>
@@ -24274,7 +24234,23 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -24289,10 +24265,6 @@ Would you like to post it anyway?</source>
         <translation>Lista de Materiais</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Threshold Days:</source>
         <translation>Número de Dias Mínimo:</translation>
     </message>
@@ -24303,10 +24275,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Bill Of Materials</source>
         <translation>Lista de Materiais</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Never</source>
@@ -24324,6 +24292,14 @@ Would you like to post it anyway?</source>
         <source>You must enter a valid item number.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
 </context>
 <context>
     <name>dspBacklog</name>
@@ -24334,14 +24310,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Ship/Sched.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation type="unfinished">Visualizar Ordem...</translation>
-    </message>
-    <message>
-        <source>View Item...</source>
-        <translation type="unfinished">Visualizar Item...</translation>
     </message>
     <message>
         <source>Customer Type</source>
@@ -24366,10 +24334,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Sales Rep.</source>
         <translation type="unfinished">Rel. de Vendas:</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation type="unfinished">Editar Item...</translation>
     </message>
     <message>
         <source>Site</source>
@@ -24440,10 +24404,6 @@ Would you like to post it anyway?</source>
         <translation>Cliente</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation type="unfinished">Editar Ordem...</translation>
-    </message>
-    <message>
         <source>Start Order Date</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24478,6 +24438,22 @@ Would you like to post it anyway?</source>
     <message>
         <source>QOH</source>
         <translation type="unfinished">QEM</translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -24709,20 +24685,12 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unit Price</source>
         <translation type="unfinished">Preço Unitário</translation>
     </message>
     <message>
         <source>Sales Rep.</source>
         <translation type="unfinished">Rel. de Vendas:</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Visualizar Ordem de Compras...</translation>
     </message>
     <message>
         <source>Customer Group</source>
@@ -24769,16 +24737,8 @@ Would you like to post it anyway?</source>
         <translation type="unfinished">Data final</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ordered</source>
         <translation type="unfinished">Ordenado</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Currency</source>
@@ -24830,6 +24790,22 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Line Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -24937,10 +24913,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Item</source>
         <translation>Item</translation>
-    </message>
-    <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Brief Sales History</source>
@@ -25062,6 +25034,10 @@ Would you like to post it anyway?</source>
         <source>Cust. P/O #</source>
         <translation type="unfinished">Cli. O/C No.</translation>
     </message>
+    <message>
+        <source>View Sales Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspCapacityUOMsByClassCode</name>
@@ -25105,16 +25081,16 @@ Would you like to post it anyway?</source>
 <context>
     <name>dspCapacityUOMsByParameter</name>
     <message>
-        <source>Edit Item...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Capacity UOMs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Capacity UOMs by Class Code</source>
         <translation type="unfinished">Capacidade das UMs por código de classe</translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -25171,10 +25147,6 @@ Would you like to post it anyway?</source>
         <translation>Primeira</translation>
     </message>
     <message>
-        <source>View Cash Receipt...</source>
-        <translation type="unfinished">Ver recibo de dinheiro...</translation>
-    </message>
-    <message>
         <source>Wire Trans.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25215,10 +25187,6 @@ Would you like to post it anyway?</source>
         <translation>Última</translation>
     </message>
     <message>
-        <source>Edit Cash Receipt...</source>
-        <translation type="unfinished">Editar recibo em dinheiro...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;This will reverse all applications related to this cash receipt.  Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25247,10 +25215,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Receivable Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>AmEx</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25264,10 +25228,6 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Cert. Check</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Receivable Item...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -25340,6 +25300,22 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Date not Entered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Receivable Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -25466,10 +25442,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Payment...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Void Posted Payment...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25483,6 +25455,10 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Invalid dates specified. Please specify a valid date range.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Payment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -25537,10 +25513,6 @@ Would you like to post it anyway?</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <source>Maintain Item Costs...</source>
-        <translation type="unfinished">Manter Custos do Item...</translation>
-    </message>
-    <message>
         <source>UOM</source>
         <translation>UDM</translation>
     </message>
@@ -25561,10 +25533,6 @@ Would you like to post it anyway?</source>
         <translation>Validade</translation>
     </message>
     <message>
-        <source>View Item Costing...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unit Cost</source>
         <translation>Custo Unitário</translation>
     </message>
@@ -25574,6 +25542,14 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Need Item Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintain Item Costs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Costing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -25887,27 +25863,11 @@ Would you like to post it anyway?</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <source>Enter Count Slip...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Count Slip Edit List...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Pending Inventory History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Automatically Update</source>
         <translation>Actualizar Automaticamente</translation>
     </message>
     <message>
         <source>Post Count Tag...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Count Slip...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -25920,10 +25880,6 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Cannot Delete Count tag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Count Tag...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -26054,6 +26010,26 @@ Would you like to post it anyway?</source>
         <source>Error Retrieving Count Tag Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enter Count Slip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count Slip Edit List</source>
+        <translation type="unfinished">Lista de edição de Comprovantes de Contagem</translation>
+    </message>
+    <message>
+        <source>View Pending Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Count Slip</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspCountTagsBase</name>
@@ -26098,10 +26074,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished">Qtd. Contada</translation>
     </message>
     <message>
-        <source>View Count Tag...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%</source>
         <translation>%</translation>
     </message>
@@ -26131,6 +26103,10 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Created By</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -26377,10 +26353,6 @@ Would you like to post it anyway?</source>
         <translation>Transferência bancária</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Other</source>
         <translation>Outro</translation>
     </message>
@@ -26407,10 +26379,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Customer History</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Please enter a valid Start Date.</source>
@@ -26451,6 +26419,14 @@ Would you like to post it anyway?</source>
     <message>
         <source>Discover Card</source>
         <translation>Discover Card</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -26591,10 +26567,6 @@ Would you like to post it anyway?</source>
         <translation>Recibos</translation>
     </message>
     <message>
-        <source>View Transaction Information...</source>
-        <translation>Visualizar Informação da Transacção...</translation>
-    </message>
-    <message>
         <source>All Transactions</source>
         <translation>Todas as Transacções</translation>
     </message>
@@ -26652,6 +26624,10 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Active:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transaction Information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -26712,10 +26688,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Issues</source>
         <translation>Emições</translation>
-    </message>
-    <message>
-        <source>View Transaction Information...</source>
-        <translation>Visualizar Informação da Transacção...</translation>
     </message>
     <message>
         <source>Order #</source>
@@ -26844,6 +26816,10 @@ Would you like to post it anyway?</source>
     <message>
         <source>Phone</source>
         <translation type="unfinished">Telefone</translation>
+    </message>
+    <message>
+        <source>View Transaction Information</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -27335,10 +27311,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Transactions...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Budget
 Total</source>
         <translation type="unfinished"></translation>
@@ -27466,6 +27438,10 @@ Total</source>
     </message>
     <message>
         <source>Please make sure all accounting periods are associated with a quarter and fiscal year before using this application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transactions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -27761,10 +27737,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Journal Transactions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27785,15 +27757,7 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reverse Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>edited</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Journal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -27860,6 +27824,18 @@ Total</source>
         <source>Error Deleting GL Series Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspGLTransactions</name>
@@ -27868,16 +27844,8 @@ Total</source>
         <translation type="unfinished">Ativo</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Sub Type</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>Visualizar Vale...</translation>
     </message>
     <message>
         <source>Expense</source>
@@ -27952,10 +27920,6 @@ Total</source>
         <translation>Débito</translation>
     </message>
     <message>
-        <source>View Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Journal #</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27966,10 +27930,6 @@ Total</source>
     <message>
         <source>Start Date</source>
         <translation>Data de Início</translation>
-    </message>
-    <message>
-        <source>View Journal Series...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Posted</source>
@@ -27988,39 +27948,19 @@ Total</source>
         <translation type="unfinished">Centro de Lucro</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>Visualizar Facturação...</translation>
-    </message>
-    <message>
         <source>Username</source>
         <translation>Nome de Utilizador</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Running Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Inventory History...</source>
-        <translation>Visualizar Histórico do Estoque...</translation>
-    </message>
-    <message>
         <source>General Ledger Transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Shipment...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Beginning Balance:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Credit Memo...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -28029,18 +27969,6 @@ Total</source>
     </message>
     <message>
         <source>Running Total</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Visualizar Ordem de Compras...</translation>
-    </message>
-    <message>
-        <source>View Debit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View WO History...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -28065,6 +27993,54 @@ Total</source>
     </message>
     <message>
         <source>Error Updating GL Account Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>View Journal Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Shipment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View WO History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28178,10 +28154,6 @@ Total</source>
         <translation>Validade</translation>
     </message>
     <message>
-        <source>View Item Inventory History...</source>
-        <translation>Visualizar Histórico do Item do Estoque...</translation>
-    </message>
-    <message>
         <source>Indented Where Used</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28189,16 +28161,16 @@ Total</source>
         <source>Show &amp;Expired Components</source>
         <translation>Mostrar Componentes &amp;Expirados</translation>
     </message>
+    <message>
+        <source>View Item Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInvalidBillsOfMaterials</name>
     <message>
         <source>Invalid Bill of Material Items</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Edit Parent Item Site...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Parent Item #</source>
@@ -28213,14 +28185,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Parent Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Component Item Site...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bills of Materials without Component Item Sites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28231,6 +28195,18 @@ Total</source>
     <message>
         <source>Site</source>
         <translation>Local</translation>
+    </message>
+    <message>
+        <source>Edit Parent Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Parent Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Component Item Site</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -28244,16 +28220,8 @@ Total</source>
         <translation type="unfinished">Nvl de Reord.:</translation>
     </message>
     <message>
-        <source>View Inventory History...</source>
-        <translation>Visualizar Histórico do Estoque...</translation>
-    </message>
-    <message>
         <source>Class Code</source>
         <translation>Código de classe</translation>
-    </message>
-    <message>
-        <source>View Allocations...</source>
-        <translation type="unfinished">Visualizar Atribuições...</translation>
     </message>
     <message>
         <source>OUT Level</source>
@@ -28268,16 +28236,8 @@ Total</source>
         <translation type="unfinished">Em Ordem</translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished">Disponibilidade de Execução</translation>
-    </message>
-    <message>
         <source>Dates</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Misc. Inventory Count...</source>
-        <translation>Inserir Contagem de Estoque Diverso... </translation>
     </message>
     <message>
         <source>Enter Valid Date</source>
@@ -28312,10 +28272,6 @@ Total</source>
         <translation type="unfinished">Emitir Etiqueta de Contagem...</translation>
     </message>
     <message>
-        <source>Create Purchase Request...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unallocated</source>
         <translation type="unfinished">Não Atribuido</translation>
     </message>
@@ -28340,10 +28296,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Substitute Availability...</source>
-        <translation type="unfinished">Visualizar Disponibilidade do Substituto...</translation>
-    </message>
-    <message>
         <source>Class Code Pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28353,10 +28305,6 @@ Total</source>
     </message>
     <message>
         <source>Source Vendor Type Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Purchase Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -28370,10 +28318,6 @@ Total</source>
     <message>
         <source>Create W/O...</source>
         <translation type="unfinished">Criar O/T</translation>
-    </message>
-    <message>
-        <source>View Orders...</source>
-        <translation type="unfinished">Visualizar Ordens...</translation>
     </message>
     <message>
         <source>By Source Vendor</source>
@@ -28432,10 +28376,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter Adjustment...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A Class</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28459,16 +28399,48 @@ Total</source>
         <source>Current QOH Avail.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Purchase Order</source>
+        <translation type="unfinished">Criar Pedido de Compra</translation>
+    </message>
+    <message>
+        <source>View Substitute Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Inventory Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Adjustment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInventoryAvailabilityByCustomerType</name>
     <message>
         <source>Sched./Due Date</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Show Reservations...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Order/Start Date</source>
@@ -28555,23 +28527,27 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation type="unfinished">Editar Ordem...</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation type="unfinished">Visualizar Ordem...</translation>
-    </message>
-    <message>
-        <source>Print Packing List...</source>
-        <translation type="unfinished">Imprimir Lista de Enpacotamento...</translation>
-    </message>
-    <message>
         <source>Error Retrieving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Updating Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Packing List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Reservations</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28674,15 +28650,7 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show Reservations...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This Reserve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reserve Stock...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -28699,6 +28667,14 @@ Total</source>
     </message>
     <message>
         <source>Error Updating Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Reservations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reserve Stock</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28765,28 +28741,12 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Post Misc. Production...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;You must specify a valid Work Order Number.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create P/R...</source>
-        <translation type="unfinished">Criar P/C...</translation>
-    </message>
-    <message>
-        <source>View Inventory History...</source>
-        <translation>Visualizar Histórico do Estoque...</translation>
-    </message>
-    <message>
         <source>Invalid W/O Selected</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Misc. Inventory Count...</source>
-        <translation>Inserir Contagem de Inventario Diverso... </translation>
     </message>
     <message>
         <source>Insufficient Inventory</source>
@@ -28800,6 +28760,22 @@ Total</source>
         <source>Available QOH</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Misc. Production</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Inventory Count</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInventoryHistory</name>
@@ -28808,16 +28784,8 @@ Total</source>
         <translation type="unfinished">Padrão</translation>
     </message>
     <message>
-        <source>View Transaction Information...</source>
-        <translation type="unfinished">Visualizar Informação da Transacção...</translation>
-    </message>
-    <message>
         <source>QOH Before</source>
         <translation type="unfinished">QEM Antes</translation>
-    </message>
-    <message>
-        <source>Edit Transaction Information...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>User</source>
@@ -28890,10 +28858,6 @@ Total</source>
     <message>
         <source>Transfers</source>
         <translation type="unfinished">Transferências</translation>
-    </message>
-    <message>
-        <source>View Work Order Information...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>UOM</source>
@@ -29003,16 +28967,24 @@ Total</source>
         <source>ABC Class</source>
         <translation type="unfinished">Classe ABC</translation>
     </message>
+    <message>
+        <source>View Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order Information</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInventoryLocator</name>
     <message>
         <source>Locations</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Reassign Lot/Serial #...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>N/A</source>
@@ -29047,10 +29019,6 @@ Total</source>
         <translation>Qt.</translation>
     </message>
     <message>
-        <source>Relocate...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Local</translation>
     </message>
@@ -29077,6 +29045,14 @@ Total</source>
     <message>
         <source>Lot/Serial</source>
         <translation type="unfinished">Lote/N.Série</translation>
+    </message>
+    <message>
+        <source>Relocate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reassign Lot/Serial #</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -29257,10 +29233,6 @@ Total</source>
         <translation>Data</translation>
     </message>
     <message>
-        <source>View Customer Deposit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Credit</source>
         <translation>Crédito</translation>
     </message>
@@ -29309,18 +29281,6 @@ Total</source>
         <translation>Total</translation>
     </message>
     <message>
-        <source>View Credit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>Visualizar Facturação...</translation>
-    </message>
-    <message>
-        <source>View Debit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Credit Memo Not Found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -29346,6 +29306,22 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Credit Memo Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Customer Deposit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29502,10 +29478,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Costing Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Std. Cost</source>
         <translation type="unfinished"></translation>
     </message>
@@ -29528,6 +29500,10 @@ Total</source>
     <message>
         <source>Never</source>
         <translation>Nunca</translation>
+    </message>
+    <message>
+        <source>View Costing Detail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -29571,14 +29547,6 @@ Total</source>
     <message>
         <source>Post Actual Costs...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Item Costing Summary...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maintain Item Costs...</source>
-        <translation>Manter Custos do Item...</translation>
     </message>
     <message>
         <source>Update Actual Costs...</source>
@@ -29630,6 +29598,14 @@ Total</source>
     </message>
     <message>
         <source>Item Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintain Item Costs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Costing Summary</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29808,14 +29784,6 @@ Total</source>
         <translation type="unfinished">Tipo de Pedido</translation>
     </message>
     <message>
-        <source>Edit Item Source...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Item Source...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&apos;Always&apos;</source>
         <translation type="unfinished">&apos;&apos;Sempre&apos;&apos;</translation>
     </message>
@@ -29833,6 +29801,14 @@ Total</source>
     </message>
     <message>
         <source>Drop Ship</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Source</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29931,10 +29907,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
-    </message>
-    <message>
         <source>Item Number Pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -29945,10 +29917,6 @@ Total</source>
     <message>
         <source>Vendor Ranking</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Visualizar...</translation>
     </message>
     <message>
         <source>Set as Default...</source>
@@ -30015,12 +29983,20 @@ Total</source>
         <translation type="unfinished">Copiar...</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation type="unfinished">Apagar...</translation>
-    </message>
-    <message>
         <source>Error Deleting Item Source Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -30042,19 +30018,19 @@ Total</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <source>Create Item Source...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Purchased</source>
         <translation>Comprado</translation>
     </message>
     <message>
-        <source>Edit Item...</source>
-        <translation>Editar Item...</translation>
+        <source>Items without Item Sources</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Items without Item Sources</source>
+        <source>Create Item Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -30240,52 +30216,52 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Debit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>GL Journal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
     <message>
-        <source>View Journal Series...</source>
+        <source>View Journal Series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation type="unfinished">Visualizar Vale...</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation type="unfinished">Visualizar Facturação...</translation>
-    </message>
-    <message>
-        <source>View Shipment...</source>
+        <source>View Voucher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Credit Memo...</source>
+        <source>View Invoice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
+        <source>View Purchase Order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View WO History...</source>
+        <source>View Shipment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Visualizar Ordem de Compras...</translation>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Inventory History...</source>
-        <translation>Visualizar Histórico do Estoque...</translation>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View WO History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -30297,14 +30273,6 @@ Total</source>
     <message>
         <source>Item Number</source>
         <translation>Número do item</translation>
-    </message>
-    <message>
-        <source>View Orders...</source>
-        <translation>Visualizar Ordens...</translation>
-    </message>
-    <message>
-        <source>View Allocations...</source>
-        <translation>Visualizar Atribuições...</translation>
     </message>
     <message>
         <source>Issue W/O...</source>
@@ -30384,6 +30352,14 @@ Total</source>
     </message>
     <message>
         <source>Error Printing MRP Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -30829,36 +30805,16 @@ Total</source>
         <translation>Ordens de Trabalho</translation>
     </message>
     <message>
-        <source>Edit Quote...</source>
-        <translation>Editar Cotação...</translation>
-    </message>
-    <message>
         <source>Released</source>
         <translation>Liberado</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Visualizar Ordem de Compras...</translation>
-    </message>
-    <message>
-        <source>View Quote...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unreleased</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>Visualizar Facturação...</translation>
-    </message>
-    <message>
         <source>Unposted</source>
         <translation>Não Lançado</translation>
-    </message>
-    <message>
-        <source>Edit Invoice...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Closed</source>
@@ -30905,10 +30861,6 @@ Total</source>
         <translation>Valor</translation>
     </message>
     <message>
-        <source>Edit Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open</source>
         <translation>Aberto</translation>
     </message>
@@ -30925,72 +30877,20 @@ Total</source>
         <translation>Pedidos de Venda</translation>
     </message>
     <message>
-        <source>View Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Request...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Status</source>
         <translation>Posição</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Qty</source>
         <translation>Qt</translation>
     </message>
     <message>
-        <source>Edit Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invoices</source>
         <translation>Faturas</translation>
     </message>
     <message>
-        <source>Edit Purchase Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Project Required</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order Item...</source>
-        <translation type="unfinished">Visualizar Item do Pedido de Compra</translation>
     </message>
     <message>
         <source>Sales Order</source>
@@ -31085,14 +30985,6 @@ Total</source>
         <translation type="unfinished">Tarefa</translation>
     </message>
     <message>
-        <source>Edit Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Concept</source>
         <translation type="unfinished"></translation>
     </message>
@@ -31104,6 +30996,90 @@ Total</source>
         <source>Please save the Project first.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspOrders</name>
@@ -31112,16 +31088,8 @@ Total</source>
         <translation></translation>
     </message>
     <message>
-        <source>Reschedule P/O Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Required</source>
         <translation>Necessário</translation>
-    </message>
-    <message>
-        <source>Reprioritize W/O...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Total</source>
@@ -31138,10 +31106,6 @@ Total</source>
     <message>
         <source>Balance</source>
         <translation>Saldo</translation>
-    </message>
-    <message>
-        <source>Reschedule W/O...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Item Site Lead Time</source>
@@ -31164,18 +31128,6 @@ Total</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <source>Print Traveler...</source>
-        <translation>Imprimir Viajante...</translation>
-    </message>
-    <message>
-        <source>Change P/O Item Quantity...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change W/O Quantity...</source>
-        <translation>Alterar Quantidade de O/T...</translation>
-    </message>
-    <message>
         <source>Show Availability as of:</source>
         <translation>Mostrar Disponibilidade com:</translation>
     </message>
@@ -31193,6 +31145,30 @@ Total</source>
     </message>
     <message>
         <source>Date Range:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule P/O Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change P/O Item Quantity</source>
+        <translation type="unfinished">Alterar a Quantidade do Item da O/C</translation>
+    </message>
+    <message>
+        <source>Reprioritize W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Traveler</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -31271,16 +31247,8 @@ Total</source>
         <translation>Fechado</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>Editar Ordem...</translation>
-    </message>
-    <message>
         <source>Please eneter a valid End Date.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>Visualizar Ordem...</translation>
     </message>
     <message>
         <source>Partial</source>
@@ -31306,16 +31274,20 @@ Total</source>
         <source>Earliest</source>
         <translation>Primeira</translation>
     </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPOsByVendor</name>
     <message>
         <source>Purchase Orders</source>
         <translation type="unfinished">Pedidos de Compra</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>Editar Ordem...</translation>
     </message>
     <message>
         <source>Date</source>
@@ -31340,10 +31312,6 @@ Total</source>
     <message>
         <source>Due Date</source>
         <translation>Data Limite</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>Visualizar Ordem...</translation>
     </message>
     <message>
         <source>Order Date</source>
@@ -31393,6 +31361,14 @@ Total</source>
         <source>Earliest</source>
         <translation>Primeira</translation>
     </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPartiallyShippedOrders</name>
@@ -31409,10 +31385,6 @@ Total</source>
         <translation>Nenhum</translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation>Visualizar Ordem...</translation>
-    </message>
-    <message>
         <source>Prices</source>
         <translation type="unfinished"></translation>
     </message>
@@ -31423,14 +31395,6 @@ Total</source>
     <message>
         <source>Show</source>
         <translation>Exibir</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>Editar Ordem...</translation>
-    </message>
-    <message>
-        <source>Print Packing List...</source>
-        <translation>Imprimir Lista de Enpacotamento...</translation>
     </message>
     <message>
         <source>Credit</source>
@@ -31504,6 +31468,18 @@ Total</source>
     <message>
         <source>Tax</source>
         <translation type="unfinished">Imposto</translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Packing List</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -31600,10 +31576,6 @@ Total</source>
         <translation></translation>
     </message>
     <message>
-        <source>View BOM Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>UOM</source>
         <translation>UDM</translation>
     </message>
@@ -31648,10 +31620,6 @@ Total</source>
         <translation>Efetivo(a)</translation>
     </message>
     <message>
-        <source>Edit BOM Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Qty. Per</source>
         <translation>Qt. por</translation>
     </message>
@@ -31667,13 +31635,17 @@ Total</source>
         <source>Cutoff Date:</source>
         <translation>Data de Interrupção:</translation>
     </message>
+    <message>
+        <source>Edit BOM Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View BOM Item</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPlannedOrders</name>
-    <message>
-        <source>Delete Order...</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Type</source>
         <translation>Tipo</translation>
@@ -31683,23 +31655,7 @@ Total</source>
         <translation>Item</translation>
     </message>
     <message>
-        <source>Usage Statistics...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation type="unfinished">Editar Ordem...</translation>
-    </message>
-    <message>
         <source>Firm Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished">Disponibilidade de Execução</translation>
-    </message>
-    <message>
-        <source>Soften Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -31796,6 +31752,26 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soften Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -32301,10 +32277,6 @@ Total</source>
         <translation>Data de Recepção</translation>
     </message>
     <message>
-        <source>Create Voucher...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>N/A</source>
         <translation>N/A</translation>
     </message>
@@ -32424,6 +32396,10 @@ Total</source>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPoItemsByDate</name>
@@ -32512,10 +32488,6 @@ Total</source>
         <translation>O/C No.</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>Editar Ordem...</translation>
-    </message>
-    <message>
         <source>Vendor</source>
         <translation>Fornecedor</translation>
     </message>
@@ -32536,36 +32508,12 @@ Total</source>
         <translation>Devolvido</translation>
     </message>
     <message>
-        <source>Change Qty...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>All Purchasing Agents</source>
         <translation>Todos os Agentes de Compras</translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation>Visualizar Ordem...</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>Disponibilidade de Execução</translation>
-    </message>
-    <message>
-        <source>View Item...</source>
-        <translation>Visualizar Item...</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>Editar Item...</translation>
-    </message>
-    <message>
         <source>Reschedule...</source>
         <translation>Reagendar...</translation>
-    </message>
-    <message>
-        <source>Open Item...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close Item...</source>
@@ -32607,6 +32555,34 @@ Total</source>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Qty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Item</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPoItemsByItem</name>
@@ -32635,10 +32611,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Item...</source>
-        <translation>Editar Item...</translation>
-    </message>
-    <message>
         <source>Received</source>
         <translation>Recebido</translation>
     </message>
@@ -32659,24 +32631,8 @@ Total</source>
         <translation>Por favor insira um Número de Item válido.</translation>
     </message>
     <message>
-        <source>Open Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Item...</source>
-        <translation>Visualizar Item...</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>Disponibilidade de Execução</translation>
-    </message>
-    <message>
         <source>Due Date</source>
         <translation>Data Limite</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>Editar Ordem...</translation>
     </message>
     <message>
         <source>P/O #</source>
@@ -32693,10 +32649,6 @@ Total</source>
     <message>
         <source>Reschedule...</source>
         <translation>Reagendar...</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>Visualizar Ordem...</translation>
     </message>
     <message>
         <source>Change Qty...</source>
@@ -32746,6 +32698,30 @@ Total</source>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Item</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPoItemsByVendor</name>
@@ -32758,10 +32734,6 @@ Total</source>
         <translation>Todos os Itens</translation>
     </message>
     <message>
-        <source>View Item...</source>
-        <translation>Visualizar Item...</translation>
-    </message>
-    <message>
         <source>Open Items</source>
         <translation>Itens Abertos</translation>
     </message>
@@ -32770,20 +32742,12 @@ Total</source>
         <translation>Fornecedor</translation>
     </message>
     <message>
-        <source>Open Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Purchase Order Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Closed</source>
         <translation>Fechado</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>Editar Item...</translation>
     </message>
     <message>
         <source>Received</source>
@@ -32850,16 +32814,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation>Visualizar Ordem...</translation>
-    </message>
-    <message>
         <source>Close Item...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>Disponibilidade de Execução</translation>
     </message>
     <message>
         <source>Please enter a valid Vendor Number.</source>
@@ -32872,10 +32828,6 @@ Total</source>
     <message>
         <source>Returned</source>
         <translation>Devolvido</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>Editar Ordem...</translation>
     </message>
     <message>
         <source>Reschedule...</source>
@@ -32911,6 +32863,30 @@ Total</source>
     </message>
     <message>
         <source>Error Saving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -33742,16 +33718,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation>Disponibilidade de Execução</translation>
-    </message>
-    <message>
         <source>Qty.</source>
         <translation>Qt.</translation>
-    </message>
-    <message>
-        <source>Delete P/R...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sub #</source>
@@ -33810,15 +33778,23 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit P/R...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View S/O Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error opening Sales Order item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete P/R</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -33881,10 +33857,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation>Disponibilidade de Execução</translation>
-    </message>
-    <message>
         <source>Delete P/R...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -33937,15 +33909,19 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit P/R...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View S/O Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error opening Sales Order item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit P/R</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -33984,10 +33960,6 @@ Total</source>
         <translation>Item</translation>
     </message>
     <message>
-        <source>Issue Count Tag...</source>
-        <translation type="unfinished">Emitir Etiqueta de Contagem...</translation>
-    </message>
-    <message>
         <source>Item Group Pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -34024,24 +33996,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Transfer to another Site...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Location/Lot/Serial # Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Adjust this Quantity...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Descrição</translation>
-    </message>
-    <message>
-        <source>Enter Misc. Count...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>None</source>
@@ -34135,6 +34091,26 @@ Total</source>
         <source>ABC Class</source>
         <translation type="unfinished">Classe ABC</translation>
     </message>
+    <message>
+        <source>View Location/Lot/Serial # Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspQOHByLocation</name>
@@ -34175,10 +34151,6 @@ Total</source>
         <translation>Lote/N.Série</translation>
     </message>
     <message>
-        <source>Relocate...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Quantities on Hand by Location</source>
         <translation type="unfinished"></translation>
     </message>
@@ -34216,6 +34188,10 @@ Total</source>
     </message>
     <message>
         <source>T/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Relocate</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -34266,28 +34242,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Location/Lot/Serial # Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transfer to another Site...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Adjust this Quantity...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reset this Quantity to 0...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Misc. Count...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation type="unfinished">Emitir Etiqueta de Contagem...</translation>
     </message>
     <message>
         <source>Missing Selection</source>
@@ -34295,6 +34251,26 @@ Total</source>
     </message>
     <message>
         <source>&lt;p&gt;Please select a Warehouse Zone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Location/Lot/Serial # Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -34305,16 +34281,8 @@ Total</source>
         <translation></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Enter valid Start and End dates.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Show Converted</source>
@@ -34350,10 +34318,6 @@ Total</source>
     </message>
     <message>
         <source>Error Getting Quote</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Convert...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -34415,6 +34379,18 @@ Total</source>
     <message>
         <source>Quote Date</source>
         <translation>Data Cotação</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Convert</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -34480,16 +34456,8 @@ Total</source>
         <translation>Data Cotação</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Customer</source>
         <translation>Cliente</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
     </message>
     <message>
         <source>Quote Lookup by Item</source>
@@ -34498,6 +34466,14 @@ Total</source>
     <message>
         <source>You may not view, edit, or convert this Quote as it references a Site for which you have not been granted privileges.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -34523,20 +34499,12 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>
     <message>
         <source>Item Number</source>
         <translation>Número do item</translation>
-    </message>
-    <message>
-        <source>View Running Availability...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reorder Level</source>
@@ -34549,6 +34517,14 @@ Total</source>
     <message>
         <source>Proj. Avail.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Work Order</source>
+        <translation type="unfinished">Criar Ordem de Trabalho</translation>
     </message>
 </context>
 <context>
@@ -34563,10 +34539,6 @@ Total</source>
     </message>
     <message>
         <source>Item Required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Transfer Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -34590,28 +34562,12 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Running Bal.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Required</source>
         <translation>Necessário</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Visualizar Ordem de Compras...</translation>
-    </message>
-    <message>
-        <source>Edit Transfer Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>QOH:</source>
@@ -34627,6 +34583,26 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -34717,14 +34693,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Visualizar...</translation>
-    </message>
-    <message>
         <source>Undefined</source>
         <translation type="unfinished">Indefinido</translation>
     </message>
@@ -34771,6 +34739,14 @@ Total</source>
     <message>
         <source>&lt;p&gt;You may not view or edit this Return Authorization as it references a Site for which you have not been granted privileges.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -34828,14 +34804,6 @@ Total</source>
         <translation type="unfinished">Recebido</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Visualizar...</translation>
-    </message>
-    <message>
         <source>Item Required</source>
         <translation type="unfinished"></translation>
     </message>
@@ -34883,6 +34851,14 @@ Total</source>
         <source>&lt;p&gt;You may not view or edit this Return Authorization as it references a Site for which you have not been granted privileges.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
 </context>
 <context>
     <name>dspRunningAvailability</name>
@@ -34892,10 +34868,6 @@ Total</source>
     </message>
     <message>
         <source>Running Availability</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Work Order Details...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -34919,10 +34891,6 @@ Total</source>
         <translation type="unfinished">Exibir Ordens Planejadas</translation>
     </message>
     <message>
-        <source>Work Order Schedule by Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Received</source>
         <translation>Recebido</translation>
     </message>
@@ -34939,10 +34907,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ordered</source>
         <translation>Ordenado</translation>
     </message>
@@ -34952,10 +34916,6 @@ Total</source>
     </message>
     <message>
         <source>Running Avail.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Soften Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -34977,10 +34937,6 @@ Total</source>
     <message>
         <source>Planned W/O</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Visualizar Ordem de Compras...</translation>
     </message>
     <message>
         <source>Planned P/O (firmed)</source>
@@ -35015,10 +34971,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Transfer Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Site:</source>
         <translation>Local</translation>
     </message>
@@ -35043,18 +34995,6 @@ Total</source>
         <translation type="unfinished">Notas</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Transfer Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reserved</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35068,6 +35008,42 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soften Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work Order Schedule by Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -35138,10 +35114,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Base Unit Price</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35156,10 +35128,6 @@ Total</source>
     <message>
         <source>Customer</source>
         <translation>Cliente</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Ext. Price</source>
@@ -35244,6 +35212,14 @@ Total</source>
     <message>
         <source>Cust. P/O #</source>
         <translation type="unfinished">Cli. O/C No.</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -35412,28 +35388,8 @@ Total</source>
         <translation type="unfinished">Cli. O/C No.</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Visualizar...</translation>
-    </message>
-    <message>
         <source>Copy...</source>
         <translation type="unfinished">Copiar...</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shipments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Return Authorization...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No Lines</source>
@@ -35469,6 +35425,26 @@ Total</source>
     </message>
     <message>
         <source>Created By</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished">Expedições</translation>
+    </message>
+    <message>
+        <source>Create Return Authorization</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -35507,14 +35483,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Item Required</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35529,14 +35497,6 @@ Total</source>
     <message>
         <source>Closed</source>
         <translation>Fechado</translation>
-    </message>
-    <message>
-        <source>Shipments..</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create Return Authorization...</source>
@@ -35610,6 +35570,22 @@ Total</source>
         <source>Inv. Balance</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished">Expedições</translation>
+    </message>
 </context>
 <context>
     <name>dspShipmentsBase</name>
@@ -35639,10 +35615,6 @@ Total</source>
     </message>
     <message>
         <source>Cannot Track %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Query Shipment Status...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -35723,6 +35695,10 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Shipment Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query Shipment Status</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -35885,10 +35861,6 @@ Total</source>
         <translation></translation>
     </message>
     <message>
-        <source>Edit Item Master...</source>
-        <translation>Editar Item Principal...</translation>
-    </message>
-    <message>
         <source>Always</source>
         <translation type="unfinished">Sempre</translation>
     </message>
@@ -35957,10 +35929,6 @@ Total</source>
         <translation>Validade</translation>
     </message>
     <message>
-        <source>Edit Bill of Materials...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Effective:</source>
         <translation type="unfinished">Efetivo(a):</translation>
     </message>
@@ -35969,11 +35937,19 @@ Total</source>
         <translation>Hoje</translation>
     </message>
     <message>
-        <source>View Item Inventory History...</source>
-        <translation>Visualizar Histórico do Item do Estoque...</translation>
+        <source>Single Level Where Used</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Single Level Where Used</source>
+        <source>Edit Bill of Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item Master</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Inventory History</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -36008,23 +35984,11 @@ Total</source>
         <translation>UDM</translation>
     </message>
     <message>
-        <source>Issue Count Tag...</source>
-        <translation>Emitir Etiqueta de Contagem...</translation>
-    </message>
-    <message>
-        <source>Adjust this QOH...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>QOH</source>
         <translation>QEM</translation>
     </message>
     <message>
         <source>Reset this QOH to 0...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Misc. Count...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -36060,10 +36024,6 @@ Total</source>
         <translation>Local</translation>
     </message>
     <message>
-        <source>Transfer to another Site...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use Posted Costs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -36074,6 +36034,22 @@ Total</source>
     <message>
         <source>%</source>
         <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this QOH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36202,14 +36178,6 @@ Total</source>
         <translation>Disponivel</translation>
     </message>
     <message>
-        <source>View Allocations...</source>
-        <translation>Visualizar Atribuições...</translation>
-    </message>
-    <message>
-        <source>View Orders...</source>
-        <translation>Visualizar Ordens...</translation>
-    </message>
-    <message>
         <source>Show Availability as of:</source>
         <translation>Mostrar Disponibilidade com:</translation>
     </message>
@@ -36228,6 +36196,14 @@ Total</source>
     <message>
         <source>Site</source>
         <translation>Local</translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36264,16 +36240,8 @@ Total</source>
         <translation>Imprimir Lista de Enpacotamento...</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>Hold Type/Shipped</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Cannot Delete Sales Order</source>
@@ -36292,10 +36260,6 @@ Total</source>
         <translation>Primeira</translation>
     </message>
     <message>
-        <source>Inventory Availability by Sales Order...</source>
-        <translation>Disponibilidade de Estoque por Ordem de Vendas...</translation>
-    </message>
-    <message>
         <source>Latest</source>
         <translation>Última</translation>
     </message>
@@ -36306,10 +36270,6 @@ Total</source>
     <message>
         <source>Backlog</source>
         <translation type="unfinished">Pedidos em Carteira</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
     </message>
     <message>
         <source>Credit</source>
@@ -36414,6 +36374,22 @@ Total</source>
     <message>
         <source>Tax</source>
         <translation type="unfinished">Imposto</translation>
+    </message>
+    <message>
+        <source>Inventory Availability by Sales Order</source>
+        <translation type="unfinished">Disponibilidade de Estoque por Ordem de Vendas</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -36530,16 +36506,8 @@ Total</source>
         <translation>Transações</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Todos</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>Visualizar Vale...</translation>
     </message>
     <message>
         <source>Posted</source>
@@ -36548,14 +36516,6 @@ Total</source>
     <message>
         <source>Credit</source>
         <translation>Crédito</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>Visualizar Facturação...</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Username</source>
@@ -36600,6 +36560,22 @@ Total</source>
     <message>
         <source>S/R</source>
         <translation>E/R</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36765,10 +36741,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
@@ -36786,6 +36758,10 @@ Total</source>
     </message>
     <message>
         <source>Sale Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Detail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37298,10 +37274,6 @@ Rate</source>
 <context>
     <name>dspTimePhasedAvailability</name>
     <message>
-        <source>View Availability Detail...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Item Number</source>
         <translation>Número do item</translation>
     </message>
@@ -37314,28 +37286,32 @@ Rate</source>
         <translation>Local</translation>
     </message>
     <message>
-        <source>View Orders...</source>
-        <translation>Visualizar Ordens...</translation>
-    </message>
-    <message>
-        <source>View Allocations...</source>
-        <translation>Visualizar Atribuições...</translation>
-    </message>
-    <message>
         <source>Time-Phased Availability</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create W/O...</source>
-        <translation>Criar O/T</translation>
+        <source>View Availability Detail</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create P/R...</source>
-        <translation>Criar P/C...</translation>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create P/O...</source>
-        <translation>Criar O/C...</translation>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/O</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37393,10 +37369,6 @@ Rate</source>
         <translation>Número do item</translation>
     </message>
     <message>
-        <source>View Bookings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Inventory</source>
         <translation>Estoque</translation>
     </message>
@@ -37423,6 +37395,10 @@ Rate</source>
     <message>
         <source>Site</source>
         <translation>Local</translation>
+    </message>
+    <message>
+        <source>View Bookings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37462,10 +37438,6 @@ Rate</source>
     <message>
         <source>Select Calendar Periods</source>
         <translation>Seleccionar Períodos de Calendário</translation>
-    </message>
-    <message>
-        <source>View Open Items...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use Custom Calendar</source>
@@ -37527,6 +37499,10 @@ Rate</source>
         <source>The criteria you specified are not complete. Please make sure all fields are correctly filled out before running the report.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Open Items</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedOpenARItems</name>
@@ -37537,10 +37513,6 @@ Rate</source>
     <message>
         <source>0-30 Days</source>
         <translation>0-30 Dias</translation>
-    </message>
-    <message>
-        <source>View Open Items...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use</source>
@@ -37634,6 +37606,10 @@ Rate</source>
         <source>The criteria you specified are not complete. Please make sure all fields are correctly filled out before running the report.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Open Items</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedSales</name>
@@ -37698,10 +37674,6 @@ Rate</source>
         <translation>Tipo de Cliente</translation>
     </message>
     <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item</source>
         <translation>Item</translation>
     </message>
@@ -37725,16 +37697,16 @@ Rate</source>
         <source>Include Misc. Items</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Sales Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedUsageStatisticsByItem</name>
     <message>
         <source>Usage</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>View Transactions...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Transaction Type</source>
@@ -37771,6 +37743,10 @@ Rate</source>
     <message>
         <source>Transfers</source>
         <translation type="unfinished">Transferências</translation>
+    </message>
+    <message>
+        <source>View Transactions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37840,10 +37816,6 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Transactions...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>End Bal.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -37862,6 +37834,10 @@ Rate</source>
     <message>
         <source>Fiscal Year</source>
         <translation type="unfinished">Ano Fiscal</translation>
+    </message>
+    <message>
+        <source>View Transactions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37883,27 +37859,11 @@ Rate</source>
         <translation>Número do item</translation>
     </message>
     <message>
-        <source>View Inventory Availability...</source>
-        <translation>Visualizar Disponibilidade de Estoque...</translation>
-    </message>
-    <message>
         <source>UOM</source>
         <translation>UDM</translation>
     </message>
     <message>
         <source>QOH Detail.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Item Site...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Item Site...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Balance Item Site...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -37913,10 +37873,6 @@ Rate</source>
     <message>
         <source>Lot #</source>
         <translation>Lote #</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation>Emitir Etiqueta de Contagem...</translation>
     </message>
     <message>
         <source>None</source>
@@ -37936,6 +37892,26 @@ Rate</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37958,20 +37934,12 @@ Rate</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <source>Edit Item...</source>
-        <translation>Editar Item...</translation>
-    </message>
-    <message>
         <source>Exception</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show &amp;Inactive Items</source>
         <translation>Mostrar Intens Inactivos</translation>
-    </message>
-    <message>
-        <source>Create BOM...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No BOM</source>
@@ -37983,6 +37951,14 @@ Rate</source>
     </message>
     <message>
         <source>Undefined Manufactured Items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create BOM</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -38041,10 +38017,6 @@ Rate</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <source>Create Credit Memo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Uninvoiced P/O Receipts and Returns</source>
         <translation>Recebimentos e Devoluções de O/C Não-faturadas</translation>
     </message>
@@ -38058,6 +38030,10 @@ Rate</source>
     </message>
     <message>
         <source>P/O Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Credit Memo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -38268,10 +38244,6 @@ Rate</source>
         <translation></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Other</source>
         <translation>Outro</translation>
     </message>
@@ -38348,18 +38320,6 @@ Rate</source>
         <translation>O/C No.</translation>
     </message>
     <message>
-        <source>View A/P Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View G/L Series...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>Visualizar Vale...</translation>
-    </message>
-    <message>
         <source>Currency</source>
         <translation>Moeda</translation>
     </message>
@@ -38393,6 +38353,22 @@ Rate</source>
     </message>
     <message>
         <source>Please make a valid vendor selection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -38455,20 +38431,8 @@ Rate</source>
         <translation>Todas as Contas</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>Visualizar Facturação...</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>Visualizar Vale...</translation>
-    </message>
-    <message>
         <source>Account</source>
         <translation>Conta</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Username</source>
@@ -38491,11 +38455,23 @@ Rate</source>
         <translation>Débito</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
+        <source>Invalid Dates</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid Dates</source>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -38546,10 +38522,6 @@ Rate</source>
         <translation>Nº O/P</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Status</source>
         <translation>Posição</translation>
     </message>
@@ -38574,10 +38546,6 @@ Rate</source>
         <translation>Ordenado</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Due Date</source>
         <translation>Data Limite</translation>
     </message>
@@ -38588,6 +38556,14 @@ Rate</source>
     <message>
         <source>Work Order History by Class Code</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -38629,10 +38605,6 @@ Rate</source>
         <translation>Posição</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Latest</source>
         <translation>Última</translation>
     </message>
@@ -38665,10 +38637,6 @@ Rate</source>
         <translation>Data de Início</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Only Show Top Level Work Orders</source>
         <translation>Apenas Mostrar Ordens de Trabalho Nível Superior</translation>
     </message>
@@ -38679,6 +38647,14 @@ Rate</source>
     <message>
         <source>You must enter a valid item number for this report.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -38740,16 +38716,8 @@ Rate</source>
         <translation>Local</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Work Order History by W/O Number</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>W/O #</source>
@@ -38782,6 +38750,14 @@ Rate</source>
     <message>
         <source>You must enter a work order pattern for this report.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -38942,10 +38918,6 @@ Rate</source>
         <translation>Data Limite</translation>
     </message>
     <message>
-        <source>View Requirement...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
@@ -38965,28 +38937,16 @@ Rate</source>
         <source>Component Item Description 2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Requirement</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspWoSchedule</name>
     <message>
-        <source>View Bill of Materials...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>View Material Requirements...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished">Disponibilidade de Execução</translation>
-    </message>
-    <message>
         <source>Released</source>
         <translation>Liberado</translation>
-    </message>
-    <message>
-        <source>View Parent Work Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Item Group Pattern</source>
@@ -39006,14 +38966,6 @@ Rate</source>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change Quantity...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Parent Sales Order Information...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -39053,10 +39005,6 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reschedule...</source>
-        <translation type="unfinished">Reagendar...</translation>
-    </message>
-    <message>
         <source>Implode...</source>
         <translation>Implodir...</translation>
     </message>
@@ -39087,10 +39035,6 @@ Rate</source>
     <message>
         <source>Show Only Top Level</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
     </message>
     <message>
         <source>Site</source>
@@ -39137,14 +39081,6 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Inventory Availability...</source>
-        <translation>Disponibilidade de Estoque...</translation>
-    </message>
-    <message>
-        <source>Reprioritize...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Due Date</source>
         <translation>Data Limite</translation>
     </message>
@@ -39157,16 +39093,8 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The Work Order that you selected to delete was created to satisfy Sales Order demand. If you delete the selected Work Order then the Sales Order demand will remain but the Work Order to relieve that demand will not. Are you sure that you want to delete the selected Work Order?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Work Order that you selected to delete is a child of another Work Order.  If you delete the selected Work Order then the Work Order Materials Requirements for the Component Item will remain but the Work Order to relieve that demand will not. Are you sure that you want to delete the selected Work Order?</source>
@@ -39266,6 +39194,54 @@ Rate</source>
     </message>
     <message>
         <source>Return Material Item...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>View Bill of Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Material Requirements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory Availability</source>
+        <translation type="unfinished">Estoque Disponível</translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reprioritize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Parent Sales Order Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Parent Work Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -39819,10 +39795,6 @@ Rate</source>
         <translation>Código</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">Visualizar...</translation>
-    </message>
-    <message>
         <source>Show Active Only</source>
         <translation type="unfinished"></translation>
     </message>
@@ -39843,10 +39815,6 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete this Employee?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -39865,6 +39833,14 @@ Rate</source>
     <message>
         <source>Employee Group</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -39982,10 +39958,6 @@ Rate</source>
     </message>
     <message>
         <source>Vend. UOM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Receipt...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -41653,28 +41625,12 @@ Would you like to automatically create a credit memo against this return?</sourc
 <context>
     <name>eventManager</name>
     <message>
-        <source>View Todo Item...</source>
-        <translation>Visualizar Item a Fazer...</translation>
-    </message>
-    <message>
         <source>Show &amp;Acknowledged Events</source>
         <translation>Mostrar Eventos &amp;Reconhecidos</translation>
     </message>
     <message>
-        <source>View Incident...</source>
-        <translation>Visualizar incidente...</translation>
-    </message>
-    <message>
         <source>&amp;Close</source>
         <translation>Fechar</translation>
-    </message>
-    <message>
-        <source>View Purchase Order Item...</source>
-        <translation>Visualizar Item do Pedido de Compra</translation>
-    </message>
-    <message>
-        <source>View Project Task...</source>
-        <translation>Visualizar Tarefa do Projeto...</translation>
     </message>
     <message>
         <source>Events:</source>
@@ -41695,10 +41651,6 @@ Would you like to automatically create a credit memo against this return?</sourc
     <message>
         <source>Delete Work Order?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Inventory Availability...</source>
-        <translation>Visualizar Disponibilidade de Estoque...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -41729,26 +41681,6 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation>Imprimir Lista de Enpacotamento...</translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation>Visualizar Ordem de Compras...</translation>
-    </message>
-    <message>
-        <source>Inventory Availability by Work Order...</source>
-        <translation>Disponibilidade de Estoque por Ordem de Trabalho...</translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Inventory History...</source>
-        <translation>Visualizar Histórico do Estoque...</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation>Emitir Etiqueta de Contagem...</translation>
-    </message>
-    <message>
         <source>Print W/O Traveler...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -41757,15 +41689,7 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation>Rechamada de Pedido de Trabalho</translation>
     </message>
     <message>
-        <source>Change W/O Quantity...</source>
-        <translation>Alterar Quantidade de O/T...</translation>
-    </message>
-    <message>
         <source>Delete Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change W/O Due Date...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -41814,6 +41738,54 @@ Would you like to automatically create a credit memo against this return?</sourc
     </message>
     <message>
         <source>Error Retrieving Event Log Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory Availability by Work Order</source>
+        <translation type="unfinished">Disponibilidade de Estoque por Ordem de Trabalho</translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Due Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Todo Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Project Task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -44733,10 +44705,6 @@ You must reassign these Users before you may delete the selected Group.</source>
 <context>
     <name>honorifics</name>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
-    </message>
-    <message>
         <source>&amp;Print</source>
         <translation>Imprimir</translation>
     </message>
@@ -44773,10 +44741,6 @@ You must reassign these Users before you may delete the selected Group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Apagar</translation>
     </message>
@@ -44787,6 +44751,14 @@ You must reassign these Users before you may delete the selected Group.</source>
     <message>
         <source>Error Deleting Title</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -45652,10 +45624,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>
@@ -45688,10 +45656,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>List Incident Categories</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45702,6 +45666,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Error Deleting Selected Incident Category %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -45962,10 +45934,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>List Incident Resolutions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45974,16 +45942,20 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Error Retrieving Incident Resolution Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Deleting Incident Resolution</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -46025,10 +45997,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Visualizar</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>
@@ -46041,16 +46009,20 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Error Retrieving Incident Severity Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Deleting Incident Severity</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -46183,16 +46155,8 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Projeto</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Public</source>
         <translation type="unfinished">Público</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
     </message>
     <message>
         <source>User</source>
@@ -46225,6 +46189,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Resolution</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -49900,14 +49872,6 @@ You must delete these assignments before you may delete the selected Pricing Sch
         <translation>Número do item</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Serial #</source>
         <translation>Num. de Série #</translation>
     </message>
@@ -49930,10 +49894,6 @@ You must delete these assignments before you may delete the selected Pricing Sch
     <message>
         <source>Cntrl. Method</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation type="unfinished">Emitir Etiqueta de Contagem...</translation>
     </message>
     <message>
         <source>&amp;Item Sites:</source>
@@ -49996,20 +49956,12 @@ You must delete these assignments before you may delete the selected Pricing Sch
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>Last Cnt&apos;d</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Description</source>
         <translation>Descrição</translation>
-    </message>
-    <message>
-        <source>View Inventory Availability...</source>
-        <translation>Visualizar Disponibilidade de Estoque...</translation>
     </message>
     <message>
         <source>Never</source>
@@ -50073,6 +50025,26 @@ You must delete these assignments before you may delete the selected Pricing Sch
     </message>
     <message>
         <source>Error Deleting Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -50781,10 +50753,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation>Exibir Inativos</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Items</source>
         <translation>Itens</translation>
     </message>
@@ -50795,10 +50763,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     <message>
         <source>Class Code Pattern</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
     </message>
     <message>
         <source>Type</source>
@@ -50853,10 +50817,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation>Comprado</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>Make Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -50899,6 +50859,18 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     <message>
         <source>Cannot Delete Item</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -51088,10 +51060,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation>Semana</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Ship-to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51110,10 +51078,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     <message>
         <source>Customer</source>
         <translation>Cliente</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -51158,6 +51122,14 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     <message>
         <source>Posted</source>
         <translation type="unfinished">Lançado</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -51956,10 +51928,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished">Novo</translation>
     </message>
     <message>
-        <source>Edit Actual Cost...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51996,10 +51964,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update Actual Cost...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Maintain Item Costs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -52008,15 +51972,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Totais</translation>
     </message>
     <message>
-        <source>View Costing Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>!ERROR!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Actual Cost...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -52033,10 +51989,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Costing &amp;Elements:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Cost...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -52057,6 +52009,26 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Error Retrieving Cost Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update Actual Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Costing Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Actual Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Actual Cost</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -52692,10 +52664,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;List Unapplied Credit Memos</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New &amp;Misc. Debit Memoz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -54721,14 +54689,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Apagar</translation>
     </message>
@@ -55277,10 +55237,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Are you sure that you want to completely delete the selected Return Authorization?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -55301,20 +55257,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Validade</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Return Authorizations:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Access Denied</source>
         <translation type="unfinished">Acesso Negado</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
     </message>
     <message>
         <source>Close</source>
@@ -55335,6 +55283,18 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Error Retrieving Return Authorization Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -55362,18 +55322,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Ordered</source>
         <translation>Ordenado</translation>
-    </message>
-    <message>
-        <source>Shipments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ship-To</source>
@@ -55404,24 +55352,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished">Rel. de Vendas:</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Order #</source>
         <translation>Pedido #</translation>
     </message>
     <message>
         <source>Notes</source>
         <translation>Notas</translation>
-    </message>
-    <message>
-        <source>Add to Packing List Batch...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print Packing List...</source>
@@ -55543,6 +55479,30 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>Tax</source>
         <translation type="unfinished">Imposto</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Add to Packing List Batch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished">Expedições</translation>
+    </message>
 </context>
 <context>
     <name>openVouchers</name>
@@ -55604,10 +55564,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Changing Dist. Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Voucher...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -55691,12 +55647,16 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Voucher...</source>
+        <source>Edit Voucher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation>Visualizar Vale...</translation>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Voucher</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -56077,10 +56037,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Activate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -56129,16 +56085,8 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>Novo...</translation>
-    </message>
-    <message>
         <source>Actual Date</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -56183,6 +56131,18 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Name Pattern</source>
         <translation type="unfinished">Padrão de nome</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Novo</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
     </message>
 </context>
 <context>
@@ -56656,10 +56616,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Apagar</translation>
     </message>
@@ -56727,6 +56683,10 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <source>Error Disabling Package</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
 </context>
 <context>
     <name>packingListBatch</name>
@@ -56761,10 +56721,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <message>
         <source>None</source>
         <translation>Nenhum</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Visualizar Ordem de Compras...</translation>
     </message>
     <message>
         <source>&amp;Delete Printed</source>
@@ -56821,10 +56777,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <message>
         <source>Customer #</source>
         <translation>Cliente #</translation>
-    </message>
-    <message>
-        <source>View Transfer Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Type</source>
@@ -56920,6 +56872,14 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Print Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -57934,10 +57894,6 @@ may be posted.</source>
         <translation type="unfinished">Crédito</translation>
     </message>
     <message>
-        <source>View Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Entries</source>
         <translation type="unfinished"></translation>
     </message>
@@ -58055,6 +58011,10 @@ may be posted.</source>
     </message>
     <message>
         <source>%1: Could not initialize printing system for multiple reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Journal</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -61146,98 +61106,6 @@ You may not create a Product Category with this code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Quote...</source>
-        <translation type="unfinished">Editar Cotação...</translation>
-    </message>
-    <message>
-        <source>View Quote...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Visualizar Ordem de Compras...</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Invoice...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation type="unfinished">Visualizar Facturação...</translation>
-    </message>
-    <message>
-        <source>Edit Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Request...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order Item...</source>
-        <translation type="unfinished">Visualizar Item do Pedido de Compra</translation>
-    </message>
-    <message>
-        <source>Edit Incident...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Incident...</source>
-        <translation type="unfinished">Visualizar incidente...</translation>
-    </message>
-    <message>
         <source>Purchase Request</source>
         <translation type="unfinished"></translation>
     </message>
@@ -61380,6 +61248,98 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>Locking Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -62258,10 +62218,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>WO</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62272,10 +62228,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     <message>
         <source>SO</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Visualizar Ordem de Compras...</translation>
     </message>
     <message>
         <source>&lt;p&gt;This Purchase Order does not have any line items.  Are you sure you want to delete this Purchase Order?</source>
@@ -62346,20 +62298,12 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>None</source>
         <translation type="unfinished">Nenhum</translation>
     </message>
     <message>
         <source>UOM</source>
         <translation>UDM</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Status:</source>
@@ -62700,6 +62644,22 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     <message>
         <source>&lt;p&gt;The selected item has no Std. Costing information. Please see your controller to correct this situation before continuing.</source>
         <translation type="unfinished">O item selecionado não possui o custo padrão. Corrija junto à sua contabilidade antes de continuar</translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -63428,10 +63388,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation type="unfinished">Data final</translation>
     </message>
     <message>
-        <source>Convert to Invoice...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Customer Type Pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63454,10 +63410,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
     <message>
         <source>Undefined</source>
         <translation type="unfinished">Indefinido</translation>
-    </message>
-    <message>
-        <source>Convert to S/O...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Start Date</source>
@@ -63508,10 +63460,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation>Deletar Cotações Selecionadas</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>Quote Date</source>
         <translation>Data Cotação</translation>
     </message>
@@ -63526,14 +63474,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
     <message>
         <source>Print...</source>
         <translation>Imprimir...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Convert Selected Quote(s)</source>
@@ -63576,10 +63516,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation type="unfinished">Total</translation>
     </message>
     <message>
-        <source>Copy to Cust./Prospect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The prospect must be manually converted to customer from either the Account or Customer windows before coverting this quote.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63614,6 +63550,30 @@ Are you sure that you want to delete the selected Invoice Records?</source>
     <message>
         <source>Error Deleting Quote #%1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to S/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to Cust./Prospect...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -65440,15 +65400,7 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation></translation>
     </message>
     <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>N&amp;otes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit New Order Line...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -65456,15 +65408,7 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot Save Return Authorization</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View New Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -65544,10 +65488,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation>Não Estocado</translation>
     </message>
     <message>
-        <source>Delete Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;You may not enter a Misc. Charge without indicating the G/L Sales Account number for the charge. Please set the Misc. Charge amount to 0 or select a Misc. Charge Sales Account.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -65597,10 +65537,6 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>Ship Site:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit New Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -65716,10 +65652,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New Order Shipment Status...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Work Order Closed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -65804,16 +65736,8 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation>Imposto</translation>
     </message>
     <message>
-        <source>View New Order Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>N/A</source>
         <translation>N/A</translation>
-    </message>
-    <message>
-        <source>New Order Shipments...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Site</source>
@@ -65872,10 +65796,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation>%</translation>
     </message>
     <message>
-        <source>View Original Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Substitute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -65897,10 +65817,6 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>Upon Receipt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -66085,6 +66001,50 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>&lt;p&gt;Expiry Date must be on or later than the Authorization Date.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Original Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit New Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View New Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit New Order Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View New Order Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Order Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Order Shipments</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -67650,15 +67610,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>Sequência</translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Only opportunities from Customers or Prospects can be related.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -67671,10 +67623,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Unreserve Stock</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -67722,10 +67670,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No Items can be rescheduled because there are no valid price schedules for the date entered.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -67768,10 +67712,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>%</source>
         <translation>%</translation>
-    </message>
-    <message>
-        <source>Close Line...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Terms</source>
@@ -67822,14 +67762,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Release P/R...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Freight:</source>
         <translation>Frete:</translation>
     </message>
@@ -67844,10 +67776,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>&amp;Save</source>
         <translation>Salvar</translation>
-    </message>
-    <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You must select a Customer for this order before you may save it.</source>
@@ -67869,16 +67797,8 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Purchase Request...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Sales Rep.:</source>
         <translation>Rel. de Vendas:</translation>
-    </message>
-    <message>
-        <source>Show Reservations...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -68037,10 +67957,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Firm Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Authorized CC Payments:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68055,10 +67971,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>Require sufficient Inventory</source>
         <translation>Exigir Estoque suficiente</translation>
-    </message>
-    <message>
-        <source>Soften Line...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Issue to Shipping</source>
@@ -68359,10 +68271,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>Type</source>
         <translation>Tipo</translation>
-    </message>
-    <message>
-        <source>Delete Line...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;p&gt;You have deleted all of the Line Items for this Sales Order. Would you like to cancel this Sales Order?</source>
@@ -68766,10 +68674,6 @@ Do you wish to continue saving the order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete Purchase Order Item?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68824,6 +68728,62 @@ Do you wish to change all future Sales Order recurrences?</source>
     </message>
     <message>
         <source>You may not delete this Sales Order as it has one or more line items on a Purchase Order.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firm Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soften Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Reservations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Release P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -70346,14 +70306,6 @@ Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item Workbench</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70716,6 +70668,14 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Error Creating itemlocdist Records</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -71312,22 +71272,6 @@ Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
-        <source>View Manager...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Manager...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search for Employees</source>
         <translation type="unfinished"></translation>
     </message>
@@ -71413,6 +71357,22 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Error Retrieving Employee Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Manager</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -72039,26 +71999,6 @@ Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation type="unfinished">Visualizar Vale...</translation>
-    </message>
-    <message>
-        <source>Void Voucher...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit A/P Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View A/P Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View G/L Series...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;You cannot set this item as On Hold. This Item is already approved for payment.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -72112,6 +72052,26 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Enter an On Hold Comment:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Void Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -73124,10 +73084,6 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
         <translation>Notas</translation>
     </message>
     <message>
-        <source>View Order Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Order #:</source>
         <translation>Pedido #:</translation>
     </message>
@@ -73138,10 +73094,6 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
     <message>
         <source>Items</source>
         <translation>Itens</translation>
-    </message>
-    <message>
-        <source>Issue Additional Stock for this Order Line to Shipping...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shipping Information</source>
@@ -73181,10 +73133,6 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
     </message>
     <message>
         <source>Order on Hold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return ALL Stock Issued for this Order Line to the Site...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -73233,6 +73181,18 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
     </message>
     <message>
         <source>Error Returning Items From Shipment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Additional Stock for this Order Line to Shipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return ALL Stock Issued for this Order Line to the Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -73417,15 +73377,11 @@ You must reassign these Sites before deleting this Site Type.</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <source>Edit Site Type...</source>
+        <source>Edit Site Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete Site Type...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Site Type...</source>
+        <source>View Site Type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -79257,6 +79213,18 @@ You must first re-assign these items before deleting the selected Tax Type.</sou
         <source>Error Retrieving To Do Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Novo</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
 </context>
 <context>
     <name>toggleBankrecCleared</name>
@@ -79374,10 +79342,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Tax:</source>
         <translation>Imposto</translation>
-    </message>
-    <message>
-        <source>Issue Stock...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Issue Line Balance</source>
@@ -79616,14 +79580,6 @@ otherwise a new one will be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Shipping Form:</source>
         <translation>Formulário de Expedição:</translation>
     </message>
@@ -79665,10 +79621,6 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Ship Complete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -79780,10 +79732,6 @@ otherwise a new one will be created.</source>
         <translation>Recebido</translation>
     </message>
     <message>
-        <source>Close Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Documents</source>
         <translation type="unfinished">Documentos</translation>
     </message>
@@ -79861,6 +79809,22 @@ otherwise a new one will be created.</source>
         <source>Item %1 failed with:
 %2
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -80169,10 +80133,6 @@ otherwise a new one will be created.</source>
         <translation>Copiar...</translation>
     </message>
     <message>
-        <source>Release...</source>
-        <translation>Liberar...</translation>
-    </message>
-    <message>
         <source>Issue To Shipping...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80181,24 +80141,12 @@ otherwise a new one will be created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add to Packing List Batch...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Closed</source>
         <translation>Fechado</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>List Open Transfer Orders</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
     </message>
     <message>
         <source>Release</source>
@@ -80223,10 +80171,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Scheduled</source>
         <translation>Agendado</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Open</source>
@@ -80314,6 +80258,22 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Error Retrieving Transfer Order Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Add to Packing List Batch</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81124,20 +81084,16 @@ otherwise a new one will be created.</source>
         <translation type="unfinished">Aprovado</translation>
     </message>
     <message>
-        <source>Approve This Order for Billing...</source>
+        <source>Error Retrieving Shipment Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Retrieving Shipment Information</source>
+        <source>Approve This Order for Billing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>unpostedCreditMemos</name>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished">Editar...</translation>
-    </message>
     <message>
         <source>Hold</source>
         <translation type="unfinished"></translation>
@@ -81149,10 +81105,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Prnt&apos;d</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
     </message>
     <message>
         <source>Post...</source>
@@ -81278,6 +81230,14 @@ otherwise a new one will be created.</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
 </context>
 <context>
     <name>unpostedGLTransactions</name>
@@ -81318,22 +81278,6 @@ otherwise a new one will be created.</source>
         <translation>Lançado</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>Visualizar Vale...</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>Visualizar Facturação...</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -81359,6 +81303,22 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Error Retrieving G/L Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81405,28 +81365,12 @@ otherwise a new one will be created.</source>
         <translation>Débito</translation>
     </message>
     <message>
-        <source>Delete G/L Series...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Are you sure you want to delete these unposted G/L Transactions?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View G/L Series...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit G/L Series...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Print</source>
         <translation>Imprimir</translation>
-    </message>
-    <message>
-        <source>Post G/L Series...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -81470,6 +81414,22 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Error Posting G/L Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post G/L Series</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81553,20 +81513,8 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Print...</source>
         <translation type="unfinished">Imprimir...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure that you want to delete the selected Invoices?</source>
@@ -81676,6 +81624,14 @@ Would you like to post it anyway?</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
 </context>
 <context>
     <name>unpostedPoReceipts</name>
@@ -81684,20 +81640,12 @@ Would you like to post it anyway?</source>
         <translation></translation>
     </message>
     <message>
-        <source>View Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>N/A</source>
         <translation>N/A</translation>
     </message>
     <message>
         <source>Received</source>
         <translation>Recebido</translation>
-    </message>
-    <message>
-        <source>Delete Receipt...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Non-Inventory</source>
@@ -81754,10 +81702,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>&amp;Close</source>
         <translation>Fechar</translation>
-    </message>
-    <message>
-        <source>Edit Receipt...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Vend. Item #</source>
@@ -81866,13 +81810,17 @@ Would you like to post it anyway?</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>unpostedPurchaseOrders</name>
-    <message>
-        <source>Delete...</source>
-        <translation type="unfinished">Apagar...</translation>
-    </message>
     <message>
         <source>&lt;p&gt;The Purchase Order that you selected to delete was created to satisfy Sales Order demand. If you delete the selected Purchase Order then the Sales Order demand will remain but the Purchase Order to relieve that demand will not. Are you sure that you want to delete the selected Purchase Order?</source>
         <translation type="unfinished"></translation>
@@ -81894,10 +81842,6 @@ Would you like to post it anyway?</source>
         <translation>Aberto</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Due Date</source>
         <translation>Data Limite</translation>
     </message>
@@ -81912,10 +81856,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Vendor</source>
         <translation>Fornecedor</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Unreleased</source>
@@ -82064,6 +82004,18 @@ Would you like to post it anyway?</source>
     <message>
         <source>Receipt Order</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
 </context>
 <context>
@@ -84759,10 +84711,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation>Cidade</translation>
     </message>
     <message>
-        <source>Delete Vendor...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Email</source>
         <translation>E-mail</translation>
     </message>
@@ -84787,20 +84735,12 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation type="unfinished">Padrão de telefone</translation>
     </message>
     <message>
-        <source>Edit Vendor...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Address</source>
         <translation>Endereço</translation>
     </message>
     <message>
         <source>State Pattern</source>
         <translation type="unfinished">Padrão de estado</translation>
-    </message>
-    <message>
-        <source>View Vendor...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Vendor Name Pattern</source>
@@ -84849,6 +84789,18 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     <message>
         <source>Active</source>
         <translation type="unfinished">Ativo</translation>
+    </message>
+    <message>
+        <source>Edit Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Vendor</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -85328,10 +85280,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation>Prazos:</translation>
     </message>
     <message>
-        <source>View P/O Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Valor</translation>
     </message>
@@ -85469,6 +85417,10 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Co&amp;mments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View P/O Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -85639,14 +85591,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Split Receipt...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Correct Receipt...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unit Price:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -85724,6 +85668,14 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Would you like to cancel anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correct Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Receipt</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -86198,20 +86150,8 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation>Local</translation>
     </message>
     <message>
-        <source>List Item Sites...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Active</source>
         <translation>Ativo</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>Description</source>
@@ -86220,6 +86160,18 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     <message>
         <source>Address</source>
         <translation>Endereço</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>List Item Sites</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -86421,20 +86373,8 @@ sure there is sufficient Quantity on Hand before proceeding.</source>
         <translation type="unfinished">Lista de operações</translation>
     </message>
     <message>
-        <source>Scrap...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Inventory Availability...</source>
-        <translation>Disponibilidade de Estoque...</translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation>Nome</translation>
-    </message>
-    <message>
-        <source>Substitute...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Comments</source>
@@ -86473,10 +86413,6 @@ sure there is sufficient Quantity on Hand before proceeding.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Issue...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Run Remain.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -86487,10 +86423,6 @@ sure there is sufficient Quantity on Hand before proceeding.</source>
     <message>
         <source>Bill of Materials</source>
         <translation>Lista de Materiais</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
     </message>
     <message>
         <source>&lt;p&gt;This W/O Material Requirement cannot be deleted as it has has material issued to it. You must return this material to stock before you can delete this Material Requirement. Would you like to return this material to stock now?</source>
@@ -86524,10 +86456,6 @@ Please correct before updating this Work Order</source>
         <source>Order Parameters for this Item do not allow a quantitiy of %1 to be created.
 You must create an order for at least %2 of this item.
 Do you want to update the order quantity and create the order?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Material...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -86584,10 +86512,6 @@ Do you want to update the order quantity and create the order?</source>
         <translation>Explodir...</translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished">Disponibilidade de Execução</translation>
-    </message>
-    <message>
         <source>Costing</source>
         <translation>a custar</translation>
     </message>
@@ -86617,18 +86541,6 @@ Please correct before updating this Work Order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
-        <source>Close...</source>
-        <translation type="unfinished">Fechar...</translation>
-    </message>
-    <message>
-        <source>Change Quantity...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Priority:</source>
         <translation>Prioridade:</translation>
     </message>
@@ -86641,19 +86553,7 @@ Please correct before updating this Work Order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Issue Batch...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Change Qty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Return Batch...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Availability...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -86666,10 +86566,6 @@ Please correct before updating this Work Order</source>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure that you want to delete the selected Work Order?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Post Production...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -86687,10 +86583,6 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>Accumulated Costs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Correct Production Posting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -86722,10 +86614,6 @@ Please correct before creating this Work Order</source>
         <translation type="unfinished">Operações</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
         <source>Invalid Order Quantitiy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -86750,24 +86638,12 @@ Please correct before creating this Work Order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reprioritize...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Qty. Received:</source>
         <translation>Qnt. Recebida:</translation>
     </message>
     <message>
-        <source>Reschedule...</source>
-        <translation type="unfinished">Reagendar...</translation>
-    </message>
-    <message>
         <source>Due Date:</source>
         <translation>Data Limite:</translation>
-    </message>
-    <message>
-        <source>Substitute Availability...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A priority change from %1 to %2 will update all work order requirements.  Are you sure you want to change the work order priority?</source>
@@ -87018,6 +86894,78 @@ Please correct before creating this Work Order</source>
         <source>Work Order Characteristics</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Fechar</translation>
+    </message>
+    <message>
+        <source>New Material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Batch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return Batch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Production</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correct Production Posting</source>
+        <translation type="unfinished">Corrigir lançamento de produção</translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory Availability</source>
+        <translation type="unfinished">Estoque Disponível</translation>
+    </message>
+    <message>
+        <source>Reprioritize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Issue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Substitute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Availability</source>
+        <translation type="unfinished">Disponibilidade</translation>
+    </message>
+    <message>
+        <source>Substitute Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>workOrderMaterials</name>
@@ -87046,10 +86994,6 @@ Please correct before creating this Work Order</source>
         <translation type="unfinished">UDM emitida</translation>
     </message>
     <message>
-        <source>View Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Total Qty. Per</source>
         <translation type="unfinished">Total Qtd. Por</translation>
     </message>
@@ -87066,32 +87010,12 @@ Please correct before creating this Work Order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Visualizar...</translation>
-    </message>
-    <message>
-        <source>View Item-Defined Subsitute Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Substitute...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Push</source>
         <translation>Empurrar</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Editar...</translation>
-    </message>
-    <message>
         <source>Due Date</source>
         <translation>Data Limite</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Apagar...</translation>
     </message>
     <message>
         <source>Reference</source>
@@ -87203,6 +87127,30 @@ Please correct before creating this Work Order</source>
     </message>
     <message>
         <source>Error Retrieving Work Order Material Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Visualizar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>View Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item-Defined Subsitute Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Substitute</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

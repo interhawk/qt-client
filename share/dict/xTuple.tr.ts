@@ -118,10 +118,6 @@ Address:</source>
         <translation type="unfinished">Tedarikçi</translation>
     </message>
     <message>
-        <source>Vendor addresss</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation type="unfinished"></translation>
     </message>
@@ -131,6 +127,14 @@ Address:</source>
     </message>
     <message>
         <source>Saving Shared Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vendor address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;This address is shared by a Vendor Address and you do not have privileges to edit Vendor Addresses.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5629,10 +5633,6 @@ returned %2
 <context>
     <name>VirtualClusterLineEdit</name>
     <message>
-        <source>Info...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Objects</source>
         <translation>Objeler</translation>
     </message>
@@ -5651,14 +5651,6 @@ returned %2
     <message>
         <source>%1::sInfo() not yet defined</source>
         <translation>%1::sBilgi() henüz tanımlanmadı</translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation type="unfinished">Yeni...</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Aç...</translation>
     </message>
     <message>
         <source>Open record detail</source>
@@ -5689,10 +5681,6 @@ returned %2
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy...</source>
-        <translation type="unfinished">Kopyala...</translation>
-    </message>
-    <message>
         <source>Ctrl+Shift+C</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5715,6 +5703,22 @@ returned %2
     <message>
         <source>Error Finding Matching Record</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">Aç</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">Kopyala</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Yeni</translation>
     </message>
 </context>
 <context>
@@ -6074,14 +6078,6 @@ returned %2
         <translation></translation>
     </message>
     <message>
-        <source>List...</source>
-        <translation>Listele...</translation>
-    </message>
-    <message>
-        <source>Search...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>List all records</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6104,6 +6100,14 @@ returned %2
     <message>
         <source>Ctrl+Shift+A</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation type="unfinished">Liste</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Arama</translation>
     </message>
 </context>
 <context>
@@ -6839,34 +6843,6 @@ returned %2
         <translation>Blokeli</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzenle...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
-        <source>Close...</source>
-        <translation>Kapat...</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Aç...</translation>
-    </message>
-    <message>
-        <source>Freeze...</source>
-        <translation>Bloke...</translation>
-    </message>
-    <message>
-        <source>Thaw...</source>
-        <translation>Çöz...</translation>
-    </message>
-    <message>
         <source>Accounting Periods:</source>
         <translation>Muhasebe Dönemleri:</translation>
     </message>
@@ -6946,6 +6922,34 @@ returned %2
         <source>Error Getting Periods</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
+    <message>
+        <source>Freeze</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Kapat</translation>
+    </message>
+    <message>
+        <source>Thaw</source>
+        <translation type="unfinished">Erit</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">Aç</translation>
+    </message>
 </context>
 <context>
     <name>accountingYearPeriod</name>
@@ -7001,24 +7005,8 @@ returned %2
         <translation>Kapalı</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzenle...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
         <source>Close...</source>
         <translation>Kapat...</translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation>Aç...</translation>
     </message>
     <message>
         <source>Fiscal Years:</source>
@@ -7075,6 +7063,22 @@ returned %2
     <message>
         <source>Error Opening Requested Period</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">Aç</translation>
     </message>
 </context>
 <context>
@@ -7170,14 +7174,6 @@ Check the database server log for errors.</source>
         <translation>Tedarikçi Adresi</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzenle...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Konum</translation>
     </message>
@@ -7266,14 +7262,6 @@ Check the database server log for errors.</source>
         <translation>Posta Kodu</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Sil</translation>
     </message>
@@ -7291,10 +7279,6 @@ Check the database server log for errors.</source>
     </message>
     <message>
         <source>View Prospect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Prospect...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7336,6 +7320,18 @@ as an Address. Please select a Prospect to edit:</source>
     <message>
         <source>Address</source>
         <translation type="unfinished">Adres</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Create Prospect</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10039,18 +10035,6 @@ Are you sure that you want to save this change?</source>
         <translation>Para Birimi</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
         <source>Post...</source>
         <translation>Gönder...</translation>
     </message>
@@ -10097,6 +10081,18 @@ Are you sure that you want to save this change?</source>
     <message>
         <source>Error Posting Bank Adjustment</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -11492,10 +11488,6 @@ Devam mı?</translation>
         <translation>Gönder...</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Certified Check</source>
         <translation>Tasdikli Çek</translation>
     </message>
@@ -11506,14 +11498,6 @@ Devam mı?</translation>
     <message>
         <source>&amp;Edit</source>
         <translation>&amp;Düzelt</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
     </message>
     <message>
         <source>American Express</source>
@@ -11594,6 +11578,18 @@ Devam mı?</translation>
     <message>
         <source>Deposit Date</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -12851,24 +12847,12 @@ You may not create duplicate Forms.</source>
 <context>
     <name>companies</name>
     <message>
-        <source>Delete...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&amp;New</source>
         <translation>Yeni</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Düzelt</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -12905,6 +12889,18 @@ You may not create duplicate Forms.</source>
     <message>
         <source>Error Retrieving Company Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -14243,14 +14239,6 @@ You may not create duplicate Forms.</source>
     <message>
         <source>Successful Imports:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation>Yeni...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
     </message>
     <message>
         <source>After error during import:</source>
@@ -16305,14 +16293,6 @@ You may not create duplicate Forms.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>State</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16488,6 +16468,14 @@ You may not create duplicate Forms.</source>
         <source>Unmarking failed</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>contract</name>
@@ -16657,27 +16645,11 @@ Contract Number you have specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished">Satınalma Siparişi Görüntüle...</translation>
-    </message>
-    <message>
         <source>Delete Purchase Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Release Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Receipt...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Return...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -16728,6 +16700,14 @@ Contract Number you have specified.</source>
         <source>Error Rejecting Contract Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>contracts</name>
@@ -16750,14 +16730,6 @@ Contract Number you have specified.</source>
     <message>
         <source>Delete Contract</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="unfinished">Sil...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
     </message>
     <message>
         <source>Item Count</source>
@@ -16812,16 +16784,24 @@ Contract Number you have specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy...</source>
-        <translation type="unfinished">Kopyala...</translation>
-    </message>
-    <message>
         <source>Error Deleting Contract</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished">Kopyala</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -17503,10 +17483,6 @@ Please check the values of these dates.</source>
         <translation type="unfinished">Maliyet kategorisini silmek istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <source>List Items in this Inventory Cost Category...</source>
-        <translation>Bu Envanter Maliyet Kategorisindeki Ürünleri Listele...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The selected Cost Category cannot be deleted as it still contains Items. You must reassign these Items before deleting this Cost Category.</source>
         <translation>İlgili maliyet kategorisi silenemedi.</translation>
     </message>
@@ -17527,24 +17503,12 @@ Please check the values of these dates.</source>
         <translation>Açıklama</translation>
     </message>
     <message>
-        <source>Edit Inventory Cost Cateogry...</source>
-        <translation>Envanter Maliyet Kategorisini Düzelt...</translation>
-    </message>
-    <message>
-        <source>Delete Inventory Cost Category...</source>
-        <translation>Envanter Maliyet Kategorisini Sil...</translation>
-    </message>
-    <message>
         <source>Cost Category in Use</source>
         <translation>Kullanımda olan Maliyet Kategorisi</translation>
     </message>
     <message>
         <source>&amp;View</source>
         <translation>Göster</translation>
-    </message>
-    <message>
-        <source>View Inventory Cost Category...</source>
-        <translation>Envanter Maliyet Kategorisini Görüntüle...</translation>
     </message>
     <message>
         <source>&amp;Print</source>
@@ -17576,6 +17540,22 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Error Deleting Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Inventory Cost Cateogry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Inventory Cost Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List Items in this Inventory Cost Category</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -19508,15 +19488,15 @@ creating Planned Orders.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Sales Credit Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You may not view or edit this Sales Credit as it references a Site for which you have not been granted privileges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -20295,10 +20275,6 @@ creating Planned Orders.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Düzelt...</translation>
-    </message>
-    <message>
         <source>Last</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20357,10 +20333,6 @@ creating Planned Orders.</source>
     <message>
         <source>Account Number Pattern</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>Tax Auth.</source>
@@ -20426,13 +20398,17 @@ creating Planned Orders.</source>
         <source>Are you sure you want to delete these Account(s)?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>currencies</name>
-    <message>
-        <source>Delete...</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Cannot delete base currency</source>
         <translation>Esas para birimi silinememektedir</translation>
@@ -20446,20 +20422,12 @@ creating Planned Orders.</source>
         <translation>Kısaltma</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Additional Configuration Required</source>
         <translation>Ek Konfigürasyon Gerekmektedir</translation>
     </message>
     <message>
         <source>&lt;p&gt;Your system is configured to use multiple Currencies, but the Currency Gain/Loss Account and/or the G/L Series Discrepancy Account does not appear to be configured correctly. You should define these Accounts in &apos;System | Configure Modules | Configure G/L...&apos; before posting any transactions in the system.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -20516,6 +20484,18 @@ creating Planned Orders.</source>
     <message>
         <source>Exchange Rate Comments:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -20698,24 +20678,12 @@ Please check the values of these dates.</source>
         <translation>%1::%2\&apos;de bir Sistem hatasi oluştu.</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Base Currency:</source>
         <translation>Ana para birimi:</translation>
     </message>
     <message>
         <source>&amp;New</source>
         <translation>Yeni</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
     </message>
     <message>
         <source>Foreign Currencies:</source>
@@ -20760,6 +20728,18 @@ Please check the values of these dates.</source>
     <message>
         <source>Error Retrieving Currency Exchange Rates</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -23241,10 +23221,6 @@ to be deleted.</source>
         <translation>Belge No</translation>
     </message>
     <message>
-        <source>View Apply-To Voucher...</source>
-        <translation>Makbuz Başvurusu...</translation>
-    </message>
-    <message>
         <source>Found multiple checks with this check number.</source>
         <translation>Bu çek numarasını kullanan birden çok çek bulunuyor.</translation>
     </message>
@@ -23263,18 +23239,6 @@ to be deleted.</source>
     <message>
         <source>Check Look-Up Failed</source>
         <translation>Çek arama başarısız</translation>
-    </message>
-    <message>
-        <source>View Source Credit Memo...</source>
-        <translation>Kaynak Alacak Seneti Göster...</translation>
-    </message>
-    <message>
-        <source>View Source Check...</source>
-        <translation>Kaynak Çek Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Apply-To Debit Memo...</source>
-        <translation>Borç Dekontlarını Göster...</translation>
     </message>
     <message>
         <source>You must select the Vendor(s) whose A/R Applications you wish to view.</source>
@@ -23344,6 +23308,22 @@ to be deleted.</source>
         <source>Cannot set Parameters</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Source Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Source Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspAPOpenItemsByVendor</name>
@@ -23358,10 +23338,6 @@ to be deleted.</source>
     <message>
         <source>Voucher</source>
         <translation>Satınalma Faturası</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>Base Balance</source>
@@ -23441,10 +23417,6 @@ This Item is already selected for payment.</source>
         <translation>Satınalma Sip. No</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Doc. Type</source>
         <translation>Bel. Tipi</translation>
     </message>
@@ -23478,10 +23450,6 @@ This Item is already selected for payment.</source>
         <translation>Bakiye (%1 içinde)</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Access Denied</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23508,6 +23476,18 @@ This Item is already selected for payment.</source>
     <message>
         <source>Apply Credit Memo...</source>
         <translation type="unfinished">Alacak Dekontunu Uygula</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -23629,16 +23609,8 @@ This Item is already selected for payment.</source>
         <translation>Nakit faturaları Göster</translation>
     </message>
     <message>
-        <source>View Apply-To Debit Memo...</source>
-        <translation>Borç özetine uygulamayı görüntüle...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The Credit Memo #%1 could not be found.</source>
         <translation>Alacak Seneti #%1 bulunamadı.</translation>
-    </message>
-    <message>
-        <source>View Source Credit Memo...</source>
-        <translation>Kaynak Alacak Seneti Görüntüle...</translation>
     </message>
     <message>
         <source>Post Date</source>
@@ -23647,10 +23619,6 @@ This Item is already selected for payment.</source>
     <message>
         <source>Cash Deposit</source>
         <translation>Nakit Depozito</translation>
-    </message>
-    <message>
-        <source>View Apply-To Invoice...</source>
-        <translation>Fatura Uygulamalarını Görüntüle...</translation>
     </message>
     <message>
         <source>C/R</source>
@@ -23724,6 +23692,18 @@ This Item is already selected for payment.</source>
         <source>Cannot Set Parameters</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Source Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Apply-To Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspAROpenItems</name>
@@ -23788,32 +23768,12 @@ This Item is already selected for payment.</source>
         <translation>Tutar</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>Faturayı Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Shipments...</source>
-        <translation>Sevkiyatlar...</translation>
-    </message>
-    <message>
         <source>Invoice</source>
         <translation>Fatura</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation>Satış siparişini düzenle...</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Satış Siparişini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Apply Credit Memo...</source>
         <translation>Alacak Dekontunu Uygula</translation>
-    </message>
-    <message>
-        <source>New Cash Receipt...</source>
-        <translation>Yeni Nakit Tahsilat...</translation>
     </message>
     <message>
         <source>Cannot Refund by Credit Card</source>
@@ -23850,14 +23810,6 @@ This Item is already selected for payment.</source>
     <message>
         <source>Edit Posted Invoice?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
-        <source>View Invoice Information...</source>
-        <translation>Fatura Bilgisi Görüntüle...</translation>
     </message>
     <message>
         <source>Amount (in %1)</source>
@@ -23902,10 +23854,6 @@ This Item is already selected for payment.</source>
     <message>
         <source>Refund</source>
         <translation>İade</translation>
-    </message>
-    <message>
-        <source>Edit Posted Invoice...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Receivables</source>
@@ -23973,18 +23921,6 @@ Would you like to post it anyway?</source>
         <translation>Alacak Dekontu</translation>
     </message>
     <message>
-        <source>New Incident...</source>
-        <translation>Yeni Vaka...</translation>
-    </message>
-    <message>
-        <source>Edit Incident...</source>
-        <translation>Vakayı Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Incident...</source>
-        <translation>Vaka Görüntüle...</translation>
-    </message>
-    <message>
         <source>Recurring</source>
         <translation>Tekrarlayan</translation>
     </message>
@@ -24021,10 +23957,6 @@ Would you like to post it anyway?</source>
         <translation>Müşt./Tayin</translation>
     </message>
     <message>
-        <source>Edit Invoice...</source>
-        <translation>Faturayı Düzelt...</translation>
-    </message>
-    <message>
         <source>Credit Card Processing Error</source>
         <translation>Kredi Kartı İşlem Hatası</translation>
     </message>
@@ -24045,18 +23977,6 @@ Would you like to post it anyway?</source>
         <translation>Kredi Kartı</translation>
     </message>
     <message>
-        <source>Shipment Status...</source>
-        <translation>Sevkiyat Durumu...</translation>
-    </message>
-    <message>
-        <source>Edit Receivable Item...</source>
-        <translation>Alacak Kalemini Düzenle...</translation>
-    </message>
-    <message>
-        <source>View Receivable Item...</source>
-        <translation>Alacak Kalemi Görüntüle...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Are you sure that you want to delete the selected Invoices?</source>
         <translation>Seçili faturaları silmek istediğinizden emin misiniz?</translation>
     </message>
@@ -24067,10 +23987,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Cancel</source>
         <translation>İptal</translation>
-    </message>
-    <message>
-        <source>Open Customer...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Retrieving AR Information</source>
@@ -24144,15 +24060,7 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Void Posted Sales Credit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Credit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -24187,6 +24095,74 @@ Would you like to post it anyway?</source>
         <source>Could not void invoice because the accounting period for the posting date is closed. Try again with a different date?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open Customer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Posted Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Incident</source>
+        <translation type="unfinished">Yeni Vaka</translation>
+    </message>
 </context>
 <context>
     <name>dspAllocations</name>
@@ -24215,24 +24191,12 @@ Would you like to post it anyway?</source>
         <translation>Tamamlanmış</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation>Satış Siparişini düzelt...</translation>
-    </message>
-    <message>
         <source>Balance</source>
         <translation>Bakiye</translation>
     </message>
     <message>
         <source>Running Bal.</source>
         <translation>Kalan miktar</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation>Üretim Siparişi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Satış Siparişini Görüntüle...</translation>
     </message>
     <message>
         <source>Show Availability as of:</source>
@@ -24263,16 +24227,28 @@ Would you like to post it anyway?</source>
         <translation>Tarih Aralığı:</translation>
     </message>
     <message>
-        <source>Edit Transfer Order...</source>
-        <translation>Nakil Siparişini Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Transfer Order...</source>
-        <translation>Nakil Siparişi Görüntüle...</translation>
-    </message>
-    <message>
         <source>Site:</source>
         <translation>Site:</translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -24280,14 +24256,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Bill Of Materials</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Never</source>
@@ -24321,16 +24289,20 @@ Would you like to post it anyway?</source>
         <source>You must enter a valid item number.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>dspBacklog</name>
     <message>
         <source>Customer Group</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Backlog</source>
@@ -24342,10 +24314,6 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Customer Ship-To</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -24409,10 +24377,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished">Genişletilmiş Fiyat</translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation type="unfinished">Siparişi Görüntüle...</translation>
-    </message>
-    <message>
         <source>S/O #/Line #</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24435,10 +24399,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Product Category</source>
         <translation type="unfinished">Ürün Kategorisi</translation>
-    </message>
-    <message>
-        <source>View Item...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Customer/Item Number</source>
@@ -24475,6 +24435,22 @@ Would you like to post it anyway?</source>
     <message>
         <source>QOH</source>
         <translation type="unfinished">Mevcut Miktar</translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -24682,20 +24658,12 @@ Would you like to post it anyway?</source>
         <translation>Para Birimi</translation>
     </message>
     <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Site</translation>
     </message>
     <message>
         <source>Ordered</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished">Satış Siparişi Kalemini Görüntüle...</translation>
     </message>
     <message>
         <source>Item</source>
@@ -24766,16 +24734,8 @@ Would you like to post it anyway?</source>
         <translation type="unfinished">Açıklama</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item Number</source>
         <translation>Malzeme Numarası</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Satış Siparişini Görüntüle...</translation>
     </message>
     <message>
         <source>Start Date</source>
@@ -24827,6 +24787,22 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Line Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -24952,10 +24928,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Customer Ship-to</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25059,6 +25031,10 @@ Would you like to post it anyway?</source>
         <source>Cust. P/O #</source>
         <translation type="unfinished">Müşteri Alış Siparişi No:</translation>
     </message>
+    <message>
+        <source>View Sales Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspCapacityUOMsByClassCode</name>
@@ -25110,7 +25086,7 @@ Would you like to post it anyway?</source>
         <translation type="unfinished">Sınıf koduna göre Kapasite Ölçü Birimi</translation>
     </message>
     <message>
-        <source>Edit Item...</source>
+        <source>Edit Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -25228,10 +25204,6 @@ Would you like to post it anyway?</source>
         <translation>Numara</translation>
     </message>
     <message>
-        <source>View Cash Receipt...</source>
-        <translation>Nakit Tahsilatı Görüntüle...</translation>
-    </message>
-    <message>
         <source>Unposted</source>
         <translation>Onaysız</translation>
     </message>
@@ -25256,10 +25228,6 @@ Would you like to post it anyway?</source>
         <translation>Temel Tutar</translation>
     </message>
     <message>
-        <source>Edit Cash Receipt...</source>
-        <translation>Nakit Tahsilatı Düzenle...</translation>
-    </message>
-    <message>
         <source>Visa</source>
         <translation>Visa</translation>
     </message>
@@ -25278,14 +25246,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Latest</source>
         <translation>En Geç</translation>
-    </message>
-    <message>
-        <source>Edit Receivable Item...</source>
-        <translation>Alacak Kalemi Düzenle...</translation>
-    </message>
-    <message>
-        <source>View Receivable Item...</source>
-        <translation>Alacak Kalemi Görüntüle...</translation>
     </message>
     <message>
         <source>Post Cash Receipt</source>
@@ -25337,6 +25297,22 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Date not Entered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Cash Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Receivable Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Receivable Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -25463,10 +25439,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Payment...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Void Posted Payment...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25482,16 +25454,16 @@ Would you like to post it anyway?</source>
         <source>Invalid dates specified. Please specify a valid date range.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Payment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspCostedBOMBase</name>
     <message>
         <source>Costed Bill of Materials</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>View Item Costing...</source>
-        <translation type="unfinished">Ürün Maliyetini Görüntüle...</translation>
     </message>
     <message>
         <source>Use Actual Costs</source>
@@ -25570,8 +25542,12 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Maintain Item Costs...</source>
-        <translation type="unfinished">Malzeme Maliyet Bakımı...</translation>
+        <source>Maintain Item Costs</source>
+        <translation type="unfinished">Ürün Maliyeti Bakımı</translation>
+    </message>
+    <message>
+        <source>View Item Costing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -25892,10 +25868,6 @@ Would you like to post it anyway?</source>
         <translation>&amp;Arama:</translation>
     </message>
     <message>
-        <source>Count Slip Edit List...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation type="unfinished">Açıklama</translation>
     </message>
@@ -25908,20 +25880,8 @@ Would you like to post it anyway?</source>
         <translation>Etiket Silinemiyor</translation>
     </message>
     <message>
-        <source>Enter Count Slip...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Automatically Update</source>
         <translation>Otomatik Güncelleştirme</translation>
-    </message>
-    <message>
-        <source>View Pending Inventory History...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Count Tag...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Post Count Tag...</source>
@@ -25933,10 +25893,6 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Delete Count Tag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Count Slip...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -26051,6 +26007,26 @@ Would you like to post it anyway?</source>
         <source>Error Retrieving Count Tag Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enter Count Slip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count Slip Edit List</source>
+        <translation type="unfinished">Sayma Slip Değisiklik Listesi</translation>
+    </message>
+    <message>
+        <source>View Pending Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Count Slip</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspCountTagsBase</name>
@@ -26061,10 +26037,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>%</source>
         <translation type="unfinished">%</translation>
-    </message>
-    <message>
-        <source>View Count Tag...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Entered By</source>
@@ -26128,6 +26100,10 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Count Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -26342,10 +26318,6 @@ Would you like to post it anyway?</source>
         <translation>Tasdikli Çek</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Credit Memo</source>
         <translation>Alacak Dekontu</translation>
     </message>
@@ -26380,10 +26352,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>American Express</source>
         <translation>American Express</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Düzelt...</translation>
     </message>
     <message>
         <source>Cash</source>
@@ -26448,6 +26416,14 @@ Would you like to post it anyway?</source>
     <message>
         <source>Check</source>
         <translation>Çek</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -26530,10 +26506,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Enter Start Date</source>
         <translation>Başlangıç Tarihi Giriniz</translation>
-    </message>
-    <message>
-        <source>View Transaction Information...</source>
-        <translation>İşlem Bilgisini Görüntüle...</translation>
     </message>
     <message>
         <source>Qty. After</source>
@@ -26651,6 +26623,10 @@ Would you like to post it anyway?</source>
         <source>Active:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspDetailedInventoryHistoryByLotSerial</name>
@@ -26759,10 +26735,6 @@ Would you like to post it anyway?</source>
         <translation>Lot/Seri # Giriniz</translation>
     </message>
     <message>
-        <source>View Transaction Information...</source>
-        <translation>İşlem Bilgisini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Detailed Inventory History by Lot/Serial #</source>
         <translation>Lot/Seri No&apos;&apos;ya göre Stok Tarihçesi</translation>
     </message>
@@ -26841,6 +26813,10 @@ Would you like to post it anyway?</source>
     <message>
         <source>Phone</source>
         <translation type="unfinished">Telefon</translation>
+    </message>
+    <message>
+        <source>View Transaction Information</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -27308,10 +27284,6 @@ Would you like to post it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Transactions...</source>
-        <translation type="unfinished">İşlemleri Görüntüle...</translation>
-    </message>
-    <message>
         <source>Budget
 Total</source>
         <translation type="unfinished"></translation>
@@ -27463,6 +27435,10 @@ Total</source>
     </message>
     <message>
         <source>Please make sure all accounting periods are associated with a quarter and fiscal year before using this application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transactions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -27774,14 +27750,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Journal Transactions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27812,10 +27780,6 @@ Total</source>
     <message>
         <source>Debit</source>
         <translation>Borç</translation>
-    </message>
-    <message>
-        <source>Reverse Journal...</source>
-        <translation>Yevmiye Ters Kaydı...</translation>
     </message>
     <message>
         <source>Credit</source>
@@ -27855,6 +27819,18 @@ Total</source>
     </message>
     <message>
         <source>Error Deleting GL Series Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse Journal</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -27909,20 +27885,8 @@ Total</source>
         <translation type="unfinished">Ana Bölüm</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation>Fatura Görüntüle...</translation>
-    </message>
-    <message>
         <source>Sub Account</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>View Shipment...</source>
-        <translation>Sevkiyat Görüntüle...</translation>
     </message>
     <message>
         <source>Account Type</source>
@@ -27943,18 +27907,6 @@ Total</source>
     <message>
         <source>Expense</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation>Satınalma Siparişi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Journal Series...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>Faturayı Görüntüle...</translation>
     </message>
     <message>
         <source>Journal #</source>
@@ -27997,10 +27949,6 @@ Total</source>
         <translation>Kaynak</translation>
     </message>
     <message>
-        <source>View Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Beginning Balance:</source>
         <translation>Açılış Bakiyesi:</translation>
     </message>
@@ -28013,32 +27961,12 @@ Total</source>
         <translation>Defter-i Kebir İşlemleri</translation>
     </message>
     <message>
-        <source>View Inventory History...</source>
-        <translation>Stok Tarihçesini Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View WO History...</source>
-        <translation>Üretim Siparişlerini Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Satış Siparişini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Running Total</source>
         <translation>Toplam Çalışan</translation>
     </message>
     <message>
         <source>Date Created</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Credit Memo...</source>
-        <translation>Alacak Seneti Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Debit Memo...</source>
-        <translation>Borç Seneti Görüntüle...</translation>
     </message>
     <message>
         <source>Document Type</source>
@@ -28062,6 +27990,54 @@ Total</source>
     </message>
     <message>
         <source>Error Updating GL Account Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>View Journal Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Shipment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View WO History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Journal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28123,10 +28099,6 @@ Total</source>
         <translation>Ölçü Birimi</translation>
     </message>
     <message>
-        <source>View Item Inventory History...</source>
-        <translation>Malzeme Stok Tarihçesini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Qty. Per</source>
         <translation type="unfinished">Birim Miktar</translation>
     </message>
@@ -28186,6 +28158,10 @@ Total</source>
         <source>Error Executing Report</source>
         <translation>Raporun Uygulanmasında Hata</translation>
     </message>
+    <message>
+        <source>View Item Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInvalidBillsOfMaterials</name>
@@ -28198,24 +28174,12 @@ Total</source>
         <translation>Ana Ürün#</translation>
     </message>
     <message>
-        <source>Create Component Item Site...</source>
-        <translation>Depo </translation>
-    </message>
-    <message>
-        <source>Edit Parent Item...</source>
-        <translation>Ana Parçayı Düzenle...</translation>
-    </message>
-    <message>
         <source>Component Item #</source>
         <translation>Bileşen#</translation>
     </message>
     <message>
         <source>Component Item Description</source>
         <translation>Bileşen Tanımı</translation>
-    </message>
-    <message>
-        <source>Edit Parent Item Site...</source>
-        <translation>Ana Malzeme/Üretim Yeri Düzenle...</translation>
     </message>
     <message>
         <source>Bills of Materials without Component Item Sites</source>
@@ -28228,6 +28192,18 @@ Total</source>
     <message>
         <source>Site</source>
         <translation>Site</translation>
+    </message>
+    <message>
+        <source>Edit Parent Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Parent Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Component Item Site</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -28253,28 +28229,12 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create Purchase Request...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Allocations...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item</source>
         <translation>Malzeme</translation>
     </message>
     <message>
-        <source>View Orders...</source>
-        <translation type="unfinished">Siparişleri Görüntüle...</translation>
-    </message>
-    <message>
         <source>Reorder Lvl.</source>
         <translation type="unfinished">Yeniden Sipariş Seviyesi</translation>
-    </message>
-    <message>
-        <source>Enter Misc. Inventory Count...</source>
-        <translation type="unfinished">Özel Stok Sayımlarını Giriniz...</translation>
     </message>
     <message>
         <source>Item Site Lead Time</source>
@@ -28349,10 +28309,6 @@ Total</source>
         <translation type="unfinished">Göster</translation>
     </message>
     <message>
-        <source>Create Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Site</translation>
     </message>
@@ -28385,10 +28341,6 @@ Total</source>
         <translation type="unfinished">OUT Seviyesi</translation>
     </message>
     <message>
-        <source>View Substitute Availability...</source>
-        <translation type="unfinished">Yedek Kullanılabilirliğini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Unallocated</source>
         <translation type="unfinished">Tahditsiz</translation>
     </message>
@@ -28401,16 +28353,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ignore Reorder at 0</source>
         <translation type="unfinished">Yeniden Siparişi 0&apos;&apos;da Görmezden gel</translation>
-    </message>
-    <message>
-        <source>View Inventory History...</source>
-        <translation type="unfinished">Stok Tarihçesini Görüntüle...</translation>
     </message>
     <message>
         <source>By Source Vendor</source>
@@ -28427,10 +28371,6 @@ Total</source>
     <message>
         <source>Shortages</source>
         <translation type="unfinished">Eksiklikler</translation>
-    </message>
-    <message>
-        <source>Enter Adjustment...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A Class</source>
@@ -28454,6 +28394,42 @@ Total</source>
     </message>
     <message>
         <source>Current QOH Avail.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Create Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Purchase Order</source>
+        <translation type="unfinished">Satınalma Siparişi Oluştur</translation>
+    </message>
+    <message>
+        <source>View Substitute Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Inventory Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Adjustment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28520,10 +28496,6 @@ Total</source>
         <translation>Stok rezervasyon çöz</translation>
     </message>
     <message>
-        <source>Show Reservations...</source>
-        <translation>Rezervasyonları Göster...</translation>
-    </message>
-    <message>
         <source>Reserve Line Balance</source>
         <translation>Rezervasyon Bakiyesi</translation>
     </message>
@@ -28552,23 +28524,27 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation type="unfinished">Siparişi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Print Packing List...</source>
-        <translation type="unfinished">Paketleme Listesini Yazdır...</translation>
-    </message>
-    <message>
         <source>Error Retrieving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Updating Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Packing List</source>
+        <translation type="unfinished">Paketleme Listesini Yazdır</translation>
+    </message>
+    <message>
+        <source>Show Reservations</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -28587,20 +28563,12 @@ Total</source>
         <translation>Rezervasyon Çöz</translation>
     </message>
     <message>
-        <source>Show Reservations...</source>
-        <translation>Rezervasyonları Göster...</translation>
-    </message>
-    <message>
         <source>Availability</source>
         <translation type="unfinished">Kullanılabilirlik</translation>
     </message>
     <message>
         <source>Reserve Line Balance</source>
         <translation>Kalem Bakiyesini Rezerve Et</translation>
-    </message>
-    <message>
-        <source>Reserve Stock...</source>
-        <translation>Stok Rezerve Et...</translation>
     </message>
     <message>
         <source>You must select a valid Sales Order.</source>
@@ -28698,6 +28666,14 @@ Total</source>
         <source>Error Updating Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show Reservations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reserve Stock</source>
+        <translation type="unfinished">Stok Rezerve Et</translation>
+    </message>
 </context>
 <context>
     <name>dspInventoryAvailabilityByWorkOrder</name>
@@ -28762,14 +28738,6 @@ Total</source>
         <translation>Toplam Uygunluk.</translation>
     </message>
     <message>
-        <source>Post Misc. Production...</source>
-        <translation>Özel Teyit Gir...</translation>
-    </message>
-    <message>
-        <source>Create P/R...</source>
-        <translation>Satınalma Talebi Oluştur...</translation>
-    </message>
-    <message>
         <source>Insufficient Inventory</source>
         <translation>Yetersiz Stok</translation>
     </message>
@@ -28782,28 +28750,32 @@ Total</source>
         <translation>Üretim Siparişi bazında Kullanılabilirlik Kontrolü</translation>
     </message>
     <message>
-        <source>View Inventory History...</source>
-        <translation>Stok Tarihçesini Görüntüle...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;You must specify a valid Work Order Number.</source>
         <translation>Geçerli bir üretim siparişi no. giriniz</translation>
-    </message>
-    <message>
-        <source>Enter Misc. Inventory Count...</source>
-        <translation>Özel Stok Sayımlarını Giriniz...</translation>
     </message>
     <message>
         <source>Available QOH</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Misc. Production</source>
+        <translation type="unfinished">Özel Teyit Kaydet...</translation>
+    </message>
+    <message>
+        <source>Enter Misc. Inventory Count</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInventoryHistory</name>
-    <message>
-        <source>Edit Transaction Information...</source>
-        <translation></translation>
-    </message>
     <message>
         <source>Inventory History</source>
         <translation type="unfinished"></translation>
@@ -28811,10 +28783,6 @@ Total</source>
     <message>
         <source>User</source>
         <translation>Kullanıcı</translation>
-    </message>
-    <message>
-        <source>View Work Order Information...</source>
-        <translation type="unfinished">Üretim Siparişi Görüntüle...</translation>
     </message>
     <message>
         <source>Work Order</source>
@@ -28977,10 +28945,6 @@ Total</source>
         <translation type="unfinished">Malzeme Grubu Şablonu</translation>
     </message>
     <message>
-        <source>View Transaction Information...</source>
-        <translation type="unfinished">İşlem Bilgisini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Sales Order</source>
         <translation>Satış Siparişi</translation>
     </message>
@@ -29000,6 +28964,18 @@ Total</source>
         <source>ABC Class</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order Information</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspInventoryLocator</name>
@@ -29014,10 +28990,6 @@ Total</source>
     <message>
         <source>Location/Lot/Serial # Detail</source>
         <translation>Lokasyon/Parti/Seri No Detayı</translation>
-    </message>
-    <message>
-        <source>Reassign Lot/Serial #...</source>
-        <translation>Lot/Serial # ı yeniden düzenle...</translation>
     </message>
     <message>
         <source>No</source>
@@ -29048,10 +29020,6 @@ Total</source>
         <translation>Son Kullanım</translation>
     </message>
     <message>
-        <source>Relocate...</source>
-        <translation>Yer Değiştir...</translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Site</translation>
     </message>
@@ -29074,6 +29042,14 @@ Total</source>
     <message>
         <source>Lot/Serial</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Relocate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reassign Lot/Serial #</source>
+        <translation type="unfinished">Lot/Serial nosunu tekrardan ata</translation>
     </message>
 </context>
 <context>
@@ -29270,10 +29246,6 @@ Total</source>
         <translation>Alacak</translation>
     </message>
     <message>
-        <source>View Credit Memo...</source>
-        <translation>Alacak Seneti Görüntüle...</translation>
-    </message>
-    <message>
         <source>Total</source>
         <translation>TOPLAM</translation>
     </message>
@@ -29292,14 +29264,6 @@ Total</source>
     <message>
         <source>Subtotal</source>
         <translation>Aratoplam</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>Faturayı Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Debit Memo...</source>
-        <translation>Borç Seneti Görüntüle...</translation>
     </message>
     <message>
         <source>Credit Memo Not Found</source>
@@ -29326,10 +29290,6 @@ Total</source>
         <translation>Borç Memo</translation>
     </message>
     <message>
-        <source>View Customer Deposit...</source>
-        <translation>Müşteri Depozitini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Customer Deposit</source>
         <translation>Müşteri Depoziti</translation>
     </message>
@@ -29343,6 +29303,22 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Credit Memo Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Customer Deposit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29519,12 +29495,12 @@ Total</source>
         <translation>Yenilenmiş</translation>
     </message>
     <message>
-        <source>View Costing Detail...</source>
-        <translation>Maliyet Ayrıntılarını Görüntüle...</translation>
-    </message>
-    <message>
         <source>Never</source>
         <translation>Asla</translation>
+    </message>
+    <message>
+        <source>View Costing Detail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -29532,10 +29508,6 @@ Total</source>
     <message>
         <source>Items</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>View Item Costing Summary...</source>
-        <translation>Malzeme Maliyet Özetini Göster...</translation>
     </message>
     <message>
         <source>Act. Cost</source>
@@ -29552,10 +29524,6 @@ Total</source>
     <message>
         <source>Active</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maintain Item Costs...</source>
-        <translation>Malzeme Maliyet Bakımı...</translation>
     </message>
     <message>
         <source>% Var.</source>
@@ -29628,6 +29596,14 @@ Total</source>
     <message>
         <source>Item Type</source>
         <translation type="unfinished">Malzeme Türü</translation>
+    </message>
+    <message>
+        <source>Maintain Item Costs</source>
+        <translation type="unfinished">Ürün Maliyeti Bakımı</translation>
+    </message>
+    <message>
+        <source>View Item Costing Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -29805,14 +29781,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Item Source...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Item Source...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&apos;Always&apos;</source>
         <translation type="unfinished">&apos;&apos;Always&apos;&apos;</translation>
     </message>
@@ -29830,6 +29798,14 @@ Total</source>
     </message>
     <message>
         <source>Drop Ship</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Source</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29869,10 +29845,6 @@ Total</source>
     </message>
     <message>
         <source>Vendor Ranking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -29956,10 +29928,6 @@ Total</source>
         <translation type="unfinished">Varsayılan</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
-    </message>
-    <message>
         <source>Vendor Item Number</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30012,12 +29980,20 @@ Total</source>
         <translation type="unfinished">Kopyala...</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation type="unfinished">Sil...</translation>
-    </message>
-    <message>
         <source>Error Deleting Item Source Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -30043,16 +30019,16 @@ Total</source>
         <translation>Dışarıdan</translation>
     </message>
     <message>
-        <source>Create Item Source...</source>
-        <translation>Malzeme Kaynağı Oluştur...</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>Malzeme Düzelt...</translation>
-    </message>
-    <message>
         <source>Purchased</source>
         <translation>Satınalınan</translation>
+    </message>
+    <message>
+        <source>Create Item Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -30117,10 +30093,6 @@ Total</source>
 <context>
     <name>dspJournals</name>
     <message>
-        <source>View Invoice...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Liability</source>
         <translation type="unfinished">Borç</translation>
     </message>
@@ -30134,10 +30106,6 @@ Total</source>
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Journal Series...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -30183,10 +30151,6 @@ Total</source>
     <message>
         <source>Company</source>
         <translation type="unfinished">Şirket</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
     </message>
     <message>
         <source>Username</source>
@@ -30253,36 +30217,48 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Voucher...</source>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>View Journal Series</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished">Satınalma Siparişi Görüntüle...</translation>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Shipment...</source>
-        <translation type="unfinished">Sevkiyat Görüntüle...</translation>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Credit Memo...</source>
-        <translation type="unfinished">Alacak Seneti Görüntüle...</translation>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Debit Memo...</source>
-        <translation type="unfinished">Borç Seneti Görüntüle...</translation>
+        <source>View Shipment</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Satış Siparişini Görüntüle...</translation>
+        <source>View Credit Memo</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View WO History...</source>
-        <translation type="unfinished">Üretim Siparişlerini Görüntüle...</translation>
+        <source>View Debit Memo</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Inventory History...</source>
-        <translation type="unfinished">Stok Tarihçesini Görüntüle...</translation>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View WO History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -30304,20 +30280,12 @@ Total</source>
         <translation>Siparişler</translation>
     </message>
     <message>
-        <source>View Allocations...</source>
-        <translation>Dağıtımları Görüntüle...</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Açıklama</translation>
     </message>
     <message>
         <source>Allocations</source>
         <translation>Dağıtımlar</translation>
-    </message>
-    <message>
-        <source>View Orders...</source>
-        <translation>Siparişleri Görüntüle...</translation>
     </message>
     <message>
         <source>Issue P/R...</source>
@@ -30381,6 +30349,14 @@ Total</source>
     </message>
     <message>
         <source>Error Printing MRP Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -30810,20 +30786,12 @@ Total</source>
         <translation type="unfinished">Kapatıldı</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation>Satış Siparişini düzelt...</translation>
-    </message>
-    <message>
         <source>Unposted</source>
         <translation>Onaysız</translation>
     </message>
     <message>
         <source>In Process</source>
         <translation type="unfinished">Devam Eden</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Satış Siparişini Görüntüle...</translation>
     </message>
     <message>
         <source>Invoices</source>
@@ -30846,14 +30814,6 @@ Total</source>
         <translation type="unfinished">Patlatıldı</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>Faturayı Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Invoice...</source>
-        <translation>Faturayı Düzelt...</translation>
-    </message>
-    <message>
         <source>Purchase Request</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30866,16 +30826,8 @@ Total</source>
         <translation type="unfinished">Onaylı</translation>
     </message>
     <message>
-        <source>View Quote...</source>
-        <translation>Fiyat teklifini görüntüle...</translation>
-    </message>
-    <message>
         <source>Posted</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Quote...</source>
-        <translation>Fiyat teklifini değiştir...</translation>
     </message>
     <message>
         <source>Converted</source>
@@ -30934,10 +30886,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unreleased</source>
         <translation type="unfinished">Onaylanmayan</translation>
     </message>
@@ -30962,60 +30910,12 @@ Total</source>
         <translation type="unfinished">Açıklama</translation>
     </message>
     <message>
-        <source>Edit Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Value</source>
         <translation type="unfinished">Değer</translation>
     </message>
     <message>
         <source>Total</source>
         <translation>TOPLAM</translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished">Satış Siparişi Kalemini Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished">Satınalma Siparişi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Request...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order Item...</source>
-        <translation type="unfinished">Satınalma Siparişi Kalemi Görüntüle...</translation>
     </message>
     <message>
         <source>Project Required</source>
@@ -31082,14 +30982,6 @@ Total</source>
         <translation type="unfinished">Görev</translation>
     </message>
     <message>
-        <source>Edit Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Concept</source>
         <translation type="unfinished">Konsept</translation>
     </message>
@@ -31099,6 +30991,90 @@ Total</source>
     </message>
     <message>
         <source>Please save the Project first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -31117,32 +31093,8 @@ Total</source>
         <translation>Site:</translation>
     </message>
     <message>
-        <source>Print Traveler...</source>
-        <translation>Üretim Siparişlerini Yazdır...</translation>
-    </message>
-    <message>
-        <source>Reschedule P/O Item...</source>
-        <translation>Satınalma Siparişini Yeniden Terminle...</translation>
-    </message>
-    <message>
         <source>Required</source>
         <translation>Gerekli</translation>
-    </message>
-    <message>
-        <source>Change W/O Quantity...</source>
-        <translation>Üretim Sipariş Miktarını Değiştir...</translation>
-    </message>
-    <message>
-        <source>Change P/O Item Quantity...</source>
-        <translation>SAS Miktarını Değiştir...</translation>
-    </message>
-    <message>
-        <source>Reprioritize W/O...</source>
-        <translation>Üretim Siparişlerinin Önem Sırasını Yenile...</translation>
-    </message>
-    <message>
-        <source>Reschedule W/O...</source>
-        <translation>Üretim Siparişlerini Yeniden Düzenle...</translation>
     </message>
     <message>
         <source>Item Site Lead Time</source>
@@ -31191,6 +31143,30 @@ Total</source>
     <message>
         <source>Balance</source>
         <translation>Bakiye</translation>
+    </message>
+    <message>
+        <source>Reschedule P/O Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change P/O Item Quantity</source>
+        <translation type="unfinished">Satınalma Siparişi Kalem Miktarını Değiştir</translation>
+    </message>
+    <message>
+        <source>Reprioritize W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Traveler</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -31272,16 +31248,8 @@ Total</source>
         <translation>Onaysız</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>Sıralamayı Düzelt...</translation>
-    </message>
-    <message>
         <source>Please eneter a valid End Date.</source>
         <translation>Lütfen Geçerli Bir Bitiş Tarihi Girin.</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>Siparişi Görüntüle...</translation>
     </message>
     <message>
         <source>Closed</source>
@@ -31302,6 +31270,14 @@ Total</source>
     <message>
         <source>Purchasing Agent:</source>
         <translation>Satın Alma Elemanı:</translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -31383,12 +31359,12 @@ Total</source>
         <translation>Tedarikçi</translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation>Siparişi Görüntüle...</translation>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>Sıralamayı Düzelt...</translation>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -31416,10 +31392,6 @@ Total</source>
     <message>
         <source>Latest</source>
         <translation>En Geç</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>Siparişi Görüntüle...</translation>
     </message>
     <message>
         <source>Scheduled</source>
@@ -31451,10 +31423,6 @@ Total</source>
         <translation>Para Birimi</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>Sıralamayı Düzelt...</translation>
-    </message>
-    <message>
         <source>Pack Date</source>
         <translation>Paketleme Tarihi</translation>
     </message>
@@ -31469,10 +31437,6 @@ Total</source>
     <message>
         <source>Return</source>
         <translation>İade</translation>
-    </message>
-    <message>
-        <source>Print Packing List...</source>
-        <translation>Paketleme Listesini Yazdır...</translation>
     </message>
     <message>
         <source>None</source>
@@ -31501,6 +31465,18 @@ Total</source>
     <message>
         <source>Tax</source>
         <translation type="unfinished">Vergi</translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print Packing List</source>
+        <translation type="unfinished">Paketleme Listesini Yazdır</translation>
     </message>
 </context>
 <context>
@@ -31649,20 +31625,20 @@ Total</source>
         <translation>Birim Miktar</translation>
     </message>
     <message>
-        <source>Edit BOM Item...</source>
-        <translation>Bileşen düzenle...</translation>
-    </message>
-    <message>
-        <source>View BOM Item...</source>
-        <translation>Bileşen Görüntüle...</translation>
-    </message>
-    <message>
         <source>Effective</source>
         <translation>Geçerlilik</translation>
     </message>
     <message>
         <source>Pending Bill of Materials Changes</source>
         <translation>Bekleyen Ürün Ağacı Değişiklikleri</translation>
+    </message>
+    <message>
+        <source>Edit BOM Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View BOM Item</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -31696,20 +31672,12 @@ Total</source>
         <translation type="unfinished">Sabit</translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Release Order...</source>
         <translation type="unfinished">Siparişi Onayla...</translation>
     </message>
     <message>
         <source>Order Types</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Order...</source>
-        <translation type="unfinished">Siparişi Sil...</translation>
     </message>
     <message>
         <source>Planned Orders</source>
@@ -31736,16 +31704,8 @@ Total</source>
         <translation type="unfinished">Transferler</translation>
     </message>
     <message>
-        <source>Usage Statistics...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Firm Order...</source>
         <translation type="unfinished">Sabit Sipariş...</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Planner Code Pattern</source>
@@ -31754,10 +31714,6 @@ Total</source>
     <message>
         <source>Planner Code</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Soften Order...</source>
-        <translation type="unfinished">Siparişi Yumuşat...</translation>
     </message>
     <message>
         <source>Qty</source>
@@ -31793,6 +31749,26 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Usage Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soften Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -32358,10 +32334,6 @@ Total</source>
         <translation>Stoklanmayan</translation>
     </message>
     <message>
-        <source>Create Voucher...</source>
-        <translation>Satınalma Faturası Oluştur...</translation>
-    </message>
-    <message>
         <source>Receipts and Returns by Vendor</source>
         <translation>Tedarikçiye göre Giriş ve İadeler</translation>
     </message>
@@ -32421,6 +32393,10 @@ Total</source>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspPoItemsByDate</name>
@@ -32461,14 +32437,6 @@ Total</source>
         <translation type="unfinished">Tedarikçi Ölçü Birimi</translation>
     </message>
     <message>
-        <source>Change Qty...</source>
-        <translation>Miktarı Değiştir ...</translation>
-    </message>
-    <message>
-        <source>Open Item...</source>
-        <translation>Malzemeyi Aç...</translation>
-    </message>
-    <message>
         <source>Purchase Order Items</source>
         <translation type="unfinished"></translation>
     </message>
@@ -32489,10 +32457,6 @@ Total</source>
         <translation>En Erken</translation>
     </message>
     <message>
-        <source>View Item...</source>
-        <translation>Malzeme Görüntüle...</translation>
-    </message>
-    <message>
         <source>Ordered</source>
         <translation>Sipariş Verilen</translation>
     </message>
@@ -32507,22 +32471,6 @@ Total</source>
     <message>
         <source>Received</source>
         <translation>Alınan</translation>
-    </message>
-    <message>
-        <source>Edit Order...</source>
-        <translation>Siparişi Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>Siparişi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>Malzemeyi Düzelt...</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>Kullanılabilirlik...</translation>
     </message>
     <message>
         <source>Open Items</source>
@@ -32604,16 +32552,40 @@ Total</source>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Qty</source>
+        <translation type="unfinished">Miktar değiştir</translation>
+    </message>
+    <message>
+        <source>Open Item</source>
+        <translation type="unfinished">Açık Kalem</translation>
+    </message>
 </context>
 <context>
     <name>dspPoItemsByItem</name>
     <message>
         <source>Purchase Order Items</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>Malzemeyi Düzelt...</translation>
     </message>
     <message>
         <source>Vendor</source>
@@ -32626,10 +32598,6 @@ Total</source>
     <message>
         <source>UOM</source>
         <translation>Ölçü Birimi</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>Kullanılabilirlik...</translation>
     </message>
     <message>
         <source>Returned</source>
@@ -32656,20 +32624,8 @@ Total</source>
         <translation>Sipariş Verilen</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>Sıralamayı Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Order...</source>
-        <translation>Siparişi Görüntüle...</translation>
-    </message>
-    <message>
         <source>Change Qty...</source>
         <translation>Miktarı Değiştir ...</translation>
-    </message>
-    <message>
-        <source>View Item...</source>
-        <translation>Malzeme Görüntüle...</translation>
     </message>
     <message>
         <source>Reschedule...</source>
@@ -32728,10 +32684,6 @@ Total</source>
         <translation>Vade Tarihi</translation>
     </message>
     <message>
-        <source>Open Item...</source>
-        <translation>Açık Malzeme...</translation>
-    </message>
-    <message>
         <source>All Items</source>
         <translation>Tüm Malzemeler</translation>
     </message>
@@ -32742,6 +32694,30 @@ Total</source>
     <message>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Item</source>
+        <translation type="unfinished">Açık Kalem</translation>
     </message>
 </context>
 <context>
@@ -32839,32 +32815,12 @@ Total</source>
         <translation>Ölçü Birimi</translation>
     </message>
     <message>
-        <source>View Order...</source>
-        <translation>Siparişi Görüntüle...</translation>
-    </message>
-    <message>
         <source>Returned</source>
         <translation>İade Edilen</translation>
     </message>
     <message>
-        <source>Edit Order...</source>
-        <translation>Siparişi Düzelt...</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>Malzemeyi Düzelt...</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>Kullanılabilirlik Çalıştır...</translation>
-    </message>
-    <message>
         <source>Open</source>
         <translation>Aç</translation>
-    </message>
-    <message>
-        <source>View Item...</source>
-        <translation>Ürünü Görüntüle...</translation>
     </message>
     <message>
         <source>Reschedule...</source>
@@ -32899,16 +32855,36 @@ Total</source>
         <translation>Lütfen Geçerli Bir Tedarikçi Numarası Girin.</translation>
     </message>
     <message>
-        <source>Open Item...</source>
-        <translation>Malzemeyi Aaç...</translation>
-    </message>
-    <message>
         <source>Error Retrieving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Saving Item Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Item</source>
+        <translation type="unfinished">Açık Kalem</translation>
     </message>
 </context>
 <context>
@@ -33747,16 +33723,8 @@ Total</source>
         <translation>Alt No</translation>
     </message>
     <message>
-        <source>Running Availability...</source>
-        <translation>Kullanılabilirlik Çalıştır...</translation>
-    </message>
-    <message>
         <source>P/R #</source>
         <translation>SAT #</translation>
-    </message>
-    <message>
-        <source>Delete P/R...</source>
-        <translation>Satınalma Talebini Sil...</translation>
     </message>
     <message>
         <source>&lt;p&gt;Item is required.</source>
@@ -33807,15 +33775,23 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit P/R...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View S/O Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error opening Sales Order item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Edit P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete P/R</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -33852,10 +33828,6 @@ Total</source>
     <message>
         <source>Purchase Requests</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>Kullanılabilirlik Çalıştır...</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -33934,15 +33906,19 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit P/R...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View S/O Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error opening Sales Order item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Edit P/R</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -33957,10 +33933,6 @@ Total</source>
         <translation>Ölçü Birimi</translation>
     </message>
     <message>
-        <source>Transfer to another Site...</source>
-        <translation type="unfinished">Diğer Üretim Yerine Transfer...</translation>
-    </message>
-    <message>
         <source>Quantities on Hand</source>
         <translation type="unfinished">Elde Bulunan Miktarlar</translation>
     </message>
@@ -33971,10 +33943,6 @@ Total</source>
     <message>
         <source>Item Group Pattern</source>
         <translation type="unfinished">Malzeme Grubu Şablonu</translation>
-    </message>
-    <message>
-        <source>Adjust this Quantity...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>QOH</source>
@@ -34005,10 +33973,6 @@ Total</source>
         <translation type="unfinished">Maliyet Yöntemi</translation>
     </message>
     <message>
-        <source>Enter Misc. Count...</source>
-        <translation type="unfinished">Çeşitli Sayımları Giriniz...</translation>
-    </message>
-    <message>
         <source>Show Inventory Value</source>
         <translation type="unfinished">Stok Değerini Göster</translation>
     </message>
@@ -34021,20 +33985,12 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Location/Lot/Serial # Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cost Category</source>
         <translation type="unfinished">Maliyet Kategorisi</translation>
     </message>
     <message>
         <source>Item Group</source>
         <translation type="unfinished">Malzeme Grubu</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation type="unfinished">Sayım Etiketi Çıkışı...</translation>
     </message>
     <message>
         <source>None</source>
@@ -34132,6 +34088,26 @@ Total</source>
         <source>ABC Class</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Location/Lot/Serial # Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspQOHByLocation</name>
@@ -34166,10 +34142,6 @@ Total</source>
     <message>
         <source>UOM</source>
         <translation>Ölçü Birimi</translation>
-    </message>
-    <message>
-        <source>Relocate...</source>
-        <translation>Yer Değiştir...</translation>
     </message>
     <message>
         <source>Netable:</source>
@@ -34214,6 +34186,10 @@ Total</source>
     <message>
         <source>T/O</source>
         <translation type="unfinished">Nakil Sip.</translation>
+    </message>
+    <message>
+        <source>Relocate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -34263,28 +34239,8 @@ Total</source>
         <translation type="unfinished">Adres</translation>
     </message>
     <message>
-        <source>View Location/Lot/Serial # Detail...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transfer to another Site...</source>
-        <translation type="unfinished">Diğer Üretim Yerine Transfer...</translation>
-    </message>
-    <message>
-        <source>Adjust this Quantity...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reset this Quantity to 0...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Misc. Count...</source>
-        <translation type="unfinished">Çeşitli Sayımları Giriniz...</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation type="unfinished">Sayım Etiketi Çıkışı...</translation>
     </message>
     <message>
         <source>Missing Selection</source>
@@ -34292,6 +34248,26 @@ Total</source>
     </message>
     <message>
         <source>&lt;p&gt;Please select a Warehouse Zone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Location/Lot/Serial # Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -34362,20 +34338,8 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Convert...</source>
-        <translation>Değiştir...</translation>
-    </message>
-    <message>
         <source>Ship-to</source>
         <translation>Gönderilen Yer</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>Cust. P/O #</source>
@@ -34413,6 +34377,18 @@ Total</source>
         <source>Selected P/O #:</source>
         <translation>Seçili SAS #:</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Convert</source>
+        <translation type="unfinished">Dönüştür</translation>
+    </message>
 </context>
 <context>
     <name>dspQuotesByItem</name>
@@ -34445,16 +34421,8 @@ Total</source>
         <translation>Teklif #</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation>Düzelt...</translation>
-    </message>
-    <message>
         <source>You may not view, edit, or convert this Quote as it references a Site for which you have not been granted privileges.</source>
         <translation>Bu üretim yeri için yetkiniz bulunmuyor.</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>You must specify a Start Date and End Date.</source>
@@ -34496,16 +34464,20 @@ Total</source>
         <source>Quoted</source>
         <translation>Fiyat Teklifi Sunulmuş</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>dspReorderExceptionsByPlannerCode</name>
     <message>
         <source>Expedite Exceptions</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Create Work Order...</source>
-        <translation>Üretim Siparişi Oluştur...</translation>
     </message>
     <message>
         <source>Proj. Avail.</source>
@@ -34518,10 +34490,6 @@ Total</source>
     <message>
         <source>Exception Date</source>
         <translation>İstisna Tarihi</translation>
-    </message>
-    <message>
-        <source>View Running Availability...</source>
-        <translation>Kullanılabilirlik Görüntüle...</translation>
     </message>
     <message>
         <source>&amp;Include Planned Orders</source>
@@ -34546,6 +34514,14 @@ Total</source>
     <message>
         <source>Site</source>
         <translation>Site</translation>
+    </message>
+    <message>
+        <source>View Running Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Work Order</source>
+        <translation type="unfinished">Üretim Siparişi Oluştur</translation>
     </message>
 </context>
 <context>
@@ -34583,18 +34559,6 @@ Total</source>
         <translation>Rezerve Edilebilen:</translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation>Satış Siparişini Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order...</source>
-        <translation>Satış siparişini düzenle...</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation>Üretim Siparişini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Required</source>
         <translation>Gerekli</translation>
     </message>
@@ -34607,14 +34571,6 @@ Total</source>
         <translation>Eldeki Miktar:</translation>
     </message>
     <message>
-        <source>Edit Transfer Order...</source>
-        <translation>Nakil Siparişini Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Transfer Order...</source>
-        <translation>Nakil Siparişini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Item Reservations</source>
         <translation>Malzeme Rezervasyonları</translation>
     </message>
@@ -34624,6 +34580,26 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Item Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -34714,14 +34690,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
-    </message>
-    <message>
         <source>Undefined</source>
         <translation type="unfinished">Tanımlanmayan</translation>
     </message>
@@ -34768,6 +34736,14 @@ Total</source>
     <message>
         <source>&lt;p&gt;You may not view or edit this Return Authorization as it references a Site for which you have not been granted privileges.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -34825,14 +34801,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
-    </message>
-    <message>
         <source>Item Required</source>
         <translation type="unfinished">Malzeme İhtiyacı</translation>
     </message>
@@ -34880,6 +34848,14 @@ Total</source>
         <source>&lt;p&gt;You may not view or edit this Return Authorization as it references a Site for which you have not been granted privileges.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>dspRunningAvailability</name>
@@ -34904,24 +34880,12 @@ Total</source>
         <translation>Alınan</translation>
     </message>
     <message>
-        <source>Soften Order...</source>
-        <translation>Siparişi Yumuşat...</translation>
-    </message>
-    <message>
         <source>Ordered</source>
         <translation>Sipariş Edilen</translation>
     </message>
     <message>
         <source>Due Date</source>
         <translation>Vade Tarihi</translation>
-    </message>
-    <message>
-        <source>Work Order Schedule by Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished">Satınalma Siparişi Görüntüle...</translation>
     </message>
     <message>
         <source>Planned T/O (firmed)</source>
@@ -34956,20 +34920,12 @@ Total</source>
         <translation>Siparişi Onayla...</translation>
     </message>
     <message>
-        <source>View Transfer Order...</source>
-        <translation>Nakil Siparişi Görüntüle...</translation>
-    </message>
-    <message>
         <source>Delete Order...</source>
         <translation>Siparişi Sil...</translation>
     </message>
     <message>
         <source>Planned W/O Req. (firmed)</source>
         <translation>Planlı Üretim Siparişi İhtiyacı (Sabit)</translation>
-    </message>
-    <message>
-        <source>View Work Order Details...</source>
-        <translation>Üretim Siparişi Detaylarını Görüntüle...</translation>
     </message>
     <message>
         <source>Planned W/O Req.</source>
@@ -34986,10 +34942,6 @@ Total</source>
     <message>
         <source>Show Planned Orders</source>
         <translation>Planlı Siparişleri Göster</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Satış Siparişini Görüntüle...</translation>
     </message>
     <message>
         <source>Order Multiple:</source>
@@ -35040,18 +34992,6 @@ Total</source>
         <translation type="unfinished">Notlar</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Transfer Order...</source>
-        <translation type="unfinished">Nakil Siparişini Düzelt...</translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reserved</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35067,6 +35007,42 @@ Total</source>
         <source>Error Retrieving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Soften Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work Order Schedule by Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Transfer Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspSalesHistory</name>
@@ -35077,10 +35053,6 @@ Total</source>
     <message>
         <source>Invoice #</source>
         <translation>Fatura #</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Customer Type Pattern</source>
@@ -35113,10 +35085,6 @@ Total</source>
     <message>
         <source>Sale Type</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
     </message>
     <message>
         <source>Ext. Cost</source>
@@ -35241,6 +35209,14 @@ Total</source>
     <message>
         <source>Cust. P/O #</source>
         <translation type="unfinished">Müşteri Alış Siparişi No:</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -35409,28 +35385,8 @@ Total</source>
         <translation type="unfinished">Müşteri Alış Siparişi No:</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
-    </message>
-    <message>
         <source>Copy...</source>
         <translation type="unfinished">Kopyala...</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation type="unfinished">Sevkiyat Durumu...</translation>
-    </message>
-    <message>
-        <source>Shipments...</source>
-        <translation type="unfinished">Sevkiyatlar...</translation>
-    </message>
-    <message>
-        <source>Create Return Authorization...</source>
-        <translation type="unfinished">İade Yarat...</translation>
     </message>
     <message>
         <source>No Lines</source>
@@ -35466,6 +35422,26 @@ Total</source>
     </message>
     <message>
         <source>Created By</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Return Authorization</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -35544,22 +35520,6 @@ Total</source>
         <translation>Sipariş Verilen</translation>
     </message>
     <message>
-        <source>Shipments..</source>
-        <translation>Sevkiyatlar...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation>Sevkiyat Durumu...</translation>
-    </message>
-    <message>
         <source>Sales Order Lookup by Item</source>
         <translation>Malzemeye göre Satış Siparişlerine bak</translation>
     </message>
@@ -35605,6 +35565,22 @@ Total</source>
     </message>
     <message>
         <source>Inv. Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -35707,10 +35683,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Query Shipment Status...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ship Date</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35720,6 +35692,10 @@ Total</source>
     </message>
     <message>
         <source>Error Retrieving Shipment Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query Shipment Status</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -35882,10 +35858,6 @@ Total</source>
         <translation></translation>
     </message>
     <message>
-        <source>Edit Bill of Materials...</source>
-        <translation>Ürün Ağacı düzenle...</translation>
-    </message>
-    <message>
         <source>Special</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35954,16 +35926,8 @@ Total</source>
         <translation>Geçerlilik</translation>
     </message>
     <message>
-        <source>Edit Item Master...</source>
-        <translation>Malzeme Düzelt...</translation>
-    </message>
-    <message>
         <source>Single Level Where Used</source>
         <translation>Tek Seviye Nerede Kullanıldığı</translation>
-    </message>
-    <message>
-        <source>View Item Inventory History...</source>
-        <translation>Malzeme Stok Tarihçesini Görüntüle...</translation>
     </message>
     <message>
         <source>Today</source>
@@ -35972,6 +35936,18 @@ Total</source>
     <message>
         <source>Effective:</source>
         <translation>Geçerlilik:</translation>
+    </message>
+    <message>
+        <source>Edit Bill of Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item Master</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Inventory History</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -35983,10 +35959,6 @@ Total</source>
     <message>
         <source>Reset this QOH to 0...</source>
         <translation>Bu QOH ı yeniden 0 olarak gir...</translation>
-    </message>
-    <message>
-        <source>Adjust this QOH...</source>
-        <translation>Bu QOH ı düzenle...</translation>
     </message>
     <message>
         <source>UOM</source>
@@ -36001,10 +35973,6 @@ Total</source>
         <translation>Mevcut Miktar</translation>
     </message>
     <message>
-        <source>Enter Misc. Count...</source>
-        <translation>Çeşitli Sayımları Giriniz...</translation>
-    </message>
-    <message>
         <source>Use Standard Costs</source>
         <translation>Standart Maliyetleri Kullan</translation>
     </message>
@@ -36015,10 +35983,6 @@ Total</source>
     <message>
         <source>Value</source>
         <translation>Değer</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation>Sayım Etiketi Çıkışı...</translation>
     </message>
     <message>
         <source>Unit Cost</source>
@@ -36045,10 +36009,6 @@ Total</source>
         <translation>Bir Anahtar Tarih seçmelisiniz.</translation>
     </message>
     <message>
-        <source>Transfer to another Site...</source>
-        <translation>Diğer Üretim Yerine Transfer...</translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Site</translation>
     </message>
@@ -36071,6 +36031,22 @@ Total</source>
     <message>
         <source>%</source>
         <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>Transfer to another Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust this QOH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Misc. Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36191,16 +36167,8 @@ Total</source>
         <translation>Tahsis Edilen</translation>
     </message>
     <message>
-        <source>View Orders...</source>
-        <translation>Siparişleri Görüntüle...</translation>
-    </message>
-    <message>
         <source>Look Ahead Days:</source>
         <translation>İleride Bakılacak Günler:</translation>
-    </message>
-    <message>
-        <source>View Allocations...</source>
-        <translation>Tahsisleri Görüntüle...</translation>
     </message>
     <message>
         <source>Reorder Lvl.</source>
@@ -36225,6 +36193,14 @@ Total</source>
     <message>
         <source>Show Availability as of:</source>
         <translation>Kullanılabilirliği Göster:</translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36293,10 +36269,6 @@ Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Ordered/Shipped</source>
         <translation>Sipariş verildi/Yollandı</translation>
     </message>
@@ -36321,10 +36293,6 @@ Total</source>
         <translation>Masraf</translation>
     </message>
     <message>
-        <source>Inventory Availability by Sales Order...</source>
-        <translation>Satış Siparişine göre Kullanılabilirlik...</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
@@ -36333,16 +36301,8 @@ Total</source>
         <translation>Hayır</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Print Packing List...</source>
         <translation>Paketleme Listesini Yazdır...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
     </message>
     <message>
         <source>Pack</source>
@@ -36411,6 +36371,22 @@ Total</source>
     <message>
         <source>Tax</source>
         <translation type="unfinished">Vergi</translation>
+    </message>
+    <message>
+        <source>Inventory Availability by Sales Order</source>
+        <translation type="unfinished">Satış Siparişine göre Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -36487,10 +36463,6 @@ Total</source>
         <translation type="unfinished">Özet Defter-i Kebir İşlemleri</translation>
     </message>
     <message>
-        <source>View Invoice...</source>
-        <translation>Faturayı Görüntüle...</translation>
-    </message>
-    <message>
         <source>Src.</source>
         <translation>Src.</translation>
     </message>
@@ -36537,18 +36509,6 @@ Total</source>
     <message>
         <source>Credit</source>
         <translation>Alacak</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation>Satınalma Siparişi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Voucher...</source>
-        <translation>Makbuzu Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>All Sources</source>
@@ -36598,6 +36558,22 @@ Total</source>
         <source>W/O</source>
         <translation>Üretim Siparişi</translation>
     </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspSummarizedSales</name>
@@ -36608,10 +36584,6 @@ Total</source>
     <message>
         <source>Shipping Zone</source>
         <translation type="unfinished">Sevkiyat Bölgesi</translation>
-    </message>
-    <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Customer Ship-to</source>
@@ -36783,6 +36755,10 @@ Total</source>
     </message>
     <message>
         <source>Sale Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Detail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37295,14 +37271,6 @@ Rate</source>
 <context>
     <name>dspTimePhasedAvailability</name>
     <message>
-        <source>View Orders...</source>
-        <translation type="unfinished">Siparişleri Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Create W/O...</source>
-        <translation>Üretim Siparişi Oluştur...</translation>
-    </message>
-    <message>
         <source>Item Number</source>
         <translation>Malzeme Numarası</translation>
     </message>
@@ -37311,28 +37279,36 @@ Rate</source>
         <translation>Ölçü Birimi</translation>
     </message>
     <message>
-        <source>View Availability Detail...</source>
-        <translation>Kullanılabilirlik Detayını Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Allocations...</source>
-        <translation>Tahsisleri Görüntüle...</translation>
-    </message>
-    <message>
         <source>Time-Phased Availability</source>
         <translation>Zaman Kısıtlı Kullanılabilirlik</translation>
     </message>
     <message>
-        <source>Create P/R...</source>
-        <translation>SAT Oluştur...</translation>
-    </message>
-    <message>
-        <source>Create P/O...</source>
-        <translation>SAS Oluştur...</translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Site</translation>
+    </message>
+    <message>
+        <source>View Availability Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Allocations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Orders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create W/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create P/O</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37378,10 +37354,6 @@ Rate</source>
         <translation type="unfinished">Ürün Kategorisi</translation>
     </message>
     <message>
-        <source>View Bookings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item</source>
         <translation>Malzeme</translation>
     </message>
@@ -37421,6 +37393,10 @@ Rate</source>
         <source>Capacity</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Bookings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedOpenAPItems</name>
@@ -37451,10 +37427,6 @@ Rate</source>
     <message>
         <source>Vendor</source>
         <translation>Tedarikçi</translation>
-    </message>
-    <message>
-        <source>View Open Items...</source>
-        <translation>Açık Kalemleri Görüntüle...</translation>
     </message>
     <message>
         <source>61-90 Days</source>
@@ -37522,6 +37494,10 @@ Rate</source>
     </message>
     <message>
         <source>The criteria you specified are not complete. Please make sure all fields are correctly filled out before running the report.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Open Items</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37596,10 +37572,6 @@ Rate</source>
         <translation>Bildiriyi Yazdır...</translation>
     </message>
     <message>
-        <source>View Open Items...</source>
-        <translation>Açık Kalemleri Görüntüle...</translation>
-    </message>
-    <message>
         <source>Select Calendar Periods</source>
         <translation>Dönem Seç</translation>
     </message>
@@ -37631,6 +37603,10 @@ Rate</source>
         <source>The criteria you specified are not complete. Please make sure all fields are correctly filled out before running the report.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Open Items</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedSales</name>
@@ -37653,10 +37629,6 @@ Rate</source>
     <message>
         <source>Item Number</source>
         <translation>Malzeme Numarası</translation>
-    </message>
-    <message>
-        <source>View Sales Detail...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time-Phased Sales History</source>
@@ -37722,6 +37694,10 @@ Rate</source>
         <source>Include Misc. Items</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Sales Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspTimePhasedUsageStatisticsByItem</name>
@@ -37758,16 +37734,16 @@ Rate</source>
         <translation>Alındı</translation>
     </message>
     <message>
-        <source>View Transactions...</source>
-        <translation>İşlemleri Görüntüle...</translation>
-    </message>
-    <message>
         <source>Transaction Type</source>
         <translation>İşlem Tipi</translation>
     </message>
     <message>
         <source>Transfers</source>
         <translation type="unfinished">Transferler</translation>
+    </message>
+    <message>
+        <source>View Transactions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37837,10 +37813,6 @@ Rate</source>
         <translation>Açılış Bakiye</translation>
     </message>
     <message>
-        <source>View Transactions...</source>
-        <translation>İşlemleri Görüntüle...</translation>
-    </message>
-    <message>
         <source>Credits</source>
         <translation>Alacaklar</translation>
     </message>
@@ -37860,6 +37832,10 @@ Rate</source>
         <source>Fiscal Year</source>
         <translation type="unfinished">Mali Yıl</translation>
     </message>
+    <message>
+        <source>View Transactions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspUnbalancedQOHByClassCode</name>
@@ -37876,28 +37852,8 @@ Rate</source>
         <translation>Parti #</translation>
     </message>
     <message>
-        <source>Edit Item Site...</source>
-        <translation>Malzeme Deposu Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Inventory Availability...</source>
-        <translation>Kullanılabilirlik Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Item Site...</source>
-        <translation>Malzeme Deposu Görüntüle...</translation>
-    </message>
-    <message>
         <source>Regular</source>
         <translation>Düzenli</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation>Sayım Etiketi Çıkışı...</translation>
-    </message>
-    <message>
-        <source>Balance Item Site...</source>
-        <translation>Malzeme Bakiyesi...</translation>
     </message>
     <message>
         <source>QOH</source>
@@ -37935,6 +37891,26 @@ Rate</source>
         <source>Error Retrieving Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Balance Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspUndefinedManufacturedItems</name>
@@ -37949,14 +37925,6 @@ Rate</source>
     <message>
         <source>Active</source>
         <translation>Etkin</translation>
-    </message>
-    <message>
-        <source>Edit Item...</source>
-        <translation>Malzemeyi Düzelt...</translation>
-    </message>
-    <message>
-        <source>Create BOM...</source>
-        <translation>BOM Oluştur...</translation>
     </message>
     <message>
         <source>No BOM</source>
@@ -37982,6 +37950,14 @@ Rate</source>
         <source>Item Number</source>
         <translation>Malzeme Numarası</translation>
     </message>
+    <message>
+        <source>Edit Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create BOM</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspUninvoicedReceivings</name>
@@ -38000,10 +37976,6 @@ Rate</source>
     <message>
         <source>Selected:</source>
         <translation>Seçilen:</translation>
-    </message>
-    <message>
-        <source>Create Credit Memo...</source>
-        <translation>Alacak Dekontu Oluştur...</translation>
     </message>
     <message>
         <source>#</source>
@@ -38055,6 +38027,10 @@ Rate</source>
     </message>
     <message>
         <source>P/O Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Credit Memo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -38281,10 +38257,6 @@ Rate</source>
         <translation type="unfinished">Çek</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation>Fiş Görüntüle...</translation>
-    </message>
-    <message>
         <source>Debit Memo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -38321,16 +38293,8 @@ Rate</source>
         <translation>Aç</translation>
     </message>
     <message>
-        <source>View A/P Open...</source>
-        <translation>Açık Satıcı Hesapları Görüntüle...</translation>
-    </message>
-    <message>
         <source>P/O #</source>
         <translation>SAS #</translation>
-    </message>
-    <message>
-        <source>View G/L Series...</source>
-        <translation>Genek defter serlerini görüntüle...</translation>
     </message>
     <message>
         <source>Invoice #</source>
@@ -38365,10 +38329,6 @@ Rate</source>
         <translation>Para Birimi</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Voiding Voucher</source>
         <translation type="unfinished"></translation>
     </message>
@@ -38392,6 +38352,22 @@ Rate</source>
         <source>Please make a valid vendor selection.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspVoucherRegister</name>
@@ -38406,10 +38382,6 @@ Rate</source>
     <message>
         <source>Enter a valid End Date.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>Latest</source>
@@ -38476,23 +38448,27 @@ Rate</source>
         <translation>Fatura Kaydı</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation>Fatura Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation>Satınalma Siparişi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>Faturayı Görüntüle...</translation>
-    </message>
-    <message>
         <source>Username</source>
         <translation>Kullanıcı Adı</translation>
     </message>
     <message>
         <source>Invalid Dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -38519,20 +38495,12 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Received</source>
         <translation>Alınan</translation>
     </message>
     <message>
         <source>Enter a valid End Date.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
     </message>
     <message>
         <source>Work Order History by Class Code</source>
@@ -38586,6 +38554,14 @@ Rate</source>
         <source>Cost</source>
         <translation>Maliyet</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>dspWoHistoryByItem</name>
@@ -38638,10 +38614,6 @@ Rate</source>
         <translation>Üretim Siparişi Maliyetini Göster</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Start Date</source>
         <translation>Başlangıç Tarihi</translation>
     </message>
@@ -38662,10 +38634,6 @@ Rate</source>
         <translation>Malzemeye göre Üretim Siparişi Tarihçesi</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Site</source>
         <translation>Site</translation>
     </message>
@@ -38676,6 +38644,14 @@ Rate</source>
     <message>
         <source>You must enter a valid item number for this report.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -38691,10 +38667,6 @@ Rate</source>
     <message>
         <source>Item #</source>
         <translation>Malzeme #</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>Sub. #</source>
@@ -38737,10 +38709,6 @@ Rate</source>
         <translation>Sadece Üst Seviye Üretim Siparişlerini Göster</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Priority</source>
         <translation>Öncelik</translation>
     </message>
@@ -38779,6 +38747,14 @@ Rate</source>
     <message>
         <source>You must enter a work order pattern for this report.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -38935,10 +38911,6 @@ Rate</source>
         <translation>Bakiye</translation>
     </message>
     <message>
-        <source>View Requirement...</source>
-        <translation>İhtiyacı Görüntüle...</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
@@ -38962,17 +38934,13 @@ Rate</source>
         <source>Component Item Description 2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View Requirement</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>dspWoSchedule</name>
-    <message>
-        <source>Delete...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Reprioritize...</source>
-        <translation type="unfinished">Yeniden Önceliklendir...</translation>
-    </message>
     <message>
         <source>Recall</source>
         <translation type="unfinished">Geri Çağır</translation>
@@ -38982,19 +38950,7 @@ Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Parent Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Class Code Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Inventory Availability...</source>
-        <translation type="unfinished">Stok Kullanılabilirlik...</translation>
-    </message>
-    <message>
-        <source>Reschedule...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -39010,20 +38966,8 @@ Rate</source>
         <translation type="unfinished">Malzeme Grubu Şablonu</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Status</source>
         <translation type="unfinished">Durumu</translation>
-    </message>
-    <message>
-        <source>View Material Requirements...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Class Code</source>
@@ -39032,10 +38976,6 @@ Rate</source>
     <message>
         <source>Planner Code</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change Quantity...</source>
-        <translation type="unfinished">Miktar değiştir...</translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure that you want to delete the selected Work Order?</source>
@@ -39094,10 +39034,6 @@ Rate</source>
         <translation type="unfinished">Operasyon Teyiti Düzelt...</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
-    </message>
-    <message>
         <source>Has Closed Parent Sales Order</source>
         <translation type="unfinished"></translation>
     </message>
@@ -39115,10 +39051,6 @@ Rate</source>
     </message>
     <message>
         <source>Issue Material Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Parent Sales Order Information...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -39167,10 +39099,6 @@ Rate</source>
     </message>
     <message>
         <source>Work Order #</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Bill of Materials...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -39263,6 +39191,54 @@ Rate</source>
     </message>
     <message>
         <source>Return Material Item...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
+    <message>
+        <source>View Bill of Materials</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Material Requirements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Reprioritize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Parent Sales Order Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Parent Work Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -39824,16 +39800,8 @@ Rate</source>
         <translation>Site</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete this Employee?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
     </message>
     <message>
         <source>Employees</source>
@@ -39862,6 +39830,14 @@ Rate</source>
     <message>
         <source>Employee Group</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -39920,10 +39896,6 @@ Rate</source>
     <message>
         <source>Ordered</source>
         <translation>Sipariş Verilen</translation>
-    </message>
-    <message>
-        <source>Enter Receipt...</source>
-        <translation>Stok Girişi...</translation>
     </message>
     <message>
         <source>Vend. Item #</source>
@@ -41654,28 +41626,12 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation type="unfinished">Üretim Siparişi Sil?</translation>
     </message>
     <message>
-        <source>View Project Task...</source>
-        <translation>Proje Görevi Görüntüle...</translation>
-    </message>
-    <message>
         <source>Delete Work Order...</source>
         <translation>Üretim Siparişi Sil...</translation>
     </message>
     <message>
         <source>Recall Work Order</source>
         <translation>Üretim Siparişini Geri Çağır</translation>
-    </message>
-    <message>
-        <source>View Incident...</source>
-        <translation>Vaka Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Todo Item...</source>
-        <translation>Yapılacak İşleri Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Inventory Availability by Work Order...</source>
-        <translation>Üretim Siparişi bazında Kullanılabilirlik</translation>
     </message>
     <message>
         <source>Are you sure that you want to delete the selected Work Order?</source>
@@ -41702,40 +41658,12 @@ Would you like to automatically create a credit memo against this return?</sourc
         <translation>Sipariş #</translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation>Satış Siparişini Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation>Sayım Etiketi Çıkışı...</translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation>Satış Siparişi Kalemini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Print Packing List...</source>
         <translation>Paketleme Listesini Yazdır...</translation>
     </message>
     <message>
-        <source>View Inventory Availability...</source>
-        <translation>Kullanılabilirlik Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View Inventory History...</source>
-        <translation>Stok Tarihçesini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Print W/O Traveler...</source>
         <translation>Üretim Sipariş Dosyalarını Yazdır...</translation>
-    </message>
-    <message>
-        <source>Change W/O Quantity...</source>
-        <translation>Üretim Sipariş Miktarını Değiştir</translation>
-    </message>
-    <message>
-        <source>Change W/O Due Date...</source>
-        <translation>Üretim Sipariş Takvimini Değiştir...</translation>
     </message>
     <message>
         <source>Acknowleged</source>
@@ -41756,10 +41684,6 @@ Would you like to automatically create a credit memo against this return?</sourc
     <message>
         <source>&amp;No</source>
         <translation>&amp;Hayır</translation>
-    </message>
-    <message>
-        <source>View Purchase Order Item...</source>
-        <translation>Satınalma Siparişi Kalemi Görüntüle...</translation>
     </message>
     <message>
         <source>Events:</source>
@@ -41811,6 +41735,54 @@ Would you like to automatically create a credit memo against this return?</sourc
     </message>
     <message>
         <source>Error Retrieving Event Log Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inventory Availability by Work Order</source>
+        <translation type="unfinished">Üretim Siparişi bazında Kullanılabilirlik Kontrolü</translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change W/O Due Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Todo Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Project Task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -44758,14 +44730,6 @@ You must reassign these Users before you may delete the selected Group.</source>
         <translation>Sil</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Sil</translation>
     </message>
@@ -44784,6 +44748,14 @@ You must reassign these Users before you may delete the selected Group.</source>
     <message>
         <source>Error Deleting Title</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -45673,14 +45645,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Sil</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Açıklama</translation>
     </message>
@@ -45699,6 +45663,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Error Deleting Selected Incident Category %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -45967,20 +45939,20 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Açıklama</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Error Retrieving Incident Resolution Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error Deleting Incident Resolution</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -46018,20 +45990,12 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Sil</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Düzelt</translation>
     </message>
     <message>
         <source>&amp;View</source>
         <translation>Göster</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -46048,6 +46012,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Error Deleting Incident Severity</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -46176,10 +46148,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
         <translation>Atandığı yer</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
-    </message>
-    <message>
         <source>Item</source>
         <translation type="unfinished">Malzeme</translation>
     </message>
@@ -46197,10 +46165,6 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>Public</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -46222,6 +46186,14 @@ Are you sure that you want to Implode the selected Work Order?</source>
     <message>
         <source>Resolution</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -49897,16 +49869,8 @@ You must delete these assignments before you may delete the selected Pricing Sch
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation type="unfinished">Sil...</translation>
-    </message>
-    <message>
         <source>Sold Ranking</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Inventory Availability...</source>
-        <translation type="unfinished">Kullanılabilirlik Görüntüle...</translation>
     </message>
     <message>
         <source>List Item Sites</source>
@@ -49923,10 +49887,6 @@ You must delete these assignments before you may delete the selected Pricing Sch
     <message>
         <source>Class Code Pattern</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
     </message>
     <message>
         <source>Site</source>
@@ -49959,14 +49919,6 @@ You must delete these assignments before you may delete the selected Pricing Sch
     <message>
         <source>&amp;Delete</source>
         <translation>Sil</translation>
-    </message>
-    <message>
-        <source>Issue Count Tag...</source>
-        <translation type="unfinished">Sayım Etiketi Çıkışı...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>N/A</source>
@@ -50070,6 +50022,26 @@ You must delete these assignments before you may delete the selected Pricing Sch
     </message>
     <message>
         <source>Error Deleting Item Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
+    <message>
+        <source>View Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Count Tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -50782,10 +50754,6 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Show Inactive</source>
         <translation type="unfinished"></translation>
     </message>
@@ -50798,20 +50766,12 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation type="unfinished">Malzemeler</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Delete Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copy...</source>
         <translation>Kopyala...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
     </message>
     <message>
         <source>Phantom</source>
@@ -50896,6 +50856,18 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     <message>
         <source>Cannot Delete Item</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -51125,16 +51097,8 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Amount</source>
         <translation>Tutar</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation type="unfinished">Göster...</translation>
     </message>
     <message>
         <source>Access Denied</source>
@@ -51155,6 +51119,14 @@ You may edit the existing Substitution but you may not create a duplicate.</sour
     <message>
         <source>Posted</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -51961,22 +51933,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Costing Detail...</source>
-        <translation>Maliyet Detaylarını Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Delete Cost...</source>
-        <translation>Maliyeti Sil...</translation>
-    </message>
-    <message>
-        <source>New Actual Cost...</source>
-        <translation>Yeni Gerçek Maliyet...</translation>
-    </message>
-    <message>
-        <source>Edit Actual Cost...</source>
-        <translation>Gerçek Maliyeti Düzenle...</translation>
-    </message>
-    <message>
         <source>Totals</source>
         <translation>Toplamlar</translation>
     </message>
@@ -52021,10 +51977,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Gönderildi</translation>
     </message>
     <message>
-        <source>Update Actual Cost...</source>
-        <translation>Gerçek Maliyeti Yenile...</translation>
-    </message>
-    <message>
         <source>Lower</source>
         <translation>Alt Seviye</translation>
     </message>
@@ -52054,6 +52006,26 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Error Retrieving Cost Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update Actual Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Costing Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Actual Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Actual Cost</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -52689,10 +52661,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;List Unapplied Credit Memos</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New &amp;Misc. Debit Memoz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -54730,14 +54698,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>Yazdır</translation>
     </message>
@@ -55230,10 +55190,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>İade Formu Yazdır...</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Cust. #</source>
         <translation>Müşteri #</translation>
     </message>
@@ -55264,14 +55220,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Substitute</source>
         <translation>Yedek</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -55333,20 +55281,24 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>Error Retrieving Return Authorization Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
 </context>
 <context>
     <name>openSalesOrders</name>
     <message>
         <source>Status</source>
         <translation type="unfinished">Durumu</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Shipment Status...</source>
-        <translation>Sevkiyat Durumu...</translation>
     </message>
     <message>
         <source>Print Sales Order Form...</source>
@@ -55357,24 +55309,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Müşteri</translation>
     </message>
     <message>
-        <source>Shipments...</source>
-        <translation>Sevkiyatlar...</translation>
-    </message>
-    <message>
         <source>Ship-To</source>
         <translation>Sevkiyat Adresi</translation>
     </message>
     <message>
         <source>Error</source>
         <translation>Hata</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
-        <source>Add to Packing List Batch...</source>
-        <translation>Çeki Listesine Toplu Ekle...</translation>
     </message>
     <message>
         <source>Print Packing List...</source>
@@ -55415,10 +55355,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Customer Type Pattern</source>
         <translation type="unfinished">Müşteri Türü Modeli</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
     </message>
     <message>
         <source>Scheduled</source>
@@ -55540,6 +55476,30 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <source>Tax</source>
         <translation type="unfinished">Vergi</translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
+    <message>
+        <source>Add to Packing List Batch</source>
+        <translation type="unfinished">Çeki Listesine Toplu Ekleme</translation>
+    </message>
+    <message>
+        <source>Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shipments</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>openVouchers</name>
@@ -55616,10 +55576,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>SAS #</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation>Fatura Görüntüle...</translation>
-    </message>
-    <message>
         <source>Vendor</source>
         <translation>Tedarikçi</translation>
     </message>
@@ -55636,20 +55592,12 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Tutar</translation>
     </message>
     <message>
-        <source>Edit Voucher...</source>
-        <translation>Satınalma Faturası Düzenle...</translation>
-    </message>
-    <message>
         <source>Vendor Invc. #</source>
         <translation>Tedarikçi Fatura #</translation>
     </message>
     <message>
         <source>Post Voucher...</source>
         <translation>Fatura Kaydet...</translation>
-    </message>
-    <message>
-        <source>Delete Voucher...</source>
-        <translation>Satınalma Faturası Sil...</translation>
     </message>
     <message>
         <source>Vouchers:</source>
@@ -55694,6 +55642,18 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>&lt;p&gt;Are you sure that you want to delete the selected Vouchers?</source>
         <translation>&lt;p&gt;Seçilen makbuzları silmek istediğinizden emin misiniz?</translation>
+    </message>
+    <message>
+        <source>Edit Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Voucher</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -56034,10 +55994,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
         <translation>Kullanıcı</translation>
     </message>
     <message>
-        <source>New...</source>
-        <translation>Yeni...</translation>
-    </message>
-    <message>
         <source>Type Pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -56064,10 +56020,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Opportunities</source>
         <translation type="unfinished">Fırsatlar</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
     </message>
     <message>
         <source>Amount</source>
@@ -56116,10 +56068,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Activate</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>Assigned</source>
@@ -56180,6 +56128,18 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     <message>
         <source>Name Pattern</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Yeni</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
     </message>
 </context>
 <context>
@@ -56629,10 +56589,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <translation>Yazdır</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Açıklama</translation>
     </message>
@@ -56724,6 +56680,10 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <source>Error Disabling Package</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>packingListBatch</name>
@@ -56752,10 +56712,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
         <translation>Nakil Siparişi Ekle</translation>
     </message>
     <message>
-        <source>View Transfer Order...</source>
-        <translation>Transfer Emrini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Customer #</source>
         <translation>Müşteri No</translation>
     </message>
@@ -56766,10 +56722,6 @@ You must reassign these Opportunities before you may delete the selected Opportu
     <message>
         <source>Pack</source>
         <translation>Paketle</translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation>Satış Siparişini Görüntüle...</translation>
     </message>
     <message>
         <source>None</source>
@@ -56917,6 +56869,14 @@ You must reassign these Opportunities before you may delete the selected Opportu
     </message>
     <message>
         <source>&amp;Print Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Transfer Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -57999,10 +57959,6 @@ Would you like to post them?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Journal...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>General Ledger Series</source>
         <translation type="unfinished">Defter-i Kebir Serisi</translation>
     </message>
@@ -58052,6 +58008,10 @@ Would you like to post them?</source>
     </message>
     <message>
         <source>%1: Could not initialize printing system for multiple reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Journal</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -61143,98 +61103,6 @@ You may not create a Product Category with this code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Task...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Quote...</source>
-        <translation type="unfinished">Fiyat teklifini değiştir...</translation>
-    </message>
-    <message>
-        <source>View Quote...</source>
-        <translation type="unfinished">Fiyat teklifini görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Quote Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Satış Siparişini Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Sales Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Sales Order Item...</source>
-        <translation type="unfinished">Satış Siparişi Kalemini Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Invoice...</source>
-        <translation type="unfinished">Faturayı Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation type="unfinished">Faturayı Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Invoice Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Request...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished">Satınalma Siparişi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order Item...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Order Item...</source>
-        <translation type="unfinished">Satınalma Siparişi Kalemi Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit Incident...</source>
-        <translation type="unfinished">Vakayı Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Incident...</source>
-        <translation type="unfinished">Vaka Görüntüle...</translation>
-    </message>
-    <message>
         <source>Purchase Request</source>
         <translation type="unfinished"></translation>
     </message>
@@ -61377,6 +61245,98 @@ You may not create a Product Category with this code.</source>
     </message>
     <message>
         <source>Locking Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Quote Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Incident</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Incident</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -62263,10 +62223,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Sales Order...</source>
-        <translation type="unfinished">Satış Siparişini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Delete Purchase Order Item?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62323,10 +62279,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
         <translation>Yeni</translation>
     </message>
     <message>
-        <source>Edit Sales Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -62340,14 +62292,6 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&lt;p&gt;This Purchase Order does not have any line items.  Are you sure you want to delete this Purchase Order?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Work Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -62696,6 +62640,22 @@ Click Yes to use the existing Purchase Order otherwise a new one will be created
     </message>
     <message>
         <source>&lt;p&gt;The selected item has no Std. Costing information. Please see your controller to correct this situation before continuing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Sales Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -63449,20 +63409,12 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Convert to Invoice...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Quotes</source>
         <translation type="unfinished">Teklifler</translation>
     </message>
     <message>
         <source>Open</source>
         <translation type="unfinished">Aç</translation>
-    </message>
-    <message>
-        <source>Convert to S/O...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Site</source>
@@ -63497,10 +63449,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation type="unfinished">Notlar</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Customer</source>
         <translation>Müşteri</translation>
     </message>
@@ -63521,16 +63469,8 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation>SAS Numarası</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Print...</source>
         <translation>Yazdır...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
     </message>
     <message>
         <source>Convert Selected Quote(s)</source>
@@ -63573,10 +63513,6 @@ Are you sure that you want to delete the selected Invoice Records?</source>
         <translation type="unfinished">TOPLAM</translation>
     </message>
     <message>
-        <source>Copy to Cust./Prospect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The prospect must be manually converted to customer from either the Account or Customer windows before coverting this quote.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63611,6 +63547,30 @@ Are you sure that you want to delete the selected Invoice Records?</source>
     <message>
         <source>Error Deleting Quote #%1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to S/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Convert to Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to Cust./Prospect...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -65465,10 +65425,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation>Kredilendiren için değer giriniz</translation>
     </message>
     <message>
-        <source>Delete Line...</source>
-        <translation>Kalemi Sil...</translation>
-    </message>
-    <message>
         <source>To Receive</source>
         <translation>Alınacak</translation>
     </message>
@@ -65513,10 +65469,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit New Order...</source>
-        <translation>Yeni Sipariş Düzenle...</translation>
-    </message>
-    <message>
         <source>Total Credit:</source>
         <translation>Toplam Kredi:</translation>
     </message>
@@ -65527,10 +65479,6 @@ You must Recall this Work Order before Rescheduling it.</source>
     <message>
         <source>&amp;Delete</source>
         <translation>Sil</translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
-        <translation>Kalem Aç...</translation>
     </message>
     <message>
         <source>&lt;p&gt;Are you sure that you want to delete the the selected Line Item(s)?</source>
@@ -65573,10 +65521,6 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation>Kredi kartı bulunamadı</translation>
     </message>
     <message>
-        <source>Close Line...</source>
-        <translation>Kalemi Kapat...</translation>
-    </message>
-    <message>
         <source>Subtotal:</source>
         <translation>Ara Toplam:</translation>
     </message>
@@ -65589,16 +65533,8 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation>Para Birimi:</translation>
     </message>
     <message>
-        <source>New Order Shipment Status...</source>
-        <translation>Yeni Sipariş Sevkiyat Durumu...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;This Return Authorization has authorized credit amounts. You may not set the Credit By to &apos;None&apos; unless all credit amounts are zero.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Line...</source>
-        <translation>Kalemi Düzenle...</translation>
     </message>
     <message>
         <source>Credit Price</source>
@@ -65647,14 +65583,6 @@ You must Recall this Work Order before Rescheduling it.</source>
     <message>
         <source>&amp;View</source>
         <translation>Göster</translation>
-    </message>
-    <message>
-        <source>View Original Order...</source>
-        <translation>Orijinal Sipariş Görüntüle...</translation>
-    </message>
-    <message>
-        <source>New Order Shipments...</source>
-        <translation>Yeni Sevkiyatlar...</translation>
     </message>
     <message>
         <source>Co&amp;mments</source>
@@ -65929,20 +65857,12 @@ You must Recall this Work Order before Rescheduling it.</source>
         <translation>Komisyon:</translation>
     </message>
     <message>
-        <source>View New Order Line...</source>
-        <translation>Yeni Sipariş Kalemi Görüntüle...</translation>
-    </message>
-    <message>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
         <source>Incident:</source>
         <translation>Olay:</translation>
-    </message>
-    <message>
-        <source>Edit New Order Line...</source>
-        <translation>Yeni Sipariş Kalemi Düzenle...</translation>
     </message>
     <message>
         <source>Credit Card</source>
@@ -65967,10 +65887,6 @@ You must Recall this Work Order before Rescheduling it.</source>
     <message>
         <source>Freight:</source>
         <translation>Nakliye:</translation>
-    </message>
-    <message>
-        <source>View New Order...</source>
-        <translation>Yeni Sipariş Görüntüle...</translation>
     </message>
     <message>
         <source>Cash Payment</source>
@@ -66082,6 +65998,50 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>&lt;p&gt;Expiry Date must be on or later than the Authorization Date.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Original Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit New Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View New Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit New Order Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View New Order Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Order Shipment Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Order Shipments</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -67591,16 +67551,8 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>&lt;p&gt;Bu teklifi ve bütün kalemlerini silmek istediğinize emin misiniz?</translation>
     </message>
     <message>
-        <source>View Purchase Order...</source>
-        <translation type="unfinished">Satınalma Siparişi Görüntüle...</translation>
-    </message>
-    <message>
         <source>The item cannot be Closed at this time as there is inventory at shipping.</source>
         <translation>Sevkiyatta stok olduğu için kalem kapatılamıyor.</translation>
-    </message>
-    <message>
-        <source>Release P/R...</source>
-        <translation type="unfinished">Satınalma Talebini Onayla...</translation>
     </message>
     <message>
         <source>Cannot Close Item</source>
@@ -67651,18 +67603,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Work Order...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Purchase Request...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Firm Line...</source>
-        <translation>Kalemi Sabitle...</translation>
-    </message>
-    <message>
         <source>Order Date Required</source>
         <translation>Sipariş Tarihi Gerekli</translation>
     </message>
@@ -67695,14 +67635,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>Toplam:</translation>
     </message>
     <message>
-        <source>Close Line...</source>
-        <translation>Kalemi Kapat...</translation>
-    </message>
-    <message>
-        <source>Delete Line...</source>
-        <translation>Kalemi Sil...</translation>
-    </message>
-    <message>
         <source>CVV Code:</source>
         <translation>CVV Kodu:</translation>
     </message>
@@ -67725,10 +67657,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>New</source>
         <translation>Yeni</translation>
-    </message>
-    <message>
-        <source>View Work Order...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move Down</source>
@@ -67918,10 +67846,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>Sıra</translation>
     </message>
     <message>
-        <source>Show Reservations...</source>
-        <translation>Rezervasyonları Göster...</translation>
-    </message>
-    <message>
         <source>&amp;Save</source>
         <translation>Kaydet</translation>
     </message>
@@ -67932,10 +67856,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     <message>
         <source>You must select a Customer for this order before you may save it.</source>
         <translation>Kaydetmeden önce bu sipariş için bir Müşteri seçmelisiniz.</translation>
-    </message>
-    <message>
-        <source>Soften Line...</source>
-        <translation>Kalemi Yumuşat...</translation>
     </message>
     <message>
         <source>Manual Freight?</source>
@@ -67950,16 +67870,8 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
         <translation>Yeterli Stok mevcut değil</translation>
     </message>
     <message>
-        <source>Edit Line...</source>
-        <translation>Kalemi düzenle...</translation>
-    </message>
-    <message>
         <source>Quote</source>
         <translation>Teklif</translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
-        <translation>Kalemi Aç...</translation>
     </message>
     <message>
         <source>Scheduled Da&amp;te:</source>
@@ -67987,10 +67899,6 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>&lt;p&gt;You may not enter a Misc. Charge without indicating the G/L Sales Account number for the charge.  Please set the Misc. Charge amount to 0 or select a Misc. Charge Sales Account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Purchase Order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -68763,10 +68671,6 @@ Do you wish to continue saving the order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cancel Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete Purchase Order Item?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68821,6 +68725,62 @@ Do you wish to change all future Sales Order recurrences?</source>
     </message>
     <message>
         <source>You may not delete this Sales Order as it has one or more line items on a Purchase Order.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Firm Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soften Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Reservations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Purchase Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Release P/R</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Work Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Work Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -70343,14 +70303,6 @@ Are you sure you want to do this?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Line...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Item Workbench</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70713,6 +70665,14 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Error Creating itemlocdist Records</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -71313,10 +71273,6 @@ Are you sure you want to do this?</source>
         <translation>İlk</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Code</source>
         <translation>Kod</translation>
     </message>
@@ -71381,18 +71337,6 @@ Are you sure you want to do this?</source>
         <translation>Departman</translation>
     </message>
     <message>
-        <source>Edit Manager...</source>
-        <translation>Yönetici Düzenle...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
-        <source>View Manager...</source>
-        <translation>Yönetici Görüntüle...</translation>
-    </message>
-    <message>
         <source>Search for Employees</source>
         <translation>Personel Arama</translation>
     </message>
@@ -71410,6 +71354,22 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Error Retrieving Employee Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Manager</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -72036,26 +71996,6 @@ Are you sure you want to do this?</source>
         <translation type="unfinished">Alacak Dekontu</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Void Voucher...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit A/P Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View A/P Open...</source>
-        <translation type="unfinished">Açık Satıcı Hesapları Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View G/L Series...</source>
-        <translation type="unfinished">Genek defter serlerini görüntüle...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;You cannot set this item as On Hold. This Item is already approved for payment.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -72109,6 +72049,26 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Enter an On Hold Comment:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Void Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View A/P Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -73137,10 +73097,6 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
         <translation type="unfinished">Malzemeler</translation>
     </message>
     <message>
-        <source>View Order Line...</source>
-        <translation>Sipariş Kalemini Görüntüle...</translation>
-    </message>
-    <message>
         <source>Cust. Phone:</source>
         <translation>Müşteri Telefonu:</translation>
     </message>
@@ -73185,14 +73141,6 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
         <translation>&lt;p&gt;Ödeme için bu siparişi seçmeden önce bir sevkiyat tarihi girmelisiniz.</translation>
     </message>
     <message>
-        <source>Return ALL Stock Issued for this Order Line to the Site...</source>
-        <translation>Çıkılan Tüm Stokları Üretim Yerine İade Et...</translation>
-    </message>
-    <message>
-        <source>Issue Additional Stock for this Order Line to Shipping...</source>
-        <translation>Sevkiyat için bu sipariş kaleminde ilave stok çıkışı...</translation>
-    </message>
-    <message>
         <source>Tare Wght.</source>
         <translation>dara ağırlığı.</translation>
     </message>
@@ -73230,6 +73178,18 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
     </message>
     <message>
         <source>Error Returning Items From Shipment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Additional Stock for this Order Line to Shipping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return ALL Stock Issued for this Order Line to the Site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Order Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -73353,10 +73313,6 @@ before you may save it.</source>
 <context>
     <name>siteTypes</name>
     <message>
-        <source>View Site Type...</source>
-        <translation type="unfinished">Depo Tipi Görüntüle...</translation>
-    </message>
-    <message>
         <source>Are you sure that you want to delete the selected Site Type?</source>
         <translation>Seçili Üretim Yeri Tipini silmek istediğinizden emin misiniz?</translation>
     </message>
@@ -73390,14 +73346,6 @@ You must reassign these Sites before deleting this Site Type.</source>
         <translation>Kullanımdaki Depo Tipi</translation>
     </message>
     <message>
-        <source>Edit Site Type...</source>
-        <translation>Depo Tipi Düzenle...</translation>
-    </message>
-    <message>
-        <source>Delete Site Type...</source>
-        <translation>Depo Tipi Sil...</translation>
-    </message>
-    <message>
         <source>Site Types:</source>
         <translation>Depo Tipleri:</translation>
     </message>
@@ -73424,6 +73372,14 @@ You must reassign these Sites before deleting this Site Type.</source>
     <message>
         <source>&amp;Edit</source>
         <translation>&amp;Düzelt</translation>
+    </message>
+    <message>
+        <source>Edit Site Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Site Type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -79254,6 +79210,18 @@ You must first re-assign these items before deleting the selected Tax Type.</sou
         <source>Error Retrieving To Do Item Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Yeni</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>toggleBankrecCleared</name>
@@ -79381,14 +79349,6 @@ otherwise a new one will be created.</source>
         <translation>Bu Nakil Siparişini kaydetmeden önce en az bir kalem yaratmalısınız.</translation>
     </message>
     <message>
-        <source>Delete Line...</source>
-        <translation>Sırayı Sil...</translation>
-    </message>
-    <message>
-        <source>Edit Line...</source>
-        <translation>Sırayı Düzenle...</translation>
-    </message>
-    <message>
         <source>At Shipping</source>
         <translation>Sevk Edilmiş</translation>
     </message>
@@ -79419,10 +79379,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Tax Zone:</source>
         <translation>Vergi Bölgesi:</translation>
-    </message>
-    <message>
-        <source>Open Line...</source>
-        <translation>Kalemi Aç...</translation>
     </message>
     <message>
         <source>You must enter a valid T/O # for this TransferOrder before you may save it.</source>
@@ -79523,10 +79479,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Error Getting Status</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close Line...</source>
-        <translation>Kalemi Kapat...</translation>
     </message>
     <message>
         <source>Return Stock</source>
@@ -79643,10 +79595,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>The Source and Destination Sites must be different.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Issue Stock...</source>
-        <translation>Stoğu Çıkışı...</translation>
     </message>
     <message>
         <source>&lt;p&gt;You must enter a T/O # for this Transfer Order before you may continue.</source>
@@ -79858,6 +79806,22 @@ otherwise a new one will be created.</source>
         <source>Item %1 failed with:
 %2
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -80154,28 +80118,12 @@ otherwise a new one will be created.</source>
         <translation type="unfinished">Onayla</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Selected:</source>
         <translation>Seçili:</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>All Statuses</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Release...</source>
-        <translation>&amp;Onayla...</translation>
-    </message>
-    <message>
-        <source>Add to Packing List Batch...</source>
-        <translation>Paketleme Listesi grubuna ekle...</translation>
     </message>
     <message>
         <source>Print Packing List...</source>
@@ -80228,10 +80176,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Copy...</source>
         <translation>Kopyala...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
     </message>
     <message>
         <source>Issue To Shipping...</source>
@@ -80312,6 +80256,22 @@ otherwise a new one will be created.</source>
     <message>
         <source>Error Retrieving Transfer Order Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
+    <message>
+        <source>Add to Packing List Batch</source>
+        <translation type="unfinished">Çeki Listesine Toplu Ekleme</translation>
     </message>
 </context>
 <context>
@@ -81121,11 +81081,11 @@ otherwise a new one will be created.</source>
         <translation type="unfinished">Onaylandı</translation>
     </message>
     <message>
-        <source>Approve This Order for Billing...</source>
+        <source>Error Retrieving Shipment Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error Retrieving Shipment Information</source>
+        <source>Approve This Order for Billing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81138,10 +81098,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>&amp;Print</source>
         <translation>Yazdır</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>Prnt&apos;d</source>
@@ -81158,10 +81114,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Post...</source>
         <translation>Gönder...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -81275,6 +81227,14 @@ otherwise a new one will be created.</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>unpostedGLTransactions</name>
@@ -81285,10 +81245,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>The following G/L Transactions will be posted to the Trial Balance if you open this period:</source>
         <translation>Eğer bu periyodu açarsanız aiağıdaki genek defter işlemleri mizana gönderilecek:</translation>
-    </message>
-    <message>
-        <source>View Purchase Order...</source>
-        <translation>Satınalma Siparişi Görüntüle...</translation>
     </message>
     <message>
         <source>Unposted G/L Transactions</source>
@@ -81305,10 +81261,6 @@ otherwise a new one will be created.</source>
     <message>
         <source>Open Period</source>
         <translation>Açık periyot</translation>
-    </message>
-    <message>
-        <source>View Invoice...</source>
-        <translation>Faturayı Görüntüle...</translation>
     </message>
     <message>
         <source>Credit</source>
@@ -81347,15 +81299,23 @@ otherwise a new one will be created.</source>
         <translation>Gönderildi</translation>
     </message>
     <message>
-        <source>View Voucher...</source>
-        <translation>Makbuzu Görüntüle...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Error Retrieving G/L Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>View Voucher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Invoice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Purchase Order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81374,24 +81334,8 @@ otherwise a new one will be created.</source>
         <translation>Tarih</translation>
     </message>
     <message>
-        <source>View G/L Series...</source>
-        <translation>Genek defter serlerini görüntüle...</translation>
-    </message>
-    <message>
-        <source>Edit G/L Series...</source>
-        <translation>Genek defter serlerini düzenle...</translation>
-    </message>
-    <message>
         <source>&amp;Close</source>
         <translation>Kapat</translation>
-    </message>
-    <message>
-        <source>Post G/L Series...</source>
-        <translation>Genek defter serlerini gönder...</translation>
-    </message>
-    <message>
-        <source>Delete G/L Series...</source>
-        <translation>Genek defter serlerini sil...</translation>
     </message>
     <message>
         <source>Unposted G/L Series Entries</source>
@@ -81467,6 +81411,22 @@ otherwise a new one will be created.</source>
     </message>
     <message>
         <source>Error Posting G/L Transaction Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete G/L Series</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post G/L Series</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -81550,20 +81510,8 @@ Would you like to post it anyway?</source>
         <translation>Kaydet...</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Print...</source>
         <translation>Yazdır...</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
     </message>
     <message>
         <source>G/L Dist Date</source>
@@ -81673,6 +81621,14 @@ Would you like to post it anyway?</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
 </context>
 <context>
     <name>unpostedPoReceipts</name>
@@ -81737,16 +81693,8 @@ Would you like to post it anyway?</source>
         <translation>Muhasebeleştirme Tarihi</translation>
     </message>
     <message>
-        <source>Edit Receipt...</source>
-        <translation>Girişi Düzenle...</translation>
-    </message>
-    <message>
         <source>Post Receipt...</source>
         <translation>Girişi Kaydet...</translation>
-    </message>
-    <message>
-        <source>Delete Receipt...</source>
-        <translation>Girişi Sil...</translation>
     </message>
     <message>
         <source>Non-Inventory</source>
@@ -81783,10 +81731,6 @@ Would you like to post it anyway?</source>
     <message>
         <source>Type</source>
         <translation>Tipi</translation>
-    </message>
-    <message>
-        <source>View Order Item...</source>
-        <translation>Sipariş Kalemi Görüntüle...</translation>
     </message>
     <message>
         <source>View Order Item</source>
@@ -81863,6 +81807,14 @@ Would you like to post it anyway?</source>
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>unpostedPurchaseOrders</name>
@@ -81915,20 +81867,8 @@ Would you like to post it anyway?</source>
         <translation>Yazdır...</translation>
     </message>
     <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;The Purchase Order that you selected to delete was created to satisfy Sales Order demand. If you delete the selected Purchase Order then the Sales Order demand will remain but the Purchase Order to relieve that demand will not. Are you sure that you want to delete the selected Purchase Order?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
     </message>
     <message>
         <source>List Open Purchase Orders</source>
@@ -82061,6 +82001,18 @@ Would you like to post it anyway?</source>
     <message>
         <source>Receipt Order</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
     </message>
 </context>
 <context>
@@ -84764,14 +84716,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Vendor...</source>
-        <translation>Satıcı Düzenle...</translation>
-    </message>
-    <message>
-        <source>Delete Vendor...</source>
-        <translation>Satıcıyı Sil...</translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation>Adı</translation>
     </message>
@@ -84790,10 +84734,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     <message>
         <source>Error Deleting</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View Vendor...</source>
-        <translation>Satıcıyı Gör...</translation>
     </message>
     <message>
         <source>City Pattern</source>
@@ -84845,6 +84785,18 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Vendor</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -85079,10 +85031,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     <message>
         <source>Uninvoiced</source>
         <translation>Faturalanmayan</translation>
-    </message>
-    <message>
-        <source>View P/O Item...</source>
-        <translation>Satınalma Siparişi Kalemi Görüntüle...</translation>
     </message>
     <message>
         <source>Do you want to save this voucher?</source>
@@ -85468,6 +85416,10 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <source>Co&amp;mments</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>View P/O Item</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>voucherItem</name>
@@ -85608,10 +85560,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation>Kaydetmeden önce bu makbuz parçası için en azından bir tane dağıtım yapmalısınız.</translation>
     </message>
     <message>
-        <source>Correct Receipt...</source>
-        <translation>Giriş Düzelt...</translation>
-    </message>
-    <message>
         <source>No</source>
         <translation>Hayır</translation>
     </message>
@@ -85662,10 +85610,6 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     <message>
         <source>Line Item Freight:</source>
         <translation>Kalem Nakliye:</translation>
-    </message>
-    <message>
-        <source>Split Receipt...</source>
-        <translation>Grişi Parçala...</translation>
     </message>
     <message>
         <source>Uninvoiced Receipts and Returns</source>
@@ -85722,6 +85666,14 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     <message>
         <source>Would you like to cancel anyway?</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correct Receipt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Receipt</source>
+        <translation type="unfinished">Giriş Parçala</translation>
     </message>
 </context>
 <context>
@@ -86195,20 +86147,8 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
         <translation>Yazdır</translation>
     </message>
     <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Açıklama</translation>
-    </message>
-    <message>
-        <source>List Item Sites...</source>
-        <translation>Malzeme/Üretim Yerini Listele...</translation>
     </message>
     <message>
         <source>List Sites</source>
@@ -86217,6 +86157,18 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     <message>
         <source>Sites:</source>
         <translation>Üretim Yerleri:</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>List Item Sites</source>
+        <translation type="unfinished">Malzeme/Depo Listele</translation>
     </message>
 </context>
 <context>
@@ -86407,16 +86359,8 @@ and Work Order Component Items may not be Job Costed.</source>
         <translation>Geçersiz Sipariş Miktarı</translation>
     </message>
     <message>
-        <source>Change Quantity...</source>
-        <translation>Miktar değiştir...</translation>
-    </message>
-    <message>
         <source>Disassembly</source>
         <translation>Ana Malzeme</translation>
-    </message>
-    <message>
-        <source>Reschedule...</source>
-        <translation>Yeniden Terminle...</translation>
     </message>
     <message>
         <source>Work Order not Exploded</source>
@@ -86425,10 +86369,6 @@ and Work Order Component Items may not be Job Costed.</source>
     <message>
         <source>&lt;p&gt;Are you sure that you want to delete the selected Work Order?</source>
         <translation>Seçili üretim siparişini silmek istediğinizden emin misiniz?</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation>Düzelt...</translation>
     </message>
     <message>
         <source>Setup Remain.</source>
@@ -86479,14 +86419,6 @@ Do you want to update the order quantity and create the order?</source>
         <translation>Malzemenin MIP parametreleri %1 miktarının oluşturulmasına izin vermiyor. Lütfen en az %2 miktarında sipariş oluşturunuz.</translation>
     </message>
     <message>
-        <source>Issue...</source>
-        <translation>Çıkış...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Cannot return Work Order Material</source>
         <translation>Üretim Siparişi malzemesi iade edilemez</translation>
     </message>
@@ -86524,10 +86456,6 @@ Do you want to update the order quantity and create the order?</source>
         <translation>Seçili üretim siparişi silinemez.</translation>
     </message>
     <message>
-        <source>Substitute...</source>
-        <translation>Yedek...</translation>
-    </message>
-    <message>
         <source>W/O Material Requirement cannot be Deleted</source>
         <translation>Üretim Siparişi Malzeme İhtiyacı silinemez.</translation>
     </message>
@@ -86542,10 +86470,6 @@ Do you want to update the order quantity and create the order?</source>
     <message>
         <source>Work Order</source>
         <translation>Üretim Siparişi</translation>
-    </message>
-    <message>
-        <source>Scrap...</source>
-        <translation>Fire...</translation>
     </message>
     <message>
         <source>&amp;Print Traveler</source>
@@ -86571,10 +86495,6 @@ Do you want to update the order quantity and create the order?</source>
         <source>You have entered an invalid Due Date.
 Please correct before updating this Work Order</source>
         <translation>Geçersiz bitiş tarihi girdiniz.</translation>
-    </message>
-    <message>
-        <source>Availability...</source>
-        <translation>Kullanılabilirlik...</translation>
     </message>
     <message>
         <source>Due Date:</source>
@@ -86669,52 +86589,20 @@ Please correct before updating this Work Order</source>
         <translation>Geri Çağır</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
         <source>Costing</source>
         <translation>Maliyet</translation>
-    </message>
-    <message>
-        <source>Close...</source>
-        <translation>Kapat...</translation>
     </message>
     <message>
         <source>Characteristics</source>
         <translation>Karakteristikler</translation>
     </message>
     <message>
-        <source>New Material...</source>
-        <translation>Yeni Malzeme...</translation>
-    </message>
-    <message>
-        <source>Issue Batch...</source>
-        <translation>Toplu Çıkış...</translation>
-    </message>
-    <message>
         <source>Assembly</source>
         <translation>Bileşen</translation>
     </message>
     <message>
-        <source>Return Batch...</source>
-        <translation>Toplu İade...</translation>
-    </message>
-    <message>
         <source>Posted:</source>
         <translation>Kaydedilen:</translation>
-    </message>
-    <message>
-        <source>Post Production...</source>
-        <translation>Üretim Teyiti...</translation>
-    </message>
-    <message>
-        <source>Running Availability...</source>
-        <translation>Kullanılabilirlik Çalıştır...</translation>
-    </message>
-    <message>
-        <source>Inventory Availability...</source>
-        <translation>Stok Kullanılabilirlik...</translation>
     </message>
     <message>
         <source>Project #:</source>
@@ -86798,10 +86686,6 @@ Make sure the itemsite you are creating the work order in is set to allow manufa
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Substitute Availability...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The new Order Quantity that you have entered does not meet the Order Parameters set for the parent Item Site for this Work Order.  In order to meet the Item Site Order Parameters the new Order Quantity must be increased to %1. Do you want to change the Order Quantity for this Work Order to %2?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -86842,16 +86726,8 @@ You may want to consider imploding and exploding the Work Order.
         <translation>Açılım...</translation>
     </message>
     <message>
-        <source>Reprioritize...</source>
-        <translation>Yeniden Önceliklendir...</translation>
-    </message>
-    <message>
         <source>Reference</source>
         <translation>Referans</translation>
-    </message>
-    <message>
-        <source>Correct Production Posting...</source>
-        <translation>Operasyon Teyiti Düzelt...</translation>
     </message>
     <message>
         <source>This Work Order has had material received against it
@@ -87015,6 +86891,78 @@ Please correct before creating this Work Order</source>
         <source>Work Order Characteristics</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Kapat</translation>
+    </message>
+    <message>
+        <source>New Material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Issue Batch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return Batch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Post Production</source>
+        <translation type="unfinished">Üretimi Muhasebeleştir</translation>
+    </message>
+    <message>
+        <source>Correct Production Posting</source>
+        <translation type="unfinished">Üretim Teyiti Düzelt</translation>
+    </message>
+    <message>
+        <source>Running Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Inventory Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reprioritize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reschedule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Issue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Substitute</source>
+        <translation type="unfinished">Yedek</translation>
+    </message>
+    <message>
+        <source>Availability</source>
+        <translation type="unfinished">Kullanılabilirlik</translation>
+    </message>
+    <message>
+        <source>Substitute Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>workOrderMaterials</name>
@@ -87083,32 +87031,8 @@ Please correct before creating this Work Order</source>
         <translation>Yeni</translation>
     </message>
     <message>
-        <source>Delete...</source>
-        <translation>Sil...</translation>
-    </message>
-    <message>
-        <source>Edit...</source>
-        <translation> Düzelt...</translation>
-    </message>
-    <message>
-        <source>View...</source>
-        <translation>Göster...</translation>
-    </message>
-    <message>
         <source>Mixed</source>
         <translation>Karma</translation>
-    </message>
-    <message>
-        <source>View Item-Defined Subsitute Availability...</source>
-        <translation>Malzeme Tanımlı Yedek Kullanılabilirliğini Görüntüle...</translation>
-    </message>
-    <message>
-        <source>Substitute...</source>
-        <translation>Yedek...</translation>
-    </message>
-    <message>
-        <source>View Availability...</source>
-        <translation>Kullanılabilirliği Göster...</translation>
     </message>
     <message>
         <source>&lt;p&gt;This W/O Material Requirement cannot be deleted as it has has material issued to it. You must return this material to stock before you can delete this Material Requirement. Would you like to return this material to stock now?</source>
@@ -87201,6 +87125,30 @@ Please correct before creating this Work Order</source>
     <message>
         <source>Error Retrieving Work Order Material Information</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished">Göster</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Sil</translation>
+    </message>
+    <message>
+        <source>View Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Item-Defined Subsitute Availability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Substitute</source>
+        <translation type="unfinished">Yedek</translation>
     </message>
 </context>
 <context>
