@@ -1534,7 +1534,7 @@ void salesOrder::sPopulateMenu(QMenu *pMenu)
 
       menuItem = pMenu->addAction(tr("Return Stock"), this, SLOT(sReturnStock()));
       menuItem->setEnabled(_privileges->check("IssueStockToShipping"));
-      menuItem = pMenu->addAction(tr("Issue Stock...s"), this, SLOT(sIssueStock()));
+      menuItem = pMenu->addAction(tr("Issue Stock..."), this, SLOT(sIssueStock()));
       menuItem->setEnabled(_privileges->check("IssueStockToShipping"));
       menuItem = pMenu->addAction(tr("Issue Line Balance"), this, SLOT(sIssueLineBalance()));
       menuItem->setEnabled(_privileges->check("IssueStockToShipping"));
