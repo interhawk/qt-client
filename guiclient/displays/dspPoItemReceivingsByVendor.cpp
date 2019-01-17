@@ -133,7 +133,7 @@ void dspPoItemReceivingsByVendor::sPopulateMenu(QMenu *menu, QTreeWidgetItem *, 
     case 2:     // id = poreject_id
       break;
     case 3:     // id = unvouchered pohead_id
-      createVoucher = new QAction(tr("Create Voucher..."),  this);
+      createVoucher = new QAction(tr("Create Voucher"),  this);
       createVoucher->setEnabled(_privileges->check("MaintainVouchers"));
       connect(createVoucher, SIGNAL(triggered()), this, SLOT(sCreateVoucher()));
       menu->addAction(createVoucher);

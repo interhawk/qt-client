@@ -82,10 +82,10 @@ void dspCustomerARHistory::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelecte
 
   if (((XTreeWidgetItem *)pSelected)->id() != -1)
   {
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("EditAROpenItem"));
 
-    pMenu->addAction(tr("View..."), this, SLOT(sView()));
+    pMenu->addAction(tr("View"), this, SLOT(sView()));
   }
 }
 

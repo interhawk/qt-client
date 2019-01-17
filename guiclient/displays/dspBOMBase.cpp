@@ -107,11 +107,11 @@ void dspBOMBase::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));;
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));;
   if (!_privileges->check("MaintainItemMasters"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));;
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));;
 }
 
 void dspBOMBase::sEdit()

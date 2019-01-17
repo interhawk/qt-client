@@ -198,9 +198,9 @@ void incidentWorkbench::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
       (omfgThis->username() == list()->currentItem()->rawValue("incdt_username") && _privileges->check("ViewPersonalIncidents")) ||
       (_privileges->check("ViewAllIncidents"));
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(editPriv);
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(viewPriv);
 }
 

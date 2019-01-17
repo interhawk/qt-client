@@ -96,17 +96,17 @@ void dspVendorAPHistory::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected,
   XTreeWidgetItem * item = (XTreeWidgetItem*)pSelected;
   if (item->id() != -1)
   {
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("EditAPOpenItem"));
 
-    pMenu->addAction(tr("View A/P Open..."), this, SLOT(sView()));
+    pMenu->addAction(tr("View A/P Open"), this, SLOT(sView()));
 
-    menuItem = pMenu->addAction(tr("View G/L Series..."), this, SLOT(sViewGLSeries()));
+    menuItem = pMenu->addAction(tr("View G/L Series"), this, SLOT(sViewGLSeries()));
     menuItem->setEnabled(_privileges->check("ViewGLTransactions"));
 
     if(item->altId() == -1 && item->text(1)==tr("Voucher"))
     {
-      menuItem = pMenu->addAction(tr("View Voucher..."), this, SLOT(sViewVoucher()));
+      menuItem = pMenu->addAction(tr("View Voucher"), this, SLOT(sViewVoucher()));
       menuItem->setEnabled(_privileges->check("ViewVouchers") || _privileges->check("MaintainVouchers"));
 
       if(item->rawValue("amount")==item->rawValue("balance"))

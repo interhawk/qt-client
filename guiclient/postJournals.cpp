@@ -151,7 +151,7 @@ void postJournals::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *)
     pMenu->addSeparator();
   }
 
-  menuItem = pMenu->addAction(tr("View Journal..."), this, SLOT(sViewTransactions()));
+  menuItem = pMenu->addAction(tr("View Journal"), this, SLOT(sViewTransactions()));
   menuItem->setEnabled(_privileges->check("ViewJournals"));
 }
 

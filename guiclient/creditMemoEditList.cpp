@@ -92,10 +92,10 @@ void creditMemoEditList::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
 {
   _orderid = _cmhead->id();
 
-  pMenu->addAction(tr("Edit Sales Credit..."), this, SLOT(sEditCreditMemo()));
+  pMenu->addAction(tr("Edit Sales Credit"), this, SLOT(sEditCreditMemo()));
 
   if (((XTreeWidgetItem *)pSelected)->altId() != -1)
-    pMenu->addAction(tr("Edit Sales Credit Item..."), this, SLOT(sEditCreditMemoItem()));
+    pMenu->addAction(tr("Edit Sales Credit Item"), this, SLOT(sEditCreditMemoItem()));
 }
 
 void creditMemoEditList::sFillList()

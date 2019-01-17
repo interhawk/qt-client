@@ -70,15 +70,15 @@ void accountingYearPeriods::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelect
 
   if (altId == 0)
   {
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainAccountingPeriods"));
   }
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
 
   if (altId == 0)
   {
-    menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
     menuItem->setEnabled(_privileges->check("MaintainAccountingPeriods"));
   }
 
@@ -90,7 +90,7 @@ void accountingYearPeriods::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelect
   }
   else if (altId == 1)
   {
-    menuItem = pMenu->addAction(tr("Open..."), this, SLOT(sOpenPeriod()));
+    menuItem = pMenu->addAction(tr("Open"), this, SLOT(sOpenPeriod()));
   }
 }
 

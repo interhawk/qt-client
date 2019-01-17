@@ -93,11 +93,11 @@ void dspPOsByDate::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, int)
   if (dynamic_cast<XTreeWidgetItem*>(pSelected) &&
       dynamic_cast<XTreeWidgetItem*>(pSelected)->rawValue("poitem_status").toString() == "U")
   {
-    menuItem = pMenu->addAction(tr("Edit Order..."), this, SLOT(sEditOrder()));
+    menuItem = pMenu->addAction(tr("Edit Order"), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
   }
 
-  menuItem = pMenu->addAction(tr("View Order..."), this, SLOT(sViewOrder()));
+  menuItem = pMenu->addAction(tr("View Order"), this, SLOT(sViewOrder()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                        _privileges->check("ViewPurchaseOrders"));
 }

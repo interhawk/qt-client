@@ -139,15 +139,15 @@ void siteTypes::sPopulateMenu(QMenu *menu)
 {
   QAction *menuItem;
 
-  menuItem = menu->addAction(tr("Edit Site Type..."), this, SLOT(sEdit()));
+  menuItem = menu->addAction(tr("Edit Site Type"), this, SLOT(sEdit()));
   if (!_privileges->check("MaintainSiteTypes"))
     menuItem->setEnabled(false);
 
-  menuItem = menu->addAction(tr("View Site Type..."), this, SLOT(sView()));
+  menuItem = menu->addAction(tr("View Site Type"), this, SLOT(sView()));
   if ((!_privileges->check("MaintainSiteTypes")) && (!_privileges->check("ViewSiteTypes")))
     menuItem->setEnabled(false);
 
-  menuItem = menu->addAction(tr("Delete Site Type..."), this, SLOT(sDelete()));
+  menuItem = menu->addAction(tr("Delete Site Type"), this, SLOT(sDelete()));
   if (!_privileges->check("MaintainSiteTypes"))
     menuItem->setEnabled(false);
 }

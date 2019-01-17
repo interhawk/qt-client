@@ -131,13 +131,13 @@ void vendors::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Vendor..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit Vendor"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainVendors"));
 
-  menuItem = pMenu->addAction(tr("View Vendor..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View Vendor"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainVendors") || _privileges->check("ViewVendors"));
 
-  menuItem = pMenu->addAction(tr("Delete Vendor..."), this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Delete Vendor"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainVendors"));
 }
 

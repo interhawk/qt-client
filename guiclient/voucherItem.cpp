@@ -678,10 +678,10 @@ void voucherItem::sPopulateMenu(QMenu *pMenu,  XTreeWidgetItem *selected)
   
   if ( (selected->rawValue("action") == "REC") && (selected->text(4) == "No") )
   {
-    menuItem = pMenu->addAction(tr("Correct Receipt..."), this, SLOT(sCorrectReceiving()));
+    menuItem = pMenu->addAction(tr("Correct Receipt"), this, SLOT(sCorrectReceiving()));
     menuItem->setEnabled(_privileges->check("EnterReceipts"));
 
-    menuItem = pMenu->addAction(tr("Split Receipt..."), this, SLOT(sSplitReceipt()));
+    menuItem = pMenu->addAction(tr("Split Receipt"), this, SLOT(sSplitReceipt()));
     menuItem->setEnabled(_privileges->check("EnterReceipts"));
   }
 }

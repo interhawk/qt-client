@@ -123,21 +123,21 @@ void dspInventoryAvailabilityByWorkOrder::sPopulateMenu(QMenu *pMenu, QTreeWidge
       XTreeWidgetItem * item = (XTreeWidgetItem*)selected;
       QAction *menuItem;
 
-      menuItem = pMenu->addAction(tr("View Inventory History..."), this, SLOT(sViewHistory()));
+      menuItem = pMenu->addAction(tr("View Inventory History"), this, SLOT(sViewHistory()));
       if (!_privileges->check("ViewInventoryHistory"))
         menuItem->setEnabled(false);
 
       pMenu->addSeparator();
 
-      menuItem = pMenu->addAction("View Allocations...", this, SLOT(sViewAllocations()));
+      menuItem = pMenu->addAction("View Allocations", this, SLOT(sViewAllocations()));
       if (item->rawValue("woinvav_allocated").toDouble() == 0.0)
         menuItem->setEnabled(false);
 
-      menuItem = pMenu->addAction("View Orders...", this, SLOT(sViewOrders()));
+      menuItem = pMenu->addAction("View Orders", this, SLOT(sViewOrders()));
       if (item->rawValue("woinvav_ordered").toDouble() == 0.0)
         menuItem->setEnabled(false);
 
-      menuItem = pMenu->addAction("Running Availability...", this, SLOT(sRunningAvailability()));
+      menuItem = pMenu->addAction("Running Availability", this, SLOT(sRunningAvailability()));
 
       pMenu->addSeparator();
       
@@ -150,11 +150,11 @@ void dspInventoryAvailabilityByWorkOrder::sPopulateMenu(QMenu *pMenu, QTreeWidge
 	  {
 		  if (dspPopulateMenu.value("result").toBool())
 		  {
-			menuItem = pMenu->addAction(tr("Create P/R..."), this, SLOT(sCreatePR()));
+			menuItem = pMenu->addAction(tr("Create P/R"), this, SLOT(sCreatePR()));
 			if (!_privileges->check("MaintainPurchaseRequests"))
 			  menuItem->setEnabled(false);
 
-			menuItem = pMenu->addAction("Create P/O...", this, SLOT(sCreatePO()));
+			menuItem = pMenu->addAction("Create P/O", this, SLOT(sCreatePO()));
 			if (!_privileges->check("MaintainPurchaseOrders"))
 			  menuItem->setEnabled(false);
 
@@ -172,11 +172,11 @@ void dspInventoryAvailabilityByWorkOrder::sPopulateMenu(QMenu *pMenu, QTreeWidge
 		  {
 			if(list()->altId() != -1)
 			{
-			  menuItem = pMenu->addAction("Create W/O...", this, SLOT(sCreateWO()));
+			  menuItem = pMenu->addAction("Create W/O", this, SLOT(sCreateWO()));
 			  if (!_privileges->check("MaintainWorkOrders"))
 				menuItem->setEnabled(false);
 			}
-			menuItem = pMenu->addAction(tr("Post Misc. Production..."), this, SLOT(sPostMiscProduction()));
+			menuItem = pMenu->addAction(tr("Post Misc. Production"), this, SLOT(sPostMiscProduction()));
 			if (!_privileges->check("PostMiscProduction"))
 			  menuItem->setEnabled(false);
 
@@ -185,7 +185,7 @@ void dspInventoryAvailabilityByWorkOrder::sPopulateMenu(QMenu *pMenu, QTreeWidge
 	  }
 //      }
 
-      menuItem = pMenu->addAction("View Substitute Availability...", this, SLOT(sViewSubstituteAvailability()));
+      menuItem = pMenu->addAction("View Substitute Availability", this, SLOT(sViewSubstituteAvailability()));
 
       pMenu->addSeparator();
 
@@ -193,7 +193,7 @@ void dspInventoryAvailabilityByWorkOrder::sPopulateMenu(QMenu *pMenu, QTreeWidge
       if (!_privileges->check("IssueCountTags"))
         menuItem->setEnabled(false);
 
-      menuItem = pMenu->addAction(tr("Enter Misc. Inventory Count..."), this, SLOT(sEnterMiscCount()));
+      menuItem = pMenu->addAction(tr("Enter Misc. Inventory Count"), this, SLOT(sEnterMiscCount()));
       if (!_privileges->check("EnterMiscCounts"))
         menuItem->setEnabled(false);
 

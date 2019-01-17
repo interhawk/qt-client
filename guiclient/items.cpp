@@ -105,12 +105,12 @@ void items::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainItemMasters"));
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
 
-  QAction *tmpaction = pMenu->addAction(tr("Delete..."));
+  QAction *tmpaction = pMenu->addAction(tr("Delete"));
   connect(tmpaction, SIGNAL(triggered()), this, SLOT(sDelete()));
   tmpaction->setEnabled(_privileges->check("DeleteItemMasters"));
   tmpaction->setObjectName("items.popup.delete");

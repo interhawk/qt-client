@@ -929,7 +929,7 @@ void voucher::sPopulateDueDate()
 
 void voucher::sPopulateMenu( QMenu * pMenu )
 {
-  pMenu->addAction(tr("View P/O Item..."), this, SLOT(sView()));
+  pMenu->addAction(tr("View P/O Item"), this, SLOT(sView()));
 }
 
 void voucher::sView()

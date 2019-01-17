@@ -60,12 +60,12 @@ void dspUndefinedManufacturedItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));
+  menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));
   menuItem->setEnabled(_privileges->check("MaintainItemMasters"));
 
   if (((XTreeWidgetItem *)list()->currentItem())->altId() == 2)
   {
-    menuItem = pMenu->addAction(tr("Create BOM..."), this, SLOT(sCreateBOM()));
+    menuItem = pMenu->addAction(tr("Create BOM"), this, SLOT(sCreateBOM()));
     menuItem->setEnabled(_privileges->check("MaintainBOMs"));
   }
 }

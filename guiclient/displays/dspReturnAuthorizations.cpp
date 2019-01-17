@@ -67,8 +67,8 @@ enum SetResponse dspReturnAuthorizations::set(const ParameterList &pParams)
 void dspReturnAuthorizations::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
   if(_privileges->check("MaintainReturns"))
-    menuThis->addAction(tr("Edit..."), this, SLOT(sEditRA()));
-  menuThis->addAction(tr("View..."), this, SLOT(sViewRA()));
+    menuThis->addAction(tr("Edit"), this, SLOT(sEditRA()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewRA()));
 }
 
 void dspReturnAuthorizations::sEditRA()

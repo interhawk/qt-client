@@ -112,13 +112,13 @@ void dspInvalidBillsOfMaterials::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, 
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Parent Item..."), this, SLOT(sEditItem()));
+  menuItem = pMenu->addAction(tr("Edit Parent Item"), this, SLOT(sEditItem()));
   menuItem->setEnabled(_privileges->check("MaintainItemMasters"));
 
-  menuItem = pMenu->addAction(tr("Edit Parent Item Site..."), this, SLOT(sEditItemSite()));
+  menuItem = pMenu->addAction(tr("Edit Parent Item Site"), this, SLOT(sEditItemSite()));
   menuItem->setEnabled(_privileges->check("MaintainItemSites"));
 
-  menuItem = pMenu->addAction(tr("Create Component Item Site..."), this, SLOT(sCreateItemSite()));
+  menuItem = pMenu->addAction(tr("Create Component Item Site"), this, SLOT(sCreateItemSite()));
   menuItem->setEnabled(_privileges->check("MaintainItemSites"));
 }
 

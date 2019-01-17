@@ -64,11 +64,11 @@ void dspPendingBOMChanges::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit BOM Item..."), this, SLOT(sEdit()));;
+  menuItem = pMenu->addAction(tr("Edit BOM Item"), this, SLOT(sEdit()));;
   if (!_privileges->check("MaintainBOMs"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("View BOM Item..."), this, SLOT(sView()));;
+  menuItem = pMenu->addAction(tr("View BOM Item"), this, SLOT(sView()));;
   if ( (!_privileges->check("MaintainBOMs")) && (!_privileges->check("ViewBOMs")) )
     menuItem->setEnabled(false);
 }

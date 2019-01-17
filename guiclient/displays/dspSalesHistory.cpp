@@ -201,11 +201,11 @@ void dspSalesHistory::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   if (!_privileges->check("EditSalesHistory"))
     menuItem->setEnabled(false);
 
-  pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  pMenu->addAction(tr("View"), this, SLOT(sView()));
 }
 
 void dspSalesHistory::sEdit()

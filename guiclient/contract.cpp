@@ -305,10 +305,10 @@ void contract::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem * pSelected )
 
   if (!((oper == "Receipt") || (oper == "Return")) && (oper > " "))
   {
-     menuItem = pMenu->addAction(tr("Edit Purchase Order..."), this, SLOT(sEditPo()));
+     menuItem = pMenu->addAction(tr("Edit Purchase Order"), this, SLOT(sEditPo()));
      menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
 
-     menuItem = pMenu->addAction(tr("View Purchase Order..."), this, SLOT(sViewPo()));
+     menuItem = pMenu->addAction(tr("View Purchase Order"), this, SLOT(sViewPo()));
      menuItem->setEnabled(_privileges->check("ViewPurchaseOrders") || _privileges->check("MaintainPurchaseOrders"));
 
      if (stat == "Unreleased")
@@ -325,10 +325,10 @@ void contract::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem * pSelected )
 
   if (_itemSource->altId() > 0)
   {
-     menuItem = pMenu->addAction(tr("New Receipt..."), this, SLOT(sNewRcpt()));
+     menuItem = pMenu->addAction(tr("New Receipt"), this, SLOT(sNewRcpt()));
      menuItem->setEnabled(_privileges->check("EnterReceipts"));
 
-     menuItem = pMenu->addAction(tr("New Return..."), this, SLOT(sNewRtrn()));
+     menuItem = pMenu->addAction(tr("New Return"), this, SLOT(sNewRtrn()));
      menuItem->setEnabled(_privileges->check("EnterReturns"));
   }
 }

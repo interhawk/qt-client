@@ -124,12 +124,12 @@ void companies::sPopulateMenu(QMenu *pMenu)
 {
   QAction *menuItem;
 
-  pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  pMenu->addAction(tr("View"), this, SLOT(sView()));
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainChartOfAccounts"));
 
-  menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainChartOfAccounts"));
 }
 

@@ -73,16 +73,16 @@ void contracts::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
   QAction *menuItem;
 
-  menuItem = menuThis->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = menuThis->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 
-  menuItem = menuThis->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = menuThis->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources") || _privileges->check("ViewItemSource"));
 
-  menuItem = menuThis->addAction(tr("Copy..."), this, SLOT(sCopy()));
+  menuItem = menuThis->addAction(tr("Copy"), this, SLOT(sCopy()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 
-  menuItem = menuThis->addAction(tr("Delete..."), this, SLOT(sDelete()));
+  menuItem = menuThis->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 }
 

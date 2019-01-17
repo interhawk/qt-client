@@ -513,15 +513,15 @@ void unpostedInvoices::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   if (!_privileges->check("MaintainMiscInvoices"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   if ((!_privileges->check("MaintainMiscInvoices")) && (!_privileges->check("ViewMiscInvoices")))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   if (!_privileges->check("MaintainMiscInvoices"))
     menuItem->setEnabled(false);
 

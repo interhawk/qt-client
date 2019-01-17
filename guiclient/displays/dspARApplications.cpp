@@ -173,7 +173,7 @@ void dspARApplications::sPopulateMenu(QMenu* pMenu, QTreeWidgetItem*, int)
 
   if (list()->currentItem()->rawValue("arapply_source_doctype") == "C")
   {
-    menuItem = pMenu->addAction(tr("View Source Credit Memo..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Source Credit Memo"), this, SLOT(sViewCreditMemo()));
     if (! _privileges->check("MaintainARMemos") &&
 	! _privileges->check("ViewARMemos"))
       menuItem->setEnabled(false);
@@ -181,14 +181,14 @@ void dspARApplications::sPopulateMenu(QMenu* pMenu, QTreeWidgetItem*, int)
 
   if (list()->currentItem()->rawValue("arapply_target_doctype") == "D")
   {
-    menuItem = pMenu->addAction(tr("View Apply-To Debit Memo..."), this, SLOT(sViewDebitMemo()));
+    menuItem = pMenu->addAction(tr("View Apply-To Debit Memo"), this, SLOT(sViewDebitMemo()));
     if (! _privileges->check("MaintainARMemos") &&
 	! _privileges->check("ViewARMemos"))
       menuItem->setEnabled(false);
   }
   else if (list()->currentItem()->rawValue("arapply_target_doctype") == "I")
   {
-    menuItem = pMenu->addAction(tr("View Apply-To Invoice..."), this, SLOT(sViewInvoice()));
+    menuItem = pMenu->addAction(tr("View Apply-To Invoice"), this, SLOT(sViewInvoice()));
     if (! _privileges->check("MaintainMiscInvoices") &&
 	! _privileges->check("ViewMiscInvoices"))
       menuItem->setEnabled(false);

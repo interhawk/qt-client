@@ -176,14 +176,14 @@ void currencies::sPopulateMenu(QMenu* pMenu)
 {
   QAction *menuItem;
   
-  menuItem = pMenu->addAction(tr("View..."));
+  menuItem = pMenu->addAction(tr("View"));
   connect(menuItem, SIGNAL(triggered()), this, SLOT(sView()));
   
-  menuItem = pMenu->addAction(tr("Edit..."));
+  menuItem = pMenu->addAction(tr("Edit"));
   connect(menuItem, SIGNAL(triggered()), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainCurrencies"));
   
-  menuItem = pMenu->addAction(tr("Delete..."));
+  menuItem = pMenu->addAction(tr("Delete"));
   connect(menuItem, SIGNAL(triggered()), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainCurrencies"));
 }

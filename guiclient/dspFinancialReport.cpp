@@ -113,7 +113,7 @@ void dspFinancialReport::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected,
   {
     _col = pColumn;
 
-    QAction* viewGlAct = pMenu->addAction(tr("View Transactions..."), this, SLOT(sViewTransactions()));
+    QAction* viewGlAct = pMenu->addAction(tr("View Transactions"), this, SLOT(sViewTransactions()));
     viewGlAct->setEnabled(_privileges->check("ViewGLTransactions"));
   }
   else

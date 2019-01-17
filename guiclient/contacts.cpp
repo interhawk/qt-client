@@ -154,10 +154,10 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
       (omfgThis->username() == list()->currentItem()->rawValue("cntct_owner_username") && _privileges->check("ViewPersonalContacts")) ||
       (_privileges->check("ViewAllContacts"));
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(editPriv);
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(viewPriv);
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));

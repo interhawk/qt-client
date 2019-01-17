@@ -220,21 +220,21 @@ void dspSummarizedBacklogByWarehouse::sPopulateMenu(QMenu *pMenu, QTreeWidgetIte
 
   if (list()->id() != -1)
   {
-    menuItem = pMenu->addAction(tr("Inventory Availability by Sales Order..."), this, SLOT(sInventoryAvailabilityBySalesOrder()));
+    menuItem = pMenu->addAction(tr("Inventory Availability by Sales Order"), this, SLOT(sInventoryAvailabilityBySalesOrder()));
     if (!_privileges->check("ViewInventoryAvailability"))
       menuItem->setEnabled(false);
 
     pMenu->addSeparator();
   
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     if (!_privileges->check("MaintainSalesOrders"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
     if ((!_privileges->check("MaintainSalesOrders")) && (!_privileges->check("ViewSalesOrders")))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
     if (!_privileges->check("MaintainSalesOrders"))
       menuItem->setEnabled(false);
 

@@ -266,8 +266,8 @@ void address::sPopulate()
 
 void address::sPopulateMenu(QMenu *pMenu)
 {
-  QString editStr = tr("Edit...");
-  QString viewStr = tr("View...");
+  QString editStr = tr("Edit");
+  QString viewStr = tr("View");
 
   switch (_uses->altId())
   {

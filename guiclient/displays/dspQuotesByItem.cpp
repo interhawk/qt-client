@@ -70,8 +70,8 @@ enum SetResponse dspQuotesByItem::set(const ParameterList &pParams)
 
 void dspQuotesByItem::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
-  menuThis->addAction(tr("Edit..."), this, SLOT(sEditOrder()));
-  menuThis->addAction(tr("View..."), this, SLOT(sViewOrder()));
+  menuThis->addAction(tr("Edit"), this, SLOT(sEditOrder()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewOrder()));
 }
 
 void dspQuotesByItem::sEditOrder()

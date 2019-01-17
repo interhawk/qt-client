@@ -57,18 +57,18 @@ void dspSummarizedGLTransactions::sPopulateMenu(QMenu * menuThis, QTreeWidgetIte
   if(list()->altId() == -1)
     return;
 
-  menuThis->addAction(tr("View..."), this, SLOT(sViewTrans()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewTrans()));
 
   QTreeWidgetItem * item = list()->currentItem();
   if(0 == item)
     return;
 
   if(item->text(4) == "VO")
-    menuThis->addAction(tr("View Voucher..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Voucher"), this, SLOT(sViewDocument()));
   else if(item->text(4) == "IN")
-    menuThis->addAction(tr("View Invoice..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Invoice"), this, SLOT(sViewDocument()));
   else if(item->text(4) == "PO")
-    menuThis->addAction(tr("View Purchase Order..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Purchase Order"), this, SLOT(sViewDocument()));
 }
 
 bool dspSummarizedGLTransactions::setParams(ParameterList & params)

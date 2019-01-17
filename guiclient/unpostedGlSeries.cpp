@@ -195,13 +195,13 @@ void unpostedGlSeries::sPopulateMenu(QMenu *pMenu)
 {
   //QAction *menuItem;
 
-  (void)pMenu->addAction(tr("Edit G/L Series..."),  this, SLOT(sEdit()));
-  (void)pMenu->addAction(tr("View G/L Series..."),  this, SLOT(sView()));
-  (void)pMenu->addAction(tr("Delete G/L Series..."),this, SLOT(sDelete()));
+  (void)pMenu->addAction(tr("Edit G/L Series"),  this, SLOT(sEdit()));
+  (void)pMenu->addAction(tr("View G/L Series"),  this, SLOT(sView()));
+  (void)pMenu->addAction(tr("Delete G/L Series"),this, SLOT(sDelete()));
 
   pMenu->addSeparator();
 
-  (void)pMenu->addAction(tr("Post G/L Series..."),  this, SLOT(sPost()));
+  (void)pMenu->addAction(tr("Post G/L Series"),  this, SLOT(sPost()));
 
   pMenu->addSeparator();
 }

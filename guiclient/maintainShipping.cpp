@@ -107,13 +107,13 @@ void maintainShipping::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *selected)
   switch (_itemtype)
   {
     case 1:
-      menuItem = pMenu->addAction("Shipping Information...", this, SLOT(sShippingInformation()));
+      menuItem = pMenu->addAction("Shipping Information", this, SLOT(sShippingInformation()));
       menuItem->setEnabled(_privileges->check("EnterShippingInformation"));
 
-      menuItem = pMenu->addAction("Return ALL Stock Issued to Order...", this, SLOT(sReturnAllOrderStock()));
+      menuItem = pMenu->addAction("Return ALL Stock Issued to Order", this, SLOT(sReturnAllOrderStock()));
       menuItem->setEnabled(_privileges->check("ReturnStockFromShipping"));
 
-      menuItem = pMenu->addAction("View Order...", this, SLOT(sViewOrder()));
+      menuItem = pMenu->addAction("View Order", this, SLOT(sViewOrder()));
       menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
 
       menuItem = pMenu->addAction("Print Shipping Form...", this, SLOT(sPrintShippingForm()));
@@ -131,16 +131,16 @@ void maintainShipping::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *selected)
       menuItem = pMenu->addAction("Issue Additional Stock to Order Line...", this, SLOT(sIssueStock()));
       menuItem->setEnabled(_privileges->check("IssueStockToShipping"));
 
-      menuItem = pMenu->addAction("Return ALL Stock Issued to Order Line...", this, SLOT(sReturnAllLineStock()));
+      menuItem = pMenu->addAction("Return ALL Stock Issued to Order Line", this, SLOT(sReturnAllLineStock()));
       menuItem->setEnabled(_privileges->check("ReturnStockFromShipping"));
 
-      menuItem = pMenu->addAction("View Order Line...", this, SLOT(sViewLine()));
+      menuItem = pMenu->addAction("View Order Line", this, SLOT(sViewLine()));
       menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
 
       break;
 
     case 3:
-      menuItem = pMenu->addAction("Return ALL of this Stock Issued in this Transaction...", this, SLOT(sReturnAllStock()));
+      menuItem = pMenu->addAction("Return ALL of this Stock Issued in this Transaction", this, SLOT(sReturnAllStock()));
       menuItem->setEnabled(_privileges->check("ReturnStockFromShipping"));
 
       break;

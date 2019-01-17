@@ -126,15 +126,15 @@ void dspAPOpenItemsByVendor::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *select
 
   if (list()->currentItem()->text("f_doctype") == tr("Voucher"))
   {
-    menuItem = pMenu->addAction(tr("View Voucher..."), this, SLOT(sViewVoucher()));
+    menuItem = pMenu->addAction(tr("View Voucher"), this, SLOT(sViewVoucher()));
     menuItem->setEnabled(_privileges->check("ViewVouchers") || _privileges->check("MaintainVouchers"));
   }
   
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   if (!_privileges->check("EditAPOpenItem"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   XSqlQuery menu;
   menu.prepare("SELECT apopen_status FROM apopen WHERE apopen_id=:apopen_id;");
   menu.bindValue(":apopen_id", list()->id());

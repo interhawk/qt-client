@@ -96,8 +96,8 @@ void dspWoHistoryByNumber::sEdit()
 
 void dspWoHistoryByNumber::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
-  (void)pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
-  (void)pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  (void)pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
+  (void)pMenu->addAction(tr("View"), this, SLOT(sView()));
 }
 
 void dspWoHistoryByNumber::sHandleCosts(bool pShowCosts)

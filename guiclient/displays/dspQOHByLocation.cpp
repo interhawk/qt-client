@@ -154,7 +154,7 @@ void dspQOHByLocation::sPopulateMenu(QMenu *menu, QTreeWidgetItem*, int)
 
   if (list()->id() != -1 && list()->altId() == 0)
   {
-    menuItem = menu->addAction(tr("Relocate..."), this, SLOT(sRelocate()));
+    menuItem = menu->addAction(tr("Relocate"), this, SLOT(sRelocate()));
     menuItem->setEnabled(_privileges->check("RelocateInventory"));
   }
   else if (list()->id() != -1 && list()->altId() > 0)

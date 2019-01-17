@@ -95,13 +95,13 @@ void opportunityList::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
       (omfgThis->username() == list()->currentItem()->rawValue("ophead_username") && _privileges->check("ViewPersonalOpportunities")) ||
       (_privileges->check("ViewAllOpportunities"));
 
-  menuItem = pMenu->addAction(tr("New..."), this, SLOT(sNew()));
+  menuItem = pMenu->addAction(tr("New"), this, SLOT(sNew()));
   menuItem->setEnabled(editPriv);
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(editPriv);
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(viewPriv);
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));

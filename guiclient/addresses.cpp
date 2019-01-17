@@ -71,10 +71,10 @@ void addresses::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainAddresses"));
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("ViewAddresses"));
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
@@ -116,7 +116,7 @@ void addresses::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
     if (sql.value("new").toBool())
     {
       pMenu->addSeparator();
-      menuItem = pMenu->addAction(tr("Create Prospect..."), this, SLOT(sNewProspect()));
+      menuItem = pMenu->addAction(tr("Create Prospect"), this, SLOT(sNewProspect()));
       menuItem->setEnabled(editProspectPriv);
     }
   }

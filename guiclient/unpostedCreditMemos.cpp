@@ -87,10 +87,10 @@ void unpostedCreditMemos::sPopulateMenu(QMenu *pMenu)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainCreditMemos"));
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainCreditMemos") ||
                        _privileges->check("ViewCreditMemos"));
 

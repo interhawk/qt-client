@@ -133,10 +133,10 @@ void dspPartiallyShippedOrders::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, in
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Order..."), this, SLOT(sEditOrder()));
+  menuItem = pMenu->addAction(tr("Edit Order"), this, SLOT(sEditOrder()));
   menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
 
-  menuItem = pMenu->addAction(tr("View Order..."), this, SLOT(sViewOrder()));
+  menuItem = pMenu->addAction(tr("View Order"), this, SLOT(sViewOrder()));
   menuItem->setEnabled(_privileges->check("MaintainSalesOrders") ||
                        _privileges->check("ViewSalesOrders"));
 
@@ -144,7 +144,7 @@ void dspPartiallyShippedOrders::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, in
 
   if ( (list()->currentItem()->text(0) != "P") && (list()->currentItem()->text(0) != "C") )
   {
-    menuItem = pMenu->addAction(tr("Print Packing List..."), this, SLOT(sPrintPackingList()));
+    menuItem = pMenu->addAction(tr("Print Packing List"), this, SLOT(sPrintPackingList()));
     menuItem->setEnabled(_privileges->check("PrintPackingLists"));
   }
 }

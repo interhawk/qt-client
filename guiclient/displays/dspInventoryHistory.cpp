@@ -315,8 +315,8 @@ void dspInventoryHistory::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, in
   XSqlQuery dspPopulateMenu;
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("View Transaction Information..."), this, SLOT(sViewTransInfo()));
-  menuItem = pMenu->addAction(tr("Edit Transaction Information..."), this, SLOT(sEditTransInfo()));
+  menuItem = pMenu->addAction(tr("View Transaction Information"), this, SLOT(sViewTransInfo()));
+  menuItem = pMenu->addAction(tr("Edit Transaction Information"), this, SLOT(sEditTransInfo()));
 
   if ( (pItem->text(list()->column("warehous_code")).length()) &&
        ( (pItem->text(list()->column("invhist_transtype")) == "RM") || (pItem->text(list()->column("invhist_transtype")) == "IM") ) )
@@ -338,7 +338,7 @@ void dspInventoryHistory::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pItem, in
       dspPopulateMenu.exec();
       if (dspPopulateMenu.first())
       {
-        menuItem = pMenu->addAction(tr("View Work Order Information..."), this, SLOT(sViewWOInfo()));
+        menuItem = pMenu->addAction(tr("View Work Order Information"), this, SLOT(sViewWOInfo()));
         menuItem->setEnabled(_privileges->check("MaintainWorkOrders") || _privileges->check("ViewWorkOrders"));
       }
     }

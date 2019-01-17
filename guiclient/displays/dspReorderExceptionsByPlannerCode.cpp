@@ -63,14 +63,14 @@ void dspReorderExceptionsByPlannerCode::sPopulateMenu(QMenu *pMenu, QTreeWidgetI
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("View Running Availability..."), this, SLOT(sRunningAvailability()));
+  menuItem = pMenu->addAction(tr("View Running Availability"), this, SLOT(sRunningAvailability()));
   menuItem->setEnabled(_privileges->check("ViewInventoryAvailability"));
 
   if (list()->altId() == 1)
   {
     pMenu->addSeparator();
 
-    menuItem = pMenu->addAction(tr("Create Work Order..."), this, SLOT(sCreateWorkOrder()));
+    menuItem = pMenu->addAction(tr("Create Work Order"), this, SLOT(sCreateWorkOrder()));
     menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
   }
 }

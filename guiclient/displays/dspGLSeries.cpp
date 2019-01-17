@@ -149,16 +149,16 @@ void dspGLSeries::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem*, int)
 
   if (!_isJournal)
   {
-    menuItem = pMenu->addAction(tr("Edit Journal..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Journal"), this, SLOT(sEdit()));
     menuItem->setEnabled(editable);
 
-    menuItem = pMenu->addAction(tr("Delete Journal..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete Journal"), this, SLOT(sDelete()));
     menuItem->setEnabled(deletable);
 
     pMenu->addSeparator();
   }
 
-  menuItem = pMenu->addAction(tr("Reverse Journal..."), this, SLOT(sReverse()));
+  menuItem = pMenu->addAction(tr("Reverse Journal"), this, SLOT(sReverse()));
   menuItem->setEnabled(reversible);
 
   if (item->rawValue("doctype").toString() == "JP")

@@ -680,8 +680,8 @@ void unpostedPoReceipts::sPopulateMenu(QMenu *pMenu,QTreeWidgetItem *pItem)
   QAction *menuItem;
   QString ordertype = pItem->text(_recv->column("recv_order_type"));
 
-  menuItem = pMenu->addAction(tr("Edit Receipt..."),	this, SLOT(sEdit()));
-  menuItem = pMenu->addAction(tr("Delete Receipt..."),	this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Edit Receipt"),	this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Delete Receipt"),	this, SLOT(sDelete()));
 
   pMenu->addSeparator();
 
@@ -689,7 +689,7 @@ void unpostedPoReceipts::sPopulateMenu(QMenu *pMenu,QTreeWidgetItem *pItem)
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("View Order Item..."),this, SLOT(sViewOrderItem()));
+  menuItem = pMenu->addAction(tr("View Order Item"),this, SLOT(sViewOrderItem()));
   menuItem->setEnabled(
       (ordertype == "PO" && _privileges->check("ViewPurchaseOrders")) ||
       (ordertype == "TO" && _privileges->check("ViewTransferOrders")) ||

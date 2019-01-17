@@ -95,23 +95,23 @@ void dspReservations::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, in
 
   if (QString(pSelected->text(0)) == "W/O")
   {
-    menuItem = pMenu->addAction(tr("View Work Order..."), this, SLOT(sViewWorkOrder()));
+    menuItem = pMenu->addAction(tr("View Work Order"), this, SLOT(sViewWorkOrder()));
     menuItem->setEnabled(_privileges->check("ViewWorkOrders"));
   }
   else if (QString(pSelected->text(0)) == "S/O")
   {
-    menuItem = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sViewCustomerOrder()));
+    menuItem = pMenu->addAction(tr("View Sales Order"), this, SLOT(sViewCustomerOrder()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
 
-    menuItem = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEditCustomerOrder()));
+    menuItem = pMenu->addAction(tr("Edit Sales Order"), this, SLOT(sEditCustomerOrder()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
   }
   else if (QString(pSelected->text(0)) == "T/O")
   {
-    menuItem = pMenu->addAction(tr("View Transfer Order..."), this, SLOT(sViewTransferOrder()));
+    menuItem = pMenu->addAction(tr("View Transfer Order"), this, SLOT(sViewTransferOrder()));
     menuItem->setEnabled(_privileges->check("ViewTransferOrders"));
 
-    menuItem = pMenu->addAction(tr("Edit Transfer Order..."), this, SLOT(sEditTransferOrder()));
+    menuItem = pMenu->addAction(tr("Edit Transfer Order"), this, SLOT(sEditTransferOrder()));
     menuItem->setEnabled(_privileges->check("MaintainTransferOrders"));
   }
 }

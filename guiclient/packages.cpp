@@ -251,7 +251,7 @@ void packages::sPopulateMenu(QMenu *pMenu)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(package::userHasPriv(cView));
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));

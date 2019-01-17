@@ -165,7 +165,7 @@ void dspSummarizedSales::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 {
   //QAction *menuItem;
 
-  (void)pMenu->addAction(tr("View Sales Detail..."), this, SLOT(sViewHistory()));
+  (void)pMenu->addAction(tr("View Sales Detail"), this, SLOT(sViewHistory()));
 
 }
 

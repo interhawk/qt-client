@@ -76,7 +76,7 @@ void uninvoicedShipments::sPopulateMenu(QMenu *menu)
 {
   QAction *menuItem;
 
-  menuItem = menu->addAction(tr("Approve This Order for Billing..."), this, SLOT(sSelectForBilling()));
+  menuItem = menu->addAction(tr("Approve This Order for Billing"), this, SLOT(sSelectForBilling()));
   menuItem->setEnabled(_privileges->check("SelectBilling"));
 }
 

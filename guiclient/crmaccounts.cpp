@@ -187,10 +187,10 @@ void crmaccounts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
       (omfgThis->username() == list()->currentItem()->rawValue("crmacct_owner_username") && _privileges->check("ViewPersonalCRMAccounts")) ||
       (_privileges->check("ViewAllCRMAccounts"));
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(editPriv);
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(viewPriv);
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));

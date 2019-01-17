@@ -107,30 +107,30 @@ void dspOrders::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 
   if (list()->altId() == 1)
   {
-    menuItem = pMenu->addAction(tr("Reschedule P/O Item..."), this, SLOT(sReschedulePoitem()));
+    menuItem = pMenu->addAction(tr("Reschedule P/O Item"), this, SLOT(sReschedulePoitem()));
     if (!_privileges->check("ReschedulePurchaseOrders"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Change P/O Item Quantity..."), this, SLOT(sChangePoitemQty()));
+    menuItem = pMenu->addAction(tr("Change P/O Item Quantity"), this, SLOT(sChangePoitemQty()));
     if (!_privileges->check("ChangePurchaseOrderQty"))
       menuItem->setEnabled(false);
   }
   else if (list()->altId() == 2)
   {
-    menuItem = pMenu->addAction(tr("Reprioritize W/O..."), this, SLOT(sReprioritizeWo()));
+    menuItem = pMenu->addAction(tr("Reprioritize W/O"), this, SLOT(sReprioritizeWo()));
     if (!_privileges->check("ReprioritizeWorkOrders"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Reschedule W/O..."), this, SLOT(sRescheduleWO()));
+    menuItem = pMenu->addAction(tr("Reschedule W/O"), this, SLOT(sRescheduleWO()));
     if (!_privileges->check("RescheduleWorkOrders") ||
         (list()->rawValue("order_status") != "O" && list()->rawValue("order_status") != "E"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Change W/O Quantity..."), this, SLOT(sChangeWOQty()));
+    menuItem = pMenu->addAction(tr("Change W/O Quantity"), this, SLOT(sChangeWOQty()));
     if (!_privileges->check("ChangeWorkOrderQty"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Print Traveler..."), this, SLOT(sPrintTraveler()));
+    menuItem = pMenu->addAction(tr("Print Traveler"), this, SLOT(sPrintTraveler()));
     if (!_privileges->check("PrintWorkOrderPaperWork"))
       menuItem->setEnabled(false);
   }

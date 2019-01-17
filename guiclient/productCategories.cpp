@@ -132,10 +132,10 @@ void productCategories::sPopulateMenu( QMenu * menu )
 {
   QAction *menuItem;
 
-  menuItem = menu->addAction("Edit Product Cateogry...", this, SLOT(sEdit()));
+  menuItem = menu->addAction("Edit Product Cateogry", this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainProductCategories"));
 
-  menuItem = menu->addAction("Delete Product Category...", this, SLOT(sDelete()));
+  menuItem = menu->addAction("Delete Product Category", this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainProductCategories"));
 }
 

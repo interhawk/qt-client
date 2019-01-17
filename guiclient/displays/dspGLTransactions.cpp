@@ -194,33 +194,33 @@ void dspGLTransactions::sPopulateMenu(QMenu * menuThis, QTreeWidgetItem* pItem, 
   if(0 == item)
     return;
 
-  menuThis->addAction(tr("View..."), this, SLOT(sViewTrans()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewTrans()));
   if (item->rawValue("gltrans_journalnumber").toInt() > 0)
   {
-    QAction* viewSeriesAct = menuThis->addAction(tr("View Journal Series..."), this, SLOT(sViewSeries()));
+    QAction* viewSeriesAct = menuThis->addAction(tr("View Journal Series"), this, SLOT(sViewSeries()));
     viewSeriesAct->setDisabled(item->data(0, Xt::DeletedRole).toBool());
   }
 
   if(item->rawValue("gltrans_doctype").toString() == "VO")
-    menuThis->addAction(tr("View Voucher..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Voucher"), this, SLOT(sViewDocument()));
   else if(item->rawValue("gltrans_doctype").toString() == "IN")
-    menuThis->addAction(tr("View Invoice..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Invoice"), this, SLOT(sViewDocument()));
   else if(item->rawValue("gltrans_doctype").toString() == "PO")
-    menuThis->addAction(tr("View Purchase Order..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Purchase Order"), this, SLOT(sViewDocument()));
   else if(item->rawValue("gltrans_doctype").toString() == "SH")
-    menuThis->addAction(tr("View Shipment..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Shipment"), this, SLOT(sViewDocument()));
   else if(item->rawValue("gltrans_doctype").toString() == "CM")
-    menuThis->addAction(tr("View Credit Memo..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Credit Memo"), this, SLOT(sViewDocument()));
   else if(item->rawValue("gltrans_doctype").toString() == "DM")
-    menuThis->addAction(tr("View Debit Memo..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Debit Memo"), this, SLOT(sViewDocument()));
   else if(item->rawValue("gltrans_doctype").toString() == "SO")
-    menuThis->addAction(tr("View Sales Order..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Sales Order"), this, SLOT(sViewDocument()));
   else if(item->rawValue("gltrans_doctype").toString() == "WO")
-    menuThis->addAction(tr("View WO History..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View WO History"), this, SLOT(sViewDocument()));
   else if(item->rawValue("gltrans_doctype").toString() == "JP")
-    menuThis->addAction(tr("View Journal..."), this, SLOT(sViewJournal()));
+    menuThis->addAction(tr("View Journal"), this, SLOT(sViewJournal()));
   else if(item->rawValue("gltrans_source").toString() == "I/M")
-    menuThis->addAction(tr("View Inventory History..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Inventory History"), this, SLOT(sViewDocument()));
 }
 
 bool dspGLTransactions::setParams(ParameterList &params)

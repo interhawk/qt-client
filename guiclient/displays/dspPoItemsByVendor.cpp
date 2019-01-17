@@ -109,15 +109,15 @@ void dspPoItemsByVendor::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected,
 
   if (item && item->rawValue("poitem_status") == "U")
   {
-    menuItem = pMenu->addAction(tr("Edit Order..."), this, SLOT(sEditOrder()));
+    menuItem = pMenu->addAction(tr("Edit Order"), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
   }
 
-  menuItem = pMenu->addAction(tr("View Order..."), this, SLOT(sViewOrder()));
+  menuItem = pMenu->addAction(tr("View Order"), this, SLOT(sViewOrder()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                        _privileges->check("ViewPurchaseOrders"));
 
-  menuItem = pMenu->addAction(tr("Running Availability..."), this, SLOT(sRunningAvailability()));
+  menuItem = pMenu->addAction(tr("Running Availability"), this, SLOT(sRunningAvailability()));
 
   menuItem->setEnabled(_privileges->check("ViewInventoryAvailability"));
 
@@ -125,11 +125,11 @@ void dspPoItemsByVendor::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected,
 
   if (item && item->rawValue("poitem_status") == "U")
   {
-    menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));
+    menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
   }
 
-  menuItem = pMenu->addAction(tr("View Item..."), this, SLOT(sViewItem()));
+  menuItem = pMenu->addAction(tr("View Item"), this, SLOT(sViewItem()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                        _privileges->check("ViewPurchaseOrders"));
 
@@ -151,7 +151,7 @@ void dspPoItemsByVendor::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected,
   }
   else if (item && item->rawValue("poitem_status") == "C")
   {
-    menuItem = pMenu->addAction(tr("Open Item..."), this, SLOT(sOpenItem()));
+    menuItem = pMenu->addAction(tr("Open Item"), this, SLOT(sOpenItem()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
   }
 }

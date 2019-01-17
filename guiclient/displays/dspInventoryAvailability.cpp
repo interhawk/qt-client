@@ -226,27 +226,27 @@ void dspInventoryAvailability::sPopulateMenu(QMenu *menu, QTreeWidgetItem *selec
   XTreeWidgetItem * item = (XTreeWidgetItem*)selected;
   QAction *menuItem;
 
-  menuItem = menu->addAction(tr("View Inventory History..."), this, SLOT(sViewHistory()));
+  menuItem = menu->addAction(tr("View Inventory History"), this, SLOT(sViewHistory()));
   menuItem->setEnabled(_privileges->check("ViewInventoryHistory"));
 
   menu->addSeparator();
 
-  menuItem = menu->addAction(tr("View Allocations..."), this, SLOT(sViewAllocations()));
+  menuItem = menu->addAction(tr("View Allocations"), this, SLOT(sViewAllocations()));
   menuItem->setEnabled(item->rawValue("allocated").toDouble() != 0.0);
 
-  menuItem = menu->addAction(tr("View Orders..."), this, SLOT(sViewOrders()));
+  menuItem = menu->addAction(tr("View Orders"), this, SLOT(sViewOrders()));
   menuItem->setEnabled(item->rawValue("ordered").toDouble() != 0.0);
 
-  menuItem = menu->addAction(tr("Running Availability..."), this, SLOT(sRunningAvailability()));
+  menuItem = menu->addAction(tr("Running Availability"), this, SLOT(sRunningAvailability()));
 
   menu->addSeparator();
 
   if (((XTreeWidgetItem *)selected)->altId() == 1)
   {
-    menuItem = menu->addAction(tr("Create Purchase Request..."), this, SLOT(sCreatePR()));
+    menuItem = menu->addAction(tr("Create Purchase Request"), this, SLOT(sCreatePR()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseRequests"));
 
-    menuItem = menu->addAction(tr("Create Purchase Order..."), this, SLOT(sCreatePO()));
+    menuItem = menu->addAction(tr("Create Purchase Order"), this, SLOT(sCreatePO()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
 
     menu->addSeparator();
@@ -262,17 +262,17 @@ void dspInventoryAvailability::sPopulateMenu(QMenu *menu, QTreeWidgetItem *selec
     menu->addSeparator();
   }
     
-  menu->addAction(tr("View Substitute Availability..."), this, SLOT(sViewSubstituteAvailability()));
+  menu->addAction(tr("View Substitute Availability"), this, SLOT(sViewSubstituteAvailability()));
 
   menu->addSeparator();
 
   menuItem = menu->addAction(tr("Issue Count Tag..."), this, SLOT(sIssueCountTag()));
   menuItem->setEnabled(_privileges->check("IssueCountTags"));
 
-  menuItem = menu->addAction(tr("Enter Misc. Inventory Count..."), this, SLOT(sEnterMiscCount()));
+  menuItem = menu->addAction(tr("Enter Misc. Inventory Count"), this, SLOT(sEnterMiscCount()));
   menuItem->setEnabled(_privileges->check("EnterMiscCounts"));
   
-  menuItem = menu->addAction(tr("Enter Adjustment..."), this, SLOT(sEnterAdjustment()));
+  menuItem = menu->addAction(tr("Enter Adjustment"), this, SLOT(sEnterAdjustment()));
   menuItem->setEnabled(_privileges->check("CreateAdjustmentTrans"));
 }
 

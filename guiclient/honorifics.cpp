@@ -139,11 +139,11 @@ void honorifics::sPopulateMenu( QMenu *pMenu)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   if (!_privileges->check("MaintainTitles"))
     menuItem->setEnabled(false);
 
-  pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  pMenu->addAction(tr("View"), this, SLOT(sView()));
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   if (!_privileges->check("MaintainTitles"))

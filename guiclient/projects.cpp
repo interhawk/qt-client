@@ -265,7 +265,7 @@ void projects::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem*, int)
     menuItem = pMenu->addAction("Delete", this, SLOT(sDelete()));
     menuItem->setEnabled(del);
 
-    menuItem = pMenu->addAction("Copy", this, SLOT(sCopy()));
+    menuItem = pMenu->addAction("Copy...", this, SLOT(sCopy()));
     menuItem->setEnabled(del);
   }
 }

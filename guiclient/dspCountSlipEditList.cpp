@@ -117,7 +117,7 @@ void dspCountSlipEditList::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelecte
 
   if (((XTreeWidgetItem *)pSelected)->rawValue("cntslip_posted") == 0)
   {
-    menuItem = pMenu->addAction("Edit Count Slip...", this, SLOT(sEdit()));
+    menuItem = pMenu->addAction("Edit Count Slip", this, SLOT(sEdit()));
     if (!_privileges->check("EnterCountSlips"))
       menuItem->setEnabled(false);
 
