@@ -2361,9 +2361,6 @@ to be bound by its terms.</comment>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
-              <property name="enabled">
-                <bool>false</bool>
-              </property>
              </widget>
             </item>
             <item row="8" column="1">
