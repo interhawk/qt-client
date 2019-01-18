@@ -140,15 +140,8 @@ XTreeWidget::XTreeWidget(QWidget *pParent) :
   connect(header(),       SIGNAL(sectionResized(int, int, int)),
           this,     SLOT(sColumnSizeChanged(int, int, int)));
   connect(this,           SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem *)),  SLOT(sCurrentItemChanged(QTreeWidgetItem*, QTreeWidgetItem *)));
-  connect(this,           SIGNAL(itemActivated(QTreeWidgetItem*, int)),                     SLOT(sItemActivated(QTreeWidgetItem*, int)));
   connect(this,           SIGNAL(itemChanged(QTreeWidgetItem*, int)),                       SLOT(sItemChanged(QTreeWidgetItem*, int)));
   connect(this,           SIGNAL(itemClicked(QTreeWidgetItem*, int)),                       SLOT(sItemClicked(QTreeWidgetItem*, int)));
-  connect(this,           SIGNAL(itemCollapsed(QTreeWidgetItem*)),                          SLOT(sItemCollapsed(QTreeWidgetItem*)));
-  connect(this,           SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)),                 SLOT(sItemDoubleClicked(QTreeWidgetItem*, int)));
-  connect(this,           SIGNAL(itemEntered(QTreeWidgetItem*, int)),                       SLOT(sItemEntered(QTreeWidgetItem*, int)));
-  connect(this,           SIGNAL(itemClicked(QTreeWidgetItem*, int)),                       SLOT(sItemClicked(QTreeWidgetItem*, int)));
-  connect(this,           SIGNAL(itemExpanded(QTreeWidgetItem*)),                           SLOT(sItemExpanded(QTreeWidgetItem*)));
-  connect(this,           SIGNAL(itemPressed(QTreeWidgetItem*, int)),                       SLOT(sItemPressed(QTreeWidgetItem*, int)));
   connect(&_workingTimer, SIGNAL(timeout()), this, SLOT(populateWorker()));
 
   emit valid(false);
