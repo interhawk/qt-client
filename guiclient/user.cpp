@@ -111,8 +111,27 @@ enum SetResponse user::set(const ParameterList &pParams)
 
   param = pParams.value("username", &valid);
   if (valid)
-  {
     _cUsername = param.toString();
+
+  param = pParams.value("usr_id", &valid);
+  if (valid)
+  {
+    XSqlQuery usr;
+    usr.prepare("SELECT usr_username "
+                  "FROM usr "
+                 "WHERE usr_id = :usr_id;");
+    usr.bindValue(":usr_id", param.toInt());
+    usr.exec();
+
+    if (usr.first())
+      _cUsername = usr.value("usr_username").toString();
+    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error getting username"),
+                                  usr, __FILE__, __LINE__))
+      return UndefinedError;
+  }
+
+  if (!_cUsername.isEmpty())
+  {
     _pref = new Preferences(_cUsername);
 
     _inventoryMenu->setChecked(_pref->boolean("ShowIMMenu"));
