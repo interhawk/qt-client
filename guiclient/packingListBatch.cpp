@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -249,14 +249,14 @@ void packingListBatch::sPopulateMenu(QMenu *pMenu)
 
   if (_pack->currentItem()->rawValue("pack_head_type") == "SO")
   {
-    menuItem = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sViewSalesOrder()));
+    menuItem = pMenu->addAction(tr("View Sales Order"), this, SLOT(sViewSalesOrder()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders") ||
                         _privileges->check("ViewSalesOrders"));
   }
 
   if (_pack->currentItem()->rawValue("pack_head_type") == "TO")
   {
-    menuItem = pMenu->addAction(tr("View Transfer Order..."), this, SLOT(sViewTransferOrder()));
+    menuItem = pMenu->addAction(tr("View Transfer Order"), this, SLOT(sViewTransferOrder()));
     menuItem->setEnabled(_privileges->check("MaintainTransferOrders") ||
                         _privileges->check("ViewTransferOrders"));
   }

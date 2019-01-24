@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -156,11 +156,11 @@ void shippingInformation::sSave()
 
 void shippingInformation::sPopulateMenu(QMenu *menuThis)
 {
-  QAction * act = menuThis->addAction(tr("Issue Additional Stock for this Order Line to Shipping..."), this, SLOT(sIssueStock()));
+  QAction * act = menuThis->addAction(tr("Issue Additional Stock for this Order Line to Shipping"), this, SLOT(sIssueStock()));
   if(_order->isClosed())
     act->setEnabled(false);
-  menuThis->addAction(tr("Return ALL Stock Issued for this Order Line to the Site..."), this, SLOT(sReturnAllLineStock()));
-  menuThis->addAction(tr("View Order Line..."), this, SLOT(sViewLine()));
+  menuThis->addAction(tr("Return ALL Stock Issued for this Order Line to the Site"), this, SLOT(sReturnAllLineStock()));
+  menuThis->addAction(tr("View Order Line"), this, SLOT(sViewLine()));
 }
 
 void shippingInformation::sIssueStock()

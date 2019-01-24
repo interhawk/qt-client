@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -60,12 +60,12 @@ void dspUndefinedManufacturedItems::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));
+  menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));
   menuItem->setEnabled(_privileges->check("MaintainItemMasters"));
 
   if (((XTreeWidgetItem *)list()->currentItem())->altId() == 2)
   {
-    menuItem = pMenu->addAction(tr("Create BOM..."), this, SLOT(sCreateBOM()));
+    menuItem = pMenu->addAction(tr("Create BOM"), this, SLOT(sCreateBOM()));
     menuItem->setEnabled(_privileges->check("MaintainBOMs"));
   }
 }

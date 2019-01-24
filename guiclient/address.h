@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -42,6 +42,7 @@ protected slots:
     virtual void sEditVendor();
     virtual void sEditVendorAddress();
     virtual void sEditWarehouse();
+    virtual void sHandleSelection();
     virtual void sPopulate();
     virtual void sPopulateMenu(QMenu *);
     virtual void sSave();
@@ -56,8 +57,9 @@ protected slots:
     virtual void setVisible(bool);
 
 private:
-    int _mode;
-    int _addrid;
+    int  _mode;
+    int  _editableMode;
+    int  _addrid;
     bool _captive;
     bool _close;
     AppLock _lock;

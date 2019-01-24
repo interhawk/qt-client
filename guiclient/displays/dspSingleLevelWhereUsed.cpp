@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -85,15 +85,15 @@ void dspSingleLevelWhereUsed::sPopulateMenu(QMenu *menu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = menu->addAction(tr("Edit Bill of Materials..."), this, SLOT(sEditBOM()));
+  menuItem = menu->addAction(tr("Edit Bill of Materials"), this, SLOT(sEditBOM()));
   if (!_privileges->check("MaintainBOMs"))
     menuItem->setEnabled(false);
 
-  menuItem = menu->addAction(tr("Edit Item Master..."), this, SLOT(sEditItem()));
+  menuItem = menu->addAction(tr("Edit Item Master"), this, SLOT(sEditItem()));
   if (!_privileges->check("MaintainItemMasters"))
     menuItem->setEnabled(false);
 
-  menuItem = menu->addAction(tr("View Item Inventory History..."), this, SLOT(sViewInventoryHistory()));
+  menuItem = menu->addAction(tr("View Item Inventory History"), this, SLOT(sViewInventoryHistory()));
   if (!_privileges->check("ViewInventoryHistory"))
     menuItem->setEnabled(false);
 }

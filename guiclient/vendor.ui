@@ -2,7 +2,7 @@
 <ui version="4.0">
  <comment>This file is part of the xTuple ERP: PostBooks Edition, a free and
 open source Enterprise Resource Planning software suite,
-Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
 It is licensed to you under the Common Public Attribution License
 version 1.0, the full text of which (including xTuple-specific Exhibits)
 is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1975,22 +1975,6 @@ and Purchase Order amounts</string>
     <hint type="destinationlabel">
      <x>669</x>
      <y>324</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_vendaddr</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_viewAddress</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>54</x>
-     <y>467</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>126</x>
-     <y>467</y>
     </hint>
    </hints>
   </connection>

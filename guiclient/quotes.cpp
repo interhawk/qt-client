@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -107,10 +107,10 @@ void quotes::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Convert to S/O..."), this, SLOT(sConvertSalesOrder()));
+  menuItem = pMenu->addAction(tr("Convert to S/O"), this, SLOT(sConvertSalesOrder()));
   menuItem->setEnabled(_privileges->check("ConvertQuotes"));
 
-  menuItem = pMenu->addAction(tr("Convert to Invoice..."), this, SLOT(sConvertInvoice()));
+  menuItem = pMenu->addAction(tr("Convert to Invoice"), this, SLOT(sConvertInvoice()));
   menuItem->setEnabled(_privileges->check("ConvertQuotesInvoice"));
 
   pMenu->addSeparator();
@@ -118,17 +118,17 @@ void quotes::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
   menuItem = pMenu->addAction(tr("Copy"), this, SLOT(sCopy()));
   menuItem->setEnabled(_privileges->check("MaintainQuotes"));
 
-  menuItem = pMenu->addAction(tr("Copy to Cust./Prospect"), this, SLOT(sCopyToCustomer()));
+  menuItem = pMenu->addAction(tr("Copy to Cust./Prospect..."), this, SLOT(sCopyToCustomer()));
   menuItem->setEnabled(_privileges->check("MaintainQuotes"));
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainQuotes"));
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
 
-  menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainQuotes"));
 }
 

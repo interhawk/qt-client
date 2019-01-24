@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -456,12 +456,12 @@ void selectPayments::sPopulateMenu(QMenu *pMenu,QTreeWidgetItem *selected)
 
   if (_apopen->currentItem()->text("doctype") == tr("Voucher"))
   {
-    menuItem = pMenu->addAction(tr("View Voucher..."), this, SLOT(sViewVoucher()));
+    menuItem = pMenu->addAction(tr("View Voucher"), this, SLOT(sViewVoucher()));
     menuItem->setEnabled(_privileges->check("ViewVouchers") || _privileges->check("MaintainVouchers"));
 
     if(item->rawValue("selected") == 0.0)
     {
-      menuItem = pMenu->addAction(tr("Void Voucher..."), this, SLOT(sVoidVoucher()));
+      menuItem = pMenu->addAction(tr("Void Voucher"), this, SLOT(sVoidVoucher()));
       menuItem->setEnabled(_privileges->check("VoidPostedVouchers"));
     }
   }
@@ -472,12 +472,12 @@ void selectPayments::sPopulateMenu(QMenu *pMenu,QTreeWidgetItem *selected)
   menu.exec();
   if (menu.first())
   {
-    menuItem = pMenu->addAction(tr("Edit A/P Open..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit A/P Open"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("EditAPOpenItem"));
     
-    pMenu->addAction(tr("View A/P Open..."), this, SLOT(sView()));
+    pMenu->addAction(tr("View A/P Open"), this, SLOT(sView()));
     
-    menuItem = pMenu->addAction(tr("View G/L Series..."), this, SLOT(sViewGLSeries()));
+    menuItem = pMenu->addAction(tr("View G/L Series"), this, SLOT(sViewGLSeries()));
     menuItem->setEnabled(_privileges->check("ViewGLTransactions"));
 
     if(menu.value("apopen_status").toString() == "O")

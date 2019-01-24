@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -63,14 +63,14 @@ void dspReorderExceptionsByPlannerCode::sPopulateMenu(QMenu *pMenu, QTreeWidgetI
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("View Running Availability..."), this, SLOT(sRunningAvailability()));
+  menuItem = pMenu->addAction(tr("View Running Availability"), this, SLOT(sRunningAvailability()));
   menuItem->setEnabled(_privileges->check("ViewInventoryAvailability"));
 
   if (list()->altId() == 1)
   {
     pMenu->addSeparator();
 
-    menuItem = pMenu->addAction(tr("Create Work Order..."), this, SLOT(sCreateWorkOrder()));
+    menuItem = pMenu->addAction(tr("Create Work Order"), this, SLOT(sCreateWorkOrder()));
     menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
   }
 }

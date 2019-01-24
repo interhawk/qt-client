@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -161,19 +161,19 @@ void costCategories::sPopulateMenu(QMenu *menu)
 {
   QAction *menuItem;
 
-  menuItem = menu->addAction(tr("Edit Inventory Cost Cateogry..."), this, SLOT(sEdit()));
+  menuItem = menu->addAction(tr("Edit Inventory Cost Cateogry"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainCostCategories"));
 
-  menuItem = menu->addAction(tr("View Inventory Cost Category..."), this, SLOT(sView()));
+  menuItem = menu->addAction(tr("View Inventory Cost Category"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainCostCategories") ||
                        _privileges->check("ViewCostCategories"));
 
-  menuItem = menu->addAction(tr("Delete Inventory Cost Category..."), this, SLOT(sDelete()));
+  menuItem = menu->addAction(tr("Delete Inventory Cost Category"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainCostCategories"));
 
   menu->addSeparator();
 
-  menuItem = menu->addAction(tr("List Items in this Inventory Cost Category..."), this, SLOT(sListItemSites()));
+  menuItem = menu->addAction(tr("List Items in this Inventory Cost Category"), this, SLOT(sListItemSites()));
   menuItem->setEnabled(_privileges->check("ViewItemSites"));
 }
 

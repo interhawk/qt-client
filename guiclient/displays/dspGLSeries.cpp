@@ -1,7 +1,7 @@
 ﻿/*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -149,16 +149,16 @@ void dspGLSeries::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem*, int)
 
   if (!_isJournal)
   {
-    menuItem = pMenu->addAction(tr("Edit Journal..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Journal"), this, SLOT(sEdit()));
     menuItem->setEnabled(editable);
 
-    menuItem = pMenu->addAction(tr("Delete Journal..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete Journal"), this, SLOT(sDelete()));
     menuItem->setEnabled(deletable);
 
     pMenu->addSeparator();
   }
 
-  menuItem = pMenu->addAction(tr("Reverse Journal..."), this, SLOT(sReverse()));
+  menuItem = pMenu->addAction(tr("Reverse Journal"), this, SLOT(sReverse()));
   menuItem->setEnabled(reversible);
 
   if (item->rawValue("doctype").toString() == "JP")

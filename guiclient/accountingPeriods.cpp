@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -81,15 +81,15 @@ void accountingPeriods::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
 
   if (altId == 0)
   {
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainAccountingPeriods"));
   }
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
 
   if (altId == 0)
   {
-    menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
     menuItem->setEnabled(_privileges->check("MaintainAccountingPeriods"));
   }
 
@@ -97,19 +97,19 @@ void accountingPeriods::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
 
   if (altId == 0)
   {
-    menuItem = pMenu->addAction(tr("Freeze..."), this, SLOT(sFreezePeriod()));
+    menuItem = pMenu->addAction(tr("Freeze"), this, SLOT(sFreezePeriod()));
 
-    menuItem = pMenu->addAction(tr("Close..."), this, SLOT(sClosePeriod()));
+    menuItem = pMenu->addAction(tr("Close"), this, SLOT(sClosePeriod()));
   }
   else if (altId == 1)
   {
-    menuItem = pMenu->addAction(tr("Thaw..."), this, SLOT(sThawPeriod()));
+    menuItem = pMenu->addAction(tr("Thaw"), this, SLOT(sThawPeriod()));
 
-    menuItem = pMenu->addAction(tr("Close..."), this, SLOT(sClosePeriod()));
+    menuItem = pMenu->addAction(tr("Close"), this, SLOT(sClosePeriod()));
   }
   else if (altId == 2 || altId == 3)
   {
-    menuItem = pMenu->addAction(tr("Open..."), this, SLOT(sOpenPeriod()));
+    menuItem = pMenu->addAction(tr("Open"), this, SLOT(sOpenPeriod()));
   }
 }
 

@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -662,10 +662,10 @@ void voucherItem::sPopulateMenu(QMenu *pMenu,  XTreeWidgetItem *selected)
   
   if ( (selected->rawValue("action") == "REC") && (selected->text(4) == "No") )
   {
-    menuItem = pMenu->addAction(tr("Correct Receipt..."), this, SLOT(sCorrectReceiving()));
+    menuItem = pMenu->addAction(tr("Correct Receipt"), this, SLOT(sCorrectReceiving()));
     menuItem->setEnabled(_privileges->check("EnterReceipts"));
 
-    menuItem = pMenu->addAction(tr("Split Receipt..."), this, SLOT(sSplitReceipt()));
+    menuItem = pMenu->addAction(tr("Split Receipt"), this, SLOT(sSplitReceipt()));
     menuItem->setEnabled(_privileges->check("EnterReceipts"));
   }
 }
