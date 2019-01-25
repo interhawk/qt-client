@@ -444,22 +444,6 @@ void project::sPopulateOrdersMenu(QMenu *pMenu,  QTreeWidgetItem *selected)
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                          _privileges->check("ViewPurchaseOrders"));
   }
-<<<<<<< HEAD
-=======
-
-  if(_prjtask->altId() == 105)
-  {
-    menuItem = pMenu->addAction(tr("Edit Incident"), this, SLOT(sEditOrder()));
-    menuItem->setEnabled(_privileges->check("MaintainPersonalIncidents") ||
-			_privileges->check("MaintainAllIncidents"));
-
-    menuItem = pMenu->addAction(tr("View Incident"), this, SLOT(sViewOrder()));
-    menuItem->setEnabled(_privileges->check("ViewPersonalIncidents") ||
-			_privileges->check("ViewAllIncidents") ||
-			_privileges->check("MaintainPersonalIncidents") ||
-			_privileges->check("MaintainAllIncidents"));
-  }
->>>>>>> XTUPLE/4_12_x
 }
 
 void project::populate()
