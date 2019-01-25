@@ -12,8 +12,8 @@
 
 QString _Name        = "xTuple ERP: %1 Edition";
 
-QString _Version     = "4.12.0-beta";
-QString _dbVersion   = "4.12.0-beta";
+QString _Version     = "4.12.0-rc";
+QString _dbVersion   = "4.12.0-rc";
 QString _Copyright   = "Copyright (c) 1999-2019, OpenMFG, LLC. d/b/a xTuple";
 QString _ConnAppName = "xTuple ERP (qt-client)";
 
