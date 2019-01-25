@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -86,18 +86,18 @@ enum SetResponse unpostedGLTransactions::set(const ParameterList &pParams)
 
 void unpostedGLTransactions::sPopulateMenu(QMenu * menuThis, QTreeWidgetItem* pItem)
 {
-  menuThis->addAction(tr("View..."), this, SLOT(sViewTrans()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewTrans()));
 
   XTreeWidgetItem * item = (XTreeWidgetItem*)pItem;
   if(0 == item)
     return;
 
   if(item->text(2) == "VO")
-    menuThis->addAction(tr("View Voucher..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Voucher"), this, SLOT(sViewDocument()));
   else if(item->text(2) == "IN")
-    menuThis->addAction(tr("View Invoice..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Invoice"), this, SLOT(sViewDocument()));
   else if(item->text(2) == "PO")
-    menuThis->addAction(tr("View Purchase Order..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Purchase Order"), this, SLOT(sViewDocument()));
 }
 
 void unpostedGLTransactions::sPrint()

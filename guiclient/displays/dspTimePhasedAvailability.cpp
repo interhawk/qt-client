@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -126,20 +126,20 @@ void dspTimePhasedAvailability::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSe
   _column = pColumn;
   if (_column > 2)
   {
-    (void)pMenu->addAction(tr("View Availability Detail..."), this, SLOT(sViewAvailability()));
-    (void)pMenu->addAction(tr("View Allocations..."), this, SLOT(sViewAllocations()));
-    (void)pMenu->addAction(tr("View Orders..."), this, SLOT(sViewOrders()));
+    (void)pMenu->addAction(tr("View Availability Detail"), this, SLOT(sViewAvailability()));
+    (void)pMenu->addAction(tr("View Allocations"), this, SLOT(sViewAllocations()));
+    (void)pMenu->addAction(tr("View Orders"), this, SLOT(sViewOrders()));
   
     if (((XTreeWidgetItem *)pSelected)->altId() == 1)
     {
       pMenu->addSeparator();
-      (void)pMenu->addAction(tr("Create W/O..."), this, SLOT(sCreateWO()));
+      (void)pMenu->addAction(tr("Create W/O"), this, SLOT(sCreateWO()));
     }
     else if (((XTreeWidgetItem *)pSelected)->altId() == 2)
     {
       pMenu->addSeparator();
-      (void)pMenu->addAction(tr("Create P/R..."), this, SLOT(sCreatePR()));
-      (void)pMenu->addAction(tr("Create P/O..."), this, SLOT(sCreatePO()));
+      (void)pMenu->addAction(tr("Create P/R"), this, SLOT(sCreatePR()));
+      (void)pMenu->addAction(tr("Create P/O"), this, SLOT(sCreatePO()));
     }
   }
 }

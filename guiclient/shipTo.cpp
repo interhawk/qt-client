@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -235,6 +235,8 @@ void shipTo::sSave()
 
   saveq.bindValue(":shipto_id", _shiptoid);
   saveq.bindValue(":shipto_active", QVariant(_active->isChecked()));
+  if(!_active->isChecked()) // if shipTo is inactive, default should be false
+    _default->setChecked(false);
   saveq.bindValue(":shipto_default", QVariant(_default->isChecked()));
   saveq.bindValue(":shipto_cust_id", _custid);
   saveq.bindValue(":shipto_num", _shipToNumber->text().trimmed());

@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -281,44 +281,36 @@ SetResponse vendor::set(const ParameterList &pParams)
     {
       _mode = cNew;
       emit newMode(_mode);
-      
       clear();
       _accountingTab->setEnabled(false);
-
-      if (_privileges->check("MaintainVendorAddresses"))
-      {
-        connect(_vendaddr, SIGNAL(valid(bool)), _editAddress, SLOT(setEnabled(bool)));
-        connect(_vendaddr, SIGNAL(valid(bool)), _deleteAddress, SLOT(setEnabled(bool)));
-        connect(_vendaddr, SIGNAL(itemSelected(int)), _editAddress, SLOT(animateClick()));
-      }
-      else
-      {
-        _newAddress->setEnabled(false);
-        connect(_vendaddr, SIGNAL(itemSelected(int)), _viewAddress, SLOT(animateClick()));
-      }
     }
     else if (param.toString() == "edit")
     {
       _mode = cEdit;
       emit newMode(_mode);
-
-      if (_privileges->check("MaintainVendorAddresses"))
-      {
-        connect(_vendaddr, SIGNAL(valid(bool)), _editAddress, SLOT(setEnabled(bool)));
-        connect(_vendaddr, SIGNAL(valid(bool)), _deleteAddress, SLOT(setEnabled(bool)));
-        connect(_vendaddr, SIGNAL(itemSelected(int)), _editAddress, SLOT(animateClick()));
-      }
-      else
-      {
-        _newAddress->setEnabled(false);
-        connect(_vendaddr, SIGNAL(itemSelected(int)), _viewAddress, SLOT(animateClick()));
-      }
     }
     else if (param.toString() == "view")
     {
       setViewMode();
     }
     _tempMode = _mode;
+  }
+
+  if (_mode != cView)
+  {
+    if (_privileges->check("MaintainVendorAddresses"))
+    {
+      connect(_vendaddr, SIGNAL(valid(bool)), _editAddress, SLOT(setEnabled(bool)));
+      connect(_vendaddr, SIGNAL(valid(bool)), _deleteAddress, SLOT(setEnabled(bool)));
+      connect(_vendaddr, SIGNAL(itemSelected(int)), _editAddress, SLOT(animateClick()));
+    }
+    else
+    {
+      _address->setEnabled(false);
+      _newAddress->setEnabled(false);
+      if (_privileges->check("ViewVendorAddresses"))
+        connect(_vendaddr, SIGNAL(valid(bool)), _viewAddress, SLOT(setEnabled(bool)));
+    }
   }
 
   param = pParams.value("crmacct_id", &valid);

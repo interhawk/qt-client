@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -193,25 +193,25 @@ void dspAPApplications::sPopulateMenu(QMenu* pMenu, QTreeWidgetItem*, int)
 
   if (list()->currentItem()->rawValue("apapply_source_doctype") == "C")
   {
-    menuItem = pMenu->addAction(tr("View Source Credit Memo..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Source Credit Memo"), this, SLOT(sViewCreditMemo()));
     menuItem->setEnabled(_privileges->check("MaintainAPMemos") ||
                          _privileges->check("ViewAPMemos"));
   }
   else if (list()->currentItem()->rawValue("apapply_source_doctype") == "K")
   {
-    menuItem = pMenu->addAction(tr("View Source Check..."), this, SLOT(sViewCheck()));
+    menuItem = pMenu->addAction(tr("View Source Check"), this, SLOT(sViewCheck()));
     menuItem->setEnabled(_privileges->check("MaintainPayments"));
   }
 
   if (list()->currentItem()->rawValue("apapply_target_doctype") == "D")
   {
-    menuItem = pMenu->addAction(tr("View Apply-To Debit Memo..."), this, SLOT(sViewDebitMemo()));
+    menuItem = pMenu->addAction(tr("View Apply-To Debit Memo"), this, SLOT(sViewDebitMemo()));
     menuItem->setEnabled(_privileges->check("MaintainAPMemos") ||
                          _privileges->check("ViewAPMemos"));
   }
   else if (list()->currentItem()->rawValue("apapply_target_doctype") == "V")
   {
-    menuItem = pMenu->addAction(tr("View Apply-To Voucher..."), this, SLOT(sViewVoucher()));
+    menuItem = pMenu->addAction(tr("View Apply-To Voucher"), this, SLOT(sViewVoucher()));
     menuItem->setEnabled(_privileges->check("MaintainVouchers") ||
                          _privileges->check("ViewVouchers"));
   }

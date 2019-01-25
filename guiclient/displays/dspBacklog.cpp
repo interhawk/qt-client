@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -194,11 +194,11 @@ void dspBacklog::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 
   if (selected.size() == 1)
   {
-    menuItem = pMenu->addAction(tr("Edit Order..."), this, SLOT(sEditOrder()));
+    menuItem = pMenu->addAction(tr("Edit Order"), this, SLOT(sEditOrder()));
     if (!_privileges->check("MaintainSalesOrders"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("View Order..."), this, SLOT(sViewOrder()));
+    menuItem = pMenu->addAction(tr("View Order"), this, SLOT(sViewOrder()));
     if ((!_privileges->check("MaintainSalesOrders")) && (!_privileges->check("ViewSalesOrders")))
       menuItem->setEnabled(false);
 
@@ -206,11 +206,11 @@ void dspBacklog::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
     {
       pMenu->addSeparator();
 
-      menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));
+      menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));
       if (!_privileges->check("MaintainSalesOrders") || list()->rawValue("coitem_firm").toBool())
         menuItem->setEnabled(false);
 
-      menuItem = pMenu->addAction(tr("View Item..."), this, SLOT(sViewItem()));
+      menuItem = pMenu->addAction(tr("View Item"), this, SLOT(sViewItem()));
       if ((!_privileges->check("MaintainSalesOrders")) && (!_privileges->check("ViewSalesOrders")))
         menuItem->setEnabled(false);
     }

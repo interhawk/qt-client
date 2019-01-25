@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -237,7 +237,6 @@ void dspDocuments::sOpenAssignment()
     QMessageBox::critical(this, tr("Invalid Source"), tr("Could not determine the ui form to open"));
     return;
   }
-
   QWidget *w = ScriptableWidget::_guiClientInterface->openWindow(ui, params, this, 
                                                                   Qt::NonModal, Qt::Window);
   QDialog* newdlg = qobject_cast<QDialog*>(w);

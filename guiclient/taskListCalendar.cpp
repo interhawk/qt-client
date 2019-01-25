@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -163,13 +163,13 @@ void taskListCalendar::sPopulateMenu(QMenu *pMenu)
         (_list->currentItem()->rawValue("assigned").toString().indexOf(omfgThis->username()) > 0 && _privileges->check("ViewPersonalTaskItems")) ||
         (_privileges->check("ViewAllTaskItems"));
 
-    menuItem = pMenu->addAction(tr("New..."), this, SLOT(sNewTask()));
+    menuItem = pMenu->addAction(tr("New"), this, SLOT(sNewTask()));
     menuItem->setEnabled(editPriv);
 
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEditTask()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEditTask()));
     menuItem->setEnabled(editPriv);
 
-   menuItem = pMenu->addAction(tr("View..."), this, SLOT(sViewTask()));
+   menuItem = pMenu->addAction(tr("View"), this, SLOT(sViewTask()));
     menuItem->setEnabled(viewPriv);
 
     menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));

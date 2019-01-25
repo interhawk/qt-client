@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -112,13 +112,13 @@ void dspInvalidBillsOfMaterials::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, 
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Parent Item..."), this, SLOT(sEditItem()));
+  menuItem = pMenu->addAction(tr("Edit Parent Item"), this, SLOT(sEditItem()));
   menuItem->setEnabled(_privileges->check("MaintainItemMasters"));
 
-  menuItem = pMenu->addAction(tr("Edit Parent Item Site..."), this, SLOT(sEditItemSite()));
+  menuItem = pMenu->addAction(tr("Edit Parent Item Site"), this, SLOT(sEditItemSite()));
   menuItem->setEnabled(_privileges->check("MaintainItemSites"));
 
-  menuItem = pMenu->addAction(tr("Create Component Item Site..."), this, SLOT(sCreateItemSite()));
+  menuItem = pMenu->addAction(tr("Create Component Item Site"), this, SLOT(sCreateItemSite()));
   menuItem->setEnabled(_privileges->check("MaintainItemSites"));
 }
 

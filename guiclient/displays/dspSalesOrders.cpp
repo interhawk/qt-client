@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -73,21 +73,21 @@ void dspSalesOrders::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
     return;
 
   if(_privileges->check("MaintainSalesOrders"))
-    menuThis->addAction(tr("Edit..."), this, SLOT(sEditOrder()));
-  menuThis->addAction(tr("View..."), this, SLOT(sViewOrder()));
+    menuThis->addAction(tr("Edit"), this, SLOT(sEditOrder()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewOrder()));
   if(_privileges->check("MaintainSalesOrders"))
   {
     menuThis->addSeparator();
     menuThis->addAction(tr("Copy..."), this, SLOT(sCopyOrder()));
   }
   menuThis->addSeparator();
-  menuThis->addAction(tr("Shipment Status..."), this, SLOT(sDspShipmentStatus()));
-  menuThis->addAction(tr("Shipments..."), this, SLOT(sDspShipments()));
+  menuThis->addAction(tr("Shipment Status"), this, SLOT(sDspShipmentStatus()));
+  menuThis->addAction(tr("Shipments"), this, SLOT(sDspShipments()));
 
   if ( (_metrics->boolean("EnableReturnAuth")) && (_privileges->check("MaintainReturns")) )
   {
     menuThis->addSeparator();
-    menuThis->addAction(tr("Create Return Authorization..."), this, SLOT(sCreateRA()));
+    menuThis->addAction(tr("Create Return Authorization"), this, SLOT(sCreateRA()));
   }
 }
 

@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -86,7 +86,7 @@ bool dspCountTagsBase::setParams(ParameterList &params)
 
 void dspCountTagsBase::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 {
-  pMenu->addAction(tr("View Count Tag..."), this, SLOT(sView()));
+  pMenu->addAction(tr("View Count Tag"), this, SLOT(sView()));
 }
 
 void dspCountTagsBase::sView()

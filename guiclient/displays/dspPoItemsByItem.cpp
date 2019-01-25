@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -138,15 +138,15 @@ void dspPoItemsByItem::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, i
 
   if (item && item->rawValue("poitem_status") == "U")
   {
-    menuItem = pMenu->addAction(tr("Edit Order..."), this, SLOT(sEditOrder()));
+    menuItem = pMenu->addAction(tr("Edit Order"), this, SLOT(sEditOrder()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
   }
 
-  menuItem = pMenu->addAction(tr("View Order..."), this, SLOT(sViewOrder()));
+  menuItem = pMenu->addAction(tr("View Order"), this, SLOT(sViewOrder()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                        _privileges->check("ViewPurchaseOrders"));
 
-  menuItem = pMenu->addAction(tr("Running Availability..."), this, SLOT(sRunningAvailability()));
+  menuItem = pMenu->addAction(tr("Running Availability"), this, SLOT(sRunningAvailability()));
 
   menuItem->setEnabled(_privileges->check("ViewInventoryAvailability"));
 
@@ -154,11 +154,11 @@ void dspPoItemsByItem::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, i
 
   if (item && item->rawValue("poitem_status") == "U")
   {
-    menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));
+    menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
   }
 
-  menuItem = pMenu->addAction(tr("View Item..."), this, SLOT(sViewItem()));
+  menuItem = pMenu->addAction(tr("View Item"), this, SLOT(sViewItem()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                        _privileges->check("ViewPurchaseOrders"));
 
@@ -180,7 +180,7 @@ void dspPoItemsByItem::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, i
   }
   else if (item && item->rawValue("poitem_status") == "C")
   {
-    menuItem = pMenu->addAction(tr("Open Item..."), this, SLOT(sOpenItem()));
+    menuItem = pMenu->addAction(tr("Open Item"), this, SLOT(sOpenItem()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
   }
 }

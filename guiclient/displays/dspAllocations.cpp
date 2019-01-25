@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -102,23 +102,23 @@ void dspAllocations::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, int
 
   if (QString(pSelected->text(0)) == "W/O")
   {
-    menuItem = pMenu->addAction(tr("View Work Order..."), this, SLOT(sViewWorkOrder()));
+    menuItem = pMenu->addAction(tr("View Work Order"), this, SLOT(sViewWorkOrder()));
     menuItem->setEnabled(_privileges->check("ViewWorkOrders"));
   }
   else if (QString(pSelected->text(0)) == "S/O")
   {
-    menuItem = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sViewCustomerOrder()));
+    menuItem = pMenu->addAction(tr("View Sales Order"), this, SLOT(sViewCustomerOrder()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
 
-    menuItem = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEditCustomerOrder()));
+    menuItem = pMenu->addAction(tr("Edit Sales Order"), this, SLOT(sEditCustomerOrder()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
   }
   else if (QString(pSelected->text(0)) == "T/O")
   {
-    menuItem = pMenu->addAction(tr("View Transfer Order..."), this, SLOT(sViewTransferOrder()));
+    menuItem = pMenu->addAction(tr("View Transfer Order"), this, SLOT(sViewTransferOrder()));
     menuItem->setEnabled(_privileges->check("ViewTransferOrders"));
 
-    menuItem = pMenu->addAction(tr("Edit Transfer Order..."), this, SLOT(sEditTransferOrder()));
+    menuItem = pMenu->addAction(tr("Edit Transfer Order"), this, SLOT(sEditTransferOrder()));
     menuItem->setEnabled(_privileges->check("MaintainTransferOrders"));
   }
 }

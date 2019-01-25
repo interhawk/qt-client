@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -41,14 +41,14 @@ XLineEdit::XLineEdit(QWidget *parent, const char *name) :
   _id = -1;
   connect(this, SIGNAL(editingFinished()), this, SLOT(sParse()));
 
-  _listAct = new QAction(tr("List..."), this);
+  _listAct = new QAction(tr("List"), this);
   _listAct->setShortcut(QKeySequence(tr("Ctrl+Shift+L")));
   _listAct->setShortcutContext(Qt::WidgetShortcut);
   _listAct->setToolTip(tr("List all records"));
   connect(_listAct, SIGNAL(triggered()), this, SIGNAL(requestList()));
   addAction(_listAct);
 
-  _searchAct = new QAction(tr("Search..."), this);
+  _searchAct = new QAction(tr("Search"), this);
   _searchAct->setShortcut(QKeySequence(tr("Ctrl+Shift+Space")));
   _searchAct->setShortcutContext(Qt::WidgetShortcut);
   _searchAct->setToolTip(tr("Search on specific criteria"));
