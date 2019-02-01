@@ -479,7 +479,8 @@ void AddressCluster::clear()
   _id = -1;
   _valid = false;
 
-  setCountry(_x_metrics->value("DefaultAddressCountry"));
+  if (_x_metrics)
+    setCountry(_x_metrics->value("DefaultAddressCountry"));
 
   // reset cache
   c_active     = true;
