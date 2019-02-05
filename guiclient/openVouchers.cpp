@@ -198,7 +198,13 @@ void openVouchers::sDelete()
        int id = ((XTreeWidgetItem*)(selected[i]))->id();
        delq.bindValue(":vohead_id", id);
        delq.exec();
-       if (delq.first())
+       if (delq.lastError().type() != QSqlError::NoError)
+       {
+         rollback.exec();
+         ErrorReporter::error(QtCriticalMsg, this, tr("Deleting Voucher"),
+                              delq, __FILE__, __LINE__);
+       }
+       else
        {
          if (!_taxIntegration->cancel("VCH", id, ((XTreeWidgetItem*)(selected[i]))->text("vohead_number")))
          {
@@ -209,12 +215,6 @@ void openVouchers::sDelete()
 
          XSqlQuery("COMMIT;");
          omfgThis->sVouchersUpdated();
-       }
-       else if (delq.lastError().type() != QSqlError::NoError)
-       {
-         rollback.exec();
-         ErrorReporter::error(QtCriticalMsg, this, tr("Deleting Voucher"),
-                              delq, __FILE__, __LINE__);
        }
       }
     }
