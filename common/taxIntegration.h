@@ -19,6 +19,8 @@
 
 #include "xsqlquery.h"
 
+class QScriptEngine;
+
 class TaxIntegration : public QObject
 {
   Q_OBJECT
@@ -55,5 +57,8 @@ class TaxIntegration : public QObject
     virtual void handleResponse(QString, QString, int, QString, QString);
     virtual void sNotified(const QString&, QSqlDriver::NotificationSource, const QVariant&);
 };
+
+void setupTaxIntegration(QScriptEngine *engine);
+Q_DECLARE_METATYPE(TaxIntegration *)
 
 #endif
