@@ -12,7 +12,6 @@
 #define __SCRIPTTOOLBOX_H__
 
 #include <QObject>
-#include <QVariant>
 #include <QtScript>
 
 #include <parametergroup.h>
@@ -23,10 +22,6 @@
 #include "addresscluster.h"     // for AddressCluster::SaveFlags
 
 class QWidget;
-class QLayout;
-class QGridLayout;
-class QBoxLayout;
-class QStackedLayout;
 class QScriptEngine;
 
 /* TODO: remove this enum and use AddressCluster::SaveFlags directly

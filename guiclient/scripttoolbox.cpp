@@ -13,13 +13,9 @@
 
 #include <QtGlobal>
 
-#include <QBoxLayout>
-#include <QDateTime>
 #include <QDesktopServices>
-#include <QDir>
 #include <QFile>
 #include <QFileDialog>
-#include <QGridLayout>
 #include <QIODevice>
 #include <QLayout>
 #include <QList>
@@ -27,9 +23,6 @@
 #include <QMessageBox>
 #include <QScriptEngine>
 #include <QScriptValueIterator>
-#include <QSqlError>
-#include <QStackedLayout>
-#include <QTabWidget>
 #include <QTextStream>
 #include <QUrl>
 #include <QWidget>
