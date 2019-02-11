@@ -76,13 +76,6 @@
     The descriptions of individual methods below should point you to
     the proper C++ classes to use.
 
-    Historical note:
-    Many methods in the ScriptToolbox are deprecated. They were created
-    while we were learning how best to integrate QtScript with xTuple ERP.
-    Please do not use these, as they will eventually be removed from the
-    toolbox. The documentation for these deprecated methods refers to
-    better ways to handle relevant situations.
-
     @see initMenu
     @see toolbox
     @see XDialog
