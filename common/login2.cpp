@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -302,8 +302,8 @@ void login2::sLogin()
 connected:
   if (db.isOpen())
   {
-    QString earliest = "9.3.0",
-            latest   = "9.7.0";
+    QString earliest = "9.5.0",
+            latest   = "10.0.0";
     XSqlQuery checkVersion;   // include earliest in the range but exclude latest
     checkVersion.prepare("SELECT compareVersion(:earliest) <= 0"
                          "   AND compareVersion(:latest)   > 0 AS ok,"
