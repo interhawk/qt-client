@@ -112,6 +112,8 @@ salesOrderItem::salesOrderItem(QWidget *parent, const char *name, Qt::WindowFlag
 
   _charVars << -1 << -1 << -1 << 0 << -1 << omfgThis->dbDate();
 
+  _initialMode = -1;
+
   //  Configure some Widgets
   _item->setType(ItemLineEdit::cSold | ItemLineEdit::cActive);
   _item->addExtraClause( QString("(itemsite_active)") );  // ItemLineEdit::cActive doesn't compare against the itemsite record
@@ -919,7 +921,6 @@ void salesOrderItem::clear()
   _canceling                     = false;
   _custid                        = -1;
   _error                         = false;
-  _initialMode                   = -1;
   _invIsFractional               = false;
   _invuomid                      = -1;
   _itemsiteLastItemid            = -1;
