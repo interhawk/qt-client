@@ -12,6 +12,7 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QtScript>
 
 #include "errorReporter.h"
 #include "avalaraIntegration.h"
@@ -213,4 +214,89 @@ void TaxIntegration::done()
 QString TaxIntegration::error()
 {
   return _error;
+}
+
+// script exposure /////////////////////////////////////////////////////////////
+
+QScriptValue TaxIntegrationToScriptValue(QScriptEngine *engine, TaxIntegration *const &ti)
+{
+  return engine->newQObject(ti);
+}
+
+void TaxIntegrationFromScriptValue(const QScriptValue &obj, TaxIntegration * &ti)
+{
+  ti = qobject_cast<TaxIntegration *>(obj.toQObject());
+}
+
+// proxies for C++ methods with default arguments
+QScriptValue getTaxIntegration(QScriptContext *context, QScriptEngine *engine)
+{
+  Q_UNUSED(engine);
+  TaxIntegration *ti = 0;
+  if (context->argumentCount() >= 1)
+    ti = TaxIntegration::getTaxIntegration(context->argument(0).toBool());
+  else
+    ti = TaxIntegration::getTaxIntegration();
+
+  QScriptValue result = TaxIntegrationToScriptValue(engine, ti);
+  return result;
+}
+
+QScriptValue getTaxExemptCategories(QScriptContext *context, QScriptEngine *engine)
+{
+  Q_UNUSED(engine);
+  TaxIntegration *ti = qscriptvalue_cast<TaxIntegration*>(context->thisObject());
+  if (context->argumentCount() >= 1)
+    ti->getTaxExemptCategories(context->argument(0).toVariant().toStringList());
+  else
+    ti->getTaxExemptCategories();
+  return QScriptValue();
+}
+
+QScriptValue calculateTax(QScriptContext *context, QScriptEngine *engine)
+{
+  Q_UNUSED(engine);
+  TaxIntegration *ti = qscriptvalue_cast<TaxIntegration*>(context->thisObject());
+  if (! ti)
+    context->throwError(QScriptContext::UnknownError, "calculateTax() called on an invalid object");
+  else if (context->argumentCount() >= 3)
+    ti->calculateTax(context->argument(0).toString(), context->argument(1).toInt32(), context->argument(2).toBool());
+  else if (context->argumentCount() == 2)
+    ti->calculateTax(context->argument(0).toString(), context->argument(1).toInt32());
+  else
+    context->throwError(QScriptContext::UnknownError, "calculateTax(string, integer, optional boolean) requires at least 2 arguments");
+  return QScriptValue();
+}
+
+QScriptValue cancel(QScriptContext *context, QScriptEngine *engine)
+{
+  Q_UNUSED(engine);
+  TaxIntegration *ti = qscriptvalue_cast<TaxIntegration*>(context->thisObject());
+  if (! ti)
+    context->throwError(QScriptContext::UnknownError, "cancel() called on an invalid object");
+  else if (context->argumentCount() >= 3)
+    ti->cancel(context->argument(0).toString(), context->argument(1).toInt32(), context->argument(2).toString());
+  else if (context->argumentCount() == 2)
+    ti->cancel(context->argument(0).toString(), context->argument(1).toInt32());
+  else
+    context->throwError(QScriptContext::UnknownError, "cancel(string, integer, optional string) requires at least 2 arguments");
+  return QScriptValue();
+}
+
+void setupTaxIntegration(QScriptEngine *engine)
+{
+  const QScriptValue::PropertyFlags propflags = (QScriptValue::ReadOnly | QScriptValue::Undeletable);
+
+  qScriptRegisterMetaType(engine, TaxIntegrationToScriptValue, TaxIntegrationFromScriptValue);
+
+  // we can't instantiate a prototype TaxIntegration because it's an abstract class
+  QScriptValue proto = engine->newQObject(new QObject());
+  engine->setDefaultPrototype(qMetaTypeId<TaxIntegration*>(), proto);
+  
+  // no constructor here -- scripts should call TaxIntegration::getTaxIntegration()
+  engine->globalObject().setProperty("TaxIntegration", proto);
+  proto.setProperty("getTaxIntegration",      engine->newFunction(getTaxIntegration), propflags);
+  proto.setProperty("getTaxExemptCategories", engine->newFunction(getTaxExemptCategories), propflags);
+  proto.setProperty("calculateTax",           engine->newFunction(calculateTax), propflags);
+  proto.setProperty("cancel",                 engine->newFunction(cancel), propflags);
 }

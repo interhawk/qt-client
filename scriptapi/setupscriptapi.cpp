@@ -148,6 +148,7 @@
 #include "qwebsocketprotocolproto.h"
 #include "qwebsocketserverproto.h"
 #include "qwidgetproto.h"
+#include "taxIntegration.h"
 #include "webchanneltransport.h"
 #include "xsqlqueryproto.h"
 #include "xvariantsetup.h"
@@ -276,6 +277,7 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQTabWidgetProto(engine);
   setupQTableWidgetProto(engine);
   setupQTableWidgetItemProto(engine);
+  setupTaxIntegration(engine);
   setupQTcpServerProto(engine);
   setupQTcpSocketProto(engine);
   setupQTextDocumentProto(engine);

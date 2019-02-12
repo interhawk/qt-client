@@ -2302,6 +2302,8 @@ void GUIClient::loadScriptGlobals(QScriptEngine * engine)
   setupParameters(engine, "preferences",  _preferences);
   setupParameters(engine, "privileges",   _privileges);
 
+  engine->globalObject().setProperty("taxIntegration", engine->newQObject(_taxIntegration));
+
   QScriptValue settingsval = engine->newFunction(settingsValue, 2);
   engine->globalObject().setProperty("settingsValue", settingsval);
 
