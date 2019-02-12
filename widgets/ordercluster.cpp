@@ -740,6 +740,7 @@ void OrderLineEdit::setId(const int pId, const QString &pType)
   {
     const int  oldId    = _id;
     OrderTypes oldTypes = _allowedTypes;
+    unlock();
 
     if (!pType.isNull())
       setAllowedType(pType);
@@ -760,8 +761,12 @@ void OrderLineEdit::setId(const int pId, const QString &pType)
       if (DEBUG)
         qDebug() << objectName() << "setId() found table" << table;
 
-      if (table.isEmpty() || !_lock.acquire(table, _id, AppLock::Interactive))
+      if (table.isEmpty())
+        clear();
+      else if (!_lock.acquire(table, _id, AppLock::Interactive))
       {
+        QMessageBox::information(this, tr("Could lock order"),
+                                 tr("Could not lock this order"));
         clear();
       }
     }
