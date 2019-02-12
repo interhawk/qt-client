@@ -13,13 +13,9 @@
 
 #include <QtGlobal>
 
-#include <QBoxLayout>
-#include <QDateTime>
 #include <QDesktopServices>
-#include <QDir>
 #include <QFile>
 #include <QFileDialog>
-#include <QGridLayout>
 #include <QIODevice>
 #include <QLayout>
 #include <QList>
@@ -27,9 +23,6 @@
 #include <QMessageBox>
 #include <QScriptEngine>
 #include <QScriptValueIterator>
-#include <QSqlError>
-#include <QStackedLayout>
-#include <QTabWidget>
 #include <QTextStream>
 #include <QUrl>
 #include <QWidget>
@@ -75,13 +68,6 @@
     Use the appropriate classes and methods directly if you are writing in C++.
     The descriptions of individual methods below should point you to
     the proper C++ classes to use.
-
-    Historical note:
-    Many methods in the ScriptToolbox are deprecated. They were created
-    while we were learning how best to integrate QtScript with xTuple ERP.
-    Please do not use these, as they will eventually be removed from the
-    toolbox. The documentation for these deprecated methods refers to
-    better ways to handle relevant situations.
 
     @see initMenu
     @see toolbox
@@ -289,146 +275,6 @@ XSqlQuery ScriptToolbox::executeRollback()
   return mql.toQuery(params);
 }
 
-/** @brief Get a standard Quantity QValidator.
-  @deprecated Use mainwindow.qtyVal() instead.
- */
-QObject * ScriptToolbox::qtyVal()
-{
-  scriptDeprecated("Use mainwindow.qtyVal() instead of toolbox.qtyVal()");
-  QValidator * val = omfgThis->qtyVal();
-  return val;
-}
-
-/** @brief Get a standard Transfer Quantity QValidator.
-  @deprecated Use mainwindow.transQtyVal() instead.
- */
-QObject * ScriptToolbox::TransQtyVal()
-{
-  scriptDeprecated("Use mainwindow.transQtyVal() instead of toolbox.TransQtyVal()");
-  QValidator * val = omfgThis->transQtyVal();
-  return val;
-}
-
-/** @brief Get a standard Quantity Per QValidator.
-  @deprecated Use mainwindow.qtyPerVal() instead.
- */
-QObject * ScriptToolbox::qtyPerVal()
-{
-  scriptDeprecated("Use mainwindow.qtyPerVal() instead of toolbox.qtyPerVal()");
-  QValidator * val = omfgThis->qtyPerVal();
-  return val;
-}
-
-/** @brief Get a standard Percent QValidator.
-  @deprecated Use mainwindow.percentVal() instead.
- */
-QObject * ScriptToolbox::percentVal()
-{
-  scriptDeprecated("Use mainwindow.percentVal() instead of toolbox.percentVal()");
-  QValidator * val = omfgThis->percentVal();
-  return val;
-}
-
-/** @brief Get a standard Money QValidator.
-  @deprecated Use mainwindow.moneyVal() instead.
- */
-QObject * ScriptToolbox::moneyVal()
-{
-  scriptDeprecated("Use mainwindow.moneyVal() instead of toolbox.moneyVal()");
-  QValidator * val = omfgThis->moneyVal();
-  return val;
-}
-
-/** @brief Get a standard Negative Money QValidator.
-  @deprecated Use mainwindow.negMoneyVal() instead.
- */
-QObject * ScriptToolbox::negMoneyVal()
-{
-  scriptDeprecated("Use mainwindow.negMoneyVal() instead of toolbox.negMoneyVal()");
-  QValidator * val = omfgThis->negMoneyVal();
-  return val;
-}
-
-/** @brief Get a standard Price QValidator.
-  @deprecated Use mainwindow.priceVal() instead.
- */
-QObject * ScriptToolbox::priceVal()
-{
-  scriptDeprecated("Use mainwindow.priceVal() instead of toolbox.priceVal()");
-  QValidator * val = omfgThis->priceVal();
-  return val;
-}
-
-/** @brief Get a standard Cost QValidator.
-  @deprecated Use mainwindow.costVal() instead.
- */
-QObject * ScriptToolbox::costVal()
-{
-  scriptDeprecated("Use mainwindow.costVal() instead of toolbox.costVal()");
-  QValidator * val = omfgThis->costVal();
-  return val;
-}
-
-/** @brief Get a standard Ratio QValidator.
-  @deprecated Use mainwindow.ratioVal() instead.
- */
-QObject * ScriptToolbox::ratioVal()
-{
-  scriptDeprecated("Use mainwindow.ratioVal() instead of toolbox.ratioVal()");
-  QValidator * val = omfgThis->ratioVal();
-  return val;
-}
-
-/** @brief Get a standard Weight QValidator.
-  @deprecated Use mainwindow.weightVal() instead.
- */
-QObject * ScriptToolbox::weightVal()
-{
-  scriptDeprecated("Use mainwindow.weightVal() instead of toolbox.weightVal()");
-  QValidator * val = omfgThis->weightVal();
-  return val;
-}
-
-/** @brief Get a standard Run Time QValidator.
-  @deprecated Use mainwindow.runTimeVal() instead.
- */
-QObject * ScriptToolbox::runTimeVal()
-{
-  scriptDeprecated("Use mainwindow.runTimeVal() instead of toolbox.runTimeVal()");
-  QValidator * val = omfgThis->runTimeVal();
-  return val;
-}
-
-/** @brief Get a standard Order QValidator.
-  @deprecated Use mainwindow.orderVal() instead.
- */
-QObject * ScriptToolbox::orderVal()
-{
-  scriptDeprecated("Use mainwindow.orderVal() instead of toolbox.orderVal()");
-  QValidator * val = omfgThis->orderVal();
-  return val;
-}
-
-/** @brief Get a standard Day QValidator.
-  @deprecated Use mainwindow.dayVal() instead.
- */
-QObject * ScriptToolbox::dayVal()
-{
-  scriptDeprecated("Use mainwindow.dayVal() instead of toolbox.dayVal()");
-  QValidator * val = omfgThis->dayVal();
-  return val;
-}
-
-/** @brief Create a new QGridLayout.
-  @deprecated Use QGridLayout instead.
- */
-QObject * ScriptToolbox::createGridLayout()
-{
-  scriptDeprecated("Use QGridLayout() instead of toolbox.createGridLayout()");
-  QGridLayout * layout = new QGridLayout;
-  return layout;
-}
-
 /** @brief Get the layout containing the given widget.
 
   Search the object hierarchy and find the smallest QLayout
@@ -459,189 +305,6 @@ QObject * ScriptToolbox::widgetGetLayout(QWidget * w)
   return NULL;
 }
 
-/** @brief Insert a QGridLayout into an existing QGridLayout.
-    @deprecated Use QGridLayout::addLayout instead
-  */
-void ScriptToolbox::layoutGridAddLayout(QObject * parent, QObject * child, int row, int column, int alignment)
-{
-  scriptDeprecated("Use QGridLayout::addLayout instead of toolbox.layoutGridAddLayout()");
-  QGridLayout * parentLayout = qobject_cast<QGridLayout*>(parent);
-  QGridLayout * childLayout = qobject_cast<QGridLayout*>(child);
-
-  if(parentLayout)
-    parentLayout->addLayout(childLayout, row, column, (Qt::Alignment)alignment);
-}
-
-/** @brief Insert a QWidget into an existing QBoxLayout.
-    @deprecated Use QBoxLayout::insertWidget directly
-  */
-void ScriptToolbox::layoutBoxInsertWidget(QObject * obj, int index, QWidget * widget, int stretch, int alignment)
-{
-  scriptDeprecated("Use QBoxLayout::insertWidget() instead of toolbox.layoutBoxInsertWidget()");
-  QBoxLayout * layout = qobject_cast<QBoxLayout*>(obj);
-  if(layout && widget)
-    layout->insertWidget(index, widget, stretch, (Qt::Alignment)alignment);
-}
-
-/** @brief Insert a QWidget into an existing QGridLayout.
-    @deprecated Use QGridLayout::addWidget instead.
-  */
-void ScriptToolbox::layoutGridAddWidget(QObject * obj, QWidget * widget, int row, int column, int alignment)
-{
-  scriptDeprecated("Use QGridLayout::addWidget() instead of toolbox.layoutGridAddWidget()");
-  QGridLayout * layout = qobject_cast<QGridLayout*>(obj);
-  if(layout && widget)
-    layout->addWidget(widget, row, column, (Qt::Alignment)alignment);
-}
-
-/** @brief Insert a QWidget into an existing QGridLayout.
-    @deprecated Use QGridLayout::addWidget instead.
-  */
-void ScriptToolbox::layoutGridAddWidget(QObject * obj, QWidget * widget, int fromRow, int fromColumn, int rowSpan, int columnSpan, int alignment)
-{
-  scriptDeprecated("Use QGridLayout::addWidget() instead of toolbox.layoutGridAddWidget()");
-  QGridLayout * layout = qobject_cast<QGridLayout*>(obj);
-  if(layout && widget)
-    layout->addWidget(widget, fromRow, fromColumn, rowSpan, columnSpan, (Qt::Alignment)alignment);
-}
-
-/** @brief Insert a QWidget into an existing QStackedLayout.
-    @deprecated Use QStackedWidget::insertWidget instead.
-  */
-void ScriptToolbox::layoutStackedInsertWidget(QObject * obj, int index, QWidget * widget)
-{
-  scriptDeprecated("Use QStackedWidget::insertWidget instead of toolbox.layoutStackedInsertWidget()");
-  QStackedLayout * layout = qobject_cast<QStackedLayout*>(obj);
-  if(layout && widget)
-    layout->insertWidget(index, widget);
-}
-
-/** @brief Add an action to an existing QMenu.
-    @deprecated Use QMenu::addAction instead.
-  */
-QObject * ScriptToolbox::menuAddAction(QObject * menu, const QString & text, const bool enabled)
-{
-  scriptDeprecated("Use QMenu::addAction instead of toolbox.menuAddAction()");
-  QMenu * m = qobject_cast<QMenu*>(menu);
-  QAction * act = 0;
-  if(m)
-  {
-    act = m->addAction(text);
-    act->setEnabled(enabled);
-  }
-  return act;
-}
-
-/** @brief Add an action to an existing QMenu.
-    @deprecated Use QMenu::addAction instead.
-  */
-QObject * ScriptToolbox::menuAddMenu(QObject * menu, const QString & text, const QString & name)
-{
-  scriptDeprecated("Use QMenu::addAction instead of toolbox.menuAddMenu()");
-  QMenu * m = qobject_cast<QMenu*>(menu);
-  QMenu * nm = 0;
-  if(m)
-  {
-    nm = m->addMenu(text);
-    if(!name.isEmpty())
-      nm->setObjectName(name);
-  }
-  return nm;
-}
-
-/** @brief Add a separator to an existing QMenu.
-    @deprecated Use QMenu::addSeparator instead.
-  */
-QObject * ScriptToolbox::menuAddSeparator(QObject * menu)
-{
-  scriptDeprecated("Use QMenu::addSeparator instead of toolbox.menuAddSeparator");
-  QMenu * m = qobject_cast<QMenu*>(menu);
-  QAction * na = 0;
-  if(m)
-    na = m->addSeparator();
-  return na;
-}
-
-/** @brief Insert an action into an existing QMenu.
-    @deprecated Use QMenu::insertAction instead.
-  */
-QObject * ScriptToolbox::menuInsertAction(QObject * menu, QObject * before, const QString & name, const bool enabled)
-{
-  scriptDeprecated("Use QMenu::insertAction instead of toolbox.menuInsertAction");
-  QMenu * m = qobject_cast<QMenu*>(menu);
-  QAction * ba = qobject_cast<QAction*>(before);
-  QAction * na = new QAction(name,m);
-  na->setEnabled(enabled);
-  if(m && ba && na)
-  {
-    m->insertAction(ba, na);
-    return na;
-  }
-  return 0;
-}
-
-/** @brief Insert a QMenu into an existing QMenu.
-    @deprecated Use QMenu::insertMenu instead.
-  */
-QObject * ScriptToolbox::menuInsertMenu(QObject * menu, QObject * before, const QString & name)
-{
-  scriptDeprecated("Use QMenu::insertMenu instead of toolbox.menuInsertMenu()");
-  QMenu * m = qobject_cast<QMenu*>(menu);
-  QAction * ba = qobject_cast<QAction*>(before);
-  QMenu * nm = new QMenu(name);
-
-  if (!ba && nm)
-  {
-    QMenu * bm =  qobject_cast<QMenu*>(before);
-    if (bm)
-      ba = bm->menuAction();
-  }
-  if (ba && nm)
-    m->insertMenu(ba, nm);
-  return nm;
-}
-
-
-/** @brief Insert a separator into an existing QMenu.
-    @deprecated Use QMenu::insertSeparator instead.
-  */
-QObject * ScriptToolbox::menuInsertSeparator(QObject * menu, QObject * before)
-{
-  scriptDeprecated("Use QMenu::insertSeparator instead of toolbox.menuInsertSeparator()");
-  QMenu * m = qobject_cast<QMenu*>(menu);
-  QAction * ba = qobject_cast<QAction*>(before);
-  if (!ba)
-  {
-    QMenu * bm = qobject_cast<QMenu*>(before);
-    ba = bm->menuAction();
-  }
-  QAction * na = new QAction(m);
-  if(m && ba && na)
-  {
-    na->setSeparator(true);
-    m->insertAction(ba, na);
-    return na;
-  }
-  return 0;
-}
-
-/** @brief Remove a QAction from a QMenu.
-    @deprecated Use QMenu::removeAction instead.
-  */
-void ScriptToolbox::menuRemove(QObject * menu, QObject * action)
-{
-  scriptDeprecated("Use QMenu::removeAction instead of toolbox.menuRemove()");
-  QMenu * m = qobject_cast<QMenu*>(menu);
-  QAction * act = qobject_cast<QAction*>(action);
-  if (!act)
-  {
-    QMenu * ma = qobject_cast<QMenu*>(action);
-    act = ma->menuAction();
-  }
-  if(m && act)
-    m->removeAction(act);
-}
-
 /** @brief Find the number of QActions in a QMenu.
   @param menu The QMenu whose QAction children you want to count
   @return The number of QAction objects in the menu or 0 if @c menu isn't really a QMenu
@@ -652,102 +315,6 @@ int ScriptToolbox::menuActionCount(QObject * menu)
   if (m)
     return m->actions().count();
   return 0;
-}
-
-/** @brief Find the number of tabs in the QTabWidget
-    @deprecated Use QTabWidget::count directly.
- */
-int ScriptToolbox::tabCount(QWidget * tab)
-{
-  scriptDeprecated("Use QTabWidget::count() instead of toolbox.tabCount()");
-  QTabWidget *tw = qobject_cast<QTabWidget*>(tab);
-  if(tw)
-    return tw->count();
-  return 0;
-}
-
-/** @brief Return the QWidget for a particular tab in a QTabWidget.
-    @deprecated Use QTabWidget::widget directly.
-  */
-QWidget * ScriptToolbox::tabWidget(QWidget * tab, int idx)
-{
-  scriptDeprecated("Use QTabWidget::widget() instead of toolbox.tabWidget()");
-  QTabWidget *tw = qobject_cast<QTabWidget*>(tab);
-  QWidget * w = 0;
-  if(tw)
-    w = tw->widget(idx);
-  return w;
-}
-
-/** @brief Insert a new tab into a QTabWidget.
-    @deprecated Use QTabWidget::insertTab directly.
-  */
-int ScriptToolbox::tabInsertTab(QWidget * tab, int idx, QWidget * page, const QString & text)
-{
-  scriptDeprecated("Use QTabWidget::insertTab() instead of toolbox.tabInsertTab()");
-  QTabWidget *tw = qobject_cast<QTabWidget*>(tab);
-  int i = -1;
-  if(tw)
-    i = tw->insertTab(idx, page, text);
-  return i;
-}
-
-/** @brief Get the index of a particular tab in a QTabWidget.
-    @deprecated Use QTabWidget::indexOf directly.
-  */
-int ScriptToolbox::tabTabIndex(QWidget * tab, QWidget * page)
-{
-  scriptDeprecated("Use QTabWidget::indexOf() instead of toolbox.tabTabIndex()");
-  QTabWidget *tw = qobject_cast<QTabWidget*>(tab);
-  if(tw)
-    return tw->indexOf(page);
-  return 0;
-}
-
-/** @brief Remove a particular tab from a QTabWidget.
-    @deprecated Use QTabWidget::removeTab directly.
-  */
-void ScriptToolbox::tabRemoveTab(QWidget * tab, int idx)
-{
-  scriptDeprecated("Use QTabWidget::removeTab() instead of toolbox.tabRemoveTab()");
-  QTabWidget *tw = qobject_cast<QTabWidget*>(tab);
-  if(tw)
-    tw->removeTab(idx);
-}
-
-/** @brief Enable or disable a particular tab on a QTabWidget.
-    @deprecated Use QTabWidget::setTabEnabled directly.
-  */
-void ScriptToolbox::tabSetTabEnabled(QWidget * tab, int idx, bool enable)
-{
-  scriptDeprecated("Use QTabWidget::setTabEnabled() instead of toolbox.tabSetTabEnabled()");
-  QTabWidget *tw = qobject_cast<QTabWidget*>(tab);
-  if(tw)
-    tw->setTabEnabled(idx, enable);
-}
-
-/** @brief Set the text for a particular tab on a QTabWidget.
-    @deprecated Use QTabWidget::setTabText directly.
-  */
-void ScriptToolbox::tabSetTabText(QWidget * tab, int idx, const QString & text)
-{
-  scriptDeprecated("Use QTabWidget::setTabText() instead of toolbox.tabSetTabText()");
-  QTabWidget *tw = qobject_cast<QTabWidget*>(tab);
-  if(tw)
-    tw->setTabText(idx, text);
-}
-
-/** @brief Get the text for a particular tab on a QTabWidget.
-    @deprecated Use QTabWidget::tabText directly.
-  */
-QString ScriptToolbox::tabtabText(QWidget * tab, int idx)
-{
-  scriptDeprecated("Use QTabWidget::tabText() instead of toolbox.tabtabText()");
-  QTabWidget *tw = qobject_cast<QTabWidget*>(tab);
-  QString str;
-  if(tw)
-    str = tw->tabText(idx);
-  return str;
 }
 
 /** @brief Create a widget based on the name of the desired class.
@@ -1080,42 +647,6 @@ void ScriptToolbox::openUrl(const QString & fileUrl)
     QDesktopServices::openUrl(url);
 }
 
-/** @deprecated Use QFile.copyFile(oldName, newName) instead */
-bool ScriptToolbox::copyFile(const QString & oldName, const QString & newName)
-{
-  scriptDeprecated("Use QFile.copyFile(oldName, newName) instead of toolbox.copyFile()");
-  return QFile::copy(oldName, newName);
-}
-
-/** @deprecated Use var file = new QFileInfo(path).fileName() instead */
-QString ScriptToolbox::getFileName(const QString & path)
-{
-  scriptDeprecated("Use new QFileInfo(path).fileName() instead of toolbox.getFileName(path)");
-  QFileInfo fi(path);
-  return fi.fileName();
-}
-
-/** @deprecated Use QFile.rename(oldName, newName) instead */
-bool ScriptToolbox::renameFile(const QString & oldName, const QString & newName)
-{
-  scriptDeprecated("Use QFile.rename(oldName, newName) instead of toolbox.renameFile()");
-  return QFile::rename(oldName, newName);
-}
-
-/** @deprecated Use QFile.removeFile(oldName, newName) instead */
-bool ScriptToolbox::removeFile(const QString & name)
-{
-  scriptDeprecated("Use QFile.removeFile() instead of toolbox.removeFile()");
-  return QFile::remove(name);
-}
-
-/** @deprecated Use QFile.exists(name) instead */
-bool ScriptToolbox::fileExists(const QString & name)
-{
-  scriptDeprecated("Use QFile.exists(name) instead of toolbox.fileExists()");
-  return QFile::exists(name);
-}
-
 /** @brief Read the entire contents of a text %file.
 
     This method opens a text %file, reads its contents into a string, and
@@ -1166,60 +697,6 @@ bool ScriptToolbox::textStreamWrite(const QString & pName, const QString & Write
    out << WriteText;
    file.close();
    return true;
-}
-
-/** @deprecated use QFile.exists(name) instead */
-bool fileExists(const QString & name)
-{
-  scriptDeprecated("use QFile.exists(name) instead of toolbox.fileExist()");
-  QFile file(name);
-  return file.exists();
-}
-
-/** @deprecated Use QDir.homePath() instead */
-QString ScriptToolbox::getHomeDir()
-{
-  scriptDeprecated("Use QDir.homePath() instead of toolbox.getHomeDir()");
-  return QDir::homePath();
-}
-
-/** @deprecated Use QDir.currentPath() instead */
-QString ScriptToolbox::getCurrentDir()
-{
-  scriptDeprecated("Use QDir.currentPath() instead of toolbox.getCurrentDir()");
-  return QDir::currentPath();
-}
-
-/** @deprecated Use QDir.tempPath() instead */
-QString ScriptToolbox::getTempDir()
-{
-  scriptDeprecated("Use QDir.tempPath() instead of toolbox.getTempDir()");
-   return QDir::tempPath();
-}
-
-/** @deprecated Use QDir.rootPath() instead */
-QString ScriptToolbox::rootPath()
-{
-  scriptDeprecated("Use QDir.rootPath() instead of toolbox.rootPath()");
-   return QDir::rootPath();
-}
-
-/** @deprecated Use var dir = new QDir(rootPath) followed by dir.mkpath(mkPath) instead */
-bool ScriptToolbox::makePath(const QString & mkPath, const QString & rootPath)
-{
-  scriptDeprecated("Use var dir = new QDir(rootPath) ; dir.mkpath(mkPath) instead of toolbox.makePath(mkPath, rootPath)");
-   QDir dir(rootPath);
-
-   return dir.mkpath(mkPath);
-}
-
-/** @deprecated Use var dir = new QDir(rootPath) followed by dir.rmpath(rmPath) instead */
-bool ScriptToolbox::removePath(const QString & rmPath, const QString & rootPath)
-{
-  scriptDeprecated("Use var dir = new QDir(rootPath) ; dir.rmpath(rmPath) instead of toolbox.removePath(rmPath, rootPath)");
-   QDir dir(rootPath);
-
-   return dir.rmpath(rmPath);
 }
 
 /** @brief Show the properties of a QtScript object.
@@ -1274,27 +751,6 @@ void ScriptToolbox::listProperties(const QScriptValue &obj, const bool showProto
       tmp = QScriptValue();
   }
   qWarning("End of %s", qPrintable(obj.toString()));
-}
-
-/** @brief A wrapper around the QMessageBox static methods for standard dialogs.
-
-    @deprecated Use QMessageBox.critical, QMessageBox.information,
-                QMessageBox.question, or QMessageBox.warning.
- */
-int ScriptToolbox::messageBox(const QString & type, QWidget * parent, const QString & title, const QString & text, int buttons, int defaultButton)
-{
-  scriptDeprecated("Use QMessageBox.critical(), QMessageBox.information(), "
-                   "QMessageBox.question(), or QMessageBox.warning() instead of toolbox.messageBox()");
-  int btn;
-  if(type == "critical")
-    btn = QMessageBox::critical(parent, title, text, (QMessageBox::StandardButton)buttons, (QMessageBox::StandardButton)defaultButton);
-  else if(type == "information")
-    btn = QMessageBox::information(parent, title, text, (QMessageBox::StandardButton)buttons, (QMessageBox::StandardButton)defaultButton);
-  else if(type == "question")
-    btn = QMessageBox::question(parent, title, text, (QMessageBox::StandardButton)buttons, (QMessageBox::StandardButton)defaultButton);
-  else //if(type == "warning")
-    btn = QMessageBox::warning(parent, title, text, (QMessageBox::StandardButton)buttons, (QMessageBox::StandardButton)defaultButton);
-  return btn;
 }
 
 /** @brief Override the last window opened by this toolbox instance.
@@ -1435,28 +891,6 @@ QWidget *ScriptToolbox::newDisplay(QString pname, QWidget *parent, Qt::WindowMod
   return window;
 }
 
-/** @brief Add a column to an existing XTreeWidget
-    @deprecated Use XTreeWidget::addColumn directly.
-  */
-void ScriptToolbox::addColumnXTreeWidget(QWidget * tree, const QString & pString, int pWidth, int pAlignment, bool pVisible, const QString pEditColumn, const QString pDisplayColumn)
-{
-  scriptDeprecated("Use XTreeWidget::addColumn() instead of toolbox.addColumnXTreeWidget()");
-  XTreeWidget *xt = qobject_cast<XTreeWidget*>(tree);
-  if(xt)
-    xt->addColumn(pString, pWidth, pAlignment, pVisible, pEditColumn, pDisplayColumn);
-}
-
-/** @brief Populate an XTreeWidget with the results of the given query.
-    @deprecated Use XTreeWidget::populate directly.
-  */
-void ScriptToolbox::populateXTreeWidget(QWidget * tree, XSqlQuery pSql, bool pUseAltId)
-{
-  scriptDeprecated("Use XTreeWidget::populate() instead of toolbox.populateXtreeWidget()");
-  XTreeWidget *xt = qobject_cast<XTreeWidget*>(tree);
-  if(xt)
-    xt->populate(pSql, pUseAltId);
-}
-
 #if QT_VERSION <= 0x050900
 /** @brief Load the given QWebView with the given URL. */
 void ScriptToolbox::loadQWebView(QWidget * webView, const QString & url)
@@ -1522,65 +956,6 @@ int ScriptToolbox::saveCreditCard(QWidget *parent,
 QObject *ScriptToolbox::getCreditCardProcessor()
 {
   return CreditCardProcessor::getProcessor();
-}
-
-/** @brief C++ implementation of the original script include mechanism.
-
-  This is the first implementation of script inclusion. It should never be
-  called.
-
-  @deprecated See include.cpp for the proper way to include scripts. This
-              function will be removed, as will all examples
-              of its use.
-
-  @see include
- */
-QString scriptHandleIncludes(QString source)
-{
-  scriptDeprecated("See include.cpp for the proper way to include scripts");
-  QString returnVal = source;
-  if (returnVal.contains(QRegExp("#include")))
-  {
-    QStringList line = returnVal.split(QRegExp("\n\r?|\r\n?"));
-    for (int i = 0; i < line.size(); i++)
-    {
-      if (line.at(i).startsWith("#include"))
-      {
-        QStringList words = line.at(i).split(QRegExp("\\s+"));
-        if (words.size() <= 1)
-          qWarning("scriptByName(%s): found #include with no script name",
-                   qPrintable(line.at(i)));
-
-        int order = -1;
-        if (words.size() > 2)
-          order = words.at(2).toInt();
-
-        QString name;
-        if (words.size() > 1)
-          name = words.at(1);
-
-        line.replace(i, "// " + line.at(i));
-        ParameterList params;
-        params.append("jsonlist", QString("{\"1\": \"%1\"}").arg(name));
-        params.append("order", order);
-        MetaSQLQuery mql(omfgThis->_mqlhash->value("scripts", "fetch"));
-        XSqlQuery inclq = mql.toQuery(params);
-        bool found = false;
-        while (inclq.next())
-        {
-          found = true;
-          line.replace(i,
-                       line.at(i) + "\n" + scriptHandleIncludes(inclq.value("script_source").toString()));
-        }
-        if (found)
-          line.replace(i,
-                       line.at(i) + "\n// end include of " + name);
-      }
-    }
-    returnVal = line.join("\n");
-  }
-
-  return returnVal;
 }
 
 /** @brief This is a wrapper around the core storedProcErrorLookup. */
