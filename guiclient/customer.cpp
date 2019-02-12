@@ -1813,7 +1813,7 @@ void customer::sIdChanged(int id)
 
   if(qry.first())
   {
-    _contacts->setCrmacctid(qry.value("crmacct_id").toInt());
+    _contacts->setCrmacctid(qry.value("cust_crmacct_id").toInt());
     _taskList->parameterWidget()->setDefault(tr("Account"), qry.value("cust_crmacct_id").toInt(), true);
     _taxreg->setCustid(id);
     _billCntct->setSearchAcct(qry.value("cust_crmacct_id").toInt());
