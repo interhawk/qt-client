@@ -439,7 +439,7 @@ void voucherItem::sSave()
                        "   SET poreject_voitem_id=CASE WHEN (poreject_vohead_id IS NULL) THEN NULL ELSE :voitem_id END "
                        "WHERE  poreject_poitem_id=:poitem_id "
                        "  AND  poreject_posted "
-                       "  AND  poreject_vohead_id IS NULL OR poreject_vohead_id=:vohead_id;" );
+                       "  AND  (poreject_vohead_id IS NULL OR poreject_vohead_id=:vohead_id);" );
   voucherSave.bindValue(":voitem_id", _voitemid);
   voucherSave.bindValue(":vohead_id", _voheadid);
   voucherSave.bindValue(":poitem_id", _poitemid);
