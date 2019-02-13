@@ -1602,6 +1602,8 @@ void XComboBox::showPopup()
   {
     _data->_popupCounter++;
     itemView->setFixedHeight(itemView->height() + _data->_editButton->height() + 5);
+    QComboBox::hidePopup();
+    QComboBox::showPopup();
   }
 }
 
