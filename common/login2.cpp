@@ -303,7 +303,7 @@ connected:
   if (db.isOpen())
   {
     QString earliest = "9.5.0",
-            latest   = "10.0.0";
+            latest   = "11.0.0";
     XSqlQuery checkVersion;   // include earliest in the range but exclude latest
     checkVersion.prepare("SELECT compareVersion(:earliest) <= 0"
                          "   AND compareVersion(:latest)   > 0 AS ok,"
