@@ -416,7 +416,6 @@ void voucherItem::sSave()
   }
 
   //Save 'tagged' status stored in rev_vohead_id to recv_voitem_id
-
   voucherSave.prepare( "UPDATE recv "
                        "SET recv_voitem_id=CASE WHEN (recv_vohead_id IS NULL) THEN NULL ELSE :voitem_id END "
                        "WHERE ( (NOT recv_invoiced) "
@@ -424,6 +423,23 @@ void voucherItem::sSave()
                        "AND     ((recv_vohead_id IS NULL) OR (recv_vohead_id=:vohead_id)) "
                        "AND     (recv_order_type='PO') "
                        "AND     (recv_orderitem_id=:poitem_id) );" );
+  voucherSave.bindValue(":voitem_id", _voitemid);
+  voucherSave.bindValue(":vohead_id", _voheadid);
+  voucherSave.bindValue(":poitem_id", _poitemid);
+  voucherSave.exec();
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Voucher Item Information"),
+                                voucherSave, __FILE__, __LINE__))
+  {
+    reject();
+    return;
+  }
+
+  //Save 'tagged' status stored in poreject_vohead_id to poreject_voitem_id
+  voucherSave.prepare( "UPDATE poreject "
+                       "   SET poreject_voitem_id=CASE WHEN (poreject_vohead_id IS NULL) THEN NULL ELSE :voitem_id END "
+                       "WHERE  poreject_poitem_id=:poitem_id "
+                       "  AND  poreject_posted "
+                       "  AND  (poreject_vohead_id IS NULL OR poreject_vohead_id=:vohead_id);" );
   voucherSave.bindValue(":voitem_id", _voitemid);
   voucherSave.bindValue(":vohead_id", _voheadid);
   voucherSave.bindValue(":poitem_id", _poitemid);
