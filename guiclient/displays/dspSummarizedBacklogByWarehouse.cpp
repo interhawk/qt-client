@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -220,21 +220,21 @@ void dspSummarizedBacklogByWarehouse::sPopulateMenu(QMenu *pMenu, QTreeWidgetIte
 
   if (list()->id() != -1)
   {
-    menuItem = pMenu->addAction(tr("Inventory Availability by Sales Order..."), this, SLOT(sInventoryAvailabilityBySalesOrder()));
+    menuItem = pMenu->addAction(tr("Inventory Availability by Sales Order"), this, SLOT(sInventoryAvailabilityBySalesOrder()));
     if (!_privileges->check("ViewInventoryAvailability"))
       menuItem->setEnabled(false);
 
     pMenu->addSeparator();
   
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     if (!_privileges->check("MaintainSalesOrders"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
     if ((!_privileges->check("MaintainSalesOrders")) && (!_privileges->check("ViewSalesOrders")))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
     if (!_privileges->check("MaintainSalesOrders"))
       menuItem->setEnabled(false);
 

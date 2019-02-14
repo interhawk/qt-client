@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -94,10 +94,10 @@ void dspItemSources::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem* selected, i
   XTreeWidgetItem * item = (XTreeWidgetItem*)selected;
   QAction *menuItem;
 
-  menuItem = menuThis->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = menuThis->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 
-  menuItem = menuThis->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = menuThis->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources") || _privileges->check("ViewItemSource"));
 
   menuItem = menuThis->addAction(tr("Set as Default..."), this, SLOT(sDefault()));
@@ -106,14 +106,14 @@ void dspItemSources::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem* selected, i
   menuItem = menuThis->addAction(tr("Copy..."), this, SLOT(sCopy()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 
-  menuItem = menuThis->addAction(tr("Delete..."), this, SLOT(sDelete()));
+  menuItem = menuThis->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 
   menuThis->addSeparator();
 
-  menuThis->addAction("View Buy Card...",  this, SLOT(sBuyCard()));
+  menuThis->addAction("View Buy Card",  this, SLOT(sBuyCard()));
 
-  menuThis->addAction("View Receipts and Returns...",  this, SLOT(sReceipts()));
+  menuThis->addAction("View Receipts and Returns",  this, SLOT(sReceipts()));
 }
 
 void dspItemSources::sNew()

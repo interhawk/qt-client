@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -138,11 +138,11 @@ void dspInventoryLocator::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected
 
   if (((XTreeWidgetItem *)pSelected)->altId() == 1)
   {
-    menuItem = pMenu->addAction(tr("Relocate..."), this, SLOT(sRelocateInventory()));;
+    menuItem = pMenu->addAction(tr("Relocate"), this, SLOT(sRelocateInventory()));;
     if (!_privileges->check("RelocateInventory"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Reassign Lot/Serial #..."), this, SLOT(sReassignLotSerial()));;
+    menuItem = pMenu->addAction(tr("Reassign Lot/Serial #"), this, SLOT(sReassignLotSerial()));;
     if (!_privileges->check("ReassignLotSerial"))
       menuItem->setEnabled(false);
   }

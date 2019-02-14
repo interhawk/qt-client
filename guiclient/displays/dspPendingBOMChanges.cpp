@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -64,11 +64,11 @@ void dspPendingBOMChanges::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit BOM Item..."), this, SLOT(sEdit()));;
+  menuItem = pMenu->addAction(tr("Edit BOM Item"), this, SLOT(sEdit()));;
   if (!_privileges->check("MaintainBOMs"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("View BOM Item..."), this, SLOT(sView()));;
+  menuItem = pMenu->addAction(tr("View BOM Item"), this, SLOT(sView()));;
   if ( (!_privileges->check("MaintainBOMs")) && (!_privileges->check("ViewBOMs")) )
     menuItem->setEnabled(false);
 }

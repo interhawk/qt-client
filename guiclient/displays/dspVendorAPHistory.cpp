@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -96,17 +96,17 @@ void dspVendorAPHistory::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected,
   XTreeWidgetItem * item = (XTreeWidgetItem*)pSelected;
   if (item->id() != -1)
   {
-    menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("EditAPOpenItem"));
 
-    pMenu->addAction(tr("View A/P Open..."), this, SLOT(sView()));
+    pMenu->addAction(tr("View A/P Open"), this, SLOT(sView()));
 
-    menuItem = pMenu->addAction(tr("View G/L Series..."), this, SLOT(sViewGLSeries()));
+    menuItem = pMenu->addAction(tr("View G/L Series"), this, SLOT(sViewGLSeries()));
     menuItem->setEnabled(_privileges->check("ViewGLTransactions"));
 
     if(item->altId() == -1 && item->text(1)==tr("Voucher"))
     {
-      menuItem = pMenu->addAction(tr("View Voucher..."), this, SLOT(sViewVoucher()));
+      menuItem = pMenu->addAction(tr("View Voucher"), this, SLOT(sViewVoucher()));
       menuItem->setEnabled(_privileges->check("ViewVouchers") || _privileges->check("MaintainVouchers"));
 
       if(item->rawValue("amount")==item->rawValue("balance"))

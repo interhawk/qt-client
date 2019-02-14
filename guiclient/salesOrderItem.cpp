@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -896,7 +896,6 @@ void salesOrderItem::clear()
     disconnect(_supplyDropShip,    SIGNAL(toggled(bool)),                this, SLOT(sHandleSupplyOrder()));
   }
 
-  _soheadid                      = -1;
   _soitemid                      = -1;
 
   _autoord                       = true;
@@ -918,7 +917,6 @@ void salesOrderItem::clear()
   _itemsubsLastItemid            = -1;
   _itemsubsLastWarehousid        = -1;
   _leadTime                      = 999;
-  _mode                          = cView;
   _modified                      = false;
   _originalQtyOrd                = 0.0;
   _partialsaved                  = false;
@@ -1863,7 +1861,6 @@ void salesOrderItem::sRecalcPrice()
 void salesOrderItem::sDeterminePrice(bool force)
 {
   ENTERED << "with" << force;
-  if (DEBUG) qDebug() << "sDeterminePrice(force) entered with" << force;
   XSqlQuery salesDeterminePrice;
   // Determine if we can or should update the price
   if ( _mode == cView ||
@@ -4516,7 +4513,7 @@ void salesOrderItem::reject()
   ENTERED;
   XSqlQuery salesreject;
   bool saved = false;
-  if (_modified)
+  if (_modified && _item->id() > 0)
   {
     switch ( QMessageBox::question( this, tr("Unsaved Changed"),
                                     tr("<p>You have made some changes which have not yet been saved!\n"

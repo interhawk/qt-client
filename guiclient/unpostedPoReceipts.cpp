@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -680,8 +680,8 @@ void unpostedPoReceipts::sPopulateMenu(QMenu *pMenu,QTreeWidgetItem *pItem)
   QAction *menuItem;
   QString ordertype = pItem->text(_recv->column("recv_order_type"));
 
-  menuItem = pMenu->addAction(tr("Edit Receipt..."),	this, SLOT(sEdit()));
-  menuItem = pMenu->addAction(tr("Delete Receipt..."),	this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Edit Receipt"),	this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Delete Receipt"),	this, SLOT(sDelete()));
 
   pMenu->addSeparator();
 
@@ -689,7 +689,7 @@ void unpostedPoReceipts::sPopulateMenu(QMenu *pMenu,QTreeWidgetItem *pItem)
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("View Order Item..."),this, SLOT(sViewOrderItem()));
+  menuItem = pMenu->addAction(tr("View Order Item"),this, SLOT(sViewOrderItem()));
   menuItem->setEnabled(
       (ordertype == "PO" && _privileges->check("ViewPurchaseOrders")) ||
       (ordertype == "TO" && _privileges->check("ViewTransferOrders")) ||

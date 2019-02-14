@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -422,10 +422,10 @@ void dspWoSchedule::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *pSelected, int
   QString  status = item->rawValue("wo_status").toString();
   QString  ordtype = item->rawValue("wo_ordtype").toString();
 
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
 
   pMenu->addSeparator();
 
@@ -453,7 +453,7 @@ void dspWoSchedule::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *pSelected, int
 
   if ((status == "O") || (status == "E"))
   {
-    menuItem = pMenu->addAction(tr("Delete..."), this, SLOT(sDeleteWO()));
+    menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDeleteWO()));
     menuItem->setEnabled(_privileges->check("DeleteWorkOrders"));
   }
   else
@@ -464,18 +464,18 @@ void dspWoSchedule::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *pSelected, int
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("View Bill of Materials..."), this, SLOT(sViewBOM()));
+  menuItem = pMenu->addAction(tr("View Bill of Materials"), this, SLOT(sViewBOM()));
   menuItem->setEnabled(_privileges->check("ViewBOMs"));
 
   if ((status == "E") || (status == "R") || (status == "I"))
   {
-    menuItem = pMenu->addAction(tr("View Material Requirements..."), this, SLOT(sViewWomatl()));
+    menuItem = pMenu->addAction(tr("View Material Requirements"), this, SLOT(sViewWomatl()));
     menuItem->setEnabled(_privileges->check("ViewWoMaterials"));
       
-    menuItem = pMenu->addAction(tr("Inventory Availability..."), this, SLOT(sInventoryAvailabilityByWorkOrder()));
+    menuItem = pMenu->addAction(tr("Inventory Availability"), this, SLOT(sInventoryAvailabilityByWorkOrder()));
     menuItem->setEnabled(_privileges->check("ViewInventoryAvailability"));
 
-    menuItem = pMenu->addAction(tr("Running Availability..."), this, SLOT(sDspRunningAvailability()));
+    menuItem = pMenu->addAction(tr("Running Availability"), this, SLOT(sDspRunningAvailability()));
 
     pMenu->addSeparator();
 
@@ -507,16 +507,16 @@ void dspWoSchedule::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *pSelected, int
 
   if ((status == "O") || (status == "E") || (status == "R") || (status == "I"))
   {
-    menuItem = pMenu->addAction(tr("Reprioritize..."), this, SLOT(sReprioritizeWo()));
+    menuItem = pMenu->addAction(tr("Reprioritize"), this, SLOT(sReprioritizeWo()));
     menuItem->setEnabled(_privileges->check("ReprioritizeWorkOrders"));
   }
   
   if ((status == "O") || (status == "E") || (status == "I"))
   {
-    menuItem = pMenu->addAction(tr("Reschedule..."), this, SLOT(sRescheduleWO()));
+    menuItem = pMenu->addAction(tr("Reschedule"), this, SLOT(sRescheduleWO()));
     menuItem->setEnabled(_privileges->check("RescheduleWorkOrders"));
 
-    menuItem = pMenu->addAction(tr("Change Quantity..."), this, SLOT(sChangeWOQty()));
+    menuItem = pMenu->addAction(tr("Change Quantity"), this, SLOT(sChangeWOQty()));
     menuItem->setEnabled(_privileges->check("ChangeWorkOrderQty"));
   }
   
@@ -525,12 +525,12 @@ void dspWoSchedule::sPopulateMenu(QMenu *pMenu,  QTreeWidgetItem *pSelected, int
     if (ordtype == "S")
     {
       pMenu->addSeparator();
-      menuItem = pMenu->addAction(tr("View Parent Sales Order Information..."), this, SLOT(sViewParentSO()));
+      menuItem = pMenu->addAction(tr("View Parent Sales Order Information"), this, SLOT(sViewParentSO()));
     }
     else if (ordtype == "W")
     {
       pMenu->addSeparator();
-      menuItem = pMenu->addAction(tr("View Parent Work Order..."), this, SLOT(sViewParentWO()));
+      menuItem = pMenu->addAction(tr("View Parent Work Order"), this, SLOT(sViewParentWO()));
     }
   }
 }

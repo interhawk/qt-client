@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -105,7 +105,7 @@ menuManufacture::menuManufacture(GUIClient *Pparent) :
   actionProperties acts[] = {
     // Production | Control
     { "menu",                              tr("&Work Order"), (char*)ordersMenu,                       mainMenu,   "true",                  0, 0, true, NULL },
-    { "wo.newWorkOrder",                       tr("&New..."), SLOT(sNewWorkOrder()),                   ordersMenu, "MaintainWorkOrders",    0, 0, true, NULL },
+    { "wo.newWorkOrder",                       tr("&New"), SLOT(sNewWorkOrder()),                   ordersMenu, "MaintainWorkOrders",    0, 0, true, NULL },
     { "separator",                                      NULL, NULL,                                    ordersMenu, "true",                  0, 0, true, NULL },
     { "wo.explodeWorkOrder",               tr("E&xplode..."), SLOT(sExplodeWorkOrder()),               ordersMenu, "ExplodeWorkOrders",     0, 0, true, NULL },
     { "wo.implodeWorkOrder",               tr("&Implode..."), SLOT(sImplodeWorkOrder()),               ordersMenu, "ImplodeWorkOrders",     0, 0, true, NULL },
@@ -118,7 +118,7 @@ menuManufacture::menuManufacture(GUIClient *Pparent) :
 
     //  Production | W/O Materials
     { "menu",                               tr("&Materials"), (char*)materialsMenu,                 mainMenu,      "true",                0, 0, true, NULL },
-    { "wo.createWoMaterialRequirement",        tr("&New..."), SLOT(sCreateWoMaterialRequirement()), materialsMenu, "MaintainWoMaterials", 0, 0, true, NULL },
+    { "wo.createWoMaterialRequirement",        tr("&New"), SLOT(sCreateWoMaterialRequirement()), materialsMenu, "MaintainWoMaterials", 0, 0, true, NULL },
     { "wo.maintainWoMaterialRequirements",tr("&Maintain..."), SLOT(sMaintainWoMaterials()),         materialsMenu, "MaintainWoMaterials", 0, 0, true, NULL },
 
     { "separator",                  NULL,                   NULL,                          mainMenu,          "true",  0, 0, true, NULL },
@@ -188,7 +188,7 @@ menuManufacture::menuManufacture(GUIClient *Pparent) :
     { "separator",              NULL,                               NULL,                           mainMenu,      "true",            0, 0, true, NULL },
     { "menu",                   tr("&Utilities"),                   (char*)utilitiesMenu,           mainMenu,      "true",            0, 0, true, NULL },
     { "wo.purgeClosedWorkOrder",tr("Pur&ge Closed Work Orders..."), SLOT(sPurgeClosedWorkOrders()), utilitiesMenu, "PurgeWorkOrders", 0, 0, true, NULL },
-    { "wo.setup",	tr("&Setup..."),	SLOT(sSetup()),	mainMenu,	NULL,	NULL,	NULL,	true, NULL}
+    { "wo.setup",	tr("&Setup"),	SLOT(sSetup()),	mainMenu,	NULL,	NULL,	NULL,	true, NULL}
   };
 
   addActionsToMenu(acts, sizeof(acts) / sizeof(acts[0]));

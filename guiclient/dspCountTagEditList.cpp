@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -152,21 +152,21 @@ void dspCountTagEditList::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected
 
   if (((XTreeWidgetItem *)pSelected)->altId() == -1)
   {
-    menuItem = pMenu->addAction(tr("Enter Count Slip..."), this, SLOT(sEnterCountSlip()));
+    menuItem = pMenu->addAction(tr("Enter Count Slip"), this, SLOT(sEnterCountSlip()));
     if (!_privileges->check("EnterCountSlips"))
       menuItem->setEnabled(false);
 
-    menuItem = pMenu->addAction(tr("Count Slip Edit List..."), this, SLOT(sCountSlipEditList()));
+    menuItem = pMenu->addAction(tr("Count Slip Edit List"), this, SLOT(sCountSlipEditList()));
 
     pMenu->addSeparator();
 
-    menuItem = pMenu->addAction(tr("View Pending Inventory History..."), this, SLOT(sViewInventoryHistory()));
+    menuItem = pMenu->addAction(tr("View Pending Inventory History"), this, SLOT(sViewInventoryHistory()));
     if (!_privileges->check("ViewInventoryHistory"))
       menuItem->setEnabled(false);
 
     pMenu->addSeparator();
 
-    menuItem = pMenu->addAction(tr("Edit Count Tag..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Count Tag"), this, SLOT(sEdit()));
     if (!_privileges->check("EnterCountTags"))
       menuItem->setEnabled(false);
 
@@ -185,7 +185,7 @@ void dspCountTagEditList::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected
   {
     if (pSelected->text(3) == tr("Unposted"))
     {
-      menuItem = pMenu->addAction(tr("Edit Count Slip..."), this, SLOT(sEdit()));
+      menuItem = pMenu->addAction(tr("Edit Count Slip"), this, SLOT(sEdit()));
       if (!_privileges->check("EnterCountSlips"))
         menuItem->setEnabled(false);
     }

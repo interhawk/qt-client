@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -10,60 +10,117 @@
 
 #include "taxRegistrations.h"
 
-#include <QVariant>
+#include <QAction>
+#include <QMenu>
 #include <QMessageBox>
 #include <QSqlError>
-#include <parameter.h>
-//#include <QWorkspace>
+
+#include "guiclient.h"
+#include "parameterwidget.h"
 #include "taxRegistration.h"
 #include "errorReporter.h"
+#include "xtreewidget.h"
 
-taxRegistrations::taxRegistrations(QWidget* parent, const char* name, Qt::WindowFlags fl)
-  : XWidget(parent, name, fl)
+taxRegistrations::taxRegistrations(QWidget* parent, const char*, Qt::WindowFlags fl)
+  : display(parent, "taxRegistrations", fl)
 {
-  setupUi(this);
+  setWindowTitle(tr("Tax Registrations"));
+  setReportName("TaxRegistrations");
+  setMetaSQLOptions("taxRegistration", "detail");
+  setParameterWidgetVisible(true);
+  setQueryOnStartEnabled(true);
 
-  // signals and slots connections
-  connect(_new, SIGNAL(clicked()), this, SLOT(sNew()));
-  connect(_edit, SIGNAL(clicked()), this, SLOT(sEdit()));
-  connect(_delete, SIGNAL(clicked()), this, SLOT(sDelete()));
-  connect(_view, SIGNAL(clicked()), this, SLOT(sView()));
+  setNewVisible(true);
+  newAction()->setEnabled(_privileges->check("MaintainTaxRegistrations"));
 
-  if (_privileges->check("MaintainTaxRegistrations"))
-  {
-    connect(_taxreg, SIGNAL(valid(bool)), _edit, SLOT(setEnabled(bool)));
-    connect(_taxreg, SIGNAL(valid(bool)), _delete, SLOT(setEnabled(bool)));
-    connect(_taxreg, SIGNAL(itemSelected(int)), _edit, SLOT(animateClick()));
-  }
+  parameterWidget()->append(tr("Customer"), "cust_id", ParameterWidget::Customer);
+  parameterWidget()->append(tr("Vendor"), "vend_id", ParameterWidget::Vendor);
+
+  list()->addColumn(tr("Tax Zone"),       150,  Qt::AlignCenter,   true,  "taxzone_code");
+  list()->addColumn(tr("Tax Authority"),  150,  Qt::AlignCenter,   true,  "taxauth_code");
+  list()->addColumn(tr("Registration #"),  -1,    Qt::AlignLeft,   true,  "taxreg_number");
+  list()->addColumn(tr("Start Date"),      -1,    Qt::AlignLeft,   true,  "taxreg_effective");
+  list()->addColumn(tr("End Date"),        -1,    Qt::AlignLeft,   true,  "taxreg_expires");
+
+  _custid = -1;
+  _vendid = -1;
+
+}
+
+enum SetResponse taxRegistrations::set(const ParameterList &pParams)
+{
+  XWidget::set(pParams);
+  QVariant param;
+  bool     valid;
+
+  parameterWidget()->setSavedFilters();
+
+  param = pParams.value("cust_id", &valid);
+  if (valid)
+    parameterWidget()->setDefault(tr("Customer"), param);
+
+  param = pParams.value("vend_id", &valid);
+  if (valid)
+    parameterWidget()->setDefault(tr("Vendor"), param);
+
+  param = pParams.value("run", &valid);
+  if (valid)
+    sFillList();
+
+  return NoError;
+}
+
+void taxRegistrations::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected, int)
+{
+  Q_UNUSED(pSelected);
+  QAction *menuItem;
+
+  menuItem = pMenu->addAction(tr("New"), this, SLOT(sNew()));
+  menuItem->setEnabled(_privileges->check("MaintainTaxRegistrations"));
+
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
+  menuItem->setEnabled(_privileges->check("MaintainTaxRegistrations"));
+
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
+  menuItem->setEnabled(_privileges->check("ViewTaxRegistrations"));
+
+  menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
+  menuItem->setEnabled(_privileges->check("MaintainTaxRegistrations"));
+}
+
+void taxRegistrations::setCustid(int custId)
+{
+  _custid = custId;
+  if (_custid == -1)
+    parameterWidget()->setDefault(tr("Customer"), QVariant(), true);
   else
-  {
-    _new->setEnabled(false);
-    connect(_taxreg, SIGNAL(itemSelected(int)), _view, SLOT(animateClick()));
-  }
-
-  _taxreg->addColumn(tr("Tax Zone"),  100,  Qt::AlignCenter,   true,  "taxzone_code"   );
-  _taxreg->addColumn(tr("Tax Authority"),  100,  Qt::AlignCenter, true,  "taxauth_code" );
-  _taxreg->addColumn(tr("Registration #"),  100,  Qt::AlignLeft,   true,  "taxreg_number"   );
-  _taxreg->addColumn(tr("Start Date"),  100,  Qt::AlignLeft,   true,  "taxreg_effective"   );
-  _taxreg->addColumn(tr("End Date"),  -1,  Qt::AlignLeft,   true,  "taxreg_expires"   );
-
-  sFillList();
+    parameterWidget()->setDefault(tr("Customer"), _custid, true);
 }
 
-taxRegistrations::~taxRegistrations()
+void taxRegistrations::setVendid(int vendId)
 {
-  // no need to delete child widgets, Qt does it all for us
-}
-
-void taxRegistrations::languageChange()
-{
-  retranslateUi(this);
+  _vendid = vendId;
+  if (_vendid == -1)
+    parameterWidget()->setDefault(tr("Vendor"), QVariant(), true);
+  else
+    parameterWidget()->setDefault(tr("Vendor"), _vendid, true);
 }
 
 void taxRegistrations::sNew()
 {
   ParameterList params;
   params.append("mode", "new");
+
+  if (_custid > 0)
+  {
+    params.append("taxreg_rel_id", _custid);
+    params.append("taxreg_rel_type", "C");
+  }
+  else if (_vendid > 0)
+  {
+    params.append("taxreg_rel_id", _vendid);
+    params.append("taxreg_rel_type", "V");
+  }
 
   taxRegistration newdlg(this, "", true);
   newdlg.set(params);
@@ -74,7 +131,7 @@ void taxRegistrations::sNew()
 void taxRegistrations::sEdit()
 {
   ParameterList params;
-  params.append("taxreg_id", _taxreg->id());
+  params.append("taxreg_id", list()->id());
   params.append("mode", "edit");
 
   taxRegistration newdlg(this, "", true);
@@ -86,7 +143,7 @@ void taxRegistrations::sEdit()
 void taxRegistrations::sView()
 {
   ParameterList params;
-  params.append("taxreg_id", _taxreg->id());
+  params.append("taxreg_id", list()->id());
   params.append("mode", "view");
 
   taxRegistration newdlg(this, "", true);
@@ -99,7 +156,7 @@ void taxRegistrations::sDelete()
   XSqlQuery taxDelete;
   taxDelete.prepare("DELETE FROM taxreg"
             " WHERE (taxreg_id=:taxreg_id);");
-  taxDelete.bindValue(":taxreg_id", _taxreg->id());
+  taxDelete.bindValue(":taxreg_id", list()->id());
   taxDelete.exec();
   if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Tax Registration Information"),
                                 taxDelete, __FILE__, __LINE__))
@@ -107,27 +164,5 @@ void taxRegistrations::sDelete()
     return;
   }
   sFillList();
-}
-
-void taxRegistrations::sFillList()
-{
-  XSqlQuery taxFillList;
-  taxFillList.prepare("SELECT taxreg_id, taxreg_taxzone_id, taxreg_taxauth_id, "
-            "       CASE WHEN taxreg_taxzone_id ISNULL THEN '~Any~' "
-			"		ELSE taxzone_code "
-			"		END AS taxzone_code, "
-			"		taxauth_code, taxreg_number, "
-			"		taxreg_effective, taxreg_expires "
-            "  FROM taxreg LEFT OUTER JOIN taxauth ON (taxreg_taxauth_id = taxauth_id) "
-			"		LEFT OUTER JOIN taxzone ON (taxreg_taxzone_id = taxzone_id)"
-            " WHERE (taxreg_rel_type IS NULL)"
-			" ORDER BY taxzone_code, taxauth_code, taxreg_number;");
-  taxFillList.exec();
-  _taxreg->populate(taxFillList, true);
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Tax Registration Information"),
-                                taxFillList, __FILE__, __LINE__))
-  {
-    return;
-  }
 }
 

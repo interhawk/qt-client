@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -113,11 +113,10 @@ void XComboBoxDescrip::sListen()
            notification.split(" ", QString::SkipEmptyParts))
   {
     if (! db.driver()->subscribedToNotifications().contains(notice))
-    {
       db.driver()->subscribeToNotification(notice);
-      connect(db.driver(), SIGNAL(notification(const QString&)),
-              this,        SLOT(sNotified(const QString&)));
-    }
+
+    connect(db.driver(), SIGNAL(notification(const QString&)),
+            this,        SLOT(sNotified(const QString&)));
   }
 }
 
@@ -1444,9 +1443,7 @@ int XComboBox::id(int pIndex) const
 {
   if ((pIndex >= 0) && (pIndex < count()))
   {
-    if ( (allowNull()) && (currentIndex() <= 0) )
-      return -1;
-    else if(pIndex < _data->_ids.count())
+    if(pIndex < _data->_ids.count())
       return _data->_ids.at(pIndex);
   }
   return -1;

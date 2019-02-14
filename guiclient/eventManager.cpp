@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -115,14 +115,14 @@ void eventManager::sPopulateMenu(QMenu *menu)
   {
     menu->addSeparator();
 
-    menuItem = menu->addAction(tr("Inventory Availability by Work Order..."), this, SLOT(sInventoryAvailabilityByWorkOrder()));
+    menuItem = menu->addAction(tr("Inventory Availability by Work Order"), this, SLOT(sInventoryAvailabilityByWorkOrder()));
   }
   
   else if ( (_event->currentItem()->rawValue("evnttype_name").toString() == "POitemCreate") )
   {
     menu->addSeparator();
 
-    menuItem = menu->addAction(tr("View Purchase Order Item..."), this, SLOT(sViewPurchaseOrderItem()));
+    menuItem = menu->addAction(tr("View Purchase Order Item"), this, SLOT(sViewPurchaseOrderItem()));
   }
 
   else if ( (_event->currentItem()->rawValue("evnttype_name").toString() == "SoitemCreated") ||
@@ -131,8 +131,8 @@ void eventManager::sPopulateMenu(QMenu *menu)
   {
     menu->addSeparator();
 
-    menuItem = menu->addAction(tr("View Sales Order..."), this, SLOT(sViewSalesOrder()));
-    menuItem = menu->addAction(tr("View Sales Order Item..."), this, SLOT(sViewSalesOrderItem()));
+    menuItem = menu->addAction(tr("View Sales Order"), this, SLOT(sViewSalesOrder()));
+    menuItem = menu->addAction(tr("View Sales Order Item"), this, SLOT(sViewSalesOrderItem()));
     menuItem = menu->addAction(tr("Print Packing List..."), this, SLOT(sPrintPackingList()));
   }
 
@@ -140,7 +140,7 @@ void eventManager::sPopulateMenu(QMenu *menu)
   {
     menu->addSeparator();
 
-    menuItem = menu->addAction(tr("View Sales Order..."), this, SLOT(sViewSalesOrder()));
+    menuItem = menu->addAction(tr("View Sales Order"), this, SLOT(sViewSalesOrder()));
     menuItem = menu->addAction(tr("Print Packing List..."), this, SLOT(sPrintPackingList()));
   }
 
@@ -148,9 +148,9 @@ void eventManager::sPopulateMenu(QMenu *menu)
   {
     menu->addSeparator();
 
-    menuItem = menu->addAction(tr("Issue Count Tag..."), this, SLOT(sIssueCountTag()));
-    menuItem = menu->addAction(tr("View Inventory History..."), this, SLOT(sViewInventoryHistory()));
-    menuItem = menu->addAction(tr("View Inventory Availability..."), this, SLOT(sViewInventoryAvailability()));
+    menuItem = menu->addAction(tr("Issue Count Tag"), this, SLOT(sIssueCountTag()));
+    menuItem = menu->addAction(tr("View Inventory History"), this, SLOT(sViewInventoryHistory()));
+    menuItem = menu->addAction(tr("View Inventory Availability"), this, SLOT(sViewInventoryAvailability()));
   }
 
   else if (_event->currentItem()->rawValue("evnttype_name").toString() == "RWoQtyRequestChange")
@@ -158,7 +158,7 @@ void eventManager::sPopulateMenu(QMenu *menu)
     menu->addSeparator();
 
     menuItem = menu->addAction(tr("Recall Work Order"), this, SLOT(sRecallWo()));
-    menuItem = menu->addAction(tr("Change W/O Quantity..."), this, SLOT(sChangeWoQty()));
+    menuItem = menu->addAction(tr("Change W/O Quantity"), this, SLOT(sChangeWoQty()));
     menuItem = menu->addAction(tr("Print W/O Traveler..."), this, SLOT(sPrintWoTraveler()));
   }
 
@@ -167,7 +167,7 @@ void eventManager::sPopulateMenu(QMenu *menu)
     menu->addSeparator();
 
     menuItem = menu->addAction(tr("Recall Work Order"), this, SLOT(sRecallWo()));
-    menuItem = menu->addAction(tr("Change W/O Due Date..."), this, SLOT(sChangeWoDueDate()));
+    menuItem = menu->addAction(tr("Change W/O Due Date"), this, SLOT(sChangeWoDueDate()));
     menuItem = menu->addAction(tr("Print W/O Traveler..."), this, SLOT(sPrintWoTraveler()));
   }
 
@@ -183,21 +183,21 @@ void eventManager::sPopulateMenu(QMenu *menu)
   {
     menu->addSeparator();
 
-    menuItem = menu->addAction(tr("View Todo Item..."), this, SLOT(sViewTodoItem()));
+    menuItem = menu->addAction(tr("View Todo Item"), this, SLOT(sViewTodoItem()));
   }
 
   else if (_event->currentItem()->rawValue("evnttype_name").toString() == "IncidentAlarm")
   {
     menu->addSeparator();
 
-    menuItem = menu->addAction(tr("View Incident..."), this, SLOT(sViewIncident()));
+    menuItem = menu->addAction(tr("View Incident"), this, SLOT(sViewIncident()));
   }
 
   else if (_event->currentItem()->rawValue("evnttype_name").toString() == "TaskAlarm")
   {
     menu->addSeparator();
 
-    menuItem = menu->addAction(tr("View Project Task..."), this, SLOT(sViewTask()));
+    menuItem = menu->addAction(tr("View Project Task"), this, SLOT(sViewTask()));
   }
 }
 

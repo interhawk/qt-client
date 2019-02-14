@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -195,13 +195,13 @@ void unpostedGlSeries::sPopulateMenu(QMenu *pMenu)
 {
   //QAction *menuItem;
 
-  (void)pMenu->addAction(tr("Edit G/L Series..."),  this, SLOT(sEdit()));
-  (void)pMenu->addAction(tr("View G/L Series..."),  this, SLOT(sView()));
-  (void)pMenu->addAction(tr("Delete G/L Series..."),this, SLOT(sDelete()));
+  (void)pMenu->addAction(tr("Edit G/L Series"),  this, SLOT(sEdit()));
+  (void)pMenu->addAction(tr("View G/L Series"),  this, SLOT(sView()));
+  (void)pMenu->addAction(tr("Delete G/L Series"),this, SLOT(sDelete()));
 
   pMenu->addSeparator();
 
-  (void)pMenu->addAction(tr("Post G/L Series..."),  this, SLOT(sPost()));
+  (void)pMenu->addAction(tr("Post G/L Series"),  this, SLOT(sPost()));
 
   pMenu->addSeparator();
 }

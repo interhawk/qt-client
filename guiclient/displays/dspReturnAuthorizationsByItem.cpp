@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -74,8 +74,8 @@ enum SetResponse dspReturnAuthorizationsByItem::set(const ParameterList &pParams
 void dspReturnAuthorizationsByItem::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
   if(_privileges->check("MaintainReturns"))
-    menuThis->addAction(tr("Edit..."), this, SLOT(sEditRA()));
-  menuThis->addAction(tr("View..."), this, SLOT(sViewRA()));
+    menuThis->addAction(tr("Edit"), this, SLOT(sEditRA()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewRA()));
 }
 
 void dspReturnAuthorizationsByItem::sEditRA()

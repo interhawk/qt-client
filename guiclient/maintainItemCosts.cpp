@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -90,34 +90,34 @@ void maintainItemCosts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
   {
     if (pSelected->text(0) == "Direct Labor")
     {
-      menuItem = pMenu->addAction(tr("Update Actual Cost..."), this, SLOT(sUpdateDirectLabor()));
+      menuItem = pMenu->addAction(tr("Update Actual Cost"), this, SLOT(sUpdateDirectLabor()));
       menuItem->setEnabled(_privileges->check("UpdateActualCosts"));
     }
 
     else if (pSelected->text(0) == "Overhead")
     {
-      menuItem = pMenu->addAction(tr("Update Actual Cost..."), this, SLOT(sUpdateOverhead()));
+      menuItem = pMenu->addAction(tr("Update Actual Cost"), this, SLOT(sUpdateOverhead()));
       menuItem->setEnabled(_privileges->check("UpdateActualCosts"));
     }
 
     else if (pSelected->text(0) == "Machine Overhead")
     {
-      menuItem = pMenu->addAction(tr("Update Actual Cost..."), this, SLOT(sUpdateMachineOverhead()));
+      menuItem = pMenu->addAction(tr("Update Actual Cost"), this, SLOT(sUpdateMachineOverhead()));
       menuItem->setEnabled(_privileges->check("UpdateActualCosts"));
     }
   }
   else
   {
-    pMenu->addAction(tr("View Costing Detail..."), this, SLOT(sViewDetail()));
+    pMenu->addAction(tr("View Costing Detail"), this, SLOT(sViewDetail()));
     pMenu->addSeparator();
 
-    menuItem = pMenu->addAction(tr("Update Actual Cost..."), this, SLOT(sUpdateDetail()));
+    menuItem = pMenu->addAction(tr("Update Actual Cost"), this, SLOT(sUpdateDetail()));
     menuItem->setEnabled(_privileges->check("UpdateActualCosts"));
   }
 
   if (((XTreeWidgetItem *)pSelected)->altId() == 0)
   {
-    menuItem = pMenu->addAction(tr("Delete Cost..."), this, SLOT(sDelete()));
+    menuItem = pMenu->addAction(tr("Delete Cost"), this, SLOT(sDelete()));
     menuItem->setEnabled(_privileges->check("DeleteCosts"));
   }
 
@@ -126,10 +126,10 @@ void maintainItemCosts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Edit Actual Cost..."), this, SLOT(sEnterActualCost()));
+  menuItem = pMenu->addAction(tr("Edit Actual Cost"), this, SLOT(sEnterActualCost()));
   menuItem->setEnabled(_privileges->check("EnterActualCosts"));
 
-  menuItem = pMenu->addAction(tr("New Actual Cost..."), this, SLOT(sCreateUserCost()));
+  menuItem = pMenu->addAction(tr("New Actual Cost"), this, SLOT(sCreateUserCost()));
   menuItem->setEnabled(_privileges->check("CreateCosts"));
 }
 

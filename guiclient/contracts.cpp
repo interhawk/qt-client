@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -73,16 +73,16 @@ void contracts::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
   QAction *menuItem;
 
-  menuItem = menuThis->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = menuThis->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 
-  menuItem = menuThis->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = menuThis->addAction(tr("View"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources") || _privileges->check("ViewItemSource"));
 
-  menuItem = menuThis->addAction(tr("Copy..."), this, SLOT(sCopy()));
+  menuItem = menuThis->addAction(tr("Copy"), this, SLOT(sCopy()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 
-  menuItem = menuThis->addAction(tr("Delete..."), this, SLOT(sDelete()));
+  menuItem = menuThis->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainItemSources"));
 }
 

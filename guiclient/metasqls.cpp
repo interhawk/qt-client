@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -162,7 +162,7 @@ void metasqls::sPopulateMenu(QMenu *pMenu)
   QAction *menuAction;
 
   menuAction = pMenu->addAction(_privileges->check("MaintainMetaSQL") ?
-                                            tr("Edit...") : tr("View..."),
+                                            tr("Edit") : tr("View"),
                                 this, SLOT(sEdit()));
   menuAction->setEnabled(_privileges->check("MaintainMetaSQL") ||
                          _privileges->check("ViewMetaSQL"));

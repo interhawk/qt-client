@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -30,17 +30,19 @@ dspItemsWithoutItemSources::dspItemsWithoutItemSources(QWidget* parent, const ch
   list()->addColumn(tr("Type"),        _itemColumn,  Qt::AlignCenter,true, "type");
 
   connect(omfgThis, SIGNAL(itemsUpdated(int, bool)), this, SLOT(sFillList()));
+  if (_privileges->check("MaintainItemMasters"))
+    connect(list(), SIGNAL(itemSelected(int)), this, SLOT(sEditItem()));
 }
 
 void dspItemsWithoutItemSources::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Create Item Source..."), this, SLOT(sCreateItemSource()));;
+  menuItem = pMenu->addAction(tr("Create Item Source"), this, SLOT(sCreateItemSource()));;
   if (!_privileges->check("MaintainItemSources"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("Edit Item..."), this, SLOT(sEditItem()));;
+  menuItem = pMenu->addAction(tr("Edit Item"), this, SLOT(sEditItem()));;
   if (!_privileges->check("MaintainItemMasters"))
     menuItem->setEnabled(false);
 }

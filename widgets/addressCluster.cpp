@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -196,7 +196,7 @@ AddressCluster::SaveFlags AddressCluster::askForSaveMode(int pAddrId, QWidget *p
   params.append("contact",  tr("Contact"));
   params.append("shipto",   tr("Ship-to Address"));
   params.append("vendor",   tr("Vendor"));
-  params.append("vendaddr", tr("Vendor addresss"));
+  params.append("vendaddr", tr("Vendor address"));
   params.append("whs",      tr("Site"));
 
   MetaSQLQuery mql(_guiClientInterface->getMqlHash()->value("address", "uses"));
@@ -218,7 +218,17 @@ AddressCluster::SaveFlags AddressCluster::askForSaveMode(int pAddrId, QWidget *p
 
   QStringList countlist;
   foreach (QString type, count.keys())
-    countlist << QString("%1 - %2").arg(type).arg(count[type]);
+  {
+    if (type == tr("Vendor address") && _x_privileges && !_x_privileges->check("MaintainVendorAddresses"))
+    {
+      QMessageBox::warning(pParent, tr("Saving Shared Address"),
+                           tr("<p>This address is shared by a Vendor Address and you do not have "
+                              "privileges to edit Vendor Addresses."));
+      return PRIV;
+    }
+    else
+      countlist << QString("%1 - %2").arg(type).arg(count[type]);
+  }
 
   QString message = tr("There are multiple uses of this address:<UL><li>%1</li></UL>"
                        "<p>Would you like to save just this one use, save all "
@@ -469,6 +479,9 @@ void AddressCluster::clear()
   _id = -1;
   _valid = false;
 
+  if (_x_metrics)
+    setCountry(_x_metrics->value("DefaultAddressCountry"));
+
   // reset cache
   c_active     = true;
   c_addr1      = "";
@@ -486,7 +499,6 @@ void AddressCluster::clear()
   _addr3->clear();
   _city->clear();
   _state->setText(QString());
-  _country->setId(-1);
   _postalcode->clear();
   _active->setChecked(c_active);
   _selected = false;
@@ -518,6 +530,9 @@ void AddressCluster::setDataWidgetMap(XDataWidgetMapper* m)
  */
 int AddressCluster::save(enum SaveFlags flag)
 {
+
+  if (flag == PRIV)
+    return -99;
 
   if (_number->text() == "" &&
       _addr1->text() == "" && _addr2->text() == "" &&

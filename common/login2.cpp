@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -12,6 +12,7 @@
 
 #include <QAction>
 #include <QCursor>
+#include <QDebug>
 #include <QMenu>
 #include <QMessageBox>
 #include <QPushButton>
@@ -34,6 +35,8 @@
 #include "splashconst.h"
 #include "cmdlinemessagehandler.h"
 #include "guimessagehandler.h"
+
+#define DEBUG false
 
 class login2Private {
   public:
@@ -281,22 +284,26 @@ void login2::sLogin()
   password << QMd5(QString(_d->_cPassword + salt  + _d->_cUsername))
            << _d->_cPassword
            << QMd5(QString(_d->_cPassword + "OpenMFG" + _d->_cUsername)) ;      // this must be last
-  int passwordidx; // not declared in for () because we need it later
-  for (passwordidx = 0; passwordidx < password.size() && ! db.isOpen(); passwordidx++)
+  int passwordidx = 0; // not declared in for () because we need it later
+  foreach (QString p, password)
   {
     foreach (QString options, connectionOptions)
     {
+      if (DEBUG)
+        qDebug() << options << passwordidx;
       db.setConnectOptions(options);
       db.setPassword(password.at(passwordidx));
       if (db.open())
-        break;
+        goto connected;
     }
+    passwordidx++;
   }
 
+connected:
   if (db.isOpen())
   {
-    QString earliest = "9.3.0",
-            latest   = "9.7.0";
+    QString earliest = "9.5.0",
+            latest   = "11.0.0";
     XSqlQuery checkVersion;   // include earliest in the range but exclude latest
     checkVersion.prepare("SELECT compareVersion(:earliest) <= 0"
                          "   AND compareVersion(:latest)   > 0 AS ok,"

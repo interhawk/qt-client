@@ -583,7 +583,6 @@ FORMS =   absoluteCalendarItem.ui               \
           taxCodes.ui                           \
           taxDetail.ui                          \
           taxRegistration.ui                    \
-          taxRegistrations.ui                   \
           taxType.ui                            \
           taxTypes.ui                           \
           taxZone.ui                            \

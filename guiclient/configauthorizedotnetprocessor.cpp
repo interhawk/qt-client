@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2016 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -33,10 +33,9 @@ ConfigAuthorizeDotNetProcessor::ConfigAuthorizeDotNetProcessor(QWidget* parent, 
   _anEncap->setText(_metrics->value("CCANEncap"));
   _anDuplicateWindow->setValue(_metrics->value("CCANDuplicateWindow").toInt());
 
-  _anMD5Hash->setText(_metrics->value("CCANMD5Hash"));
-  _anMD5HashSetOnGateway->setChecked(_metrics->boolean("CCANMD5HashSetOnGateway"));
-  _anMD5HashWarn->setChecked(_metrics->value("CCANMD5HashAction") == "W");
-  _anMD5HashFail->setChecked(_metrics->value("CCANMD5HashAction") == "F");
+  _anCheckSigKey->setChecked(_metrics->boolean("CCANCheckSigKey"));
+  _anSigKeyWarn->setChecked(_metrics->value("CCANSigKeyAction") == "W");
+  _anSigKeyFail->setChecked(_metrics->value("CCANSigKeyAction") == "F");
 
   if (! _metrics->value("CCANCurrency").isEmpty())
     _anCurrFixedValue->setId(_metrics->value("CCANCurrency").toInt());
@@ -45,9 +44,9 @@ ConfigAuthorizeDotNetProcessor::ConfigAuthorizeDotNetProcessor(QWidget* parent, 
   _anIgnoreSSLErrors->setChecked(_metrics->boolean("CCANIgnoreSSLErrors"));
 
   if (0 != _metricsenc)
-    _anMD5Hash->setText(_metricsenc->value("CCANMD5Hash"));
+    _anSigKey->setText(_metricsenc->value("CCANSigKey"));
   else
-    _anMD5Hash->setEnabled(false);
+    _anSigKey->setEnabled(false);
 
   sDuplicateWindow(_anDuplicateWindow->value());
 }
@@ -68,22 +67,21 @@ bool ConfigAuthorizeDotNetProcessor::sSave()
   _metrics->set("CCANDelim",             _anDelim->text());
   _metrics->set("CCANEncap",             _anEncap->text());
   _metrics->set("CCANDuplicateWindow",   _anDuplicateWindow->cleanText());
-  _metrics->set("CCANMD5HashSetOnGateway", _anMD5HashSetOnGateway->isChecked());
-  if (_anMD5HashWarn->isChecked())
-    _metrics->set("CCANMD5HashAction", QString("W"));
-  else if (_anMD5HashFail->isChecked())
-    _metrics->set("CCANMD5HashAction", QString("F"));
+  _metrics->set("CCANCheckSigKey",       _anCheckSigKey->isChecked());
+  if (_anSigKeyWarn->isChecked())
+    _metrics->set("CCANSigKeyAction", QString("W"));
+  else if (_anSigKeyFail->isChecked())
+    _metrics->set("CCANSigKeyAction", QString("F"));
 
   _metrics->set("CCANCurrency", _anCurrFixedValue->id());
   _metrics->set("CCANWellsFargoSecureSource", _anUsingWellsFargoSecureSource->isChecked());
-  _metrics->set("CCANMD5HashSetOnGateway", _anMD5HashSetOnGateway->isChecked());
   _metrics->set("CCANIgnoreSSLErrors",     _anIgnoreSSLErrors->isChecked());
 
   _metrics->load();
 
   if (0 != _metricsenc)
   {
-    _metricsenc->set("CCANMD5Hash",     _anMD5Hash->text());
+    _metricsenc->set("CCANSigKey",     _anSigKey->text());
     _metricsenc->load();
   }
 

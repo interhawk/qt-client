@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -558,10 +558,13 @@ void contact::sSave()
   }
   if (saveResult < 0)   // check from errors for CHECK and CHANGE* saves
   {
-    ErrorReporter::error(QtCriticalMsg, this, tr("Saving Address"),
-                         tr("<p>There was an error saving this Address (%1). "
-                            "Check the database server log for errors.")
-                         .arg(saveResult), __FILE__, __LINE__);
+    if (saveResult == -99)
+      return; // Privilege fail, message already presented.
+    else
+      ErrorReporter::error(QtCriticalMsg, this, tr("Saving Address"),
+                           tr("<p>There was an error saving this Address (%1). "
+                              "Check the database server log for errors.")
+                           .arg(saveResult), __FILE__, __LINE__);
     return;
   }
 

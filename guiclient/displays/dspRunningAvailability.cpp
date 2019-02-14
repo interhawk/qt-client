@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -157,7 +157,7 @@ void dspRunningAvailability::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelec
       ordertype == tr("Planned P/O") )
   {
     if (ordertype == tr("Planned W/O (firmed)") || ordertype == tr("Planned P/O (firmed)") )
-      pMenu->addAction(tr("Soften Order..."), this, SLOT(sSoftenOrder()));
+      pMenu->addAction(tr("Soften Order"), this, SLOT(sSoftenOrder()));
     else
       pMenu->addAction(tr("Firm Order..."), this, SLOT(sFirmOrder()));
  
@@ -168,31 +168,31 @@ void dspRunningAvailability::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelec
   else if (ordertype.contains("W/O") &&
 	  !(ordertype == tr("Planned W/O Req. (firmed)") || ordertype == tr("Planned W/O Req.")))
   {
-    pMenu->addAction(tr("View Work Order Details..."), this, SLOT(sViewWo()));
-    menuItem = pMenu->addAction(tr("Work Order Schedule by Item..."), this, SLOT(sDspWoScheduleByWorkOrder()));
+    pMenu->addAction(tr("View Work Order Details"), this, SLOT(sViewWo()));
+    menuItem = pMenu->addAction(tr("Work Order Schedule by Item"), this, SLOT(sDspWoScheduleByWorkOrder()));
     menuItem->setEnabled( _privileges->check("MaintainWorkOrders") || _privileges->check("ViewWorkOrders"));
   }
   else if (ordertype == "S/O")
   {
-    menuItem = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sViewSo()));
+    menuItem = pMenu->addAction(tr("View Sales Order"), this, SLOT(sViewSo()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
-    menuItem = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEditSo()));
+    menuItem = pMenu->addAction(tr("Edit Sales Order"), this, SLOT(sEditSo()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
   }
 
   else if (ordertype == "T/O")
   {
-    menuItem = pMenu->addAction(tr("View Transfer Order..."), this, SLOT(sViewTo()));
+    menuItem = pMenu->addAction(tr("View Transfer Order"), this, SLOT(sViewTo()));
     menuItem->setEnabled(_privileges->check("ViewTransferOrders"));
-    menuItem = pMenu->addAction(tr("Edit Transfer Order..."), this, SLOT(sEditTo()));
+    menuItem = pMenu->addAction(tr("Edit Transfer Order"), this, SLOT(sEditTo()));
     menuItem->setEnabled(_privileges->check("MaintainTransferOrders"));
   }
 
   else if (ordertype == "P/O")
   {
-    menuItem = pMenu->addAction(tr("View Purchase Order..."), this, SLOT(sViewPo()));
+    menuItem = pMenu->addAction(tr("View Purchase Order"), this, SLOT(sViewPo()));
     menuItem->setEnabled(_privileges->check("ViewPurchaseOrders"));
-    menuItem = pMenu->addAction(tr("Edit Purchase Order..."), this, SLOT(sEditPo()));
+    menuItem = pMenu->addAction(tr("Edit Purchase Order"), this, SLOT(sEditPo()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
   }
 

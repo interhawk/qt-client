@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -106,7 +106,7 @@ void dspInvoiceRegister::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 
   if (list()->altId() == 1)
   {
-    menuItem = pMenu->addAction(tr("View Invoice..."), this, SLOT(sViewInvoice()));
+    menuItem = pMenu->addAction(tr("View Invoice"), this, SLOT(sViewInvoice()));
     if (! _privileges->check("MaintainMiscInvoices") &&
         ! _privileges->check("ViewMiscInvoices"))
       menuItem->setEnabled(false);
@@ -114,21 +114,21 @@ void dspInvoiceRegister::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem*, int)
 
   else if (list()->altId() == 2)
   {
-    menuItem = pMenu->addAction(tr("View Credit Memo..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Credit Memo"), this, SLOT(sViewCreditMemo()));
     if (! _privileges->check("MaintainARMemos") &&
         ! _privileges->check("ViewARMemos"))
       menuItem->setEnabled(false);
   }
   else if (list()->altId() == 3)
   {
-    menuItem = pMenu->addAction(tr("View Debit Memo..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Debit Memo"), this, SLOT(sViewCreditMemo()));
     if (! _privileges->check("MaintainARMemos") &&
         ! _privileges->check("ViewARMemos"))
       menuItem->setEnabled(false);
   }
   else if (list()->altId() == 4)
   {
-    menuItem = pMenu->addAction(tr("View Customer Deposit..."), this, SLOT(sViewCreditMemo()));
+    menuItem = pMenu->addAction(tr("View Customer Deposit"), this, SLOT(sViewCreditMemo()));
     if (! _privileges->check("MaintainARMemos") &&
         ! _privileges->check("ViewARMemos"))
       menuItem->setEnabled(false);

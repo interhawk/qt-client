@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -122,21 +122,21 @@ void workOrderMaterials::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *)
   double qtyiss = _womatl->rawValue("womatl_qtyiss").toDouble();
   //QAction *menuItem;
 
-  (void)pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
-  (void)pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  (void)pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
+  (void)pMenu->addAction(tr("View"), this, SLOT(sView()));
   
   if (qtyiss == 0.0)
-    (void)pMenu->addAction(tr("Delete..."), this, SLOT(sDelete()));
+    (void)pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   
   pMenu->addSeparator();
   
-  (void)pMenu->addAction(tr("View Availability..."), this, SLOT(sViewAvailability()));
+  (void)pMenu->addAction(tr("View Availability"), this, SLOT(sViewAvailability()));
   
   pMenu->addSeparator();
   
-  (void)pMenu->addAction(tr("View Item-Defined Subsitute Availability..."), this, SLOT(sViewSubstituteAvailability()));
+  (void)pMenu->addAction(tr("View Item-Defined Subsitute Availability"), this, SLOT(sViewSubstituteAvailability()));
   if (qtyiss == 0.0)
-    (void)pMenu->addAction(tr("Substitute..."), this, SLOT(sSubstitute()));
+    (void)pMenu->addAction(tr("Substitute"), this, SLOT(sSubstitute()));
 }
 
 void workOrderMaterials::sNew()

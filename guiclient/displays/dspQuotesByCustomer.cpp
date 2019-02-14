@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -69,13 +69,13 @@ void dspQuotesByCustomer::sPopulatePo()
 
 void dspQuotesByCustomer::sPopulateMenu(QMenu *menuThis, QTreeWidgetItem*, int)
 {
-  menuThis->addAction(tr("Edit..."), this, SLOT(sEditOrder()));
-  menuThis->addAction(tr("View..."), this, SLOT(sViewOrder()));
+  menuThis->addAction(tr("Edit"), this, SLOT(sEditOrder()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewOrder()));
 
   if (_privileges->check("ConvertQuotes"))
   {
     menuThis->addSeparator();
-    menuThis->addAction(tr("Convert..."), this, SLOT(sConvert()));
+    menuThis->addAction(tr("Convert"), this, SLOT(sConvert()));
   }
 }
 

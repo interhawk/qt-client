@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -365,7 +365,7 @@ VirtualClusterLineEdit::VirtualClusterLineEdit(QWidget* pParent,
     connect(_listAct, SIGNAL(triggered()), this, SLOT(sList()));
     connect(_searchAct, SIGNAL(triggered()), this, SLOT(sSearch()));
 
-    _infoAct = new QAction(tr("Info..."), this);
+    _infoAct = new QAction(tr("Info"), this);
     _infoAct->setObjectName("_infoAct");
     _infoAct->setShortcut(QKeySequence(tr("Ctrl+Shift+I")));
     _infoAct->setShortcutContext(Qt::WidgetWithChildrenShortcut);
@@ -374,7 +374,7 @@ VirtualClusterLineEdit::VirtualClusterLineEdit(QWidget* pParent,
     connect(_infoAct, SIGNAL(triggered()), this, SLOT(sInfo()));
     addAction(_infoAct);
 
-    _openAct = new QAction(tr("Open..."), this);
+    _openAct = new QAction(tr("Open"), this);
     _openAct->setObjectName("_openAct");
     _openAct->setShortcut(QKeySequence(tr("Ctrl+Shift+O")));
     _openAct->setShortcutContext(Qt::WidgetWithChildrenShortcut);
@@ -383,7 +383,7 @@ VirtualClusterLineEdit::VirtualClusterLineEdit(QWidget* pParent,
     connect(_openAct, SIGNAL(triggered()), this, SLOT(sOpen()));
     addAction(_openAct);
 
-    _copyAct = new QAction(tr("Copy..."), this);
+    _copyAct = new QAction(tr("Copy"), this);
     _copyAct->setObjectName("_copyAct");
     _copyAct->setShortcut(QKeySequence(tr("Ctrl+Shift+C")));
     _copyAct->setShortcutContext(Qt::WidgetWithChildrenShortcut);
@@ -392,7 +392,7 @@ VirtualClusterLineEdit::VirtualClusterLineEdit(QWidget* pParent,
     connect(_copyAct, SIGNAL(triggered()), this, SLOT(sCopy()));
     addAction(_copyAct);
 
-    _newAct = new QAction(tr("New..."), this);
+    _newAct = new QAction(tr("New"), this);
     _newAct->setObjectName("_newAct");
     _newAct->setShortcut(QKeySequence(tr("Ctrl+Shift+N")));
     _newAct->setShortcutContext(Qt::WidgetWithChildrenShortcut);

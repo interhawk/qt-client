@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -126,15 +126,15 @@ void dspAPOpenItemsByVendor::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *select
 
   if (list()->currentItem()->text("f_doctype") == tr("Voucher"))
   {
-    menuItem = pMenu->addAction(tr("View Voucher..."), this, SLOT(sViewVoucher()));
+    menuItem = pMenu->addAction(tr("View Voucher"), this, SLOT(sViewVoucher()));
     menuItem->setEnabled(_privileges->check("ViewVouchers") || _privileges->check("MaintainVouchers"));
   }
   
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   if (!_privileges->check("EditAPOpenItem"))
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
   XSqlQuery menu;
   menu.prepare("SELECT apopen_status FROM apopen WHERE apopen_id=:apopen_id;");
   menu.bindValue(":apopen_id", list()->id());

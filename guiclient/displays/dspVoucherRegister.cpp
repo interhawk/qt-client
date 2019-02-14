@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -104,7 +104,7 @@ enum SetResponse dspVoucherRegister::set(const ParameterList &pParams)
 
 void dspVoucherRegister::sPopulateMenu(QMenu * menuThis, QTreeWidgetItem*, int)
 {
-  menuThis->addAction(tr("View..."), this, SLOT(sViewTrans()));
+  menuThis->addAction(tr("View"), this, SLOT(sViewTrans()));
 
   XTreeWidgetItem *item = dynamic_cast<XTreeWidgetItem*>(list()->currentItem());
   if(0 == item)
@@ -112,11 +112,11 @@ void dspVoucherRegister::sPopulateMenu(QMenu * menuThis, QTreeWidgetItem*, int)
   QString doctype = item->rawValue("gltrans_doctype").toString();
 
   if (doctype == "VO")
-    menuThis->addAction(tr("View Voucher..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Voucher"), this, SLOT(sViewDocument()));
   else if (doctype == "IN")
-    menuThis->addAction(tr("View Invoice..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Invoice"), this, SLOT(sViewDocument()));
   else if (doctype == "PO")
-    menuThis->addAction(tr("View Purchase Order..."), this, SLOT(sViewDocument()));
+    menuThis->addAction(tr("View Purchase Order"), this, SLOT(sViewDocument()));
 }
 
 bool dspVoucherRegister::setParams(ParameterList & params)

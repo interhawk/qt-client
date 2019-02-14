@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -92,18 +92,18 @@ void dspPurchaseReqsByItem::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem* pItem, 
 
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Running Availability..."), this, SLOT(sDspRunningAvailability()));
+  menuItem = pMenu->addAction(tr("Running Availability"), this, SLOT(sDspRunningAvailability()));
   menuItem->setEnabled(_privileges->check("ViewInventoryAvailability"));
 
   pMenu->addSeparator();
 
-  menuItem = pMenu->addAction(tr("Edit P/R..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit P/R"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseRequests"));
 
   menuItem = pMenu->addAction(tr("Release P/R..."), this, SLOT(sRelease()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
 
-  menuItem = pMenu->addAction(tr("Delete P/R..."), this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Delete P/R"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainPurchaseRequests"));
 
   if(item->rawValue("parent").toString().indexOf("S/O") == 0)

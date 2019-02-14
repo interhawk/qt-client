@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -16,6 +16,7 @@
 #include "xwidget.h"
 #include <parameter.h>
 #include "contactcluster.h"
+#include "taxRegistrations.h"
 #include "ui_vendor.h"
 
 class ParameterList;
@@ -53,11 +54,6 @@ public slots:
     virtual void sViewAddress();
     virtual void sDeleteAddress();
     virtual void sFillAddressList();
-    virtual void sFillTaxregList();
-    virtual void sNewTaxreg();
-    virtual void sEditTaxreg();
-    virtual void sViewTaxreg();
-    virtual void sDeleteTaxreg();
     virtual void sHandleButtons();
     virtual void sHandleDistButtons();
     virtual void sNumberEdited();
@@ -93,6 +89,7 @@ protected:
     dspPoItemReceivingsByVendor *_receipts;
     dspVendorAPHistory          *_history;
     dspCheckRegister            *_checks;
+    taxRegistrations            *_taxreg;
 
 private:
     int _mode;

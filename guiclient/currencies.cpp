@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -176,14 +176,14 @@ void currencies::sPopulateMenu(QMenu* pMenu)
 {
   QAction *menuItem;
   
-  menuItem = pMenu->addAction(tr("View..."));
+  menuItem = pMenu->addAction(tr("View"));
   connect(menuItem, SIGNAL(triggered()), this, SLOT(sView()));
   
-  menuItem = pMenu->addAction(tr("Edit..."));
+  menuItem = pMenu->addAction(tr("Edit"));
   connect(menuItem, SIGNAL(triggered()), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainCurrencies"));
   
-  menuItem = pMenu->addAction(tr("Delete..."));
+  menuItem = pMenu->addAction(tr("Delete"));
   connect(menuItem, SIGNAL(triggered()), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainCurrencies"));
 }

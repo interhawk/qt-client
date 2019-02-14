@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1633,11 +1633,13 @@ void XTreeWidget::sExport()
 
   ExportOptions eo;
   QString filetype, delimSelected;
+  bool openAutomatically;
 
   if (!eo.exec())
     return;
   filetype = eo.getFiletype();
   delimSelected = eo.getDelim();
+  openAutomatically = eo.getOpen();
   
   if(delimSelected == "{tab}")
       delimSelected = "\t";
@@ -1686,7 +1688,9 @@ void XTreeWidget::sExport()
     }
     writer.write(doc);
   }
-  QDesktopServices::openUrl(fi.filePath());
+
+  if(openAutomatically)
+    QDesktopServices::openUrl(fi.filePath());
 }
 
 void XTreeWidget::mousePressEvent(QMouseEvent *event)

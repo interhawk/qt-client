@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2017 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -123,10 +123,10 @@ void dspOrderActivityByProject::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem*, i
 
   if(list()->altId() == 5)
   {
-    menuItem = pMenu->addAction(tr("Edit Task..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Task"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainAllProjects") || _privileges->check("MaintainPersonalProjects"));
 
-    menuItem = pMenu->addAction(tr("View Task..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Task"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainAllProjects") ||
 			 _privileges->check("MaintainPersonalProjects") ||
                          _privileges->check("ViewAllProjects")  ||
@@ -136,40 +136,40 @@ void dspOrderActivityByProject::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem*, i
 
   if(list()->altId() == 15)
   {
-    menuItem = pMenu->addAction(tr("Edit Quote..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Quote"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainQuotes"));
 
-    menuItem = pMenu->addAction(tr("View Quote..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Quote"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainQuotes") ||
                          _privileges->check("ViewQuotes") );
   }
 
   if(list()->altId() == 17)
   {
-    menuItem = pMenu->addAction(tr("Edit Quote Item..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Quote Item"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainQuotes"));
 
-    menuItem = pMenu->addAction(tr("View Quote Item..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Quote Item"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainQuotes") ||
                          _privileges->check("ViewQuotes"));
   }
 
   if(list()->altId() == 25)
   {
-    menuItem = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Sales Order"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
 
-    menuItem = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Sales Order"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders") ||
                          _privileges->check("ViewSalesOrders"));
   }
 
   if(list()->altId() == 27)
   {
-    menuItem = pMenu->addAction(tr("Edit Sales Order Item..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Sales Order Item"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
 
-    menuItem = pMenu->addAction(tr("View Sales Order Item..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Sales Order Item"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders") ||
                          _privileges->check("ViewSalesOrders"));
   }
@@ -178,11 +178,11 @@ void dspOrderActivityByProject::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem*, i
   {
     if (list()->rawValue("status") != "Posted")
     {
-      menuItem = pMenu->addAction(tr("Edit Invoice..."), this, SLOT(sEdit()));
+      menuItem = pMenu->addAction(tr("Edit Invoice"), this, SLOT(sEdit()));
       menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
     }
 
-    menuItem = pMenu->addAction(tr("View Invoice..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Invoice"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainMiscInvoices") ||
                          _privileges->check("ViewMiscInvoices"));
   }
@@ -191,48 +191,48 @@ void dspOrderActivityByProject::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem*, i
   {
     if (list()->rawValue("status") != "Posted")
     {
-      menuItem = pMenu->addAction(tr("Edit Invoice Item..."), this, SLOT(sEdit()));
+      menuItem = pMenu->addAction(tr("Edit Invoice Item"), this, SLOT(sEdit()));
       menuItem->setEnabled(_privileges->check("MaintainMiscInvoices"));
     }
 
-    menuItem = pMenu->addAction(tr("View Invoice Item..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Invoice Item"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainMiscInvoices") ||
                          _privileges->check("ViewMiscInvoices"));
   }
 
   if(list()->altId() == 45)
   {
-    menuItem = pMenu->addAction(tr("Edit Work Order..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Work Order"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
 
-    menuItem = pMenu->addAction(tr("View Work Order..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Work Order"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainWorkOrders") ||
                          _privileges->check("ViewWorkOrders"));
   }
 
   if(list()->altId() == 55)
   {
-    menuItem = pMenu->addAction(tr("View Purchase Request..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Purchase Request"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseRequests") ||
                          _privileges->check("ViewPurchaseRequests"));
   }
 
   if(list()->altId() == 65)
   {
-    menuItem = pMenu->addAction(tr("Edit Purchase Order..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Purchase Order"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
 
-    menuItem = pMenu->addAction(tr("View Purchase Order..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Purchase Order"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                          _privileges->check("ViewPurchaseOrders"));
   }
 
   if(list()->altId() == 67)
   {
-    menuItem = pMenu->addAction(tr("Edit Purchase Order Item..."), this, SLOT(sEdit()));
+    menuItem = pMenu->addAction(tr("Edit Purchase Order Item"), this, SLOT(sEdit()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders"));
 
-    menuItem = pMenu->addAction(tr("View Purchase Order Item..."), this, SLOT(sView()));
+    menuItem = pMenu->addAction(tr("View Purchase Order Item"), this, SLOT(sView()));
     menuItem->setEnabled(_privileges->check("MaintainPurchaseOrders") ||
                          _privileges->check("ViewPurchaseOrders"));
   }

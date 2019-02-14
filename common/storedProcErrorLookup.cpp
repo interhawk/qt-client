@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1485,17 +1485,16 @@ const struct {
 
   { "postValueIntoInvBalance", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "An inventory balance record was not found "
                                "for item %1.  This is typically caused by that item missing standard costs"), 0, "" },
-
-  { "postVoucher",	-5, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The Cost Category for one or more Item Sites "
-			       "for the Purchase Order covered by this Voucher "
-			       "is not configured with Purchase Price Variance "
-			       "or P/O Liability Clearing Account Numbers or "
-			       "the Vendor of this Voucher is not configured "
-			       "with an A/P Account Number. Because of this, "
-			       "G/L Transactions cannot be posted for this "
-			       "Voucher."),
-								0, "" },
-
+  { "postVoucher",	-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot Post Voucher for a negative or zero amount "),0, "" },
+  { "postVoucher",	-2, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot Post Voucher with negative or zero distributions"),0, "" },
+  { "postVoucher",	-3, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot Post Voucher with distributions greater than the voucher amount"),0, "" },
+  { "postVoucher",	-4, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot Post Voucher with distributions less than the voucher amount"),0, "" },
+  { "postVoucher",	-6, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot Post Voucher as one or more of the line items have already been fully vouchered"),0, "" },
+  { "postVoucher",	-7, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot Post Voucher due to unassigned G/L Accounts"),0, "" },
+  { "postVoucher",	-8, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot Post Voucher due to unassigned G/L Accounts"),0, "" },
+  { "postVoucher",	-9, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot Post Voucher #% due to an unassigned A/P Account"),0, " " },
+  { "postVoucher",	-10, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot post Voucher #% as it is already posted "),0, "" },
+  { "postVoucher",	-11, QT_TRANSLATE_NOOP("storedProcErrorLookup", " Cannot post Voucher as it has items without any tagged receipts or without distributions"),0, "" },
   { "_raheadBeforeUpdateTrigger", -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You do not have privileges to change "
                                "a Return Authorization."), 0, "" },
   { "_raheadBeforeUpdateTrigger", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Returns may not be saved with disposition "

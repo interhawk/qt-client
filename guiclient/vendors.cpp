@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -131,13 +131,13 @@ void vendors::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("Edit Vendor..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("Edit Vendor"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainVendors"));
 
-  menuItem = pMenu->addAction(tr("View Vendor..."), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("View Vendor"), this, SLOT(sView()));
   menuItem->setEnabled(_privileges->check("MaintainVendors") || _privileges->check("ViewVendors"));
 
-  menuItem = pMenu->addAction(tr("Delete Vendor..."), this, SLOT(sDelete()));
+  menuItem = pMenu->addAction(tr("Delete Vendor"), this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainVendors"));
 }
 

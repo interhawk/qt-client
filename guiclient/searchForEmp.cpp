@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -133,15 +133,15 @@ void searchForEmp::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *pSelected)
 {
   QAction *menuItem;
 
-  menuItem = pMenu->addAction(tr("View..."), this, SLOT(sView()));
-  menuItem = pMenu->addAction(tr("Edit..."), this, SLOT(sEdit()));
+  menuItem = pMenu->addAction(tr("View"), this, SLOT(sView()));
+  menuItem = pMenu->addAction(tr("Edit"), this, SLOT(sEdit()));
   menuItem->setEnabled(_privileges->check("MaintainEmployees"));
 
   if (((XTreeWidgetItem *)pSelected)->altId() > 0)
   {
     pMenu->addSeparator();
-    menuItem = pMenu->addAction(tr("View Manager..."), this, SLOT(sViewMgr()));
-    menuItem = pMenu->addAction(tr("Edit Manager..."), this, SLOT(sEditMgr()));
+    menuItem = pMenu->addAction(tr("View Manager"), this, SLOT(sViewMgr()));
+    menuItem = pMenu->addAction(tr("Edit Manager"), this, SLOT(sEditMgr()));
     menuItem->setEnabled(_privileges->check("MaintainEmployees"));
   }
 }

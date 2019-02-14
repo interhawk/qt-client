@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2018 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1751,19 +1751,19 @@ void purchaseOrder::sPopulateMenu( QMenu * pMenu, QTreeWidgetItem * pSelected )
 
   if (pSelected->text(_poitem->column("demand_type")) == tr("SO"))
   {
-    menuItem = pMenu->addAction(tr("View Sales Order..."), this, SLOT(sViewSo()));
+    menuItem = pMenu->addAction(tr("View Sales Order"), this, SLOT(sViewSo()));
     menuItem->setEnabled(_privileges->check("ViewSalesOrders"));
 
-    menuItem = pMenu->addAction(tr("Edit Sales Order..."), this, SLOT(sEditSo()));
+    menuItem = pMenu->addAction(tr("Edit Sales Order"), this, SLOT(sEditSo()));
     menuItem->setEnabled(_privileges->check("MaintainSalesOrders"));
   }
 
   else if (pSelected->text(_poitem->column("demand_type")) == "WO")
   {
-    menuItem = pMenu->addAction(tr("View Work Order..."), this, SLOT(sViewWo()));
+    menuItem = pMenu->addAction(tr("View Work Order"), this, SLOT(sViewWo()));
     menuItem->setEnabled(_privileges->check("ViewWorkOrders")); 
 
-    menuItem = pMenu->addAction(tr("Edit Work Order..."), this, SLOT(sEditWo()));
+    menuItem = pMenu->addAction(tr("Edit Work Order"), this, SLOT(sEditWo()));
     menuItem->setEnabled(_privileges->check("MaintainWorkOrders"));
   }
 }

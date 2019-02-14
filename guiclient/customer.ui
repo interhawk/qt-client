@@ -2,7 +2,7 @@
 <ui version="4.0">
  <comment>This file is part of the xTuple ERP: PostBooks Edition, a free and
 open source Enterprise Resource Planning software suite,
-Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
 It is licensed to you under the Common Public Attribution License
 version 1.0, the full text of which (including xTuple-specific Exhibits)
 is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -1492,70 +1492,6 @@ to be bound by its terms.</comment>
                </property>
               </widget>
              </item>
-             <item>
-              <layout class="QHBoxLayout">
-               <item>
-                <widget class="XTreeWidget" name="_taxreg"/>
-               </item>
-               <item>
-                <layout class="QVBoxLayout">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <widget class="QPushButton" name="_newTaxreg">
-                   <property name="text">
-                    <string>New</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="_editTaxreg">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="text">
-                    <string>Edit</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="_viewTaxreg">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="text">
-                    <string>View</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="_deleteTaxreg">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="text">
-                    <string>Delete</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer>
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
             </layout>
            </item>
            <item row="0" column="0">
@@ -2386,11 +2322,6 @@ to be bound by its terms.</comment>
   <tabstop>_graceDays</tabstop>
   <tabstop>_taxButton</tabstop>
   <tabstop>_taxzone</tabstop>
-  <tabstop>_taxreg</tabstop>
-  <tabstop>_newTaxreg</tabstop>
-  <tabstop>_editTaxreg</tabstop>
-  <tabstop>_viewTaxreg</tabstop>
-  <tabstop>_deleteTaxreg</tabstop>
   <tabstop>_creditcardsButton</tabstop>
   <tabstop>_cc</tabstop>
   <tabstop>_newCC</tabstop>
@@ -2421,70 +2352,6 @@ to be bound by its terms.</comment>
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>_taxreg</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_editTaxreg</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>57</x>
-     <y>207</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>131</x>
-     <y>207</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_taxreg</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_viewTaxreg</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>57</x>
-     <y>207</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>131</x>
-     <y>207</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_taxreg</sender>
-   <signal>valid(bool)</signal>
-   <receiver>_deleteTaxreg</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>57</x>
-     <y>207</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>131</x>
-     <y>207</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_taxreg</sender>
-   <signal>itemSelected(int)</signal>
-   <receiver>_editTaxreg</receiver>
-   <slot>animateClick()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>57</x>
-     <y>207</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>131</x>
-     <y>207</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>_charass</sender>
    <signal>itemSelected(int)</signal>

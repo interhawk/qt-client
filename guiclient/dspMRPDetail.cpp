@@ -1,7 +1,7 @@
 /*
  * This file is part of the xTuple ERP: PostBooks Edition, a free and
  * open source Enterprise Resource Planning software suite,
- * Copyright (c) 1999-2014 by OpenMFG LLC, d/b/a xTuple.
+ * Copyright (c) 1999-2019 by OpenMFG LLC, d/b/a xTuple.
  * It is licensed to you under the Common Public Attribution License
  * version 1.0, the full text of which (including xTuple-specific Exhibits)
  * is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -118,14 +118,14 @@ void dspMRPDetail::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int pColumn)
 
   _column = pColumn;
 
-  menuItem = pMenu->addAction(tr("View Allocations..."), this, SLOT(sViewAllocations()));
+  menuItem = pMenu->addAction(tr("View Allocations"), this, SLOT(sViewAllocations()));
   while ((mrpIndex < _mrp->topLevelItemCount()) &&
 	 (_mrp->topLevelItem(mrpIndex)->text(0) != tr("Allocations")))
     mrpIndex++;
   if (_mrp->topLevelItem(mrpIndex)->text(pColumn).toDouble() == 0.0)
     menuItem->setEnabled(false);
 
-  menuItem = pMenu->addAction(tr("View Orders..."), this, SLOT(sViewOrders()));
+  menuItem = pMenu->addAction(tr("View Orders"), this, SLOT(sViewOrders()));
   while ((mrpIndex < _mrp->topLevelItemCount()) &&
 	 (_mrp->topLevelItem(mrpIndex)->text(0) != tr("Orders")))
     mrpIndex++;
