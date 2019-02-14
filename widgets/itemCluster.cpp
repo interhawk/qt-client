@@ -27,9 +27,6 @@
 
 #define DEBUG false
 
-QString buildItemLineEditQuery(const QString, const QStringList, const QString, const unsigned int, bool);
-QString buildItemLineEditTitle(const unsigned int, const QString);
-
 QString buildItemLineEditQuery(const QString pPre, const QStringList pClauses, const QString pPost, const unsigned int pType, bool unionAlias)
 {
   QStringList clauses = pClauses;
@@ -55,28 +52,19 @@ QString buildItemLineEditQuery(const QString pPre, const QStringList pClauses, c
   else
   {
     sql = pPre + " FROM item "
-                 "      JOIN uom ON (uom_id=item_inv_uom_id)"
+                 "      JOIN uom ON uom_id = item_inv_uom_id"
                  "      LEFT OUTER JOIN itemalias ON (itemalias_item_id=item_id)"
                  "      LEFT OUTER JOIN crmacct ON (crmacct_id=itemalias_crmacct_id)";
   }
 
   if (pType & (ItemLineEdit::cLocationControlled | ItemLineEdit::cLotSerialControlled | ItemLineEdit::cDefaultLocation | ItemLineEdit::cActive))
-  {
-    sql += ", itemsite";
-    clauses << "(itemsite_item_id=item_id)";
-  }
+    sql += "JOIN itemsite ON itemsite_item_id = item_id";
 
   if (pType & (ItemLineEdit::cHasBom))
-  {
-    sql += ", bomitem";
-    clauses << "(bomitem_parent_item_id=item_id)";
-  }
+    sql += "JOIN bomitem ON bomitem_parent_item_id = item_id";
 
   if (pType & (ItemLineEdit::cUsedOnBom))
-  {
-    sql += ", bomitem";
-    clauses << "(bomitem_item_id=item_id)";
-  }
+    sql += "JOIN bomitem ON bomitem_item_id = item_id";
 
   if (pType & ItemLineEdit::cAllItemTypes_Mask)
   {
@@ -119,37 +107,29 @@ QString buildItemLineEditQuery(const QString pPre, const QStringList pClauses, c
       types << "'K'";
 
     if (!types.isEmpty())
-      clauses << QString("(item_type IN (" + types.join(",") + "))");
+      clauses << QString("item_type IN (" + types.join(",") + ")");
   }
 
   if (pType & (ItemLineEdit::cLocationControlled | ItemLineEdit::cLotSerialControlled | ItemLineEdit::cDefaultLocation))
   {
-    QString sub;
+    QStringList sub;
     if (pType & ItemLineEdit::cLocationControlled)
-      sub = "(itemsite_loccntrl)";
+      sub << "itemsite_loccntrl";
 
     if (pType & ItemLineEdit::cLotSerialControlled)
-    {
-      if (!sub.isEmpty())
-        sub += " OR ";
-      sub += "(itemsite_controlmethod IN ('L', 'S'))";
-    }
+      sub << "itemsite_controlmethod IN ('L', 'S')";
 
     if (pType & ItemLineEdit::cDefaultLocation)
-    {
-      if (!sub.isEmpty())
-        sub += " OR ";
-      sub += "(useDefaultLocation(itemsite_id))";
-    }
+      sub << "useDefaultLocation(itemsite_id)";
 
-    clauses << QString("( " + sub + " )");
+    clauses << QString("( " + sub.join(" OR ") + " )");
   }
 
   if (pType & ItemLineEdit::cSold)
-    clauses << "(item_sold)";
+    clauses << "item_sold";
 
   if (pType & (ItemLineEdit::cActive | ItemLineEdit::cItemActive))
-    clauses << "(item_active)";
+    clauses << "item_active";
 
   if (!clauses.isEmpty())
     sql += " WHERE (" + clauses.join(" AND ") + ")";
@@ -257,8 +237,7 @@ void ItemLineEditDelegate::setModelData(QWidget *editor,
 ItemLineEdit::ItemLineEdit(QWidget* pParent, const char* pName) :
     VirtualClusterLineEdit(pParent, "item", "item_id", "item_number", "(item_descrip1 || ' ' || item_descrip2) ", 0, 0, pName)
 {
-  if (DEBUG)
-    qDebug("ItemLineEdit::ItemLineEdit(%p, %s) entered", pParent, pName);
+  ENTERED << pParent << pName;
   setObjectName(pName ? pName : "ItemLineEdit");
 
   setTitles(tr("Item"), tr("Items"));
@@ -290,16 +269,17 @@ ItemLineEdit::ItemLineEdit(QWidget* pParent, const char* pName) :
 
 void ItemLineEdit::setItemNumber(const QString& pNumber)
 {
-  if (DEBUG)
-    qDebug("%s::setItemNumber(%s) entered",
-           qPrintable(objectName()), qPrintable(pNumber));
+  ENTERED << pNumber;
   XSqlQuery item;
   bool      found = false;
 
   _parsed = true;
 
   if (pNumber == text())
+  {
+    RETURNING << "[pNumber == text()]";
     return;
+  }
 
   if (!pNumber.isEmpty())
   {
@@ -337,6 +317,7 @@ void ItemLineEdit::setItemNumber(const QString& pNumber)
         params.append("searchNumber");
         params.append("searchUpc");
         sSearch(params);
+        RETURNING << "[after sSearch(search, searchNumber, searchUpc)]";
         return;
       }
       else
@@ -393,9 +374,7 @@ void ItemLineEdit::setItemNumber(const QString& pNumber)
 
 void ItemLineEdit::silentSetId(const int pId)
 {
-  if (DEBUG)
-    qDebug("%s::silentSetId(%d) entered",
-           qPrintable(objectName()), pId);
+  ENTERED << pId;
 
   XSqlQuery item;
   bool      found = false;
@@ -486,11 +465,12 @@ void ItemLineEdit::silentSetId(const int pId)
 
     emit valid(false);
   }
+  RETURNING << "with" << _id << _itemNumber;
 }
 
 void ItemLineEdit::setId(int pId)
 {
-  if (DEBUG) qDebug("%s::setId(%d) entered", qPrintable(objectName()), pId);
+  ENTERED << pId;
   bool changed = (pId != _id);
   silentSetId(pId);
   if (changed)
@@ -498,13 +478,12 @@ void ItemLineEdit::setId(int pId)
     emit privateIdChanged(_id);
     emit newId(_id);
   }
+  RETURNING;
 }
 
 void ItemLineEdit::setItemsiteid(int pItemsiteid)
 {
-  if (DEBUG)
-    qDebug("%s::setItemsiteId(%d) entered",
-           qPrintable(objectName()), pItemsiteid);
+  ENTERED << pItemsiteid;
   XSqlQuery itemsite;
   itemsite.prepare( "SELECT itemsite_item_id, itemsite_warehous_id "
                     "FROM itemsite "
@@ -521,6 +500,7 @@ void ItemLineEdit::setItemsiteid(int pItemsiteid)
     setId(-1);
     emit warehouseIdChanged(-1);
   }
+  RETURNING << _id << "from" << pItemsiteid;
 }
 
 void ItemLineEdit::setCRMAcctId(unsigned int pAcct)
@@ -563,7 +543,7 @@ void ItemLineEdit::sCopy()
 
 void ItemLineEdit::sHandleCompleter()
 {
-  if (DEBUG) qDebug("%s::sHandleCompleter() entered", qPrintable(objectName()));
+  ENTERED;
   if (!hasFocus())
     return;
 
@@ -676,12 +656,15 @@ void ItemLineEdit::sList()
 
 void ItemLineEdit::sSearch()
 {
+  ENTERED;
   ParameterList params;
   sSearch(params);
+  RETURNING;
 }
 
 void ItemLineEdit::sSearch(ParameterList params)
 {
+  ENTERED << params.size() << "params";
   disconnect(this, SIGNAL(editingFinished()), this, SLOT(sParse()));
   params.append("item_id", _id);
 
@@ -708,11 +691,17 @@ void ItemLineEdit::sSearch(ParameterList params)
     if (numQ.first())
       newdlg->setQuery(numQ);
   }
-  newdlg->setSearchText(text());
+  newdlg->setSearchText(stripped);
   int id;
   if ((id = newdlg->exec()) != QDialog::Rejected)
+  {
     setId(id);
+    if (DEBUG) qDebug() << (_alias.isEmpty() ? QString() : _alias.at(0));
+    emit aliasChanged(_alias.isEmpty() ? QString() : _alias.at(0));
+  }
+
   connect(this, SIGNAL(editingFinished()), this, SLOT(sParse()));
+  RETURNING;
 }
 
 itemList* ItemLineEdit::listFactory()
@@ -793,17 +782,13 @@ bool ItemLineEdit::isConfigured()
 
 bool ItemLineEdit::isFractional()
 {
-    sParse();
-    return _fractional;
+  sParse();
+  return _fractional;
 }
 
 void ItemLineEdit::sParse()
 {
-  if (DEBUG)
-    qDebug("%s::sParse() entered with parsed %d, text [%s], "
-           "_useValidationQuery %d, _useQuery %d",
-           qPrintable(objectName()), _parsed, qPrintable(text()),
-           _useValidationQuery, _useQuery);
+  ENTERED << _parsed << text() << _useValidationQuery << _useQuery;
   if (_completerId)
   {
     int id = _completerId;
@@ -818,6 +803,7 @@ void ItemLineEdit::sParse()
     if (stripped.isEmpty())
     {
       setId(-1);
+      RETURNING << "[stripped.isEmpty]";
       return;
     }
     else if (_useValidationQuery)
@@ -850,11 +836,13 @@ void ItemLineEdit::sParse()
           params.append("searchNumber");
           params.append("searchUpc");
           sSearch(params);
+          RETURNING << "[after sSearch]";
           return;
         }
         else if (oneq.first())
         {
           setId(itemid);
+          RETURNING << "[after oneq.first()]";
           return;
         }
       }
@@ -868,6 +856,7 @@ void ItemLineEdit::sParse()
             item.value("item_upccode").toString().startsWith(stripped))
         {
           setId(item.value("item_id").toInt());
+          RETURNING << "[matching item_number/item_upscode]";
           return;
         }
       }
@@ -896,6 +885,7 @@ void ItemLineEdit::sParse()
         setId(item.value("item_id").toInt());
         if(_itemNumber != item.value("number").toString())
           emit aliasChanged(item.value("number").toString());
+        RETURNING << "[after number POSITION = 1]";
         return;
       }
       // item number not found, check upccode
@@ -908,6 +898,7 @@ void ItemLineEdit::sParse()
       if (item.first())
       {
         setId(item.value("item_id").toInt());
+        RETURNING << "[after upccode POSITION = 1]";
         return;
       }
       if (_x_metrics && _x_metrics->boolean("AutoItemSearch"))
@@ -919,11 +910,13 @@ void ItemLineEdit::sParse()
         params.append("searchUpc");
         params.append("searchAlias");
         sSearch(params);
+        RETURNING << "[AutoItemSearch]";
         return;
       }
     }
     setId(-1);
   }
+  RETURNING;
 }
 
 void ItemLineEdit::addExtraClause(const QString & pClause)
@@ -958,7 +951,6 @@ ItemCluster::ItemCluster(QWidget* pParent, const char* pName) :
   _grid->addWidget(_descrip2, 3, 1, 1, -1);
   setDescriptionVisible(true);
 
-//  Make some internal connections
   ItemLineEdit* itemNumber = static_cast<ItemLineEdit* >(_number);
   connect(itemNumber, SIGNAL(aliasChanged(const QString &)), this, SIGNAL(aliasChanged(const QString &)));
   connect(itemNumber, SIGNAL(privateIdChanged(int)), this, SIGNAL(privateIdChanged(int)));
@@ -1238,11 +1230,11 @@ itemSearch::itemSearch(QWidget* pParent, Qt::WindowFlags pFlags)
   _showInactive->setObjectName("_showInactive");
   selectorsLyt->addWidget(_showInactive, 5, 0);
 
-  // signals and slots connections
   connect( _showInactive, SIGNAL( clicked() ), this, SLOT( sFillList() ) );
   connect( _searchName, SIGNAL(clicked() ), this, SLOT( sFillList() ) );
   connect( _searchUpc, SIGNAL( clicked() ), this, SLOT( sFillList() ) );
   connect( _searchAlias, SIGNAL( clicked() ), this, SLOT( sFillList() ) );
+  connect(_listTab, SIGNAL(itemSelectionChanged()), this, SLOT(sItemSelectionChanged()));
 
   _listTab->setColumnCount(0);
   _listTab->addColumn(tr("Item Number"),  100,  Qt::AlignLeft,  true, "item_number" );
@@ -1379,7 +1371,6 @@ void itemSearch::sFillList()
              "       item_active, itemalias_number, crmacct_name";
       post = "ORDER BY item_number";
     }
-
     sql = buildItemLineEditQuery(pre, clauses, post, _itemType, false);
   }
 
@@ -1388,6 +1379,23 @@ void itemSearch::sFillList()
   search.bindValue(":searchString", _search->text());
   search.exec();
   _listTab->populate(search, _itemid);
+}
+
+void itemSearch::sItemSelectionChanged()
+{
+  ENTERED;
+  ItemLineEdit *lineEdit = qobject_cast<ItemLineEdit *>(_parent);
+  if (lineEdit)
+  {
+    lineEdit->_alias.clear();
+    foreach(QTreeWidgetItem *item, _listTab->selectedItems())
+    {
+      XTreeWidgetItem *x = dynamic_cast<XTreeWidgetItem*>(item);
+      if (x)
+        lineEdit->_alias.append(x->rawValue("itemalias_number").toString());
+    }
+  }
+  RETURNING << (lineEdit ? lineEdit->_alias : QStringList());
 }
 
 // script api //////////////////////////////////////////////////////////////////
