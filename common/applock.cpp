@@ -229,20 +229,18 @@ bool AppLock::release()
   if (_p->_myLock)
   {
     XSqlQuery q;
-    q.prepare("SELECT pg_advisory_unlock(CAST(oid AS INTEGER), :id) AS released"
+    q.prepare("SELECT pg_advisory_unlock(CAST(oid AS INTEGER), :id)"
               "  FROM pg_class"
               " WHERE relname = :table;");
     q.bindValue(":id",    _p->_id);
     q.bindValue(":table", _p->_table);
     q.exec();
+    // the unlock call returns true if the lock was released, false if there was no lock.
+    // we don't care _how_ the lock was cleared, just _that_ it was, so ignore the result.
     if (q.first())
     {
-      released = q.value("released").toBool();
-      if (released)
-      {
-        _p->_myLock    = false;
-        _p->_otherLock = false;
-      }
+      _p->_myLock    = false;
+      _p->_otherLock = false;
     }
     else if (ErrorReporter::error(QtCriticalMsg, qobject_cast<QWidget*>(parent()),
                                   tr("Unlocking Error"),
