@@ -793,7 +793,10 @@ void ItemLineEdit::sParse()
   {
     int id = _completerId;
     _completerId = 0;
+    QString alias = text().trimmed().toUpper();
     setId(id);
+    if (_itemNumber != alias)
+      emit aliasChanged(alias);
   }
   else if (!_parsed)
   {
