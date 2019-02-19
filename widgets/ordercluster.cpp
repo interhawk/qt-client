@@ -765,7 +765,7 @@ void OrderLineEdit::setId(const int pId, const QString &pType)
         clear();
       else if (!_lock.acquire(table, _id, AppLock::Interactive))
       {
-        QMessageBox::information(this, tr("Could lock order"),
+        QMessageBox::information(this, tr("Couldn't lock order"),
                                  tr("Could not lock this order"));
         clear();
       }
