@@ -132,7 +132,7 @@ AppLock::~AppLock()
 
 /** Try to acquire an application-level lock on the record described in the
     constructor or last call to this AppLock's acquire(table, id).
-  
+
    @return true if this AppLock instance appears to hold the lock
    @return false if the lock could not be acquired
 
@@ -219,17 +219,17 @@ bool AppLock::isLockedOut() const
   return _p->_otherLock;
 }
 
+// we don't care _how_ the lock gets cleared, just _that_ it gets cleared
 bool AppLock::release()
 {
   if (_p->_id < 0 || _p->_table.isEmpty() || ! _p->_dbIsOpen)
     return true;
 
-  bool released = false;
   _p->_error.clear();
   if (_p->_myLock)
   {
     XSqlQuery q;
-    q.prepare("SELECT pg_advisory_unlock(CAST(oid AS INTEGER), :id) AS released"
+    q.prepare("SELECT pg_advisory_unlock(CAST(oid AS INTEGER), :id)"
               "  FROM pg_class"
               " WHERE relname = :table;");
     q.bindValue(":id",    _p->_id);
@@ -237,28 +237,18 @@ bool AppLock::release()
     q.exec();
     if (q.first())
     {
-      released = q.value("released").toBool();
-      if (released)
-      {
-        _p->_myLock    = false;
-        _p->_otherLock = false;
-      }
+      _p->_myLock    = false;
+      _p->_otherLock = false;
     }
     else if (ErrorReporter::error(QtCriticalMsg, qobject_cast<QWidget*>(parent()),
                                   tr("Unlocking Error"),
                                   q, __FILE__, __LINE__))
+    {
       _p->_error = q.lastError().text();
+      return false;
+    }
   }
-  if (! released)
-  {
-    _p->updateLockStatus();
-    if (_p->_myLock)
-      _p->_error = tr("Could not release the lock.");
-    else
-      released = true;
-  }
-
-  return released;
+  return true;
 }
 
 QString AppLock::lastError() const
