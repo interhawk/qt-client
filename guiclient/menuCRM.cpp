@@ -98,7 +98,7 @@ menuCRM::menuCRM(GUIClient *Pparent) :
     // CRM / Tasks
     { "menu",			tr("&Tasks"),            (char*)taskMenu,        crmMenu,	"true", NULL, NULL, true	, NULL },
     { "crm.task",		tr("&New"),	         SLOT(sTask()),	        taskMenu,	"MaintainPersonalTaskItems MaintainAllTaskItems", NULL, NULL, true	, NULL },
-    { "crm.taskList",		tr("&List"),		 SLOT(sTaskList()),	taskMenu,	"MaintainPersonalTaskItems ViewPersonalTaskItems MaintainAllTaskItems ViewAllTaskItems", new QPixmap(":/images/toDoList.png"), toolBar, true	, tr("To-Do List") },
+    { "crm.taskList",		tr("&List"),		 SLOT(sTaskList()),	taskMenu,	"MaintainPersonalTaskItems ViewPersonalTaskItems MaintainAllTaskItems ViewAllTaskItems", new QPixmap(":/images/toDoList.png"), toolBar, true	, tr("Task List") },
     { "crm.taskListCalendar",	tr("&Calendar List..."), SLOT(sTaskListCalendar()),	taskMenu,	"MaintainPersonalTaskItems ViewPersonalTaskItems MaintainAllTaskItems ViewAllTaskItems", NULL, NULL, true, NULL},
 
     //  Project

@@ -235,8 +235,6 @@ void comment::set(const ParameterList &pParams)
         _cmnttype->setType(XComboBox::TaskCommentTypes);
       else if (_sourcetype == "TATC")
         _cmnttype->setType(XComboBox::TimeAttendanceCommentTypes);
-      else if (_sourcetype == "TD")
-        _cmnttype->setType(XComboBox::TodoItemCommentTypes);
       else if (_sourcetype == "TO")
         _cmnttype->setType(XComboBox::TransferOrderCommentTypes);
       else if (_sourcetype == "TI")

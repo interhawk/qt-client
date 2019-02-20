@@ -391,7 +391,7 @@ void taskListCalendar::sFillList(const QDate & date)
 
   _list->populate(itemQ);
 
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving To Do Item Information"),
+  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Task Information"),
                                 itemQ, __FILE__, __LINE__))
   {
     dontBotherMe = false;

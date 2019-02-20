@@ -673,7 +673,7 @@ void contact::sFillList()
   getp.append("quhead",     tr("Quote"));
   getp.append("secondary",  tr("Secondary Contact"));
   getp.append("shipto",     tr("Ship-To Address"));
-  getp.append("todo",       tr("To-Do Item"));
+  getp.append("task",       tr("Task"));
   getp.append("vend",       tr("Vendor"));
   getp.append("vendaddr",   tr("Vendor Address"));
   getp.append("vendcntct",  tr("Vendor Contact"));

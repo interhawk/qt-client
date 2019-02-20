@@ -78,9 +78,9 @@ class XTUPLEWIDGETS_EXPORT Documents : public QWidget, public Ui::documents, pub
       PurchaseOrderItem,ReturnAuth,         ReturnAuthItem,
       Quote,            QuoteItem,          SalesOrder,
       SalesOrderItem,   ShipTo,             TimeExpense,
-      Todo,             TransferOrder,      TransferOrderItem,
+      Task,             TransferOrder,      TransferOrderItem,
       Vendor,           Voucher,            Warehouse,
-      WorkOrder,                            ProjectTask
+      WorkOrder
     };
     Q_ENUM(DocumentSources)
 

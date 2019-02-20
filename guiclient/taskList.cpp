@@ -414,7 +414,7 @@ void taskList::sDelete()
                  "  FROM task"
                  " WHERE task_recurring_task_id=:id"
                  "   AND task_id!=:id;" ;
-      recurtype = "TODO";
+      recurtype = "TASK";
     }
 
     bool deleteAll  = false;
@@ -443,7 +443,7 @@ void taskList::sDelete()
         else if (ret == QMessageBox::Yes)
           deleteOne = true;
       }
-      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving To Do Item Information"),
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Task Information"),
                                     recurq, __FILE__, __LINE__))
       {
         return;
@@ -475,12 +475,12 @@ void taskList::sDelete()
 
       if (procresult < 0)
       {
-        ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Recurring To Do Item Information"),
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Recurring Task Information"),
                              storedProcErrorLookup("deleteOpenRecurringItems", procresult),
                              __FILE__, __LINE__);
         return;
       }
-      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Recurring To Do Item Information"),
+      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Recurring Task Information"),
                                     taskDelete, __FILE__, __LINE__))
       {
         return;

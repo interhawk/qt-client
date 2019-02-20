@@ -178,7 +178,7 @@ void eventManager::sPopulateMenu(QMenu *menu)
     menuItem = menu->addAction(tr("Delete Work Order..."), this, SLOT(sDeleteWorkOrder()));
   }
 
-  else if (_event->currentItem()->rawValue("evnttype_name").toString() == "TodoAlarm")
+  else if (_event->currentItem()->rawValue("evnttype_name").toString() == "TaskAlarm")
   {
     menu->addSeparator();
 

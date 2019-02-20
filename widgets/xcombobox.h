@@ -86,7 +86,7 @@ class XTUPLEWIDGETS_EXPORT XComboBox : public QComboBox
       ShipVias, ShippingCharges,	ShippingForms, ShippingZones,
       SiteTypes, SoProjects, Subaccounts,
       TaxAuths, TaxClasses, TaxCodes, TaxZones,
-      TaxTypes, Terms, TaskCommentTypes, TimeAttendanceCommentTypes, TodoItemCommentTypes,
+      TaxTypes, Terms, TaskCommentTypes, TimeAttendanceCommentTypes,
       TransferOrderCommentTypes, TransferOrderItemCommentTypes,
       UOMs, Users, ActiveUsers, VendorCommentTypes, VendorGroups,
       VendorTypes, WarehouseCommentTypes, WoProjects,

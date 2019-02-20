@@ -82,10 +82,9 @@ class XTUPLEWIDGETS_EXPORT Comments : public QWidget
       Quote,             QuoteItem,
       SalesOrder,        SalesOrderItem,
       Task,              TimeAttendance,
-      TodoItem,          TransferOrder,
-      TransferOrderItem, Vendor,
-      Voucher,           Warehouse,
-      WorkOrder
+      TransferOrder,     TransferOrderItem,
+      Vendor,            Voucher,
+      Warehouse,         WorkOrder
     };
     Q_ENUM(CommentSources)
 

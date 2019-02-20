@@ -529,7 +529,7 @@ void Documents::refresh()
   params.append("soitem",         _strMap.contains("SI") ? _strMap.value("SI")->translation : "SI");
   params.append("shipto",         _strMap.contains("SHP") ? _strMap.value("SHP")->translation : "SHP");
   params.append("timeexpense",    _strMap.contains("TE") ? _strMap.value("TE")->translation : "TE");
-  params.append("todo",           _strMap.contains("TODO") ? _strMap.value("TODO")->translation : "TODO");
+  params.append("task",           _strMap.contains("TASK") ? _strMap.value("TASK")->translation : "TASK");
   params.append("to",             _strMap.contains("TO") ? _strMap.value("TO")->translation : "TO");
   params.append("toitem",         _strMap.contains("TI") ? _strMap.value("TI")->translation : "TI");
   params.append("vendor",         _strMap.contains("V") ? _strMap.value("V")->translation : "V");
