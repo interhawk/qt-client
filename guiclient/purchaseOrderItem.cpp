@@ -764,13 +764,13 @@ void purchaseOrderItem::sSave()
         purchaseSave.bindValue(":poitem_itemsite_id", itemsiteid.value("itemsite_id").toInt());
       else
       {
+        emit saveBeforeRollback(&itemsiteid);
+        rollback.exec();
+        emit saveAfterRollback(&itemsiteid);
         QMessageBox::critical( this, tr("Invalid Item/Site"),
                                tr("<p>The Item and Site you have selected does not appear to be a valid combination. "
                                   "Make sure you have a Site selected and that there is a valid itemsite for "
                                   "this Item and Site combination.") );
-        emit saveBeforeRollback(&itemsiteid);
-        rollback.exec();
-        emit saveAfterRollback(&itemsiteid);
         return;
       }
     }
@@ -826,14 +826,16 @@ void purchaseOrderItem::sSave()
     purchaseSave.bindValue(":poitem_boo_rev_id", _booRevision->id());
   }
   purchaseSave.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Purchase Order Item Information"),
-                                         purchaseSave, __FILE__, __LINE__))
+  if (purchaseSave.lastError().type() != QSqlError::NoError)
   {
     emit saveBeforeRollback(&purchaseSave);
     rollback.exec();
     emit saveAfterRollback(&purchaseSave);
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Purchase Order Item Information"),
+      purchaseSave, __FILE__, __LINE__);
     return;
   }
+
 
   if (_parentwo != -1)
   {
@@ -841,12 +843,13 @@ void purchaseOrderItem::sSave()
     purchaseSave.bindValue(":parentwo", _parentwo);
     purchaseSave.bindValue(":poitem_id", _poitemid);
     purchaseSave.exec();
-    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Work Order Information"),
-                             purchaseSave, __FILE__, __LINE__))
+    if (purchaseSave.lastError().type() != QSqlError::NoError)
     {
       emit saveBeforeRollback(&purchaseSave);
       rollback.exec();
       emit saveAfterRollback(&purchaseSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Work Order Information"),
+        purchaseSave, __FILE__, __LINE__);
       return;
     }
   }
@@ -857,24 +860,27 @@ void purchaseOrderItem::sSave()
     purchaseSave.bindValue(":parentso", _parentso);
     purchaseSave.bindValue(":poitem_id", _poitemid);
     purchaseSave.exec();
-    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Sales Order Information"),
-                             purchaseSave, __FILE__, __LINE__))
+    if (purchaseSave.lastError().type() != QSqlError::NoError)
     {
       emit saveBeforeRollback(&purchaseSave);
       rollback.exec();
       emit saveAfterRollback(&purchaseSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Sales Order Information"),
+        purchaseSave, __FILE__, __LINE__);
       return;
     }
+
     purchaseSave.prepare("UPDATE coitem SET coitem_order_id=:poitem_id, coitem_order_type='P' WHERE (coitem_id=:parentso);");
     purchaseSave.bindValue(":parentso", _parentso);
     purchaseSave.bindValue(":poitem_id", _poitemid);
     purchaseSave.exec();
-    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Sales Order Item Information"),
-                             purchaseSave, __FILE__, __LINE__))
+    if (purchaseSave.lastError().type() != QSqlError::NoError)
     {
       emit saveBeforeRollback(&purchaseSave);
       rollback.exec();
       emit saveAfterRollback(&purchaseSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Sales Order Item Information"),
+        purchaseSave, __FILE__, __LINE__);
       return;
     }
   }
@@ -892,12 +898,13 @@ void purchaseOrderItem::sSave()
       purchaseSave.bindValue(":char_id", _itemchar->data(idx1, Qt::UserRole));
       purchaseSave.bindValue(":char_value", _itemchar->data(idx2, Qt::DisplayRole));
       purchaseSave.exec();
-      if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Characteristics Information"),
-                               purchaseSave, __FILE__, __LINE__))
+      if (purchaseSave.lastError().type() != QSqlError::NoError)
       {
         emit saveBeforeRollback(&purchaseSave);
         rollback.exec();
         emit saveAfterRollback(&purchaseSave);
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Characteristics Information"),
+          purchaseSave, __FILE__, __LINE__);
         return;
       }
     }
