@@ -22,6 +22,8 @@ class purchaseOrderItem : public XDialog, public Ui::purchaseOrderItem
     Q_OBJECT
 
 public:
+    enum SaveStatus { OK, Failed };
+    Q_ENUM(SaveStatus);
     purchaseOrderItem(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
     ~purchaseOrderItem();
 
@@ -30,7 +32,16 @@ public:
     virtual void  clear();
     Q_INVOKABLE virtual int id() { return _poitemid; }
 
+signals:
+    virtual void saveBeforeBegin();
+    virtual void saveAfterBegin();
+    virtual void saveBeforeCommit();
+    virtual void saveAfterCommit();
+    virtual void saveBeforeRollback(QSqlQuery*);
+    virtual void saveAfterRollback(QSqlQuery*);
+
 public slots:
+    inline virtual void setSaveStatus(SaveStatus status) { _saveStatus = status; };
     virtual SetResponse set( const ParameterList & pParams );
     virtual void populate();
     virtual void sDeterminePrice();
@@ -75,6 +86,7 @@ private:
     QString	_poStatus;
     QString	_costmethod;
     QStandardItemModel * _itemchar;
+    SaveStatus _saveStatus;
 
 };
 

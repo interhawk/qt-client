@@ -21,7 +21,11 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
 {
   Q_OBJECT
 
-  public: salesOrderItem(QWidget *parent = 0, const char * = 0, Qt::WindowFlags fl = 0);
+  public: 
+    enum SaveStatus { OK, Failed };
+    Q_ENUM(SaveStatus);
+
+    salesOrderItem(QWidget *parent = 0, const char * = 0, Qt::WindowFlags fl = 0);
     ~salesOrderItem();
 
     virtual void  prepare();
@@ -33,6 +37,14 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
     Q_INVOKABLE virtual int supplyid() { return _supplyOrderId; }
     Q_INVOKABLE virtual int mode()  { return _mode; }
     Q_INVOKABLE virtual int modeType() const;
+
+  signals:
+    virtual void saveBeforeBegin();
+    virtual void saveAfterBegin();
+    virtual void saveBeforeCommit();
+    virtual void saveAfterCommit();
+    virtual void saveBeforeRollback(QSqlQuery*);
+    virtual void saveAfterRollback(QSqlQuery*);
 
   public slots:
     virtual SetResponse set( const ParameterList &pParams );
@@ -81,6 +93,7 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
     virtual void        sCalcUnitCost();
     virtual void        sHandleButton();
     virtual void        sHandleScheduleDate();
+    inline virtual void setSaveStatus(SaveStatus status) { _saveStatus = status; };
 
   protected slots:
     virtual void  languageChange();
@@ -144,6 +157,7 @@ class salesOrderItem : public XDialog, public Ui::salesOrderItem
     int     _itemsiteLastWarehousid;
     int     _itemsubsLastItemid;
     int     _itemsubsLastWarehousid;
+    SaveStatus _saveStatus;
 
     // For holding variables for characteristic pricing
     QList<QVariant> _charVars;

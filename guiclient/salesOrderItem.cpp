@@ -1084,7 +1084,21 @@ void salesOrderItem::sSave(bool pPartial)
 
   XSqlQuery rollback;
   rollback.prepare("ROLLBACK;");  // In case of failure along the way
-  salesSave.exec("BEGIN;");
+
+  emit saveBeforeBegin();
+  if (_saveStatus == Failed)
+  {
+    return;
+  }
+
+  XSqlQuery begin("BEGIN;");
+
+  emit saveAfterBegin();
+  if (_saveStatus == Failed)
+  {
+    rollback.exec();
+    return;
+  }
 
   if (_mode == cNew && !_partialsaved)
   {
@@ -1148,11 +1162,14 @@ void salesOrderItem::sSave(bool pPartial)
 
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
+      emit saveBeforeRollback(&salesSave);
       rollback.exec();
+      emit saveAfterRollback(&salesSave);
       ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
                            salesSave, __FILE__, __LINE__);
       return;
     }
+
   }
   else if ( (_mode == cEdit) || ((_mode == cNew) && _partialsaved) )
   {
@@ -1225,7 +1242,9 @@ void salesOrderItem::sSave(bool pPartial)
 
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
+      emit saveBeforeRollback(&salesSave);
       rollback.exec();
+      emit saveAfterRollback(&salesSave);
       ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
                            salesSave, __FILE__, __LINE__);
       return;
@@ -1249,9 +1268,13 @@ void salesOrderItem::sSave(bool pPartial)
         // setup for re-reserving the new qty
         _reserveOnSave->setChecked(true);
       }
-      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Item Information"),
-                                    salesSave, __FILE__, __LINE__))
+      else if (salesSave.lastError().type() != QSqlError::NoError)
       {
+        emit saveBeforeRollback(&salesSave);
+        rollback.exec();
+        emit saveAfterRollback(&salesSave);
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Item Information"),
+                             salesSave, __FILE__, __LINE__);
         return;
       }
     }
@@ -1306,9 +1329,11 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.exec();
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
+      emit saveBeforeRollback(&salesSave);
       rollback.exec();
-          ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Item Information"),
-                               salesSave, __FILE__, __LINE__);
+      emit saveAfterRollback(&salesSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
+                           salesSave, __FILE__, __LINE__);
       return;
     }
   }
@@ -1366,9 +1391,11 @@ void salesOrderItem::sSave(bool pPartial)
     salesSave.exec();
     if (salesSave.lastError().type() != QSqlError::NoError)
     {
+      emit saveBeforeRollback(&salesSave);
       rollback.exec();
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Item Information"),
-                               salesSave, __FILE__, __LINE__);
+      emit saveAfterRollback(&salesSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
+                           salesSave, __FILE__, __LINE__);
       return;
     }
 
@@ -1382,9 +1409,11 @@ void salesOrderItem::sSave(bool pPartial)
       salesSave.exec();
       if (salesSave.lastError().type() != QSqlError::NoError)
       {
+        emit saveBeforeRollback(&salesSave);
         rollback.exec();
-          ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Item Information"),
-                               salesSave, __FILE__, __LINE__);
+        emit saveAfterRollback(&salesSave);
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Item Information"),
+                             salesSave, __FILE__, __LINE__);
         return;
       }
     }
@@ -1401,9 +1430,16 @@ void salesOrderItem::sSave(bool pPartial)
       ordStatus.exec();
       if (ordStatus.first())
         _supplyOrderStatus->setText(ordStatus.value("wo_status").toString());
-      else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error returning order status"),
-                                  ordStatus, __FILE__, __LINE__))
+
+      else if (ordStatus.lastError().type() != QSqlError::NoError)
+      {
+        emit saveBeforeRollback(&ordStatus);
+        rollback.exec();
+        emit saveAfterRollback(&ordStatus);
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error returning order status"),
+                             ordStatus, __FILE__, __LINE__);
         return;
+      }
   }
   else if (_supplyOrderType == "P" || _supplyOrderType == "R")
   {
@@ -1416,9 +1452,15 @@ void salesOrderItem::sSave(bool pPartial)
     {
       _supplyOrderId = salesSave.value("coitem_order_id").toInt();
     }
-    else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
-                                  salesSave, __FILE__, __LINE__))
+    else if (salesSave.lastError().type() != QSqlError::NoError)
+    {
+      emit saveBeforeRollback(&salesSave);
+      rollback.exec();
+      emit saveAfterRollback(&salesSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Item Information"),
+                           salesSave, __FILE__, __LINE__);
       return;
+    }
   }
 
   // Update supply order characteristics
@@ -1457,9 +1499,12 @@ void salesOrderItem::sSave(bool pPartial)
             changed = true;
             break;
           }
+          
           else if (chgq.lastError().type() != QSqlError::NoError)
           {
+            emit saveBeforeRollback(&chgq);
             rollback.exec();
+            emit saveAfterRollback(&chgq);
             ErrorReporter::error(QtCriticalMsg, this, tr("Error Checking Characteristics"),
                                  chgq, __FILE__, __LINE__);
             return;
@@ -1490,7 +1535,9 @@ void salesOrderItem::sSave(bool pPartial)
               _supplyOrderStatus->setText("O");
             else if (implodeq.lastError().type() != QSqlError::NoError)
             {
+              emit saveBeforeRollback(&implodeq);
               rollback.exec();
+              emit saveAfterRollback(&implodeq);
               ErrorReporter::error(QtCriticalMsg, this, tr("Error Updating Supply Work Order Information"),
                                    implodeq, __FILE__, __LINE__);
               return;
@@ -1516,7 +1563,9 @@ void salesOrderItem::sSave(bool pPartial)
               int result = salesSave.value("result").toInt();
               if (result < 0)
               {
+                emit saveBeforeRollback(&salesSave);
                 rollback.exec();
+                emit saveAfterRollback(&salesSave);
                 ErrorReporter::error(QtCriticalMsg, this, tr("Error with Characteristics"),
                                      storedProcErrorLookup("updateCharAssignment", result),
                                      __FILE__, __LINE__);
@@ -1525,7 +1574,9 @@ void salesOrderItem::sSave(bool pPartial)
             }
             else if (salesSave.lastError().type() != QSqlError::NoError)
             {
+              emit saveBeforeRollback(&salesSave);
               rollback.exec();
+              emit saveAfterRollback(&salesSave);
               ErrorReporter::error(QtCriticalMsg, this, tr("Error with Characteristics"),
                                    salesSave, __FILE__, __LINE__);
               return;
@@ -1561,7 +1612,9 @@ void salesOrderItem::sSave(bool pPartial)
         int result = salesSave.value("result").toInt();
         if (result < 0)
         {
+          emit saveBeforeRollback(&salesSave);
           rollback.exec();
+          emit saveAfterRollback(&salesSave);
           ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Item Information"),
                                  storedProcErrorLookup("updateCharAssignment", result),
                                  __FILE__, __LINE__);
@@ -1570,8 +1623,10 @@ void salesOrderItem::sSave(bool pPartial)
       }
       else if (salesSave.lastError().type() != QSqlError::NoError)
       {
+        emit saveBeforeRollback(&salesSave);
         rollback.exec();
-        ErrorReporter::error(QtCriticalMsg, this, tr("Error Retreiving Item Information"),
+        emit saveAfterRollback(&salesSave);
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Item Information"),
                              salesSave, __FILE__, __LINE__);
         return;
       }
@@ -1590,7 +1645,9 @@ void salesOrderItem::sSave(bool pPartial)
       }
       else if (explodeq.lastError().type() != QSqlError::NoError)
       {
+        emit saveBeforeRollback(&explodeq);
         rollback.exec();
+        emit saveAfterRollback(&explodeq);
         ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Work Order Information"),
                              explodeq, __FILE__, __LINE__);
         return;
@@ -1598,7 +1655,40 @@ void salesOrderItem::sSave(bool pPartial)
     }
   }
 
-  salesSave.exec("COMMIT;");
+  emit saveBeforeCommit();
+  if (_saveStatus == Failed)
+  {
+    rollback.exec();
+    return;
+  }
+
+  XSqlQuery commit("COMMIT;");
+
+  bool tryAgain = false;
+
+  do
+  {
+    emit saveAfterCommit();
+    if (_saveStatus == Failed)
+    {
+      QMessageBox failure(QMessageBox::Critical, tr("Script Error"),
+        tr("A script has failed after the main window saved successfully. How do "
+          "you wish to proceed?"));
+      QPushButton* retry = failure.addButton(tr("Retry"), QMessageBox::NoRole);
+      failure.addButton(tr("Ignore"), QMessageBox::YesRole);
+      QPushButton* cancel = failure.addButton(QMessageBox::Cancel);
+      failure.setDefaultButton(cancel);
+      failure.setEscapeButton((QAbstractButton*)cancel);
+      failure.exec();
+      if (failure.clickedButton() == (QAbstractButton*)retry)
+      {
+        setSaveStatus(OK);
+        tryAgain = true;
+      }
+      else if (failure.clickedButton() == (QAbstractButton*)cancel)
+        return;
+    }
+  } while (tryAgain);
 
   if (!pPartial && _orderRefresh->isChecked())
   {
