@@ -11,6 +11,7 @@
 #include "contacts.h"
 
 #include <QAction>
+#include <QDesktopServices>
 #include <QInputDialog>
 #include <QMenu>
 #include <QToolBar>
@@ -273,6 +274,10 @@ void contacts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
                                   sql, __FILE__, __LINE__))
       return;
   }
+
+  pMenu->addSeparator();
+  menuItem = pMenu->addAction(tr("Send Email..."), this, SLOT(sSendEmail()));
+  menuItem->setEnabled(viewPriv);
 }
 
 void contacts::sPopulateHeaderMenu(QMenu *pMenu, QTreeWidgetItem *, int index)
@@ -901,4 +906,30 @@ void contacts::sOpenProspect(QString mode)
     newdlg->set(params);
     omfgThis->handleNewWindow(newdlg);
   }
+}
+
+void contacts::sSendEmail()
+{
+  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
+                      "  FROM cntct "
+                      " WHERE cntct_id IN (-1 "
+                      "       <? foreach('contacts') ?> "
+                      "       , <? value('contacts') ?> "
+                      "       <? endforeach ?> "
+                      "       );");
+
+  QList<QVariant> contacts;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    contacts.append(item->id());
+
+  ParameterList params;
+  params.append("contacts", contacts);
+
+  XSqlQuery qry = emails.toQuery(params);
+
+  if (qry.first())
+    QDesktopServices::openUrl("mailto:" + qry.value("emails").toString());
+  else
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching emails"),
+                         qry, __FILE__, __LINE__);
 }

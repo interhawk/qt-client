@@ -27,6 +27,7 @@ public slots:
     virtual void sNew();
     virtual void sView();
     virtual void sOpen();
+    virtual void sSendEmail();
     virtual void sPopulateMenu(QMenu *, QTreeWidgetItem *, int);
 };
 

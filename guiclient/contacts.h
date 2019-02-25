@@ -51,6 +51,7 @@ public slots:
     virtual void sEditProspect();
     virtual void sViewProspect();
     virtual void sOpenProspect(QString);
+    virtual void sSendEmail();
    
 signals:
     void cntctDetached(int);

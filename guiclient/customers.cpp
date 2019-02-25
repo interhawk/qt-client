@@ -10,6 +10,7 @@
 
 #include "customers.h"
 
+#include <QDesktopServices>
 #include <QMessageBox>
 #include <QSqlError>
 #include <QVariant>
@@ -17,6 +18,7 @@
 #include "customer.h"
 #include "customerTypeList.h"
 #include "errorReporter.h"
+#include "metasql.h"
 #include "storedProcErrorLookup.h"
 #include "parameterwidget.h"
 
@@ -95,6 +97,8 @@ customers::customers(QWidget* parent, const char*, Qt::WindowFlags fl)
   list()->addColumn(tr("Corr. State"),  50, Qt::AlignLeft  , false, "corr_state" );
   list()->addColumn(tr("Corr. Postal"), 75, Qt::AlignLeft  , false, "corr_postalcode" );
   list()->addColumn(tr("Corr. Country"),100, Qt::AlignLeft , false, "corr_country" );
+
+  list()->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   setupCharacteristics("C");
 
@@ -179,6 +183,33 @@ void customers::sDelete()
   omfgThis->sCustomersUpdated(list()->id(), true); // TODO: true or false????
 }
 
+void customers::sSendEmail()
+{
+  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
+                      "  FROM custinfo "
+                      "  JOIN cntct ON cust_corrcntct_id = cntct_id "
+                      " WHERE cust_id IN (-1 "
+                      "       <? foreach('customers') ?> "
+                      "       , <? value('customers') ?> "
+                      "       <? endforeach ?> "
+                      "       );");
+
+  QList<QVariant> customers;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    customers.append(item->id());
+
+  ParameterList params;
+  params.append("customers", customers);
+
+  XSqlQuery qry = emails.toQuery(params);
+
+  if (qry.first())
+    QDesktopServices::openUrl("mailto:" + qry.value("emails").toString());
+  else
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching emails"),
+                         qry, __FILE__, __LINE__);
+}
+
 void customers::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
 {
   QAction *menuItem;
@@ -196,6 +227,8 @@ void customers::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
   menuItem = pMenu->addAction("Reassign Customer Type", this, SLOT(sReassignCustomerType()));
   menuItem->setEnabled(_privileges->check("MaintainCustomerMasters"));
 
+  pMenu->addSeparator();
+  pMenu->addAction(tr("Send Email..."), this, SLOT(sSendEmail()));
 }
 
 bool customers::setParams(ParameterList &params)
