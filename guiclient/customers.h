@@ -27,6 +27,7 @@ public slots:
     virtual void sReassignCustomerType();
     virtual void sView();
     virtual void sDelete();
+    virtual void sSendEmail();
     virtual void sPopulateMenu(QMenu *, QTreeWidgetItem *, int);
     virtual bool setParams(ParameterList &);
 };

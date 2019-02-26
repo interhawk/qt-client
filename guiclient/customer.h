@@ -87,6 +87,7 @@ protected slots:
     virtual void languageChange();
     virtual void sCrmAccount();
     virtual void sNumberEdited();
+    virtual void setVisible(bool);
 
 signals:
     void populated();
@@ -121,6 +122,7 @@ private:
     bool _captive;
     bool _charfilled;
     QStandardItemModel * _custchar;
+    bool _closed;
 
 };
 

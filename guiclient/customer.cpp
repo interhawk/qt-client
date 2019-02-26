@@ -193,6 +193,7 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _captive = false;
   _charfilled = false;
   _mode       = -1;
+  _closed = false;
 
   _currency->setLabel(_currencyLit);
 
@@ -365,6 +366,40 @@ enum SetResponse customer::set(const ParameterList &pParams)
     if (!_lock.acquire("custinfo", _custid, AppLock::Interactive))
     {
       setViewMode();
+    }
+  }
+
+  _closed = false;
+
+  foreach (QWidget* widget, QApplication::allWidgets())
+  {
+    if (!widget->isWindow() || !widget->isVisible())
+      continue;
+
+    customer *w = qobject_cast<customer*>(widget);
+
+    if (w && w != this && w->id()==_custid)
+    {
+      // detect "i'm my own grandpa"
+      QObject *p;
+      for (p = parent(); p && p != w ; p = p->parent())
+        ; // do nothing
+      if (p == w)
+      {
+        QMessageBox::warning(this, tr("Cannot Open Recursively"),
+                             tr("This customer is already open and cannot be "
+                                "raised. Please close windows to get to it."));
+        _closed = true;
+      } else if (p) {
+        w->setFocus();
+        if (omfgThis->showTopLevel())
+        {
+          w->raise();
+          w->activateWindow();
+        }
+        _closed = true;
+      }
+      break;
     }
   }
 
@@ -1964,3 +1999,10 @@ void customer::sPrepare()
   _NumberGen = _number->number().toInt();
 }
 
+void customer::setVisible(bool visible)
+{
+  if (_closed)
+    close();
+  else
+    XWidget::setVisible(visible);
+}

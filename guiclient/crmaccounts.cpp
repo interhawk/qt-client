@@ -11,6 +11,7 @@
 #include "crmaccounts.h"
 
 #include <QAction>
+#include <QDesktopServices>
 #include <QMenu>
 #include <QMessageBox>
 #include <QSqlError>
@@ -18,6 +19,7 @@
 
 #include "crmaccount.h"
 #include "errorReporter.h"
+#include "metasql.h"
 #include "storedProcErrorLookup.h"
 #include "parameterwidget.h"
 
@@ -193,6 +195,10 @@ void crmaccounts::sPopulateMenu(QMenu *pMenu, QTreeWidgetItem *, int)
 
   menuItem = pMenu->addAction(tr("Delete"), this, SLOT(sDelete()));
   menuItem->setEnabled(editPriv);
+
+  pMenu->addSeparator();
+  menuItem = pMenu->addAction(tr("Send Email..."), this, SLOT(sSendEmail()));
+  menuItem->setEnabled(viewPriv);
 }
 
 void crmaccounts::sOpen()
@@ -209,4 +215,59 @@ void crmaccounts::sOpen()
     sEdit();
   else if (viewPriv)
     sView();
+}
+
+void crmaccounts::sSendEmail()
+{
+  QList<QVariant> crmaccounts;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    crmaccounts.append(item->id());
+
+  ParameterList params;
+  params.append("crmaccounts", crmaccounts);
+
+  MetaSQLQuery optin("SELECT BOOL_AND(cntct_email_optin) AS alloptin "
+                      "  FROM crmacct "
+                      "  JOIN crmacctcntctass ON crmacct_id = crmacctcntctass_crmacct_id "
+                      "                      AND crmacctcntctass_crmrole_id = getcrmroleid('Primary') "
+                      "  JOIN cntct ON crmacctcntctass_cntct_id = cntct_id "
+                      " WHERE crmacct_id IN (-1 "
+                      "       <? foreach('crmaccounts') ?> "
+                      "       , <? value('crmaccounts') ?> "
+                      "       <? endforeach ?> "
+                      "       );");
+
+  XSqlQuery qry = optin.toQuery(params);
+
+  if (qry.first() && !qry.value("alloptin").toBool() &&
+      QMessageBox::question(this, tr("Include opt-out?"),
+                            tr("Include people who have opted out of email contact?"),
+                            QMessageBox::Yes | QMessageBox::No,
+                            QMessageBox::No) == QMessageBox::No)
+      params.append("optinonly");
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching emails"),
+                                qry, __FILE__, __LINE__))
+    return;
+
+  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
+                      "  FROM crmacct "
+                      "  JOIN crmacctcntctass ON crmacct_id = crmacctcntctass_crmacct_id "
+                      "                      AND crmacctcntctass_crmrole_id = getcrmroleid('Primary') "
+                      "  JOIN cntct ON crmacctcntctass_cntct_id = cntct_id "
+                      " WHERE crmacct_id IN (-1 "
+                      "       <? foreach('crmaccounts') ?> "
+                      "       , <? value('crmaccounts') ?> "
+                      "       <? endforeach ?> "
+                      "       ) "
+                      " <? if exists('optinonly') ?> "
+                      "   AND cntct_email_optin "
+                      " <? endif ?>;");
+
+  qry = emails.toQuery(params);
+
+  if (qry.first())
+    QDesktopServices::openUrl("mailto:" + qry.value("emails").toString());
+  else
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching emails"),
+                         qry, __FILE__, __LINE__);
 }
