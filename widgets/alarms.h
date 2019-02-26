@@ -44,7 +44,7 @@ class XTUPLEWIDGETS_EXPORT Alarms : public QWidget, public Ui::alarms
       Project,		PurchaseOrder,      PurchaseOrderItem,
       ReturnAuth,       ReturnAuthItem,     Quote, 
       QuoteItem,        SalesOrder,         SalesOrderItem,
-      TodoItem,
+      Task,
       TransferOrder,	TransferOrderItem,  Vendor,
       Warehouse,	WorkOrder
     };

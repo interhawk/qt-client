@@ -775,10 +775,6 @@ XComboBoxPrivate::XComboBoxPrivate(XComboBox *pParent)
                        new XComboBoxDescrip(XComboBox::TimeAttendanceCommentTypes,
                        "commentTypes", "MaintainCommentTypes",
                        cmnttypeMQL, "cmnttype", true, "source_name", "TATC"));
-    typeDescrip.insert(XComboBox::TodoItemCommentTypes,
-                       new XComboBoxDescrip(XComboBox::TodoItemCommentTypes,
-                       "commentTypes", "MaintainCommentTypes",
-                       cmnttypeMQL, "cmnttype", true, "source_name", "TD"));
     typeDescrip.insert(XComboBox::TransferOrderCommentTypes,
                        new XComboBoxDescrip(XComboBox::TransferOrderCommentTypes,
                        "commentTypes", "MaintainCommentTypes",

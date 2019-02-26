@@ -87,7 +87,7 @@ task::task(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
   _owner->setType(UsernameLineEdit::UsersActive);
   _comments->setType(Comments::Task);
   _charass->setType("TASK");
-  _documents->setType(Documents::ProjectTask);
+  _documents->setType(Documents::Task);
 
   _status->append(0, tr("New"),        "N");
   _status->append(1, tr("Pending"),    "P");

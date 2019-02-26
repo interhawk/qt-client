@@ -51,7 +51,7 @@ const Alarms::AlarmMap Alarms::_alarmMap[] =
   AlarmMap( QuoteItem,         "QI"  ),
   AlarmMap( SalesOrder,        "S"   ),
   AlarmMap( SalesOrderItem,    "SI"  ),
-  AlarmMap( TodoItem,          "TODO" ),
+  AlarmMap( Task,              "TASK" ),
   AlarmMap( TransferOrder,     "TO"  ),
   AlarmMap( TransferOrderItem, "TI"  ),
   AlarmMap( Vendor,            "V"   ),

@@ -125,7 +125,7 @@ void createRecurringItems::sSubmit()
     { _vouchers,   "V"     },
     { _incidents,  "INCDT" },
     { _projects,   "J"     },
-    { _todoItems,  "TODO"  },
+    { _todoItems,  "TASK"  },
     { _salesOrder, "S"     }
   };
 
@@ -146,8 +146,8 @@ void createRecurringItems::sSubmit()
         params.append("action_name", "CreateRecurringIncidents");
       else if (list[i].arg == "J")
         params.append("action_name", "CreateRecurringProjects");
-      else if (list[i].arg == "TODO")
-        params.append("action_name", "CreateRecurringTodos");
+      else if (list[i].arg == "TASK")
+        params.append("action_name", "CreateRecurringTasks");
       else if (list[i].arg == "S")
         params.append("action_name", "CreateRecurringSalesOrders");
       params.append("type", list[i].arg);

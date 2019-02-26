@@ -420,12 +420,6 @@ const struct {
                                     "unrecognized object type."),       0, "" },
 
   { "CreateRevision", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Revision control not enabled."),	0, "" },
-  { "createTodoItem",	-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The To-Do List Item cannot be created as "
-			       "there is no assigned User."),	0, "" },
-  { "createTodoItem",	-2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The To-Do List Item cannot be created as "
-			       "the Task Name is blank."),	0, "" },
-  { "createTodoItem",	-3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The To-Do List Item cannot be created as "
-			       "there is no Due Date."),	0, "" },
 
   { "createWo",	-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Work Order can not be created because Site "
 			       "not allowed to Manufacture this Item."),	0, "" },
@@ -641,7 +635,7 @@ const struct {
                                   "may delete the selected Freight Class." ),  0, ""},
 
   { "deleteIncident",	-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "This Incident cannot be deleted as there are "
-			       "To-Do List Items associated with it."),
+			       "Tasks associated with it."),
 								 	0, "" },
   { "deleteIncident",	-2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "This Incident cannot be deleted as there are "
 			       "Comments associated with it."), 	0, "" },
@@ -1741,24 +1735,9 @@ const struct {
   { "thawAccountingPeriod", -2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot thaw this Accounting Period "
 				     "because it is not frozen."), 0, "" },
 
-  { "todoItemMove",	-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot change the Sequence of a non-existent "
-			       "To-Do List Item. Possible cause: no To-Do "
-			       "List Item was selected."),
-								0, "" },
-
   { "unreleasePurchaseOrder",
     -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot unrelease this Purchase Order because it "
                           "has in process Purchase Order Items."),	0, "" },
-
-  { "updateTodoItem",	-1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The To-Do List Item cannot be updated as "
-			       "there is no assigned User."),	0, "" },
-  { "updateTodoItem",	-2, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The To-Do List Item cannot be updated as "
-			       "the Task Name is blank."),	0, "" },
-  { "updateTodoItem",	-3, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The To-Do List Item cannot be updated as "
-			       "there is no Due Date."),	0, "" },
-  { "updateTodoItem",  -10, QT_TRANSLATE_NOOP("storedProcErrorLookup", "The To-Do List Item cannot be updated as "
-			       "an invalid internal ID was supplied ."),
-								 0, "" },
 
   { "voidAPOpenVoucher", -10, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot Void Voucher Id % as apopen not found. "),				0, "" },
   { "voidAPOpenVoucher", -20, QT_TRANSLATE_NOOP("storedProcErrorLookup", "Cannot Void Voucher #% as vohead not found. "),				0, "" },
