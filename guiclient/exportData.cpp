@@ -12,18 +12,15 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QSqlError>
 
-#include <metasql.h>
 #include <mqlutil.h>
 #include <parameteredit.h>
-#include <selectmql.h>
 
 #include "exporthelper.h"
 #include "storedProcErrorLookup.h"
 #include "errorReporter.h"
 
-#define DEBUG true
+#define DEBUG false
 
 QString exportData::exportFileDir = QString::null;
 
@@ -110,12 +107,9 @@ void exportData::sDeleteQuerySet()
         return;
       }
     }
-    if (delq.lastError().type() != QSqlError::NoError)
-    {
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Query Set"),
-                           delq, __FILE__, __LINE__);
+    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting Query Set"),
+                             delq, __FILE__, __LINE__))
       return;
-    }
 
     sFillList();
   }
@@ -132,9 +126,7 @@ void exportData::sEditQuerySet()
 
 void exportData::sExport()
 {
-  if (DEBUG)
-    qDebug("exportData::sExport() entered with exportFileDir '%s'",
-           qPrintable(exportFileDir));
+  ENTERED << "with exportFileDir" << exportFileDir;
   if (exportFileDir.isEmpty())
   {
 #if defined Q_OS_MAC
@@ -217,10 +209,10 @@ void exportData::sHandleButtons()
                                     qiq.value("qryitem_detail").toString(),
                                     errmsg, &valid);
           if (valid)
-            paramlist.append(MQLEdit::getParamsFromMetaSQLText(tmpqry));
+            paramlist.append(MQLUtil::getParamsFromText(tmpqry));
         }
         else if (qryitem_src == "CUSTOM")
-          paramlist.append(MQLEdit::getParamsFromMetaSQLText(qiq.value("qryitem_detail").toString()));
+          paramlist.append(MQLUtil::getParamsFromText(qiq.value("qryitem_detail").toString()));
       }
       if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Query Information"),
                                     qiq, __FILE__, __LINE__))
@@ -228,8 +220,8 @@ void exportData::sHandleButtons()
         return;
       }
       paramlist.sort();
-      for (int i = 0; i < paramlist.size(); i++)
-        xml += "\n <parameter name='" + paramlist.at(i) + "'/>";
+      foreach (QString pname, paramlist)
+        xml += "\n <parameter name='" + pname + "'/>";
 
       xml += "\n</report>";
       QDomDocument doc;
