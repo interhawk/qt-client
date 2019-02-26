@@ -219,7 +219,14 @@ void crmaccounts::sOpen()
 
 void crmaccounts::sSendEmail()
 {
-  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
+  QList<QVariant> crmaccounts;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    crmaccounts.append(item->id());
+
+  ParameterList params;
+  params.append("crmaccounts", crmaccounts);
+
+  MetaSQLQuery optin("SELECT BOOL_AND(cntct_email_optin) AS alloptin "
                       "  FROM crmacct "
                       "  JOIN crmacctcntctass ON crmacct_id = crmacctcntctass_crmacct_id "
                       "                      AND crmacctcntctass_crmrole_id = getcrmroleid('Primary') "
@@ -230,14 +237,33 @@ void crmaccounts::sSendEmail()
                       "       <? endforeach ?> "
                       "       );");
 
-  QList<QVariant> crmaccounts;
-  foreach (XTreeWidgetItem* item, list()->selectedItems())
-    crmaccounts.append(item->id());
+  XSqlQuery qry = optin.toQuery(params);
 
-  ParameterList params;
-  params.append("crmaccounts", crmaccounts);
+  if (qry.first() && !qry.value("alloptin").toBool() &&
+      QMessageBox::question(this, tr("Include opt-out?"),
+                            tr("Include people who have opted out of email contact?"),
+                            QMessageBox::Yes | QMessageBox::No,
+                            QMessageBox::No) == QMessageBox::No)
+      params.append("optinonly");
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching emails"),
+                                qry, __FILE__, __LINE__))
+    return;
 
-  XSqlQuery qry = emails.toQuery(params);
+  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
+                      "  FROM crmacct "
+                      "  JOIN crmacctcntctass ON crmacct_id = crmacctcntctass_crmacct_id "
+                      "                      AND crmacctcntctass_crmrole_id = getcrmroleid('Primary') "
+                      "  JOIN cntct ON crmacctcntctass_cntct_id = cntct_id "
+                      " WHERE crmacct_id IN (-1 "
+                      "       <? foreach('crmaccounts') ?> "
+                      "       , <? value('crmaccounts') ?> "
+                      "       <? endforeach ?> "
+                      "       ) "
+                      " <? if exists('optinonly') ?> "
+                      "   AND cntct_email_optin "
+                      " <? endif ?>;");
+
+  qry = emails.toQuery(params);
 
   if (qry.first())
     QDesktopServices::openUrl("mailto:" + qry.value("emails").toString());

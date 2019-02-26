@@ -117,24 +117,30 @@ void customers::sNew()
 
 void customers::sEdit()
 {
-  ParameterList params;
-  params.append("cust_id", list()->id());
-  params.append("mode", "edit");
+  foreach (XTreeWidgetItem *item, list()->selectedItems())
+  {
+    ParameterList params;
+    params.append("cust_id", item->id());
+    params.append("mode", "edit");
 
-  customer *newdlg = new customer();
-  newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+    customer *newdlg = new customer();
+    newdlg->set(params);
+    omfgThis->handleNewWindow(newdlg);
+  }
 }
 
 void customers::sView()
 {
-  ParameterList params;
-  params.append("cust_id", list()->id());
-  params.append("mode", "view");
+  foreach (XTreeWidgetItem *item, list()->selectedItems())
+  {
+    ParameterList params;
+    params.append("cust_id", item->id());
+    params.append("mode", "view");
 
-  customer *newdlg = new customer();
-  newdlg->set(params);
-  omfgThis->handleNewWindow(newdlg);
+    customer *newdlg = new customer();
+    newdlg->set(params);
+    omfgThis->handleNewWindow(newdlg);
+  }
 }
 
 void customers::sReassignCustomerType()
@@ -165,27 +171,38 @@ void customers::sReassignCustomerType()
 
 void customers::sDelete()
 {
-  if (QMessageBox::question(this, tr("Delete Customer?"),
+  if (QMessageBox::question(this, tr("Delete Customer(s)?"),
                            tr("<p>Are you sure that you want to completely "
-			      "delete the selected Customer?"),
+			      "delete the selected Customer(s)?"),
 			   QMessageBox::Yes,
 			   QMessageBox::No | QMessageBox::Default) == QMessageBox::No)
     return;
 
   XSqlQuery delq;
   delq.prepare("DELETE FROM custinfo WHERE (cust_id=:cust_id);");
-  delq.bindValue(":cust_id", list()->id());
-  delq.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting"),
-                           delq, __FILE__, __LINE__))
-    return;
 
-  omfgThis->sCustomersUpdated(list()->id(), true); // TODO: true or false????
+  foreach (XTreeWidgetItem *item, list()->selectedItems())
+  {
+    delq.bindValue(":cust_id", item->id());
+    delq.exec();
+    if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Deleting"),
+                             delq, __FILE__, __LINE__))
+      return;
+
+    omfgThis->sCustomersUpdated(item->id(), true); // TODO: true or false????
+  }
 }
 
 void customers::sSendEmail()
 {
-  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
+  QList<QVariant> customers;
+  foreach (XTreeWidgetItem* item, list()->selectedItems())
+    customers.append(item->id());
+
+  ParameterList params;
+  params.append("customers", customers);
+
+  MetaSQLQuery optin("SELECT BOOL_AND(cntct_email_optin) AS alloptin "
                       "  FROM custinfo "
                       "  JOIN cntct ON cust_corrcntct_id = cntct_id "
                       " WHERE cust_id IN (-1 "
@@ -194,14 +211,31 @@ void customers::sSendEmail()
                       "       <? endforeach ?> "
                       "       );");
 
-  QList<QVariant> customers;
-  foreach (XTreeWidgetItem* item, list()->selectedItems())
-    customers.append(item->id());
+  XSqlQuery qry = optin.toQuery(params);
 
-  ParameterList params;
-  params.append("customers", customers);
+  if (qry.first() && !qry.value("alloptin").toBool() &&
+      QMessageBox::question(this, tr("Include opt-out?"),
+                            tr("Include people who have opted out of email contact?"),
+                            QMessageBox::Yes | QMessageBox::No,
+                            QMessageBox::No) == QMessageBox::No)
+      params.append("optinonly");
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching emails"),
+                                qry, __FILE__, __LINE__))
+    return;
 
-  XSqlQuery qry = emails.toQuery(params);
+  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
+                      "  FROM custinfo "
+                      "  JOIN cntct ON cust_corrcntct_id = cntct_id "
+                      " WHERE cust_id IN (-1 "
+                      "       <? foreach('customers') ?> "
+                      "       , <? value('customers') ?> "
+                      "       <? endforeach ?> "
+                      "       ) "
+                      " <? if exists('optinonly') ?> "
+                      "   AND cntct_email_optin "
+                      " <? endif ?>;");
+
+  qry = emails.toQuery(params);
 
   if (qry.first())
     QDesktopServices::openUrl("mailto:" + qry.value("emails").toString());
@@ -222,10 +256,12 @@ void customers::sPopulateMenu(QMenu * pMenu, QTreeWidgetItem *, int)
   menuItem = pMenu->addAction("Delete", this, SLOT(sDelete()));
   menuItem->setEnabled(_privileges->check("MaintainCustomerMasters"));
 
-  pMenu->addSeparator();
-
-  menuItem = pMenu->addAction("Reassign Customer Type", this, SLOT(sReassignCustomerType()));
-  menuItem->setEnabled(_privileges->check("MaintainCustomerMasters"));
+  if (list()->selectedItems().count() == 1)
+  {
+    pMenu->addSeparator();
+    menuItem = pMenu->addAction("Reassign Customer Type", this, SLOT(sReassignCustomerType()));
+    menuItem->setEnabled(_privileges->check("MaintainCustomerMasters"));
+  }
 
   pMenu->addSeparator();
   pMenu->addAction(tr("Send Email..."), this, SLOT(sSendEmail()));

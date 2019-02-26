@@ -193,6 +193,7 @@ customer::customer(QWidget* parent, const char* name, Qt::WindowFlags fl)
   _captive = false;
   _charfilled = false;
   _mode       = -1;
+  _closed = false;
 
   _currency->setLabel(_currencyLit);
 
@@ -365,6 +366,30 @@ enum SetResponse customer::set(const ParameterList &pParams)
     if (!_lock.acquire("custinfo", _custid, AppLock::Interactive))
     {
       setViewMode();
+    }
+  }
+
+  _closed = false;
+
+  foreach (QWidget* widget, QApplication::allWidgets())
+  {
+    if (!widget->isWindow() || !widget->isVisible())
+      continue;
+
+    customer *w = qobject_cast<customer*>(widget);
+
+    if (w && w->id()==_custid)
+    {
+      w->setFocus();
+
+      if (omfgThis->showTopLevel())
+      {
+        w->raise();
+        w->activateWindow();
+      }
+
+      _closed = true;
+      break;
     }
   }
 
@@ -1964,3 +1989,10 @@ void customer::sPrepare()
   _NumberGen = _number->number().toInt();
 }
 
+void customer::setVisible(bool visible)
+{
+  if (_closed)
+    close();
+  else
+    XWidget::setVisible(visible);
+}

@@ -910,14 +910,6 @@ void contacts::sOpenProspect(QString mode)
 
 void contacts::sSendEmail()
 {
-  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
-                      "  FROM cntct "
-                      " WHERE cntct_id IN (-1 "
-                      "       <? foreach('contacts') ?> "
-                      "       , <? value('contacts') ?> "
-                      "       <? endforeach ?> "
-                      "       );");
-
   QList<QVariant> contacts;
   foreach (XTreeWidgetItem* item, list()->selectedItems())
     contacts.append(item->id());
@@ -925,7 +917,38 @@ void contacts::sSendEmail()
   ParameterList params;
   params.append("contacts", contacts);
 
-  XSqlQuery qry = emails.toQuery(params);
+  MetaSQLQuery optin("SELECT BOOL_AND(cntct_email_optin) AS alloptin "
+                      "  FROM cntct "
+                      " WHERE cntct_id IN (-1 "
+                      "       <? foreach('contacts') ?> "
+                      "       , <? value('contacts') ?> "
+                      "       <? endforeach ?> "
+                      "       );");
+
+  XSqlQuery qry = optin.toQuery(params);
+
+  if (qry.first() && !qry.value("alloptin").toBool() &&
+      QMessageBox::question(this, tr("Include opt-out?"),
+                            tr("Include people who have opted out of email contact?"),
+                            QMessageBox::Yes | QMessageBox::No,
+                            QMessageBox::No) == QMessageBox::No)
+      params.append("optinonly");
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error fetching emails"),
+                                qry, __FILE__, __LINE__))
+    return;
+
+  MetaSQLQuery emails("SELECT string_agg(distinct cntct_email, ',') AS emails "
+                      "  FROM cntct "
+                      " WHERE cntct_id IN (-1 "
+                      "       <? foreach('contacts') ?> "
+                      "       , <? value('contacts') ?> "
+                      "       <? endforeach ?> "
+                      "       ) "
+                      " <? if exists('optinonly') ?> "
+                      "   AND cntct_email_optin "
+                      " <? endif ?>;");
+
+  qry = emails.toQuery(params);
 
   if (qry.first())
     QDesktopServices::openUrl("mailto:" + qry.value("emails").toString());
