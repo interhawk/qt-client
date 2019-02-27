@@ -49,8 +49,8 @@ win32-msvc* {
 }
 
 QMAKE_LIBDIR = ../lib $${OPENRPT_LIBDIR} $$QMAKE_LIBDIR
-LIBS        += -lxtuplecommon -lxtuplewidgets -lwrtembed -lopenrptcommon
-LIBS        += -lrenderer -lxtuplescriptapi -lqzint -lMetaSQL
+LIBS        += -lxtuplecommon -lxtuplewidgets -lwrtembed -lrenderer
+LIBS        += -lxtuplescriptapi -lqzint -lMetaSQL -lopenrptcommon
 
 lessThan(QT_MAJOR_VERSION, 5) {
 #not the best way to handle this, but it should do
