@@ -1281,7 +1281,51 @@
     </message>
 </context>
 <context>
-    <name>CommentMap</name>
+    <name>Comments</name>
+    <message>
+        <source>Source</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <source>Public</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editer</translation>
+    </message>
+    <message>
+        <source>Verbose Text</source>
+        <translation>Mode bavard</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Commentaire</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Nouveau</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Visualiser</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Aucun</translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation>Date/Heure</translation>
+    </message>
+    <message>
+        <source>User Account</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>[Pick a Document Type]</source>
         <translation type="unfinished"></translation>
@@ -1453,53 +1497,6 @@
     <message>
         <source>Work Order</source>
         <translation type="unfinished">Bon de Travail</translation>
-    </message>
-</context>
-<context>
-    <name>Comments</name>
-    <message>
-        <source>Source</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>Type</translation>
-    </message>
-    <message>
-        <source>Public</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Editer</translation>
-    </message>
-    <message>
-        <source>Verbose Text</source>
-        <translation>Mode bavard</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>Commentaire</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Nouveau</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Visualiser</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Aucun</translation>
-    </message>
-    <message>
-        <source>Date/Time</source>
-        <translation>Date/Heure</translation>
-    </message>
-    <message>
-        <source>User Account</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2884,17 +2881,6 @@ What would you like to do?</source>
     </message>
 </context>
 <context>
-    <name>DocumentMap</name>
-    <message>
-        <source>[Pick a Document Type]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Getting Document Types</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Documents</name>
     <message>
         <source>Other</source>
@@ -3042,6 +3028,14 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Url Open Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[Pick a Document Type]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Getting Document Types</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3591,61 +3585,6 @@ returned %2
     <message>
         <source>Could not get user and edition</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GroupMap</name>
-    <message>
-        <source>Street Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>City Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>State Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Postal Code Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Country Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished">Numéro</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">Nom</translation>
-    </message>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished">Compte</translation>
-    </message>
-    <message>
-        <source>Customer</source>
-        <translation type="unfinished">Client</translation>
-    </message>
-    <message>
-        <source>Prospect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Employee</source>
-        <translation type="unfinished">Salarié</translation>
-    </message>
-    <message>
-        <source>Contact</source>
-        <translation type="unfinished">Personne-ressource</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished">Adresse</translation>
     </message>
 </context>
 <context>
@@ -10975,6 +10914,26 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>Group %1 has been successfully populated with %2 %3s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postal Code Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country Pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -20467,6 +20426,14 @@ Item: %2 - %3</source>
         <source>Error Retrieving Group Source Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Numéro</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nom</translation>
+    </message>
 </context>
 <context>
     <name>crmGroups</name>
@@ -20529,6 +20496,30 @@ Item: %2 - %3</source>
     <message>
         <source>Error Retrieving %1 Groups</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished">Compte</translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Client</translation>
+    </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Employee</source>
+        <translation type="unfinished">Salarié</translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Personne-ressource</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Adresse</translation>
     </message>
 </context>
 <context>
@@ -56302,29 +56293,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Use Tax Owed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>newForm</name>
-    <message>
-        <source>New Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search Criterion:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="unfinished">Fermer</translation>
-    </message>
-    <message>
-        <source>Query</source>
-        <translation type="unfinished">Requête</translation>
-    </message>
-    <message>
-        <source>Results:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Question Saving Address</source>
-        <translation>質問&#x3000;保存&#x3000;住所</translation>
+        <translation>質問　保存　住所</translation>
     </message>
     <message>
         <source>Active</source>
@@ -481,7 +481,7 @@
     </message>
     <message>
         <source>The Gateway returned the following error: %1</source>
-        <translation>ゲートウェーは次のエラー:&#x3000;%1&#x3000;受取りました.</translation>
+        <translation>ゲートウェーは次のエラー:　%1　受取りました.</translation>
     </message>
     <message>
         <source>&amp; (ampersand) is not a valid Delimiting Character.</source>
@@ -489,7 +489,7 @@
     </message>
     <message>
         <source>The Delimiting Character and the Encapsulating Character cannot be the same. Please change one or the other.</source>
-        <translation>区切り文字カプセル化した文字は同じではありません.&#x3000;変更するか、ほかの文字をお使い下さい.</translation>
+        <translation>区切り文字カプセル化した文字は同じではありません.　変更するか、ほかの文字をお使い下さい.</translation>
     </message>
     <message>
         <source>The response from the Gateway failed the Signature Key security check.</source>
@@ -679,7 +679,7 @@
     </message>
     <message>
         <source>&lt;p&gt;This action can not be undone. Are you sure you want to delete this Item?</source>
-        <translation>この操作は実行することができません.&#x3000;このアイテムを削除してもよろしいでしょうか？</translation>
+        <translation>この操作は実行することができません.　このアイテムを削除してもよろしいでしょうか？</translation>
     </message>
     <message>
         <source>Scrap %</source>
@@ -771,7 +771,7 @@
     </message>
     <message>
         <source>&lt;p&gt;A required total Qty. Per was specified but not met. Please correct the problem before continuing.</source>
-        <translation>要求した合計数量毎は指定に適合していない.&#x3000;続ける前に問題を修正して下さい.</translation>
+        <translation>要求した合計数量毎は指定に適合していない.　続ける前に問題を修正して下さい.</translation>
     </message>
     <message>
         <source>Bill of Materials</source>
@@ -1283,7 +1283,51 @@
     </message>
 </context>
 <context>
-    <name>CommentMap</name>
+    <name>Comments</name>
+    <message>
+        <source>Public</source>
+        <translation type="unfinished">パブリック</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>タイプ</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>資源ソース</translation>
+    </message>
+    <message>
+        <source>Verbose Text</source>
+        <translation>冗長な文字</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>編集</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>コメント</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>新規</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>表示</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>None</translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation>日/時間</translation>
+    </message>
+    <message>
+        <source>User Account</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>[Pick a Document Type]</source>
         <translation type="unfinished"></translation>
@@ -1458,53 +1502,6 @@
     </message>
 </context>
 <context>
-    <name>Comments</name>
-    <message>
-        <source>Public</source>
-        <translation type="unfinished">パブリック</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>タイプ</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation>資源ソース</translation>
-    </message>
-    <message>
-        <source>Verbose Text</source>
-        <translation>冗長な文字</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>編集</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>コメント</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>新規</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>表示</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>None</translation>
-    </message>
-    <message>
-        <source>Date/Time</source>
-        <translation>日/時間</translation>
-    </message>
-    <message>
-        <source>User Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ConfigAuthorizeDotNetProcessor</name>
     <message>
         <source>Ignore SSL Errors</source>
@@ -1633,7 +1630,7 @@
     <name>ContactClusterLineEdit</name>
     <message>
         <source>A System Error Occurred at %1::%2.</source>
-        <translation type="unfinished">%1::%2&#x3000;において、システムエラーが起こりました.</translation>
+        <translation type="unfinished">%1::%2　において、システムエラーが起こりました.</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -1806,7 +1803,7 @@
     </message>
     <message>
         <source>A System Error Occurred at %1::%2.</source>
-        <translation>%1::%2&#x3000;でシステムエラーが起こりました.</translation>
+        <translation>%1::%2　でシステムエラーが起こりました.</translation>
     </message>
     <message>
         <source>Existing Contact</source>
@@ -1814,7 +1811,7 @@
     </message>
     <message>
         <source>Question Saving Address</source>
-        <translation>質問&#x3000;保存&#x3000;住所</translation>
+        <translation>質問　保存　住所</translation>
     </message>
     <message>
         <source>Multple contacts exist with the same first and last name</source>
@@ -2090,7 +2087,7 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Credit Card %1 is not active. Make it active or select another Credit Card.</source>
-        <translation>クレジットカード %1 はアクティブではありません.&#x3000;アクティブにするか他のクレジットカードを選択して下さい.</translation>
+        <translation>クレジットカード %1 はアクティブではありません.　アクティブにするか他のクレジットカードを選択して下さい.</translation>
     </message>
     <message>
         <source>The login for the proxy server is not defined.</source>
@@ -2293,7 +2290,7 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Could not open digital certificate (.pem file) %1.</source>
-        <translation>電子証明書(.pem file) %1&#x3000;を開けません.</translation>
+        <translation>電子証明書(.pem file) %1　を開けません.</translation>
     </message>
     <message>
         <source>Could not figure out which Credit Card Processing Company to set up (based on %1).</source>
@@ -2377,7 +2374,7 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Country Pattern</source>
-        <translation type="unfinished">国&#x3000;パターン</translation>
+        <translation type="unfinished">国　パターン</translation>
     </message>
     <message>
         <source>Updating Selections</source>
@@ -2886,17 +2883,6 @@ What would you like to do?</source>
     </message>
 </context>
 <context>
-    <name>DocumentMap</name>
-    <message>
-        <source>[Pick a Document Type]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Getting Document Types</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Documents</name>
     <message>
         <source>Relationship</source>
@@ -3044,6 +3030,14 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Url Open Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[Pick a Document Type]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Getting Document Types</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3240,7 +3234,7 @@ What would you like to do?</source>
         <source>The XSLT Processor returned an error code: %1
 returned %2
 %3</source>
-        <translation>XSLTプロセッサはエラーコードを返しました：％1&#x3000;％2 ％3を返しました</translation>
+        <translation>XSLTプロセッサはエラーコードを返しました：％1　％2 ％3を返しました</translation>
     </message>
     <message>
         <source>Could not find XSLT mapping with internal id %1.</source>
@@ -3593,61 +3587,6 @@ returned %2
     <message>
         <source>Could not get user and edition</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GroupMap</name>
-    <message>
-        <source>Street Pattern</source>
-        <translation type="unfinished">町名 パターン</translation>
-    </message>
-    <message>
-        <source>City Pattern</source>
-        <translation type="unfinished">市 パターン</translation>
-    </message>
-    <message>
-        <source>State Pattern</source>
-        <translation type="unfinished">都道府県 パターン</translation>
-    </message>
-    <message>
-        <source>Postal Code Pattern</source>
-        <translation type="unfinished">郵便番号 パターン</translation>
-    </message>
-    <message>
-        <source>Country Pattern</source>
-        <translation type="unfinished">国&#x3000;パターン</translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished">番号</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">名前</translation>
-    </message>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished">アカウント</translation>
-    </message>
-    <message>
-        <source>Customer</source>
-        <translation type="unfinished">顧客</translation>
-    </message>
-    <message>
-        <source>Prospect</source>
-        <translation type="unfinished">見込み</translation>
-    </message>
-    <message>
-        <source>Employee</source>
-        <translation type="unfinished">従業員</translation>
-    </message>
-    <message>
-        <source>Contact</source>
-        <translation type="unfinished">コンタクト</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished">住所</translation>
     </message>
 </context>
 <context>
@@ -4254,7 +4193,7 @@ returned %2
     </message>
     <message>
         <source>The Gateway returned the following error: %1</source>
-        <translation type="unfinished">ゲートウェーは次のエラー:&#x3000;%1&#x3000;受取りました.</translation>
+        <translation type="unfinished">ゲートウェーは次のエラー:　%1　受取りました.</translation>
     </message>
     <message>
         <source>A Division Number must be no more than 10 characters long.</source>
@@ -7220,7 +7159,7 @@ or Name</source>
     <message>
         <source>There was an error saving this address (%1).
 Check the database server log for errors.</source>
-        <translation>住所を保存する際にエラーが起こりました(%1)。&#x3000;エラーの箇所をデータベースサーバーでご確認下さい。</translation>
+        <translation>住所を保存する際にエラーが起こりました(%1)。　エラーの箇所をデータベースサーバーでご確認下さい。</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -7420,7 +7359,7 @@ Check the database server log for errors.</source>
     </message>
     <message>
         <source>View...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">表示...</translation>
     </message>
     <message>
         <source>Error Adding Delete Action To Menu</source>
@@ -8265,7 +8204,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source> - Enter Misc. Credit Memo</source>
-        <translation>- その他入力&#x3000;クレジットメモ</translation>
+        <translation>- その他入力　クレジットメモ</translation>
     </message>
     <message>
         <source> - Enter Misc. Debit Memo</source>
@@ -8365,11 +8304,11 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>&lt;p&gt;You are changing the open amount of this A/P Open Item.  If you do not post a G/L Transaction to distribute this change then the A/P Open Item total will be out of balance with the A/P Trial Balance(s). Are you sure that you want to save this change?</source>
-        <translation>このA/Pオープンアイテムのオープン数量を変更しています.&#x3000;もしこの変更で配送するためにG/L処理を実行（POST)しないためには、A/Pオープンアイテムの合計がA/P試算表と整合性がとれないようになります.&#x3000;変更を保存してもよろしいでしょうか？</translation>
+        <translation>このA/Pオープンアイテムのオープン数量を変更しています.　もしこの変更で配送するためにG/L処理を実行（POST)しないためには、A/Pオープンアイテムの合計がA/P試算表と整合性がとれないようになります.　変更を保存してもよろしいでしょうか？</translation>
     </message>
     <message>
         <source>&lt;p&gt;The A/P Memo cannot be created as there are missing A/P Account Assignments for the selected Vendor. You must create an A/P Account Assignment for the selected Vendor&apos;s Vendor Type before you may create this A/P Memo.</source>
-        <translation>A/Pは選択されたベンダーで、A/Pアカウント付与でミスがあり、作成されませんでした.&#x3000;A/Pメモを作成する前に、選択されたベンダーのベンダータイプをA/Pアカウント付与で作成して下さい.</translation>
+        <translation>A/Pは選択されたベンダーで、A/Pアカウント付与でミスがあり、作成されませんでした.　A/Pメモを作成する前に、選択されたベンダーのベンダータイプをA/Pアカウント付与で作成して下さい.</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -9100,11 +9039,11 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source> - Enter Misc. Credit Memo</source>
-        <translation>-&#x3000;その他入力&#x3000;貸方割戻金(返金Credit Memo)</translation>
+        <translation>-　その他入力　貸方割戻金(返金Credit Memo)</translation>
     </message>
     <message>
         <source> - Enter Misc. Debit Memo</source>
-        <translation>-&#x3000;その他入力 追加請求(借方debit memo)</translation>
+        <translation>-　その他入力 追加請求(借方debit memo)</translation>
     </message>
     <message>
         <source>Post</source>
@@ -9112,7 +9051,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>A/R Open Amount Changed</source>
-        <translation>A/Rオープン&#x3000;総額変更済み</translation>
+        <translation>A/Rオープン　総額変更済み</translation>
     </message>
     <message>
         <source>Dist. Date</source>
@@ -9123,7 +9062,7 @@ as an Address. Please select a Prospect to edit:</source>
 to distribute this change then the A/R Open Item total will be out of balance with the
 A/R Trial Balance(s).
 Are you sure that you want to save this change?</source>
-        <translation>このA/Rオープンアイテムのオープン総額を変更しています。&#x3000;もし、この変更を配送するためにG/L処理をポストできません。 A/Rオープンアイテム合計は、A/R試算表で、不均衡になります。&#x3000;この変更を保存してもよろしいでしょうか？</translation>
+        <translation>このA/Rオープンアイテムのオープン総額を変更しています。　もし、この変更を配送するためにG/L処理をポストできません。 A/Rオープンアイテム合計は、A/R試算表で、不均衡になります。　この変更を保存してもよろしいでしょうか？</translation>
     </message>
     <message>
         <source>Cannot Save Receivable Memo</source>
@@ -9183,7 +9122,7 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>Sales Rep.:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>Terms:</source>
@@ -9745,7 +9684,7 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>&lt;p&gt;You must indicate the Lot/Serial # to assign and select the &apos;Assign&apos; button. You may not cancel this action.</source>
-        <translation>付与（アサイン）するロット/シリアル#を示して、’付与（アサイン）’ボタンを選択して下さい.&#x3000;この動作はキャンセルできません.</translation>
+        <translation>付与（アサイン）するロット/シリアル#を示して、’付与（アサイン）’ボタンを選択して下さい.　この動作はキャンセルできません.</translation>
     </message>
     <message>
         <source>&lt;p&gt;You must assign a Lot/Serial # to the remaining Quantity before saving this assignment.</source>
@@ -9784,7 +9723,7 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>&lt;p&gt;There was a problem reading the Atlas file, line %1 column %2: %3&lt;br&gt;(%4)</source>
-        <translation>地図ファイルを読み込み中に問題がありました、行&#x3000;%1 列&#x3000;%2: %3 (%4)</translation>
+        <translation>地図ファイルを読み込み中に問題がありました、行　%1 列　%2: %3 (%4)</translation>
     </message>
     <message>
         <source>XML Error</source>
@@ -9995,7 +9934,7 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>&lt;p&gt;The Immediate Origin is usually either a 10 digit Company Id number or a space followed by a 9 digit Routing Number. Does %1 match what your bank told you to enter here?</source>
-        <translation>すぐの配送元(Origin)は１０桁の数字の会社ID番号もしくはスペース付きの９桁のRouting番号が一般的です.&#x3000;あなたの銀行で言われた％１にマッチする番号を入力して下さい.</translation>
+        <translation>すぐの配送元(Origin)は１０桁の数字の会社ID番号もしくはスペース付きの９桁のRouting番号が一般的です.　あなたの銀行で言われた％１にマッチする番号を入力して下さい.</translation>
     </message>
     <message>
         <source>Cash</source>
@@ -10027,11 +9966,11 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>&lt;p&gt;The Immediate Destination is usually either a 10 digit Company Id number or a space followed by a 9 digit Routing Number. Does %1 match what your bank told you to enter here?</source>
-        <translation>すぐの配送先は１０桁の数字の会社ID番号もしくはスペース付きの９桁のRouting番号が一般的です.&#x3000;あなたの銀行で言われた％１にマッチする番号を入力して下さい.</translation>
+        <translation>すぐの配送先は１０桁の数字の会社ID番号もしくはスペース付きの９桁のRouting番号が一般的です.　あなたの銀行で言われた％１にマッチする番号を入力して下さい.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Bank Account name is already in use. Please enter a unique name.</source>
-        <translation>銀行口座名は既に使われております.&#x3000;ユニーク（単一）な名前を入力して下さい.</translation>
+        <translation>銀行口座名は既に使われております.　ユニーク（単一）な名前を入力して下さい.</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -10629,7 +10568,7 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>&lt;p&gt;Adding a Reference Item to a Bill of Material may cause W/O variances. &lt;p&gt; OK to continue? </source>
-        <translation>参照するアイテムをBOMに追加することで、W/Oの矛盾が起こりえます.&#x3000;続けてもよろしいでしょうか？</translation>
+        <translation>参照するアイテムをBOMに追加することで、W/Oの矛盾が起こりえます.　続けてもよろしいでしょうか？</translation>
     </message>
     <message>
         <source>Push</source>
@@ -10979,6 +10918,26 @@ Are you sure that you want to save this change?</source>
     <message>
         <source>Group %1 has been successfully populated with %2 %3s</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street Pattern</source>
+        <translation type="unfinished">町名 パターン</translation>
+    </message>
+    <message>
+        <source>City Pattern</source>
+        <translation type="unfinished">市 パターン</translation>
+    </message>
+    <message>
+        <source>State Pattern</source>
+        <translation type="unfinished">都道府県 パターン</translation>
+    </message>
+    <message>
+        <source>Postal Code Pattern</source>
+        <translation type="unfinished">郵便番号 パターン</translation>
+    </message>
+    <message>
+        <source>Country Pattern</source>
+        <translation type="unfinished">国　パターン</translation>
     </message>
 </context>
 <context>
@@ -11994,7 +11953,7 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>&lt;p&gt;You have changed the quantity to 0 or less. Are you sure you want to do this?</source>
-        <translation>数量を０もしくはそれ以下に変更しました.&#x3000;よろしいでしょうか？</translation>
+        <translation>数量を０もしくはそれ以下に変更しました.　よろしいでしょうか？</translation>
     </message>
     <message>
         <source>Comment Type:</source>
@@ -12041,7 +12000,7 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>The current value specified is 0. Are you sure you want to continue?</source>
-        <translation>現在の値(時価)は０として明記されています.&#x3000;続けてもよろしいでしょうか？</translation>
+        <translation>現在の値(時価)は０として明記されています.　続けてもよろしいでしょうか？</translation>
     </message>
     <message>
         <source>New</source>
@@ -12077,7 +12036,7 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>&lt;p&gt;The new Order Quantity that you have entered does not meet the Order Parameters set for the parent Item Site for this Work Order.  In order to meet the Item Site Order Parameters the new Order Quantity must be increased to %1. Do you want to change the Order Quantity for this Work Order to %2?</source>
-        <translation>新しい発注数量は、この作業オーダーのための親アイテムサイトのためにオーダー内容が設定されていないのを入力しています.&#x3000;アイテムサイトオーダー設定に合致するためには、新しい発注数量は%1まで増加しなければなりません.この作業発注が&apos;&apos;になるまで発注数量をへんこうしますか？</translation>
+        <translation>新しい発注数量は、この作業オーダーのための親アイテムサイトのためにオーダー内容が設定されていないのを入力しています.　アイテムサイトオーダー設定に合致するためには、新しい発注数量は%1まで増加しなければなりません.この作業発注が&apos;&apos;になるまで発注数量をへんこうしますか？</translation>
     </message>
     <message>
         <source>Error Changing Quantity</source>
@@ -12953,7 +12912,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&lt;p&gt;There has not been any Production received from this Work Order. This probably means Production Postings for this Work Order have been overlooked.</source>
-        <translation>この作業オーダーからそれほど多く生産されていません.&#x3000;これは、この作業オーダーが見過ごされた状態で生産がポストされたことを意味します.</translation>
+        <translation>この作業オーダーからそれほど多く生産されていません.　これは、この作業オーダーが見過ごされた状態で生産がポストされたことを意味します.</translation>
     </message>
     <message>
         <source>You must enter a valid transaction date.</source>
@@ -12985,11 +12944,11 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&lt;p&gt;The selected Work Order has Material Requirements that are Push-Issued but have not had any material issued to them. This probably means that required manual material issues have been overlooked.</source>
-        <translation>選択した作業オーダーは、Push－Issuedで多くの資材を発行していないという資材要求を満たしています.&#x3000;これはたぶん、手動の資材発行が見過ごされていたことを意味します.</translation>
+        <translation>選択した作業オーダーは、Push－Issuedで多くの資材を発行していないという資材要求を満たしています.　これはたぶん、手動の資材発行が見過ごされていたことを意味します.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The selected Work Order has Material Requirements that are Pull-Issued but have not had any material issued to them. This probably means that Production was posted for this Work Order through posting Operations. The BOM for this Item should be modified to list Used At selections for each BOM Item.</source>
-        <translation>選択した作業オーダーは、Pull-Issuedで多くの資材をもっていないという資材の要望を含んでいます.&#x3000;たぶんこれは、ポスティング処理により作業オーダーがポストされ、生産したということになります.&#x3000;このアイテムのBOMは、お互いのBOMアイテム使用済みかどうかの選択リストで修正されています.</translation>
+        <translation>選択した作業オーダーは、Pull-Issuedで多くの資材をもっていないという資材の要望を含んでいます.　たぶんこれは、ポスティング処理により作業オーダーがポストされ、生産したということになります.　このアイテムのBOMは、お互いのBOMアイテム使用済みかどうかの選択リストで修正されています.</translation>
     </message>
     <message>
         <source>Comments</source>
@@ -13361,11 +13320,11 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&lt;p&gt;The old Company Number %1 might be used by existing Accounts, including Accounts in the %2 child database. Would you like to change all accounts in the current database that use it to Company Number %3?&lt;p&gt;If you answer &apos;No&apos; then either Cancel or change the Number back to %4 and Save again. If you answer &apos;Yes&apos; then change the Company Number in the child database as well.</source>
-        <translation>古い会社番号 %1 は既存のアカウントで使用されているかもしれません、%2&#x3000;子データベースのアカウントを含んで。&#x3000;会社番号 %3 に使われている現在のデータベースですべてのアカウントを変更しても宜しいでしょうか。&#x3000;もし、だめな場合、キャンセルもしくは%4&#x3000;へ番号を変更し、再度保存して下さい。&#x3000;もしYesの場合は、子データベースで会社番号を変更して下さい。</translation>
+        <translation>古い会社番号 %1 は既存のアカウントで使用されているかもしれません、%2　子データベースのアカウントを含んで。　会社番号 %3 に使われている現在のデータベースですべてのアカウントを変更しても宜しいでしょうか。　もし、だめな場合、キャンセルもしくは%4　へ番号を変更し、再度保存して下さい。　もしYesの場合は、子データベースで会社番号を変更して下さい。</translation>
     </message>
     <message>
         <source>&lt;p&gt;The old Company Number %1 might be used by existing Accounts. Would you like to change all accounts that use it to Company Number %2?&lt;p&gt;If you answer &apos;No&apos; then either Cancel or change the Number back to %3 and Save again.</source>
-        <translation>古い会社番号 %1 は既存のアカウントで使用されています。&#x3000;会社番号 %2 へすべてのアカウントを変更しても宜しいでしょうか。&#x3000;もしNoの場合はキャンセルもしくは %3 へ番号を戻し変更して再度保存して下さい。</translation>
+        <translation>古い会社番号 %1 は既存のアカウントで使用されています。　会社番号 %2 へすべてのアカウントを変更しても宜しいでしょうか。　もしNoの場合はキャンセルもしくは %3 へ番号を戻し変更して再度保存して下さい。</translation>
     </message>
     <message>
         <source>Versions Incompatible</source>
@@ -13373,7 +13332,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&lt;p&gt;The version of the child database is not the same as the version of the parent database (%1 vs. %2). The data cannot safely be synchronized.</source>
-        <translation>子データベースのバージョンは親データベースのバージョンと同じではありません（%1 vs %2）。&#x3000;データは安全に同期できません。</translation>
+        <translation>子データベースのバージョンは親データベースのバージョンと同じではありません（%1 vs %2）。　データは安全に同期できません。</translation>
     </message>
     <message>
         <source>Currencies Incompatible</source>
@@ -13389,7 +13348,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>&lt;p&gt;The parent database does not appear to have a base currency defined. The data cannot safely be synchronized.</source>
-        <translation>親のデータベースは基本の通貨定義がある状態で表示されません。&#x3000;データは安全に同期できません。</translation>
+        <translation>親のデータベースは基本の通貨定義がある状態で表示されません。　データは安全に同期できません。</translation>
     </message>
     <message>
         <source>&lt;p&gt;The child database does not appear to have a Company %1 defined. The data cannot safely be synchronized.</source>
@@ -15026,7 +14985,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>Enabling revision control will create control records for products that contain revision number data.  This change can not be undone.  Do you wish to proceed?</source>
-        <translation>リビジョンのコントロールを有効にすると、リビジョン番号データが含まれる製品のコントロール記録を作成することができます.&#x3000;この変更は、このままにすることはできません.&#x3000;進めますか？</translation>
+        <translation>リビジョンのコントロールを有効にすると、リビジョン番号データが含まれる製品のコントロール記録を作成することができます.　この変更は、このままにすることはできません.　進めますか？</translation>
     </message>
     <message>
         <source>Set Sold Items as E&amp;xclusive</source>
@@ -15420,7 +15379,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>Sales Rep:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>Returns</source>
@@ -16772,7 +16731,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>Country Pattern</source>
-        <translation>国&#x3000;パターン</translation>
+        <translation>国　パターン</translation>
     </message>
     <message>
         <source>Postal Code Pattern</source>
@@ -17873,7 +17832,7 @@ Contract Number you have specified.</source>
     </message>
     <message>
         <source>Cust. Phone:</source>
-        <translation>顧客&#x3000;電話:</translation>
+        <translation>顧客　電話:</translation>
     </message>
     <message>
         <source>P/O Number:</source>
@@ -18106,7 +18065,7 @@ Contract Number you have specified.</source>
     </message>
     <message>
         <source>&lt;p&gt;The selected Cost Category cannot be deleted as it still contains Items. You must reassign these Items before deleting this Cost Category.</source>
-        <translation>選択したコストカテゴリーは、まだアイテムが含まれているので削除できません。&#x3000;このコストカテゴリーを削除する前に、それらのアイテムを再配置（再アサイン）して下さい。</translation>
+        <translation>選択したコストカテゴリーは、まだアイテムが含まれているので削除できません。　このコストカテゴリーを削除する前に、それらのアイテムを再配置（再アサイン）して下さい。</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -18408,7 +18367,7 @@ Please verify the # of the Count Slip you are entering.</source>
     </message>
     <message>
         <source>Slip #:</source>
-        <translation>スリップ&#x3000;#：</translation>
+        <translation>スリップ　#：</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -18659,7 +18618,7 @@ Please contact your Systems Administrator and report this issue.</source>
     </message>
     <message>
         <source>&lt;p&gt;This is a master table used for selecting country names for Addresses and default currency symbols for the Currency window. Are you sure you want to delete this country and its associated information?</source>
-        <translation>選択している住所の国名と通貨ウィンドウの標準通貨記号に使われているマスターテーブルです.&#x3000;この国とそれに関連する情報を削除してもよろしいでしょうか？</translation>
+        <translation>選択している住所の国名と通貨ウィンドウの標準通貨記号に使われているマスターテーブルです.　この国とそれに関連する情報を削除してもよろしいでしょうか？</translation>
     </message>
     <message>
         <source>Confirm Delete</source>
@@ -19581,7 +19540,7 @@ creating Planned Orders.</source>
     <message numerus="yes">
         <source>&lt;p&gt;%n record(s) were created.</source>
         <translation type="unfinished">
-            <numerusform>%n&#x3000;レコードが作成されました.
+            <numerusform>%n　レコードが作成されました.
             
         </numerusform>
         </translation>
@@ -19898,7 +19857,7 @@ creating Planned Orders.</source>
     </message>
     <message>
         <source>Sales Rep.:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>Copy to Ship-to -&gt;</source>
@@ -20473,6 +20432,14 @@ creating Planned Orders.</source>
         <source>Error Retrieving Group Source Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">番号</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">名前</translation>
+    </message>
 </context>
 <context>
     <name>crmGroups</name>
@@ -20535,6 +20502,30 @@ creating Planned Orders.</source>
     <message>
         <source>Error Retrieving %1 Groups</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished">アカウント</translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">顧客</translation>
+    </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished">見込み</translation>
+    </message>
+    <message>
+        <source>Employee</source>
+        <translation type="unfinished">従業員</translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">コンタクト</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">住所</translation>
     </message>
 </context>
 <context>
@@ -21225,7 +21216,7 @@ creating Planned Orders.</source>
     </message>
     <message>
         <source>Country Pattern</source>
-        <translation>国&#x3000;パターン</translation>
+        <translation>国　パターン</translation>
     </message>
     <message>
         <source>City Pattern</source>
@@ -22339,7 +22330,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Sales Rep:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -22833,7 +22824,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Customer Number Pattern</source>
-        <translation>顧客番号&#x3000;パターン</translation>
+        <translation>顧客番号　パターン</translation>
     </message>
     <message>
         <source>Contact Name Pattern</source>
@@ -22841,7 +22832,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Customer Name Pattern</source>
-        <translation>顧客名&#x3000;パターン</translation>
+        <translation>顧客名　パターン</translation>
     </message>
     <message>
         <source>Customer Type Pattern</source>
@@ -22861,7 +22852,7 @@ Please check the values of these dates.</source>
     </message>
     <message>
         <source>Country Pattern</source>
-        <translation>国&#x3000;パターン</translation>
+        <translation>国　パターン</translation>
     </message>
     <message>
         <source>City Pattern</source>
@@ -25710,7 +25701,7 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Sales Rep.</source>
-        <translation>販売&#x3000;責任者</translation>
+        <translation>販売　責任者</translation>
     </message>
     <message>
         <source>Invc. Date</source>
@@ -25936,7 +25927,7 @@ Would you like to post it anyway?</source>
     </message>
     <message>
         <source>Alt/Inv Ratio</source>
-        <translation>代替え/請求書&#x3000;比率</translation>
+        <translation>代替え/請求書　比率</translation>
     </message>
     <message>
         <source>Alt. UOM</source>
@@ -25974,7 +25965,7 @@ Would you like to post it anyway?</source>
     <name>dspCapacityUOMsByProductCategory</name>
     <message>
         <source>Alt/Inv Ratio</source>
-        <translation type="unfinished">代替え/請求書&#x3000;比率</translation>
+        <translation type="unfinished">代替え/請求書　比率</translation>
     </message>
     <message>
         <source>Inv. UOM</source>
@@ -29128,7 +29119,7 @@ Total</source>
     </message>
     <message>
         <source>Reorder Lvl.</source>
-        <translation>再発注&#x3000;Lvl.</translation>
+        <translation>再発注　Lvl.</translation>
     </message>
     <message>
         <source>Enter Valid Dates</source>
@@ -29486,7 +29477,7 @@ Total</source>
     </message>
     <message>
         <source>Cust. Phone:</source>
-        <translation>顧客&#x3000;電話:</translation>
+        <translation>顧客　電話:</translation>
     </message>
     <message>
         <source>P/O Number:</source>
@@ -34729,7 +34720,7 @@ Total</source>
     </message>
     <message>
         <source>Reorder Lvl.</source>
-        <translation type="unfinished">再発注&#x3000;Lvl.</translation>
+        <translation type="unfinished">再発注　Lvl.</translation>
     </message>
     <message>
         <source>Release multiple PRs?</source>
@@ -34860,7 +34851,7 @@ Total</source>
     </message>
     <message>
         <source>Reorder Lvl.</source>
-        <translation type="unfinished">再発注&#x3000;Lvl.</translation>
+        <translation type="unfinished">再発注　Lvl.</translation>
     </message>
     <message>
         <source>Release multiple PRs?</source>
@@ -34967,7 +34958,7 @@ Total</source>
     </message>
     <message>
         <source>Reorder Lvl.</source>
-        <translation type="unfinished">再発注&#x3000;Lvl.</translation>
+        <translation type="unfinished">再発注　Lvl.</translation>
     </message>
     <message>
         <source>Cost Method</source>
@@ -36232,7 +36223,7 @@ Total</source>
     </message>
     <message>
         <source>Cust. Phone:</source>
-        <translation>顧客&#x3000;電話:</translation>
+        <translation>顧客　電話:</translation>
     </message>
     <message>
         <source>Returned</source>
@@ -36589,7 +36580,7 @@ Total</source>
     </message>
     <message>
         <source>Cust. Phone:</source>
-        <translation>顧客&#x3000;電話:</translation>
+        <translation>顧客　電話:</translation>
     </message>
     <message>
         <source>Cannot Track %1</source>
@@ -37050,7 +37041,7 @@ Total</source>
     </message>
     <message>
         <source>Journal deleted by %1 on %2</source>
-        <translation>%1 on %2&#x3000;により削除された仕訳帳</translation>
+        <translation>%1 on %2　により削除された仕訳帳</translation>
     </message>
     <message>
         <source>G/L Transactions</source>
@@ -37097,7 +37088,7 @@ Total</source>
     </message>
     <message>
         <source>Reorder Lvl.</source>
-        <translation>再発注&#x3000;Lvl.</translation>
+        <translation>再発注　Lvl.</translation>
     </message>
     <message>
         <source>You must specify an Item Number</source>
@@ -37556,7 +37547,7 @@ Total</source>
     <name>dspSummarizedSales</name>
     <message>
         <source>Sales Rep.</source>
-        <translation type="unfinished">販売&#x3000;責任者:</translation>
+        <translation type="unfinished">販売　責任者:</translation>
     </message>
     <message>
         <source>Select a Group By</source>
@@ -37600,7 +37591,7 @@ Total</source>
     </message>
     <message>
         <source>&apos;Sales Rep.:&apos;</source>
-        <translation>&apos;&apos;販売&#x3000;責任者:&apos;&apos;</translation>
+        <translation>&apos;&apos;販売　責任者:&apos;&apos;</translation>
     </message>
     <message>
         <source>&apos;Item:&apos;</source>
@@ -47512,7 +47503,7 @@ Are you sure that you want to Implode the selected Work Order?</source>
     </message>
     <message>
         <source>Sales Rep.:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>Invoice Date:</source>
@@ -56313,29 +56304,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
 </context>
 <context>
-    <name>newForm</name>
-    <message>
-        <source>New Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search Criterion:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Query</source>
-        <translation type="unfinished">クエリー</translation>
-    </message>
-    <message>
-        <source>Results:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>openPurchaseOrder</name>
     <message>
         <source>Open Purchase Orders for :</source>
@@ -63452,7 +63420,7 @@ Do you also want to delete sub-tasks?</source>
     </message>
     <message>
         <source>Country Pattern</source>
-        <translation type="unfinished">国&#x3000;パターン</translation>
+        <translation type="unfinished">国　パターン</translation>
     </message>
     <message>
         <source>Street Pattern</source>
@@ -67247,7 +67215,7 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>Sales Rep.:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>None</source>
@@ -67965,7 +67933,7 @@ You must Recall this Work Order before Rescheduling it.</source>
     </message>
     <message>
         <source>View...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">表示...</translation>
     </message>
     <message>
         <source>Include Closed</source>
@@ -69026,7 +68994,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Sales Rep.:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>Commission:</source>
@@ -69069,7 +69037,7 @@ Would you like to mark the selected Sales Category as inactive instead?</source>
     </message>
     <message>
         <source>Sales Rep.:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>Issue Canceled</source>
@@ -70453,7 +70421,7 @@ Do you wish to change all future Sales Order recurrences?</source>
     </message>
     <message>
         <source>Cance&amp;l Item</source>
-        <translation>キャンセル&#x3000;アイテム</translation>
+        <translation>キャンセル　アイテム</translation>
     </message>
     <message>
         <source>On Order</source>
@@ -71075,7 +71043,7 @@ Would you like to save them now?</source>
     </message>
     <message>
         <source>Reorder Lvl.</source>
-        <translation type="unfinished">再発注&#x3000;Lvl.</translation>
+        <translation type="unfinished">再発注　Lvl.</translation>
     </message>
     <message>
         <source>Available</source>
@@ -71280,7 +71248,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>View...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">表示...</translation>
     </message>
     <message>
         <source>Delete...</source>
@@ -74322,7 +74290,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>Sales Rep.:</source>
-        <translation>販売&#x3000;責任者:</translation>
+        <translation>販売　責任者:</translation>
     </message>
     <message>
         <source>Ship Via:</source>
@@ -74692,7 +74660,7 @@ You must reassign these Ship-Tos before you may delete the selected Shipping For
     </message>
     <message>
         <source>Cust. Phone:</source>
-        <translation>顧客&#x3000;電話:</translation>
+        <translation>顧客　電話:</translation>
     </message>
     <message>
         <source>Shipment #:</source>
@@ -78144,7 +78112,7 @@ Period %3</source>
     </message>
     <message>
         <source>&lt;p&gt;The parent database does not appear to have a base currency defined. The data cannot safely be synchronized.</source>
-        <translation type="unfinished">親のデータベースは基本の通貨定義がある状態で表示されません。&#x3000;データは安全に同期できません。</translation>
+        <translation type="unfinished">親のデータベースは基本の通貨定義がある状態で表示されません。　データは安全に同期できません。</translation>
     </message>
     <message>
         <source>End</source>
@@ -78225,7 +78193,7 @@ Posting currency revaluation adjustments...</source>
     <message>
         <source>Synchronizing Company %1 (%2)
 Forward updating trial balances...</source>
-        <translation>同期中 会社 %1 (%2)&#x3000;試算表を更新中へフォワード...</translation>
+        <translation>同期中 会社 %1 (%2)　試算表を更新中へフォワード...</translation>
     </message>
     <message>
         <source>Skipping Database</source>
@@ -78263,7 +78231,7 @@ Forward updating trial balances...</source>
         <source>Synchronizing Company %1 (%2): 
 Period: %3 
 Updating Chart of Accounts...</source>
-        <translation>同期中&#x3000;会社 %1 (%2): 期間: %3 勘定科目表の更新中...</translation>
+        <translation>同期中　会社 %1 (%2): 期間: %3 勘定科目表の更新中...</translation>
     </message>
     <message>
         <source>Versions Incompatible</source>
@@ -78271,7 +78239,7 @@ Updating Chart of Accounts...</source>
     </message>
     <message>
         <source>&lt;p&gt;The version of the child database is not the same as the version of the parent database (%1 vs. %2). The data cannot safely be synchronized.</source>
-        <translation type="unfinished">子データベースのバージョンは親データベースのバージョンと同じではありません（%1 vs %2）。&#x3000;データは安全に同期できません。</translation>
+        <translation type="unfinished">子データベースのバージョンは親データベースのバージョンと同じではありません（%1 vs %2）。　データは安全に同期できません。</translation>
     </message>
     <message>
         <source>Synchronizing Company %1 (%2): Posting into trial balances...</source>
@@ -79058,7 +79026,7 @@ Updating Chart of Accounts...</source>
     </message>
     <message>
         <source>&lt;p&gt;This is a recurring item. Do you want to delete just this one item or delete all open items in this recurrence?</source>
-        <translation type="unfinished">これは繰り返しているアイテムです.&#x3000;このアイテムだけを削除するか、この繰り返し状態の開いているアイテムをすべて削除しますか?</translation>
+        <translation type="unfinished">これは繰り返しているアイテムです.　このアイテムだけを削除するか、この繰り返し状態の開いているアイテムをすべて削除しますか?</translation>
     </message>
     <message>
         <source>Delete List Item?</source>
@@ -79226,7 +79194,7 @@ Do you also want to delete sub-tasks?</source>
     </message>
     <message>
         <source>View...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">表示...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -79699,7 +79667,7 @@ You first need to Revoke those Tax Codes.</source>
     </message>
     <message>
         <source>Country Pattern</source>
-        <translation type="unfinished">国&#x3000;パターン</translation>
+        <translation type="unfinished">国　パターン</translation>
     </message>
     <message>
         <source>Tax Authority Name Pattern</source>
@@ -86498,7 +86466,7 @@ You must reassign these Vendors before you may delete the selected Vendor Type.<
     </message>
     <message>
         <source>Country Pattern</source>
-        <translation type="unfinished">国&#x3000;パターン</translation>
+        <translation type="unfinished">国　パターン</translation>
     </message>
     <message>
         <source>Error Deleting</source>
@@ -88370,7 +88338,7 @@ You must instead return each Work Order Material item individually.
     </message>
     <message>
         <source>Print Traveler...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">トラベラーの印刷...</translation>
     </message>
     <message>
         <source>Qty. Ordered:</source>

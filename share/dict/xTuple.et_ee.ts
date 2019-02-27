@@ -1281,7 +1281,51 @@
     </message>
 </context>
 <context>
-    <name>CommentMap</name>
+    <name>Comments</name>
+    <message>
+        <source>Source</source>
+        <translation type="unfinished">Päritolu</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tüüp</translation>
+    </message>
+    <message>
+        <source>Public</source>
+        <translation>Avalik</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Muuda</translation>
+    </message>
+    <message>
+        <source>Verbose Text</source>
+        <translation>Vabatekst</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Kommentaar</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Uus</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Näita</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Mitte</translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation>Kuupäev/kellaaeg</translation>
+    </message>
+    <message>
+        <source>User Account</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>[Pick a Document Type]</source>
         <translation type="unfinished"></translation>
@@ -1453,53 +1497,6 @@
     <message>
         <source>Work Order</source>
         <translation type="unfinished">Töötellimus</translation>
-    </message>
-</context>
-<context>
-    <name>Comments</name>
-    <message>
-        <source>Source</source>
-        <translation type="unfinished">Päritolu</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>Tüüp</translation>
-    </message>
-    <message>
-        <source>Public</source>
-        <translation>Avalik</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Muuda</translation>
-    </message>
-    <message>
-        <source>Verbose Text</source>
-        <translation>Vabatekst</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>Kommentaar</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Uus</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Näita</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Mitte</translation>
-    </message>
-    <message>
-        <source>Date/Time</source>
-        <translation>Kuupäev/kellaaeg</translation>
-    </message>
-    <message>
-        <source>User Account</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2884,17 +2881,6 @@ What would you like to do?</source>
     </message>
 </context>
 <context>
-    <name>DocumentMap</name>
-    <message>
-        <source>[Pick a Document Type]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Getting Document Types</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Documents</name>
     <message>
         <source>Miscellaneous</source>
@@ -3042,6 +3028,14 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Url Open Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[Pick a Document Type]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Getting Document Types</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3591,61 +3585,6 @@ returned %2
     <message>
         <source>Could not get user and edition</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GroupMap</name>
-    <message>
-        <source>Street Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>City Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>State Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Postal Code Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Country Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished">Number</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">Nimi</translation>
-    </message>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished">Konto</translation>
-    </message>
-    <message>
-        <source>Customer</source>
-        <translation type="unfinished">Klient</translation>
-    </message>
-    <message>
-        <source>Prospect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Employee</source>
-        <translation type="unfinished">Töötaja</translation>
-    </message>
-    <message>
-        <source>Contact</source>
-        <translation type="unfinished">Kontakt</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished">Aadress</translation>
     </message>
 </context>
 <context>
@@ -7417,7 +7356,7 @@ Check the database server log for errors.</source>
     </message>
     <message>
         <source>View...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Näita...</translation>
     </message>
     <message>
         <source>Error Adding Delete Action To Menu</source>
@@ -10975,6 +10914,26 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>Group %1 has been successfully populated with %2 %3s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postal Code Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country Pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -16533,7 +16492,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>View...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Näita...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -20467,6 +20426,14 @@ Item: %2 - %3</source>
         <source>Error Retrieving Group Source Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Number</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nimi</translation>
+    </message>
 </context>
 <context>
     <name>crmGroups</name>
@@ -20529,6 +20496,30 @@ Item: %2 - %3</source>
     <message>
         <source>Error Retrieving %1 Groups</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished">Konto</translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Klient</translation>
+    </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Employee</source>
+        <translation type="unfinished">Töötaja</translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Kontakt</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Aadress</translation>
     </message>
 </context>
 <context>
@@ -40134,7 +40125,7 @@ to Vendor %1</source>
     </message>
     <message>
         <source>Close...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sule...</translation>
     </message>
     <message>
         <source>Cannot Delete Work Order</source>
@@ -56305,29 +56296,6 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
 </context>
 <context>
-    <name>newForm</name>
-    <message>
-        <source>New Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search Criterion:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Query</source>
-        <translation type="unfinished">Päring</translation>
-    </message>
-    <message>
-        <source>Results:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>openPurchaseOrder</name>
     <message>
         <source>Created By</source>
@@ -56506,7 +56474,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Close...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sule...</translation>
     </message>
     <message>
         <source>Error Retrieving Return Authorization Information</source>
@@ -71271,7 +71239,7 @@ Are you sure you want to do this?</source>
     </message>
     <message>
         <source>View...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Näita...</translation>
     </message>
     <message>
         <source>Delete...</source>
@@ -79217,7 +79185,7 @@ Do you also want to delete sub-tasks?</source>
     </message>
     <message>
         <source>View...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Näita...</translation>
     </message>
     <message>
         <source>Delete</source>
