@@ -26,6 +26,7 @@ class QLabel;
 class ItemLineEditDelegate;
 class itemList;
 class itemSearch;
+class XTreeWidgetItem;
 
 class XTUPLEWIDGETS_EXPORT itemList : public VirtualList
 {
@@ -68,6 +69,7 @@ public:
 public slots:
     void set(const ParameterList & pParams);
     void sFillList();
+    void sItemSelectionChanged();
 
 private:
     int _itemid;
@@ -75,6 +77,7 @@ private:
     bool _useQuery;
     QString _sql;
     QStringList _extraClauses;
+
 };
 
 class XTUPLEWIDGETS_EXPORT ItemLineEdit : public VirtualClusterLineEdit
@@ -84,6 +87,8 @@ class XTUPLEWIDGETS_EXPORT ItemLineEdit : public VirtualClusterLineEdit
 
 friend class ItemCluster;
 friend class ItemLineEditDelegate;
+friend class itemList;
+friend class itemSearch;
 
   public:
     ItemLineEdit(QWidget *, const char * = 0);
@@ -190,6 +195,9 @@ friend class ItemLineEditDelegate;
     void fractional(bool);
     void warehouseIdChanged(int);
     void valid(bool);
+
+  protected:
+    QStringList _alias;
 
   protected slots:
     itemList* listFactory();

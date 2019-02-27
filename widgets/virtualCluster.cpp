@@ -606,6 +606,7 @@ void VirtualClusterLineEdit::sHandleCompleter()
 void VirtualClusterLineEdit::completerActivated(const QModelIndex &pIndex)
 {
   _completerId = _completer->completionModel()->data(pIndex.sibling(pIndex.row(), 0)).toInt();
+  setText(pIndex.sibling(pIndex.row(), 1).data().toString());
   if (DEBUG)
     qDebug() << objectName() << "::completerActivated(" << pIndex << ")"
              << "corresponds to completerId" << _completerId;

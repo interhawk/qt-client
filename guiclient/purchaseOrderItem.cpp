@@ -714,6 +714,24 @@ void purchaseOrderItem::sSave()
     }
   }
 
+  XSqlQuery rollback;
+  rollback.prepare("ROLLBACK;");
+
+  emit saveBeforeBegin();
+  if (_saveStatus == Failed)
+  {
+    return;
+  }
+
+  XSqlQuery begin("BEGIN;");
+
+  emit saveAfterBegin();
+  if (_saveStatus == Failed)
+  {
+    rollback.exec();
+    return;
+  }
+
   if (_mode == cNew)
   {
     purchaseSave.prepare( "INSERT INTO poitem "
@@ -758,6 +776,9 @@ void purchaseOrderItem::sSave()
         purchaseSave.bindValue(":poitem_itemsite_id", itemsiteid.value("itemsite_id").toInt());
       else
       {
+        emit saveBeforeRollback(&itemsiteid);
+        rollback.exec();
+        emit saveAfterRollback(&itemsiteid);
         QMessageBox::critical( this, tr("Invalid Item/Site"),
                                tr("<p>The Item and Site you have selected does not appear to be a valid combination. "
                                   "Make sure you have a Site selected and that there is a valid itemsite for "
@@ -819,11 +840,16 @@ void purchaseOrderItem::sSave()
   }
   purchaseSave.bindValue(":poitem_tax_exemption", _taxExempt->code());
   purchaseSave.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Purchase Order Item Information"),
-                                         purchaseSave, __FILE__, __LINE__))
+  if (purchaseSave.lastError().type() != QSqlError::NoError)
   {
+    emit saveBeforeRollback(&purchaseSave);
+    rollback.exec();
+    emit saveAfterRollback(&purchaseSave);
+    ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Purchase Order Item Information"),
+      purchaseSave, __FILE__, __LINE__);
     return;
   }
+
 
   if (_parentwo != -1)
   {
@@ -831,6 +857,15 @@ void purchaseOrderItem::sSave()
     purchaseSave.bindValue(":parentwo", _parentwo);
     purchaseSave.bindValue(":poitem_id", _poitemid);
     purchaseSave.exec();
+    if (purchaseSave.lastError().type() != QSqlError::NoError)
+    {
+      emit saveBeforeRollback(&purchaseSave);
+      rollback.exec();
+      emit saveAfterRollback(&purchaseSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Work Order Information"),
+        purchaseSave, __FILE__, __LINE__);
+      return;
+    }
   }
 
   if (_parentso != -1)
@@ -839,10 +874,29 @@ void purchaseOrderItem::sSave()
     purchaseSave.bindValue(":parentso", _parentso);
     purchaseSave.bindValue(":poitem_id", _poitemid);
     purchaseSave.exec();
+    if (purchaseSave.lastError().type() != QSqlError::NoError)
+    {
+      emit saveBeforeRollback(&purchaseSave);
+      rollback.exec();
+      emit saveAfterRollback(&purchaseSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Sales Order Information"),
+        purchaseSave, __FILE__, __LINE__);
+      return;
+    }
+
     purchaseSave.prepare("UPDATE coitem SET coitem_order_id=:poitem_id, coitem_order_type='P' WHERE (coitem_id=:parentso);");
     purchaseSave.bindValue(":parentso", _parentso);
     purchaseSave.bindValue(":poitem_id", _poitemid);
     purchaseSave.exec();
+    if (purchaseSave.lastError().type() != QSqlError::NoError)
+    {
+      emit saveBeforeRollback(&purchaseSave);
+      rollback.exec();
+      emit saveAfterRollback(&purchaseSave);
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Sales Order Item Information"),
+        purchaseSave, __FILE__, __LINE__);
+      return;
+    }
   }
 
   if ( _mode != cView )
@@ -858,9 +912,52 @@ void purchaseOrderItem::sSave()
       purchaseSave.bindValue(":char_id", _itemchar->data(idx1, Qt::UserRole));
       purchaseSave.bindValue(":char_value", _itemchar->data(idx2, Qt::DisplayRole));
       purchaseSave.exec();
+      if (purchaseSave.lastError().type() != QSqlError::NoError)
+      {
+        emit saveBeforeRollback(&purchaseSave);
+        rollback.exec();
+        emit saveAfterRollback(&purchaseSave);
+        ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Characteristics Information"),
+          purchaseSave, __FILE__, __LINE__);
+        return;
+      }
     }
   }
 
+  emit saveBeforeCommit();
+  if (_saveStatus == Failed)
+  {
+    rollback.exec();
+    return;
+  }
+
+  XSqlQuery commit("COMMIT;");
+
+  bool tryAgain = false;
+
+  do
+  {
+    emit saveAfterCommit();
+    if (_saveStatus == Failed)
+    {
+      QMessageBox failure(QMessageBox::Critical, tr("Script Error"),
+        tr("A script has failed after the main window saved successfully. How do "
+          "you wish to proceed?"));
+      QPushButton* retry = failure.addButton(tr("Retry"), QMessageBox::NoRole);
+      failure.addButton(tr("Ignore"), QMessageBox::YesRole);
+      QPushButton* cancel = failure.addButton(QMessageBox::Cancel);
+      failure.setDefaultButton(cancel);
+      failure.setEscapeButton((QAbstractButton*)cancel);
+      failure.exec();
+      if (failure.clickedButton() == (QAbstractButton*)retry)
+      {
+        setSaveStatus(OK);
+        tryAgain = true;
+      }
+      else if (failure.clickedButton() == (QAbstractButton*)cancel)
+        return;
+    }
+  } while (tryAgain);
   
   if (cNew == _mode && !_captive)
   {
