@@ -19,6 +19,7 @@
  */
 
 #include <QDebug>
+#include <QMessageAuthenticationCode>
 #include <QSqlError>
 
 #include <currcluster.h>
@@ -53,9 +54,9 @@ AuthorizeDotNetProcessor::AuthorizeDotNetProcessor() : CreditCardProcessor()
   _msgHash.insert(-205, tr("The response from the Gateway appears to be "
 			   "incorrectly formatted (could not find field %1 "
 			   "as there are only %2 fields present)."));
-  _msgHash.insert(-206, tr("The response from the Gateway failed the MD5 "
+  _msgHash.insert(-206, tr("The response from the Gateway failed the Signature Key "
 			   "security check."));
-  _msgHash.insert( 206, tr("The response from the Gateway has failed the MD5 "
+  _msgHash.insert( 206, tr("The response from the Gateway has failed the Signature Key "
 			   "security check but will be processed anyway."));
   _msgHash.insert(-207, tr("The Gateway returned the following error: %1"));
   _msgHash.insert(-208, tr("& (ampersand) is not a valid Delimiting Character."));
@@ -656,8 +657,6 @@ int AuthorizeDotNetProcessor::handleResponse(const QString &presponse, const int
     else if (returnValue < 0)
       return returnValue;
 
-    returnValue = fieldValue(responseFields, 9, r_hash);	// md5 hash
-
   } else {
   returnValue = fieldValue(responseFields, 7, r_ordernum);	// transaction id
 
@@ -669,10 +668,6 @@ int AuthorizeDotNetProcessor::handleResponse(const QString &presponse, const int
     return returnValue;
 
   returnValue = fieldValue(responseFields, 35, r_shipping);	// echo x_freight
-  if (returnValue < 0)
-    return returnValue;
-
-  returnValue = fieldValue(responseFields, 38, r_hash);	// md5 hash
   if (returnValue < 0)
     return returnValue;
 
@@ -691,6 +686,10 @@ int AuthorizeDotNetProcessor::handleResponse(const QString &presponse, const int
   if (returnValue < 0)
     return returnValue;
   }
+
+  returnValue = fieldValue(responseFields, 69, r_hash); // sha-512 hash
+  if (returnValue < 0)
+    return returnValue;
 
   if (r_cardtype == "Discover" || r_cardtype == "MasterCard"
       || r_cardtype == "Visa"  || r_cardtype == "American Express")
@@ -780,34 +779,26 @@ int AuthorizeDotNetProcessor::handleResponse(const QString &presponse, const int
   else
     pparams.append("amount",   0);	// no money changed hands this attempt
 
-  // don't bother checking MD5 if we hit a bigger problem
-  if (returnValue == 0 && _metrics->boolean("CCANMD5HashSetOnGateway"))
+  // don't bother checking SHA-512 if we hit a bigger problem
+  if (returnValue == 0 && _metrics->boolean("CCANCheckSigKey"))
   {
-    QString expected_hash;
-    XSqlQuery anq;
-    anq.prepare("SELECT UPPER(MD5(:inputstr)) AS expected;");
-    anq.bindValue(":inputstr", _metricsenc->value("CCANMD5Hash") +
-			       _metricsenc->value("CCLogin") +
-			       r_ordernum +
-			       QString::number(pamount, 'f', 2));
-    anq.exec();
-    if (anq.first())
-      expected_hash = anq.value("expected").toString();
-    else if (anq.lastError().type() != QSqlError::NoError)
-    {
-      _errorMsg = errorMsg(-1).arg(anq.lastError().databaseText());
-      returnValue = -1;
-    }
+    QString expected_hash =
+    QString::fromUtf8(QMessageAuthenticationCode::hash(QString("^" + _metricsenc->value("CCLogin") +
+                                                               "^" + r_ordernum +
+                                                               "^" + QString::number(pamount, 'f', 2) +
+                                                               "^").toUtf8(),
+                                                       QByteArray::fromHex(QString(_metricsenc->value("CCANSigKey")).toUtf8()),
+                                                       QCryptographicHash::Sha512).toHex()).toUpper();
     if (DEBUG)
-      qDebug("AN:handleResponse expected md5 %s and got %s",
+      qDebug("AN:handleResponse expected sha-512 %s and got %s",
 	      expected_hash.toLatin1().data(), r_hash.toLatin1().data());
 
-    if (_metrics->value("CCANMD5HashAction") == "F" && expected_hash != r_hash)
+    if (_metrics->value("CCANSigKeyAction") == "F" && expected_hash != r_hash)
     {
       _errorMsg = errorMsg(-206);
       returnValue = -206;
     }
-    else if (_metrics->value("CCANMD5HashAction") == "W" && expected_hash != r_hash)
+    else if (_metrics->value("CCANSigKeyAction") == "W" && expected_hash != r_hash)
     {
       _errorMsg = errorMsg(206);
       returnValue = 206;
