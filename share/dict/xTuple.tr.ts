@@ -1283,51 +1283,7 @@ Ne yapmak istersiniz?</translation>
     </message>
 </context>
 <context>
-    <name>Comments</name>
-    <message>
-        <source>Public</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>Tipi</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="unfinished">Kaynak</translation>
-    </message>
-    <message>
-        <source>Verbose Text</source>
-        <translation>Metin</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Düzenle</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>Açıklama</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Yeni</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Göster</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Hiçbiri</translation>
-    </message>
-    <message>
-        <source>Date/Time</source>
-        <translation>Tarih/Saat</translation>
-    </message>
-    <message>
-        <source>User Account</source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>CommentMap</name>
     <message>
         <source>[Pick a Document Type]</source>
         <translation type="unfinished"></translation>
@@ -1499,6 +1455,53 @@ Ne yapmak istersiniz?</translation>
     <message>
         <source>Work Order</source>
         <translation type="unfinished">Üretim Siparişi</translation>
+    </message>
+</context>
+<context>
+    <name>Comments</name>
+    <message>
+        <source>Public</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tipi</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation type="unfinished">Kaynak</translation>
+    </message>
+    <message>
+        <source>Verbose Text</source>
+        <translation>Metin</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Düzenle</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Açıklama</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Yeni</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Göster</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Hiçbiri</translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation>Tarih/Saat</translation>
+    </message>
+    <message>
+        <source>User Account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2883,6 +2886,17 @@ What would you like to do?</source>
     </message>
 </context>
 <context>
+    <name>DocumentMap</name>
+    <message>
+        <source>[Pick a Document Type]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Getting Document Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Documents</name>
     <message>
         <source>Parent</source>
@@ -3030,14 +3044,6 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Url Open Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[Pick a Document Type]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Getting Document Types</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3589,6 +3595,61 @@ returned %2
     <message>
         <source>Could not get user and edition</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GroupMap</name>
+    <message>
+        <source>Street Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postal Code Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Adı</translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished">Hesap</translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Müşteri</translation>
+    </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Employee</source>
+        <translation type="unfinished">Personel</translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Adres</translation>
     </message>
 </context>
 <context>
@@ -10919,26 +10980,6 @@ Devam mı?</translation>
     </message>
     <message>
         <source>Group %1 has been successfully populated with %2 %3s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Street Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>City Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>State Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Postal Code Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Country Pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -20431,14 +20472,6 @@ creating Planned Orders.</source>
         <source>Error Retrieving Group Source Information</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">Adı</translation>
-    </message>
 </context>
 <context>
     <name>crmGroups</name>
@@ -20501,30 +20534,6 @@ creating Planned Orders.</source>
     <message>
         <source>Error Retrieving %1 Groups</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished">Hesap</translation>
-    </message>
-    <message>
-        <source>Customer</source>
-        <translation type="unfinished">Müşteri</translation>
-    </message>
-    <message>
-        <source>Prospect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Employee</source>
-        <translation type="unfinished">Personel</translation>
-    </message>
-    <message>
-        <source>Contact</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished">Adres</translation>
     </message>
 </context>
 <context>
@@ -56297,6 +56306,29 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Use Tax Owed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>newForm</name>
+    <message>
+        <source>New Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Criterion:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query</source>
+        <translation type="unfinished">Sorgula</translation>
+    </message>
+    <message>
+        <source>Results:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

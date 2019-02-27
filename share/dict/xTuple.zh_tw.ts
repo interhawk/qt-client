@@ -1281,51 +1281,7 @@
     </message>
 </context>
 <context>
-    <name>Comments</name>
-    <message>
-        <source>Source</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>類型</translation>
-    </message>
-    <message>
-        <source>Public</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Verbose Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished">編輯</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>註釋</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>新增</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>檢視</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>無</translation>
-    </message>
-    <message>
-        <source>Date/Time</source>
-        <translation>日期/時間</translation>
-    </message>
-    <message>
-        <source>User Account</source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>CommentMap</name>
     <message>
         <source>[Pick a Document Type]</source>
         <translation type="unfinished"></translation>
@@ -1497,6 +1453,53 @@
     <message>
         <source>Work Order</source>
         <translation type="unfinished">工作單</translation>
+    </message>
+</context>
+<context>
+    <name>Comments</name>
+    <message>
+        <source>Source</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>類型</translation>
+    </message>
+    <message>
+        <source>Public</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Verbose Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">編輯</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>註釋</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>新增</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>檢視</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>無</translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation>日期/時間</translation>
+    </message>
+    <message>
+        <source>User Account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2881,6 +2884,17 @@ What would you like to do?</source>
     </message>
 </context>
 <context>
+    <name>DocumentMap</name>
+    <message>
+        <source>[Pick a Document Type]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Getting Document Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Documents</name>
     <message>
         <source>Miscellaneous</source>
@@ -3028,14 +3042,6 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Url Open Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[Pick a Document Type]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Getting Document Types</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3585,6 +3591,61 @@ returned %2
     <message>
         <source>Could not get user and edition</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GroupMap</name>
+    <message>
+        <source>Street Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postal Code Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">名稱</translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">客戶</translation>
+    </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished">潛在客戶</translation>
+    </message>
+    <message>
+        <source>Employee</source>
+        <translation type="unfinished">員工</translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">聯絡人</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">地址</translation>
     </message>
 </context>
 <context>
@@ -7799,7 +7860,7 @@ as an Address. Please select a Prospect to edit:</source>
     <name>alarmMaint</name>
     <message>
         <source>hours after</source>
-        <translation type="unfinished">小時　之後</translation>
+        <translation type="unfinished">小時&#x3000;之後</translation>
     </message>
     <message>
         <source>&amp;Contact...</source>
@@ -7811,7 +7872,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>minutes after</source>
-        <translation>分鐘　之後</translation>
+        <translation>分鐘&#x3000;之後</translation>
     </message>
     <message>
         <source>Event</source>
@@ -7827,7 +7888,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>hours before</source>
-        <translation>小時　之前</translation>
+        <translation>小時&#x3000;之前</translation>
     </message>
     <message>
         <source>Alarm</source>
@@ -7835,7 +7896,7 @@ as an Address. Please select a Prospect to edit:</source>
     </message>
     <message>
         <source>minutes before</source>
-        <translation>分鐘　之前</translation>
+        <translation>分鐘&#x3000;之前</translation>
     </message>
     <message>
         <source>Due:</source>
@@ -10918,26 +10979,6 @@ Are you sure that you want to save this change?</source>
     </message>
     <message>
         <source>Group %1 has been successfully populated with %2 %3s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Street Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>City Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>State Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Postal Code Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Country Pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14120,7 +14161,7 @@ You may not create duplicate Forms.</source>
     </message>
     <message>
         <source>Company Ids must be 10 characters or shorter (not counting dashes in EIN&apos;s, TIN&apos;s, and DUNS numbers).</source>
-        <translation>公司 ID 必須少餘或等於10個字 ( -　符號不算在內).</translation>
+        <translation>公司 ID 必須少餘或等於10個字 ( -&#x3000;符號不算在內).</translation>
     </message>
     <message>
         <source>General Ledger</source>
@@ -20445,14 +20486,6 @@ creating Planned Orders.</source>
         <source>Error Retrieving Group Source Information</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">名稱</translation>
-    </message>
 </context>
 <context>
     <name>crmGroups</name>
@@ -20515,30 +20548,6 @@ creating Planned Orders.</source>
     <message>
         <source>Error Retrieving %1 Groups</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Customer</source>
-        <translation type="unfinished">客戶</translation>
-    </message>
-    <message>
-        <source>Prospect</source>
-        <translation type="unfinished">潛在客戶</translation>
-    </message>
-    <message>
-        <source>Employee</source>
-        <translation type="unfinished">員工</translation>
-    </message>
-    <message>
-        <source>Contact</source>
-        <translation type="unfinished">聯絡人</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished">地址</translation>
     </message>
 </context>
 <context>
@@ -51456,7 +51465,7 @@ before you may save this Item Source.</source>
     </message>
     <message>
         <source>Inventory/Vendor UOM Ratio:</source>
-        <translation>庫存/廠商　單位比例:</translation>
+        <translation>庫存/廠商&#x3000;單位比例:</translation>
     </message>
     <message>
         <source>&amp;Add</source>
@@ -54892,7 +54901,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Single Level...</source>
-        <translation>單層 &amp;S　...</translation>
+        <translation>單層 &amp;S&#x3000;...</translation>
     </message>
     <message>
         <source>&amp;Indented...</source>
@@ -54968,7 +54977,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>&amp;Summary...</source>
-        <translation>摘要 &amp;S　...</translation>
+        <translation>摘要 &amp;S&#x3000;...</translation>
     </message>
     <message>
         <source>Post &amp;Standard Costs</source>
@@ -55294,7 +55303,7 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Item Prices by Customer &amp;Type...</source>
-        <translation>物品價格依照客戶類型　&amp;T ...</translation>
+        <translation>物品價格依照客戶類型&#x3000;&amp;T ...</translation>
     </message>
     <message>
         <source>S&amp;ales</source>
@@ -56344,6 +56353,29 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Use Tax Owed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>newForm</name>
+    <message>
+        <source>New Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Criterion:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished">關閉 &amp;C</translation>
+    </message>
+    <message>
+        <source>Query</source>
+        <translation type="unfinished">查詢</translation>
+    </message>
+    <message>
+        <source>Results:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

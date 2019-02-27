@@ -1276,51 +1276,7 @@
     </message>
 </context>
 <context>
-    <name>Comments</name>
-    <message>
-        <source>Verbose Text</source>
-        <translation type="unfinished">Desplegar Texto</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>Tipo</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Editar</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation>Origen</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation>Comentario</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Nuevo</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Ver</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ninguno</translation>
-    </message>
-    <message>
-        <source>Date/Time</source>
-        <translation>Fecha/Hora</translation>
-    </message>
-    <message>
-        <source>User Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Public</source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>CommentMap</name>
     <message>
         <source>[Pick a Document Type]</source>
         <translation type="unfinished"></translation>
@@ -1492,6 +1448,53 @@
     <message>
         <source>Work Order</source>
         <translation type="unfinished">Orden de Trabajo</translation>
+    </message>
+</context>
+<context>
+    <name>Comments</name>
+    <message>
+        <source>Verbose Text</source>
+        <translation type="unfinished">Desplegar Texto</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tipo</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editar</translation>
+    </message>
+    <message>
+        <source>Source</source>
+        <translation>Origen</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Comentario</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Nuevo</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Ver</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Ninguno</translation>
+    </message>
+    <message>
+        <source>Date/Time</source>
+        <translation>Fecha/Hora</translation>
+    </message>
+    <message>
+        <source>User Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Public</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2876,6 +2879,17 @@ What would you like to do?</source>
     </message>
 </context>
 <context>
+    <name>DocumentMap</name>
+    <message>
+        <source>[Pick a Document Type]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Getting Document Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Documents</name>
     <message>
         <source>Other</source>
@@ -3025,14 +3039,6 @@ What would you like to do?</source>
     </message>
     <message>
         <source>Url Open Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[Pick a Document Type]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error Getting Document Types</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3582,6 +3588,61 @@ returned %2
     <message>
         <source>Could not get user and edition</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GroupMap</name>
+    <message>
+        <source>Street Pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City Pattern</source>
+        <translation type="unfinished">Ciudad Comienza con</translation>
+    </message>
+    <message>
+        <source>State Pattern</source>
+        <translation type="unfinished">Estado Comienza con</translation>
+    </message>
+    <message>
+        <source>Postal Code Pattern</source>
+        <translation type="unfinished">Cod. Postal Comienza con</translation>
+    </message>
+    <message>
+        <source>Country Pattern</source>
+        <translation type="unfinished">País Comienza con</translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished">Número</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished">Cuenta</translation>
+    </message>
+    <message>
+        <source>Customer</source>
+        <translation type="unfinished">Cliente</translation>
+    </message>
+    <message>
+        <source>Prospect</source>
+        <translation type="unfinished">Prospecto</translation>
+    </message>
+    <message>
+        <source>Employee</source>
+        <translation type="unfinished">Empleado</translation>
+    </message>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Contacto</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished">Dirección</translation>
     </message>
 </context>
 <context>
@@ -10913,26 +10974,6 @@ si selecciona &apos;&apos;&apos;&apos;Otro&apos;&apos;&apos;&apos;.</translation
     <message>
         <source>Group %1 has been successfully populated with %2 %3s</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Street Pattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>City Pattern</source>
-        <translation type="unfinished">Ciudad Comienza con</translation>
-    </message>
-    <message>
-        <source>State Pattern</source>
-        <translation type="unfinished">Estado Comienza con</translation>
-    </message>
-    <message>
-        <source>Postal Code Pattern</source>
-        <translation type="unfinished">Cod. Postal Comienza con</translation>
-    </message>
-    <message>
-        <source>Country Pattern</source>
-        <translation type="unfinished">País Comienza con</translation>
     </message>
 </context>
 <context>
@@ -20430,14 +20471,6 @@ Continuar el proceso?</translation>
         <source>Error Retrieving Group Source Information</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished">Número</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>crmGroups</name>
@@ -20500,30 +20533,6 @@ Continuar el proceso?</translation>
     <message>
         <source>Error Retrieving %1 Groups</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished">Cuenta</translation>
-    </message>
-    <message>
-        <source>Customer</source>
-        <translation type="unfinished">Cliente</translation>
-    </message>
-    <message>
-        <source>Prospect</source>
-        <translation type="unfinished">Prospecto</translation>
-    </message>
-    <message>
-        <source>Employee</source>
-        <translation type="unfinished">Empleado</translation>
-    </message>
-    <message>
-        <source>Contact</source>
-        <translation type="unfinished">Contacto</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished">Dirección</translation>
     </message>
 </context>
 <context>
@@ -56311,6 +56320,29 @@ You must reassign these Item Sites before you may delete the selected Planner Co
     </message>
     <message>
         <source>Use Tax Owed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>newForm</name>
+    <message>
+        <source>New Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Criterion:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query</source>
+        <translation type="unfinished">Consultar</translation>
+    </message>
+    <message>
+        <source>Results:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
