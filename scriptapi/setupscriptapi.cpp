@@ -140,9 +140,6 @@
 #include "quuidproto.h"
 #include "qvalidatorproto.h"
 #include "qwebchannelproto.h"
-#include "qwebenginepageproto.h"
-#include "qwebenginesettingsproto.h"
-#include "qwebengineviewproto.h"
 #include "qwebsocketcorsauthenticatorproto.h"
 #include "qwebsocketproto.h"
 #include "qwebsocketprotocolproto.h"
@@ -153,6 +150,12 @@
 #include "xsqlqueryproto.h"
 #include "xvariantsetup.h"
 #include "xwebsync.h"
+
+#if QT_VERSION >= 0x050900
+  #include "qwebenginepageproto.h"
+  #include "qwebengineviewproto.h"
+  #include "qwebenginesettingsproto.h"
+#endif
 
 static Preferences *prefs = 0;
 /*! \defgroup scriptapi The xTuple ERP Scripting API
@@ -292,9 +295,6 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupQUuidProto(engine);
   setupQValidatorProto(engine);
   setupQWebChannelProto(engine);
-  setupQWebEnginePageProto(engine);
-  setupQWebEngineSettingsProto(engine);
-  setupQWebEngineViewProto(engine);
   setupQWebSocketCorsAuthenticatorProto(engine);
   setupQWebSocketProto(engine);
   setupQWebSocketProtocolProto(engine);
@@ -307,6 +307,12 @@ void setupScriptApi(QScriptEngine *engine, Preferences *pPreferences)
   setupXWebSync(engine);
   setupchar(engine);
   setupFormat(engine);
+
+  #if QT_VERSION > 0x050900
+    setupQWebEnginePageProto(engine);
+    setupQWebEngineViewProto(engine);
+    setupQWebEngineSettingsProto(engine);
+  #endif
 }
 
 void scriptDeprecated(QString msg)

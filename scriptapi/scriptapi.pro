@@ -3,8 +3,14 @@ TARGET = xtuplescriptapi
 TEMPLATE = lib
 CONFIG += qt warn_on staticlib
 
-QT += core network printsupport script sql widgets xml webengine webenginewidgets
+QT += core network printsupport script sql widgets xml
 QT += websockets webchannel serialport
+
+lessThan (QT_MINOR_VERSION, 6) : isEqual(QT_MAJOR_VERSION, 5) {
+  QT += webkit webkitwidgets
+} else {
+  QT += webengine webenginewidgets
+}
 
 DBFILE = scriptapi.db
 LANGUAGE = C++
@@ -141,19 +147,27 @@ HEADERS += setupscriptapi.h \
     quuidproto.h \
     qvalidatorproto.h \
     qwebchannelproto.h \
-    qwebenginepageproto.h \
-    qwebenginesettingsproto.h \
     qwebsocketcorsauthenticatorproto.h \
     qwebsocketproto.h \
     qwebsocketprotocolproto.h \
     qwebsocketserverproto.h \
-    qwebengineviewproto.h \
     qwidgetproto.h \
     webchanneltransport.h \
     xsqlqueryproto.h \
     xvariantsetup.h \
     xwebsync.h \
     xwebsync_p.h \
+
+lessThan (QT_MINOR_VERSION, 6) : equals(QT_MAJOR_VERSION, 5) {
+} else {
+  HEADERS += qwebenginepageproto.h \
+              qwebengineviewproto.h \
+              qwebendinesettingsproto.h
+
+  SOURCES += qwebenginepageproto.cpp \
+              qwebengineviewproto.cpp \
+              qwebenginesettingsproto.cpp
+}
 
 SOURCES += setupscriptapi.cpp \
     include.cpp \
@@ -277,13 +291,10 @@ SOURCES += setupscriptapi.cpp \
     quuidproto.cpp \
     qvalidatorproto.cpp \
     qwebchannelproto.cpp \
-    qwebenginepageproto.cpp \
-    qwebenginesettingsproto.cpp \
     qwebsocketcorsauthenticatorproto.cpp \
     qwebsocketproto.cpp \
     qwebsocketprotocolproto.cpp \
     qwebsocketserverproto.cpp \
-    qwebengineviewproto.cpp \
     qwidgetproto.cpp \
     webchanneltransport.cpp \
     xsqlqueryproto.cpp \
