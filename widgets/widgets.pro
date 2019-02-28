@@ -4,8 +4,14 @@ TARGET   = xtuplewidgets
 TEMPLATE = lib
 CONFIG  += qt warn_on plugin
 
+lessThan (QT_MINOR_VERSION, 6) : isEqual(QT_MAJOR_VERSION, 5) {
+  QT += webkit webkitwidgets
+} else {
+  QT += webengine webenginewidgets
+}
+
 QT      += core network printsupport script scripttools sql \
-           webengine webenginewidgets widgets xml
+           widgets xml
 QT      += designer printsupport serialport uitools \
            webchannel websockets
 
