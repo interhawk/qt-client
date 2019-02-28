@@ -162,7 +162,7 @@ lessThan (QT_MINOR_VERSION, 6) : equals(QT_MAJOR_VERSION, 5) {
 } else {
   HEADERS += qwebenginepageproto.h \
               qwebengineviewproto.h \
-              qwebendinesettingsproto.h
+              qwebenginesettingsproto.h
 
   SOURCES += qwebenginepageproto.cpp \
               qwebengineviewproto.cpp \
