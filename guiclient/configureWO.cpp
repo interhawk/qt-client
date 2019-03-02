@@ -38,6 +38,7 @@ configureWO::configureWO(QWidget* parent, const char* name, bool /*modal*/, Qt::
   _autoExplode->setChecked(_metrics->boolean("AutoExplodeWO"));
   _issueToExplodedWO->setChecked(_metrics->boolean("IssueToExplodedWO"));
   _workOrderChangeLog->setChecked(_metrics->boolean("WorkOrderChangeLog"));
+  _requireMiscProdTransDate->setChecked(_metrics->boolean("RequireMiscProdDateEntry"));
 
   _woNumGeneration->append(0, tr("Automatic"),                  "A");
   _woNumGeneration->append(1, tr("Manual"),                     "M");
@@ -87,6 +88,7 @@ bool configureWO::sSave()
   _metrics->set("AutoExplodeWO", _autoExplode->isChecked());
   _metrics->set("IssueToExplodedWO", _issueToExplodedWO->isChecked());
   _metrics->set("WorkOrderChangeLog", _workOrderChangeLog->isChecked());
+  _metrics->set("RequireMiscProdDateEntry", _requireMiscProdTransDate->isChecked());
 
   _metrics->set("WONumberGeneration", _woNumGeneration->code());
 
