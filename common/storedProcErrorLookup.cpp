@@ -382,7 +382,7 @@ const struct {
 
   { "createBOMItem",	 -1, QT_TRANSLATE_NOOP("storedProcErrorLookup", "You may not create a BOM Item that defines a "
 				"Parent that is composed of itself."),	0, "" },
-  { "createBOMItem",	 -2, QT_TRANSLATE_NOOP("storedProcErrorLookup",  "The Component that you have selected for this"
+  { "createBOMItem",	 -2, QT_TRANSLATE_NOOP("storedProcErrorLookup",  "The Component that you have selected for this "
 				 "BOM Item is a manufactured or phantom Item "
 				 "that uses the Parent Item as a Component "
 				 "Item in its own BOM. You may not create a "
