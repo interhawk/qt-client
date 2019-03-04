@@ -110,6 +110,16 @@ to be bound by its terms.</comment>
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="_requireMiscProdTransDate">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Require Misc. Production Trans. Date Entry</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -225,6 +235,8 @@ to be bound by its terms.</comment>
   <tabstop>_woNumGeneration</tabstop>
   <tabstop>_autoExplode</tabstop>
   <tabstop>_workOrderChangeLog</tabstop>
+  <tabstop>_requireMiscProdTransDate</tabstop>
+  <tabstop>_issueToExplodedWO</tabstop>
   <tabstop>_explodeDateEffective</tabstop>
   <tabstop>_startDateEffective</tabstop>
   <tabstop>_singleLevel</tabstop>

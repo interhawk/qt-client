@@ -55,6 +55,14 @@ postMiscProduction::postMiscProduction(QWidget* parent, const char* name, bool m
 
   // TODO: unhide as part of implementation of 5847
   _nonPickItems->hide();
+
+  // Set transaction date if conditions require it
+  if (!_privileges->check("AlterTransactionDates") ||
+      !_metrics->boolean("RequireMiscProdDateEntry"))
+    _transactionDate->setDate(QDate::currentDate(), false);
+
+  _transactionDate->setEnabled(
+          _privileges->check("AlterTransactionDates"));
 }
 
 postMiscProduction::~postMiscProduction()
@@ -181,6 +189,14 @@ bool postMiscProduction::okToPost()
     }
   }
 
+  if (!_transactionDate->isValid())
+  {
+    QMessageBox::warning( this, tr("Transaction Date Not Set"),
+                          tr( "Transaction canceled. A valid transaction date must be entered in the Trans. Date field before\n"
+                              "you may post the transaction." ) );
+    return false;
+  }
+
   _itemsiteid = 0;
   XSqlQuery itemsite;
   itemsite.prepare( "SELECT itemsite_id, isControlledItemsite(itemsite_id) AS controlled "
@@ -218,9 +234,10 @@ bool postMiscProduction::createwo()
 {
   _woid = 0;
   XSqlQuery wo;
-  wo.prepare( "SELECT createWo(fetchWoNumber(), :itemsite_id, :qty, CURRENT_DATE, CURRENT_DATE, :comments) AS result;" );
+  wo.prepare( "SELECT createWo(fetchWoNumber(), :itemsite_id, :qty, :trans_date::DATE, :trans_date::DATE, :comments) AS result;" );
   wo.bindValue(":itemsite_id", _itemsiteid);
   wo.bindValue(":qty", _qty);
+  wo.bindValue(":trans_date", _transactionDate->date());
   wo.bindValue(":comments", (tr("Post Misc Production, Document Number ") +
                              _documentNum->text().trimmed() + ", " + _comments->toPlainText()));
   wo.exec();
@@ -260,11 +277,12 @@ bool postMiscProduction::createwo()
 bool postMiscProduction::post(int itemlocSeries)
 {
   XSqlQuery post;
-  post.prepare("SELECT postProduction(:wo_id, :qty, :backflushMaterials, :itemlocSeries, CURRENT_DATE, TRUE) AS result;");
+  post.prepare("SELECT postProduction(:wo_id, :qty, :backflushMaterials, :itemlocSeries, :trans_date::TIMESTAMPTZ, TRUE) AS result;");
   post.bindValue(":wo_id", _woid);
   post.bindValue(":qty", _qty);
   post.bindValue(":backflushMaterials", QVariant(_backflush->isChecked()));
   post.bindValue(":itemlocSeries", itemlocSeries);
+  post.bindValue(":trans_date", _transactionDate->date());
   post.exec();
   if (post.first())
   {
@@ -290,13 +308,14 @@ bool postMiscProduction::returntool()
 {
   int itemlocseries = 0;
   XSqlQuery post;
-  post.prepare("SELECT returnWoMaterial(womatl_id, womatl_qtyiss, CURRENT_DATE) AS result "
+  post.prepare("SELECT returnWoMaterial(womatl_id, womatl_qtyiss, :trans_date::TIMESTAMPTZ) AS result "
                "FROM womatl JOIN itemsite ON (itemsite_id=womatl_itemsite_id) "
                "            JOIN item ON (item_id=itemsite_item_id) "
                "WHERE (womatl_wo_id=:wo_id) "
                "  AND (item_type='T')"
                "  AND (womatl_qtyiss > 0);");
   post.bindValue(":wo_id", _woid);
+  post.bindValue(":trans_date", _transactionDate->date());
   post.exec();
   if (post.first())
   {
@@ -328,8 +347,9 @@ bool postMiscProduction::returntool()
 bool postMiscProduction::closewo()
 {
   XSqlQuery close;
-  close.prepare("SELECT closeWo(:wo_id, true, CURRENT_DATE) AS result;");
+  close.prepare("SELECT closeWo(:wo_id, true, :trans_date::DATE) AS result;");
   close.bindValue(":wo_id", _woid);
+  close.bindValue(":trans_date", _transactionDate->date());
   close.exec();
   if (close.first())
   {
@@ -371,7 +391,7 @@ bool postMiscProduction::transfer(int itemlocSeries)
   posttransfer.prepare("SELECT interWarehouseTransfer( :item_id, :from_warehous_id, :to_warehous_id,"
                        "  :qty, 'W', COALESCE(:documentNumber, formatWoNumber(:wo_id)), 'Transfer from Misc. Production Posting', "
                        "  :itemlocSeries, "
-                       "  now(), "
+                       "  :trans_date::TIMESTAMPTZ, "
                        "  TRUE, "
                        "  true ) AS result;");
   posttransfer.bindValue(":item_id", _item->id());
@@ -386,6 +406,7 @@ bool postMiscProduction::transfer(int itemlocSeries)
   else 
     posttransfer.bindValue(":wo_id", _woid);
   posttransfer.bindValue(":itemlocSeries", itemlocSeries);
+  posttransfer.bindValue(":trans_date", _transactionDate->date());
   posttransfer.exec();
   if (!posttransfer.first())
   {

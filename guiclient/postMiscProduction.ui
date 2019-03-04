@@ -306,6 +306,20 @@ to be bound by its terms.</comment>
          </layout>
         </item>
         <item>
+         <layout class="QGridLayout" name="_transactionDateGrid">
+          <item row="0" column="0">
+           <widget class="XLabel" name="_transactionDateLit">
+            <property name="text">
+             <string>Trans. Date:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="DLineEdit" name="_transactionDate"/>
+          </item>
+         </layout>
+        </item>
+        <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -392,6 +406,12 @@ to be bound by its terms.</comment>
  <layoutdefault spacing="5" margin="5"/>
  <customwidgets>
   <customwidget>
+   <class>DLineEdit</class>
+   <extends>QWidget</extends>
+   <header>datecluster.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>ItemCluster</class>
    <extends>QWidget</extends>
    <header>itemcluster.h</header>
@@ -434,6 +454,7 @@ to be bound by its terms.</comment>
   <tabstop>_transferWarehouse</tabstop>
   <tabstop>_post</tabstop>
   <tabstop>_close</tabstop>
+  <tabstop>_transactionDate</tabstop>
  </tabstops>
  <resources/>
  <connections>
