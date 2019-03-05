@@ -4164,7 +4164,7 @@ void salesOrderItem::populate()
   XSqlQuery item;
   QString sql;
   sql = "<? if exists('isSalesOrder') ?>"
-          "SELECT cohead_cust_id, itemsite_leadtime, warehous_id, warehous_code, "
+          "SELECT cohead_cust_id AS cust_id, itemsite_leadtime, warehous_id, warehous_code, "
           "       item_id, uom_name, iteminvpricerat(item_id) AS invpricerat,"
           "       item_inv_uom_id, item_fractional,"
           "       coitem_status, coitem_cohead_id,"
@@ -4202,7 +4202,7 @@ void salesOrderItem::populate()
           " AND (coitem_id=<? value('id') ?>) "
           " AND (locale_id = usr_locale_id));"
           "<? else ?>"
-            "SELECT quhead_cust_id, itemsite_leadtime, COALESCE(warehous_id, -1) AS warehous_id, "
+            "SELECT quhead_cust_id AS cust_id, itemsite_leadtime, COALESCE(warehous_id, -1) AS warehous_id, "
             "       warehous_code,"
             "       item_id, uom_name, iteminvpricerat(item_id) AS invpricerat,"
             "       item_inv_uom_id, item_fractional,"
@@ -4248,7 +4248,7 @@ void salesOrderItem::populate()
   if (item.first())
   {
     _soheadid = item.value("coitem_cohead_id").toInt();
-    _custid = item.value("cohead_cust_id").toInt();
+    _custid = item.value("cust_id").toInt();
     _supplyOrderType = item.value("coitem_order_type").toString();
     _supplyOrderId = item.value("coitem_order_id").toInt();
     _comments->setId(_soitemid);
