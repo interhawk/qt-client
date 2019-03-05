@@ -328,7 +328,7 @@ void adjustmentTrans::sPopulateQOH()
       if (_item->isFractional())
         _qty->setValidator(omfgThis->transQtyVal());
       else
-        _qty->setValidator(new QIntValidator(this));
+        _qty->setValidator(new QIntValidator(_qty));
     }
     else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Retrieving Information"),
                                   populateAdjustment, __FILE__, __LINE__))
