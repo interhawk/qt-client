@@ -60,7 +60,6 @@ workOrder::workOrder(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_save, SIGNAL(clicked()), this, SLOT(sSaveClicked()));
   connect(_warehouse, SIGNAL(newID(int)), this, SLOT(sPopulateLeadTime(int)));
   connect(_item, SIGNAL(newId(int)), this, SLOT(sPopulateItemChar(int)));
-  connect(_dueDate, SIGNAL(newDate(const QDate&)), this, SLOT(sUpdateStartDate()));
   connect(_leadTime, SIGNAL(valueChanged(int)), this, SLOT(sUpdateStartDate()));
   connect(_assembly, SIGNAL(toggled(bool)), this, SLOT(sHandleButtons()));
   connect(_showMaterials, SIGNAL(toggled(bool)), this, SLOT(sFillList()));
@@ -247,6 +246,7 @@ enum SetResponse workOrder::set(const ParameterList &pParams)
       connect(_woNumber, SIGNAL(editingFinished()), this, SLOT(sCreate()));
       connect(_item, SIGNAL(privateIdChanged(int)), this, SLOT(sCreate()));
       connect(_qty, SIGNAL(editingFinished()), this, SLOT(sCreate()));
+      connect(_dueDate, SIGNAL(newDate(const QDate&)), this, SLOT(sUpdateStartDate()));
       connect(_dueDate, SIGNAL(newDate(const QDate&)), this, SLOT(sCreate()));
     }
     else if (param.toString() == "edit")
@@ -562,6 +562,7 @@ void workOrder::sCreate()
         disconnect(_woNumber, SIGNAL(editingFinished()), this, SLOT(sCreate()));
         disconnect(_item, SIGNAL(privateIdChanged(int)), this, SLOT(sCreate()));
         disconnect(_qty, SIGNAL(editingFinished()), this, SLOT(sCreate()));
+        disconnect(_dueDate, SIGNAL(newDate(const QDate&)), this, SLOT(sUpdateStartDate()));
         disconnect(_dueDate, SIGNAL(newDate(const QDate&)), this, SLOT(sCreate()));
 
         connect(_priority, SIGNAL(valueChanged(int)), this, SLOT(sReprioritizeParent()));
@@ -1182,6 +1183,13 @@ void workOrder::sRescheduleParent()
     }
     else
     {
+      if (_dueDate->date() != _oldDueDate)
+      {
+        disconnect(_startDate, SIGNAL(newDate(const QDate&)), this, SLOT(sRescheduleParent()));
+        sUpdateStartDate();
+        connect(_startDate, SIGNAL(newDate(const QDate&)), this, SLOT(sRescheduleParent()));
+      }
+
       _oldStartDate=_startDate->date();
       _oldDueDate=_dueDate->date();
     }
