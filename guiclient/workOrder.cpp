@@ -1185,9 +1185,9 @@ void workOrder::sRescheduleParent()
     {
       if (_dueDate->date() != _oldDueDate)
       {
-        disconnect(_startDate, SIGNAL(newDate(const QDate&)), this, SLOT(sRescheduleParent()));
+        _startDate->blockSignals(true);
         sUpdateStartDate();
-        connect(_startDate, SIGNAL(newDate(const QDate&)), this, SLOT(sRescheduleParent()));
+        _startDate->blockSignals(false);
       }
 
       _oldStartDate=_startDate->date();
