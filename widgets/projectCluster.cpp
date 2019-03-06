@@ -67,6 +67,7 @@ ProjectLineEdit::ProjectLineEdit(QWidget* pParent, const char* pName) :
   setViewOwnPriv("ViewPersonalProjects");
 
   _type = Undefined;
+  _crma = -1;
 }
 
 ProjectLineEdit::ProjectLineEdit(enum ProjectType pPrjType, QWidget *pParent, const char *pName) :
