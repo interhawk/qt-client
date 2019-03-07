@@ -969,7 +969,7 @@ void salesOrderItem::clear()
   _historyCosts->clear();
   _historySales->clear();
   _invCost->clear();
-  _itemchar->clear();
+  _itemchar->removeRows(0, _itemchar->rowCount());
   _itemsrcp->clear();
   _leadtime->clear();
   _listPrice->clear();
