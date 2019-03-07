@@ -85,7 +85,7 @@ configureCRM::configureCRM(QWidget* parent, const char* name, bool modal, Qt::Wi
   _documentPrivileges->setChecked(_metrics->boolean("UnprivilegedViewDocInList"));
 
   if (! _metrics->value("DefaultAddressCountry").isEmpty())
-    _country->setText(_metrics->value("DefaultAddressCountry"));
+    _country->setCode(_metrics->value("DefaultAddressCountry"));
 
   _incidentsPublicShow->setChecked(_metrics->boolean("IncidentsPublicPrivate"));
   _incidentsPublicDefault->setChecked(_metrics->boolean("IncidentPublicDefault"));
@@ -179,7 +179,7 @@ bool configureCRM::sSave()
   _metrics->set("UnprivilegedViewDocInList", _documentPrivileges->isChecked());
 
   if (_country->isValid())
-    _metrics->set("DefaultAddressCountry", _country->currentText());
+    _metrics->set("DefaultAddressCountry", _country->code());
   else
     _metrics->set("DefaultAddressCountry", QString(""));
 
