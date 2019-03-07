@@ -101,6 +101,9 @@ void TaxDisplay::setMode(int mode)
 
 void TaxDisplay::sRecalculate()
 {
+  if (_orderId < 0 || _mode == cView)
+    return;
+
   emit save(true);
   if (_x_taxIntegration)
     _x_taxIntegration->calculateTax(_type, _orderId);
