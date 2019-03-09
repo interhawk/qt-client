@@ -1543,11 +1543,8 @@ void item::newItem()
     if(QString::compare(w->objectName(), "item new")==0)
     {
       w->setFocus();
-      if(omfgThis->showTopLevel())
-      {
-        w->raise();
-        w->activateWindow();
-      }
+      w->raise();
+      w->activateWindow();
       return;
     }
   }
@@ -1572,11 +1569,8 @@ void item::editItem( int pId )
     if(QString::compare(w->objectName(), n)==0)
     {
       w->setFocus();
-      if(omfgThis->showTopLevel())
-      {
-        w->raise();
-        w->activateWindow();
-      }
+      w->raise();
+      w->activateWindow();
       return;
     }
   }
@@ -1602,11 +1596,8 @@ void item::viewItem( int pId )
     if(QString::compare(w->objectName(), n)==0)
     {
       w->setFocus();
-      if(omfgThis->showTopLevel())
-      {
-        w->raise();
-        w->activateWindow();
-      }
+      w->raise();
+      w->activateWindow();
       return;
     }
   }

@@ -615,11 +615,8 @@ void contact::sPopulate()
         _data->_close = true;
       } else if (p) {
         w->setFocus();
-        if (omfgThis->showTopLevel())
-        {
-          w->raise();
-          w->activateWindow();
-        }
+        w->raise();
+        w->activateWindow();
         _data->_close = true;
       }
       break;

@@ -1676,11 +1676,8 @@ void transferOrder::newTransferOrder(int pSrcWhsid, int pDstWhsid)
       if(QString::compare(w->objectName(), "transferOrder new")==0)
       {
         w->setFocus();
-        if(omfgThis->showTopLevel())
-        {
-          w->raise();
-          w->activateWindow();
-        }
+        w->raise();
+        w->activateWindow();
         return;
       }
     }
@@ -1712,11 +1709,8 @@ void transferOrder::editTransferOrder( int pId , bool enableSaveAndAdd )
     if(QString::compare(w->objectName(), n)==0)
     {
       w->setFocus();
-      if(omfgThis->showTopLevel())
-      {
-        w->raise();
-        w->activateWindow();
-      }
+      w->raise();
+      w->activateWindow();
       return;
     }
   }
@@ -1744,11 +1738,8 @@ void transferOrder::viewTransferOrder( int pId )
     if(QString::compare(w->objectName(), n)==0)
     {
       w->setFocus();
-      if(omfgThis->showTopLevel())
-      {
-        w->raise();
-        w->activateWindow();
-      }
+      w->raise();
+      w->activateWindow();
       return;
     }
   }
