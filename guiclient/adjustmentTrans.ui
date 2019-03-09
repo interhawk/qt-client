@@ -545,12 +545,10 @@ to be bound by its terms.</comment>
   <tabstop>_relative</tabstop>
   <tabstop>_absolute</tabstop>
   <tabstop>_documentNum</tabstop>
-  <tabstop>_costAdjust</tabstop>
   <tabstop>_costCalculated</tabstop>
   <tabstop>_costManual</tabstop>
   <tabstop>_cost</tabstop>
   <tabstop>_tab</tabstop>
-  <tabstop>_notes</tabstop>
   <tabstop>_post</tabstop>
   <tabstop>_close</tabstop>
  </tabstops>
