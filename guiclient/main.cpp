@@ -807,6 +807,7 @@ int main(int argc, char *argv[])
   app.exec();
 
 //  Clean up
+  qInstallMessageHandler(0);
   delete _metrics;
   delete _preferences;
   delete _privileges;
