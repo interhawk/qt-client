@@ -869,6 +869,12 @@ void purchaseOrder::sSave()
        _status->setCurrentIndex(2);
      }
   }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Purchase Order"),
+                                   purchaseSave, __FILE__, __LINE__))
+  {
+     return;
+  }
+
   purchaseSave.prepare( "UPDATE pohead "
              "SET pohead_warehous_id=:pohead_warehous_id, pohead_orderdate=:pohead_orderdate,"
              "    pohead_shipvia=:pohead_shipvia, pohead_taxzone_id=:pohead_taxzone_id,"
