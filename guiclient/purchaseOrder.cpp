@@ -852,6 +852,23 @@ void purchaseOrder::sSave()
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Purchase Order"), errors))
     return;
 
+  purchaseSave.prepare( "SELECT count(*) AS isOpen "
+                        "FROM poitem "
+                        "WHERE poitem_pohead_id=:pohead_id "
+                        "  AND poitem_status <> 'C';" );
+  purchaseSave.bindValue(":pohead_id", _poheadid);
+  purchaseSave.exec();
+  if (purchaseSave.first() && purchaseSave.value("isOpen").toInt() == 0)
+  {
+     if (QMessageBox::question(this, tr("Close Purchase Order?"),
+                                  tr("<p>There are no open items on this Purchase Order. "
+                                     "Do you wish to close this Purchase Order?"),
+         QMessageBox::Yes,
+          QMessageBox::No | QMessageBox::Default) == QMessageBox::Yes)
+     {
+       _status->setCurrentIndex(2);
+     }
+  }
   purchaseSave.prepare( "UPDATE pohead "
              "SET pohead_warehous_id=:pohead_warehous_id, pohead_orderdate=:pohead_orderdate,"
              "    pohead_shipvia=:pohead_shipvia, pohead_taxzone_id=:pohead_taxzone_id,"
