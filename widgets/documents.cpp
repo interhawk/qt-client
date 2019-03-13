@@ -197,6 +197,11 @@ void Documents::sNewDoc(QString ptype, QString pui)
 
   ParameterList params;
   params.append("mode", "new");
+  if (ui == "task")
+  {
+    params.append("parent", _sourcetype);
+    params.append("parent_id", _sourceid);
+  }
   int target_id = -1;
   QWidget *window = _guiClientInterface->openWindow(ui, params, parentWidget(), Qt::WindowModal, Qt::Dialog);
   QDialog *newdlg = qobject_cast<QDialog*>(window);
