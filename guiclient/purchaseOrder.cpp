@@ -44,6 +44,10 @@ purchaseOrder::purchaseOrder(QWidget* parent, const char* name, Qt::WindowFlags 
   _so->setNameVisible(false);
   _so->setDescriptionVisible(false);
 
+  _status->append(0, tr("Unreleased"), "U");
+  _status->append(1, tr("Open"),       "O");
+  _status->append(2, tr("Closed"),     "C");
+
   _orderNumber->setValidator(new QIntValidator(this));
 
   connect(_poitem,                   SIGNAL(populateMenu(QMenu*,QTreeWidgetItem*,int)), this,          SLOT(sPopulateMenu(QMenu*,QTreeWidgetItem*)));
@@ -622,7 +626,7 @@ void purchaseOrder::createHeader()
   _documents->setId(_poheadid);
   _charass->setId(_poheadid);
   _orderDate->setDate(omfgThis->dbDate(), true);
-  _status->setCurrentIndex(0);
+  _status->setCode("U");
   _vendor->setShowInactive(false);
 
   purchasecreateHeader.prepare( "INSERT INTO pohead "
@@ -665,10 +669,7 @@ void purchaseOrder::populate()
   
   po.prepare( "SELECT pohead.*, COALESCE(pohead_warehous_id, -1) AS warehous_id,"
               "       COALESCE(pohead_cohead_id, -1) AS cohead_id,"
-              "       CASE WHEN (pohead_status='U') THEN 0"
-              "            WHEN (pohead_status='O') THEN 1"
-              "            WHEN (pohead_status='C') THEN 2"
-              "       END AS status,"
+              "       pohead_status,"
               "       COALESCE(pohead_terms_id, -1) AS terms_id,"
               "       COALESCE(pohead_vend_id, -1) AS vend_id,"
               "       COALESCE(vendaddr_id, -1) AS vendaddrid,"
@@ -690,7 +691,7 @@ void purchaseOrder::populate()
     if(po.value("pohead_released").isValid())                                                             
       _releaseDate->setDate(po.value("pohead_released").toDate(), true);
     _agent->setText(po.value("pohead_agent_username").toString());
-    _status->setCurrentIndex(po.value("status").toInt());
+    _status->setCode(po.value("pohead_status").toString());
     _printed = po.value("pohead_printed").toBool();
     _terms->setId(po.value("terms_id").toInt());
     _shipVia->setText(po.value("pohead_shipvia"));
@@ -818,7 +819,7 @@ void purchaseOrder::sSave()
   purchaseSave.exec();
   if (purchaseSave.first())
   {
-    if ((purchaseSave.value("pohead_status") == "O") && (_status->currentIndex() == 0))
+    if ((purchaseSave.value("pohead_status") == "O") && (_status->code() == "U"))
     {
       if (!_privileges->check("UnreleasePurchaseOrders"))
         errors << GuiErrorCheck(true, _status,
@@ -851,6 +852,28 @@ void purchaseOrder::sSave()
 
   if (GuiErrorCheck::reportErrors(this, tr("Cannot Save Purchase Order"), errors))
     return;
+
+  purchaseSave.prepare( "SELECT EXISTS( SELECT 1 "
+                        "  FROM poitem "
+                        " WHERE poitem_pohead_id=:pohead_id "
+                        "   AND poitem_status <> 'C') AS isOpen;" );
+  purchaseSave.bindValue(":pohead_id", _poheadid);
+  purchaseSave.exec();
+  if (purchaseSave.first() && !purchaseSave.value("isOpen").toBool())
+  {
+     if (QMessageBox::question(this, tr("Close Purchase Order?"),
+                                  tr("<p>There are no open items on this Purchase Order. "
+                                     "Do you wish to close this Purchase Order?"),
+         QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes)
+     {
+       _status->setCode("C");
+     }
+  }
+  else if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Saving Purchase Order"),
+                                   purchaseSave, __FILE__, __LINE__))
+  {
+     return;
+  }
 
   purchaseSave.prepare( "UPDATE pohead "
              "SET pohead_warehous_id=:pohead_warehous_id, pohead_orderdate=:pohead_orderdate,"
@@ -957,12 +980,7 @@ void purchaseOrder::sSave()
   purchaseSave.bindValue(":pohead_shiptocountry", _shiptoAddr->country());
   purchaseSave.bindValue(":pohead_freight", _freight->localValue());
   purchaseSave.bindValue(":pohead_curr_id", _poCurrency->id());
-  if (_status->currentIndex() == 0)
-    purchaseSave.bindValue(":pohead_status", "U");
-  else if (_status->currentIndex() == 1)
-    purchaseSave.bindValue(":pohead_status", "O");
-  else if (_status->currentIndex() == 2)
-    purchaseSave.bindValue(":pohead_status", "C");
+  purchaseSave.bindValue(":pohead_status", _status->code());
   if (_purchaseType->id() >= 0)
     purchaseSave.bindValue(":pohead_potype_id", _purchaseType->id());
   purchaseSave.bindValue(":pohead_dropship", QVariant(_dropShip->isChecked()));
@@ -986,7 +1004,7 @@ void purchaseOrder::sSave()
     omfgThis->sPurchaseRequestsUpdated();
   }
 
-  if (_printPO->isChecked() && (_status->currentIndex() != 2)) // don't print closed
+  if (_printPO->isChecked() && (_status->code() != "C")) // don't print closed
   {
     ParameterList params;
     params.append("pohead_id", _poheadid);
@@ -1016,7 +1034,7 @@ void purchaseOrder::sSave()
     _orderNumber->clear();
     _orderDate->clear();
     _shipVia->clear();
-    _status->setCurrentIndex(0);
+    _status->setCode("U");
     _fob->clear();
     _notes->clear();
     _tax->clear();
