@@ -39,6 +39,9 @@ miscVoucher::miscVoucher(QWidget* parent, const char* name, Qt::WindowFlags fl)
   connect(_new,                  SIGNAL(clicked()),                      this, SLOT(sNewMiscDistribution()));
   connect(_save,                 SIGNAL(clicked()),                      this, SLOT(sSave()));
   connect(_voucherNumber,        SIGNAL(editingFinished()),              this, SLOT(sHandleVoucherNumber()));
+  connect(_vendor,               SIGNAL(newId(int)),                     this, SLOT(sPopulateVendorInfo(int)));
+  connect(_taxzone,              SIGNAL(newID(int)),                     this, SLOT(sDistributionDateUpdated()));
+  connect(_distributionDate,     SIGNAL(newDate(const QDate&)),          this, SLOT(sDistributionDateUpdated()));
 
   _terms->setType(XComboBox::APTerms);
 
@@ -81,8 +84,6 @@ enum SetResponse miscVoucher::set(const ParameterList &pParams)
 
       if (_metrics->value("VoucherNumberGeneration") == "A")
         populateNumber();
-
-      connect(_vendor, SIGNAL(newId(int)), this, SLOT(sPopulateVendorInfo(int)));
 
       XSqlQuery insq;
       insq.prepare("INSERT INTO vohead ("
@@ -155,9 +156,6 @@ enum SetResponse miscVoucher::set(const ParameterList &pParams)
     _comments->setId(_voheadid);
     populate();
   }
-
-  connect(_taxzone,              SIGNAL(newID(int)),                     this, SLOT(sDistributionDateUpdated()));
-  connect(_distributionDate,     SIGNAL(newDate(const QDate&)),          this, SLOT(sDistributionDateUpdated()));
 
   return NoError;
 }
