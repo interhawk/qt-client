@@ -36,6 +36,8 @@ public:
   Q_INVOKABLE inline ParameterList getAddConstraints() const { return _addConstraints; }
   Q_INVOKABLE inline ParameterList getEqualityColumns() const { return _equalityColumns; }
   Q_INVOKABLE inline QString  getRemoveByIdTableColName() const { return _removeByIdTableColName; }
+  Q_INVOKABLE inline bool  getRemoveByAltId() const { return _removeByAltId; }
+  Q_INVOKABLE inline bool  isParentInTrans() const { return _parentInTrans; }
 
   Q_INVOKABLE void hideCancel();
   Q_INVOKABLE void showCancel();
@@ -45,6 +47,8 @@ public:
   Q_INVOKABLE void setAddConstraints(ParameterList constraints) { _addConstraints = constraints; }
   Q_INVOKABLE void setEqualityColumns(ParameterList columns) { _equalityColumns = columns; }
   Q_INVOKABLE void setRemoveByIdTableColName(QString name)  { _removeByIdTableColName = name; }
+  Q_INVOKABLE void setRemoveByAltId(bool useAlt = true) { _removeByAltId = useAlt; }
+  Q_INVOKABLE void setParentInTrans(bool parInTrans = true) { _parentInTrans = parInTrans; }
 
   
 
@@ -56,7 +60,7 @@ public:
   virtual void sRemoveAll();
   virtual void sSelect();
   virtual void sCancel();
-  virtual void sCommitChanges();
+  virtual int  sCommitChanges();
 
 signals:
   void addClickedBefore();
@@ -83,10 +87,11 @@ protected:
   ParameterList _addConstraints;
   ParameterList _equalityColumns;
   bool _removeByAltId;
+  bool _parentInTrans;
   void move(XTreeWidgetItem *pXtitem, bool pAdd);
   bool isSameItem(XTreeWidgetItem *pXtitem1, XTreeWidgetItem *pXtitem2) const;
-  int buildAddQuery();
-  int buildRemoveQuery();
+  int execAddQuery(XSqlQuery &outQry);
+  int execRemoveQuery(XSqlQuery &outQry);
 };
 
 void setupSelectionWidget(QScriptEngine *engine);

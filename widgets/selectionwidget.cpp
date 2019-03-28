@@ -13,6 +13,86 @@
 
 #define DEBUG false
 
+/**
+* @class SelectionWidget
+
+* @brief Widget used to pick items from one list and add them to another.
+
+* The selection widget in corporates 2 XTreeWidgets, one as a source (or available)
+* and one as a destination (or selected). Each tree will be populated from a different query
+* but the data should be compatible with the fields on both trees otherwise moving items back
+* and forth doesn't make sense.
+*
+* The widget was designed to be adaptible and thus requires some configuration first.
+* The following must be done befor the widget will function properly:
+*
+* <UL>
+* <LI>Tree Setup:<BR>
+* The internal trees are exposed via the getAvail() and getSel() functions. Once you
+* have pointers to the trees, they must be configured as is usual for XTreeWidgets.
+*
+* <LI>Equality Columns:<BR>
+* Since each of the trees may present different atributes of the underlying data, there needs
+* to be a way to determine equality between items on different trees. A list of name-value 
+* pairs must be passed to the setEqualityColumns() function. Each pair will contain the XTreeWidget
+* column names to be considered equivalent. When the trees first load, any items in the "available" 
+* tree that are already present in the "selected" tree (based on the equality columns) will be
+* filtered out of the available list.
+*
+* <LI>Select and Cancel Buttons:<BR>
+* Select and cancel buttons can be shown or hidden depending on your use case with the 
+* hideCancel(), showCancel() and hideSelect(), showSelect(). These buttons don't do anything other
+* than emit a clicked signal when clicked. They are shown by default. 
+* </UL>
+*
+* The widget can either be automatic or handled manually depending on the situation.
+* <UL>
+* <LI>Manual:<BR>
+* With the above setup in place, the widget will function properly and track selections.
+* Various signals are emitted by the widget when buttons are clicked and before/after items
+* are moved in either direction. At any point you can retrieve a list of changes from the 
+* getAdded() and getRemoved() functions. The getAdded function will return a list of items that
+* are currently in the "selected" tree that were not there when the widget first loaded. 
+* getRemoved() returns items that were in the "selected" tree when the widget first loaded and
+* are no longer there. Between the accessor functions and the signals, you can process the
+* changes in whatever way suits your needs.
+* 
+* <LI>Automatic:<BR>
+* The widget can automatically build and execute SQL queries to add and remove items from
+* the underlying table. In order to do that, the following must be configured:
+* <UL>
+* <LI>Set Modification Table:<BR>
+* The table where new items will be added (and from which removed items will be deleted) must
+* be passed to setModifyTableName(). Ideally this will be the table from which the "selected"
+* tree was populated though this is not necessary. The only requirement is that calling id()
+* or altId() on the XTreeWidget item will return an id that is sufficient to identify a single
+* record in the table passed to setModifyTableName().
+*
+* <LI>Set Insert Criteria:<BR>
+* In order to insert records into an arbitrary table, a list of column names and values to insert
+* must be provided. A parameter list must be passed to setAddConstraints(). This list will contain
+* one entry for each column to be populated and must, at a minimum, contain entries for each 
+* required column in the table passed to setModifyTableName(). In each entry, the parameter name 
+* must be the table column name. The parameter value can either be a literal value, or the name of
+* a column in the "selected" XTreeWidget. If the parameter value matches a column name, the 
+* contents of that column will be inserted, otherwise the parameter value will be inserted 
+* directly.
+*
+* <LI>Set Delete Criteria:<BR>
+* In order to delete records from an arbitrary table, a column name must be passed to
+* setRemoveByIdTableColName() to be used as a key to identify a specific record. The widget will
+* create a delete query which will remove records if the value returned by the XTreeWidgetItem's
+* id() or altId() function matches the value in the column provided. id() is used by default 
+* and can be changed by calling the setRemoveByAltId() function.
+*</UL>
+*</UL>
+*
+*@todo <UL><LI>add a way to add a new item directly to the "selected" tree.
+<LI> replace queries with metasql
+<LI> replace bools in add and remove with enums.
+</UL>
+*/
+
 SelectionWidget::SelectionWidget(QWidget *parent, Qt::WindowFlags fl)
   : QWidget(parent, fl)
 {
@@ -21,6 +101,7 @@ SelectionWidget::SelectionWidget(QWidget *parent, Qt::WindowFlags fl)
   _modifyTableName = "";
   _removeByIdTableColName = "";
   _removeByAltId = false;
+  _parentInTrans = false;
   connect(_add, SIGNAL(clicked()), this, SLOT(sAdd()));
   connect(_remove, SIGNAL(clicked()), this, SLOT(sRemove()));
   connect(_addAll, SIGNAL(clicked()), this, SLOT(sAddAll()));
@@ -36,13 +117,24 @@ SelectionWidget::~SelectionWidget()
 {
 }
 
+/**@brief Emits selectClicked() signal*/
 void SelectionWidget::sSelect() { emit selectClicked(); }
+/**@brief Emits cancelClicked() signal*/
 void SelectionWidget::sCancel() { emit cancelClicked(); }
+/**@brief Hides the cancel button*/
 void SelectionWidget::hideCancel() { _cancel->hide(); }
+/**@brief Shows the cancel button*/
 void SelectionWidget::showCancel() { _cancel->show(); }
+/**@brief Hides the select button*/
 void SelectionWidget::hideSelect() { _select->hide(); }
+/**@brief Shows the select button*/
 void SelectionWidget::showSelect() { _select->show(); }
 
+/**@brief Moves selected items from the "available" tree to the "selected" tree.
+*
+* Emits addClickedBefore() and addClickedAfter() before and after moving an item respectively.
+* Emits itemAdded() after each item is moved
+*/
 void SelectionWidget::sAdd()
 {
   emit addClickedBefore();
@@ -54,6 +146,11 @@ void SelectionWidget::sAdd()
   emit addClickedAfter();
 }
 
+/**@brief Moves selected items from the "selected" tree to the "available" tree
+*
+* Emits removeClickedBefore() and removeClickedAfter() before and after moving an item
+* respectively. Emits itemRemoved() after each item is moved.
+*/
 void SelectionWidget::sRemove()
 {
   emit removeClickedBefore();
@@ -65,24 +162,34 @@ void SelectionWidget::sRemove()
   emit removeClickedAfter();
 }
 
+/**@brief Moves all items from the "available" tree to the "selected" tree.
+*
+* Emits addAllClickedBefore() and addAllClickedAfter() before and after moving an item
+* respectively. Emits itemAdded() after each item is moved.
+*/
 void SelectionWidget::sAddAll()
 {
   emit addAllClickedBefore();
-  for (int i = _avail->topLevelItemCount() -1; i >= 0; i--) //loop backwards since we're removing items.
+  XTreeWidgetItem *xtitem;
+  while (xtitem = dynamic_cast<XTreeWidgetItem*>(_avail->takeTopLevelItem(0)))
   {
-    XTreeWidgetItem *xtitem = dynamic_cast<XTreeWidgetItem*>(_avail->takeTopLevelItem(i));
     move(xtitem, true);
     emit itemAdded(xtitem->id());
   }
   emit addAllClickedAfter();
 }
 
+/**@brief Moves all items from the "selected" tree to the "available" tree
+*
+* Emits removeAllClickedBefore() and removeAllClickedAfter() before and after moving an item
+* respectively. Emits itemRemoved() after each item is moved.
+*/
 void SelectionWidget::sRemoveAll()
 {
   emit removeAllClickedBefore();
-  for (int i = _sel->topLevelItemCount() -1; i >= 0 ; i--) //loop backwards since we're removing items.
+  XTreeWidgetItem *xtitem;
+  while (xtitem = dynamic_cast<XTreeWidgetItem*>(_sel->takeTopLevelItem(0)))
   {
-    XTreeWidgetItem *xtitem = dynamic_cast<XTreeWidgetItem*>(_sel->takeTopLevelItem(i));
     move(xtitem, false);
     emit itemRemoved(xtitem->id());
   }
@@ -90,6 +197,21 @@ void SelectionWidget::sRemoveAll()
 }
 
 
+/**@brief Moves an item from one tree to another based on the value of pAdd
+*
+* Based on the value of pAdd, one tree is designated as a source, the other as a destination.
+* Likewise _added and _removed are designated as either a check list or an append list.
+* pXtitem is removed from the source tree. If pXtitem is NOT in the check list, it means this is
+* a new change we must track. pXtitem is then added to the append list. If pXtitem IS present in 
+* the check list, it means the item was previously moved, and this move is merely undoing that
+* action. Therefore, pXtitem is only removed from the check list and not added to the append list.
+* Finally, pXtitem is added to the destination tree.
+* The key idea here is that depending on pAdd, the append and check lists will switch places. So
+* the list we add an item to in one direction, will be the list we check against when going in
+* the oposite direction.
+* @param pXtitem XTreeWidgetItem to be moved from one tree to another.
+* @param pAdd True when moving from "available" tree to "selected" tree, false otherwise.
+*/
 void SelectionWidget::move(XTreeWidgetItem *pXtitem, bool pAdd)
 {
   XTreeWidget *sourceTree;
@@ -120,6 +242,12 @@ void SelectionWidget::move(XTreeWidgetItem *pXtitem, bool pAdd)
   destTree->addTopLevelItem(pXtitem);
 }
 
+/**@brief Determines if 2 items are equal based on configured equality criteria.
+*
+* This function checks the _equalityColumns list. For each name value pair entry, it checks
+* the contents of the corresponding columns in each tree item and returns true only if they 
+* are the same for all entries in the list
+*/
 bool SelectionWidget::isSameItem(XTreeWidgetItem *pXtitem1, XTreeWidgetItem *pXtitem2) const
 {
   int index = 0;
@@ -140,43 +268,34 @@ void SelectionWidget::sFilterDuplicates()
   //maybe a hash might be better here...
   for (int availIndex = _avail->topLevelItemCount() - 1; availIndex >= 0; availIndex--)
   {
-    bool bFound = false;
-    int selIndex = 0;
-    while (selIndex < _sel->topLevelItemCount() && !bFound)
+    for (int selIndex = 0; selIndex < _sel->topLevelItemCount(); selIndex++)
     {
       if (isSameItem(_avail->topLevelItem(availIndex), _sel->topLevelItem(selIndex)))
       {
         _avail->takeTopLevelItem(availIndex);
-        bFound = true;
+        break;
       }
-      selIndex++;
     }
   }
 }
 
-int SelectionWidget::buildAddQuery()
+int SelectionWidget::execAddQuery(XSqlQuery &outQry)
 {
   XSqlQuery qry;
-  XSqlQuery rollback;
-  rollback.prepare("ROLLBACK;");
-  qry.exec("BEGIN;");
-
+  QString qryString = QString("INSERT INTO %1 (").arg(_modifyTableName);
+  QString valString = ") VALUES (";
+  for (int i = 0; i < _addConstraints.count(); i++)
+  {
+    qryString.append(_addConstraints.name(i) + ", ");
+    valString.append(QString(":parameter%1").arg(i) + ", ");
+  }
+  qryString.chop(2);//remove the ", " from the last iteration.
+  valString.chop(2);
+  qryString.append(valString);
+  qryString.append(");");
+  
   foreach(XTreeWidgetItem *xtitem, _added)
   {
-    QString qryString = "INSERT INTO ";
-    qryString.append(_modifyTableName + " (");
-    for (int i = 0; i < _addConstraints.count(); i++)
-    {
-      qryString.append(_addConstraints.name(i) + ", ");
-    }
-    qryString.chop(2);//remove the ", " from the last iteration.
-    qryString.append(") VALUES (");
-    for (int i = 0; i < _addConstraints.count(); i++)
-    {
-      qryString.append(QString(":parameter%1").arg(i) + ", ");
-    }
-    qryString.chop(2);//remove the ", " from the last iteration.
-    qryString.append(");");
     qry.prepare(qryString);
     QVariant bindVal;
     for (int i = 0; i < _addConstraints.count(); i++)
@@ -199,24 +318,20 @@ int SelectionWidget::buildAddQuery()
       }
     }
     qry.exec();
+    outQry = qry;
     if (qry.lastError().type() != QSqlError::NoError)
     {
-      rollback.exec();
-      ErrorReporter::error(QtCriticalMsg, this, tr("Error Adding Selected items."),
-                           qry, __FILE__, __LINE__);
       return(-1);
-    }
-    
+    } 
   }
-  qry.exec("COMMIT;");
   return(0);
 }
 
-int SelectionWidget::buildRemoveQuery()
+int SelectionWidget::execRemoveQuery(XSqlQuery &outQry)
 {
   XSqlQuery qry;
-  QString qryString = "DELETE FROM ";
-  qryString.append(_modifyTableName + " WHERE " + _removeByIdTableColName + " IN (");
+  QString qryString = QString("DELETE FROM %1 WHERE %2 IN (").arg(_modifyTableName)
+                                                             .arg(_removeByIdTableColName);
   for (int i = 0; i < _removed.count(); i++)
   {
     qryString.append(QString(":parameter%1").arg(i) + ", ");
@@ -242,31 +357,45 @@ int SelectionWidget::buildRemoveQuery()
     }
   }
   qry.exec();
-  if (ErrorReporter::error(QtCriticalMsg, this, tr("Error Adding Selected items."),
-                           qry, __FILE__, __LINE__))
-  {
-    return(-1);
-  }
-  return(0);
+  outQry = qry;
+  return (qry.lastError().type() != QSqlError::NoError) ? -1 : 0;
 }
 
 
-void SelectionWidget::sCommitChanges()
+int SelectionWidget::sCommitChanges()
 {
+  XSqlQuery outQry;
+  XSqlQuery qry;
+  XSqlQuery rollback;
+  if (!_parentInTrans)
+  {
+    rollback.prepare("ROLLBACK;");
+    qry.exec("BEGIN;");
+  }
   if ((!_modifyTableName.isEmpty()) && (!_addConstraints.isEmpty()) && (!_added.isEmpty()))
   {
-    if (buildAddQuery() == 0)
+    if (execAddQuery(outQry) == -1)
     {
-      _added.clear();
+      if (!_parentInTrans) { rollback.exec(); }
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Adding Selected items."),
+                           outQry, __FILE__, __LINE__);
+      return -1;
     }
   }
   if ((!_modifyTableName.isEmpty()) && (!_removeByIdTableColName.isEmpty()) && (!_removed.isEmpty()))
   {
-    if (buildRemoveQuery() == 0)
+    if (execRemoveQuery(outQry) == -1)
     {
-      _removed.clear();
+      if (!_parentInTrans) { rollback.exec(); }
+      ErrorReporter::error(QtCriticalMsg, this, tr("Error Removing Selected items."),
+                           outQry, __FILE__, __LINE__);
+      return -1;
     }
   }
+  qry.exec("COMMIT;");
+  _added.clear();
+  _removed.clear();
+  return 0;
 }
 
 // script exposure ////////////////////////////////////////////////////////////
