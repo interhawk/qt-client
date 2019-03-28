@@ -171,7 +171,7 @@ void SelectionWidget::sAddAll()
 {
   emit addAllClickedBefore();
   XTreeWidgetItem *xtitem;
-  while (xtitem = dynamic_cast<XTreeWidgetItem*>(_avail->takeTopLevelItem(0)))
+  while ((xtitem = dynamic_cast<XTreeWidgetItem*>(_avail->takeTopLevelItem(0))))
   {
     move(xtitem, true);
     emit itemAdded(xtitem->id());
@@ -188,7 +188,7 @@ void SelectionWidget::sRemoveAll()
 {
   emit removeAllClickedBefore();
   XTreeWidgetItem *xtitem;
-  while (xtitem = dynamic_cast<XTreeWidgetItem*>(_sel->takeTopLevelItem(0)))
+  while ((xtitem = dynamic_cast<XTreeWidgetItem*>(_sel->takeTopLevelItem(0))))
   {
     move(xtitem, false);
     emit itemRemoved(xtitem->id());
@@ -309,12 +309,12 @@ int SelectionWidget::execAddQuery(XSqlQuery &outQry)
     }
     if (DEBUG)
     {
-      qDebug("Add query string: %1", qryString);
+      qDebug() << "Add query string:" << qryString;
       QMapIterator<QString, QVariant> bindings(qry.boundValues());
       while (bindings.hasNext())
       {
         bindings.next();
-        qDebug("%1:\t%2", bindings.key(), bindings.value().toString());
+        qDebug() << bindings.key() << "\t" << bindings.value();
       }
     }
     qry.exec();
@@ -348,12 +348,12 @@ int SelectionWidget::execRemoveQuery(XSqlQuery &outQry)
   }
   if (DEBUG)
   {
-    qDebug("Remove query string: %1", qryString);
+    qDebug() << "Remove query string:" << qryString;
     QMapIterator<QString, QVariant> bindings(qry.boundValues());
     while (bindings.hasNext())
     {
       bindings.next();
-      qDebug("%1:\t%2", bindings.key(), bindings.value().toString());
+      qDebug() << bindings.key() << "\t" << bindings.value();
     }
   }
   qry.exec();
