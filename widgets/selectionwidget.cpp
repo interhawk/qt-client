@@ -392,7 +392,7 @@ int SelectionWidget::sCommitChanges()
       return -1;
     }
   }
-  qry.exec("COMMIT;");
+  if (!_parentInTrans) { qry.exec("COMMIT;"); }
   _added.clear();
   _removed.clear();
   return 0;
