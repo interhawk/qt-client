@@ -89,6 +89,7 @@ HEADERS += plugins/addressclusterplugin.h \
     plugins/raclusterplugin.h \
     plugins/recurrencewidgetplugin.h \
     plugins/revisionclusterplugin.h \
+	plugins/selectionwidgetplugin.h \
     plugins/shiftclusterplugin.h \
     plugins/shipmentclusterplugin.h \
     plugins/shiptoclusterplugin.h \
@@ -185,6 +186,7 @@ SOURCES += widgets.cpp \
     revisionCluster.cpp \
     salesOrderList.cpp \
     screen.cpp \
+	selectionwidget.cpp \
     shiftCluster.cpp \
     shipmentCluster.cpp \
     shiptoCluster.cpp \
@@ -286,6 +288,7 @@ HEADERS += widgets.h \
     revisioncluster.h \
     salesOrderList.h \
     screen.h \
+	selectionwidget.h \
     shiftcluster.h \
     shipmentcluster.h \
     shiptocluster.h \
@@ -340,6 +343,7 @@ FORMS += alarmMaint.ui \
     queryitem.ui \
     queryset.ui \
     recurrencewidget.ui \
+	selectionwidget.ui \
     vendorgroup.ui      \
     womatlcluster.ui    \
     xdoccopysetter.ui
