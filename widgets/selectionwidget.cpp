@@ -263,6 +263,12 @@ bool SelectionWidget::isSameItem(XTreeWidgetItem *pXtitem1, XTreeWidgetItem *pXt
   return true;
 }
 
+/**@brief Removes items from the "available" tree that are already in the "selected" tree. 
+*
+* This function iterates through the items in the "available" tree and for each, uses the 
+* isSameItem() function to find any items in the "selected" tree that match. If it finds any,
+* the item is removed from the "available" tree.
+*/
 void SelectionWidget::sFilterDuplicates()
 {
   //maybe a hash might be better here...
@@ -279,6 +285,19 @@ void SelectionWidget::sFilterDuplicates()
   }
 }
 
+/**@brief Builds and executes an INSERT query for each item in the _added list. 
+*
+* This function builds INSERT statements using _modifyTableName and _addConstraints in order
+* to create flexible queries for any table needed. Values to be inserted are bound to 
+* "parameterN" for N = 0 to addConstraints.count() - 1. Returns the last query executed to
+* allow for error reporting outside of a transaction block.<BR>
+* The entries in _addConstraints will determine how the query is built. For each entry in 
+* _addConstraints, the parameter name specidies the column where the value will be inserted. the
+* parameter value will either be a column name in the "available" tree or a literal value. If the
+* parameter value matches a column name, the value in that column will be inserted, otherwise the
+* parameter value itself will be inserted directly.
+* @param [out] outQry returns the last executed query before either detecting an error or completing. 
+*/
 int SelectionWidget::execAddQuery(XSqlQuery &outQry)
 {
   XSqlQuery qry;
@@ -327,6 +346,16 @@ int SelectionWidget::execAddQuery(XSqlQuery &outQry)
   return(0);
 }
 
+/**@brief Builds and executes a DELETE query to remove all items in the _removed list
+*
+* This function builds a DELETE statement using _modifyTableName and _removeByIdTableColName in
+* order to create flexile queries for any table needed. Ids to be deleted are bound to 
+* "parameterN" for N = 0 to _removed.count() - 1 Returns the last query executed to
+* allow for error reporting outside of a transaction block.<BR>
+* The delete statement will use the value returned by calling id() on each item in the _removed
+* list to identify which records to remove. If the _removeByAltId flag is set to true, the 
+* statement will instead use the result of calling altId().
+* @param [out] outQry returns the executed query.*/
 int SelectionWidget::execRemoveQuery(XSqlQuery &outQry)
 {
   XSqlQuery qry;
@@ -361,7 +390,13 @@ int SelectionWidget::execRemoveQuery(XSqlQuery &outQry)
   return (qry.lastError().type() != QSqlError::NoError) ? -1 : 0;
 }
 
-
+/**@brief Calls functions to execute the appropriate INSERT and DELETE queries
+*
+* This function will call execAddQuery() and execRemoveQuery() then clear the _added and 
+* _removed lists. If the _parentInTrans flag is false, the calls to these functions will be 
+* wrapped in a transaction block to ensure atomicity. It is left to the caller to ensure
+* that the _parentInTrans flag is set appropriately.
+*/
 int SelectionWidget::sCommitChanges()
 {
   XSqlQuery outQry;
