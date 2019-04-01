@@ -18,13 +18,13 @@
 
 * @brief Widget used to pick items from one list and add them to another.
 
-* The selection widget in corporates 2 XTreeWidgets, one as a source (or available)
+* The selection widget incorporates 2 XTreeWidgets, one as a source (or available)
 * and one as a destination (or selected). Each tree will be populated from a different query
 * but the data should be compatible with the fields on both trees otherwise moving items back
 * and forth doesn't make sense.
 *
-* The widget was designed to be adaptible and thus requires some configuration first.
-* The following must be done befor the widget will function properly:
+* The widget was designed to be adaptable and thus requires some configuration first.
+* The following must be done before the widget will function properly:
 *
 * <UL>
 * <LI>Tree Setup:<BR>
@@ -32,7 +32,7 @@
 * have pointers to the trees, they must be configured as is usual for XTreeWidgets.
 *
 * <LI>Equality Columns:<BR>
-* Since each of the trees may present different atributes of the underlying data, there needs
+* Since each of the trees may present different attributes of the underlying data, there needs
 * to be a way to determine equality between items on different trees. A list of name-value 
 * pairs must be passed to the setEqualityColumns() function. Each pair will contain the XTreeWidget
 * column names to be considered equivalent. When the trees first load, any items in the "available" 
@@ -208,7 +208,7 @@ void SelectionWidget::sRemoveAll()
 * Finally, pXtitem is added to the destination tree.
 * The key idea here is that depending on pAdd, the append and check lists will switch places. So
 * the list we add an item to in one direction, will be the list we check against when going in
-* the oposite direction.
+* the opposite direction.
 * @param pXtitem XTreeWidgetItem to be moved from one tree to another.
 * @param pAdd True when moving from "available" tree to "selected" tree, false otherwise.
 */
@@ -254,7 +254,7 @@ bool SelectionWidget::isSameItem(XTreeWidgetItem *pXtitem1, XTreeWidgetItem *pXt
   while (index < _equalityColumns.count())
   {
     if (pXtitem1->rawValue(_equalityColumns.name(index)) !=
-      pXtitem2->rawValue(_equalityColumns.value(index).toString()))
+        pXtitem2->rawValue(_equalityColumns.value(index).toString()))
     {
       return false;
     }
@@ -289,10 +289,10 @@ void SelectionWidget::sFilterDuplicates()
 *
 * This function builds INSERT statements using _modifyTableName and _addConstraints in order
 * to create flexible queries for any table needed. Values to be inserted are bound to 
-* "parameterN" for N = 0 to addConstraints.count() - 1. Returns the last query executed to
+* "parameterN" for N = 0 to addConstraints.count() - 1. Returns the query executed to
 * allow for error reporting outside of a transaction block.<BR>
 * The entries in _addConstraints will determine how the query is built. For each entry in 
-* _addConstraints, the parameter name specidies the column where the value will be inserted. the
+* _addConstraints, the parameter name specifies the column where the value will be inserted. the
 * parameter value will either be a column name in the "available" tree or a literal value. If the
 * parameter value matches a column name, the value in that column will be inserted, otherwise the
 * parameter value itself will be inserted directly.
@@ -312,44 +312,54 @@ int SelectionWidget::execAddQuery(XSqlQuery &outQry)
   valString.chop(2);
   qryString.append(valString);
   qryString.append(");");
+  qry.prepare(qryString);
   
+  //build lists of values for each constraint
+  QList<QVariantList> valueLists;
+  for (int i = 0; i < _addConstraints.count(); i++) { valueLists[i] = QVariantList(); }
   foreach(XTreeWidgetItem *xtitem, _added)
   {
-    qry.prepare(qryString);
-    QVariant bindVal;
-    for (int i = 0; i < _addConstraints.count(); i++)
+    QVariant valToInsert;
+    for (int conIndex = 0; conIndex < _addConstraints.count(); conIndex++)
     {
-      bindVal = xtitem->rawValue(_addConstraints.value(i).toString());
-      if (bindVal.isNull())
+      valToInsert = xtitem->rawValue(_addConstraints.value(conIndex).toString());
+      if (valToInsert.isNull())
       {
-        bindVal = _addConstraints.value(i);
+        valToInsert = _addConstraints.value(conIndex);
       }
-      qry.bindValue(QString(":parameter%1").arg(i), bindVal);
+      valueLists[conIndex].append(valToInsert);
     }
-    if (DEBUG)
-    {
-      qDebug("Add query string: %1", qryString);
-      QMapIterator<QString, QVariant> bindings(qry.boundValues());
-      while (bindings.hasNext())
-      {
-        bindings.next();
-        qDebug("%1:\t%2", bindings.key(), bindings.value().toString());
-      }
-    }
-    qry.exec();
-    outQry = qry;
-    if (qry.lastError().type() != QSqlError::NoError)
-    {
-      return(-1);
-    } 
   }
+  //bind value lists for batch execution
+  for (int i = 0; i < valueLists.count(); i++)
+  {
+    qry.bindValue(QString(":parameter%1").arg(i), valueLists[i]);
+  }
+
+  if (DEBUG)
+  {
+    qDebug("Add query string: %1", qryString);
+    QMapIterator<QString, QVariant> bindings(qry.boundValues());
+    while (bindings.hasNext())
+    {
+      bindings.next();
+      qDebug("%1:\t%2", bindings.key(), bindings.value().toString());
+    }
+  }
+
+  qry.execBatch();
+  outQry = qry;
+  if (qry.lastError().type() != QSqlError::NoError)
+  {
+    return(-1);
+  } 
   return(0);
 }
 
 /**@brief Builds and executes a DELETE query to remove all items in the _removed list
 *
 * This function builds a DELETE statement using _modifyTableName and _removeByIdTableColName in
-* order to create flexile queries for any table needed. Ids to be deleted are bound to 
+* order to create flexible queries for any table needed. Ids to be deleted are bound to 
 * "parameterN" for N = 0 to _removed.count() - 1 Returns the last query executed to
 * allow for error reporting outside of a transaction block.<BR>
 * The delete statement will use the value returned by calling id() on each item in the _removed
