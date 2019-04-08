@@ -93,7 +93,7 @@ protected:
   QString _removeByIdTableColName; /**<@brief Column name used as a key by the delete statement to remove records*/
   ParameterList _addConstraints; /**<@brief Name value pairs indicating column names and values to insert */
   ParameterList _equalityColumns; /**<@brief Name Value pairs indicating pairs of columns to be compared for equality*/
-  bool _removeByAltId; /**<@brief When true, delete statements us the item's altId instead of id.*/
+  bool _removeByAltId; /**<@brief When true, delete statements use the item's altId instead of id.*/
   bool _parentInTrans; /**<@brief When true, insert and delete statements will not be wrapped in a transaction block.*/
   void move(XTreeWidgetItem *pXtitem, bool pAdd);
   bool isSameItem(XTreeWidgetItem *pXtitem1, XTreeWidgetItem *pXtitem2) const;
