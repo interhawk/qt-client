@@ -89,7 +89,6 @@
 *
 *@todo <UL><LI>add a way to add a new item directly to the "selected" tree.
 <LI> replace queries with metasql
-<LI> replace bools in add and remove with enums.
 </UL>
 */
 
@@ -171,7 +170,7 @@ void SelectionWidget::sAddAll()
 {
   emit addAllClickedBefore();
   XTreeWidgetItem *xtitem;
-  while (xtitem = dynamic_cast<XTreeWidgetItem*>(_avail->takeTopLevelItem(0)))
+  while ((xtitem = dynamic_cast<XTreeWidgetItem*>(_avail->takeTopLevelItem(0))))
   {
     move(xtitem, true);
     emit itemAdded(xtitem->id());
@@ -188,7 +187,7 @@ void SelectionWidget::sRemoveAll()
 {
   emit removeAllClickedBefore();
   XTreeWidgetItem *xtitem;
-  while (xtitem = dynamic_cast<XTreeWidgetItem*>(_sel->takeTopLevelItem(0)))
+  while ((xtitem = dynamic_cast<XTreeWidgetItem*>(_sel->takeTopLevelItem(0))))
   {
     move(xtitem, false);
     emit itemRemoved(xtitem->id());
@@ -300,7 +299,7 @@ void SelectionWidget::sFilterDuplicates()
 */
 int SelectionWidget::execAddQuery(XSqlQuery &outQry)
 {
-  XSqlQuery qry;
+  QSqlQuery qry;
   QString qryString = QString("INSERT INTO %1 (").arg(_modifyTableName);
   QString valString = ") VALUES (";
   for (int i = 0; i < _addConstraints.count(); i++)
@@ -316,7 +315,7 @@ int SelectionWidget::execAddQuery(XSqlQuery &outQry)
   
   //build lists of values for each constraint
   QList<QVariantList> valueLists;
-  for (int i = 0; i < _addConstraints.count(); i++) { valueLists[i] = QVariantList(); }
+  for (int i = 0; i < _addConstraints.count(); i++) { valueLists.append(QVariantList()); }
   foreach(XTreeWidgetItem *xtitem, _added)
   {
     QVariant valToInsert;
@@ -338,12 +337,12 @@ int SelectionWidget::execAddQuery(XSqlQuery &outQry)
 
   if (DEBUG)
   {
-    qDebug("Add query string: %1", qryString);
+    qDebug() << "Add query string:" << qryString;
     QMapIterator<QString, QVariant> bindings(qry.boundValues());
     while (bindings.hasNext())
     {
       bindings.next();
-      qDebug("%1:\t%2", bindings.key(), bindings.value().toString());
+      qDebug() << bindings.key() << "\t" << bindings.value();
     }
   }
 
@@ -387,12 +386,12 @@ int SelectionWidget::execRemoveQuery(XSqlQuery &outQry)
   }
   if (DEBUG)
   {
-    qDebug("Remove query string: %1", qryString);
+    qDebug() << "Remove query string:" << qryString;
     QMapIterator<QString, QVariant> bindings(qry.boundValues());
     while (bindings.hasNext())
     {
       bindings.next();
-      qDebug("%1:\t%2", bindings.key(), bindings.value().toString());
+      qDebug() << bindings.key() << "\t" << bindings.value();
     }
   }
   qry.exec();
