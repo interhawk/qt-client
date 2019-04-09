@@ -314,23 +314,23 @@ int SelectionWidget::execAddQuery(XSqlQuery &outQry)
   qry.prepare(qryString);
   
   //build lists of values for each constraint
-  QList<QVariantList> valueLists;
+  QVariantList valueList;
   QVariant valToInsert;
-  for (int i = 0; i < _addConstraints.count(); i++) { valueLists.append(QVariantList()); }
   
-  for (int conIndex = 0; conIndex < _addConstraints.count(); conIndex++)
+  for (int i = 0; i < _addConstraints.count(); i++)
   {
     foreach(XTreeWidgetItem *xtitem, _added)
     {
-      valToInsert = xtitem->rawValue(_addConstraints.value(conIndex).toString());
+      valToInsert = xtitem->rawValue(_addConstraints.value(i).toString());
       if (valToInsert.isNull())
       {
-        valToInsert = _addConstraints.value(conIndex);
+        valToInsert = _addConstraints.value(i);
       }
-      valueLists[conIndex].append(valToInsert);
+      valueList.append(valToInsert);
     }
     //bind value list for batch execution
-    qry.bindValue(QString(":parameter%1").arg(conIndex), valueLists[conIndex]);
+    qry.bindValue(QString(":parameter%1").arg(i), valueList);
+    valueList.clear();
   }
 
   if (DEBUG)
