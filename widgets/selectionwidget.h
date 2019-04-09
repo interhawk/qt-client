@@ -88,7 +88,7 @@ protected slots:
 
 protected:
   QList<XTreeWidgetItem*> _added; /**<@brief List of items added to "available" tree since loading*/
-  QList<XTreeWidgetItem*> _removed; /**<@brief List of items removed from the "selected" tree sine loading*/
+  QList<XTreeWidgetItem*> _removed; /**<@brief List of items removed from the "selected" tree since loading*/
   QString _modifyTableName; /**<@brief Name of table where items will be added or removed*/
   QString _removeByIdTableColName; /**<@brief Column name used as a key by the delete statement to remove records*/
   ParameterList _addConstraints; /**<@brief Name value pairs indicating column names and values to insert */
