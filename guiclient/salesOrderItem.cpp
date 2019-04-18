@@ -1002,8 +1002,7 @@ void salesOrderItem::setSaveStatus(SaveStatus status, QString msg)
 
 void salesOrderItem::showScriptError()
 {
-  QMessageBox failure(QMessageBox::Critical, tr("Script Error"), _scriptErrorMsg);
-  failure.exec();
+  QMessageBox::critical(this, tr("Script Error"), _scriptErrorMsg);
 }
 
 void salesOrderItem::sSaveClicked()
@@ -5212,11 +5211,8 @@ void salesOrderItem::sHandleScheduleDate()
 
 QScriptValue constructSalesOrderItem(QScriptContext *context, QScriptEngine  *engine)
 {
-#if QT_VERSION >= 0x050000
   return engine->toScriptValue(new salesOrderItem());
-#else
   Q_UNUSED(context); Q_UNUSED(engine); return QScriptValue();
-#endif
 }
 
 void setupsalesOrderItem(QScriptEngine *engine)
