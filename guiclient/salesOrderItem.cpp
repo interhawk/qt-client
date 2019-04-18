@@ -5212,7 +5212,6 @@ void salesOrderItem::sHandleScheduleDate()
 QScriptValue constructSalesOrderItem(QScriptContext *context, QScriptEngine  *engine)
 {
   return engine->toScriptValue(new salesOrderItem());
-  Q_UNUSED(context); Q_UNUSED(engine); return QScriptValue();
 }
 
 void setupsalesOrderItem(QScriptEngine *engine)
