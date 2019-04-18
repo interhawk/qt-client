@@ -994,6 +994,18 @@ void salesOrderItem::clear()
 
 }
 
+void salesOrderItem::setSaveStatus(SaveStatus status, QString msg)
+{
+  _saveStatus = status;
+  _scriptErrorMsg = msg;
+}
+
+void salesOrderItem::showScriptError()
+{
+  QMessageBox failure(QMessageBox::Critical, tr("Script Error"), _scriptErrorMsg);
+  failure.exec();
+}
+
 void salesOrderItem::sSaveClicked()
 {
   ENTERED;
@@ -1003,6 +1015,7 @@ void salesOrderItem::sSaveClicked()
 void salesOrderItem::sSave(bool pPartial)
 {
   ENTERED << "with" << pPartial;
+  emit startingSave(pPartial);
   if (_soitemid < 0)
     return;
   XSqlQuery salesSave;
@@ -1084,10 +1097,12 @@ void salesOrderItem::sSave(bool pPartial)
 
   XSqlQuery rollback;
   rollback.prepare("ROLLBACK;");  // In case of failure along the way
+  setSaveStatus(OK);
 
   emit saveBeforeBegin();
   if (_saveStatus == Failed)
   {
+    showScriptError();
     return;
   }
 
@@ -1097,6 +1112,7 @@ void salesOrderItem::sSave(bool pPartial)
   if (_saveStatus == Failed)
   {
     rollback.exec();
+    showScriptError();
     return;
   }
 
@@ -1659,6 +1675,7 @@ void salesOrderItem::sSave(bool pPartial)
   if (_saveStatus == Failed)
   {
     rollback.exec();
+    showScriptError();
     return;
   }
 
@@ -5189,4 +5206,26 @@ void salesOrderItem::sHandleScheduleDate()
 
   sDeterminePrice();
   sDetermineAvailability();
+}
+
+//script exposure
+
+QScriptValue constructSalesOrderItem(QScriptContext *context, QScriptEngine  *engine)
+{
+#if QT_VERSION >= 0x050000
+  return engine->toScriptValue(new salesOrderItem());
+#else
+  Q_UNUSED(context); Q_UNUSED(engine); return QScriptValue();
+#endif
+}
+
+void setupsalesOrderItem(QScriptEngine *engine)
+{
+  if (!engine->globalObject().property("salesOrderItem").isFunction())
+  {
+    QScriptValue ctor = engine->newFunction(constructSalesOrderItem);
+    QScriptValue meta = engine->newQMetaObject(&salesOrderItem::staticMetaObject, ctor);
+    engine->globalObject().setProperty("salesOrderItem", meta, 
+                                       QScriptValue::ReadOnly | QScriptValue::Undeletable);
+  }
 }
