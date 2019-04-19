@@ -1681,28 +1681,28 @@ void salesOrderItem::sSave(bool pPartial)
   XSqlQuery commit("COMMIT;");
 
   bool tryAgain = false;
-
   do
   {
     emit saveAfterCommit();
     if (_saveStatus == Failed)
     {
       QMessageBox failure(QMessageBox::Critical, tr("Script Error"),
-        tr("A script has failed after the main window saved successfully. How do "
-          "you wish to proceed?"));
+        tr("After the Sales Order Item was saved, a script failed with error:<br/>%1<br/>"
+           "How do you wish to proceed?").arg(_scriptErrorMsg));
       QPushButton* retry = failure.addButton(tr("Retry"), QMessageBox::NoRole);
-      failure.addButton(tr("Ignore"), QMessageBox::YesRole);
-      QPushButton* cancel = failure.addButton(QMessageBox::Cancel);
-      failure.setDefaultButton(cancel);
-      failure.setEscapeButton((QAbstractButton*)cancel);
+      QPushButton* ignore = failure.addButton(tr("Ignore Script Error"), QMessageBox::YesRole);
+      failure.setDefaultButton(ignore);
+      failure.setEscapeButton((QAbstractButton*)ignore);
       failure.exec();
       if (failure.clickedButton() == (QAbstractButton*)retry)
       {
         setSaveStatus(OK);
         tryAgain = true;
       }
-      else if (failure.clickedButton() == (QAbstractButton*)cancel)
-        return;
+      else if (failure.clickedButton() == (QAbstractButton*)ignore)
+      {
+        tryAgain = false;
+      }
     }
   } while (tryAgain);
 
